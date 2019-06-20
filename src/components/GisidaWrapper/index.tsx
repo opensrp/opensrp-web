@@ -104,6 +104,7 @@ interface GisidaProps {
   handlers: Handlers[];
   tasks: Task[] | null;
   minHeight?: string;
+  basemapStyle?: string | FlexObject;
 }
 
 /** Returns a single layer configuration */
@@ -349,6 +350,7 @@ class GisidaWrapper extends React.Component<GisidaProps, GisidaState> {
         appName: locations && locations.properties && locations.properties.jurisdiction_name,
         bounds,
         layers,
+        style: this.props.basemapStyle,
       },
       GISIDA_MAPBOX_TOKEN,
       GISIDA_ONADATA_API_TOKEN,
