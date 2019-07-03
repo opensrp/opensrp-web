@@ -45,21 +45,6 @@ if (ENABLE_ONADATA_OAUTH) {
 
 export { providers };
 
-/** Fill opacity configuration */
-export const structureFillOpacity: Expression = [
-  'match',
-  ['get', 'task_business_status'],
-  ['Not Visited'],
-  0.7,
-  ['Not Sprayed', 'Incomplete', 'In Progress'],
-  0.7,
-  ['Sprayed'],
-  0.7,
-  ['Not Sprayable'],
-  1,
-  0.75,
-];
-
 /** Fill layer configuration */
 export const fillLayerConfig = {
   id: 'single-jurisdiction',
