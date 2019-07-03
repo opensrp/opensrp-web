@@ -28,25 +28,6 @@ export interface FlexObject {
   [key: string]: any;
 }
 
-/** Route params interface */
-export interface RouteParams {
-  id?: string;
-}
-
-/** Geometry object interface */
-export interface Geometry {
-  coordinates: number[][][] | number[];
-  type: string;
-}
-
-/** GeoJSON object interface */
-export interface GeoJSON {
-  geometry: Geometry | null;
-  id: string;
-  properties: FlexObject;
-  type: string;
-}
-
 /** Returns a number as a decimal e.g. 0.18 becomes 18% */
 export function percentage(num: number, decimalPoints: number = 0) {
   return `${(num * 100).toFixed(decimalPoints)}%`;
@@ -97,30 +78,6 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
         return getOnadataUserInfo(apiResponse);
     }
   }
-}
-
-/** interface to describe Gisida map configuration */
-export interface SiteConfigAppMapconfig {
-  bounds?: number[];
-  center?: number[];
-  container: string;
-  fitBoundsOptions?: FitBoundsOptions;
-  style: string | Style;
-  zoom?: number;
-}
-
-/** interface to describe Gisida site app configuration object */
-export interface SiteConfigApp {
-  accessToken: string;
-  apiAccessToken: string;
-  appName: string;
-  mapConfig: SiteConfigAppMapconfig;
-}
-
-/** interface to describe Gisida site configuration */
-export interface SiteConfig {
-  APP: SiteConfigApp;
-  LAYERS: Layer[];
 }
 
 /** Creates a Gisida site configuration object
