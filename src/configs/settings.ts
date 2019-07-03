@@ -45,28 +45,6 @@ if (ENABLE_ONADATA_OAUTH) {
 
 export { providers };
 
-/** Line layer configuration */
-export const lineLayerConfig = {
-  id: 'single-jurisdiction',
-  paint: {
-    'line-color': '#FFDC00',
-    'line-opacity': 1,
-    'line-width': 3,
-  },
-  source: {
-    data: {
-      data: {
-        coordinates: [],
-        type: 'Point',
-      },
-      type: 'stringified-geojson',
-    },
-    type: 'geojson',
-  },
-  type: 'line',
-  visible: false,
-};
-
 /** Fill opacity configuration */
 export const structureFillOpacity: Expression = [
   'match',
