@@ -1,6 +1,5 @@
 /** This is the main configuration module */
 import { Providers } from '@onaio/gatekeeper';
-import { Expression } from 'mapbox-gl';
 import {
   DOMAIN_NAME,
   ENABLE_ONADATA_OAUTH,
@@ -18,13 +17,6 @@ import {
 } from './env';
 
 /** Interfaces and Types */
-
-/** Interface for a Focus Investigation Classification */
-export interface Classification {
-  code: string;
-  name: string;
-  description: string;
-}
 
 /** Interface that describes location items */
 export interface LocationItem {
