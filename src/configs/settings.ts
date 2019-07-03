@@ -44,29 +44,3 @@ if (ENABLE_ONADATA_OAUTH) {
 }
 
 export { providers };
-
-/** Circle layer configuration */
-export const circleLayerConfig = {
-  categories: {
-    color: '#ff0000',
-  },
-  id: 'single-jurisdiction',
-  paint: {
-    'circle-color': '#FFDC00',
-    'circle-opacity': 0.7,
-    'circle-radius': ['interpolate', ['linear'], ['zoom'], 13.98, 0, 17.79, 10, 18.8, 15],
-    'circle-stroke-width': 1,
-  },
-  source: {
-    data: {
-      data: {
-        coordinates: [],
-        type: 'Point',
-      },
-      type: 'stringified-geojson',
-    },
-    type: 'geojson',
-  },
-  type: 'circle',
-  visible: false,
-};
