@@ -26,7 +26,19 @@ Delete color constants definition for map stuff in colors.tsx
 Delete color constants definition for structures form colors.tsx
 Delete color constants definition for tasks form src/colors.tsx
 Delete type declaration files for mapbox/geojson-extent
-Delete module declaration  files for gisida-react
+Delete module declaration files for gisida-react
 Delete module declaration files for gisida module
 Refactor the application name in the readme from reveal-frontend to OpenSRP web.
 Add a circleCi badge
+
+Change REACT_APP_WEBSITE_NAME from Reveal to OpenSRP
+REmove gisida specific environment variables from circle ci config file
+Replaced reveal favicon with one downloaded from opensrp smartregister site
+Strip reveal specific constants and components form src/App/App.tsx
+Delete connectedPrivateRoute components implementation that route to reveal specific container components
+Remove mocked environment variables that are gisida-related
+Delete ActiveFI folder
+Delete Historical Focus Investigation component's folder
+Delete SingleActiveFIMap component's folder
+Delete singleActiveFI compoent folder and the empty FOcusInvestigation folder
+Delete IRS container component's folder
