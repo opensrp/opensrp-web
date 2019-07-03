@@ -11,4 +11,3 @@ export const BLACK = '#000';
 export type BLACK = typeof BLACK;
 export const GREY = '#666a6d';
 export type GREY = typeof GREY;
-    
