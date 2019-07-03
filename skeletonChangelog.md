@@ -69,3 +69,5 @@ Delete const declarations for internal urls to Reveal specific internal paths
 Delete const declarations for Reveal specific strings
 
 Changes to helpers/utils: - strip off Reveal specific interfaces - strip off gisida configuration store - strip off Reveal specific utility functions - Removng imports that become unused
+Remove tests for depreceted utility functionality
+Update snapshots: - src/App/App.tsx - src/components/page/Header - src/containers/ConnectedHeader - src/containers/pages/Home/
