@@ -42,3 +42,28 @@ Delete Historical Focus Investigation component's folder
 Delete SingleActiveFIMap component's folder
 Delete singleActiveFI compoent folder and the empty FOcusInvestigation folder
 Delete IRS container component's folder
+
+Remove reveal specific envionment variables from .env.sample
+Replace deprecated loader component with the same but from the published js-tools loader component.
+install Loader component form js-tools
+Update snapshots for the src/App/App.tsx component
+Remove Reveal related consts form config/envs that are derived from Reveal specific environment variables
+Remove FI classification interface from the settings from config/settings.ts
+Remove LocationItem (Reveal-related) interface from config/settings.ts
+Remove location hierarchy configurations used by FI from config/settings.ts
+Remove Focus investigation-specific configurations from config/settings.ts
+Remove indicator(Adherence components) confgurations form config/settings.ts
+Remove configuration settings for following layers: - line layer configuration - fill layer opacity configuration - fill layer configuration - circle layer configuration
+Remove Reveal content from the home component
+Remove styles that were being used by the Reveal jsx elements in home component
+Remove helper/handler file: - contained declarations for mapbox - popup handler function for after features render
+Remove style file associated with the above handler file
+Delete the helpers/handler folder: at this point it just contained the tests for deleted handler files
+Delete indicators file: contained utility functions that dealt with goals reporting, adherence reporting and FI classification rendering, all of which are Reveal specific.
+Remove mapbox file that exported mapbox event interface
+Remove tests for already removed indicator functionality
+Remove ProgressBar component: This will be moved to Js-tools
+Remove color maps for tasks structures contextual coloring
+Remove consts declarations for tasks action_codes
+Delete const declarations for internal urls to Reveal specific internal paths
+Delete const declarations for Reveal specific strings
