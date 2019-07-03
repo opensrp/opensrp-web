@@ -67,3 +67,5 @@ Remove color maps for tasks structures contextual coloring
 Remove consts declarations for tasks action_codes
 Delete const declarations for internal urls to Reveal specific internal paths
 Delete const declarations for Reveal specific strings
+
+Changes to helpers/utils: - strip off Reveal specific interfaces - strip off gisida configuration store - strip off Reveal specific utility functions - Removng imports that become unused
