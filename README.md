@@ -1,5 +1,7 @@
 # OpenSRP Web Frontend
 
+[![CircleCI](https://circleci.com/gh/OpenSRP/opensrp-web.svg?style=svg)](https://circleci.com/gh/OpenSRP/opensrp-web)
+
 This is the openSRP web application front end.
 
 The structure of this repo is inherited from [create-react-app](https://github.com/facebook/create-react-app).
