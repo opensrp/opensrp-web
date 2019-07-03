@@ -14,12 +14,8 @@ import {
   LOGOUT_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
-import ActiveFocusInvestigation from '../containers/pages/FocusInvestigation/active';
-import HistoricalFocusInvestigation from '../containers/pages/FocusInvestigation/historical';
-import SingleActiveFIMap from '../containers/pages/FocusInvestigation/map/active';
-import SingleFI from '../containers/pages/FocusInvestigation/single';
+
 import Home from '../containers/pages/Home/Home';
-import IRS from '../containers/pages/IRS/IRS';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
 library.add(faMap);
