@@ -38,48 +38,7 @@ class App extends Component {
                 path="/"
                 component={Home}
               />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={IRS_URL}
-                component={IRS}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={FI_URL}
-                component={ActiveFocusInvestigation}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={`${FI_SINGLE_URL}/:id`}
-                component={SingleFI}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={`${FI_SINGLE_MAP_URL}/:id/`}
-                component={SingleActiveFIMap}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={`${FI_SINGLE_MAP_URL}/:id/:goalId`}
-                component={SingleActiveFIMap}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={FI_HISTORICAL_URL}
-                component={HistoricalFocusInvestigation}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={`${FI_HISTORICAL_URL}/:id`}
-                component={HistoricalFocusInvestigation}
-              />
+              
               {/* tslint:disable jsx-no-lambda */}
               <Route
                 exact={true}
