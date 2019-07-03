@@ -12,7 +12,7 @@ Object {
         to="/"
       >
         <img
-          alt="Reveal"
+          alt="OpenSRP"
           src="logo.png"
         />
       </Link>
@@ -58,64 +58,6 @@ Object {
             Home
           </NavLink>
         </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            aria-current="page"
-            className="nav-link"
-            to="/irs"
-          >
-            IRS
-          </NavLink>
-        </NavItem>
-        <UncontrolledDropdown
-          inNavbar={true}
-          nav={true}
-        >
-          <DropdownToggle
-            aria-haspopup={true}
-            caret={true}
-            className="nav-link"
-            color="secondary"
-            nav={true}
-          >
-            Focus Investigation
-          </DropdownToggle>
-          <DropdownMenu
-            flip={true}
-            right={true}
-            tag="div"
-          >
-            <DropdownItem
-              tag="button"
-              toggle={true}
-            >
-              <NavLink
-                activeClassName="active"
-                aria-current="page"
-                className="nav-link"
-                to="/focus-investigation"
-              >
-                Active
-              </NavLink>
-            </DropdownItem>
-            <DropdownItem
-              tag="button"
-              toggle={true}
-            >
-              <NavLink
-                activeClassName="active"
-                aria-current="page"
-                className="nav-link"
-                to="/focus-investigation/historical"
-              >
-                Historical
-              </NavLink>
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
         <NavItem
           tag="li"
         >
@@ -177,7 +119,7 @@ Object {
         to="/"
       >
         <img
-          alt="Reveal"
+          alt="OpenSRP"
           src="logo.png"
         />
       </Link>
@@ -223,64 +165,6 @@ Object {
             Home
           </NavLink>
         </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            aria-current="page"
-            className="nav-link"
-            to="/irs"
-          >
-            IRS
-          </NavLink>
-        </NavItem>
-        <UncontrolledDropdown
-          inNavbar={true}
-          nav={true}
-        >
-          <DropdownToggle
-            aria-haspopup={true}
-            caret={true}
-            className="nav-link"
-            color="secondary"
-            nav={true}
-          >
-            Focus Investigation
-          </DropdownToggle>
-          <DropdownMenu
-            flip={true}
-            right={true}
-            tag="div"
-          >
-            <DropdownItem
-              tag="button"
-              toggle={true}
-            >
-              <NavLink
-                activeClassName="active"
-                aria-current="page"
-                className="nav-link"
-                to="/focus-investigation"
-              >
-                Active
-              </NavLink>
-            </DropdownItem>
-            <DropdownItem
-              tag="button"
-              toggle={true}
-            >
-              <NavLink
-                activeClassName="active"
-                aria-current="page"
-                className="nav-link"
-                to="/focus-investigation/historical"
-              >
-                Historical
-              </NavLink>
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
         <NavItem
           tag="li"
         >
