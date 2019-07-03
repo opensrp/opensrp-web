@@ -10,11 +10,6 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
-  FI_HISTORICAL_URL,
-  FI_SINGLE_MAP_URL,
-  FI_SINGLE_URL,
-  FI_URL,
-  IRS_URL,
   LOGIN_URL,
   LOGOUT_URL,
 } from '../constants';
