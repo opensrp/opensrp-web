@@ -13,16 +13,6 @@ export const GREY = '#666a6d';
 export type GREY = typeof GREY;
 
 
-// structures
-export const STRUCTURE_NOT_VISTITED_YELLOW = '#f3cc49';
-export type STRUCTURE_NOT_VISTITED_YELLOW = typeof STRUCTURE_NOT_VISTITED_YELLOW;
-export const STRUCTURE_INCOMPLETE_RED = '#dd3f36';
-export type STRUCTURE_INCOMPLETE_RED = typeof STRUCTURE_INCOMPLETE_RED;
-export const STRUCTURE_COMPLETE_GREEN = '#7dba3b';
-export type STRUCTURE_COMPLETE_GREEN = typeof STRUCTURE_COMPLETE_GREEN;
-export const STRUCTURE_INELIGIBLE_BLACK = '#171717';
-export type STRUCTURE_INELIGIBLE_BLACK = typeof STRUCTURE_INELIGIBLE_BLACK;
-
 // tasks
 export const TASK_PINK = '#FF96C2';
 export type TASK_PINK = typeof TASK_PINK;
