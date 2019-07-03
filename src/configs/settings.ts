@@ -16,15 +16,6 @@ import {
   OPENSRP_USER_URL,
 } from './env';
 
-/** Interfaces and Types */
-
-/** Interface that describes location items */
-export interface LocationItem {
-  identifier: string /** Should match the name of the column in data */;
-  level: number /** The HDX-compliant level of the location in the hierarchy */;
-  name: string /** The name of the location */;
-}
-
 /** Authentication Configs */
 const providers: Providers = {};
 
