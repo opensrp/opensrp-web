@@ -3,16 +3,13 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faMap } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
+import Loading from '@onaio/loaders';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import { Col, Container, Row } from 'reactstrap';
-import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import {
-  LOGIN_URL,
-  LOGOUT_URL,
-} from '../constants';
+import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import Home from '../containers/pages/Home/Home';
@@ -38,7 +35,7 @@ class App extends Component {
                 path="/"
                 component={Home}
               />
-              
+
               {/* tslint:disable jsx-no-lambda */}
               <Route
                 exact={true}
