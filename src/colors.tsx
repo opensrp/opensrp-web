@@ -12,9 +12,6 @@ export type BLACK = typeof BLACK;
 export const GREY = '#666a6d';
 export type GREY = typeof GREY;
 
-// map stuff
-export const DEFAULT_MAP_COLOR = '#FFDC00';
-export type DEFAULT_MAP_COLOR = typeof DEFAULT_MAP_COLOR;
 
 // structures
 export const STRUCTURE_NOT_VISTITED_YELLOW = '#f3cc49';
