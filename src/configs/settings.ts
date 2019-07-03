@@ -45,20 +45,6 @@ if (ENABLE_ONADATA_OAUTH) {
 
 export { providers };
 
-/** Indicators configs */
-
-// thresholds
-export const GREEN_THRESHOLD = 0.9;
-export type GREEN_THRESHOLD = typeof GREEN_THRESHOLD;
-export const YELLOW_THRESHOLD = 0.2;
-export type YELLOW_THRESHOLD = typeof YELLOW_THRESHOLD;
-export const ORANGE_THRESHOLD = 0.8;
-export type ORANGE_THRESHOLD = typeof ORANGE_THRESHOLD;
-
-// 1-3-7 thresholds
-export const ONE = 0;
-export const ZERO = 0;
-
 /** Line layer configuration */
 export const lineLayerConfig = {
   id: 'single-jurisdiction',
