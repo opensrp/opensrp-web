@@ -45,28 +45,6 @@ if (ENABLE_ONADATA_OAUTH) {
 
 export { providers };
 
-/** Fill layer configuration */
-export const fillLayerConfig = {
-  id: 'single-jurisdiction',
-  paint: {
-    'fill-color': '#FFDC00',
-    'fill-opacity': structureFillOpacity,
-    'fill-outline-color': '#FFDC00',
-  },
-  source: {
-    data: {
-      data: {
-        coordinates: [],
-        type: 'Point',
-      },
-      type: 'stringified-geojson',
-    },
-    type: 'geojson',
-  },
-  type: 'fill',
-  visible: false,
-};
-
 /** Circle layer configuration */
 export const circleLayerConfig = {
   categories: {
