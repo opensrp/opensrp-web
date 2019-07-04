@@ -15,14 +15,8 @@ import {
   UncontrolledDropdown,
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
-import {
-  ENABLE_ABOUT,
-  ENABLE_FI,
-  ENABLE_IRS,
-  ENABLE_USERS,
-  WEBSITE_NAME,
-} from '../../../configs/env';
-import { FI_HISTORICAL_URL, FI_URL, IRS_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
+import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import './Header.css';
 
 /** interface for Header state */
@@ -78,38 +72,6 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                   Home
                 </NavLink>
               </NavItem>
-              {ENABLE_IRS && (
-                <NavItem>
-                  <NavLink to={IRS_URL} className="nav-link" activeClassName="active">
-                    IRS
-                  </NavLink>
-                </NavItem>
-              )}
-              {ENABLE_FI && (
-                <UncontrolledDropdown nav={true} inNavbar={true}>
-                  <DropdownToggle
-                    nav={true}
-                    caret={true}
-                    className={
-                      path === FI_URL || path === FI_HISTORICAL_URL ? 'nav-link active' : 'nav-link'
-                    }
-                  >
-                    Focus Investigation
-                  </DropdownToggle>
-                  <DropdownMenu right={true}>
-                    <DropdownItem>
-                      <NavLink to={FI_URL} className="nav-link" activeClassName="active">
-                        Active
-                      </NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                      <NavLink to={FI_HISTORICAL_URL} className="nav-link" activeClassName="active">
-                        Historical
-                      </NavLink>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              )}
               {ENABLE_USERS && (
                 <NavItem>
                   <NavLink to="/404" className="nav-link" activeClassName="active">
