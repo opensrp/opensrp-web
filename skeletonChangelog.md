@@ -72,3 +72,7 @@ Changes to helpers/utils: - strip off Reveal specific interfaces - strip off gis
 Remove tests for depreceted utility functionality
 Update snapshots: - src/App/App.tsx - src/components/page/Header - src/containers/ConnectedHeader - src/containers/pages/Home/
 Delete helpers/tables.css file; seems it is not being used anywhere.
+Remove links to Reveal container from Header component
+Replace Reveal logo with an openSRP logo
+Delete Reveal log.svg file
+Revert the delete change to the Loading component.
