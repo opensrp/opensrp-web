@@ -36,18 +36,7 @@ describe('App', () => {
         </Router>
       </Provider>
     );
-    // A hack since history.location.key is non-deterministic, feeling iffy
-    expect(wrapper.find('Router').props()).toMatchSnapshot({
-      children: <App />,
-      history: {
-        location: {
-          hash: expect.any(String),
-          key: expect.any(String),
-          pathname: expect.any(String),
-          search: expect.any(String),
-        },
-      },
-    });
+    expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.unmount();
   });
 });
