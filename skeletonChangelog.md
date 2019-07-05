@@ -76,3 +76,4 @@ Remove links to Reveal container from Header component
 Replace Reveal logo with an openSRP logo
 Delete Reveal log.svg file
 Revert the delete change to the Loading component.
+Remove dependencies packages that were specifically for Reveal
