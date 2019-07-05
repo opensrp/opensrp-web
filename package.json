@@ -8,11 +8,8 @@
     "@fortawesome/free-regular-svg-icons": "^5.7.1",
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mapbox/geojson-extent": "^0.3.2",
     "@onaio/connected-private-route": "^0.0.8",
     "@onaio/connected-reducer-registry": "^0.0.1",
-    "@onaio/drill-down-table": "^0.0.16",
-    "@onaio/element-map": "^0.0.2",
     "@onaio/gatekeeper": "^0.0.14",
     "@onaio/loaders": "^0.0.1",
     "@onaio/redux-reducer-registry": "^0.0.8",
@@ -23,7 +20,6 @@
     "@types/history": "^4.7.2",
     "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.123",
-    "@types/mapbox-gl": "^0.51.7",
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.0",
@@ -36,11 +32,8 @@
     "client-oauth2": "^4.2.3",
     "connected-react-router": "^6.4.0",
     "fetch-mock": "^7.3.3",
-    "gisida": "^1.2.5",
-    "gisida-react": "^1.2.3",
     "history": "^4.9.0",
     "lodash": "^4.17.11",
-    "mapbox-gl": "0.53.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -79,12 +72,6 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app",
-    "globals": {
-      "mapboxgl": true
-    }
   },
   "browserslist": [
     ">0.2%",
