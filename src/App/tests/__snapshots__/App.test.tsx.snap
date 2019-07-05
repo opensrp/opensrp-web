@@ -15,7 +15,7 @@ exports[`App renders App correctly 1`] = `
   <Router
     history={
       Object {
-        "action": "POP",
+        "action": "REPLACE",
         "block": [Function],
         "createHref": [Function],
         "go": [Function],
@@ -25,7 +25,8 @@ exports[`App renders App correctly 1`] = `
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "pathname": "/",
+          "key": "z5fxfn",
+          "pathname": "/login",
           "search": "",
           "state": undefined,
         },
@@ -59,7 +60,7 @@ exports[`App renders App correctly 1`] = `
                   authenticated={false}
                   history={
                     Object {
-                      "action": "POP",
+                      "action": "REPLACE",
                       "block": [Function],
                       "createHref": [Function],
                       "go": [Function],
@@ -69,7 +70,8 @@ exports[`App renders App correctly 1`] = `
                       "listen": [Function],
                       "location": Object {
                         "hash": "",
-                        "pathname": "/",
+                        "key": "z5fxfn",
+                        "pathname": "/login",
                         "search": "",
                         "state": undefined,
                       },
@@ -80,7 +82,8 @@ exports[`App renders App correctly 1`] = `
                   location={
                     Object {
                       "hash": "",
-                      "pathname": "/",
+                      "key": "z5fxfn",
+                      "pathname": "/login",
                       "search": "",
                       "state": undefined,
                     }
@@ -88,7 +91,7 @@ exports[`App renders App correctly 1`] = `
                   logOutUser={[Function]}
                   match={
                     Object {
-                      "isExact": true,
+                      "isExact": false,
                       "params": Object {},
                       "path": "/",
                       "url": "/",
@@ -127,7 +130,7 @@ exports[`App renders App correctly 1`] = `
                               onClick={[Function]}
                             >
                               <img
-                                alt="Reveal"
+                                alt="OpenSRP"
                                 src="logo.png"
                               />
                             </a>
@@ -319,16 +322,18 @@ exports[`App renders App correctly 1`] = `
                                       path="\\\\/login"
                                     >
                                       <Link
-                                        aria-current={null}
-                                        className="nav-link"
+                                        aria-current="page"
+                                        className="nav-link active"
                                         replace={false}
+                                        style={Object {}}
                                         to="/login"
                                       >
                                         <a
-                                          aria-current={null}
-                                          className="nav-link"
+                                          aria-current="page"
+                                          className="nav-link active"
                                           href="/login"
                                           onClick={[Function]}
+                                          style={Object {}}
                                         >
                                           Login
                                         </a>
@@ -371,161 +376,126 @@ exports[`App renders App correctly 1`] = `
                   className="col"
                 >
                   <Switch>
-                    <Connect(PrivateRoute)
-                      component={[Function]}
+                    <Route
                       computedMatch={
                         Object {
                           "isExact": true,
                           "params": Object {},
-                          "path": "/",
-                          "url": "/",
+                          "path": "/login",
+                          "url": "/login",
                         }
                       }
-                      disableLoginProtection={true}
                       exact={true}
                       location={
                         Object {
                           "hash": "",
-                          "pathname": "/",
+                          "key": "z5fxfn",
+                          "pathname": "/login",
                           "search": "",
                           "state": undefined,
                         }
                       }
-                      path="/"
+                      path="/login"
+                      render={[Function]}
                     >
-                      <PrivateRoute
-                        authenticated={false}
-                        component={[Function]}
-                        computedMatch={
+                      <OauthLogin
+                        ProviderLinksComponent={[Function]}
+                        history={
                           Object {
-                            "isExact": true,
-                            "params": Object {},
-                            "path": "/",
-                            "url": "/",
+                            "action": "REPLACE",
+                            "block": [Function],
+                            "createHref": [Function],
+                            "go": [Function],
+                            "goBack": [Function],
+                            "goForward": [Function],
+                            "length": 1,
+                            "listen": [Function],
+                            "location": Object {
+                              "hash": "",
+                              "key": "z5fxfn",
+                              "pathname": "/login",
+                              "search": "",
+                              "state": undefined,
+                            },
+                            "push": [Function],
+                            "replace": [Function],
                           }
                         }
-                        disableLoginProtection={true}
-                        dispatch={[Function]}
-                        exact={true}
                         location={
                           Object {
                             "hash": "",
-                            "pathname": "/",
+                            "key": "z5fxfn",
+                            "pathname": "/login",
                             "search": "",
                             "state": undefined,
                           }
                         }
-                        path="/"
-                        redirectPath="/login"
+                        match={
+                          Object {
+                            "isExact": true,
+                            "params": Object {},
+                            "path": "/login",
+                            "url": "/login",
+                          }
+                        }
+                        providers={
+                          Object {
+                            "OpenSRP": Object {
+                              "accessTokenUri": "https://reveal-stage.smartregister.org/opensrp/oauth/token  # notice NO ending /",
+                              "authorizationUri": "https://reveal-stage.smartregister.org/opensrp/oauth/authorize # notice NO ending /",
+                              "clientId": "hunter2",
+                              "redirectUri": "http://localhost:3000/oauth/callback/OpenSRP/",
+                              "scopes": Array [
+                                "read",
+                                "write",
+                              ],
+                              "state": "opensrp",
+                              "userUri": "https://reveal-stage.smartregister.org/opensrp/user-details",
+                            },
+                          }
+                        }
                       >
-                        <Route
-                          computedMatch={
+                        <ProviderLinks
+                          providers={
                             Object {
-                              "isExact": true,
-                              "params": Object {},
-                              "path": "/",
-                              "url": "/",
+                              "OpenSRP": Object {
+                                "accessTokenUri": "https://reveal-stage.smartregister.org/opensrp/oauth/token  # notice NO ending /",
+                                "authorizationUri": "https://reveal-stage.smartregister.org/opensrp/oauth/authorize # notice NO ending /",
+                                "clientId": "hunter2",
+                                "redirectUri": "http://localhost:3000/oauth/callback/OpenSRP/",
+                                "scopes": Array [
+                                  "read",
+                                  "write",
+                                ],
+                                "state": "opensrp",
+                                "userUri": "https://reveal-stage.smartregister.org/opensrp/user-details",
+                              },
                             }
                           }
-                          dispatch={[Function]}
-                          exact={true}
-                          location={
-                            Object {
-                              "hash": "",
-                              "pathname": "/",
-                              "search": "",
-                              "state": undefined,
-                            }
-                          }
-                          path="/"
-                          render={[Function]}
                         >
-                          <Home
-                            computedMatch={
-                              Object {
-                                "isExact": true,
-                                "params": Object {},
-                                "path": "/",
-                                "url": "/",
-                              }
-                            }
-                            dispatch={[Function]}
-                            exact={true}
-                            history={
-                              Object {
-                                "action": "POP",
-                                "block": [Function],
-                                "createHref": [Function],
-                                "go": [Function],
-                                "goBack": [Function],
-                                "goForward": [Function],
-                                "length": 1,
-                                "listen": [Function],
-                                "location": Object {
-                                  "hash": "",
-                                  "pathname": "/",
-                                  "search": "",
-                                  "state": undefined,
-                                },
-                                "push": [Function],
-                                "replace": [Function],
-                              }
-                            }
-                            location={
-                              Object {
-                                "hash": "",
-                                "pathname": "/",
-                                "search": "",
-                                "state": undefined,
-                              }
-                            }
-                            match={
-                              Object {
-                                "isExact": true,
-                                "params": Object {},
-                                "path": "/",
-                                "url": "/",
-                              }
-                            }
-                            path="/"
+                          <div
+                            className="gatekeeper-login"
                           >
-                            <div
-                              className="text-center"
+                            <p
+                              className="gatekeeper-p"
                             >
-                              <Row
-                                className="welcome-box"
-                                tag="div"
+                              Please log in with one of the following providers
+                            </p>
+                            <p
+                              className="gatekeeper-p item"
+                              key="OpenSRP"
+                            >
+                              <a
+                                className="gatekeeper-btn"
+                                href="https://reveal-stage.smartregister.org/opensrp/oauth/authorize # notice NO ending /?client_id=hunter2&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fcallback%2FOpenSRP%2F&scope=read%20write&response_type=token&state=opensrp"
                               >
-                                <div
-                                  className="welcome-box row"
-                                >
-                                  <Col
-                                    tag="div"
-                                    widths={
-                                      Array [
-                                        "xs",
-                                        "sm",
-                                        "md",
-                                        "lg",
-                                        "xl",
-                                      ]
-                                    }
-                                  >
-                                    <div
-                                      className="col"
-                                    >
-                                      <h3>
-                                        Welcome to OpenSRp
-                                      </h3>
-                                    </div>
-                                  </Col>
-                                </div>
-                              </Row>
-                            </div>
-                          </Home>
-                        </Route>
-                      </PrivateRoute>
-                    </Connect(PrivateRoute)>
+                                OpenSRP
+                              </a>
+                            </p>
+                          </div>
+                        </ProviderLinks>
+                      </OauthLogin>
+                    </Route>
                   </Switch>
                 </div>
               </Col>
