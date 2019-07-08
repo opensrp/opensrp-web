@@ -1,6 +1,7 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { Store } from 'redux';
 import clientsReducer, {
   Client,
@@ -12,14 +13,29 @@ import clientsReducer, {
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
 
-/** define props for the clentList component */
+/** props Interface for the clentList component */
+export interface ClientListProps {
+  clientsArray: Client[];
+  fetchClientsActionCreator: typeof fetchClients;
+  // service used to retrieve data from opensrp
+}
 
 /** default props for the clientList component */
+export const defaultClientListProps: ClientListProps = {
+  clientsArray: [],
+  fetchClientsActionCreator: fetchClients,
+  // service used to retrieve data from opensrp
+};
 
 /** Display the client list  */
-class ClientList extends React.Component<{}, {}> {
-  constructor(props: {}) {
+class ClientList extends React.Component<ClientListProps, {}> {
+  public static defaultProps: ClientListProps = defaultClientListProps;
+  constructor(props: ClientListProps) {
     super(props);
+  }
+
+  public componentDidMount() {
+    // place functionality for the api calls here
   }
 
   public render() {
