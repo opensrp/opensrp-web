@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/pages/Home renders Home correctly 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <Home>
+    <div
+      className="text-center"
+    >
+      <Row
+        className="welcome-box"
+        tag="div"
+      >
+        <div
+          className="welcome-box row"
+        >
+          <Col
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="col"
+            >
+              <h3>
+                Welcome to OpenSRp
+              </h3>
+            </div>
+          </Col>
+        </div>
+      </Row>
+    </div>
+  </Home>
+</Router>
+`;

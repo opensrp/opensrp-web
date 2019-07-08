@@ -1,0 +1,55 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.4
+
+        environment:
+          SKIP_PREFLIGHT_CHECK: "true"
+          REACT_APP_WEBSITE_NAME: "OpenSRP"
+          REACT_APP_DOMAIN_NAME: "http://localhost:3000"
+          REACT_APP_THEME_COLOR: "000000"
+          REACT_APP_ENABLE_USERS: "true"
+          REACT_APP_ENABLE_ABOUT: "true"
+          REACT_APP_DISABLE_LOGIN_PROTECTION: "true"
+          REACT_APP_SUPERSET_API_BASE: "https://superset.reveal-stage.smartregister.org/"
+          REACT_APP_SUPERSET_API_ENDPOINT: "slice"
+          REACT_APP_OPENSRP_CLIENT_ID: "hunter2"
+          REACT_APP_OPENSRP_ACCESS_TOKEN_URL: https://reveal-stage.smartregister.org/opensrp/oauth/token
+          REACT_APP_OPENSRP_AUTHORIZATION_URL: https://reveal-stage.smartregister.org/opensrp/oauth/authorize
+          REACT_APP_OPENSRP_USER_URL: https://reveal-stage.smartregister.org/opensrp/user-details
+          REACT_APP_OPENSRP_OAUTH_STATE: opensrp
+          REACT_APP_ONADATA_ACCESS_TOKEN_URL: "https://stage-api.ona.io/o/token/"
+          REACT_APP_ONADATA_AUTHORIZATION_URL: "https://stage-api.ona.io/o/authorize/"
+          REACT_APP_ONADATA_USER_URL: "https://stage-api.ona.io/api/v1/user.json"
+          REACT_APP_ONADATA_OAUTH_STATE: "onadata"
+          REACT_APP_ONADATA_CLIENT_ID: "hunter2"
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run linter
+      - run: yarn lint-ts
+      # run tests!
+      - run: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
