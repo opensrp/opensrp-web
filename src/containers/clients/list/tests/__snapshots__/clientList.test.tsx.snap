@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/clients/list/ClientList renders without crashing 1`] = `
+<ClientList
+  clientsArray={
+    Array [
+      Object {
+        "firstName": "Khalesee",
+        "gender": "female",
+        "homeAddress": "Kings landing",
+        "id": "somelong uuid",
+        "lastContactDate": "s8",
+        "lastContactType": "daggered",
+        "lastName": "Tagarryen",
+        "location": "the Red Keap",
+        "middleName": "mother of sth",
+        "phonenumber": "hahaha",
+        "type": "fierce",
+      },
+    ]
+  }
+  fetchClientsActionCreator={[MockFunction]}
+  location={[MockFunction]}
+  match={[MockFunction]}
+>
+  <div>
+    some JSX here
+  </div>
+</ClientList>
+`;
+
+exports[`containers/clients/list/ClientList works correctly with the redux store 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(ClientList)
+    fetchClientsActionCreator={[MockFunction]}
+    location={[MockFunction]}
+    match={[MockFunction]}
+  >
+    <ClientList
+      clientsArray={
+        Array [
+          Object {
+            "firstName": "Khalesee",
+            "gender": "female",
+            "homeAddress": "Kings landing",
+            "id": "somelong uuid",
+            "lastContactDate": "s8",
+            "lastContactType": "daggered",
+            "lastName": "Tagarryen",
+            "location": "the Red Keap",
+            "middleName": "mother of sth",
+            "phonenumber": "hahaha",
+            "type": "fierce",
+          },
+        ]
+      }
+      fetchClientsActionCreator={[MockFunction]}
+      fetchClientsactionCreator={[Function]}
+      location={[MockFunction]}
+      match={[MockFunction]}
+    >
+      <div>
+        some JSX here
+      </div>
+    </ClientList>
+  </Connect(ClientList)>
+  );
+</Provider>
+`;
