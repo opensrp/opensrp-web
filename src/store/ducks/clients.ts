@@ -48,3 +48,34 @@ export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => 
   clientsById: keyBy(clientsList, (client: Client) => client.id),
   type: CLIENTS_FETCHED,
 });
+
+// The reducer
+
+/** interface for clients state in redux store */
+interface ClientState {
+  clientsById: { [key: string]: Client };
+}
+
+/** Create an immutable clients state */
+export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObject<ClientState>;
+
+/** initial clients-state state */
+const initialState: ImmutableClientsState = SeamlessImmutable({
+  clientsById: {},
+});
+
+/** the clients reducer function */
+export default function reducer(
+  state: ImmutableClientsState = initialState,
+  action: ClientsActionTypes
+): ImmutableClientsState {
+  switch (action.type) {
+    case CLIENTS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        clientsById: action.clientsById,
+      });
+    default:
+      return state;
+  }
+}
