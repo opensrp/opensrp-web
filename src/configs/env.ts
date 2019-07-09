@@ -79,3 +79,14 @@ export type ONADATA_OAUTH_STATE = typeof ONADATA_OAUTH_STATE;
 
 export const GISIDA_ONADATA_API_TOKEN = process.env.REACT_APP_GISIDA_ONADATA_API_TOKEN || '';
 export type GISIDA_ONADATA_API_TOKEN = typeof GISIDA_ONADATA_API_TOKEN;
+
+/** Base Api url for opensrp */
+export const OPENSRP_BASE_API_ENDPOINT =
+  process.env.REACT_APP_OPENSRP_BASE_API_ENDPOINT ||
+  'https://reveal-stage.smartregister.org/opensrp/';
+export type OPENSRP_BASE_API_ENDPOINT = typeof OPENSRP_BASE_API_ENDPOINT;
+
+/** the clients endpoint NOTE: does not end with / */
+export const OPENSRP_CLIENT_ENDPOINT =
+  process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'rest/client';
+export type OPENSRP_CLIENTS_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
