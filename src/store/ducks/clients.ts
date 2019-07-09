@@ -21,13 +21,10 @@ export interface Client {
   id: string;
   firstName: string;
   gender: string;
-  homeAddress: string;
   lastName: string;
   lastContactDate: string;
-  lastContactType: string;
   location: string;
   middleName: string;
-  phonenumber: string;
   type: string;
 }
 
