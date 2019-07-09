@@ -298,6 +298,40 @@ exports[`App renders App correctly 1`] = `
                                       </NavLink>
                                     </li>
                                   </NavItem>
+                                  <NavItem
+                                    tag="li"
+                                  >
+                                    <li
+                                      className="nav-item"
+                                    >
+                                      <NavLink
+                                        activeClassName="active"
+                                        aria-current="page"
+                                        className="nav-link"
+                                        to="/clients"
+                                      >
+                                        <Route
+                                          path="\\\\/clients"
+                                        >
+                                          <Link
+                                            aria-current={null}
+                                            className="nav-link"
+                                            replace={false}
+                                            to="/clients"
+                                          >
+                                            <a
+                                              aria-current={null}
+                                              className="nav-link"
+                                              href="/clients"
+                                              onClick={[Function]}
+                                            >
+                                              clients
+                                            </a>
+                                          </Link>
+                                        </Route>
+                                      </NavLink>
+                                    </li>
+                                  </NavItem>
                                 </ul>
                               </Nav>
                               <Nav
