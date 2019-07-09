@@ -3,6 +3,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Store } from 'redux';
+import Loading from '../../../components/page/Loading';
+import { ClientService } from '../../../services/clients';
 import clientsReducer, {
   Client,
   fetchClients,
@@ -34,7 +36,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
     super(props);
   }
 
-  public componentDidMount() {
+  public async componentDidMount() {
     // place functionality for the api calls here
   }
 
