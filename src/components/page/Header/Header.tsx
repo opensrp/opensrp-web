@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
 import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
-import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import './Header.css';
 
 /** interface for Header state */
@@ -86,6 +86,11 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                   </NavLink>
                 </NavItem>
               )}
+              <NavItem>
+                <NavLink to={CLIENT_URL} className="nav-link" activeClassName="active">
+                  clients
+                </NavLink>
+              </NavItem>
             </Nav>
             <Nav className="ml-0" navbar={true}>
               {authenticated ? (
