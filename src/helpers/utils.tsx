@@ -31,7 +31,7 @@ export function extractClient(rawClient: any): Client {
   const thisClient: Client = {
     firstName: rawClient.firstName || '',
     gender: rawClient.gender || '',
-    id: rawClient.id || '',
+    id: rawClient._id || '',
     lastContactDate: '',
     lastName: rawClient.lastName || '',
     location: '',
