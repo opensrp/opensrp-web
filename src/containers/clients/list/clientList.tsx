@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { ClientService } from '../../../services/clients';
+import ClientService from '../../../services/clients';
 import clientsReducer, {
   Client,
   fetchClients,
@@ -17,16 +17,16 @@ reducerRegistry.register(clientsReducerName, clientsReducer);
 
 /** props Interface for the clentList component */
 export interface ClientListProps {
+  clientService: typeof ClientService;
   clientsArray: Client[];
   fetchClientsActionCreator: typeof fetchClients;
-  // service used to retrieve data from opensrp
 }
 
 /** default props for the clientList component */
 export const defaultClientListProps: ClientListProps = {
+  clientService: ClientService,
   clientsArray: [],
   fetchClientsActionCreator: fetchClients,
-  // service used to retrieve data from opensrp
 };
 
 /** Display the client list  */
@@ -37,7 +37,12 @@ class ClientList extends React.Component<ClientListProps, {}> {
   }
 
   public async componentDidMount() {
-    // place functionality for the api calls here
+    const { fetchClientsActionCreator, clientService } = this.props;
+
+    await clientService.getClientsList().then(response => {
+      const { data } = response;
+      fetchClientsActionCreator(data);
+    });
   }
 
   public render() {
