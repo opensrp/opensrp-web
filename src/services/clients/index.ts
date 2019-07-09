@@ -1,12 +1,12 @@
 import { OPENSRP_BASE_API_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../configs/env';
 
 class ClientService {
-  private CLIENTS_API_ENDPOINT = `${OPENSRP_BASE_API_ENDPOINT}/${OPENSRP_CLIENT_ENDPOINT}`;
+  private CLIENTS_API_ENDPOINT = `${OPENSRP_BASE_API_ENDPOINT}/${OPENSRP_CLIENT_ENDPOINT}/search`;
 
   public async getClientsList() {
     const response = await fetch(this.CLIENTS_API_ENDPOINT, {
       headers: {
-        accept: 'application/json',
+        Accept: 'application/json',
       },
       method: 'GET',
     });
@@ -15,7 +15,7 @@ class ClientService {
       throw new Error(`${response.status} Failed to retrieve clients list`);
     }
 
-    const { data } = await response.json();
+    const data = await response.json();
 
     return { data };
   }
