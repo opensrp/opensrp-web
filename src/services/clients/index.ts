@@ -1,8 +1,10 @@
-import { OPENSRP_API_ENDPOINT } from '../../configs/settings';
+import { CLIENTS_ENDPOINT, OPENSRP_API_ENDPOINT } from '../../configs/env';
 
 class ClientService {
-  public async getClientsList(url = `${OPENSRP_API_ENDPOINT}/clients`) {
-    const response = await fetch(url, {
+  private CLIENTS_API_ENDPOINT = `${OPENSRP_API_ENDPOINT}/${CLIENTS_ENDPOINT}`;
+
+  public async getClientsList() {
+    const response = await fetch(this.CLIENTS_API_ENDPOINT, {
       headers: {
         accept: 'application/json',
       },
@@ -18,3 +20,5 @@ class ClientService {
     return { data };
   }
 }
+
+export default new ClientService();
