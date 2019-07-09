@@ -42,11 +42,9 @@ class ClientList extends React.Component<ClientListProps, {}> {
   public async componentDidMount() {
     const { fetchClientsActionCreator, clientService } = this.props;
 
-    await clientService.getClientsList().then(response => {
-      const { data } = response;
-      const clientsData = map(data, (client: any) => extractClient(client));
-      fetchClientsActionCreator(clientsData);
-    });
+    const response = clientService.getClientsList();
+    const clientsData = map(response, (client: any) => extractClient(client));
+    fetchClientsActionCreator(clientsData);
   }
 
   public render() {
