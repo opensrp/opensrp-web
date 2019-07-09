@@ -1,0 +1,22 @@
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+tr:first-child {
+  background-color: white;
+}
+
+.table {
+  width: 90vw;
+  margin: 0 auto;
+  border: 1px outset #f2f2f2;
+}
+
+.table-shadow {
+  box-shadow: 1px 2px #c9c9c9;
+}
+
+th .form-control {
+  border: none;
+  font: inherit;
+}
