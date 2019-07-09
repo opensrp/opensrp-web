@@ -12,6 +12,7 @@ import clientsReducer, {
   getClientsArray,
   reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
+import './clientList.css';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -52,7 +53,45 @@ class ClientList extends React.Component<ClientListProps, {}> {
     if (!some(clientsArray)) {
       return <Loading />;
     }
-    return <div>some JSX here</div>;
+    return (
+      <div>
+        <table className="table table-shadow">
+          <tr>
+            <th>Identifier</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>
+              <form>
+                <select className="form-control col-auto custom-select">
+                  <option>Last contact</option>
+                  <option>other Date</option>
+                </select>
+              </form>
+            </th>
+            <th>actions</th>
+          </tr>
+          {clientsArray.map((client: Client) => {
+            return (
+              <tr>
+                <td>{client.id}</td>
+                <td>{client.firstName}</td>
+                <td>{client.middleName}</td>
+                <td>{client.lastName}</td>
+                <td>{client.gender}</td>
+                <td>{client.location}</td>
+                <td>{client.lastContactDate}</td>
+                <td>
+                  <i href={`${'#'}`}> view </i>
+                </td>
+              </tr>
+            );
+          })}
+        </table>
+      </div>
+    );
   }
 }
 
