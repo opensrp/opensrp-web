@@ -2,18 +2,14 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { create } from 'domain';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { createBrowserHistory } from 'history';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
 import store from '../../../../store';
 import reducer, { fetchClients, reducerName } from '../../../../store/ducks/clients';
 import * as fixtures from '../../../../store/ducks/tests/fixtures';
 import ConnectedClientsList, { ClientList } from '../clientList';
 
 reducerRegistry.register(reducerName, reducer);
-
-const history = createBrowserHistory();
 
 describe('containers/clients/list/ClientList', () => {
   beforeEach(() => {
@@ -23,6 +19,7 @@ describe('containers/clients/list/ClientList', () => {
   it('renders without crashing', () => {
     const mock: any = jest.fn();
     const props = {
+      clientService: mock,
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
       location: mock,
@@ -34,6 +31,7 @@ describe('containers/clients/list/ClientList', () => {
   it('renders without crashing', () => {
     const mock: any = jest.fn();
     const props = {
+      clientService: mock,
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
       location: mock,
@@ -48,6 +46,7 @@ describe('containers/clients/list/ClientList', () => {
     store.dispatch(fetchClients(fixtures.clients));
     const mock: any = jest.fn();
     const props = {
+      clientService: mock,
       fetchClientsActionCreator: mock,
       location: mock,
       match: mock,
