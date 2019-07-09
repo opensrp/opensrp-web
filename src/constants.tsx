@@ -7,3 +7,5 @@ export const LOGOUT_URL = '/logout';
 export type LOGOUT_URL = typeof LOGOUT_URL;
 export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
+export const CLIENT_URL = '/clients';
+export type CLIENT_URL = typeof CLIENT_URL;
