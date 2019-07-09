@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
@@ -46,6 +47,11 @@ class ClientList extends React.Component<ClientListProps, {}> {
   }
 
   public render() {
+    /** render loader if there are no clients in state */
+    const { clientsArray } = this.props;
+    if (!some(clientsArray)) {
+      return <Loading />;
+    }
     return <div>some JSX here</div>;
   }
 }
