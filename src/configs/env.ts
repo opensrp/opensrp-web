@@ -83,7 +83,7 @@ export type GISIDA_ONADATA_API_TOKEN = typeof GISIDA_ONADATA_API_TOKEN;
 /** Base Api url for opensrp */
 export const OPENSRP_BASE_API_ENDPOINT =
   process.env.REACT_APP_OPENSRP_BASE_API_ENDPOINT ||
-  'https://reveal-stage.smartregister.org/opensrp/';
+  'https://reveal-stage.smartregister.org/opensrp';
 export type OPENSRP_BASE_API_ENDPOINT = typeof OPENSRP_BASE_API_ENDPOINT;
 
 /** the clients endpoint NOTE: does not end with / */
