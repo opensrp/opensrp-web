@@ -21,7 +21,7 @@ class ClientService {
       .then(async response => {
         result = {
           data: await response.json(),
-          error: (!!response.ok && `${response.status} Failed to retrieve clients list`) || '',
+          error: (!response.ok && `${response.status} Failed to retrieve clients list`) || '',
         };
       })
       .catch(err => {
