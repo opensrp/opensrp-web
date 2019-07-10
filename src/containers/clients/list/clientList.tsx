@@ -86,7 +86,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
                   <td>{client.location}</td>
                   <td>{client.lastContactDate}</td>
                   <td>
-                    <i> href={`${'#'}`}> view </i>
+                    <a href={`${'#'}`}> view </a>
                   </td>
                 </tr>
               );

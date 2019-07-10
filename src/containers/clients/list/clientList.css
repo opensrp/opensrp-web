@@ -7,8 +7,6 @@ tr:first-child {
 }
 
 .table {
-  width: 90vw;
-  margin: 0 auto;
   border: 1px outset #f2f2f2;
 }
 
