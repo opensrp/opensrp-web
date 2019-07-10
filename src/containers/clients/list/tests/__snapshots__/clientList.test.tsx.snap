@@ -140,11 +140,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -164,11 +164,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -190,11 +190,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -214,11 +214,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -240,11 +240,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -266,11 +266,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
         <tr
@@ -290,11 +290,11 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
           <td />
           <td />
           <td>
-            <i>
-               href=
-              #
-              &gt; view 
-            </i>
+            <a
+              href="#"
+            >
+               view 
+            </a>
           </td>
         </tr>
       </tbody>
@@ -461,11 +461,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -485,11 +485,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -511,11 +511,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -535,11 +535,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -561,11 +561,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -587,11 +587,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
             <tr
@@ -611,11 +611,11 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
               <td />
               <td />
               <td>
-                <i>
-                   href=
-                  #
-                  &gt; view 
-                </i>
+                <a
+                  href="#"
+                >
+                   view 
+                </a>
               </td>
             </tr>
           </tbody>
