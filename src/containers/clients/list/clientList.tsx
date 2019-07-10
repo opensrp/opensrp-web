@@ -2,7 +2,6 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { map, some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import { extractClient } from '../../../helpers/utils';
@@ -42,8 +41,9 @@ class ClientList extends React.Component<ClientListProps, {}> {
   public async componentDidMount() {
     const { fetchClientsActionCreator, clientService } = this.props;
 
-    const response = clientService.getClientsList();
-    const clientsData = map(response, (client: any) => extractClient(client));
+    const response = await clientService.getClientsList();
+    const { data } = response!;
+    const clientsData = map(data, (client: { [key: string]: any }) => extractClient(client));
     fetchClientsActionCreator(clientsData);
   }
 
