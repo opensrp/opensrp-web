@@ -4,5 +4,10 @@
  * The goal is to have consistent test results
  */
 
-export const SUPERSET_PLANS_SLICE = 0;
-export type SUPERSET_PLANS_SLICE = typeof SUPERSET_PLANS_SLICE;
+/** Base Api url for opensrp */
+export const OPENSRP_BASE_API_ENDPOINT = 'https://someip';
+export type OPENSRP_BASE_API_ENDPOINT = typeof OPENSRP_BASE_API_ENDPOINT;
+
+/** the clients endpoint NOTE: does not end with / */
+export const OPENSRP_CLIENT_ENDPOINT = 'rest/client';
+export type OPENSRP_CLIENTS_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;

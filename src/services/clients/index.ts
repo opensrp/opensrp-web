@@ -1,4 +1,5 @@
 import { OPENSRP_BASE_API_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../configs/env';
+import { FAILED_TO_RETRIEVE_CLIENTS, SERVICE_HEADERS } from '../../constants';
 
 class ClientService {
   private CLIENTS_API_ENDPOINT = `${OPENSRP_BASE_API_ENDPOINT}/${OPENSRP_CLIENT_ENDPOINT}/search`;
@@ -10,18 +11,18 @@ class ClientService {
     }
     let result: Response | null = null;
 
-    await fetch(this.CLIENTS_API_ENDPOINT, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'cache-control': 'no-cache',
-      },
-      method: 'GET',
-    })
+    await fetch(this.CLIENTS_API_ENDPOINT, { headers: { ...SERVICE_HEADERS }, method: 'GET' })
       .then(async response => {
+        const returnObj = await response.json();
+        let data: Array<{ [key: string]: any }> = returnObj;
+        // check that the returned data is an array, if there was an
+        // error this will usually comeback as an object
+        if (!Array.isArray(returnObj)) {
+          data = [];
+        }
         result = {
-          data: await response.json(),
-          error: (!response.ok && `${response.status} Failed to retrieve clients list`) || '',
+          data,
+          error: (!response.ok && `${response.status} ${FAILED_TO_RETRIEVE_CLIENTS}`) || '',
         };
       })
       .catch(err => {

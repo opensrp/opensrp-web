@@ -1,4 +1,6 @@
 // strings
+export const FAILED_TO_RETRIEVE_CLIENTS = 'Failed to retrieve clients list';
+export type FAILED_TO_RETRIEVE_CLIENTS = typeof FAILED_TO_RETRIEVE_CLIENTS;
 
 // internal urls
 export const LOGIN_URL = '/login';
@@ -9,3 +11,10 @@ export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
+
+// constants for services
+export const SERVICE_HEADERS = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
+export type SERVICE_HEADERS = typeof SERVICE_HEADERS;
