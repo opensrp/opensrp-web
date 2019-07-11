@@ -25,9 +25,8 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
   }
 }
 
-// A hack since we have dont yet have type for rawclients objects
 /** func to only extract bits the client values needed from API response */
-export function extractClient(rawClient: any): Client {
+export function extractClient(rawClient: FlexObject): Client {
   const thisClient: Client = {
     firstName: rawClient.firstName || '',
     gender: rawClient.gender || '',
