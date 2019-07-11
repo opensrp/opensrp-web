@@ -17,7 +17,7 @@ import './clientList.css';
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
 
-/** props Interface for the clentList component */
+/** props Interface for the clientList component */
 export interface ClientListProps {
   clientService: typeof ClientService;
   clientsArray: Client[];
@@ -100,15 +100,15 @@ class ClientList extends React.Component<ClientListProps, {}> {
 
 export { ClientList };
 /** Maybe define default props */
-/** connect the compoenent to the store */
+/** connect the component to the store */
 
 /** Interface to describe props from mapStateToProps */
-interface DispatchedStateprops {
+interface DispatchedStateProps {
   clientsArray: Client[];
 }
 
 /** Map props to state  */
-const mapstateToProps = (state: Partial<Store>): DispatchedStateprops => {
+const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
   const result = {
     clientsArray: getClientsArray(state),
   };
@@ -116,11 +116,11 @@ const mapstateToProps = (state: Partial<Store>): DispatchedStateprops => {
 };
 
 /** map props to actions */
-const mapDispatchToProps = { fetchClientsactionCreator: fetchClients };
+const mapDispatchToProps = { fetchClientsActionCreator: fetchClients };
 
 /** connect clientsList to the redux store */
 const ConnectedClientList = connect(
-  mapstateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(ClientList);
 

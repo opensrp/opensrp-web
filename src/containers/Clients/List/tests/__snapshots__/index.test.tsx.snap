@@ -397,8 +397,7 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
           },
         ]
       }
-      fetchClientsActionCreator={[MockFunction]}
-      fetchClientsactionCreator={[Function]}
+      fetchClientsActionCreator={[Function]}
       location={[MockFunction]}
       match={[MockFunction]}
     >
