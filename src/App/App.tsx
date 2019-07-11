@@ -12,7 +12,7 @@ import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import { CLIENT_URL } from '../constants';
-import { ClientList } from '../containers/clients/list/clientList';
+import { ClientList } from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
