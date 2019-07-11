@@ -1,14 +1,3 @@
-/** The clients reducer module:
- * To implement:
- *  - clients object interface
- *  - action to fetch clients
- *  - The client's reducer
- *  - FetchClients action creator
- *  - selectors:
- *      - getclientById
- *      - getClientsArray
- *      - getClientsIdArray
- */
 import { get, keyBy, keys, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
@@ -31,7 +20,7 @@ export interface Client {
 // actions
 
 /** CLIENTS_FETCHED action type */
-export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED'; // ??What is authorize action in this context?
+export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -95,7 +84,7 @@ export function getClients(state: Partial<Store>): { [key: string]: Client } {
 }
 
 /** get clients ids in an array
- * @param {Partial<Store>} state - the reedux store
+ * @param {Partial<Store>} state - the redux store
  * @return {string[]} - clients ids as an array of strings
  */
 export function getClientsIdArray(state: Partial<Store>): string[] {
@@ -112,7 +101,7 @@ export function getClientsArray(state: Partial<Store>): Client[] {
 
 /** get a specific client by their id
  * @param {Partial<Store>} state - the redux store
- * @return {Cllient | null} a client obj if the id is found else null
+ * @return {Client | null} a client obj if the id is found else null
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
   return get(getClients(state), id) || null;
