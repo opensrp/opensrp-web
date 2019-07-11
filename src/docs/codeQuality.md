@@ -1,0 +1,4 @@
+- tests
+- atomic commits
+- linters
+- how to lint
