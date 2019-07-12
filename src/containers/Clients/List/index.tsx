@@ -2,10 +2,11 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { map, some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { extractClient } from '../../../helpers/utils';
 import ClientService from '../../../services/clients';
+import { extractClient } from '../../../store/ducks/clients';
 import clientsReducer, {
   Client,
   fetchClients,
@@ -55,8 +56,8 @@ class ClientList extends React.Component<ClientListProps, {}> {
     }
     return (
       <div>
-        <table className="table table-shadow">
-          <tbody>
+        <Table striped={true}>
+          <thead>
             <tr>
               <th>Identifier</th>
               <th>First Name</th>
@@ -74,7 +75,8 @@ class ClientList extends React.Component<ClientListProps, {}> {
               </th>
               <th>actions</th>
             </tr>
-
+          </thead>
+          <tbody>
             {clientsArray.map((client: Client) => {
               return (
                 <tr key={client.id}>
@@ -92,7 +94,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
               );
             })}
           </tbody>
-        </table>
+        </Table>
       </div>
     );
   }
