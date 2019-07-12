@@ -88,7 +88,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
               )}
               <NavItem>
                 <NavLink to={CLIENT_URL} className="nav-link" activeClassName="active">
-                  clients
+                  Clients
                 </NavLink>
               </NavItem>
             </Nav>
