@@ -1,6 +1,7 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { keyBy, values } from 'lodash';
+import { values } from 'lodash';
 import { FlushThunks } from 'redux-testkit';
+import * as rawClientFixture from '../../../services/clients/tests/fixtures';
 import store from '../../index';
 import reducer, {
   fetchClients,
@@ -10,6 +11,7 @@ import reducer, {
   getClientsIdArray,
   reducerName,
 } from '../clients';
+import { extractClient } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
 reducerRegistry.register(reducerName, reducer);
@@ -67,5 +69,20 @@ describe('reducers/clients', () => {
       middleName: '',
       type: 'Client',
     });
+  });
+
+  it('extracts clients correctly', () => {
+    const { rawClient1 } = rawClientFixture;
+    const expected = {
+      firstName: 'Khumpai',
+      gender: 'Male',
+      id: '9b67a82d-dac7-40c0-85aa-e5976339a6b6',
+      lastContactDate: '',
+      lastName: 'Family',
+      location: '',
+      middleName: '',
+      type: 'Client',
+    };
+    expect(extractClient(rawClient1)).toEqual(expected);
   });
 });
