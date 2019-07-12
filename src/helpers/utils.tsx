@@ -1,7 +1,6 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
-import { Client } from '../store/ducks/clients';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
@@ -23,19 +22,4 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
         return getOnadataUserInfo(apiResponse);
     }
   }
-}
-
-/** func to only extract bits the client values needed from API response */
-export function extractClient(rawClient: FlexObject): Client {
-  const thisClient: Client = {
-    firstName: rawClient.firstName || '',
-    gender: rawClient.gender || '',
-    id: rawClient._id || '',
-    lastContactDate: '',
-    lastName: rawClient.lastName || '',
-    location: '',
-    middleName: rawClient.middleName || '',
-    type: 'Client',
-  };
-  return thisClient;
 }

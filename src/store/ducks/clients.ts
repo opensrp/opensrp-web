@@ -1,6 +1,7 @@
 import { get, keyBy, keys, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
+import { FlexObject } from '../../helpers/utils';
 
 /** The reducer name */
 export const reducerName = 'clients';
@@ -105,4 +106,21 @@ export function getClientsArray(state: Partial<Store>): Client[] {
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
   return get(getClients(state), id) || null;
+}
+
+// utils for clients dux module
+
+/** func to only extract bits the client values needed from API response */
+export function extractClient(rawClient: FlexObject): Client {
+  const thisClient: Client = {
+    firstName: rawClient.firstName || '',
+    gender: rawClient.gender || '',
+    id: rawClient._id || '',
+    lastContactDate: '',
+    lastName: rawClient.lastName || '',
+    location: '',
+    middleName: rawClient.middleName || '',
+    type: 'Client',
+  };
+  return thisClient;
 }
