@@ -12,7 +12,7 @@ import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import { CLIENT_URL } from '../constants';
-import { ClientList } from '../containers/Clients/List';
+import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
@@ -39,7 +39,7 @@ class App extends Component {
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                 exact={true}
                 path={CLIENT_URL}
-                component={ClientList}
+                component={ConnectedClientList}
               />
 
               {/* tslint:disable jsx-no-lambda */}
