@@ -1,10 +1,10 @@
 # CONTAINERS
 
-in this doc, I will take you through the basic process of creating and adding a container to the existing opensrp code base
+in this section, I will take you through the basic process of creating and adding a container to the existing opensrp code base
 
 Ill use the Clients container for code examples along the way.
 
-### why are there components and containers?
+## why are there components and containers
 
 containers are different to components in that containers are components that are connected to the redux store
 
@@ -12,11 +12,11 @@ While a component should be purely presentational a container can receive state 
 
 ## Creating Containers
 
-Most of the work involved in creating a container is during the phase where you have to actually create the underlying presentational component. Once that is done there is `connect` function provided by `react-redux` that takes the dump component and connects it to the store.
+Most of the work involved in creating a container is done during the phase where you have to actually create the underlying presentational component([see here](components.md)). Once that is done; there is a `connect` function provided by `react-redux` that takes the dumb component and connects it to the store.
 
-The connect function can take in several args as seen [here](https://react-redux.js.org/api/connect), however more often that not you will find you only need 2 arguments:
+The [connect](https://react-redux.js.org/api/connect) function can take up to 4 arguments, however, you will often find that you only need 2 arguments:
 
-- an object that maps the components props to portions of the store, for the sake of conventions such an object is the return value of a function named `mapStateToProps`
+- an object that maps the components props to portions of the store, such an object is the return value of a function named `mapStateToProps`.
 
 ```typescript
 /** Map props to state  */
@@ -28,14 +28,14 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 };
 ```
 
-- the second arg is an object that maps the prop properties to actions that can be dispatched within the container.
+- the second arg is an object that maps certain props to actions that can be dispatched within the container.
 
 ```typescript
 /** map props to actions */
 const mapDispatchToProps = { fetchClientsActionCreator: fetchClients };
 ```
 
-the connect function is a high order function and it returns a unction that takes in the presentational component to be connected, such that the final syntax looks like this
+the connect function is a high order that takes the above optional parameters and returns a function that takes in the presentational component to be connected, such that the final syntax looks like this
 
 ```typescript
 const ConnectedClientList = connect(
@@ -44,4 +44,6 @@ const ConnectedClientList = connect(
 )(ClientList);
 ```
 
-for a more thorough look at the connecting a component to the store [see this](https://react-redux.js.org/api/connect)
+where ```ClientList``` is purely presentational.
+
+for a more comprehensive guide at connecting a component to the store [see this](https://react-redux.js.org/api/connect)
