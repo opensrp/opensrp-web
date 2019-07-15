@@ -1,1 +1,0 @@
-# Deploying opensrp-web
