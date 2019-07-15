@@ -2,23 +2,13 @@
 
 ## Guidelines
 
-see below for guidelines on the code and commit standards
-
-### Code
-
-- consider objects as immutable outside their creation scope
-- use JsDOC style comments for functions, interfaces, enums and classes
-- use JSDOC style comment for variables and types declaration where necessary
-
-### Commiting
-
-your commits should be atomic as possible, see [here](https://www.freshconsulting.com/atomic-commits/) for an excellent write up on this
+see [here](codeQuality.md) for code quality guidelines
 
 ## We Develop with Github
 
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 
-## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
+### We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)).
 
