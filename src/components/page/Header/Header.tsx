@@ -55,7 +55,6 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
 
   public render() {
     const { authenticated, user } = this.props;
-    const path = this.props.location.pathname;
     return (
       <div>
         <Navbar color="light" light={true} expand="md">
