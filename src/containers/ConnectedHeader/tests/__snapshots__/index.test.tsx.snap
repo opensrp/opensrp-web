@@ -8,7 +8,6 @@ Object {
     >
       <Link
         className="navbar-brand"
-        replace={false}
         to="/"
       >
         <img
@@ -51,7 +50,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/"
           >
@@ -63,7 +61,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/404"
           >
@@ -75,7 +72,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/404"
           >
@@ -103,7 +99,6 @@ Object {
       >
         <NavLink
           activeClassName="active"
-          aria-current="page"
           className="nav-link"
           to="/login"
         >
@@ -127,7 +122,6 @@ Object {
     >
       <Link
         className="navbar-brand"
-        replace={false}
         to="/"
       >
         <img
@@ -170,7 +164,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/"
           >
@@ -182,7 +175,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/404"
           >
@@ -194,7 +186,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/404"
           >
@@ -267,7 +258,6 @@ Object {
             >
               <NavLink
                 activeClassName="active"
-                aria-current="page"
                 className="nav-link"
                 to="/logout"
               >

@@ -54,331 +54,270 @@ exports[`App renders App correctly 1`] = `
                 }
               }
             >
-              <Route>
-                <HeaderComponent
-                  authenticated={false}
-                  history={
-                    Object {
-                      "action": "POP",
-                      "block": [Function],
-                      "createHref": [Function],
-                      "go": [Function],
-                      "goBack": [Function],
-                      "goForward": [Function],
-                      "length": 1,
-                      "listen": [Function],
-                      "location": Object {
-                        "hash": "",
-                        "pathname": "/",
-                        "search": "",
-                        "state": undefined,
-                      },
-                      "push": [Function],
-                      "replace": [Function],
-                    }
-                  }
-                  location={
-                    Object {
+              <HeaderComponent
+                authenticated={false}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
                       "hash": "",
                       "pathname": "/",
                       "search": "",
                       "state": undefined,
-                    }
+                    },
+                    "push": [Function],
+                    "replace": [Function],
                   }
-                  logOutUser={[Function]}
-                  match={
-                    Object {
-                      "isExact": true,
-                      "params": Object {},
-                      "path": "/",
-                      "url": "/",
-                    }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
                   }
-                  user={
-                    Object {
-                      "email": "",
-                      "gravatar": "",
-                      "name": "",
-                      "username": "",
-                    }
+                }
+                logOutUser={[Function]}
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
                   }
-                >
-                  <div>
-                    <Navbar
-                      color="light"
-                      expand="md"
-                      light={true}
-                      tag="nav"
+                }
+                user={
+                  Object {
+                    "email": "",
+                    "gravatar": "",
+                    "name": "",
+                    "username": "",
+                  }
+                }
+              >
+                <div>
+                  <Navbar
+                    color="light"
+                    expand="md"
+                    light={true}
+                    tag="nav"
+                  >
+                    <nav
+                      className="navbar navbar-expand-md navbar-light bg-light"
                     >
                       <nav
                         className="navbar navbar-expand-md navbar-light bg-light"
                       >
-                        <nav
-                          className="navbar navbar-expand-md navbar-light bg-light"
+                        <Link
+                          className="navbar-brand"
+                          to="/"
                         >
-                          <Link
+                          <a
                             className="navbar-brand"
-                            replace={false}
-                            to="/"
+                            href="/"
+                            onClick={[Function]}
                           >
-                            <a
-                              className="navbar-brand"
-                              href="/"
-                              onClick={[Function]}
-                            >
-                              <img
-                                alt="OpenSRP"
-                                src="logo.png"
-                              />
-                            </a>
-                          </Link>
-                        </nav>
-                        <NavbarToggler
+                            <img
+                              alt="OpenSRP"
+                              src="logo.png"
+                            />
+                          </a>
+                        </Link>
+                      </nav>
+                      <NavbarToggler
+                        onClick={[Function]}
+                        tag="button"
+                        type="button"
+                      >
+                        <button
+                          className="navbar-toggler"
                           onClick={[Function]}
-                          tag="button"
                           type="button"
                         >
-                          <button
-                            className="navbar-toggler"
-                            onClick={[Function]}
-                            type="button"
-                          >
-                            <span
-                              className="navbar-toggler-icon"
-                            />
-                          </button>
-                        </NavbarToggler>
-                        <Collapse
+                          <span
+                            className="navbar-toggler-icon"
+                          />
+                        </button>
+                      </NavbarToggler>
+                      <Collapse
+                        appear={false}
+                        enter={true}
+                        exit={true}
+                        in={false}
+                        isOpen={false}
+                        mountOnEnter={false}
+                        navbar={true}
+                        onEnter={[Function]}
+                        onEntered={[Function]}
+                        onEntering={[Function]}
+                        onExit={[Function]}
+                        onExited={[Function]}
+                        onExiting={[Function]}
+                        tag="div"
+                        timeout={350}
+                        unmountOnExit={false}
+                      >
+                        <Transition
                           appear={false}
                           enter={true}
                           exit={true}
                           in={false}
-                          isOpen={false}
                           mountOnEnter={false}
-                          navbar={true}
                           onEnter={[Function]}
                           onEntered={[Function]}
                           onEntering={[Function]}
                           onExit={[Function]}
                           onExited={[Function]}
                           onExiting={[Function]}
-                          tag="div"
                           timeout={350}
                           unmountOnExit={false}
                         >
-                          <Transition
-                            appear={false}
-                            enter={true}
-                            exit={true}
-                            in={false}
-                            mountOnEnter={false}
-                            onEnter={[Function]}
-                            onEntered={[Function]}
-                            onEntering={[Function]}
-                            onExit={[Function]}
-                            onExited={[Function]}
-                            onExiting={[Function]}
-                            timeout={350}
-                            unmountOnExit={false}
+                          <div
+                            className="collapse navbar-collapse"
+                            style={Object {}}
                           >
-                            <div
-                              className="collapse navbar-collapse"
-                              style={Object {}}
+                            <Nav
+                              className="mr-auto"
+                              navbar={true}
+                              tag="ul"
+                              vertical={false}
                             >
-                              <Nav
-                                className="mr-auto"
-                                navbar={true}
-                                tag="ul"
-                                vertical={false}
+                              <ul
+                                className="mr-auto navbar-nav"
                               >
-                                <ul
-                                  className="mr-auto navbar-nav"
+                                <NavItem
+                                  tag="li"
                                 >
-                                  <NavItem
-                                    tag="li"
+                                  <li
+                                    className="nav-item"
                                   >
-                                    <li
-                                      className="nav-item"
+                                    <NavLink
+                                      activeClassName="active"
+                                      className="nav-link"
+                                      to="/"
                                     >
-                                      <NavLink
-                                        activeClassName="active"
+                                      <Link
                                         aria-current="page"
-                                        className="nav-link"
+                                        className="nav-link active"
+                                        style={Object {}}
                                         to="/"
                                       >
-                                        <Route
-                                          path="\\\\/"
+                                        <a
+                                          aria-current="page"
+                                          className="nav-link active"
+                                          href="/"
+                                          onClick={[Function]}
+                                          style={Object {}}
                                         >
-                                          <Link
-                                            aria-current="page"
-                                            className="nav-link active"
-                                            replace={false}
-                                            style={Object {}}
-                                            to="/"
-                                          >
-                                            <a
-                                              aria-current="page"
-                                              className="nav-link active"
-                                              href="/"
-                                              onClick={[Function]}
-                                              style={Object {}}
-                                            >
-                                              Home
-                                            </a>
-                                          </Link>
-                                        </Route>
-                                      </NavLink>
-                                    </li>
-                                  </NavItem>
-                                  <NavItem
-                                    tag="li"
-                                  >
-                                    <li
-                                      className="nav-item"
-                                    >
-                                      <NavLink
-                                        activeClassName="active"
-                                        aria-current="page"
-                                        className="nav-link"
-                                        to="/404"
-                                      >
-                                        <Route
-                                          path="\\\\/404"
-                                        >
-                                          <Link
-                                            aria-current={null}
-                                            className="nav-link"
-                                            replace={false}
-                                            to="/404"
-                                          >
-                                            <a
-                                              aria-current={null}
-                                              className="nav-link"
-                                              href="/404"
-                                              onClick={[Function]}
-                                            >
-                                              Users
-                                            </a>
-                                          </Link>
-                                        </Route>
-                                      </NavLink>
-                                    </li>
-                                  </NavItem>
-                                  <NavItem
-                                    tag="li"
-                                  >
-                                    <li
-                                      className="nav-item"
-                                    >
-                                      <NavLink
-                                        activeClassName="active"
-                                        aria-current="page"
-                                        className="nav-link"
-                                        to="/404"
-                                      >
-                                        <Route
-                                          path="\\\\/404"
-                                        >
-                                          <Link
-                                            aria-current={null}
-                                            className="nav-link"
-                                            replace={false}
-                                            to="/404"
-                                          >
-                                            <a
-                                              aria-current={null}
-                                              className="nav-link"
-                                              href="/404"
-                                              onClick={[Function]}
-                                            >
-                                              About
-                                            </a>
-                                          </Link>
-                                        </Route>
-                                      </NavLink>
-                                    </li>
-                                  </NavItem>
-                                  <NavItem
-                                    tag="li"
-                                  >
-                                    <li
-                                      className="nav-item"
-                                    >
-                                      <NavLink
-                                        activeClassName="active"
-                                        aria-current="page"
-                                        className="nav-link"
-                                        to="/clients"
-                                      >
-                                        <Route
-                                          path="\\\\/clients"
-                                        >
-                                          <Link
-                                            aria-current={null}
-                                            className="nav-link"
-                                            replace={false}
-                                            to="/clients"
-                                          >
-                                            <a
-                                              aria-current={null}
-                                              className="nav-link"
-                                              href="/clients"
-                                              onClick={[Function]}
-                                            >
-                                              Clients
-                                            </a>
-                                          </Link>
-                                        </Route>
-                                      </NavLink>
-                                    </li>
-                                  </NavItem>
-                                </ul>
-                              </Nav>
-                              <Nav
-                                className="ml-0"
-                                navbar={true}
-                                tag="ul"
-                                vertical={false}
-                              >
-                                <ul
-                                  className="ml-0 navbar-nav"
+                                          Home
+                                        </a>
+                                      </Link>
+                                    </NavLink>
+                                  </li>
+                                </NavItem>
+                                <NavItem
+                                  tag="li"
                                 >
-                                  <NavLink
-                                    activeClassName="active"
-                                    aria-current="page"
-                                    className="nav-link"
-                                    to="/login"
+                                  <li
+                                    className="nav-item"
                                   >
-                                    <Route
-                                      path="\\\\/login"
+                                    <NavLink
+                                      activeClassName="active"
+                                      className="nav-link"
+                                      to="/404"
                                     >
                                       <Link
                                         aria-current={null}
                                         className="nav-link"
-                                        replace={false}
-                                        to="/login"
+                                        to="/404"
                                       >
                                         <a
                                           aria-current={null}
                                           className="nav-link"
-                                          href="/login"
+                                          href="/404"
                                           onClick={[Function]}
                                         >
-                                          Login
+                                          Users
                                         </a>
                                       </Link>
-                                    </Route>
-                                  </NavLink>
-                                </ul>
-                              </Nav>
-                            </div>
-                          </Transition>
-                        </Collapse>
-                      </nav>
-                    </Navbar>
-                  </div>
-                </HeaderComponent>
-              </Route>
+                                    </NavLink>
+                                  </li>
+                                </NavItem>
+                                <NavItem
+                                  tag="li"
+                                >
+                                  <li
+                                    className="nav-item"
+                                  >
+                                    <NavLink
+                                      activeClassName="active"
+                                      className="nav-link"
+                                      to="/404"
+                                    >
+                                      <Link
+                                        aria-current={null}
+                                        className="nav-link"
+                                        to="/404"
+                                      >
+                                        <a
+                                          aria-current={null}
+                                          className="nav-link"
+                                          href="/404"
+                                          onClick={[Function]}
+                                        >
+                                          About
+                                        </a>
+                                      </Link>
+                                    </NavLink>
+                                  </li>
+                                </NavItem>
+                              </ul>
+                            </Nav>
+                            <Nav
+                              className="ml-0"
+                              navbar={true}
+                              tag="ul"
+                              vertical={false}
+                            >
+                              <ul
+                                className="ml-0 navbar-nav"
+                              >
+                                <NavLink
+                                  activeClassName="active"
+                                  className="nav-link"
+                                  to="/login"
+                                >
+                                  <Link
+                                    aria-current={null}
+                                    className="nav-link"
+                                    to="/login"
+                                  >
+                                    <a
+                                      aria-current={null}
+                                      className="nav-link"
+                                      href="/login"
+                                      onClick={[Function]}
+                                    >
+                                      Login
+                                    </a>
+                                  </Link>
+                                </NavLink>
+                              </ul>
+                            </Nav>
+                          </div>
+                        </Transition>
+                      </Collapse>
+                    </nav>
+                  </Navbar>
+                </div>
+              </HeaderComponent>
             </withRouter(HeaderComponent)>
           </Connect(withRouter(HeaderComponent))>
           <Row
