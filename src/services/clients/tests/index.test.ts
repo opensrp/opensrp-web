@@ -19,7 +19,14 @@ describe('services/clients', () => {
 
     const responseData = await ClientService.getClientsList();
     expect(fetch.mock.calls.length).toEqual(1);
-    expect(responseData).toEqual({ data, error: '' });
+    expect(responseData).toEqual({
+      data,
+      error: {
+        apiErrorMessage: '',
+        error: null,
+        serviceErrorMessage: '',
+      },
+    });
     expect(fetch.mock.calls[0][0]).toEqual('https://someip/rest/client/search');
   });
 
@@ -28,7 +35,29 @@ describe('services/clients', () => {
     const responseData = await ClientService.getClientsList();
     const expected = {
       data: [],
-      error: `${'500'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+      error: {
+        apiErrorMessage: '',
+        error: null,
+        serviceErrorMessage: `${'500'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+      },
+    };
+    expect(responseData).toEqual(expected);
+  });
+
+  it('should handle different types of http errors', async () => {
+    const toReturn = {
+      error: 'unauthorized',
+      error_description: 'An Authentication object was not found in the SecurityContext',
+    };
+    fetch.once(JSON.stringify(toReturn), { status: 401 });
+    const responseData = await ClientService.getClientsList();
+    const expected = {
+      data: [],
+      error: {
+        apiErrorMessage: 'An Authentication object was not found in the SecurityContext',
+        error: 'unauthorized',
+        serviceErrorMessage: `${'401'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+      },
     };
     expect(responseData).toEqual(expected);
   });
