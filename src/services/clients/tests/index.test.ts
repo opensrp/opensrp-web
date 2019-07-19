@@ -1,7 +1,7 @@
 import ClientService from '../';
 import { FAILED_TO_RETRIEVE_CLIENTS } from '../../../constants';
 
-import * as fixtures from '../tests/fixtures';
+import * as fixtures from '../../../store/ducks/tests/fixtures';
 
 // tslint:disable-next-line: no-var-requires
 const fetch = require('jest-fetch-mock');
