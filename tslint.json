@@ -1,9 +1,6 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rulesDirectory": ["tslint-plugin-prettier"],
-  "linterOptions": {
-    "exclude": ["src/services/clients/tests/fixtures.ts"]
-  },
   "rules": {
     "prettier": true,
     "interface-name": false
