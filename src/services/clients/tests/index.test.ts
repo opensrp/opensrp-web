@@ -22,9 +22,7 @@ describe('services/clients', () => {
     expect(responseData).toEqual({
       data,
       error: {
-        apiErrorMessage: '',
-        error: null,
-        serviceErrorMessage: '',
+        occurred: false
       },
     });
     expect(fetch.mock.calls[0][0]).toEqual('https://someip/rest/client/search');
@@ -36,29 +34,51 @@ describe('services/clients', () => {
     const expected = {
       data: [],
       error: {
-        apiErrorMessage: '',
-        error: null,
-        serviceErrorMessage: `${'500'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+        apiErrorMessage: `HTTP Error: (${500})`,
+        occurred: true,
+        serviceErrorMessage: `${500} ${FAILED_TO_RETRIEVE_CLIENTS}`,
       },
     };
     expect(responseData).toEqual(expected);
   });
 
-  it('should handle different types of http errors', async () => {
+  it('should be able create error messages that relate to apiError', () => {
     const toReturn = {
       error: 'unauthorized',
       error_description: 'An Authentication object was not found in the SecurityContext',
     };
     fetch.once(JSON.stringify(toReturn), { status: 401 });
-    const responseData = await ClientService.getClientsList();
+    const responseData = ClientService.getClientsList();
     const expected = {
       data: [],
       error: {
+        occurred: true,
         apiErrorMessage: 'An Authentication object was not found in the SecurityContext',
-        error: 'unauthorized',
-        serviceErrorMessage: `${'401'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+        serviceErrorMessage: `${401} ${FAILED_TO_RETRIEVE_CLIENTS}`,
       },
     };
     expect(responseData).toEqual(expected);
   });
+
+  // it('should be able to handle typeErrors such as network errors', async () => {
+  //   const toReturn = {
+  //     error: 'unauthorized',
+  //     error_description: 'An Authentication object was not found in the SecurityContext',
+  //   };
+  //   fetch.mockReject(
+  //     new Error(
+  //       'request to https://example.com/ failed, reason: getaddrinfo ENOTFOUND example.com example.com:443'
+  //     )
+  //   );
+  //   const responseData = await ClientService.getClientsList();
+  //   const expected = {
+  //     data: [],
+  //     error: {
+  //       apiErrorMessage: 'An Authentication object was not found in the SecurityContext',
+  //       error: 'unauthorized',
+  //       serviceErrorMessage: `${'401'} ${FAILED_TO_RETRIEVE_CLIENTS}`,
+  //     },
+  //   };
+  //   expect(responseData).toEqual(expected);
+  // });
 });

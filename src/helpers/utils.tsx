@@ -114,6 +114,7 @@ function setServiceErrorMessage(responseObj: any, message: string = ''): string 
  * Define the slice of data that is of interest from the fetch's call response data
  */
 function setData(responseObj: any): Client[] {
+  console.log(responseObj);
   const returnedData = responseObj.then((response: any) => response.json());
   if (Array.isArray(returnedData)) {
     return returnedData;
