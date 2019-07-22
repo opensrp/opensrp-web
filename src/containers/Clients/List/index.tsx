@@ -1,12 +1,11 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { map, some } from 'lodash';
+import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import ClientService from '../../../services/clients';
-import { extractClient } from '../../../store/ducks/clients';
 import clientsReducer, {
   Client,
   fetchClients,
@@ -43,9 +42,8 @@ class ClientList extends React.Component<ClientListProps, {}> {
     const { fetchClientsActionCreator, clientService } = this.props;
 
     const response = await clientService.getClientsList();
-    const { data } = response!;
-    const clientsData = map(data, (client: { [key: string]: any }) => extractClient(client));
-    fetchClientsActionCreator(clientsData);
+    const data = response === null ? [] : response.data;
+    fetchClientsActionCreator(data);
   }
 
   public render() {
@@ -64,29 +62,18 @@ class ClientList extends React.Component<ClientListProps, {}> {
               <th>Middle Name</th>
               <th>Last Name</th>
               <th>Gender</th>
-              <th>Location</th>
-              <th>
-                <form>
-                  <select className="form-control col-auto custom-select">
-                    <option>Last contact</option>
-                    <option>other Date</option>
-                  </select>
-                </form>
-              </th>
               <th>actions</th>
             </tr>
           </thead>
           <tbody>
             {clientsArray.map((client: Client) => {
               return (
-                <tr key={client.id}>
-                  <td>{client.id}</td>
+                <tr key={client._id}>
+                  <td>{client._id}</td>
                   <td>{client.firstName}</td>
                   <td>{client.middleName}</td>
                   <td>{client.lastName}</td>
                   <td>{client.gender}</td>
-                  <td>{client.location}</td>
-                  <td>{client.lastContactDate}</td>
                   <td>
                     <a href={`${'#'}`}> view </a>
                   </td>
