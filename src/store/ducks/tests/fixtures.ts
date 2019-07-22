@@ -1,4 +1,5 @@
-export const rawClient1 = {
+import { Client } from '../../ducks/clients';
+export const client1: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557670951023,
@@ -47,7 +48,7 @@ export const rawClient1 = {
   _rev: 'v1',
 };
 
-export const rawClient2 = {
+export const client2: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557670951165,
@@ -75,7 +76,7 @@ export const rawClient2 = {
   _rev: 'v1',
 };
 
-export const rawClient3 = {
+export const client3: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557672169407,
@@ -123,7 +124,7 @@ export const rawClient3 = {
   _id: 'b23307c2-cbbb-481f-9cd7-f218564cc4bc',
   _rev: 'v1',
 };
-export const rawClient4 = {
+export const client4: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557672169419,
@@ -150,7 +151,7 @@ export const rawClient4 = {
   _id: 'e5929901-9377-413c-850c-e41b48b34d5f',
   _rev: 'v1',
 };
-export const rawClient5 = {
+export const client5: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737485545,
@@ -178,7 +179,7 @@ export const rawClient5 = {
   _id: 'faa436bb-0aa5-4c5f-a2fe-be687e164205',
   _rev: 'v1',
 };
-export const rawClient6 = {
+export const client6: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737728445,
@@ -230,7 +231,7 @@ export const rawClient6 = {
   _id: '0a5457f9-3e2e-4432-afae-75b57251651a',
   _rev: 'v1',
 };
-export const rawClient7 = {
+export const client7: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737728487,
@@ -258,12 +259,4 @@ export const rawClient7 = {
   _rev: 'v1',
 };
 
-export const rawClients = [
-  rawClient1,
-  rawClient2,
-  rawClient3,
-  rawClient4,
-  rawClient5,
-  rawClient6,
-  rawClient7,
-];
+export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
