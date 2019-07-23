@@ -6,16 +6,29 @@ import { FlexObject } from '../../helpers/utils';
 /** The reducer name */
 export const reducerName = 'clients';
 
-/** Interface for client object */
+/** Interface for client object as received from clientServices */
 export interface Client {
-  id: string;
+  type: 'Client';
+  dateCreated: number;
+  serverVersion: number;
+  clientApplicationVersion: number;
+  clientDatabaseVersion: number;
+  baseEntityId: string;
+  identifiers: { [key: string]: string | null };
+  addresses: FlexObject[];
+  attributes: FlexObject;
   firstName: string;
-  gender: string;
   lastName: string;
-  lastContactDate: string;
-  location: string;
-  middleName: string;
-  type: string;
+  birthdate: number;
+  middleName?: string;
+  birthdateApprox: boolean;
+  deathdateApprox: boolean;
+  gender?: string;
+  relationships: {
+    [key: string]: string[];
+  };
+  _id: string;
+  _rev: string;
 }
 
 // actions
@@ -39,7 +52,7 @@ export type ClientsActionTypes = FetchClientsAction | AnyAction;
  * @return {FetchClientsAction} - an action to add clients to redux store
  */
 export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
-  clientsById: keyBy(clientsList, (client: Client) => client.id),
+  clientsById: keyBy(clientsList, (client: Client) => client._id),
   type: CLIENTS_FETCHED,
 });
 
@@ -106,21 +119,4 @@ export function getClientsArray(state: Partial<Store>): Client[] {
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
   return get(getClients(state), id) || null;
-}
-
-// utils for clients dux module
-
-/** func to only extract bits the client values needed from API response */
-export function extractClient(rawClient: FlexObject): Client {
-  const thisClient: Client = {
-    firstName: rawClient.firstName || '',
-    gender: rawClient.gender || '',
-    id: rawClient._id || '',
-    lastContactDate: '',
-    lastName: rawClient.lastName || '',
-    location: '',
-    middleName: rawClient.middleName || '',
-    type: 'Client',
-  };
-  return thisClient;
 }
