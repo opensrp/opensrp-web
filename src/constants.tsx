@@ -11,10 +11,3 @@ export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
-
-// constants for services
-export const SERVICE_HEADERS = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-};
-export type SERVICE_HEADERS = typeof SERVICE_HEADERS;
