@@ -56,11 +56,10 @@ class ClientList extends React.Component<ClientListProps, {}> {
   }
 
   public async componentDidMount() {
-    const { fetchClientsActionCreator, clientService } = this.props;
-
-    const response = await clientService.getClientsList();
-    const { data } = response;
-    fetchClientsActionCreator(clientsData);
+    const { fetchClientsActionCreator, opensrpService } = this.props;
+    const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+    const response = await clientService.list();
+    fetchClientsActionCreator(response);
   }
 
   public render() {
@@ -80,7 +79,7 @@ The `defaultProps` variable is used to set the default value for the props.
 
 Then we have one of [React life cycle hooks](https://programmingwithmosh.com/javascript/react-lifecycle-methods/) the `componentDidMount` function, that basically tells react wait until this component is mounted and then do something.
 
-In our example, React will wait for the component to mount and then get clients from the clientsService and then dispatch an action that that will add the data to the redux store. The `fetchclientsActionCreator` prop which is responsible for adding the data to the redux store is handled by redux and becomes relevant after this component is connected, see [here](containers.md) to learn how to connect presentational components to the store.
+In our example, React will wait for the component to mount and then get clients from the `openSRPService` and then dispatch an action that that will add the data to the redux store. The `fetchclientsActionCreator` prop maps to an action creator that once given the response data, it creates an action that once dispatched, adds the data payload to the redux store. We will cover more about mapping props to action creators and connecting components to the store in the [containers](containers.md) file.
 
 Then we have the canonical `render` [life cycle hook](https://programmingwithmosh.com/javascript/react-lifecycle-methods/). This is the only required hook for react class-based components and its sole purpose is to render the Dom elements for the ui.
 
