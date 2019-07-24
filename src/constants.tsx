@@ -1,7 +1,3 @@
-// strings
-export const FAILED_TO_RETRIEVE_CLIENTS = 'Failed to retrieve clients list';
-export type FAILED_TO_RETRIEVE_CLIENTS = typeof FAILED_TO_RETRIEVE_CLIENTS;
-
 // internal urls
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
