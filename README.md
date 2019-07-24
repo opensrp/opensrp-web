@@ -58,7 +58,7 @@ See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/d
 
 1. [Components](docs/Architecture/components.md)
 2. [Containers](docs/Architecture/containers.md)
-3. [Reducer module](docs/Architecture/store.md)
+3. [store](docs/Architecture/store.md)
 4. [Services & Utilities](docs/Architecture/services_utilities.md)
 
 ## Code Quality
