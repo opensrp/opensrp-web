@@ -10,6 +10,7 @@ import * as fixtures from '../../../../store/ducks/tests/fixtures';
 
 reducerRegistry.register(reducerName, reducer);
 
+jest.mock('../../../../configs/env');
 describe('containers/clients/list/ClientList', () => {
   beforeEach(() => {
     jest.resetAllMocks();
