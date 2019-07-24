@@ -8,7 +8,7 @@ services in this context represent abstractions for making calls to external API
 
 there are no strict guidelines for this section since most what will go here is free form and subject to the authors interpretation. however there are still the basic principles that are in effect globally for the project. If you want, here is a [refresher](../codeQuality.md).
 
-Here is the crux of the opensrp service that one can extend to implement other services that will make calls to the opensrp APIs
+Here is the crux of the openSRPService. One can extend this to implement other services that may be needed to make calls to the opensrp APIs
 
 ```typescript
 export class OpenSRPService {
