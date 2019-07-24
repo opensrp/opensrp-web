@@ -63,4 +63,23 @@ describe('containers/clients/list/ClientList', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.unmount();
   });
+
+  it('calls openSRPService with the correct params', () => {
+    const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
+    const props = {
+      fetchClientsActionCreator: mock,
+      location: mock,
+      match: mock,
+      opensrpService: opensrpServiceMock,
+    };
+    const wrapper = mount(
+      <Provider store={store}>
+        <ConnectedClientsList {...props} />
+        );
+      </Provider>
+    );
+    expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
+    wrapper.unmount();
+  });
 });
