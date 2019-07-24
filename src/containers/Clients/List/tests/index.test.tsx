@@ -10,6 +10,7 @@ import * as fixtures from '../../../../store/ducks/tests/fixtures';
 
 reducerRegistry.register(reducerName, reducer);
 
+jest.mock('../../../../configs/env');
 describe('containers/clients/list/ClientList', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -60,6 +61,25 @@ describe('containers/clients/list/ClientList', () => {
       </Provider>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.unmount();
+  });
+
+  it('calls openSRPService with the correct params', () => {
+    const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
+    const props = {
+      fetchClientsActionCreator: mock,
+      location: mock,
+      match: mock,
+      opensrpService: opensrpServiceMock,
+    };
+    const wrapper = mount(
+      <Provider store={store}>
+        <ConnectedClientsList {...props} />
+        );
+      </Provider>
+    );
+    expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
     wrapper.unmount();
   });
 });
