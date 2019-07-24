@@ -2,16 +2,18 @@
 
 [![CircleCI](https://circleci.com/gh/OpenSRP/opensrp-web.svg?style=svg)](https://circleci.com/gh/OpenSRP/opensrp-web)
 
-This is the openSRP web application front end.
+## Summary
 
-The structure of this repo is inherited from [create-react-app](https://github.com/facebook/create-react-app).
+OpenSRP web is the web interface to the OpenSRP server. OpenSRP uses OpenMRS backend and web interface to perform most of the administrative tasks
 
-## Guidelines
+The structure of this repository is inherited from [create-react-app](https://github.com/facebook/create-react-app).
 
 - We try follow the [BEM](https://en.bem.info/methodology/quick-start/) or Block Element Modifier guidelines for CSS.
 - We strictly follow the [three principles of redux](https://redux.js.org/introduction/three-principles).
 
 ## Getting started
+
+### Running the web-app
 
 First, copy the included `.env.sample` into `.env`
 
@@ -27,15 +29,38 @@ yarn
 yarn start
 ```
 
-## Configuration
+### Lint and test
 
-The configurations are located in the `configs` directory and are split into two modules:
+To Lint:
 
-- **env.ts**: this module reads configurations from environemt variables
-- **settings.ts**: this module holds more complicated configurations
+```sh
+yarn lint-ts
+```
 
-## Testing
+Run the tests
 
 ```sh
 yarn test
 ```
+
+## Configuration
+
+The configurations are located in the `configs` directory and are split into two modules:
+
+- **env.ts**: this module reads configurations from environment variables
+- **settings.ts**: this module holds more complicated configurations
+
+## Contributing/Collaboration
+
+See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/docs/contributing.md).
+
+## Documentation
+
+1. [Components](docs/Architecture/components.md)
+2. [Containers](docs/Architecture/containers.md)
+3. [Reducer module](docs/Architecture/store.md)
+4. [Services & Utilities](docs/Architecture/services_utilities.md)
+
+## Code Quality
+
+See [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.
