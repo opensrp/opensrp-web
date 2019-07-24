@@ -2,7 +2,6 @@
 
 exports[`containers/clients/list/ClientList renders without crashing 1`] = `
 <ClientList
-  clientService={[MockFunction]}
   clientsArray={
     Array [
       Object {
@@ -276,6 +275,21 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
   fetchClientsActionCreator={[MockFunction]}
   location={[MockFunction]}
   match={[MockFunction]}
+  opensrpService={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "client/search",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
   <div>
     <Table
@@ -491,13 +505,26 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
   }
 >
   <Connect(ClientList)
-    clientService={[MockFunction]}
     fetchClientsActionCreator={[MockFunction]}
     location={[MockFunction]}
     match={[MockFunction]}
+    opensrpService={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "client/search",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
   >
     <ClientList
-      clientService={[MockFunction]}
       clientsArray={
         Array [
           Object {
@@ -771,6 +798,21 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
       fetchClientsActionCreator={[Function]}
       location={[MockFunction]}
       match={[MockFunction]}
+      opensrpService={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "client/search",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+          ],
+        }
+      }
     >
       <div>
         <Table
