@@ -31,7 +31,7 @@ yarn start
 
 ### Lint and test
 
-to Lint:
+To Lint:
 
 ```sh
 yarn lint-ts
@@ -52,9 +52,9 @@ The configurations are located in the `configs` directory and are split into two
 
 ## Contributing/Collaboration
 
-See [contributing guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/docs/contributing.md) on contributing.
+See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/docs/contributing.md).
 
-Here is a few docs, to get you up and running adding code to the project, The documents are divided in the following sections:
+## Documentation
 
 1. [Components](docs/Architecture/components.md)
 2. [Containers](docs/Architecture/containers.md)
@@ -63,4 +63,4 @@ Here is a few docs, to get you up and running adding code to the project, The do
 
 ## Code Quality
 
-see [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.
+See [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.

@@ -1,8 +1,8 @@
-# CONTRIBUTING/COLLABORATION
+# Contributing/Collaborating
 
 ## Guidelines
 
-see [here](codeQuality.md) for code quality guidelines
+[Click me](codeQuality.md) for code quality guidelines
 
 ## We Develop with Github
 

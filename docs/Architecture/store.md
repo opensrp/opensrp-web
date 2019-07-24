@@ -1,16 +1,16 @@
 # overview
 
-Through this section, we will go through the process of creating and working with:
+In this section, we will go through the process of creating and working with:
 
-1. reducers
-2. actions
-3. selectors
+1. Reducers
+2. Actions
+3. Selectors
 
 within opensrp
 
 ## Where do I find the store
 
-the store reducer modules are found within src/store. The initial directory structure looks something like this:
+The store reducer modules are found within src/store. The initial directory structure looks something like this:
 
 ```
 ...
@@ -41,34 +41,32 @@ Its a common convention as well as recommended one to use action constants,
 here is an example from the clients reducer module:
 
 ```typescript
-
 /** CLIENTS_FETCHED action type */
 const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 ```
 
-first declare the action type as a constant variable then use the constant instead of the actual string literal within the action.
+First declare the action type as a constant variable then use the constant instead of the actual string literal within the action.
 
 ```typescript
-
 /* a GOOD Sample action */
 const goodSampleAction: FetchClientsAction = {
   clientsById: {
-    'GUUID': {
+    GUUID: {
       id: 'GUUId',
-    }
+    },
   },
   type: CLIENTS_FETCHED,
-}
+};
 
 /** a BAD sample action */
 const badSampleAction: FetchClientsAction = {
   clientsById: {
-    'GUUID': {
+    GUUID: {
       id: 'GUUId',
-    }
+    },
   },
   type: 'opensrp/reducer/clients/CLIENTS_FETCHED',
-}
+};
 ```
 
 #### steps
@@ -82,29 +80,28 @@ interface FetchClientsAction extends AnyAction {
 }
 ```
 
-- write the action; this should be an object that compiles correctly when annotated to the already created action interface, e.g.
+- Write the action; this should be an object that compiles correctly when annotated to the already created action interface, e.g.
 
 ```typescript
-
-  const goodSampleAction: FetchClientsAction = {
+const goodSampleAction: FetchClientsAction = {
   clientsById: {
-    'GUUID': {
+    GUUID: {
       id: 'GUUId',
-    }
+    },
   },
   type: CLIENTS_FETCHED,
-}
+};
 ```
 
- In most cases you will find you do not have the payload data upfront during creation of the action object; in such cases its worth abstracting the action creation process in an action creators. Action creators are discussed in a below section
+In most cases you will find you do not have the payload data upfront during creation of the action object; in such cases its worth abstracting the action creation process in an action creator. Action creators are discussed in a below section
 
-- Create a union type of the respective action types; for instance ```ClientsActionTypes``` below will only correctly assert that any action parsed into the reducer will conform to the type of ```FetchClientsAction``` action
+- Create a union type of the respective action types; for instance `ClientsActionTypes` below will only correctly assert that any action parsed into the reducer will conform to the type of `FetchClientsAction` action
 
 ```typescript
 type ClientsActionTypes = FetchClientsAction | AnyAction;
 ```
 
-if we added another action type say `ResetClientsAction`, probably defined as
+If we added another action type say `ResetClientsAction`, probably defined as
 
 ```typescript
 const RESET_CLIENTS = 'opensrp/reducer/clients/RESET_CLIENTS';
@@ -115,18 +112,17 @@ interface ResetClientsAction {
 }
 ```
 
-The type `type ClientsActionTypes = FetchClientsAction | AnyAction | ResetClientsAction;` will onl y correctly assert action objects that conform to the interfaces of either ```FetchClientsAction``` or ```ResetClientsAction```.
+The type `type ClientsActionTypes = FetchClientsAction | AnyAction | ResetClientsAction;` will only correctly assert action objects that conform to the interfaces of either `FetchClientsAction` or `ResetClientsAction`.
 
 #### Adding ActionCreators
 
-we have covered most of the work that goes into writing an action creator since; action creators are essentially functions that return actions
+We have covered most of the work that goes into writing an action creator since; action creators are essentially functions that return actions
 
-As intuited to earlier; action creators come in handy in cases where you have some payload preprocessing before appending the payload data to the actual action object. however, do note, that actions creators are meant to be strictly pure.
+As intuited to earlier; action creators come in handy in cases where you have some payload preprocessing before appending the payload data to the action object. however, do note, that actions creators are meant to be strictly pure.
 
 Here is an example of an action creator from the clients redux module:
 
 ```typescript
-
 /** Fetch clients action creator
  * @param {Client []} clientsList - clients array to add to store
  * @return {FetchClientsAction} - an action to add clients to redux store
@@ -135,14 +131,13 @@ const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
   clientsById: keyBy(clientsList, (client: Client) => client.id),
   type: CLIENTS_FETCHED,
 });
-
 ```
 
-`fetchclients` takes in a list of Clients objects and creates a payload map where the keys are the client's object id and the values are the respective client objects. this payload is then returned in an object as the value of the ```clientsById``` key, then there is the type property we talked about earlier.
+`fetchclients` takes in a list of Clients objects and creates a payload map where the keys are the client's object id and the values are the respective client objects. this payload is then returned in an object as the value of the `clientsById` key, then there is the type property we talked about earlier.
 
 ## Selectors
 
-While the actions hold the data to change the store state; the selectors on the other hand act as getters of a slice of that data after its added to the redux store.
+While the actions hold the data to change the store state; the selectors on the other hand act as getters of that data after its added to the redux store.
 
 selectors are functions that will take at least one argument, the store, Then based on any other arguments like say an id, they can then be used to filter down the data retrieved.
 
@@ -158,9 +153,9 @@ export function getClients(state: Partial<Store>): { [key: string]: Client } {
 }
 ```
 
-As you might have guessed or deduced form the docstring: ```getClients``` takes the store as an argument. It then uses the reducerName(we have not yet seen this, it will be in the below reducer section) to access a slice of the store pertinent to this reducer.
+As you might have guessed or deduced form the docstring: `getClients` takes the store as an argument. It then uses the reducerName(we have not yet seen this, it will be in the below reducer section) to access a slice of the store pertinent to this reducer.
 
-Out of that slice it then returns values of the clientsById property which judging from the return type interface ```{ [key: string]: Client }``` and how the previous actions structured their payloads, the returned object should have a signature that looks like this:
+Out of that slice it then returns values of the clientsById property which judging from the return type interface `{ [key: string]: Client }` and how the previous actions structured their payloads, the returned object should have a signature that looks like this:
 
 ```typescript
 {
@@ -178,7 +173,7 @@ The reducer function, takes 2 arguments; the state and an action.
 using the type property of the action, the reducer should then know how to modify the state.
 such functionality could be implemented as a form of switch structure such as a list of if statements or the more recommended approach which is to use a switch statement
 
-some universal rules on creating a reducer (from the official documentation):
+Some universal rules on creating a reducer (from the official documentation):
 
 - DO NOT:
   1. Mutate the reducer's arguments
@@ -246,7 +241,7 @@ interface ClientState {
 type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObject<ClientState>;
 ```
 
-- write the actual reducer function, while applying the required type annotations as required.
+- Write the actual reducer function, while applying the required type annotations as required.
 
 ```typescript
 /** the clients reducer function */

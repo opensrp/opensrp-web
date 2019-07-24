@@ -1,12 +1,12 @@
-# CONTAINERS
+# Containers
 
-in this section, I will take you through the basic process of creating and adding a container to the existing opensrp code base
+In this section, I will take you through the basic process of creating and adding a container to the existing opensrp code base
 
 Ill use the Clients container for code examples along the way.
 
 ## why are there components and containers
 
-containers are different to components in that containers are components that are connected to the redux store
+Containers are different to components in that containers are components that are connected to the redux store
 
 While a component should be purely presentational a container can receive state updates and dispatch actions , however the actual Dom elements rendering is relegated to the underlying presentational component
 
@@ -44,6 +44,6 @@ const ConnectedClientList = connect(
 )(ClientList);
 ```
 
-where ```ClientList``` is purely presentational.
+where `ClientList` is purely presentational.
 
 for a more comprehensive guide at connecting a component to the store [see this](https://react-redux.js.org/api/connect)
