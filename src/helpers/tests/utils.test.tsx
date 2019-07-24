@@ -1,5 +1,4 @@
 import * as gatekeeper from '@onaio/gatekeeper';
-
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 
 import { oAuthUserInfoGetter } from '../utils';

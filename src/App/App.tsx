@@ -1,6 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faMap } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -12,10 +11,11 @@ import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
+import { CLIENT_URL } from '../constants';
+import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
-library.add(faMap);
 library.add(faUser);
 
 import './App.css';
@@ -34,6 +34,12 @@ class App extends Component {
                 exact={true}
                 path="/"
                 component={Home}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={CLIENT_URL}
+                component={ConnectedClientList}
               />
 
               {/* tslint:disable jsx-no-lambda */}

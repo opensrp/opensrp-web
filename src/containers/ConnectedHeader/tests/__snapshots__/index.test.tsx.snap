@@ -82,6 +82,18 @@ Object {
             About
           </NavLink>
         </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className="nav-link"
+            to="/clients"
+          >
+            Clients
+          </NavLink>
+        </NavItem>
       </Nav>
       <Nav
         className="ml-0"
@@ -187,6 +199,18 @@ Object {
             to="/404"
           >
             About
+          </NavLink>
+        </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className="nav-link"
+            to="/clients"
+          >
+            Clients
           </NavLink>
         </NavItem>
       </Nav>
