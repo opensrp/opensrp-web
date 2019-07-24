@@ -25,7 +25,7 @@ Each component should have a test folder where the tests will reside
 
 ```typescript
 export interface ClientListProps {
-  clientService: typeof ClientService;
+  opensrpService: typeof OpenSRPService;
   clientsArray: Client[];
   fetchClientsActionCreator: typeof fetchClients;
 }
@@ -36,9 +36,9 @@ export interface ClientListProps {
 ```typescript
 /** default props for the clientList component */
 export const defaultClientListProps: ClientListProps = {
-  clientService: ClientService,
   clientsArray: [],
   fetchClientsActionCreator: fetchClients,
+  opensrpService: OpenSRPService,
 };
 ```
 
