@@ -17,24 +17,26 @@ describe('containers/clients/list/ClientList', () => {
 
   it('renders without crashing', () => {
     const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
     const props = {
-      clientService: mock,
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
       location: mock,
       match: mock,
+      opensrpService: opensrpServiceMock,
     };
     shallow(<ClientList {...props} />);
   });
 
   it('renders without crashing', () => {
     const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
     const props = {
-      clientService: mock,
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
       location: mock,
       match: mock,
+      opensrpService: opensrpServiceMock,
     };
     const wrapper = mount(<ClientList {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -44,11 +46,12 @@ describe('containers/clients/list/ClientList', () => {
   it('works correctly with the redux store', () => {
     store.dispatch(fetchClients(fixtures.clients));
     const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
     const props = {
-      clientService: mock,
       fetchClientsActionCreator: mock,
       location: mock,
       match: mock,
+      opensrpService: opensrpServiceMock,
     };
     const wrapper = mount(
       <Provider store={store}>

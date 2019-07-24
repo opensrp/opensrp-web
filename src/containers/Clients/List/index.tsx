@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import ClientService from '../../../services/clients';
+import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
+import { OpenSRPService } from '../../../services/opensrp';
 import clientsReducer, {
   Client,
   fetchClients,
@@ -19,16 +20,16 @@ reducerRegistry.register(clientsReducerName, clientsReducer);
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
-  clientService: typeof ClientService;
+  opensrpService: typeof OpenSRPService;
   clientsArray: Client[];
   fetchClientsActionCreator: typeof fetchClients;
 }
 
 /** default props for the clientList component */
 export const defaultClientListProps: ClientListProps = {
-  clientService: ClientService,
   clientsArray: [],
   fetchClientsActionCreator: fetchClients,
+  opensrpService: OpenSRPService,
 };
 
 /** Display the client list  */
@@ -39,9 +40,9 @@ class ClientList extends React.Component<ClientListProps, {}> {
   }
 
   public async componentDidMount() {
-    const { fetchClientsActionCreator, clientService } = this.props;
-
-    const response = await clientService.getClientsList();
+    const { fetchClientsActionCreator, opensrpService } = this.props;
+    const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+    const response = await clientService.list();
     fetchClientsActionCreator(response);
   }
 
