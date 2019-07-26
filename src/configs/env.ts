@@ -16,6 +16,10 @@ export type ENABLE_USERS = typeof ENABLE_USERS;
 export const ENABLE_ABOUT = process.env.REACT_APP_ENABLE_ABOUT === 'true';
 export type ENABLE_ABOUT = typeof ENABLE_ABOUT;
 
+/** Do you want to enable the clients page? */
+export const ENABLE_CLIENTS = process.env.REACT_APP_ENABLE_CLIENTS === 'true';
+export type ENABLE_CLIENTS = typeof ENABLE_CLIENTS;
+
 /** Do you want to disable login protection? */
 export const DISABLE_LOGIN_PROTECTION = process.env.REACT_APP_DISABLE_LOGIN_PROTECTION === 'true';
 export type DISABLE_LOGIN_PROTECTION = typeof DISABLE_LOGIN_PROTECTION;
