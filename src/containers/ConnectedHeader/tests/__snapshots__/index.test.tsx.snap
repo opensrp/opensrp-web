@@ -83,7 +83,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/clients"
           >
@@ -197,7 +196,6 @@ Object {
         >
           <NavLink
             activeClassName="active"
-            aria-current="page"
             className="nav-link"
             to="/clients"
           >

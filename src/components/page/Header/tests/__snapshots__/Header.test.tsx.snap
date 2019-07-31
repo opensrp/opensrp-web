@@ -255,6 +255,34 @@ exports[`components/page/Header renders header correctly 1`] = `
                           </NavLink>
                         </li>
                       </NavItem>
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="active"
+                            className="nav-link"
+                            to="/clients"
+                          >
+                            <Link
+                              aria-current={null}
+                              className="nav-link"
+                              to="/clients"
+                            >
+                              <a
+                                aria-current={null}
+                                className="nav-link"
+                                href="/clients"
+                                onClick={[Function]}
+                              >
+                                Clients
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
                     </ul>
                   </Nav>
                   <Nav
@@ -549,6 +577,34 @@ exports[`components/page/Header renders header correctly when authenticated 1`] 
                                 onClick={[Function]}
                               >
                                 About
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="active"
+                            className="nav-link"
+                            to="/clients"
+                          >
+                            <Link
+                              aria-current={null}
+                              className="nav-link"
+                              to="/clients"
+                            >
+                              <a
+                                aria-current={null}
+                                className="nav-link"
+                                href="/clients"
+                                onClick={[Function]}
+                              >
+                                Clients
                               </a>
                             </Link>
                           </NavLink>
