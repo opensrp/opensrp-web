@@ -4,10 +4,6 @@ import { Col, Row } from 'reactstrap';
 import './Home.css';
 
 class Home extends React.Component<{}, {}> {
-  constructor(props: {}) {
-    super(props);
-  }
-
   public render() {
     return (
       <div className="text-center">

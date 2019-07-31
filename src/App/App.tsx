@@ -15,10 +15,9 @@ import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
+import './App.css';
 
 library.add(faUser);
-
-import './App.css';
 
 /** Main App component */
 class App extends Component {
