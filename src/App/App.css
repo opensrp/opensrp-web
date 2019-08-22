@@ -2,6 +2,10 @@ tr.definitions td:first-child {
   padding-left: 0px;
 }
 
+td {
+  font-size: 10;
+}
+
 h2.page-title {
   font-weight: 200;
 }
@@ -64,4 +68,31 @@ fieldset[disabled] .gatekeeper-btn.active {
 .gatekeeper-btn .badge {
   color: #28a745;
   background-color: #ffffff;
+}
+
+.main-container {
+  display: flex;
+  background-color: #f9fdff;
+  height: 100vh;
+}
+
+/* .home-main {
+  padding: 20px 20px
+} */
+
+.sidebar {
+  width: 15vw;
+}
+
+.main-app-container {
+  height: 100vh;
+  width: 100vw;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
 }

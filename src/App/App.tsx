@@ -19,14 +19,18 @@ import './App.css';
 
 library.add(faUser);
 
+import './App.css';
+
 /** Main App component */
 class App extends Component {
   public render() {
     return (
-      <Container>
+      <div className="main-app-container">
         <ConnectedHeader />
-        <Row id="main-page-row">
-          <Col>
+        <div className="main-container">
+          <div className="content">
+            {/* <Row id="main-page-row">
+              <Col> */}
             <Switch>
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
@@ -67,9 +71,10 @@ class App extends Component {
                 component={ConnectedLogout}
               />
             </Switch>
-          </Col>
-        </Row>
-      </Container>
+            {/*  */}
+          </div>
+        </div>
+      </div>
     );
   }
 }
