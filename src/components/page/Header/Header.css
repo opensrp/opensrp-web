@@ -1,17 +1,19 @@
-.navbar-brand img {
-  max-height: 30px;
-  position: relative;
-  top: -8px;
+#image-settings {
+  width: 15vw;
+  height: 7vh;
 }
 
-.bg-light {
-  background-color: #f7f7f9 !important;
+.navbar {
+  padding: 0;
+  background-color: rgb(0, 36, 68);
+  height: 7vh;
 }
 
-.reveal-breadcrumb {
-  margin-top: 15px;
+.collapse {
+  padding-right: 20px;
 }
 
-.reveal-breadcrumb .breadcrumb {
-  background-color: #eceeef;
+.nav-link {
+  color: white;
+  padding: 5px;
 }
