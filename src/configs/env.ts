@@ -1,7 +1,7 @@
 /** This module handles settings taken from environment variables */
 
 /** The website name */
-export const WEBSITE_NAME = process.env.REACT_APP_WEBSITE_NAME || 'OpenSRP';
+export const WEBSITE_NAME = process.env.REACT_APP_WEBSITE_NAME || 'unicef';
 export type WEBSITE_NAME = typeof WEBSITE_NAME;
 
 /** The domain name */
