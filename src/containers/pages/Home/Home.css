@@ -1,3 +1,79 @@
 .welcome-box {
   margin-top: 75px;
 }
+
+.components-list {
+  display: flex;
+  height: 40vh;
+}
+
+.nav {
+  background-color: rgb(246, 254, 255);
+  max-width: 25%;
+  min-width: 140px;
+  flex: 1;
+  font-family: 'Trebuchet MS', 'Helvetica';
+}
+
+.main-container {
+  display: flex;
+  font-family: 'Trebuchet MS', 'Helvetica';
+  font-size: 16px;
+}
+
+.home-main {
+  padding: 50px 50px;
+  width: 85vw;
+}
+
+.welcome-text {
+  text-align: left;
+  padding: 50px;
+}
+
+.button-style {
+  padding: 10px 20px;
+  border: 1px solid rgb(55, 175, 255);
+  width: 75%;
+}
+
+.home-sub-containers {
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.sub-container-heading {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  text-align: left;
+  height: 16%;
+}
+
+.sub-container-message {
+  font-size: 1rem;
+  margin: 10%;
+  height: 84%;
+}
+
+.spacer {
+  height: 80%;
+  width: 25%;
+  margin: 25px;
+}
+
+h4 p {
+  text-align: left;
+}
+
+#cont-size {
+  height: 50%;
+}
+
+#cont-sized {
+  height: 50%;
+  text-align: center;
+}
