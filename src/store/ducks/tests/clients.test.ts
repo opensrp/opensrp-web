@@ -9,6 +9,7 @@ import reducer, {
   getClientsArray,
   getClientsIdArray,
   reducerName,
+  removeClientsAction,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
@@ -42,5 +43,15 @@ describe('reducers/clients', () => {
     expect(getClientById(store.getState(), '9b67a82d-dac7-40c0-85aa-e5976339a6b6')).toEqual(
       fixtures.client1
     );
+  });
+
+  it('removes clients', () => {
+    store.dispatch(fetchClients([fixtures.client1, fixtures.client2]));
+    let numberOfClients = getClientsArray(store.getState()).length;
+    expect(numberOfClients).toEqual(2);
+
+    store.dispatch(removeClientsAction);
+    numberOfClients = getClientsArray(store.getState()).length;
+    expect(numberOfClients).toEqual(0);
   });
 });
