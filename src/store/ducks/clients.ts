@@ -96,7 +96,7 @@ export default function reducer(
     case CLIENTS_FETCHED:
       return SeamlessImmutable({
         ...state,
-        clientsById: action.clientsById,
+        clientsById: { ...state.clientsById, ...action.clientsById },
       });
     case REMOVE_CLIENTS:
       return SeamlessImmutable({
