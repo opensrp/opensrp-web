@@ -54,4 +54,15 @@ describe('reducers/clients', () => {
     numberOfClients = getClientsArray(store.getState()).length;
     expect(numberOfClients).toEqual(0);
   });
+
+  it('Adds new clients to store instead of overwriting existing ones', () => {
+    store.dispatch(removeClientsAction);
+    store.dispatch(fetchClients([fixtures.client1]));
+    let numberOfClients = getClientsArray(store.getState()).length;
+    expect(numberOfClients).toEqual(1);
+
+    store.dispatch(fetchClients([fixtures.client2]));
+    numberOfClients = getClientsArray(store.getState()).length;
+    expect(numberOfClients).toEqual(2);
+  });
 });
