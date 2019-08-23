@@ -1,7 +1,7 @@
 import { getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { authenticateUser } from '@onaio/session-reducer';
 import store from '../../../store';
-import { getDefaultHeaders, getURLParams, OpenSRPService } from '../index';
+import { getDefaultHeaders, getFilterParams, getURLParams, OpenSRPService } from '../index';
 import { createPlan, plansListResponse } from './fixtures/plans';
 import { OpenSRPAPIResponse } from './fixtures/session';
 /* tslint:disable-next-line no-var-requires */
@@ -21,7 +21,7 @@ describe('services/OpenSRP', () => {
     expect(getDefaultHeaders()).toEqual({
       accept: 'application/json',
       authorization: 'Bearer hunter2',
-      'content-type': 'application/json',
+      'content-type': 'application/json;charset=UTF-8',
     });
   });
 
@@ -39,6 +39,13 @@ describe('services/OpenSRP', () => {
     );
   });
 
+  it('getFilterParams works', async () => {
+    expect(getFilterParams({})).toEqual('');
+    expect(getFilterParams({ foo: 'bar', leet: 1337, mosh: 'pitt' })).toEqual(
+      'foo:bar,leet:1337,mosh:pitt'
+    );
+  });
+
   it('OpenSRPService list method works', async () => {
     fetch.mockResponseOnce(JSON.stringify(plansListResponse));
     const planService = new OpenSRPService('plans');
@@ -51,7 +58,7 @@ describe('services/OpenSRP', () => {
           headers: {
             accept: 'application/json',
             authorization: 'Bearer hunter2',
-            'content-type': 'application/json',
+            'content-type': 'application/json;charset=UTF-8',
           },
           method: 'GET',
         },
@@ -92,7 +99,7 @@ describe('services/OpenSRP', () => {
           headers: {
             accept: 'application/json',
             authorization: 'Bearer hunter2',
-            'content-type': 'application/json',
+            'content-type': 'application/json;charset=UTF-8',
           },
           method: 'GET',
         },
@@ -143,7 +150,7 @@ describe('services/OpenSRP', () => {
           headers: {
             accept: 'application/json',
             authorization: 'Bearer hunter2',
-            'content-type': 'application/json',
+            'content-type': 'application/json;charset=UTF-8',
           },
           method: 'POST',
         },
@@ -191,7 +198,7 @@ describe('services/OpenSRP', () => {
           headers: {
             accept: 'application/json',
             authorization: 'Bearer hunter2',
-            'content-type': 'application/json',
+            'content-type': 'application/json;charset=UTF-8',
           },
           method: 'PUT',
         },
