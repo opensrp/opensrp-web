@@ -1,0 +1,94 @@
+thead {
+  width: 98%;
+  position: absolute;
+  display: table;
+}
+
+tbody {
+  display: table;
+  width: 100%;
+}
+
+thead tr {
+  border-bottom: 0;
+}
+
+tbody tr {
+  align-items: center;
+  display: flex;
+}
+
+td {
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  font-size: 10;
+}
+
+.table-container {
+  font-size: 11px;
+  height: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: block;
+}
+
+.filter-search-div {
+  display: flex;
+  overflow: auto;
+}
+
+.filters {
+  display: flex;
+  margin-left: auto;
+}
+
+.logface-content {
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+}
+
+.location-type-filter {
+  display: block;
+  padding: 10px;
+}
+
+.form-group {
+  vertical-align: bottom;
+}
+
+#searchbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+#logface_title {
+  padding: 0px 15px;
+  border-left: 5px solid rgb(23, 181, 255);
+}
+
+#headdiv {
+  position: sticky;
+  top: 0;
+  height: 50px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+#bodydiv {
+  overflow: auto;
+  height: 661px;
+}
+
+#large-width {
+  width: 25%;
+}
+
+#default-width {
+  width: 10%;
+}
+
+#small-width {
+  width: 5%;
+}
