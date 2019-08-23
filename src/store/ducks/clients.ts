@@ -35,6 +35,8 @@ export interface Client {
 
 /** CLIENTS_FETCHED action type */
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
+/** REMOVE_CLIENTS action type */
+export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -42,8 +44,14 @@ export interface FetchClientsAction extends AnyAction {
   type: typeof CLIENTS_FETCHED;
 }
 
+/** Interface for removeClientsAction */
+interface RemoveClientsAction extends AnyAction {
+  clientsById: {};
+  type: typeof REMOVE_CLIENTS;
+}
+
 /** Create type for clients reducer actions */
-export type ClientsActionTypes = FetchClientsAction | AnyAction;
+export type ClientsActionTypes = FetchClientsAction | RemoveClientsAction | AnyAction;
 
 // action Creators
 
@@ -55,6 +63,14 @@ export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => 
   clientsById: keyBy(clientsList, (client: Client) => client._id),
   type: CLIENTS_FETCHED,
 });
+
+// actions
+
+/** removeClientsAction action */
+export const removeClientsAction = {
+  clientsById: {},
+  type: REMOVE_CLIENTS,
+};
 
 // The reducer
 
@@ -78,6 +94,11 @@ export default function reducer(
 ): ImmutableClientsState {
   switch (action.type) {
     case CLIENTS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        clientsById: action.clientsById,
+      });
+    case REMOVE_CLIENTS:
       return SeamlessImmutable({
         ...state,
         clientsById: action.clientsById,
