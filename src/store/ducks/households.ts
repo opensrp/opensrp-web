@@ -51,7 +51,7 @@ interface RemoveHouseholdsAction extends AnyAction {
 }
 
 /** Create type for households reducer actions */
-export type HouseholdsActionTypes = FetchHouseholdsAction | RemoveHouseholdsAction |AnyAction;
+export type HouseholdsActionTypes = FetchHouseholdsAction | RemoveHouseholdsAction | AnyAction;
 // action Creators
 
 /** Fetch households action creator
@@ -62,6 +62,12 @@ export const fetchHouseholds = (householdsList: Household[] = []): FetchHousehol
   householdsById: keyBy(householdsList, (household: Household) => household._id),
   type: HOUSEHOLDS_FETCHED,
 });
+
+/** removeHouseholdsAction action */
+export const removeHouseholdsAction = {
+  householdsById: {},
+  type: REMOVE_HOUSEHOLDS,
+};
 
 // The reducer
 
@@ -89,6 +95,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         householdsById: { ...state.householdsById, ...action.householdsById },
+      });
+    case REMOVE_HOUSEHOLDS:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: action.householdsById,
       });
     default:
       return state;
