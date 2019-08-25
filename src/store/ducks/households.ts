@@ -54,3 +54,35 @@ export const fetchHouseholds = (householdsList: Household[] = []): FetchHousehol
   householdsById: keyBy(householdsList, (household: Household) => household._id),
   type: HOUSEHOLDS_FETCHED,
 });
+
+// The reducer
+
+/** interface for clients state in redux store */
+interface HouseholdState {
+  householdsById: { [key: string]: Household };
+}
+
+/** Create an immutable clients state */
+export type ImmutableHouseholdsState = HouseholdState &
+  SeamlessImmutable.ImmutableObject<HouseholdState>;
+
+/** initial clients-state state */
+const initialState: ImmutableHouseholdsState = SeamlessImmutable({
+  householdsById: {},
+});
+
+/** the clients reducer function */
+export default function reducer(
+  state: ImmutableHouseholdsState = initialState,
+  action: HouseholdsActionTypes
+): ImmutableHouseholdsState {
+  switch (action.type) {
+    case HOUSEHOLDS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: action.householdsById,
+      });
+    default:
+      return state;
+  }
+}
