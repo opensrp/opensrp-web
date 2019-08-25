@@ -1,5 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { values, keyBy } from 'lodash';
+import { keyBy, values } from 'lodash';
 import { FlushThunks } from 'redux-testkit';
 import store from '../../index';
 import reducer, {
@@ -9,6 +9,7 @@ import reducer, {
   getHouseholdsArray,
   Household,
   reducerName,
+  removeHouseholdsAction,
 } from '../households';
 /** Used the client fixtures as test since the interface for houshold is same as client */
 import * as fixtures from '../tests/fixtures';
@@ -38,5 +39,15 @@ describe('reducers/households', () => {
     expect(getHouseholdById(store.getState(), 'a30116d5-0612-419e-9b93-00c87df4ffbb')).toEqual(
       fixtures.client2
     );
+  });
+
+  it('removes households', () => {
+    store.dispatch(fetchHouseholds([fixtures.client1, fixtures.client2]));
+    let numberOfHouseholds: number = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(2);
+
+    store.dispatch(removeHouseholdsAction);
+    numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(0);
   });
 });
