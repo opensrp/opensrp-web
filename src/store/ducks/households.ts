@@ -30,3 +30,14 @@ export interface Household {
   _id: string;
   _rev: string;
 }
+
+// actions
+
+/** HOUSEHOLDS_FETCHED action type */
+export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/households/HOUSEHOLDS_FETCHED';
+
+/** interface for authorize action */
+export interface FetchHouseholdsAction extends AnyAction {
+  householdsById: { [key: string]: Household };
+  type: typeof HOUSEHOLDS_FETCHED;
+}
