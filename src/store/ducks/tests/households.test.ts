@@ -42,12 +42,23 @@ describe('reducers/households', () => {
   });
 
   it('removes households', () => {
-    store.dispatch(fetchHouseholds([fixtures.client1, fixtures.client2]));
+    store.dispatch(fetchHouseholds([fixtures.client1, fixtures.client2, fixtures.client3]));
     let numberOfHouseholds: number = getHouseholdsArray(store.getState()).length;
-    expect(numberOfHouseholds).toEqual(2);
+    expect(numberOfHouseholds).toEqual(3);
 
     store.dispatch(removeHouseholdsAction);
     numberOfHouseholds = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(0);
+  });
+
+  it('Adds new households to store instead of overwriting existing ones', () => {
+    store.dispatch(removeHouseholdsAction);
+    store.dispatch(fetchHouseholds([fixtures.client1, fixtures.client2]));
+    let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(2);
+
+    store.dispatch(fetchHouseholds([fixtures.client3, fixtures.client4, fixtures.client5]));
+    numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(5);
   });
 });
