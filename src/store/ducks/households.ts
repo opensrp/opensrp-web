@@ -36,8 +36,21 @@ export interface Household {
 /** HOUSEHOLDS_FETCHED action type */
 export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/households/HOUSEHOLDS_FETCHED';
 
-/** interface for authorize action */
+/** interface for FetchHouseholdsAction action */
 export interface FetchHouseholdsAction extends AnyAction {
   householdsById: { [key: string]: Household };
   type: typeof HOUSEHOLDS_FETCHED;
 }
+
+/** Create type for households reducer actions */
+export type HouseholdsActionTypes = FetchHouseholdsAction | AnyAction;
+// action Creators
+
+/** Fetch households action creator
+ * @param {Household []} householdsList - houeholds array to add to store
+ * @return {FetchHouseholdsAction} - an action to add households to redux store
+ */
+export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
+  householdsById: keyBy(householdsList, (household: Household) => household._id),
+  type: HOUSEHOLDS_FETCHED,
+});
