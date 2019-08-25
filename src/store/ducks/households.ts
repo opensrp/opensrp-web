@@ -35,6 +35,8 @@ export interface Household {
 
 /** HOUSEHOLDS_FETCHED action type */
 export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/households/HOUSEHOLDS_FETCHED';
+/** REMOVE_CLIENTS action type */
+export const REMOVE_HOUSEHOLDS = 'opensrp/reducer/households/REMOVE_HOUSEHOLDS';
 
 /** interface for FetchHouseholdsAction action */
 export interface FetchHouseholdsAction extends AnyAction {
@@ -42,8 +44,14 @@ export interface FetchHouseholdsAction extends AnyAction {
   type: typeof HOUSEHOLDS_FETCHED;
 }
 
+/** Interface for removeClientsAction */
+interface RemoveHouseholdsAction extends AnyAction {
+  householdsById: {};
+  type: typeof REMOVE_HOUSEHOLDS;
+}
+
 /** Create type for households reducer actions */
-export type HouseholdsActionTypes = FetchHouseholdsAction | AnyAction;
+export type HouseholdsActionTypes = FetchHouseholdsAction | RemoveHouseholdsAction |AnyAction;
 // action Creators
 
 /** Fetch households action creator
