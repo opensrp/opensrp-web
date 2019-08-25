@@ -42,6 +42,7 @@ describe('reducers/households', () => {
   });
 
   it('removes households', () => {
+    store.dispatch(removeHouseholdsAction);
     store.dispatch(fetchHouseholds([fixtures.client1, fixtures.client2, fixtures.client3]));
     let numberOfHouseholds: number = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(3);
