@@ -80,7 +80,7 @@ export default function reducer(
     case HOUSEHOLDS_FETCHED:
       return SeamlessImmutable({
         ...state,
-        householdsById: action.householdsById,
+        householdsById: { ...state.householdsById, ...action.householdsById },
       });
     default:
       return state;
