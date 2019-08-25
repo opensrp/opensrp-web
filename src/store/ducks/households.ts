@@ -86,3 +86,21 @@ export default function reducer(
       return state;
   }
 }
+
+// Selectors
+
+/** returns all households in the store as values whose keys are their respective ids
+ * @param {Partial<Store>} state - the redux store
+ * @return { { [key: string] : Household} } - households object as values, respective ids as keys
+ */
+export function getHouseholds(state: Partial<Store>): { [key: string]: Household } {
+  return (state as any)[reducerName].householdsById;
+}
+
+/** gets households as an array of hosueholds objects
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household[]} - an array of households objs
+ */
+export function getHouseholdsArray(state: Partial<Store>): Household[] {
+  return values(getHouseholds(state));
+}
