@@ -2,6 +2,7 @@ import { get, keyBy, keys, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../helpers/utils';
+import { type } from 'os';
 
 /** The reducer name */
 export const reducerName = 'clients';
@@ -30,6 +31,9 @@ export interface Client {
   _id: string;
   _rev: string;
 }
+
+/** Interface for household object as same as client */
+export type Household = Client;
 
 // actions
 
