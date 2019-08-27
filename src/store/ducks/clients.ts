@@ -1,8 +1,8 @@
 import { get, keyBy, keys, values } from 'lodash';
+import { type } from 'os';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../helpers/utils';
-import { type } from 'os';
 
 /** The reducer name */
 export const reducerName = 'clients';
@@ -57,7 +57,7 @@ interface RemoveClientsAction extends AnyAction {
 }
 
 /** interface for fetchHouseholdsAction */
-interface FetchHouseholdsAction extends AnyAction{
+interface FetchHouseholdsAction extends AnyAction {
   householdsById: { [key: string]: Household };
   type: typeof HOUSEHOLDS_FETCHED;
 }
@@ -77,6 +77,15 @@ export type ClientsActionTypes =
 export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
   clientsById: keyBy(clientsList, (client: Client) => client._id),
   type: CLIENTS_FETCHED,
+});
+
+/** Fetch households action creator
+ * @param {Household []} householdList - households array to add to store
+ * @param {FetchHouseholdsAction} - an action to add households to redux store
+ */
+export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
+  householdsById: keyBy(householdsList, (household: Household) => household._id),
+  type: HOUSEHOLDS_FETCHED,
 });
 
 // actions
