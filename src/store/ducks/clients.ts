@@ -188,3 +188,11 @@ export function getHouseholdsById(state: Partial<Store>): { [key: string]: House
 export function getHouseholdsArray(state: Partial<Store>): Household[] {
   return values(getHouseholdsById(state));
 }
+
+/** get a specific household by their id
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household | null} a household obj if the id is found else null
+ */
+export function getHouseholdById(state: Partial<Store>, id: string): Household | null {
+  return get(getHouseholdsById(state), id) || null;
+}
