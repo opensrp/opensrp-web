@@ -180,3 +180,11 @@ export function getClientById(state: Partial<Store>, id: string): Client | null 
 export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
   return (state as any)[reducerName].householdsById;
 }
+
+/** gets households as an array of households objects
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household[]} - an array of households objs
+ */
+export function getHouseholdsArray(state: Partial<Store>): Household[] {
+  return values(getHouseholdsById(state));
+}
