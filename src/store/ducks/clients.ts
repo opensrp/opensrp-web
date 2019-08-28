@@ -74,6 +74,7 @@ export type ClientsActionTypes =
   | FetchClientsAction
   | FetchHouseholdsAction
   | RemoveClientsAction
+  | RemoveHouseholdsAction
   | AnyAction;
 
 // action Creators
