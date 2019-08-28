@@ -8,6 +8,9 @@ import reducer, {
   getClients,
   getClientsArray,
   getClientsIdArray,
+  getHouseholdById,
+  getHouseholdsArray,
+  getHouseholdsById,
   reducerName,
   removeClientsAction,
 } from '../clients';
@@ -28,6 +31,9 @@ describe('reducers/clients', () => {
     expect(getClientsArray(store.getState())).toEqual([]);
     expect(getClientsIdArray(store.getState())).toEqual([]);
     expect(getClientById(store.getState(), 'some-id')).toBeNull();
+    expect(getHouseholdsById(store.getState())).toEqual({});
+    expect(getHouseholdsArray(store.getState())).toEqual([]);
+    expect(getHouseholdById(store.getState(), 'test-id')).toBeNull();
   });
 
   it('fetches clients correctly', () => {
