@@ -1,5 +1,4 @@
 import { get, keyBy, keys, values } from 'lodash';
-import { type } from 'os';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../helpers/utils';
