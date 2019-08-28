@@ -6,8 +6,8 @@ import reducer, {
   fetchClients,
   fetchHouseholds,
   getClientById,
-  getClients,
   getClientsArray,
+  getClientsById,
   getClientsIdArray,
   getHouseholdById,
   getHouseholdsArray,
@@ -28,7 +28,7 @@ describe('reducers/clients', () => {
   });
 
   it('selectors work for empty initialState', () => {
-    expect(getClients(store.getState())).toEqual({});
+    expect(getClientsById(store.getState())).toEqual({});
     expect(getClientsArray(store.getState())).toEqual([]);
     expect(getClientsIdArray(store.getState())).toEqual([]);
     expect(getClientById(store.getState(), 'some-id')).toBeNull();
@@ -39,7 +39,7 @@ describe('reducers/clients', () => {
 
   it('fetches clients correctly', () => {
     store.dispatch(fetchClients([fixtures.client1, fixtures.client2]));
-    expect(getClients(store.getState())).toEqual({
+    expect(getClientsById(store.getState())).toEqual({
       '9b67a82d-dac7-40c0-85aa-e5976339a6b6': fixtures.client1,
       'a30116d5-0612-419e-9b93-00c87df4ffbb': fixtures.client2,
     });

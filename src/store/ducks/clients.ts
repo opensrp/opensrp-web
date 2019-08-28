@@ -31,7 +31,7 @@ export interface Client {
   _rev: string;
 }
 
-/** Interface for household object as same as client */
+/** Interface for household object same as client */
 export type Household = Client;
 
 // actions
@@ -142,9 +142,9 @@ export default function reducer(
 
 /** returns all clients in the store as values whose keys are their respective ids
  * @param {Partial<Store>} state - the redux store
- * @return { { [key: string] : Client} } - clients object as values, reepective ids as keys
+ * @return { { [key: string] : Client} } - clients object as values, respective ids as keys
  */
-export function getClients(state: Partial<Store>): { [key: string]: Client } {
+export function getClientsById(state: Partial<Store>): { [key: string]: Client } {
   return (state as any)[reducerName].clientsById;
 }
 
@@ -153,7 +153,7 @@ export function getClients(state: Partial<Store>): { [key: string]: Client } {
  * @return {string[]} - clients ids as an array of strings
  */
 export function getClientsIdArray(state: Partial<Store>): string[] {
-  return keys(getClients(state));
+  return keys(getClientsById(state));
 }
 
 /** gets clients as an array of clients objects
@@ -161,7 +161,7 @@ export function getClientsIdArray(state: Partial<Store>): string[] {
  * @return {Client[]} - an array of clients objs
  */
 export function getClientsArray(state: Partial<Store>): Client[] {
-  return values(getClients(state));
+  return values(getClientsById(state));
 }
 
 /** get a specific client by their id
@@ -169,12 +169,12 @@ export function getClientsArray(state: Partial<Store>): Client[] {
  * @return {Client | null} a client obj if the id is found else null
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
-  return get(getClients(state), id) || null;
+  return get(getClientsById(state), id) || null;
 }
 
 /** returns all households in the store as values whose keys are their respective ids
  * @param {Partial<Store>} state - the redux store
- * @return { { [key: string] : Household} } - households object as values, reepective ids as keys
+ * @return { { [key: string] : Household} } - households object as values, respective ids as keys
  */
 export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
   return (state as any)[reducerName].householdsById;
