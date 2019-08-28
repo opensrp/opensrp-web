@@ -99,6 +99,7 @@ describe('reducers/clients', () => {
   });
 
   it('Adds new households to store instead of overwriting existing ones', () => {
+    store.dispatch(fetchHouseholds([fixtures.household1, fixtures.household2]));
     let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(2);
 
