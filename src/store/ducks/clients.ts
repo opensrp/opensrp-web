@@ -110,6 +110,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** initial clients-state state */
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
+  householdsById: {},
 });
 
 /** the clients reducer function */
