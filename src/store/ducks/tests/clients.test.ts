@@ -14,6 +14,7 @@ import reducer, {
   getHouseholdsById,
   reducerName,
   removeClientsAction,
+  removeHouseholdsAction,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
@@ -85,6 +86,16 @@ describe('reducers/clients', () => {
     expect(getHouseholdById(store.getState(), '1bcb682a-0f31-4935-9114-c4d33d148617')).toEqual(
       fixtures.household1
     );
+  });
+
+  it('removes Households', () => {
+    store.dispatch(fetchHouseholds(fixtures.households));
+    let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(3);
+
+    store.dispatch(removeHouseholdsAction);
+    numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(0);
   });
 
   it('Adds new households to store instead of overwriting existing ones', () => {
