@@ -4,6 +4,7 @@ import { FlushThunks } from 'redux-testkit';
 import store from '../../index';
 import reducer, {
   fetchClients,
+  fetchHouseholds,
   getClientById,
   getClients,
   getClientsArray,
@@ -73,7 +74,7 @@ describe('reducers/clients', () => {
   });
 
   it('fetches households correctly', () => {
-    store.dispatch(fetchClients([fixtures.household1, fixtures.household2]));
+    store.dispatch(fetchHouseholds([fixtures.household1, fixtures.household2]));
     expect(getHouseholdsById(store.getState())).toEqual({
       '1bcb682a-0f31-4935-9114-c4d33d148617': fixtures.household1,
       '2eeb682a-0f31-4935-9114-c4d33d148617': fixtures.household2,
@@ -84,5 +85,14 @@ describe('reducers/clients', () => {
     expect(getHouseholdById(store.getState(), '1bcb682a-0f31-4935-9114-c4d33d148617')).toEqual(
       fixtures.household1
     );
+  });
+
+  it('Adds new households to store instead of overwriting existing ones', () => {
+    let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(2);
+
+    store.dispatch(fetchHouseholds([fixtures.household3]));
+    numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(3);
   });
 });
