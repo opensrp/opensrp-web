@@ -71,4 +71,18 @@ describe('reducers/clients', () => {
     numberOfClients = getClientsArray(store.getState()).length;
     expect(numberOfClients).toEqual(2);
   });
+
+  it('fetches households correctly', () => {
+    store.dispatch(fetchClients([fixtures.household1, fixtures.household2]));
+    expect(getHouseholdsById(store.getState())).toEqual({
+      '1bcb682a-0f31-4935-9114-c4d33d148617': fixtures.household1,
+      '2eeb682a-0f31-4935-9114-c4d33d148617': fixtures.household2,
+    });
+    expect(getHouseholdsArray(store.getState())).toEqual(
+      values([fixtures.household1, fixtures.household2])
+    );
+    expect(getHouseholdById(store.getState(), '1bcb682a-0f31-4935-9114-c4d33d148617')).toEqual(
+      fixtures.household1
+    );
+  });
 });
