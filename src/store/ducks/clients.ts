@@ -101,6 +101,7 @@ export const removeClientsAction = {
 /** interface for clients state in redux store */
 interface ClientState {
   clientsById: { [key: string]: Client };
+  householdsById: { [key: string]: Household };
 }
 
 /** Create an immutable clients state */
