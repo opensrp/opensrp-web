@@ -1,4 +1,4 @@
-import { Client } from '../../ducks/clients';
+import { Client, Household } from '../../ducks/clients';
 export const client1: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys
@@ -259,4 +259,92 @@ export const client7: Client = {
   _rev: 'v1',
 };
 
+export const household1: Household = {
+  type: 'Client',
+  // tslint:disable-next-line: object-literal-sort-keys
+  dateCreated: 1657737728487,
+  serverVersion: 1557737728441,
+  clientApplicationVersion: 2,
+  clientDatabaseVersion: 2,
+  baseEntityId: '123fc98d-4cce-412a-8327-ca2315efedf3',
+  identifiers: {
+    opensrp_id: '22117124',
+  },
+  addresses: [],
+  attributes: {
+    residence: '6f7ca772-b368-4c3d-bd9c-00aa698203ca',
+  },
+  firstName: 'Nafiz',
+  middleName: '',
+  lastName: 'AHMED',
+  birthdate: 358560000000,
+  birthdateApprox: false,
+  deathdateApprox: false,
+  relationships: {
+    family_head: ['abc5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    primary_caregiver: ['deff5181-c153-4bcc-85c3-0b7c3d9f2263'],
+  },
+  _id: '1bcb682a-0f31-4935-9114-c4d33d148617',
+  _rev: 'v1',
+};
+
+export const household2: Household = {
+  type: 'Client',
+  // tslint:disable-next-line: object-literal-sort-keys
+  dateCreated: 1757737728487,
+  serverVersion: 1557737728441,
+  clientApplicationVersion: 2,
+  clientDatabaseVersion: 2,
+  baseEntityId: '456fc98d-4cce-412a-8327-ca2315efedf3',
+  identifiers: {
+    opensrp_id: '33117124',
+  },
+  addresses: [],
+  attributes: {
+    residence: '6f7ca772-b368-4c3d-bd9c-00aa698203ca',
+  },
+  firstName: 'Proshanto',
+  middleName: '',
+  lastName: 'DADA',
+  birthdate: 358560000000,
+  birthdateApprox: false,
+  deathdateApprox: false,
+  relationships: {
+    family_head: ['ghif5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    primary_caregiver: ['jklf5181-c153-4bcc-85c3-0b7c3d9f2263'],
+  },
+  _id: '2eeb682a-0f31-4935-9114-c4d33d148617',
+  _rev: 'v1',
+};
+
+export const household3: Household = {
+  type: 'Client',
+  // tslint:disable-next-line: object-literal-sort-keys
+  dateCreated: 1857737728487,
+  serverVersion: 1557737728441,
+  clientApplicationVersion: 2,
+  clientDatabaseVersion: 2,
+  baseEntityId: '789fc98d-4cce-412a-8327-ca2315efedf3',
+  identifiers: {
+    opensrp_id: '44117124',
+  },
+  addresses: [],
+  attributes: {
+    residence: '6f7ca772-b368-4c3d-bd9c-00aa698203ca',
+  },
+  firstName: 'Mahmud',
+  middleName: '',
+  lastName: 'BHAI',
+  birthdate: 358560000000,
+  birthdateApprox: false,
+  deathdateApprox: false,
+  relationships: {
+    family_head: ['mnof5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    primary_caregiver: ['pqrf5181-c153-4bcc-85c3-0b7c3d9f2263'],
+  },
+  _id: '3ffb682a-0f31-4935-9114-c4d33d148617',
+  _rev: 'v1',
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
+export const households: Household[] = [household1, household2, household3];
