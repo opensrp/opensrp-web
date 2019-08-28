@@ -105,6 +105,12 @@ export const removeClientsAction = {
   type: REMOVE_CLIENTS,
 };
 
+/** removeHouseholds action */
+export const removeHouseholdsAction: RemoveHouseholdsAction = {
+  householdsById: {},
+  type: REMOVE_HOUSEHOLDS,
+};
+
 // The reducer
 
 /** interface for clients state in redux store */
@@ -142,6 +148,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         householdsById: { ...state.householdsById, ...action.householdsById },
+      });
+    case REMOVE_HOUSEHOLDS:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: action.householdsById,
       });
     default:
       return state;
