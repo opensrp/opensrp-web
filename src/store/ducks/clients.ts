@@ -172,3 +172,11 @@ export function getClientsArray(state: Partial<Store>): Client[] {
 export function getClientById(state: Partial<Store>, id: string): Client | null {
   return get(getClients(state), id) || null;
 }
+
+/** returns all households in the store as values whose keys are their respective ids
+ * @param {Partial<Store>} state - the redux store
+ * @return { { [key: string] : Household} } - households object as values, reepective ids as keys
+ */
+export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
+  return (state as any)[reducerName].householdsById;
+}
