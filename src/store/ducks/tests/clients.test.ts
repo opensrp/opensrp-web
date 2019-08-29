@@ -79,13 +79,13 @@ describe('reducers/clients', () => {
   it('fetches households correctly', () => {
     store.dispatch(fetchHouseholds([fixtures.household1, fixtures.household2]));
     expect(getHouseholdsById(store.getState())).toEqual({
-      '1bcb682a-0f31-4935-9114-c4d33d148617': fixtures.household1,
-      '2eeb682a-0f31-4935-9114-c4d33d148617': fixtures.household2,
+      '123fc98d-4cce-412a-8327-ca2315efedf3': fixtures.household1,
+      '456fc98d-4cce-412a-8327-ca2315efedf3': fixtures.household2,
     });
     expect(getHouseholdsArray(store.getState())).toEqual(
       values([fixtures.household1, fixtures.household2])
     );
-    expect(getHouseholdById(store.getState(), '1bcb682a-0f31-4935-9114-c4d33d148617')).toEqual(
+    expect(getHouseholdById(store.getState(), '123fc98d-4cce-412a-8327-ca2315efedf3')).toEqual(
       fixtures.household1
     );
   });
