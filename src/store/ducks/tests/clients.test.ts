@@ -26,6 +26,8 @@ describe('reducers/clients', () => {
   beforeEach(() => {
     flushThunks = FlushThunks.createMiddleware();
     jest.resetAllMocks();
+    store.dispatch(removeClientsAction);
+    store.dispatch(removeHouseholdsAction);
   });
 
   it('selectors work for empty initialState', () => {
