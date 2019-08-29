@@ -84,7 +84,7 @@ export type ClientsActionTypes =
  * @return {FetchClientsAction} - an action to add clients to redux store
  */
 export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
-  clientsById: keyBy(clientsList, (client: Client) => client._id),
+  clientsById: keyBy(clientsList, (client: Client) => client.baseEntityId),
   type: CLIENTS_FETCHED,
 });
 
@@ -93,7 +93,7 @@ export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => 
  * @return {FetchHouseholdsAction} - an action to add households to redux store
  */
 export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
-  householdsById: keyBy(householdsList, (household: Household) => household._id),
+  householdsById: keyBy(householdsList, (household: Household) => household.baseEntityId),
   type: HOUSEHOLDS_FETCHED,
 });
 

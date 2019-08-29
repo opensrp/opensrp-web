@@ -43,14 +43,14 @@ describe('reducers/clients', () => {
   it('fetches clients correctly', () => {
     store.dispatch(fetchClients([fixtures.client1, fixtures.client2]));
     expect(getClientsById(store.getState())).toEqual({
-      '9b67a82d-dac7-40c0-85aa-e5976339a6b6': fixtures.client1,
-      'a30116d5-0612-419e-9b93-00c87df4ffbb': fixtures.client2,
+      '71ad460c-bf76-414e-9be1-0d1b2cb1bce8': fixtures.client1,
+      '7d97182f-d623-4553-8651-5a29d2fe3f0b': fixtures.client2,
     });
     expect(getClientsArray(store.getState())).toEqual(values([fixtures.client1, fixtures.client2]));
     expect(getClientsIdArray(store.getState())).toEqual(
-      [fixtures.client1, fixtures.client2].map(client => client._id)
+      [fixtures.client1, fixtures.client2].map(client => client.baseEntityId)
     );
-    expect(getClientById(store.getState(), '9b67a82d-dac7-40c0-85aa-e5976339a6b6')).toEqual(
+    expect(getClientById(store.getState(), '71ad460c-bf76-414e-9be1-0d1b2cb1bce8')).toEqual(
       fixtures.client1
     );
   });
@@ -79,13 +79,13 @@ describe('reducers/clients', () => {
   it('fetches households correctly', () => {
     store.dispatch(fetchHouseholds([fixtures.household1, fixtures.household2]));
     expect(getHouseholdsById(store.getState())).toEqual({
-      '1bcb682a-0f31-4935-9114-c4d33d148617': fixtures.household1,
-      '2eeb682a-0f31-4935-9114-c4d33d148617': fixtures.household2,
+      '123fc98d-4cce-412a-8327-ca2315efedf3': fixtures.household1,
+      '456fc98d-4cce-412a-8327-ca2315efedf3': fixtures.household2,
     });
     expect(getHouseholdsArray(store.getState())).toEqual(
       values([fixtures.household1, fixtures.household2])
     );
-    expect(getHouseholdById(store.getState(), '1bcb682a-0f31-4935-9114-c4d33d148617')).toEqual(
+    expect(getHouseholdById(store.getState(), '123fc98d-4cce-412a-8327-ca2315efedf3')).toEqual(
       fixtures.household1
     );
   });
