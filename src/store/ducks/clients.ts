@@ -40,6 +40,8 @@ export type Household = Client;
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
+/** HOUSEHOLDS_FETCHED action type */
+export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/clients/HOUSEHOLDS_FETCHED';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -51,6 +53,12 @@ export interface FetchClientsAction extends AnyAction {
 interface RemoveClientsAction extends AnyAction {
   clientsById: {};
   type: typeof REMOVE_CLIENTS;
+}
+
+/** interface for fetchHouseholdsAction */
+interface FetchHouseholdsAction extends AnyAction{
+  householdsById: { [key: string]: Household };
+  type: typeof HOUSEHOLDS_FETCHED;
 }
 
 /** Create type for clients reducer actions */
