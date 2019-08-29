@@ -14,6 +14,7 @@ import reducer, {
   getHouseholdsById,
   reducerName,
   removeClientsAction,
+  removeHouseholdsAction,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
@@ -94,5 +95,15 @@ describe('reducers/clients', () => {
     store.dispatch(fetchHouseholds([fixtures.household3]));
     numberOfHouseholds = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(3);
+  });
+
+  it('removes Households', () => {
+    store.dispatch(fetchHouseholds(fixtures.households));
+    let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(3);
+
+    store.dispatch(removeHouseholdsAction);
+    numberOfHouseholds = getHouseholdsArray(store.getState()).length;
+    expect(numberOfHouseholds).toEqual(0);
   });
 });
