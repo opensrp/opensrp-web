@@ -84,7 +84,7 @@ export type ClientsActionTypes =
  * @return {FetchClientsAction} - an action to add clients to redux store
  */
 export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
-  clientsById: keyBy(clientsList, (client: Client) => client._id),
+  clientsById: keyBy(clientsList, (client: Client) => client.baseEntityId),
   type: CLIENTS_FETCHED,
 });
 
