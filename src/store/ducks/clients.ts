@@ -62,7 +62,11 @@ interface FetchHouseholdsAction extends AnyAction{
 }
 
 /** Create type for clients reducer actions */
-export type ClientsActionTypes = FetchClientsAction | RemoveClientsAction | AnyAction;
+export type ClientsActionTypes =
+  | FetchClientsAction
+  | FetchHouseholdsAction
+  | RemoveClientsAction
+  | AnyAction;
 
 // action Creators
 
