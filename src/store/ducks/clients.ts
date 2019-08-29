@@ -129,6 +129,11 @@ export default function reducer(
         ...state,
         clientsById: action.clientsById,
       });
+    case HOUSEHOLDS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: { ...state.householdsById, ...action.householdsById },
+      });
     default:
       return state;
   }
