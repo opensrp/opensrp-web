@@ -31,6 +31,9 @@ export interface Client {
   _rev: string;
 }
 
+/** Interface for household object as same as client */
+export type Household = Client;
+
 // actions
 
 /** CLIENTS_FETCHED action type */
