@@ -31,12 +31,19 @@ export interface Client {
   _rev: string;
 }
 
+/** Interface for household object same as client */
+export type Household = Client;
+
 // actions
 
 /** CLIENTS_FETCHED action type */
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
+/** HOUSEHOLDS_FETCHED action type */
+export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/clients/HOUSEHOLDS_FETCHED';
+/** REMOVE_HOUSEHOLDS action type */
+export const REMOVE_HOUSEHOLDS = 'opensrp/reducer/clients/REMOVE_HOUSEHOLDS';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -50,8 +57,25 @@ interface RemoveClientsAction extends AnyAction {
   type: typeof REMOVE_CLIENTS;
 }
 
+/** interface for fetchHouseholdsAction */
+interface FetchHouseholdsAction extends AnyAction {
+  householdsById: { [key: string]: Household };
+  type: typeof HOUSEHOLDS_FETCHED;
+}
+
+/** Interface for removeHouseholdsAction */
+interface RemoveHouseholdsAction extends AnyAction {
+  householdsById: {};
+  type: typeof REMOVE_HOUSEHOLDS;
+}
+
 /** Create type for clients reducer actions */
-export type ClientsActionTypes = FetchClientsAction | RemoveClientsAction | AnyAction;
+export type ClientsActionTypes =
+  | FetchClientsAction
+  | FetchHouseholdsAction
+  | RemoveClientsAction
+  | RemoveHouseholdsAction
+  | AnyAction;
 
 // action Creators
 
@@ -64,6 +88,15 @@ export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => 
   type: CLIENTS_FETCHED,
 });
 
+/** Fetch households action creator
+ * @param {Household []} householdList - households array to add to store
+ * @return {FetchHouseholdsAction} - an action to add households to redux store
+ */
+export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
+  householdsById: keyBy(householdsList, (household: Household) => household._id),
+  type: HOUSEHOLDS_FETCHED,
+});
+
 // actions
 
 /** removeClientsAction action */
@@ -72,11 +105,18 @@ export const removeClientsAction = {
   type: REMOVE_CLIENTS,
 };
 
+/** removeHouseholds action */
+export const removeHouseholdsAction: RemoveHouseholdsAction = {
+  householdsById: {},
+  type: REMOVE_HOUSEHOLDS,
+};
+
 // The reducer
 
 /** interface for clients state in redux store */
 interface ClientState {
   clientsById: { [key: string]: Client };
+  householdsById: { [key: string]: Household };
 }
 
 /** Create an immutable clients state */
@@ -85,6 +125,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** initial clients-state state */
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
+  householdsById: {},
 });
 
 /** the clients reducer function */
@@ -103,6 +144,16 @@ export default function reducer(
         ...state,
         clientsById: action.clientsById,
       });
+    case HOUSEHOLDS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: { ...state.householdsById, ...action.householdsById },
+      });
+    case REMOVE_HOUSEHOLDS:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: action.householdsById,
+      });
     default:
       return state;
   }
@@ -112,9 +163,9 @@ export default function reducer(
 
 /** returns all clients in the store as values whose keys are their respective ids
  * @param {Partial<Store>} state - the redux store
- * @return { { [key: string] : Client} } - clients object as values, reepective ids as keys
+ * @return { { [key: string] : Client} } - clients object as values, respective ids as keys
  */
-export function getClients(state: Partial<Store>): { [key: string]: Client } {
+export function getClientsById(state: Partial<Store>): { [key: string]: Client } {
   return (state as any)[reducerName].clientsById;
 }
 
@@ -123,7 +174,7 @@ export function getClients(state: Partial<Store>): { [key: string]: Client } {
  * @return {string[]} - clients ids as an array of strings
  */
 export function getClientsIdArray(state: Partial<Store>): string[] {
-  return keys(getClients(state));
+  return keys(getClientsById(state));
 }
 
 /** gets clients as an array of clients objects
@@ -131,7 +182,7 @@ export function getClientsIdArray(state: Partial<Store>): string[] {
  * @return {Client[]} - an array of clients objs
  */
 export function getClientsArray(state: Partial<Store>): Client[] {
-  return values(getClients(state));
+  return values(getClientsById(state));
 }
 
 /** get a specific client by their id
@@ -139,5 +190,29 @@ export function getClientsArray(state: Partial<Store>): Client[] {
  * @return {Client | null} a client obj if the id is found else null
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
-  return get(getClients(state), id) || null;
+  return get(getClientsById(state), id) || null;
+}
+
+/** returns all households in the store as values whose keys are their respective ids
+ * @param {Partial<Store>} state - the redux store
+ * @return { { [key: string] : Household} } - households object as values, respective ids as keys
+ */
+export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
+  return (state as any)[reducerName].householdsById;
+}
+
+/** gets households as an array of households objects
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household[]} - an array of households objs
+ */
+export function getHouseholdsArray(state: Partial<Store>): Household[] {
+  return values(getHouseholdsById(state));
+}
+
+/** get a specific household by their id
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household | null} a household obj if the id is found else null
+ */
+export function getHouseholdById(state: Partial<Store>, id: string): Household | null {
+  return get(getHouseholdsById(state), id) || null;
 }
