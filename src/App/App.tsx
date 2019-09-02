@@ -23,7 +23,7 @@ library.add(faUser);
 class App extends Component {
   public render() {
     return (
-      <Container>
+      <Container fluid={true}>
         <ConnectedHeader />
         <Row id="main-page-row">
           <Col>
