@@ -11,6 +11,7 @@ import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
+import SideMenu from '../components/page/SideMenu/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
@@ -26,7 +27,10 @@ class App extends Component {
       <Container fluid={true}>
         <ConnectedHeader />
         <Row id="main-page-row">
-          <Col>
+          <Col md={2}>
+            <SideMenu />
+          </Col>
+          <Col md={10}>
             <Switch>
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}

@@ -108,7 +108,11 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                     </DropdownToggle>
                     <DropdownMenu right={true}>
                       <DropdownItem>
-                        <NavLink to={LOGOUT_URL} className="nav-link bg-dropdown-text" activeClassName="active">
+                        <NavLink
+                          to={LOGOUT_URL}
+                          className="nav-link bg-dropdown-text"
+                          activeClassName="active"
+                        >
                           Sign Out
                         </NavLink>
                       </DropdownItem>
