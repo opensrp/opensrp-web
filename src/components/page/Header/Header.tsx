@@ -57,10 +57,10 @@ export class HeaderComponent extends React.Component<HeaderProps> {
             </Col>
             <Col md={8} />
             <Col md={2} className="bg-top-nav">
-              <Nav className="navbar navbar-expand-md account-text">
+              <Nav className="navbar navbar-expand-md center-account-text">
                 {authenticated ? (
                   <UncontrolledDropdown nav={true} inNavbar={true}>
-                    <DropdownToggle nav={true} caret={true}>
+                    <DropdownToggle nav={true} caret={true} className="account-text">
                       <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
                     </DropdownToggle>
                     <DropdownMenu right={true}>
@@ -76,7 +76,11 @@ export class HeaderComponent extends React.Component<HeaderProps> {
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 ) : (
-                  <NavLink to={LOGIN_URL} className="nav-link" activeClassName="active">
+                  <NavLink
+                    to={LOGIN_URL}
+                    className="nav-link account-text"
+                    activeClassName="active"
+                  >
                     Login
                   </NavLink>
                 )}
