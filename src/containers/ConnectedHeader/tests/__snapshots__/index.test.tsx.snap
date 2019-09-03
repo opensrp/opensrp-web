@@ -3,96 +3,139 @@
 exports[`components/ConnectedHeader renders the ConnectedHeader component 1`] = `
 Object {
   "children": Array [
-    <nav
-      className="navbar navbar-expand-md navbar-light bg-light"
-    >
-      <Link
-        className="navbar-brand"
-        to="/"
-      >
-        <img
-          alt="OpenSRP"
-          src="logo.png"
-        />
-      </Link>
-    </nav>,
-    <NavbarToggler
-      onClick={[Function]}
-      tag="button"
-      type="button"
-    />,
-    <Collapse
-      appear={false}
-      enter={true}
-      exit={true}
-      in={false}
-      isOpen={false}
-      mountOnEnter={false}
-      navbar={true}
-      onEnter={[Function]}
-      onEntered={[Function]}
-      onEntering={[Function]}
-      onExit={[Function]}
-      onExited={[Function]}
-      onExiting={[Function]}
+    <Col
+      className="bg-top-nav"
+      md={2}
       tag="div"
-      timeout={350}
-      unmountOnExit={false}
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <nav
+        className="navbar navbar-expand-md navbar-light"
+      >
+        <Link
+          className="navbar-brand"
+          to="/"
+        >
+          <img
+            alt="OpenSRP"
+            src="logo.png"
+          />
+        </Link>
+      </nav>
+    </Col>,
+    <Col
+      md={8}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <NavbarToggler
+        onClick={[Function]}
+        tag="button"
+        type="button"
+      />
+      <Collapse
+        appear={false}
+        enter={true}
+        exit={true}
+        in={false}
+        isOpen={false}
+        mountOnEnter={false}
+        navbar={true}
+        onEnter={[Function]}
+        onEntered={[Function]}
+        onEntering={[Function]}
+        onExit={[Function]}
+        onExited={[Function]}
+        onExiting={[Function]}
+        tag="div"
+        timeout={350}
+        unmountOnExit={false}
+      >
+        <Nav
+          className="mr-auto"
+          navbar={true}
+          tag="ul"
+          vertical={false}
+        >
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/"
+            >
+              Home
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/404"
+            >
+              Users
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/404"
+            >
+              About
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/clients"
+            >
+              Clients
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Collapse>
+    </Col>,
+    <Col
+      className="bg-top-nav"
+      md={2}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
     >
       <Nav
-        className="mr-auto"
-        navbar={true}
-        tag="ul"
-        vertical={false}
-      >
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/"
-          >
-            Home
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            Users
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            About
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/clients"
-          >
-            Clients
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <Nav
-        className="ml-0"
-        navbar={true}
+        className="navbar navbar-expand-md account-text"
         tag="ul"
         vertical={false}
       >
@@ -104,8 +147,9 @@ Object {
           Login
         </NavLink>
       </Nav>
-    </Collapse>,
+    </Col>,
   ],
+  "className": "nav-fill w-100 bg-navbar",
   "color": "light",
   "expand": "md",
   "light": true,
@@ -116,96 +160,139 @@ Object {
 exports[`components/ConnectedHeader renders the ConnectedHeader when logged in 1`] = `
 Object {
   "children": Array [
-    <nav
-      className="navbar navbar-expand-md navbar-light bg-light"
-    >
-      <Link
-        className="navbar-brand"
-        to="/"
-      >
-        <img
-          alt="OpenSRP"
-          src="logo.png"
-        />
-      </Link>
-    </nav>,
-    <NavbarToggler
-      onClick={[Function]}
-      tag="button"
-      type="button"
-    />,
-    <Collapse
-      appear={false}
-      enter={true}
-      exit={true}
-      in={false}
-      isOpen={false}
-      mountOnEnter={false}
-      navbar={true}
-      onEnter={[Function]}
-      onEntered={[Function]}
-      onEntering={[Function]}
-      onExit={[Function]}
-      onExited={[Function]}
-      onExiting={[Function]}
+    <Col
+      className="bg-top-nav"
+      md={2}
       tag="div"
-      timeout={350}
-      unmountOnExit={false}
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <nav
+        className="navbar navbar-expand-md navbar-light"
+      >
+        <Link
+          className="navbar-brand"
+          to="/"
+        >
+          <img
+            alt="OpenSRP"
+            src="logo.png"
+          />
+        </Link>
+      </nav>
+    </Col>,
+    <Col
+      md={8}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <NavbarToggler
+        onClick={[Function]}
+        tag="button"
+        type="button"
+      />
+      <Collapse
+        appear={false}
+        enter={true}
+        exit={true}
+        in={false}
+        isOpen={false}
+        mountOnEnter={false}
+        navbar={true}
+        onEnter={[Function]}
+        onEntered={[Function]}
+        onEntering={[Function]}
+        onExit={[Function]}
+        onExited={[Function]}
+        onExiting={[Function]}
+        tag="div"
+        timeout={350}
+        unmountOnExit={false}
+      >
+        <Nav
+          className="mr-auto"
+          navbar={true}
+          tag="ul"
+          vertical={false}
+        >
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/"
+            >
+              Home
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/404"
+            >
+              Users
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/404"
+            >
+              About
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/clients"
+            >
+              Clients
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Collapse>
+    </Col>,
+    <Col
+      className="bg-top-nav"
+      md={2}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
     >
       <Nav
-        className="mr-auto"
-        navbar={true}
-        tag="ul"
-        vertical={false}
-      >
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/"
-          >
-            Home
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            Users
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            About
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/clients"
-          >
-            Clients
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <Nav
-        className="ml-0"
-        navbar={true}
+        className="navbar navbar-expand-md account-text"
         tag="ul"
         vertical={false}
       >
@@ -256,7 +343,7 @@ Object {
             >
               <NavLink
                 activeClassName="active"
-                className="nav-link"
+                className="nav-link bg-dropdown-text"
                 to="/logout"
               >
                 Sign Out
@@ -265,8 +352,9 @@ Object {
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
-    </Collapse>,
+    </Col>,
   ],
+  "className": "nav-fill w-100 bg-navbar",
   "color": "light",
   "expand": "md",
   "light": true,

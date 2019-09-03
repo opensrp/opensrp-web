@@ -36,10 +36,11 @@ exports[`App renders App correctly 1`] = `
   >
     <App>
       <Container
+        fluid={true}
         tag="div"
       >
         <div
-          className="container"
+          className="container-fluid"
         >
           <Connect(withRouter(HeaderComponent))>
             <withRouter(HeaderComponent)
@@ -103,247 +104,311 @@ exports[`App renders App correctly 1`] = `
                 }
               >
                 <div>
-                  <Navbar
-                    color="light"
-                    expand="md"
-                    light={true}
-                    tag="nav"
+                  <Row
+                    tag="div"
                   >
-                    <nav
-                      className="navbar navbar-expand-md navbar-light bg-light"
+                    <div
+                      className="row"
                     >
-                      <nav
-                        className="navbar navbar-expand-md navbar-light bg-light"
+                      <Navbar
+                        className="nav-fill w-100 bg-navbar"
+                        color="light"
+                        expand="md"
+                        light={true}
+                        tag="nav"
                       >
-                        <Link
-                          className="navbar-brand"
-                          to="/"
+                        <nav
+                          className="nav-fill w-100 bg-navbar navbar navbar-expand-md navbar-light bg-light"
                         >
-                          <a
-                            className="navbar-brand"
-                            href="/"
-                            onClick={[Function]}
+                          <Col
+                            className="bg-top-nav"
+                            md={2}
+                            tag="div"
+                            widths={
+                              Array [
+                                "xs",
+                                "sm",
+                                "md",
+                                "lg",
+                                "xl",
+                              ]
+                            }
                           >
-                            <img
-                              alt="OpenSRP"
-                              src="logo.png"
-                            />
-                          </a>
-                        </Link>
-                      </nav>
-                      <NavbarToggler
-                        onClick={[Function]}
-                        tag="button"
-                        type="button"
-                      >
-                        <button
-                          className="navbar-toggler"
-                          onClick={[Function]}
-                          type="button"
-                        >
-                          <span
-                            className="navbar-toggler-icon"
-                          />
-                        </button>
-                      </NavbarToggler>
-                      <Collapse
-                        appear={false}
-                        enter={true}
-                        exit={true}
-                        in={false}
-                        isOpen={false}
-                        mountOnEnter={false}
-                        navbar={true}
-                        onEnter={[Function]}
-                        onEntered={[Function]}
-                        onEntering={[Function]}
-                        onExit={[Function]}
-                        onExited={[Function]}
-                        onExiting={[Function]}
-                        tag="div"
-                        timeout={350}
-                        unmountOnExit={false}
-                      >
-                        <Transition
-                          appear={false}
-                          enter={true}
-                          exit={true}
-                          in={false}
-                          mountOnEnter={false}
-                          onEnter={[Function]}
-                          onEntered={[Function]}
-                          onEntering={[Function]}
-                          onExit={[Function]}
-                          onExited={[Function]}
-                          onExiting={[Function]}
-                          timeout={350}
-                          unmountOnExit={false}
-                        >
-                          <div
-                            className="collapse navbar-collapse"
-                            style={Object {}}
+                            <div
+                              className="bg-top-nav col-md-2"
+                            >
+                              <nav
+                                className="navbar navbar-expand-md navbar-light"
+                              >
+                                <Link
+                                  className="navbar-brand"
+                                  to="/"
+                                >
+                                  <a
+                                    className="navbar-brand"
+                                    href="/"
+                                    onClick={[Function]}
+                                  >
+                                    <img
+                                      alt="OpenSRP"
+                                      src="logo.png"
+                                    />
+                                  </a>
+                                </Link>
+                              </nav>
+                            </div>
+                          </Col>
+                          <Col
+                            md={8}
+                            tag="div"
+                            widths={
+                              Array [
+                                "xs",
+                                "sm",
+                                "md",
+                                "lg",
+                                "xl",
+                              ]
+                            }
                           >
-                            <Nav
-                              className="mr-auto"
-                              navbar={true}
-                              tag="ul"
-                              vertical={false}
+                            <div
+                              className="col-md-8"
                             >
-                              <ul
-                                className="mr-auto navbar-nav"
+                              <NavbarToggler
+                                onClick={[Function]}
+                                tag="button"
+                                type="button"
                               >
-                                <NavItem
-                                  tag="li"
+                                <button
+                                  className="navbar-toggler"
+                                  onClick={[Function]}
+                                  type="button"
                                 >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/"
-                                    >
-                                      <Link
-                                        aria-current="page"
-                                        className="nav-link active"
-                                        style={Object {}}
-                                        to="/"
-                                      >
-                                        <a
-                                          aria-current="page"
-                                          className="nav-link active"
-                                          href="/"
-                                          onClick={[Function]}
-                                          style={Object {}}
-                                        >
-                                          Home
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
+                                  <span
+                                    className="navbar-toggler-icon"
+                                  />
+                                </button>
+                              </NavbarToggler>
+                              <Collapse
+                                appear={false}
+                                enter={true}
+                                exit={true}
+                                in={false}
+                                isOpen={false}
+                                mountOnEnter={false}
+                                navbar={true}
+                                onEnter={[Function]}
+                                onEntered={[Function]}
+                                onEntering={[Function]}
+                                onExit={[Function]}
+                                onExited={[Function]}
+                                onExiting={[Function]}
+                                tag="div"
+                                timeout={350}
+                                unmountOnExit={false}
+                              >
+                                <Transition
+                                  appear={false}
+                                  enter={true}
+                                  exit={true}
+                                  in={false}
+                                  mountOnEnter={false}
+                                  onEnter={[Function]}
+                                  onEntered={[Function]}
+                                  onEntering={[Function]}
+                                  onExit={[Function]}
+                                  onExited={[Function]}
+                                  onExiting={[Function]}
+                                  timeout={350}
+                                  unmountOnExit={false}
                                 >
-                                  <li
-                                    className="nav-item"
+                                  <div
+                                    className="collapse navbar-collapse"
+                                    style={Object {}}
                                   >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/404"
+                                    <Nav
+                                      className="mr-auto"
+                                      navbar={true}
+                                      tag="ul"
+                                      vertical={false}
                                     >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/404"
+                                      <ul
+                                        className="mr-auto navbar-nav"
                                       >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/404"
-                                          onClick={[Function]}
+                                        <NavItem
+                                          tag="li"
                                         >
-                                          Users
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/404"
-                                    >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/404"
-                                      >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/404"
-                                          onClick={[Function]}
+                                          <li
+                                            className="nav-item"
+                                          >
+                                            <NavLink
+                                              activeClassName="active"
+                                              className="nav-link"
+                                              to="/"
+                                            >
+                                              <Link
+                                                aria-current="page"
+                                                className="nav-link active"
+                                                style={Object {}}
+                                                to="/"
+                                              >
+                                                <a
+                                                  aria-current="page"
+                                                  className="nav-link active"
+                                                  href="/"
+                                                  onClick={[Function]}
+                                                  style={Object {}}
+                                                >
+                                                  Home
+                                                </a>
+                                              </Link>
+                                            </NavLink>
+                                          </li>
+                                        </NavItem>
+                                        <NavItem
+                                          tag="li"
                                         >
-                                          About
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/clients"
-                                    >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/clients"
-                                      >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/clients"
-                                          onClick={[Function]}
+                                          <li
+                                            className="nav-item"
+                                          >
+                                            <NavLink
+                                              activeClassName="active"
+                                              className="nav-link"
+                                              to="/404"
+                                            >
+                                              <Link
+                                                aria-current={null}
+                                                className="nav-link"
+                                                to="/404"
+                                              >
+                                                <a
+                                                  aria-current={null}
+                                                  className="nav-link"
+                                                  href="/404"
+                                                  onClick={[Function]}
+                                                >
+                                                  Users
+                                                </a>
+                                              </Link>
+                                            </NavLink>
+                                          </li>
+                                        </NavItem>
+                                        <NavItem
+                                          tag="li"
                                         >
-                                          Clients
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                              </ul>
-                            </Nav>
-                            <Nav
-                              className="ml-0"
-                              navbar={true}
-                              tag="ul"
-                              vertical={false}
+                                          <li
+                                            className="nav-item"
+                                          >
+                                            <NavLink
+                                              activeClassName="active"
+                                              className="nav-link"
+                                              to="/404"
+                                            >
+                                              <Link
+                                                aria-current={null}
+                                                className="nav-link"
+                                                to="/404"
+                                              >
+                                                <a
+                                                  aria-current={null}
+                                                  className="nav-link"
+                                                  href="/404"
+                                                  onClick={[Function]}
+                                                >
+                                                  About
+                                                </a>
+                                              </Link>
+                                            </NavLink>
+                                          </li>
+                                        </NavItem>
+                                        <NavItem
+                                          tag="li"
+                                        >
+                                          <li
+                                            className="nav-item"
+                                          >
+                                            <NavLink
+                                              activeClassName="active"
+                                              className="nav-link"
+                                              to="/clients"
+                                            >
+                                              <Link
+                                                aria-current={null}
+                                                className="nav-link"
+                                                to="/clients"
+                                              >
+                                                <a
+                                                  aria-current={null}
+                                                  className="nav-link"
+                                                  href="/clients"
+                                                  onClick={[Function]}
+                                                >
+                                                  Clients
+                                                </a>
+                                              </Link>
+                                            </NavLink>
+                                          </li>
+                                        </NavItem>
+                                      </ul>
+                                    </Nav>
+                                  </div>
+                                </Transition>
+                              </Collapse>
+                            </div>
+                          </Col>
+                          <Col
+                            className="bg-top-nav"
+                            md={2}
+                            tag="div"
+                            widths={
+                              Array [
+                                "xs",
+                                "sm",
+                                "md",
+                                "lg",
+                                "xl",
+                              ]
+                            }
+                          >
+                            <div
+                              className="bg-top-nav col-md-2"
                             >
-                              <ul
-                                className="ml-0 navbar-nav"
+                              <Nav
+                                className="navbar navbar-expand-md account-text"
+                                tag="ul"
+                                vertical={false}
                               >
-                                <NavLink
-                                  activeClassName="active"
-                                  className="nav-link"
-                                  to="/login"
+                                <ul
+                                  className="navbar navbar-expand-md account-text nav"
                                 >
-                                  <Link
-                                    aria-current={null}
+                                  <NavLink
+                                    activeClassName="active"
                                     className="nav-link"
                                     to="/login"
                                   >
-                                    <a
+                                    <Link
                                       aria-current={null}
                                       className="nav-link"
-                                      href="/login"
-                                      onClick={[Function]}
+                                      to="/login"
                                     >
-                                      Login
-                                    </a>
-                                  </Link>
-                                </NavLink>
-                              </ul>
-                            </Nav>
-                          </div>
-                        </Transition>
-                      </Collapse>
-                    </nav>
-                  </Navbar>
+                                      <a
+                                        aria-current={null}
+                                        className="nav-link"
+                                        href="/login"
+                                        onClick={[Function]}
+                                      >
+                                        Login
+                                      </a>
+                                    </Link>
+                                  </NavLink>
+                                </ul>
+                              </Nav>
+                            </div>
+                          </Col>
+                        </nav>
+                      </Navbar>
+                    </div>
+                  </Row>
                 </div>
               </HeaderComponent>
             </withRouter(HeaderComponent)>
