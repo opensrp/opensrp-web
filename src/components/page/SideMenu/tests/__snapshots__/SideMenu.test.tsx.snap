@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/page/SideMenu renders header correctly 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <SideMenu>
+    <div
+      className="side-menu-container"
+    >
+      <Row
+        tag="div"
+      >
+        <div
+          className="row"
+        >
+          <Col
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="col"
+            >
+              <Navbar
+                expand={false}
+                tag="nav"
+              >
+                <nav
+                  className="navbar"
+                >
+                  <Nav
+                    navbar={true}
+                    tag="ul"
+                    vertical={false}
+                  >
+                    <ul
+                      className="navbar-nav"
+                    >
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="side-nav-active"
+                            className="nav-link side-nav-item"
+                            to="/"
+                          >
+                            <Link
+                              aria-current="page"
+                              className="nav-link side-nav-item side-nav-active"
+                              style={Object {}}
+                              to="/"
+                            >
+                              <a
+                                aria-current="page"
+                                className="nav-link side-nav-item side-nav-active"
+                                href="/"
+                                onClick={[Function]}
+                                style={Object {}}
+                              >
+                                Home
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="side-nav-active"
+                            className="nav-link side-nav-item"
+                            to="/404"
+                          >
+                            <Link
+                              aria-current={null}
+                              className="nav-link side-nav-item"
+                              to="/404"
+                            >
+                              <a
+                                aria-current={null}
+                                className="nav-link side-nav-item"
+                                href="/404"
+                                onClick={[Function]}
+                              >
+                                Users
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="side-nav-active"
+                            className="nav-link side-nav-item"
+                            to="/404"
+                          >
+                            <Link
+                              aria-current={null}
+                              className="nav-link side-nav-item"
+                              to="/404"
+                            >
+                              <a
+                                aria-current={null}
+                                className="nav-link side-nav-item"
+                                href="/404"
+                                onClick={[Function]}
+                              >
+                                About
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
+                      <NavItem
+                        tag="li"
+                      >
+                        <li
+                          className="nav-item"
+                        >
+                          <NavLink
+                            activeClassName="side-nav-active"
+                            className="nav-link side-nav-item"
+                            to="/clients"
+                          >
+                            <Link
+                              aria-current={null}
+                              className="nav-link side-nav-item"
+                              to="/clients"
+                            >
+                              <a
+                                aria-current={null}
+                                className="nav-link side-nav-item"
+                                href="/clients"
+                                onClick={[Function]}
+                              >
+                                Clients
+                              </a>
+                            </Link>
+                          </NavLink>
+                        </li>
+                      </NavItem>
+                    </ul>
+                  </Nav>
+                </nav>
+              </Navbar>
+            </div>
+          </Col>
+        </div>
+      </Row>
+    </div>
+  </SideMenu>
+</Router>
+`;
