@@ -27,7 +27,7 @@ class App extends Component {
       <Container fluid={true}>
         <ConnectedHeader />
         <Row id="main-page-row">
-          <Col md={2}>
+          <Col md={2} className="side-menu-section">
             <SideMenu />
           </Col>
           <Col md={10}>

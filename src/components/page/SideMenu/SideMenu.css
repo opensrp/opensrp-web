@@ -1,0 +1,14 @@
+.side-nav-item {
+  color: #3A484F;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+}
+
+.side-nav-active {
+  color: #0192D4 !important;
+  font-family: Roboto;
+  font-weight: 500;
+  text-align: left;
+}
