@@ -5,26 +5,18 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import {
   Col,
-  Collapse,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
   Navbar,
-  NavbarToggler,
-  NavItem,
   Row,
   UncontrolledDropdown,
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
-import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
-import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { WEBSITE_NAME } from '../../../configs/env';
+import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import './Header.css';
-
-/** interface for Header state */
-interface State {
-  isOpen: boolean;
-}
 
 /** interface for HeaderProps */
 export interface HeaderProps extends RouteComponentProps {
@@ -43,16 +35,11 @@ const defaultHeaderProps: Partial<HeaderProps> = {
 };
 
 /** The Header component */
-export class HeaderComponent extends React.Component<HeaderProps, State> {
+export class HeaderComponent extends React.Component<HeaderProps> {
   public static defaultProps = defaultHeaderProps;
 
   constructor(props: HeaderProps) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-    };
   }
 
   public render() {
@@ -99,10 +86,6 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
         </Row>
       </div>
     );
-  }
-
-  private toggle() {
-    this.setState({ isOpen: !this.state.isOpen });
   }
 }
 
