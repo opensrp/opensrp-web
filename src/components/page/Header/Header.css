@@ -1,11 +1,6 @@
 .navbar-brand img {
   max-height: 30px;
   position: relative;
-  top: -8px;
-}
-
-.bg-light {
-  background-color: #f7f7f9 !important;
 }
 
 .reveal-breadcrumb {
@@ -14,4 +9,28 @@
 
 .reveal-breadcrumb .breadcrumb {
   background-color: #eceeef;
+}
+
+.bg-navbar{
+  background: #2B475E !important;
+  box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59);
+  padding: 0;
+}
+
+.bg-top-nav{
+  background: #233F56;
+  box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59);
+  text-align: center; 
+}
+
+.account-text{
+  justify-content: center;
+  font-family: roboto;
+}
+
+a{
+  color: #ffffff;
+}
+.bg-dropdown-text{
+  color: #233F56;
 }

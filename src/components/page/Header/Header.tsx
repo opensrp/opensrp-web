@@ -60,9 +60,9 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
     return (
       <div>
         <Row>
-          <Navbar color="light" className="nav-fill w-100" light={true} expand="md">
-            <Col md={2}>
-              <nav className="navbar navbar-expand-md navbar-light bg-light">
+          <Navbar color="light" className="nav-fill w-100 bg-navbar" light={true} expand="md">
+            <Col md={2} className="bg-top-nav">
+              <nav className="navbar navbar-expand-md navbar-light">
                 <Link to="/" className="navbar-brand">
                   <img src={logo} alt={WEBSITE_NAME} />
                 </Link>
@@ -99,8 +99,8 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                 </Nav>
               </Collapse>
             </Col>
-            <Col md={2}>
-              <Nav className="navbar navbar-expand-md">
+            <Col md={2} className="bg-top-nav">
+              <Nav className="navbar navbar-expand-md account-text">
                 {authenticated ? (
                   <UncontrolledDropdown nav={true} inNavbar={true}>
                     <DropdownToggle nav={true} caret={true}>
@@ -108,7 +108,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                     </DropdownToggle>
                     <DropdownMenu right={true}>
                       <DropdownItem>
-                        <NavLink to={LOGOUT_URL} className="nav-link" activeClassName="active">
+                        <NavLink to={LOGOUT_URL} className="nav-link bg-dropdown-text" activeClassName="active">
                           Sign Out
                         </NavLink>
                       </DropdownItem>
