@@ -68,37 +68,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                 </Link>
               </nav>
             </Col>
-            <Col md={8}>
-              <NavbarToggler onClick={this.toggle} />
-              <Collapse isOpen={this.state.isOpen} navbar={true}>
-                <Nav className="mr-auto" navbar={true}>
-                  <NavItem>
-                    <NavLink to="/" className="nav-link" activeClassName="active">
-                      Home
-                    </NavLink>
-                  </NavItem>
-                  {ENABLE_USERS && (
-                    <NavItem>
-                      <NavLink to="/404" className="nav-link" activeClassName="active">
-                        Users
-                      </NavLink>
-                    </NavItem>
-                  )}
-                  {ENABLE_ABOUT && (
-                    <NavItem>
-                      <NavLink to="/404" className="nav-link" activeClassName="active">
-                        About
-                      </NavLink>
-                    </NavItem>
-                  )}
-                  <NavItem>
-                    <NavLink to={CLIENT_URL} className="nav-link" activeClassName="active">
-                      Clients
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Collapse>
-            </Col>
+            <Col md={8} />
             <Col md={2} className="bg-top-nav">
               <Nav className="navbar navbar-expand-md account-text">
                 {authenticated ? (
