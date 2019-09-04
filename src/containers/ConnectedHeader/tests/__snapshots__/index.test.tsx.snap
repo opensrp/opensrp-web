@@ -59,13 +59,13 @@ Object {
       }
     >
       <Nav
-        className="navbar navbar-expand-md account-text"
+        className="navbar navbar-expand-md center-account-text"
         tag="ul"
         vertical={false}
       >
         <NavLink
           activeClassName="active"
-          className="nav-link"
+          className="nav-link account-text"
           to="/login"
         >
           Login
@@ -140,7 +140,7 @@ Object {
       }
     >
       <Nav
-        className="navbar navbar-expand-md account-text"
+        className="navbar navbar-expand-md center-account-text"
         tag="ul"
         vertical={false}
       >
@@ -151,6 +151,7 @@ Object {
           <DropdownToggle
             aria-haspopup={true}
             caret={true}
+            className="account-text"
             color="secondary"
             nav={true}
           >

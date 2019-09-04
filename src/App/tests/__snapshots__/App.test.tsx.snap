@@ -193,26 +193,26 @@ exports[`App renders App correctly 1`] = `
                               className="bg-top-nav col-md-2"
                             >
                               <Nav
-                                className="navbar navbar-expand-md account-text"
+                                className="navbar navbar-expand-md center-account-text"
                                 tag="ul"
                                 vertical={false}
                               >
                                 <ul
-                                  className="navbar navbar-expand-md account-text nav"
+                                  className="navbar navbar-expand-md center-account-text nav"
                                 >
                                   <NavLink
                                     activeClassName="active"
-                                    className="nav-link"
+                                    className="nav-link account-text"
                                     to="/login"
                                   >
                                     <Link
                                       aria-current={null}
-                                      className="nav-link"
+                                      className="nav-link account-text"
                                       to="/login"
                                     >
                                       <a
                                         aria-current={null}
-                                        className="nav-link"
+                                        className="nav-link account-text"
                                         href="/login"
                                         onClick={[Function]}
                                       >
