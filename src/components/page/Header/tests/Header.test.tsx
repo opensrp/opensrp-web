@@ -42,7 +42,7 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(wrapper.find('Header'))).toMatchSnapshot();
     wrapper.unmount();
   });
 
@@ -60,7 +60,7 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(wrapper.find('Header'))).toMatchSnapshot();
     wrapper.unmount();
   });
 });
