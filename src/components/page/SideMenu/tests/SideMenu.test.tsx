@@ -26,7 +26,7 @@ describe('components/page/SideMenu', () => {
         <SideMenu />
       </Router>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(wrapper.find('SideMenu'))).toMatchSnapshot();
     wrapper.unmount();
   });
 });
