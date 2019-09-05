@@ -29,6 +29,7 @@
     "@types/reactstrap": "^8.0.1",
     "@types/seamless-immutable": "^7.1.10",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "client-oauth2": "^4.2.5",
     "connected-react-router": "^6.5.2",
     "fetch-mock": "^7.3.9",
