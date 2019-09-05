@@ -4,12 +4,26 @@ import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavbarToggler, NavItem } from 'reactstrap';
 import './SubMenu.css';
 
+export interface NavObj {
+  navLabel: string;
+  navURL: string;
+}
+
+export interface NavToggleObj {
+  navLabel: string;
+  navIcon: string[];
+}
+
 export interface SubMenuProps {
   collapse: boolean;
+  parentNav: NavToggleObj;
+  childNavs: NavObj[];
 }
 
 export const defaultSubMenuProps: SubMenuProps = {
+  childNavs: [],
   collapse: true,
+  parentNav: { navLabel: 'All Clients', navIcon: ['far', 'user'] },
 };
 
 export interface SubMenuState {
