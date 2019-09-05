@@ -2,7 +2,12 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Nav, Navbar, NavItem, Row } from 'reactstrap';
 import { ENABLE_ABOUT, ENABLE_USERS } from '../../../configs/env';
-import { CLIENT_NAVIGATION_MODULE_OBJECT, CLIENT_URL } from '../../../constants';
+import {
+  ADMIN_NAVIGATION_MODULE_OBJECT,
+  CLIENT_NAVIGATION_MODULE_OBJECT,
+  CLIENT_URL,
+  REPORT_NAVIGATION_MODULE_OBJECT,
+} from '../../../constants';
 import SubMenu, { NavCollapseObj, NavObj, SubMenuProps } from '../SubMenu/SubMenu';
 import './SideMenu.css';
 
@@ -18,6 +23,8 @@ class SideMenu extends React.Component<{}, {}> {
 
   public render() {
     const clientSubMenuProps: SubMenuProps = { ...CLIENT_NAVIGATION_MODULE_OBJECT, collapse: true };
+    const reportSubMenuProps: SubMenuProps = { ...REPORT_NAVIGATION_MODULE_OBJECT, collapse: true };
+    const adminSubMenuProps: SubMenuProps = { ...ADMIN_NAVIGATION_MODULE_OBJECT, collapse: true };
     return (
       <div className="side-menu-container">
         <Row>
@@ -65,6 +72,8 @@ class SideMenu extends React.Component<{}, {}> {
                   </NavLink>
                 </NavItem>
                 <SubMenu {...clientSubMenuProps} />
+                <SubMenu {...reportSubMenuProps} />
+                <SubMenu {...adminSubMenuProps} />
               </Nav>
             </Navbar>
           </Col>
