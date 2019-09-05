@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavbarToggler, NavItem } from 'reactstrap';
-import { CLIENT_URL } from '../../../constants';
+import { CLIENT_COLLAPSE_NAVIGATION_OBJECT, CLIENT_PAGE_NAVIGATION_OBJECT } from '../../../constants';
 import './SubMenu.css';
 
 export interface NavObj {
@@ -24,9 +24,9 @@ export interface SubMenuProps {
 
 /** By default load Clients Sub Menu */
 export const defaultSubMenuProps: SubMenuProps = {
-  childNavs: [{ navLabel: 'All Clients', navURL: CLIENT_URL }],
+  childNavs: [CLIENT_PAGE_NAVIGATION_OBJECT, CLIENT_PAGE_NAVIGATION_OBJECT],
   collapse: true,
-  parentNav: { navLabel: 'Client Records', navIcon: ['far', 'user'] },
+  parentNav: CLIENT_COLLAPSE_NAVIGATION_OBJECT,
 };
 
 export interface SubMenuState {
