@@ -3,7 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { Col, Nav, Navbar, NavItem, Row } from 'reactstrap';
 import { ENABLE_ABOUT, ENABLE_USERS } from '../../../configs/env';
 import { CLIENT_URL } from '../../../constants';
+import { NavCollapseObj, NavObj } from '../SubMenu/SubMenu';
 import './SideMenu.css';
+
+export interface NavModuleObj {
+  parentNav: NavCollapseObj;
+  childNavs: NavObj[];
+}
 
 class SideMenu extends React.Component<{}, {}> {
   constructor(props: {}) {
