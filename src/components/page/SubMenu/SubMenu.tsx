@@ -1,7 +1,9 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavbarToggler, NavItem } from 'reactstrap';
+import { CLIENT_URL } from '../../../constants';
 import './SubMenu.css';
 
 export interface NavObj {
@@ -9,21 +11,22 @@ export interface NavObj {
   navURL: string;
 }
 
-export interface NavToggleObj {
+export interface NavCollapseObj {
   navLabel: string;
-  navIcon: string[];
+  navIcon: IconProp;
 }
 
 export interface SubMenuProps {
   collapse: boolean;
-  parentNav: NavToggleObj;
+  parentNav: NavCollapseObj;
   childNavs: NavObj[];
 }
 
+/** By default load Clients Sub Menu */
 export const defaultSubMenuProps: SubMenuProps = {
-  childNavs: [],
+  childNavs: [{ navLabel: 'All Clients', navURL: CLIENT_URL }],
   collapse: true,
-  parentNav: { navLabel: 'All Clients', navIcon: ['far', 'user'] },
+  parentNav: { navLabel: 'Client Records', navIcon: ['far', 'user'] },
 };
 
 export interface SubMenuState {
@@ -41,24 +44,32 @@ class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
   }
 
   public render() {
+    const { childNavs, parentNav } = this.props;
     return (
       <div>
         <Nav>
           <NavItem onClick={this.toggle}>
             <a className="nav-link side-nav-item">
-              <FontAwesomeIcon icon={['far', 'user']} />
-              <span> Client Records </span>
+              <FontAwesomeIcon icon={parentNav.navIcon} />
+              <span> {parentNav.navLabel} </span>
             </a>
           </NavItem>
         </Nav>
-        <Collapse isOpen={this.state.isCollapse}>
-          <Nav>
-            <NavItem>
-              <NavLink to="/" className="nav-link side-nav-item" activeClassName="side-nav-active">
-                <span> All Clients </span>
-              </NavLink>
-            </NavItem>
-          </Nav>
+        <Collapse isOpen={!this.state.isCollapse}>
+          {childNavs.map((childNavObj, key) => {
+            return (
+              <Nav key={'child-nav-' + key}>
+                <NavItem>
+                  <NavLink
+                    to={childNavObj.navURL}
+                    className="nav-link side-nav-item"
+                    activeClassName="side-nav-active"
+                  >
+                    <span> {childNavObj.navLabel} </span>
+                  </NavLink>
+                </NavItem>
+              </Nav>);
+          })}
         </Collapse>
       </div>
     );
