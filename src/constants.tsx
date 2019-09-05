@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { NavModuleObj } from './components/page/SideMenu/SideMenu';
 import { NavCollapseObj, NavObj } from './components/page/SubMenu/SubMenu';
 
 // internal urls
@@ -12,23 +13,33 @@ export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 
 // side nav confs
-// client nav parent
+// collapse labels
 export const CLIENT_COLLAPSE_NAVIGATION_LABEL = 'Client Records';
 export type CLIENT_COLLAPSE_NAVIGATION_LABEL = typeof CLIENT_COLLAPSE_NAVIGATION_LABEL;
+
+// icons
 export const CLIENT_COLLAPSE_NAVIGATION_ICON: IconProp = ['far', 'user'];
 
-// client nav nested items
+// nested labels
 export const CLIENT_PAGE_NAVIGATION_LABEL = 'All Clients';
+export type CLIENT_PAGE_NAVIGATION_LABEL = typeof CLIENT_PAGE_NAVIGATION_LABEL;
 
 // nav objects
-// client page nav object
+// client page
 export const CLIENT_PAGE_NAVIGATION_OBJECT: NavObj = {
   navLabel: CLIENT_PAGE_NAVIGATION_LABEL,
   navURL: CLIENT_URL,
 };
 
-// client module nav object
+// collapse nav object
+// client
 export const CLIENT_COLLAPSE_NAVIGATION_OBJECT: NavCollapseObj = {
   navIcon: CLIENT_COLLAPSE_NAVIGATION_ICON,
   navLabel: CLIENT_COLLAPSE_NAVIGATION_LABEL,
+};
+
+// nav module objects
+export const CLIENT_NAVIGATION_MODULE_OBJECT: NavModuleObj = {
+  childNavs: [CLIENT_PAGE_NAVIGATION_OBJECT],
+  parentNav: CLIENT_COLLAPSE_NAVIGATION_OBJECT,
 };

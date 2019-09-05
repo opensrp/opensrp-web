@@ -2,8 +2,8 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Nav, Navbar, NavItem, Row } from 'reactstrap';
 import { ENABLE_ABOUT, ENABLE_USERS } from '../../../configs/env';
-import { CLIENT_URL } from '../../../constants';
-import { NavCollapseObj, NavObj } from '../SubMenu/SubMenu';
+import { CLIENT_NAVIGATION_MODULE_OBJECT, CLIENT_URL } from '../../../constants';
+import SubMenu, { NavCollapseObj, NavObj, SubMenuProps } from '../SubMenu/SubMenu';
 import './SideMenu.css';
 
 export interface NavModuleObj {
@@ -17,6 +17,7 @@ class SideMenu extends React.Component<{}, {}> {
   }
 
   public render() {
+    const clientSubMenuProps: SubMenuProps = { ...CLIENT_NAVIGATION_MODULE_OBJECT, collapse: true };
     return (
       <div className="side-menu-container">
         <Row>
@@ -63,6 +64,7 @@ class SideMenu extends React.Component<{}, {}> {
                     Clients
                   </NavLink>
                 </NavItem>
+                <SubMenu {...clientSubMenuProps} />
               </Nav>
             </Navbar>
           </Col>
