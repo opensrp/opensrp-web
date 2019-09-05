@@ -24,7 +24,7 @@ export interface SubMenuProps {
 
 /** By default load Clients Sub Menu */
 export const defaultSubMenuProps: SubMenuProps = {
-  childNavs: [CLIENT_PAGE_NAVIGATION_OBJECT, CLIENT_PAGE_NAVIGATION_OBJECT],
+  childNavs: [CLIENT_PAGE_NAVIGATION_OBJECT],
   collapse: true,
   parentNav: CLIENT_COLLAPSE_NAVIGATION_OBJECT,
 };
