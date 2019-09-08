@@ -1,5 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
@@ -17,29 +18,29 @@ export interface NavCollapseObj {
 }
 
 export interface SubMenuProps {
-  collapse: boolean;
+  identifier: string;
+  isCollapseMenuActive: boolean;
+  isExpand: boolean;
   parentNav: NavCollapseObj;
   childNavs: NavObj[];
+  setSideMenuActive: any;
+  setSideMenuToggle: any;
 }
 
 /** By default load Clients Sub Menu */
 export const defaultSubMenuProps: SubMenuProps = {
   ...CLIENT_NAVIGATION_MODULE_OBJECT,
-  collapse: true,
+  isCollapseMenuActive: false,
+  identifier: 'CLIENT',
+  isExpand: true,
+  setSideMenuActive: null,
+  setSideMenuToggle: null,
 };
 
-export interface SubMenuState {
-  isCollapse: boolean;
-}
-
-class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
+class SubMenu extends React.Component<SubMenuProps, {}> {
   public static defaultProps = defaultSubMenuProps;
   constructor(props: SubMenuProps) {
     super(props);
-    const { collapse } = this.props;
-    this.state = {
-      isCollapse: collapse,
-    };
   }
 
   public render() {
@@ -48,13 +49,17 @@ class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
       <div>
         <Nav>
           <NavItem onClick={this.toggle}>
-            <a className="nav-link side-nav-item">
+            <a
+              className={classNames('nav', 'nav-link', 'side-nav-item', {
+                'active-collapse-menu': this.props.isCollapseMenuActive,
+              })}
+            >
               <FontAwesomeIcon icon={parentNav.navIcon} />
               <span> {parentNav.navLabel} </span>
             </a>
           </NavItem>
         </Nav>
-        <Collapse isOpen={!this.state.isCollapse}>
+        <Collapse isOpen={this.props.isExpand}>
           {childNavs.map((childNavObj, key) => {
             return (
               <Nav key={'child-nav-' + key}>
@@ -63,6 +68,7 @@ class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
                     to={childNavObj.navURL}
                     className="nav-link side-nav-item"
                     activeClassName="side-nav-active"
+                    onClick={this.setActiveClassNameToCollapse}
                   >
                     <span> {childNavObj.navLabel} </span>
                   </NavLink>
@@ -76,7 +82,11 @@ class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
   }
 
   private toggle = () => {
-    this.setState({ isCollapse: !this.state.isCollapse });
+    this.props.setSideMenuToggle(this.props.identifier);
+  };
+
+  private setActiveClassNameToCollapse = () => {
+    this.props.setSideMenuActive(this.props.identifier);
   };
 }
 
