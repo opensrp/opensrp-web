@@ -31,7 +31,6 @@ export interface SubMenuProps {
 export const defaultSubMenuProps: SubMenuProps = {
   ...CLIENT_NAVIGATION_MODULE_OBJECT,
   isCollapseMenuActive: false,
-  identifier: 'CLIENT',
   isExpand: true,
   setSideMenuActive: null,
   setSideMenuToggle: null,

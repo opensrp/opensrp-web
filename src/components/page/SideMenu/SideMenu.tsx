@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Col, Nav, Navbar, NavItem, Row } from 'reactstrap';
+import { Col, Nav, Navbar, Row } from 'reactstrap';
+import {
+  ENABLE_ADMIN_MODULE,
+  ENABLE_CLIENT_RECORDS_MODULE,
+  ENABLE_REPORT_MODULE,
+} from '../../../configs/env';
 import {
   ADMIN_NAVIGATION_MODULE_OBJECT,
   CLIENT_NAVIGATION_MODULE_OBJECT,
-  CLIENT_URL,
   REPORT_NAVIGATION_MODULE_OBJECT,
 } from '../../../constants';
 import SubMenu, { NavCollapseObj, NavObj, SubMenuProps } from '../SubMenu/SubMenu';
@@ -64,9 +67,9 @@ class SideMenu extends React.Component<{}, SideMenuState> {
           <Col>
             <Navbar>
               <Nav navbar={true}>
-                <SubMenu {...clientSubMenuProps} />
-                <SubMenu {...reportSubMenuProps} />
-                <SubMenu {...adminSubMenuProps} />
+                {ENABLE_CLIENT_RECORDS_MODULE && <SubMenu {...clientSubMenuProps} />}
+                {ENABLE_REPORT_MODULE && <SubMenu {...reportSubMenuProps} />}
+                {ENABLE_ADMIN_MODULE && <SubMenu {...adminSubMenuProps} />}
               </Nav>
             </Navbar>
           </Col>

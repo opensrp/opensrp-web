@@ -1,6 +1,16 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { NavModuleObj } from './components/page/SideMenu/SideMenu';
 import { NavCollapseObj, NavObj } from './components/page/SubMenu/SubMenu';
+import {
+  ENABLE_ANC_PAGE,
+  ENABLE_CHILD_PAGE,
+  ENABLE_CLIENT_PAGE,
+  ENABLE_HOUSEHOLD_PAGE,
+  ENABLE_LOCATION_PAGE,
+  ENABLE_ROLE_PAGE,
+  ENABLE_TEAM_PAGE,
+  ENABLE_USER_PAGE,
+} from './configs/env';
 
 // internal urls
 export const LOGIN_URL = '/login';
@@ -123,11 +133,13 @@ export const ADMIN_COLLAPSE_NAVIGATION_OBJECT: NavCollapseObj = {
 // nav module objects
 export const CLIENT_NAVIGATION_MODULE_OBJECT: NavModuleObj = {
   childNavs: [
-    CLIENT_PAGE_NAVIGATION_OBJECT,
-    HOUSEHOLD_PAGE_NAVIGATION_OBJECT,
-    ANC_PAGE_NAVIGATION_OBJECT,
-    CHILD_PAGE_NAVIGATION_OBJECT,
-  ],
+    ENABLE_CLIENT_PAGE && CLIENT_PAGE_NAVIGATION_OBJECT,
+    ENABLE_HOUSEHOLD_PAGE && HOUSEHOLD_PAGE_NAVIGATION_OBJECT,
+    ENABLE_ANC_PAGE && ANC_PAGE_NAVIGATION_OBJECT,
+    ENABLE_CHILD_PAGE && CHILD_PAGE_NAVIGATION_OBJECT,
+  ].filter<NavObj>(
+    (childNav: NavObj | boolean): childNav is NavObj => typeof childNav !== 'boolean'
+  ),
   identifier: CLIENT_COLLAPSE_NAVIGATION_IDENTIFIER,
   parentNav: CLIENT_COLLAPSE_NAVIGATION_OBJECT,
 };
@@ -138,11 +150,13 @@ export const REPORT_NAVIGATION_MODULE_OBJECT: NavModuleObj = {
 };
 export const ADMIN_NAVIGATION_MODULE_OBJECT: NavModuleObj = {
   childNavs: [
-    USER_PAGE_NAVIGATION_OBJECT,
-    ROLE_PAGE_NAVIGATION_OBJECT,
-    TEAM_PAGE_NAVIGATION_OBJECT,
-    LOCATION_PAGE_NAVIGATION_OBJECT,
-  ],
+    ENABLE_USER_PAGE && USER_PAGE_NAVIGATION_OBJECT,
+    ENABLE_ROLE_PAGE && ROLE_PAGE_NAVIGATION_OBJECT,
+    ENABLE_TEAM_PAGE && TEAM_PAGE_NAVIGATION_OBJECT,
+    ENABLE_LOCATION_PAGE && LOCATION_PAGE_NAVIGATION_OBJECT,
+  ].filter<NavObj>(
+    (childNav: NavObj | boolean): childNav is NavObj => typeof childNav !== 'boolean'
+  ),
   identifier: ADMIN_COLLAPSE_NAVIGATION_IDENTIFIER,
   parentNav: ADMIN_COLLAPSE_NAVIGATION_OBJECT,
 };
