@@ -74,3 +74,7 @@ fieldset[disabled] .gatekeeper-btn.active {
   background-color: #f8f9fd;
   box-shadow: inset -1px 0 0 0 #dfe3e8;
 }
+
+.contaioner-section {
+  margin-left: 266px;
+}

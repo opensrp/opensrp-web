@@ -53,8 +53,8 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
                 'active-collapse-menu': this.props.isCollapseMenuActive,
               })}
             >
-              <FontAwesomeIcon icon={parentNav.navIcon} />
-              <span> {parentNav.navLabel} </span>
+              <FontAwesomeIcon icon={parentNav.navIcon} size="lg" />
+              <span className="collapse-menu-title"> {parentNav.navLabel} </span>
             </a>
           </NavItem>
         </Nav>
