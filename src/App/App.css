@@ -76,5 +76,11 @@ fieldset[disabled] .gatekeeper-btn.active {
 }
 
 .contaioner-section {
-  margin-left: 266px;
+  margin-left: 16%;
+}
+
+@media screen and (min-width: 700px) and (max-width: 1360px) {
+  .side-menu-container {
+    font-size: 80%;
+  }
 }
