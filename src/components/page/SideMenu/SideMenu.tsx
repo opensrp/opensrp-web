@@ -20,12 +20,10 @@ export interface NavModuleObj {
 }
 
 export interface SideMenuState {
-  isActive: string[];
   isExpand: string[];
 }
 
 const sideMenuState = {
-  isActive: [],
   isExpand: [],
 };
 
@@ -38,27 +36,20 @@ class SideMenu extends React.Component<{}, SideMenuState> {
   public render() {
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE_OBJECT,
-      isCollapseMenuActive: this.state.isActive.includes(
-        CLIENT_NAVIGATION_MODULE_OBJECT.identifier
-      ),
+      isCollapseMenuActive: false,
       isExpand: this.state.isExpand.includes(CLIENT_NAVIGATION_MODULE_OBJECT.identifier),
-      setSideMenuActive: this.setMenuActive,
       setSideMenuToggle: this.setExpandToggle,
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE_OBJECT,
-      isCollapseMenuActive: this.state.isActive.includes(
-        REPORT_NAVIGATION_MODULE_OBJECT.identifier
-      ),
+      isCollapseMenuActive: false,
       isExpand: this.state.isExpand.includes(REPORT_NAVIGATION_MODULE_OBJECT.identifier),
-      setSideMenuActive: this.setMenuActive,
       setSideMenuToggle: this.setExpandToggle,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE_OBJECT,
-      isCollapseMenuActive: this.state.isActive.includes(ADMIN_NAVIGATION_MODULE_OBJECT.identifier),
+      isCollapseMenuActive: false,
       isExpand: this.state.isExpand.includes(ADMIN_NAVIGATION_MODULE_OBJECT.identifier),
-      setSideMenuActive: this.setMenuActive,
       setSideMenuToggle: this.setExpandToggle,
     };
     return (
@@ -73,10 +64,6 @@ class SideMenu extends React.Component<{}, SideMenuState> {
       </div>
     );
   }
-
-  private setMenuActive = (sideMenuIdentifier: string): void => {
-    this.setState({ ...this.state, isActive: [sideMenuIdentifier] });
-  };
 
   private setExpandToggle = (sideMenuIdentifier: string): void => {
     if (this.state.isExpand.includes(sideMenuIdentifier)) {

@@ -2,6 +2,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
 import { CLIENT_NAVIGATION_MODULE_OBJECT } from '../../../constants';
@@ -23,8 +24,11 @@ export interface SubMenuProps {
   isExpand: boolean;
   parentNav: NavCollapseObj;
   childNavs: NavObj[];
-  setSideMenuActive: any;
   setSideMenuToggle: any;
+}
+
+export interface SubMenuState {
+  isCollapseMenuActive: boolean;
 }
 
 /** By default load Clients Sub Menu */
@@ -32,14 +36,23 @@ export const defaultSubMenuProps: SubMenuProps = {
   ...CLIENT_NAVIGATION_MODULE_OBJECT,
   isCollapseMenuActive: false,
   isExpand: true,
-  setSideMenuActive: null,
   setSideMenuToggle: null,
 };
 
-class SubMenu extends React.Component<SubMenuProps, {}> {
+class SubMenu extends React.Component<SubMenuProps & RouteComponentProps, SubMenuState> {
   public static defaultProps = defaultSubMenuProps;
-  constructor(props: SubMenuProps) {
+  constructor(props: SubMenuProps & RouteComponentProps) {
     super(props);
+    this.state = {
+      isCollapseMenuActive: this.props.isCollapseMenuActive,
+    };
+  }
+  public componentDidMount() {
+    this.updateCollapseMenuStatus();
+  }
+
+  public componentDidUpdate() {
+    this.updateCollapseMenuStatus();
   }
 
   public render() {
@@ -50,7 +63,7 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
           <NavItem>
             <a
               className={classNames('nav', 'nav-link', 'side-nav-item', {
-                'active-collapse-menu': this.props.isCollapseMenuActive,
+                'active-collapse-menu': this.state.isCollapseMenuActive,
               })}
             >
               <FontAwesomeIcon icon={parentNav.navIcon} size="lg" />
@@ -67,7 +80,6 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
                     to={childNavObj.navURL}
                     className="nav-link side-nav-item"
                     activeClassName="side-nav-active"
-                    onClick={this.setActiveClassNameToCollapse}
                   >
                     <span> {childNavObj.navLabel} </span>
                   </NavLink>
@@ -84,9 +96,18 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
     this.props.setSideMenuToggle(this.props.identifier);
   };
 
-  private setActiveClassNameToCollapse = () => {
-    this.props.setSideMenuActive(this.props.identifier);
+  private updateCollapseMenuStatus = () => {
+    const { childNavs, location } = this.props;
+    let isCurrentURLinChildPresents: boolean = false;
+    childNavs.forEach(childNav => {
+      if (childNav.navURL === location.pathname) {
+        isCurrentURLinChildPresents = true;
+      }
+    });
+    if (isCurrentURLinChildPresents !== this.state.isCollapseMenuActive) {
+      this.setState({ isCollapseMenuActive: isCurrentURLinChildPresents });
+    }
   };
 }
 
-export default SubMenu;
+export default withRouter(SubMenu);
