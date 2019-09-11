@@ -46,8 +46,8 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
     const { childNavs, parentNav } = this.props;
     return (
       <div>
-        <Nav>
-          <NavItem onClick={this.toggle}>
+        <Nav className="side-collapse-nav" onClick={this.toggle}>
+          <NavItem>
             <a
               className={classNames('nav', 'nav-link', 'side-nav-item', {
                 'active-collapse-menu': this.props.isCollapseMenuActive,
@@ -62,7 +62,7 @@ class SubMenu extends React.Component<SubMenuProps, {}> {
           {childNavs.map((childNavObj, key) => {
             return (
               <Nav key={'child-nav-' + key}>
-                <NavItem>
+                <NavItem className="nav-item-extend">
                   <NavLink
                     to={childNavObj.navURL}
                     className="nav-link side-nav-item"

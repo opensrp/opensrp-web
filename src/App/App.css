@@ -66,9 +66,11 @@ fieldset[disabled] .gatekeeper-btn.active {
   background-color: #ffffff;
 }
 
-.side-menu-section{
-  height: inherit;
-  min-height: 580px;
-  background-color: #F8F9FD;
-  box-shadow: inset -1px 0 0 0 #DFE3E8;
+.side-menu-section {
+  z-index: 1;
+  overflow-x: hidden;
+  height: 100%;
+  position: fixed;
+  background-color: #f8f9fd;
+  box-shadow: inset -1px 0 0 0 #dfe3e8;
 }

@@ -64,14 +64,10 @@ class SideMenu extends React.Component<{}, SideMenuState> {
     return (
       <div className="side-menu-container">
         <Row>
-          <Col>
-            <Navbar>
-              <Nav navbar={true}>
-                {ENABLE_CLIENT_RECORDS_MODULE && <SubMenu {...clientSubMenuProps} />}
-                {ENABLE_REPORT_MODULE && <SubMenu {...reportSubMenuProps} />}
-                {ENABLE_ADMIN_MODULE && <SubMenu {...adminSubMenuProps} />}
-              </Nav>
-            </Navbar>
+          <Col className="side-menu-extend">
+            {ENABLE_CLIENT_RECORDS_MODULE && <SubMenu {...clientSubMenuProps} />}
+            {ENABLE_REPORT_MODULE && <SubMenu {...reportSubMenuProps} />}
+            {ENABLE_ADMIN_MODULE && <SubMenu {...adminSubMenuProps} />}
           </Col>
         </Row>
       </div>
