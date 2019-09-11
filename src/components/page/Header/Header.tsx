@@ -47,7 +47,12 @@ export class HeaderComponent extends React.Component<HeaderProps> {
     return (
       <div>
         <Row>
-          <Navbar color="light" className="nav-fill w-100 bg-navbar" light={true} expand="md">
+          <Navbar
+            color="light"
+            className="nav-fill w-100 bg-navbar fixed-top"
+            light={true}
+            expand="md"
+          >
             <Col md={2} className="bg-top-nav">
               <nav className="navbar navbar-expand-md navbar-light">
                 <Link to="/" className="navbar-brand">
