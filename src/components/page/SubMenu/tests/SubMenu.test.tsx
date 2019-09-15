@@ -40,7 +40,8 @@ describe('components/page/SubMenu', () => {
         <SubMenu {...props} />
       </Router>
     );
-    expect(toJson(wrapper.find('SubMenu'))).toMatchSnapshot();
+    /** match Users navItem json */
+    expect(toJson(wrapper.find('NavItem .nav-item-extend').first())).toMatchSnapshot();
     wrapper.unmount();
   });
 
