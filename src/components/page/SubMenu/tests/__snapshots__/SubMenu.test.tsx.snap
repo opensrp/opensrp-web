@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
+exports[`components/page/SubMenu renders collapsed nav correctly 1`] = `
 <SubMenu
   childNavs={
     Array [
@@ -10,9 +10,45 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
       },
     ]
   }
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
   identifier="ADMIN"
   isCollapseMenuActive={true}
   isExpand={false}
+  location={
+    Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    }
+  }
+  match={
+    Object {
+      "isExact": true,
+      "params": Object {},
+      "path": "/",
+      "url": "/",
+    }
+  }
   parentNav={
     Object {
       "navIcon": Array [
@@ -22,27 +58,27 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
       "navLabel": "Admin",
     }
   }
-  setSideMenuActive={null}
   setSideMenuToggle={null}
 >
   <div>
     <Nav
+      className="side-collapse-nav"
+      onClick={[Function]}
       tag="ul"
       vertical={false}
     >
       <ul
-        className="nav"
+        className="side-collapse-nav nav"
+        onClick={[Function]}
       >
         <NavItem
-          onClick={[Function]}
           tag="li"
         >
           <li
             className="nav-item"
-            onClick={[Function]}
           >
             <a
-              className="nav nav-link side-nav-item active-collapse-menu"
+              className="nav nav-link side-nav-item"
             >
               <FontAwesomeIcon
                 border={false}
@@ -61,7 +97,7 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
                 pull={null}
                 pulse={false}
                 rotation={null}
-                size={null}
+                size="lg"
                 spin={false}
                 symbol={false}
                 title=""
@@ -69,7 +105,7 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="svg-inline--fa fa-cog fa-w-16 "
+                  className="svg-inline--fa fa-cog fa-w-16 fa-lg "
                   data-icon="cog"
                   data-prefix="fas"
                   focusable="false"
@@ -85,7 +121,9 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
                   />
                 </svg>
               </FontAwesomeIcon>
-              <span>
+              <span
+                className="collapse-menu-title"
+              >
                  
                 Admin
                  
@@ -140,21 +178,20 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
               className="nav"
             >
               <NavItem
+                className="nav-item-extend"
                 tag="li"
               >
                 <li
-                  className="nav-item"
+                  className="nav-item-extend nav-item"
                 >
                   <NavLink
                     activeClassName="side-nav-active"
                     className="nav-link side-nav-item"
-                    onClick={[Function]}
                     to="/404"
                   >
                     <Link
                       aria-current={null}
                       className="nav-link side-nav-item"
-                      onClick={[Function]}
                       to="/404"
                     >
                       <a
@@ -182,7 +219,7 @@ exports[`components/page/SideMenu renders collapsed nav correctly 1`] = `
 </SubMenu>
 `;
 
-exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
+exports[`components/page/SubMenu renders expanded nav correctly 1`] = `
 <SubMenu
   childNavs={
     Array [
@@ -196,9 +233,45 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
       },
     ]
   }
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
   identifier="ADMIN"
   isCollapseMenuActive={true}
   isExpand={true}
+  location={
+    Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    }
+  }
+  match={
+    Object {
+      "isExact": true,
+      "params": Object {},
+      "path": "/",
+      "url": "/",
+    }
+  }
   parentNav={
     Object {
       "navIcon": Array [
@@ -208,27 +281,27 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
       "navLabel": "Admin",
     }
   }
-  setSideMenuActive={null}
   setSideMenuToggle={null}
 >
   <div>
     <Nav
+      className="side-collapse-nav"
+      onClick={[Function]}
       tag="ul"
       vertical={false}
     >
       <ul
-        className="nav"
+        className="side-collapse-nav nav"
+        onClick={[Function]}
       >
         <NavItem
-          onClick={[Function]}
           tag="li"
         >
           <li
             className="nav-item"
-            onClick={[Function]}
           >
             <a
-              className="nav nav-link side-nav-item active-collapse-menu"
+              className="nav nav-link side-nav-item"
             >
               <FontAwesomeIcon
                 border={false}
@@ -247,7 +320,7 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
                 pull={null}
                 pulse={false}
                 rotation={null}
-                size={null}
+                size="lg"
                 spin={false}
                 symbol={false}
                 title=""
@@ -255,7 +328,7 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="svg-inline--fa fa-cog fa-w-16 "
+                  className="svg-inline--fa fa-cog fa-w-16 fa-lg "
                   data-icon="cog"
                   data-prefix="fas"
                   focusable="false"
@@ -271,7 +344,9 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
                   />
                 </svg>
               </FontAwesomeIcon>
-              <span>
+              <span
+                className="collapse-menu-title"
+              >
                  
                 Admin
                  
@@ -326,21 +401,20 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
               className="nav"
             >
               <NavItem
+                className="nav-item-extend"
                 tag="li"
               >
                 <li
-                  className="nav-item"
+                  className="nav-item-extend nav-item"
                 >
                   <NavLink
                     activeClassName="side-nav-active"
                     className="nav-link side-nav-item"
-                    onClick={[Function]}
                     to="/404"
                   >
                     <Link
                       aria-current={null}
                       className="nav-link side-nav-item"
-                      onClick={[Function]}
                       to="/404"
                     >
                       <a
@@ -370,21 +444,20 @@ exports[`components/page/SideMenu renders expanded nav correctly 1`] = `
               className="nav"
             >
               <NavItem
+                className="nav-item-extend"
                 tag="li"
               >
                 <li
-                  className="nav-item"
+                  className="nav-item-extend nav-item"
                 >
                   <NavLink
                     activeClassName="side-nav-active"
                     className="nav-link side-nav-item"
-                    onClick={[Function]}
                     to="/404"
                   >
                     <Link
                       aria-current={null}
                       className="nav-link side-nav-item"
-                      onClick={[Function]}
                       to="/404"
                     >
                       <a
