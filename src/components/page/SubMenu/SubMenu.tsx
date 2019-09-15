@@ -8,6 +8,10 @@ import { Collapse, Nav, NavItem } from 'reactstrap';
 import { CLIENT_NAVIGATION_MODULE_OBJECT } from '../../../constants';
 import './SubMenu.css';
 
+/** interface for clickable Nav Menus
+ * @property {string} navLabel - text label visible on menu item
+ * @property {string} navURL- URL to get redirected on click
+ */
 export interface NavObj {
   navLabel: string;
   navURL: string;
