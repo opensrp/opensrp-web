@@ -19,7 +19,6 @@ describe('components/page/SubMenu', () => {
       isCollapseMenuActive: true,
       isExpand: true,
       parentNav: { navIcon: ['far', 'user'], navLabel: 'All client Records' },
-      setSideMenuToggle: null,
     };
     shallow(
       <Router history={history}>
@@ -35,7 +34,6 @@ describe('components/page/SubMenu', () => {
       isCollapseMenuActive: true,
       isExpand: true,
       parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
-      setSideMenuToggle: null,
     };
     const wrapper = mount(
       <Router history={history}>
@@ -53,7 +51,6 @@ describe('components/page/SubMenu', () => {
       isCollapseMenuActive: true,
       isExpand: false,
       parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
-      setSideMenuToggle: null,
     };
     const wrapper = mount(
       <Router history={history}>

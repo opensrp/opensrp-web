@@ -26,13 +26,15 @@ export interface NavCollapseObj {
   navIcon: IconProp;
 }
 
+type SetSideMenuToggle = (identifier: string) => void;
+
 export interface SubMenuProps {
   identifier: string;
   isCollapseMenuActive: boolean;
   isExpand: boolean;
   parentNav: NavCollapseObj;
   childNavs: NavObj[];
-  setSideMenuToggle: any;
+  setSideMenuToggle?: SetSideMenuToggle;
 }
 
 export interface SubMenuState {
@@ -44,7 +46,6 @@ export const defaultSubMenuProps: SubMenuProps = {
   ...CLIENT_NAVIGATION_MODULE_OBJECT,
   isCollapseMenuActive: false,
   isExpand: true,
-  setSideMenuToggle: null,
 };
 
 class SubMenu extends React.Component<SubMenuProps & RouteComponentProps, SubMenuState> {
@@ -101,7 +102,10 @@ class SubMenu extends React.Component<SubMenuProps & RouteComponentProps, SubMen
   }
 
   private toggle = () => {
-    this.props.setSideMenuToggle(this.props.identifier);
+    const { identifier, setSideMenuToggle } = this.props;
+    if (setSideMenuToggle) {
+      setSideMenuToggle(identifier);
+    }
   };
 
   private updateCollapseMenuStatus = () => {
