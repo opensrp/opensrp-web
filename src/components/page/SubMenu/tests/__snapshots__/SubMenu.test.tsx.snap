@@ -58,7 +58,6 @@ exports[`components/page/SubMenu renders collapsed nav correctly 1`] = `
       "navLabel": "Admin",
     }
   }
-  setSideMenuToggle={null}
 >
   <div>
     <Nav
@@ -281,7 +280,6 @@ exports[`components/page/SubMenu renders expanded nav correctly 1`] = `
       "navLabel": "Admin",
     }
   }
-  setSideMenuToggle={null}
 >
   <div>
     <Nav
