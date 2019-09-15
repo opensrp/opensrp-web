@@ -1,14 +1,9 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
 import SubMenu, { SubMenuProps } from '../SubMenu';
-library.add(faUser);
-library.add(faCog);
 
 const history = createBrowserHistory();
 
