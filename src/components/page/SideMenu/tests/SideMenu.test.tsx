@@ -1,15 +1,9 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
 import SideMenu from '../SideMenu';
-library.add(faUser);
-library.add(faChartLine);
-library.add(faCog);
 
 const history = createBrowserHistory();
 
@@ -26,7 +20,7 @@ describe('components/page/SideMenu', () => {
     );
   });
 
-  it('renders header correctly', () => {
+  it('renders side menu correctly', () => {
     const wrapper = mount(
       <Router history={history}>
         <SideMenu />
