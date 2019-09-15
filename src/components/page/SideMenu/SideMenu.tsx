@@ -18,11 +18,11 @@ export interface NavModuleObj {
 }
 
 export interface SideMenuState {
-  isExpand: string[];
+  expandedNavs: string[];
 }
 
-const sideMenuState = {
-  isExpand: [],
+const sideMenuState: SideMenuState = {
+  expandedNavs: [],
 };
 
 class SideMenu extends React.Component<{}, SideMenuState> {
@@ -35,19 +35,19 @@ class SideMenu extends React.Component<{}, SideMenuState> {
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE_OBJECT,
       isCollapseMenuActive: false,
-      isExpand: this.state.isExpand.includes(CLIENT_NAVIGATION_MODULE_OBJECT.identifier),
+      isExpand: this.state.expandedNavs.includes(CLIENT_NAVIGATION_MODULE_OBJECT.identifier),
       setSideMenuToggle: this.setExpandToggle,
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE_OBJECT,
       isCollapseMenuActive: false,
-      isExpand: this.state.isExpand.includes(REPORT_NAVIGATION_MODULE_OBJECT.identifier),
+      isExpand: this.state.expandedNavs.includes(REPORT_NAVIGATION_MODULE_OBJECT.identifier),
       setSideMenuToggle: this.setExpandToggle,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE_OBJECT,
       isCollapseMenuActive: false,
-      isExpand: this.state.isExpand.includes(ADMIN_NAVIGATION_MODULE_OBJECT.identifier),
+      isExpand: this.state.expandedNavs.includes(ADMIN_NAVIGATION_MODULE_OBJECT.identifier),
       setSideMenuToggle: this.setExpandToggle,
     };
     return (
@@ -64,10 +64,10 @@ class SideMenu extends React.Component<{}, SideMenuState> {
   }
 
   private setExpandToggle = (sideMenuIdentifier: string): void => {
-    if (this.state.isExpand.includes(sideMenuIdentifier)) {
-      this.setState({ ...this.state, isExpand: [] });
+    if (this.state.expandedNavs.includes(sideMenuIdentifier)) {
+      this.setState({ ...this.state, expandedNavs: [] });
     } else {
-      this.setState({ ...this.state, isExpand: [sideMenuIdentifier] });
+      this.setState({ ...this.state, expandedNavs: [sideMenuIdentifier] });
     }
   };
 }
