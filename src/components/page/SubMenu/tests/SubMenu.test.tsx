@@ -19,7 +19,6 @@ describe('components/page/SideMenu', () => {
       isCollapseMenuActive: true,
       isExpand: true,
       parentNav: { navIcon: ['far', 'user'], navLabel: 'All client Records' },
-      setSideMenuActive: null,
       setSideMenuToggle: null,
     };
     shallow(
@@ -36,7 +35,6 @@ describe('components/page/SideMenu', () => {
       isCollapseMenuActive: true,
       isExpand: true,
       parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
-      setSideMenuActive: null,
       setSideMenuToggle: null,
     };
     const wrapper = mount(
@@ -55,7 +53,6 @@ describe('components/page/SideMenu', () => {
       isCollapseMenuActive: true,
       isExpand: false,
       parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
-      setSideMenuActive: null,
       setSideMenuToggle: null,
     };
     const wrapper = mount(
