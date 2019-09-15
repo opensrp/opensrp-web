@@ -7,7 +7,7 @@ import SubMenu, { SubMenuProps } from '../SubMenu';
 
 const history = createBrowserHistory();
 
-describe('components/page/SideMenu', () => {
+describe('components/page/SubMenu', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
