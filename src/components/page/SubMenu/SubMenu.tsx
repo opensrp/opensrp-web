@@ -17,6 +17,10 @@ export interface NavObj {
   navURL: string;
 }
 
+/** interface for collapsable Nav Menu Labels
+ * @property {string} navLabel - text label visible on menu item
+ * @property {IconProp} navIcon- fontawesome icon present on menu item
+ */
 export interface NavCollapseObj {
   navLabel: string;
   navIcon: IconProp;
