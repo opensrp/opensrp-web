@@ -8,11 +8,6 @@ export type WEBSITE_NAME = typeof WEBSITE_NAME;
 export const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME || 'http://localhost:3000';
 export type DOMAIN_NAME = typeof DOMAIN_NAME;
 
-/** Do you want to enable the Client Records Module? */
-export const ENABLE_CLIENT_RECORDS_MODULE =
-  process.env.REACT_APP_ENABLE_CLIENT_RECORDS_MODULE === 'true';
-export type ENABLE_CLIENT_RECORDS_MODULE = typeof ENABLE_CLIENT_RECORDS_MODULE;
-
 /** Do you want to enable the Client Page of Client Records Module? */
 export const ENABLE_CLIENT_PAGE = process.env.REACT_APP_ENABLE_CLIENT_PAGE === 'true';
 export type ENABLE_CLIENT_PAGE = typeof ENABLE_CLIENT_PAGE;

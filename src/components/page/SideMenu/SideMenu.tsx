@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { Col, Nav, Navbar, Row } from 'reactstrap';
-import {
-  ENABLE_ADMIN_MODULE,
-  ENABLE_CLIENT_RECORDS_MODULE,
-  ENABLE_REPORT_MODULE,
-} from '../../../configs/env';
+import { Col, Row } from 'reactstrap';
+import { ENABLE_ADMIN_MODULE, ENABLE_REPORT_MODULE } from '../../../configs/env';
 import {
   ADMIN_NAVIGATION_MODULE_OBJECT,
   CLIENT_NAVIGATION_MODULE_OBJECT,
+  ENABLE_CLIENT_RECORDS_MODULE,
   REPORT_NAVIGATION_MODULE_OBJECT,
 } from '../../../constants';
 import SubMenu, { NavCollapseObj, NavObj, SubMenuProps } from '../SubMenu/SubMenu';
