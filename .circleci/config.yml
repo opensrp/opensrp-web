@@ -19,7 +19,6 @@ jobs:
           REACT_APP_ENABLE_ANC_PAGE: "true"
           REACT_APP_ENABLE_CHILD_PAGE: "true"
           REACT_APP_ENABLE_REPORT_MODULE: "true"
-          REACT_APP_ENABLE_ADMIN_MODULE: "true"
           REACT_APP_ENABLE_USER_PAGE: "true"
           REACT_APP_ENABLE_ROLE_PAGE: "true"
           REACT_APP_ENABLE_TEAM_PAGE: "true"
