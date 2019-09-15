@@ -27,8 +27,8 @@ describe('components/page/SideMenu', () => {
         <SideMenu />
       </Router>
     );
-    /** client SubMenu renders correctly */
-    expect(toJson(wrapper.find('SubMenu').first())).toMatchSnapshot();
+    /** client Collapse SubMenu renders correctly */
+    expect(toJson(wrapper.find('Nav .side-collapse-nav').first())).toMatchSnapshot();
     wrapper.unmount();
   });
 
