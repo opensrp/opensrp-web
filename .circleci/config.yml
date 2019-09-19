@@ -29,6 +29,7 @@ jobs:
           REACT_APP_ONADATA_USER_URL: "https://stage-api.ona.io/api/v1/user.json"
           REACT_APP_ONADATA_OAUTH_STATE: "onadata"
           REACT_APP_ONADATA_CLIENT_ID: "hunter2"
+          COVERALLS_REPO_TOKEN: ""
 
     working_directory: ~/repo
 
@@ -50,6 +51,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run linter
-      - run: yarn lint-ts
+      - run: 
+          name: lint Ts
+          command: yarn lint-ts
       # run tests!
-      - run: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run: 
+          name: Run test with coverage
+          command: yarn yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run:
+          name: upload coverage to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      - store_artifacts:
+          path: coverage
