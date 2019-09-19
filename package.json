@@ -52,6 +52,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "lint-js": "eslint 'src/**/*.{js,jsx}'",
     "lint-ts": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
@@ -74,6 +75,25 @@
       "git add"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx, js, jsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/serviceWorker.ts",
+      "!**/setupTests.ts",
+      "!src/index.tsx",
+      "!**/*.d.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -86,6 +106,7 @@
     "@types/enzyme-to-json": "^1.5.3",
     "@types/redux-testkit": "^1.0.3",
     "babel-eslint": "^10.0.2",
+    "coveralls": "^3.0.6",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
