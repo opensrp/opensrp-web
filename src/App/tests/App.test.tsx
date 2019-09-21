@@ -36,6 +36,18 @@ describe('App', () => {
         </Router>
       </Provider>
     );
+    // should have a top header
+    const headerWrapper = wrapper.find('HeaderComponent');
+    expect(headerWrapper.length).toEqual(1);
+
+    // should have a sidebar for the side navigation
+    const sideMenuWrapper = wrapper.find('div.side-menu-section');
+    expect(sideMenuWrapper.length).toEqual(1);
+
+    // should have the main page where the page views are rendered
+    const mainPageWrapper = wrapper.find('div.container-section');
+    expect(mainPageWrapper.length).toEqual(1);
+
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.unmount();
   });
