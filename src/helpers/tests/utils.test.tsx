@@ -28,4 +28,15 @@ describe('helpers/utils', () => {
     expect(mock).toHaveBeenCalledWith(resp);
     mock.mockRestore();
   });
+
+  it('oAuthUserInfoGetter works for unknown provider', () => {
+    const onaMock = jest.spyOn(gatekeeper, 'getOnadataUserInfo');
+    const openSRPMock = jest.spyOn(gatekeeper, 'getOpenSRPUserInfo');
+    const resp = { foo: 'bar', oAuth2Data: { state: 'someOtherState' } };
+    expect(oAuthUserInfoGetter(resp)).toBeUndefined();
+    expect(onaMock).not.toBeCalled();
+    expect(openSRPMock).not.toBeCalled();
+    onaMock.mockRestore();
+    openSRPMock.mockRestore();
+  });
 });
