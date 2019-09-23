@@ -38,10 +38,6 @@ const defaultHeaderProps: Partial<HeaderProps> = {
 export class HeaderComponent extends React.Component<HeaderProps> {
   public static defaultProps = defaultHeaderProps;
 
-  constructor(props: HeaderProps) {
-    super(props);
-  }
-
   public render() {
     const { authenticated, user } = this.props;
     return (
