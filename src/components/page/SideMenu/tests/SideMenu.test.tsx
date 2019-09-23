@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
-import { CLIENT_COLLAPSE_NAVIGATION_IDENTIFIER } from '../../../../constants';
+import { CLIENT } from '../../../../constants';
 import SideMenu from '../SideMenu';
 
 const history = createBrowserHistory();
@@ -65,9 +65,7 @@ describe('components/page/SideMenu', () => {
       .find('Nav .side-collapse-nav')
       .first()
       .simulate('click');
-    expect(wrapper.find('SideMenu').state('expandedNavs')).toEqual([
-      CLIENT_COLLAPSE_NAVIGATION_IDENTIFIER,
-    ]);
+    expect(wrapper.find('SideMenu').state('expandedNavs')).toEqual([CLIENT]);
     wrapper.unmount();
   });
 });
