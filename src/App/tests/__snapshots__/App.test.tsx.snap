@@ -103,132 +103,130 @@ exports[`App renders App correctly 1`] = `
                   }
                 }
               >
-                <div>
-                  <Row
-                    tag="div"
+                <Row
+                  tag="div"
+                >
+                  <div
+                    className="row"
                   >
-                    <div
-                      className="row"
+                    <Navbar
+                      className="nav-fill w-100 bg-navbar fixed-top"
+                      color="light"
+                      expand="md"
+                      light={true}
+                      tag="nav"
                     >
-                      <Navbar
-                        className="nav-fill w-100 bg-navbar fixed-top"
-                        color="light"
-                        expand="md"
-                        light={true}
-                        tag="nav"
+                      <nav
+                        className="nav-fill w-100 bg-navbar fixed-top navbar navbar-expand-md navbar-light bg-light"
                       >
-                        <nav
-                          className="nav-fill w-100 bg-navbar fixed-top navbar navbar-expand-md navbar-light bg-light"
+                        <Col
+                          className="bg-top-nav"
+                          md={2}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
                         >
-                          <Col
-                            className="bg-top-nav"
-                            md={2}
-                            tag="div"
-                            widths={
-                              Array [
-                                "xs",
-                                "sm",
-                                "md",
-                                "lg",
-                                "xl",
-                              ]
-                            }
+                          <div
+                            className="bg-top-nav col-md-2"
                           >
-                            <div
-                              className="bg-top-nav col-md-2"
+                            <nav
+                              className="navbar navbar-expand-md navbar-light"
                             >
-                              <nav
-                                className="navbar navbar-expand-md navbar-light"
+                              <Link
+                                className="navbar-brand"
+                                to="/"
                               >
-                                <Link
+                                <a
                                   className="navbar-brand"
-                                  to="/"
+                                  href="/"
+                                  onClick={[Function]}
                                 >
-                                  <a
-                                    className="navbar-brand"
-                                    href="/"
-                                    onClick={[Function]}
-                                  >
-                                    <img
-                                      alt="OpenSRP"
-                                      src="logo.png"
-                                    />
-                                  </a>
-                                </Link>
-                              </nav>
-                            </div>
-                          </Col>
-                          <Col
-                            md={8}
-                            tag="div"
-                            widths={
-                              Array [
-                                "xs",
-                                "sm",
-                                "md",
-                                "lg",
-                                "xl",
-                              ]
-                            }
+                                  <img
+                                    alt="OpenSRP"
+                                    src="logo.png"
+                                  />
+                                </a>
+                              </Link>
+                            </nav>
+                          </div>
+                        </Col>
+                        <Col
+                          md={8}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
+                        >
+                          <div
+                            className="col-md-8"
+                          />
+                        </Col>
+                        <Col
+                          className="bg-top-nav"
+                          md={2}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
+                        >
+                          <div
+                            className="bg-top-nav col-md-2"
                           >
-                            <div
-                              className="col-md-8"
-                            />
-                          </Col>
-                          <Col
-                            className="bg-top-nav"
-                            md={2}
-                            tag="div"
-                            widths={
-                              Array [
-                                "xs",
-                                "sm",
-                                "md",
-                                "lg",
-                                "xl",
-                              ]
-                            }
-                          >
-                            <div
-                              className="bg-top-nav col-md-2"
+                            <Nav
+                              className="navbar navbar-expand-md center-account-text"
+                              tag="ul"
+                              vertical={false}
                             >
-                              <Nav
-                                className="navbar navbar-expand-md center-account-text"
-                                tag="ul"
-                                vertical={false}
+                              <ul
+                                className="navbar navbar-expand-md center-account-text nav"
                               >
-                                <ul
-                                  className="navbar navbar-expand-md center-account-text nav"
+                                <NavLink
+                                  activeClassName="active"
+                                  className="nav-link account-text"
+                                  to="/login"
                                 >
-                                  <NavLink
-                                    activeClassName="active"
+                                  <Link
+                                    aria-current={null}
                                     className="nav-link account-text"
                                     to="/login"
                                   >
-                                    <Link
+                                    <a
                                       aria-current={null}
                                       className="nav-link account-text"
-                                      to="/login"
+                                      href="/login"
+                                      onClick={[Function]}
                                     >
-                                      <a
-                                        aria-current={null}
-                                        className="nav-link account-text"
-                                        href="/login"
-                                        onClick={[Function]}
-                                      >
-                                        Login
-                                      </a>
-                                    </Link>
-                                  </NavLink>
-                                </ul>
-                              </Nav>
-                            </div>
-                          </Col>
-                        </nav>
-                      </Navbar>
-                    </div>
-                  </Row>
-                </div>
+                                      Login
+                                    </a>
+                                  </Link>
+                                </NavLink>
+                              </ul>
+                            </Nav>
+                          </div>
+                        </Col>
+                      </nav>
+                    </Navbar>
+                  </div>
+                </Row>
               </HeaderComponent>
             </withRouter(HeaderComponent)>
           </Connect(withRouter(HeaderComponent))>

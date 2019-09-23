@@ -42,7 +42,8 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    expect(toJson(wrapper.find('Header'))).toMatchSnapshot();
+    /** compares the navbar of header component */
+    expect(toJson(wrapper.find('Navbar'))).toMatchSnapshot();
     wrapper.unmount();
   });
 
@@ -60,7 +61,8 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    expect(toJson(wrapper.find('Header'))).toMatchSnapshot();
+    /** compares the navbar of header component */
+    expect(toJson(wrapper.find('Navbar'))).toMatchSnapshot();
     wrapper.unmount();
   });
 });
