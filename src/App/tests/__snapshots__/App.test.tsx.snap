@@ -1258,7 +1258,7 @@ exports[`App renders App correctly 1`] = `
                 </div>
               </Col>
               <Col
-                className="contaioner-section"
+                className="container-section"
                 md={10}
                 tag="div"
                 widths={
@@ -1272,7 +1272,7 @@ exports[`App renders App correctly 1`] = `
                 }
               >
                 <div
-                  className="contaioner-section col-md-10"
+                  className="container-section col-md-10"
                 >
                   <Switch>
                     <Connect(PrivateRoute)

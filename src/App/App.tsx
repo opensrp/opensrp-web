@@ -33,7 +33,7 @@ class App extends Component {
           <Col md={2} className="side-menu-section">
             <SideMenu />
           </Col>
-          <Col md={10} className="contaioner-section">
+          <Col md={10} className="container-section">
             <Switch>
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
