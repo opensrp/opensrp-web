@@ -45,55 +45,49 @@ export class HeaderComponent extends React.Component<HeaderProps> {
   public render() {
     const { authenticated, user } = this.props;
     return (
-      <div>
-        <Row>
-          <Navbar
-            color="light"
-            className="nav-fill w-100 bg-navbar fixed-top"
-            light={true}
-            expand="md"
-          >
-            <Col md={2} className="bg-top-nav">
-              <nav className="navbar navbar-expand-md navbar-light">
-                <Link to="/" className="navbar-brand">
-                  <img src={logo} alt={WEBSITE_NAME} />
-                </Link>
-              </nav>
-            </Col>
-            <Col md={8} />
-            <Col md={2} className="bg-top-nav">
-              <Nav className="navbar navbar-expand-md center-account-text">
-                {authenticated ? (
-                  <UncontrolledDropdown nav={true} inNavbar={true}>
-                    <DropdownToggle nav={true} caret={true} className="account-text">
-                      <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
-                    </DropdownToggle>
-                    <DropdownMenu right={true}>
-                      <DropdownItem>
-                        <NavLink
-                          to={LOGOUT_URL}
-                          className="nav-link bg-dropdown-text"
-                          activeClassName="active"
-                        >
-                          Sign Out
-                        </NavLink>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                ) : (
-                  <NavLink
-                    to={LOGIN_URL}
-                    className="nav-link account-text"
-                    activeClassName="active"
-                  >
-                    Login
-                  </NavLink>
-                )}
-              </Nav>
-            </Col>
-          </Navbar>
-        </Row>
-      </div>
+      <Row>
+        <Navbar
+          color="light"
+          className="nav-fill w-100 bg-navbar fixed-top"
+          light={true}
+          expand="md"
+        >
+          <Col md={2} className="bg-top-nav">
+            <nav className="navbar navbar-expand-md navbar-light">
+              <Link to="/" className="navbar-brand">
+                <img src={logo} alt={WEBSITE_NAME} />
+              </Link>
+            </nav>
+          </Col>
+          <Col md={8} />
+          <Col md={2} className="bg-top-nav">
+            <Nav className="navbar navbar-expand-md center-account-text">
+              {authenticated ? (
+                <UncontrolledDropdown nav={true} inNavbar={true}>
+                  <DropdownToggle nav={true} caret={true} className="account-text">
+                    <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
+                  </DropdownToggle>
+                  <DropdownMenu right={true}>
+                    <DropdownItem>
+                      <NavLink
+                        to={LOGOUT_URL}
+                        className="nav-link bg-dropdown-text"
+                        activeClassName="active"
+                      >
+                        Sign Out
+                      </NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              ) : (
+                <NavLink to={LOGIN_URL} className="nav-link account-text" activeClassName="active">
+                  Login
+                </NavLink>
+              )}
+            </Nav>
+          </Col>
+        </Navbar>
+      </Row>
     );
   }
 }
