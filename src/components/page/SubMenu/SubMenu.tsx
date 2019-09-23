@@ -1,96 +1,134 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
-import { CLIENT_NAVIGATION_MODULE_OBJECT } from '../../../constants';
 import './SubMenu.css';
 
-/** interface for clickable Nav Menus
- * @property {string} navLabel - text label visible on menu item
- * @property {string} navURL- URL to get redirected on click
+/** interface for a module i.e group of related pages
+ * @property {string} parentNav - Page navigation for the module, collapses to reveal the page links
+ * @property {PageLink[]} childNavs - pageLinks to pages under this navigational module
  */
-export interface NavObj {
-  navLabel: string;
-  navURL: string;
+export interface NavigationModule {
+  parentNav: ModulePageLink;
+  childNavs: PageLink[];
 }
 
-/** interface for collapsable Nav Menu Labels
- * @property {string} navLabel - text label visible on menu item
- * @property {IconProp} navIcon- fontawesome icon present on menu item
+/** interface for objs describing links to different pages
+ * @property {string} label - the link's displayable text
+ * @property {string} url - URL to get redirected on click
  */
-export interface NavCollapseObj {
-  navLabel: string;
-  navIcon: IconProp;
+export interface PageLink {
+  label: string;
+  url: string;
 }
 
-type SetSideMenuToggle = (identifier: string) => void;
+/** interface for the module page links, module represents collection of related page links
+ * @property {string} label - text label visible on menu item
+ * @property {IconProp} icon- fontAwesome icon displayed on menu item
+ * @property {string} url - url that module link will redirect to
+ */
+export interface ModulePageLink {
+  label: string;
+  icon: IconProp;
+  url?: string;
+}
 
+/** takes a string and updates the current collapsed module label in the parent component
+ * @param {string} label - label of clicked navigation module pagelink
+ */
+type SetSideMenuToggle = (label: string) => void;
+
+/** props for this component
+ * @property {ModulePageLink} parentNav - object describing navigation data for the module page link
+ * @property {PageLink[]} childNavs - array of the pageNavigation links grouped under this navigation module
+ * @property {string} pathName - current url, top most entry in browsers history stack
+ * @property {string} collapsedModuleLabel - string literal with the label value of currently collapsed module navigation link
+ * @property {setCollapsedModuleLabel} setCollapsedModuleLabel - callback to parent component;
+ *            changes the collapsedModuleLabel entry in the parent component
+ */
 export interface SubMenuProps {
-  identifier: string;
-  isCollapseMenuActive: boolean;
-  isExpand: boolean;
-  parentNav: NavCollapseObj;
-  childNavs: NavObj[];
-  setSideMenuToggle?: SetSideMenuToggle;
+  parentNav: ModulePageLink;
+  childNavs: PageLink[];
+  pathName?: string;
+  collapsedModuleLabel: string;
+  setCollapsedModuleLabel?: SetCollapsedModuleLabel;
 }
 
+/** this components state
+ * @property {boolean} collapseMenu - whether the child navigation links should be collapsed or hidden
+ */
 export interface SubMenuState {
-  isCollapseMenuActive: boolean;
+  isActiveModule: boolean;
 }
 
-/** By default load Clients Sub Menu */
+type SetCollapsedModuleLabel = (label: string) => void;
+/** Default props */
 export const defaultSubMenuProps: SubMenuProps = {
-  ...CLIENT_NAVIGATION_MODULE_OBJECT,
-  isCollapseMenuActive: false,
-  isExpand: true,
+  childNavs: [],
+  collapsedModuleLabel: '',
+  parentNav: {
+    icon: ['far', 'user'],
+    label: 'home',
+  },
+  pathName: '/',
 };
 
-class SubMenu extends React.Component<SubMenuProps & RouteComponentProps, SubMenuState> {
-  public static defaultProps = defaultSubMenuProps;
-  constructor(props: SubMenuProps & RouteComponentProps) {
-    super(props);
-    this.state = {
-      isCollapseMenuActive: this.props.isCollapseMenuActive,
-    };
-  }
-  public componentDidMount() {
-    this.updateCollapseMenuStatus();
-  }
+/** intersection of all types describing the props */
+type subMenuPropsTypes = SubMenuProps;
 
-  public componentDidUpdate() {
-    this.updateCollapseMenuStatus();
-  }
+export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
+  public static defaultProps = defaultSubMenuProps;
 
   public render() {
-    const { childNavs, parentNav } = this.props;
+    const { childNavs, parentNav, collapsedModuleLabel, pathName } = this.props;
+
+    /** whether to collapse the child pages for this navigation module */
+    const collapseMenu: boolean = collapsedModuleLabel === parentNav.label;
+    /** whether the navigation module is currently active; judging from the history.location pathname
+     * set to true if one of the module navigation's children has a url similar to pathname or
+     * if the url of the parentNav is similar to the pathname
+     */
+    const isActiveModule: boolean =
+      childNavs.map(nav => nav.url).indexOf(pathName!) > -1 || parentNav.url === pathName;
+
+    const moduleLinkJsx = (
+      <Fragment>
+        <FontAwesomeIcon icon={parentNav.icon} size="lg" />
+        <span className="collapse-menu-title"> {parentNav.label} </span>
+      </Fragment>
+    );
+
+    const moduleLinkClassName = classNames('nav', 'nav-link', 'side-nav-item', {
+      'active-collapse-menu': isActiveModule,
+    });
+
     return (
       <div>
-        <Nav className="side-collapse-nav" onClick={this.toggle}>
+        <Nav className="side-collapse-nav" onClick={this.setModuleLabel}>
           <NavItem>
-            <a
-              className={classNames('nav', 'nav-link', 'side-nav-item', {
-                'active-collapse-menu': this.state.isCollapseMenuActive,
-              })}
-            >
-              <FontAwesomeIcon icon={parentNav.navIcon} size="lg" />
-              <span className="collapse-menu-title"> {parentNav.navLabel} </span>
-            </a>
+            {parentNav.url ? (
+              <NavLink to={parentNav.url} className={moduleLinkClassName}>
+                {moduleLinkJsx}
+              </NavLink>
+            ) : (
+              <span className={moduleLinkClassName}>{moduleLinkJsx}</span>
+            )}
           </NavItem>
         </Nav>
-        <Collapse isOpen={this.props.isExpand}>
+
+        <Collapse isOpen={collapseMenu}>
           {childNavs.map((childNavObj, key) => {
             return (
               <Nav key={'child-nav-' + key}>
                 <NavItem className="nav-item-extend">
                   <NavLink
-                    to={childNavObj.navURL}
+                    to={childNavObj.url}
                     className="nav-link side-nav-item"
                     activeClassName="side-nav-active"
                   >
-                    <span> {childNavObj.navLabel} </span>
+                    <span> {childNavObj.label} </span>
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -101,25 +139,8 @@ class SubMenu extends React.Component<SubMenuProps & RouteComponentProps, SubMen
     );
   }
 
-  private toggle = () => {
-    const { identifier, setSideMenuToggle } = this.props;
-    if (setSideMenuToggle) {
-      setSideMenuToggle(identifier);
-    }
-  };
-
-  private updateCollapseMenuStatus = () => {
-    const { childNavs, location } = this.props;
-    let isCurrentURLinChildPresents: boolean = false;
-    childNavs.forEach(childNav => {
-      if (childNav.navURL === location.pathname) {
-        isCurrentURLinChildPresents = true;
-      }
-    });
-    if (isCurrentURLinChildPresents !== this.state.isCollapseMenuActive) {
-      this.setState({ isCollapseMenuActive: isCurrentURLinChildPresents });
-    }
+  /** updates parent component with the label of the currently collapsed navigation module */
+  private setModuleLabel = () => {
+    this.props.setCollapsedModuleLabel!(this.props.parentNav.label);
   };
 }
-
-export default withRouter(SubMenu);
