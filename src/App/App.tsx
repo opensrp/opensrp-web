@@ -10,7 +10,9 @@ import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
+import './App.css';
 
+import SidenavComponent from '../components/page/SideNav/sidenav';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
