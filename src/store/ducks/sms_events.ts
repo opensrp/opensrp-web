@@ -11,7 +11,7 @@ export interface smsReducer {
   EventDate: string;
   ID: string;
   Location: string;
-  Message: string;
+  message: string;
   Patient: string;
   Risk: string;
   Reporter: string;
