@@ -34,7 +34,6 @@ td {
 
 .filter-search-div {
   display: flex;
-  overflow: auto;
 }
 
 .filters {

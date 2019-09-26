@@ -4,6 +4,7 @@ import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Table } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import RiskColoring from '../../components/RiskColoring';
 import TestReducer, {
   fetchSms,
@@ -21,16 +22,26 @@ interface PropsInterface {
   fetchTestDataActionCreator: typeof fetchSms;
 }
 
+interface State {
+  dropdownOpenLocation: boolean;
+  dropdownOpenType: boolean;
+}
+
 const defaultprops: PropsInterface = {
   fetchTestDataActionCreator: fetchSms,
   testData: [],
 };
 
-export class LogFace extends React.Component<PropsInterface, {}> {
+export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      dropdownOpenLocation: false,
+      dropdownOpenType: false,
+    };
   }
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
@@ -51,6 +62,9 @@ export class LogFace extends React.Component<PropsInterface, {}> {
   }
   // tslint:disable-next-line: no-empty
   public handleSearch() {}
+
+  // tslint:disable-next-line: no-empty
+  public dropdownOpen() {}
 
   public render() {
     const data = this.props.testData;
@@ -75,34 +89,29 @@ export class LogFace extends React.Component<PropsInterface, {}> {
           </Form>
           <div className="filters">
             <div className="location-type-filter">
-              Location
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Filter by Location"
-                      onChange={this.handleTermChange}
-                      onKeyPress={this.handleKeyPress}
-                    />
-                  </div>
-                </FormGroup>
-              </Form>
+              Select Location
+              <Dropdown
+                isOpen={this.state.dropdownOpenLocation}
+                toggle={this.toggleLocationDropDown}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  Select Type
+                </DropdownToggle>
+                <DropdownMenu />
+              </Dropdown>
             </div>
             <div className="location-type-filter">
               Type
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Filter by Type"
-                      onChange={this.handleTermChange}
-                      onKeyPress={this.handleKeyPress}
-                    />
-                  </div>
-                </FormGroup>
-              </Form>
+              <Dropdown isOpen={this.state.dropdownOpenType} toggle={this.toggleTypeDropDown}>
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  Select Type
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>Action</DropdownItem>
+                  <DropdownItem>Another action</DropdownItem>
+                  <DropdownItem>Something else</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </div>
           </div>
         </div>
@@ -174,6 +183,14 @@ export class LogFace extends React.Component<PropsInterface, {}> {
       </div>
     );
   }
+
+  private toggleTypeDropDown = () => {
+    this.setState({ dropdownOpenType: !this.state.dropdownOpenType });
+  };
+
+  private toggleLocationDropDown = () => {
+    this.setState({ dropdownOpenLocation: !this.state.dropdownOpenLocation });
+  };
 }
 
 const mapStateToprops = (state: any) => {
