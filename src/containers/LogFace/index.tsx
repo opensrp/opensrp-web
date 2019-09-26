@@ -25,6 +25,7 @@ interface PropsInterface {
 interface State {
   dropdownOpenLocation: boolean;
   dropdownOpenType: boolean;
+  filteredData: SmsReducer[];
 }
 
 const defaultprops: PropsInterface = {
@@ -41,14 +42,23 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.state = {
       dropdownOpenLocation: false,
       dropdownOpenType: false,
+      filteredData: [],
     };
   }
+
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
     // supersetFetch('2057').then((result: any) => {
-    // debugger
     fetchTestDataActionCreator(results);
     // });
+  }
+
+  public componentWillReceiveProps(nextProps: any) {
+    if (!this.props.testData.length) {
+      this.setState({
+        filteredData: nextProps.testData,
+      });
+    }
   }
 
   public handleSubmit(e: any) {
@@ -57,12 +67,18 @@ export class LogFace extends React.Component<PropsInterface, State> {
   }
 
   // tslint:disable-next-line: no-empty
-  public handleTermChange(e: any) {
+  public handleTermChange = (e: any) => {
+    const filteredData: SmsReducer[] = this.filterData(e.target.value);
+    this.setState({
+      filteredData,
+    });
     // console.log(e.target.value);
-  }
+  };
 
   public render() {
-    const data = this.props.testData;
+    // const data = this.props.testData;
+    // console.log(this.state.filteredData);
+    const data = this.state.filteredData;
 
     return (
       <div className="logface-content">
@@ -175,6 +191,17 @@ export class LogFace extends React.Component<PropsInterface, State> {
           </Table>
         </div>
       </div>
+    );
+  }
+
+  private filterData(filterString: string): SmsReducer[] {
+    return this.props.testData.filter(
+      dataItem =>
+        dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
+        dataItem.health_worker_name
+          .toLocaleLowerCase()
+          .includes(filterString.toLocaleLowerCase()) ||
+        dataItem.anc_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase())
     );
   }
 
