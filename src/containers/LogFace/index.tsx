@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Form, FormGroup, Input, Table } from 'reactstrap';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import RiskColoring from '../../components/RiskColoring';
+import { Types } from '../../configs/settings';
 import TestReducer, {
   fetchSms,
   getTestData,
@@ -117,8 +118,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   Select Type
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={this.handleTypeDropdownClick}>Action</DropdownItem>
-                  <DropdownItem>Another action</DropdownItem>
+                  {map(Types, type => {
+                    return (
+                      <DropdownItem onClick={this.handleTypeDropdownClick}>{type}</DropdownItem>
+                    );
+                  })}
                   <DropdownItem>Something else</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
