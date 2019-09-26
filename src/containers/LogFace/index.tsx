@@ -108,7 +108,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
                   Select Location
                 </DropdownToggle>
-                <DropdownMenu />
+                <DropdownMenu>
+                  {map(this.getAllLocations(), location => {
+                    return (
+                      <DropdownItem onClick={this.handleLocationDropdownClick}>
+                        {location}
+                      </DropdownItem>
+                    );
+                  })}
+                </DropdownMenu>
               </Dropdown>
             </div>
             <div className="location-type-filter">
@@ -197,6 +205,27 @@ export class LogFace extends React.Component<PropsInterface, State> {
       </div>
     );
   }
+
+  private handleLocationDropdownClick = (e: any) => {
+    // console.log(e.target.innerText);
+    const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
+      return dataItem.health_worker_location_name.includes(e.target.innerText);
+    });
+    this.setState({
+      filteredData,
+    });
+  };
+
+  private getAllLocations = (): string[] => {
+    const locations = [];
+    for (const i in this.props.testData) {
+      if (this.props.testData[i].health_worker_location_name) {
+        locations.push(this.props.testData[i].health_worker_location_name);
+      }
+    }
+
+    return Array.from(new Set(locations));
+  };
 
   private handleTypeDropdownClick = (e: any) => {
     // get e.target.innerText and use it to filter location
