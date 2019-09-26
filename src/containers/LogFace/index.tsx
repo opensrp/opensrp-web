@@ -117,7 +117,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   Select Type
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem>Action</DropdownItem>
+                  <DropdownItem onClick={this.handleTypeDropdownClick}>Action</DropdownItem>
                   <DropdownItem>Another action</DropdownItem>
                   <DropdownItem>Something else</DropdownItem>
                 </DropdownMenu>
@@ -193,6 +193,10 @@ export class LogFace extends React.Component<PropsInterface, State> {
       </div>
     );
   }
+
+  private handleTypeDropdownClick = (e: any) => {
+    // get e.target.innerText and use it to filter location
+  };
 
   private filterData(filterString: string): SmsReducer[] {
     return this.props.testData.filter(
