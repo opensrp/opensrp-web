@@ -70,7 +70,7 @@ export default function reducer(
     case FETCHED_SMS:
       return {
         ...state,
-        payload: action.payload,
+        payload: { ...state.payload, ...action.payload },
       };
     default:
       return state;
