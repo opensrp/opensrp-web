@@ -4,7 +4,6 @@ import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
-import { Col, Container, Row } from 'reactstrap';
 import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
