@@ -25,13 +25,13 @@ export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 
 /** interface for sms fetch */
 // tslint:disable-next-line: class-name
-export interface fetchSmsInterface extends AnyAction {
+export interface FetchSmsInterface extends AnyAction {
   payload: { [key: string]: SmsReducer };
   type: typeof FETCHED_SMS;
 }
 
 /** Create type for SMS reducer actions */
-export type TestActionTypes = fetchSmsInterface | AnyAction;
+export type TestActionTypes = FetchSmsInterface | AnyAction;
 
 // action Creators
 
@@ -39,7 +39,7 @@ export type TestActionTypes = fetchSmsInterface | AnyAction;
  * @param {Client []} clientsList - clients array to add to store
  * @return {FetchClientsAction} - an action to add clients to redux store
  */
-export const fetchSms = (TrialData: SmsReducer[] = []): fetchSmsInterface => {
+export const fetchSms = (TrialData: SmsReducer[] = []): FetchSmsInterface => {
   const actionCreated = {
     payload: keyBy(TrialData, (trialObj: SmsReducer) => trialObj.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
