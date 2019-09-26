@@ -7,15 +7,15 @@ export const reducerName = 'smsReducer';
 /** Interface for SMS record object as received from discover */
 // tslint:disable-next-line: class-name
 export interface smsReducer {
-  Age: number;
+  age: string;
   EventDate: string;
-  ID: string;
-  Location: string;
+  event_id: string;
+  health_worker_location_name: string;
   message: string;
-  Patient: string;
-  Risk: string;
-  Reporter: string;
-  Type: string;
+  anc_id: string;
+  logface_risk: string;
+  health_worker_name: string;
+  sms_type: string;
 }
 
 // actions
@@ -41,7 +41,7 @@ export type TestActionTypes = fetchSmsInterface | AnyAction;
  */
 export const fetchSms = (TrialData: smsReducer[] = []): fetchSmsInterface => {
   const actionCreated = {
-    payload: keyBy(TrialData, (trialObj: smsReducer) => trialObj.ID),
+    payload: keyBy(TrialData, (trialObj: smsReducer) => trialObj.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
   //   console.log("gets called", actionCreated);

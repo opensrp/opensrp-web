@@ -15,6 +15,7 @@ import TestReducer, {
   smsReducer,
 } from '../../store/ducks/sms_events';
 import './index.css';
+import { result as results } from './result';
 
 reducerRegistry.register(reducerName, TestReducer);
 
@@ -36,9 +37,10 @@ export class LogFace extends React.Component<PropsInterface, {}> {
   }
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
-    supersetFetch('2057').then((result: any) => {
-      fetchTestDataActionCreator(result);
-    });
+    // supersetFetch('2057').then((result: any) => {
+    // debugger
+    fetchTestDataActionCreator(results);
+    // });
   }
 
   // tslint:disable-next-line: no-empty
@@ -128,30 +130,30 @@ export class LogFace extends React.Component<PropsInterface, {}> {
               <tbody>
                 {map(data, dataObj => {
                   return (
-                    <tr key={dataObj.ID}>
-                      <td id="default-width">{dataObj.ID}</td>
+                    <tr key={dataObj.event_id}>
+                      <td id="default-width">{dataObj.event_id}</td>
                       <td id="default-width">{dataObj.EventDate}</td>
                       <div id="default-width">
                         <a href="...">
-                          <td>{dataObj.Location}</td>
+                          <td>{dataObj.health_worker_location_name}</td>
                         </a>
                       </div>
                       <div id="default-width">
                         <a href="...">
-                          <td>{dataObj.Type}</td>
+                          <td>{dataObj.sms_type}</td>
                         </a>
                       </div>
                       <div id="default-width">
                         <a href="...">
-                          <td>{dataObj.Reporter}</td>
+                          <td>{dataObj.health_worker_name}</td>
                         </a>
                       </div>
                       <div id="default-width">
                         <a href="...">
-                          <td>{dataObj.Patient}</td>
+                          <td>{dataObj.anc_id}</td>
                         </a>
                       </div>
-                      <td id="small-width">{dataObj.Age}</td>
+                      <td id="small-width">{dataObj.age}</td>
                       <td id="large-width">
                         {dataObj.message.split('\n').map((item, key) => {
                           return (
@@ -163,7 +165,7 @@ export class LogFace extends React.Component<PropsInterface, {}> {
                         })}
                       </td>
                       <div>
-                        <RiskColoring {...{ Risk: dataObj.Risk }} />
+                        <RiskColoring {...{ Risk: dataObj.logface_risk }} />
                       </div>
                     </tr>
                   );
