@@ -7,3 +7,5 @@ export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
+export const HOUSEHOLD_URL = '/households';
+export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
