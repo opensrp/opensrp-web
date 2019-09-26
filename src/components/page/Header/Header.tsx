@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
 import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
-import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { CLIENT_URL, HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import './Header.css';
 
 /** interface for Header state */
@@ -88,6 +88,11 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
               <NavItem>
                 <NavLink to={CLIENT_URL} className="nav-link" activeClassName="active">
                   Clients
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to={HOUSEHOLD_URL} className="nav-link" activeClassName="active">
+                  Households
                 </NavLink>
               </NavItem>
             </Nav>
