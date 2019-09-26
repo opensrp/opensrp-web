@@ -2,17 +2,14 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { map } from 'lodash';
 import * as React from 'react';
-import { connect, connectAdvanced } from 'react-redux';
-// import store from '../../store';
-import { Button, Col, Form, FormGroup, Input, Label, Table } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Form, FormGroup, Input, Table } from 'reactstrap';
 import RiskColoring from '../../components/RiskColoring';
-// import superset from '@onaio/superset-connector';
-import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
   getTestData,
   reducerName,
-  smsReducer,
+  SmsReducer,
 } from '../../store/ducks/sms_events';
 import './index.css';
 import { result as results } from './result';
@@ -20,7 +17,7 @@ import { result as results } from './result';
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
-  testData: smsReducer[];
+  testData: SmsReducer[];
   fetchTestDataActionCreator: typeof fetchSms;
 }
 
