@@ -36,7 +36,7 @@ export class LogFace extends React.Component<PropsInterface, {}> {
   }
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
-    supersetFetch('1277').then((result: any) => {
+    supersetFetch('2057').then((result: any) => {
       fetchTestDataActionCreator(result);
     });
   }
@@ -153,7 +153,7 @@ export class LogFace extends React.Component<PropsInterface, {}> {
                       </div>
                       <td id="small-width">{dataObj.Age}</td>
                       <td id="large-width">
-                        {dataObj.Message.split('\n').map((item, key) => {
+                        {dataObj.message.split('\n').map((item, key) => {
                           return (
                             <React.Fragment key={key}>
                               {item}
