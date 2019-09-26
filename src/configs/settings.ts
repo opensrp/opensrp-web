@@ -43,4 +43,13 @@ if (ENABLE_ONADATA_OAUTH) {
   };
 }
 
+export const Types = [
+  'Response Report',
+  'Red Alert Report',
+  'Social Determinants',
+  'ANC Visit',
+  'Delivery Planning',
+  'Pregnancy Detection',
+] as const;
+
 export { providers };
