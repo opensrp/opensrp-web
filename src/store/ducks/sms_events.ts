@@ -52,20 +52,20 @@ export const fetchSms = (TrialData: SmsReducer[] = []): FetchSmsInterface => {
 
 /** interface for sms state in redux store */
 // tslint:disable-next-line: class-name
-interface smsStateReducer {
+interface SmsStateReducer {
   payload: { [key: string]: SmsReducer };
 }
 
 /** initial sms-state state */
-const initialState: smsStateReducer = {
+const initialState: SmsStateReducer = {
   payload: {},
 };
 
 /** the sms reducer function */
 export default function reducer(
-  state: smsStateReducer = initialState,
+  state: SmsStateReducer = initialState,
   action: TestActionTypes
-): smsStateReducer {
+): SmsStateReducer {
   switch (action.type) {
     case FETCHED_SMS:
       return {
