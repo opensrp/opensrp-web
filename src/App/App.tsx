@@ -8,11 +8,12 @@ import { Col, Container, Row } from 'reactstrap';
 import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL } from '../constants';
+import { HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
+import ConnectedHouseholdList from '../containers/Households/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -40,7 +41,12 @@ class App extends Component {
                 path={CLIENT_URL}
                 component={ConnectedClientList}
               />
-
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={HOUSEHOLD_URL}
+                component={ConnectedHouseholdList}
+              />
               {/* tslint:disable jsx-no-lambda */}
               <Route
                 exact={true}
