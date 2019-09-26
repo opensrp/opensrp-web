@@ -51,20 +51,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
     // });
   }
 
-  // tslint:disable-next-line: no-empty
-  public handleSubmit() {}
-  // tslint:disable-next-line: no-empty
-  public handleTermChange() {}
-  public handleKeyPress(event: { key: string }) {
-    if (event.key === 'Enter') {
-      this.handleSearch();
-    }
+  public handleSubmit(e: any) {
+    // we need to prevent a reaload of the page
+    e.preventDefault();
   }
-  // tslint:disable-next-line: no-empty
-  public handleSearch() {}
 
   // tslint:disable-next-line: no-empty
-  public dropdownOpen() {}
+  public handleTermChange(e: any) {
+    // console.log(e.target.value);
+  }
 
   public render() {
     const data = this.props.testData;
@@ -82,7 +77,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   type="text"
                   placeholder="Search ID, Reporter, Patients"
                   onChange={this.handleTermChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </div>
             </FormGroup>
@@ -95,7 +89,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 toggle={this.toggleLocationDropDown}
               >
                 <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
-                  Select Type
+                  Select Location
                 </DropdownToggle>
                 <DropdownMenu />
               </Dropdown>
