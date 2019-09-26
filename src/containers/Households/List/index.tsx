@@ -16,3 +16,10 @@ export interface HouseholdListProps {
   householdsArray: Household[];
   fetchHouseholdsActionCreator: typeof fetchHouseholds;
 }
+
+/** default props for the householdList component */
+export const defaultHouseholdListProps: HouseholdListProps = {
+  fetchHouseholdsActionCreator: fetchHouseholds,
+  householdsArray: [],
+  opensrpService: OpenSRPService,
+};
