@@ -20,6 +20,10 @@ export type ENABLE_ABOUT = typeof ENABLE_ABOUT;
 export const DISABLE_LOGIN_PROTECTION = process.env.REACT_APP_DISABLE_LOGIN_PROTECTION === 'true';
 export type DISABLE_LOGIN_PROTECTION = typeof DISABLE_LOGIN_PROTECTION;
 
+/** The pagination size. Default size is 50 */
+export const PAGINATION_SIZE = process.env.REACT_APP_PAGINATION_SIZE || '50';
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+
 /** The Superset API base */
 export const SUPERSET_API_BASE = process.env.REACT_APP_SUPERSET_API_BASE || 'http://localhost';
 export type SUPERSET_API_BASE = typeof SUPERSET_API_BASE;

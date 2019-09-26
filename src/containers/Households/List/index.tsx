@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_HOUSEHOLD_ENDPOINT } from '../../../configs/env';
+import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientsReducer, {
   fetchHouseholds,
@@ -41,7 +41,7 @@ class HouseholdList extends React.Component<HouseholdListProps, {}> {
 
   public async componentDidMount() {
     const { fetchHouseholdsActionCreator, opensrpService } = this.props;
-    const params = { clientType: 'ec_household', pageNumber: '0', pageSize: '50' };
+    const params = { clientType: 'ec_household', pageNumber: '0', pageSize: PAGINATION_SIZE };
     const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await clientService.list(params);
     fetchHouseholdsActionCreator(response.clients);
