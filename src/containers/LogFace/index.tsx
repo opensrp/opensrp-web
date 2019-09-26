@@ -200,6 +200,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private handleTypeDropdownClick = (e: any) => {
     // get e.target.innerText and use it to filter location
+    const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
+      return dataItem.sms_type.includes(e.target.innerText);
+    });
+    this.setState({
+      filteredData,
+    });
   };
 
   private filterData(filterString: string): SmsReducer[] {
