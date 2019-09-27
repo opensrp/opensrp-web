@@ -37,6 +37,24 @@ const defaultprops: PropsInterface = {
 export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
+  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    if (
+      !prevState.filteredData.length &&
+      !(
+        document.getElementById('input') &&
+        (document.getElementById('input') as HTMLInputElement)!.value
+      )
+    ) {
+      return {
+        filteredData: nextProps.testData,
+      };
+    } else {
+      return {
+        filtereData: prevState.filteredData,
+      };
+    }
+  }
+
   constructor(props: any) {
     super(props);
 
@@ -52,14 +70,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
     // supersetFetch('2057').then((result: any) => {
     fetchTestDataActionCreator(results);
     // });
-  }
-
-  public componentWillReceiveProps(nextProps: any) {
-    if (!this.props.testData.length) {
-      this.setState({
-        filteredData: nextProps.testData,
-      });
-    }
   }
 
   public handleSubmit(e: any) {
@@ -92,6 +102,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               <div>
                 <Input
                   type="text"
+                  id="input"
                   placeholder="Search ID, Reporter, Patients"
                   onChange={this.handleTermChange}
                 />
