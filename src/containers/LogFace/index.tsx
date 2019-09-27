@@ -72,14 +72,14 @@ export class LogFace extends React.Component<PropsInterface, State> {
     // });
   }
 
-  public handleSubmit(e: any) {
+  public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     // we need to prevent a reaload of the page
     e.preventDefault();
   }
 
   // tslint:disable-next-line: no-empty
-  public handleTermChange = (e: any) => {
-    const filteredData: SmsReducer[] = this.filterData(e.target.value);
+  public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const filteredData: SmsReducer[] = this.filterData((e.target as HTMLInputElement).value);
     this.setState({
       filteredData,
     });
@@ -217,10 +217,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
     );
   }
 
-  private handleLocationDropdownClick = (e: any) => {
+  private handleLocationDropdownClick = (e: React.FormEvent<HTMLInputElement>) => {
     // console.log(e.target.innerText);
     const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
-      return dataItem.health_worker_location_name.includes(e.target.innerText);
+      return dataItem.health_worker_location_name.includes(
+        (e.target as HTMLInputElement).innerText
+      );
     });
     this.setState({
       filteredData,
@@ -238,10 +240,10 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return Array.from(new Set(locations));
   };
 
-  private handleTypeDropdownClick = (e: any) => {
+  private handleTypeDropdownClick = (e: React.FormEvent<HTMLInputElement>) => {
     // get e.target.innerText and use it to filter location
     const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
-      return dataItem.sms_type.includes(e.target.innerText);
+      return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
     });
     this.setState({
       filteredData,
