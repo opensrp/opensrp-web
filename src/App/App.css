@@ -71,7 +71,6 @@ fieldset[disabled] .gatekeeper-btn.active {
 }
 
 .main-container {
-  display: flex;
   background-color: #f9fdff;
   height: 100vh;
 }
@@ -86,7 +85,6 @@ fieldset[disabled] .gatekeeper-btn.active {
 
 .main-app-container {
   height: 100vh;
-  width: 100vw;
   border: 0;
   margin: 0;
   padding: 0;
@@ -94,5 +92,5 @@ fieldset[disabled] .gatekeeper-btn.active {
 
 .content {
   width: 100%;
-  padding: 20px;
+  margin: 20px;
 }
