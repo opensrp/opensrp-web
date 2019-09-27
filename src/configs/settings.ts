@@ -43,7 +43,7 @@ if (ENABLE_ONADATA_OAUTH) {
   };
 }
 
-export const Types = [
+export const SmsTypes = [
   'Response Report',
   'Red Alert Report',
   'Social Determinants',
