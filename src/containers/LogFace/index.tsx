@@ -142,7 +142,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       <DropdownItem onClick={this.handleTypeDropdownClick}>{type}</DropdownItem>
                     );
                   })}
-                  <DropdownItem>Something else</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -173,24 +172,16 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       <td id="default-width">{dataObj.event_id}</td>
                       <td id="default-width">{dataObj.EventDate}</td>
                       <div id="default-width">
-                        <a href="...">
-                          <td>{dataObj.health_worker_location_name}</td>
-                        </a>
+                        <td>{dataObj.health_worker_location_name}</td>
                       </div>
                       <div id="default-width">
-                        <a href="...">
-                          <td>{dataObj.sms_type}</td>
-                        </a>
+                        <td>{dataObj.sms_type}</td>
                       </div>
                       <div id="default-width">
-                        <a href="...">
-                          <td>{dataObj.health_worker_name}</td>
-                        </a>
+                        <td>{dataObj.health_worker_name}</td>
                       </div>
                       <div id="default-width">
-                        <a href="...">
-                          <td>{dataObj.anc_id}</td>
-                        </a>
+                        <td>{dataObj.anc_id}</td>
                       </div>
                       <td id="small-width">{dataObj.age}</td>
                       <td id="large-width">
