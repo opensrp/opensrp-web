@@ -12,13 +12,7 @@ const riskColoringDefaultProps: RiskColoringProps = {
 /** Colour codes risk levels */
 const riskColoring = (props: RiskColoringProps) => {
   const { Risk } = props;
-  switch (Risk) {
-    case 'No Risk':
-      return (
-        <span className="green" id="default-width">
-          {Risk}
-        </span>
-      );
+  switch (Risk.toLowerCase()) {
     case 'no risk':
       return (
         <span className="green" id="default-width">
