@@ -102,7 +102,7 @@ exports[`components/page/Header renders header correctly 1`] = `
                   onClick={[Function]}
                 >
                   <img
-                    alt="OpenSRP"
+                    alt="UNICEF"
                     src="logo.png"
                   />
                 </a>
@@ -194,62 +194,6 @@ exports[`components/page/Header renders header correctly 1`] = `
                                 style={Object {}}
                               >
                                 Home
-                              </a>
-                            </Link>
-                          </NavLink>
-                        </li>
-                      </NavItem>
-                      <NavItem
-                        tag="li"
-                      >
-                        <li
-                          className="nav-item"
-                        >
-                          <NavLink
-                            activeClassName="active"
-                            className="nav-link"
-                            to="/404"
-                          >
-                            <Link
-                              aria-current={null}
-                              className="nav-link"
-                              to="/404"
-                            >
-                              <a
-                                aria-current={null}
-                                className="nav-link"
-                                href="/404"
-                                onClick={[Function]}
-                              >
-                                Users
-                              </a>
-                            </Link>
-                          </NavLink>
-                        </li>
-                      </NavItem>
-                      <NavItem
-                        tag="li"
-                      >
-                        <li
-                          className="nav-item"
-                        >
-                          <NavLink
-                            activeClassName="active"
-                            className="nav-link"
-                            to="/404"
-                          >
-                            <Link
-                              aria-current={null}
-                              className="nav-link"
-                              to="/404"
-                            >
-                              <a
-                                aria-current={null}
-                                className="nav-link"
-                                href="/404"
-                                onClick={[Function]}
-                              >
-                                About
                               </a>
                             </Link>
                           </NavLink>
@@ -429,7 +373,7 @@ exports[`components/page/Header renders header correctly when authenticated 1`] 
                   onClick={[Function]}
                 >
                   <img
-                    alt="OpenSRP"
+                    alt="UNICEF"
                     src="logo.png"
                   />
                 </a>
@@ -521,62 +465,6 @@ exports[`components/page/Header renders header correctly when authenticated 1`] 
                                 style={Object {}}
                               >
                                 Home
-                              </a>
-                            </Link>
-                          </NavLink>
-                        </li>
-                      </NavItem>
-                      <NavItem
-                        tag="li"
-                      >
-                        <li
-                          className="nav-item"
-                        >
-                          <NavLink
-                            activeClassName="active"
-                            className="nav-link"
-                            to="/404"
-                          >
-                            <Link
-                              aria-current={null}
-                              className="nav-link"
-                              to="/404"
-                            >
-                              <a
-                                aria-current={null}
-                                className="nav-link"
-                                href="/404"
-                                onClick={[Function]}
-                              >
-                                Users
-                              </a>
-                            </Link>
-                          </NavLink>
-                        </li>
-                      </NavItem>
-                      <NavItem
-                        tag="li"
-                      >
-                        <li
-                          className="nav-item"
-                        >
-                          <NavLink
-                            activeClassName="active"
-                            className="nav-link"
-                            to="/404"
-                          >
-                            <Link
-                              aria-current={null}
-                              className="nav-link"
-                              to="/404"
-                            >
-                              <a
-                                aria-current={null}
-                                className="nav-link"
-                                href="/404"
-                                onClick={[Function]}
-                              >
-                                About
                               </a>
                             </Link>
                           </NavLink>
