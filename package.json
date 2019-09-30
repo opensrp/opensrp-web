@@ -32,6 +32,7 @@
     "client-oauth2": "^4.2.5",
     "connected-react-router": "^6.5.2",
     "fetch-mock": "^7.3.9",
+    "formik": "^1.5.8",
     "history": "^4.9.0",
     "jest-fetch-mock": "^2.1.2",
     "lodash": "^4.17.15",
