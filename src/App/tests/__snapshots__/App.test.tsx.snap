@@ -51,178 +51,169 @@ exports[`App renders App correctly 1`] = `
               }
             }
           >
-            <Route>
-              <HeaderComponent
-                authenticated={false}
-                history={
-                  Object {
-                    "action": "POP",
-                    "block": [Function],
-                    "createHref": [Function],
-                    "go": [Function],
-                    "goBack": [Function],
-                    "goForward": [Function],
-                    "length": 1,
-                    "listen": [Function],
-                    "location": Object {
-                      "hash": "",
-                      "pathname": "/",
-                      "search": "",
-                      "state": undefined,
-                    },
-                    "push": [Function],
-                    "replace": [Function],
-                  }
-                }
-                location={
-                  Object {
+            <HeaderComponent
+              authenticated={false}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
                     "hash": "",
                     "pathname": "/",
                     "search": "",
                     "state": undefined,
-                  }
+                  },
+                  "push": [Function],
+                  "replace": [Function],
                 }
-                logOutUser={[Function]}
-                match={
-                  Object {
-                    "isExact": true,
-                    "params": Object {},
-                    "path": "/",
-                    "url": "/",
-                  }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
                 }
-                user={
-                  Object {
-                    "email": "",
-                    "gravatar": "",
-                    "name": "",
-                    "username": "",
-                  }
+              }
+              logOutUser={[Function]}
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
                 }
+              }
+              user={
+                Object {
+                  "email": "",
+                  "gravatar": "",
+                  "name": "",
+                  "username": "",
+                }
+              }
+            >
+              <Navbar
+                expand="md"
+                tag="nav"
               >
-                <Navbar
-                  expand="md"
-                  tag="nav"
+                <nav
+                  className="navbar navbar-expand-md"
                 >
                   <nav
-                    className="navbar navbar-expand-md"
+                    id="image-settings"
                   >
-                    <nav
-                      id="image-settings"
+                    <Link
+                      to="/"
                     >
-                      <Link
-                        replace={false}
-                        to="/"
+                      <a
+                        href="/"
+                        onClick={[Function]}
                       >
-                        <a
-                          href="/"
-                          onClick={[Function]}
-                        >
-                          <img
-                            alt="UNICEF"
-                            height="100%"
-                            src="logo.png"
-                            width="100%"
-                          />
-                        </a>
-                      </Link>
-                    </nav>
-                    <NavbarToggler
+                        <img
+                          alt="UNICEF"
+                          height="100%"
+                          src="logo.png"
+                          width="100%"
+                        />
+                      </a>
+                    </Link>
+                  </nav>
+                  <NavbarToggler
+                    onClick={[Function]}
+                    tag="button"
+                    type="button"
+                  >
+                    <button
+                      className="navbar-toggler"
                       onClick={[Function]}
-                      tag="button"
                       type="button"
                     >
-                      <button
-                        className="navbar-toggler"
-                        onClick={[Function]}
-                        type="button"
-                      >
-                        <span
-                          className="navbar-toggler-icon"
-                        />
-                      </button>
-                    </NavbarToggler>
-                    <Collapse
+                      <span
+                        className="navbar-toggler-icon"
+                      />
+                    </button>
+                  </NavbarToggler>
+                  <Collapse
+                    appear={false}
+                    enter={true}
+                    exit={true}
+                    in={false}
+                    isOpen={false}
+                    mountOnEnter={false}
+                    navbar={true}
+                    onEnter={[Function]}
+                    onEntered={[Function]}
+                    onEntering={[Function]}
+                    onExit={[Function]}
+                    onExited={[Function]}
+                    onExiting={[Function]}
+                    tag="div"
+                    timeout={350}
+                    unmountOnExit={false}
+                  >
+                    <Transition
                       appear={false}
                       enter={true}
                       exit={true}
                       in={false}
-                      isOpen={false}
                       mountOnEnter={false}
-                      navbar={true}
                       onEnter={[Function]}
                       onEntered={[Function]}
                       onEntering={[Function]}
                       onExit={[Function]}
                       onExited={[Function]}
                       onExiting={[Function]}
-                      tag="div"
                       timeout={350}
                       unmountOnExit={false}
                     >
-                      <Transition
-                        appear={false}
-                        enter={true}
-                        exit={true}
-                        in={false}
-                        mountOnEnter={false}
-                        onEnter={[Function]}
-                        onEntered={[Function]}
-                        onEntering={[Function]}
-                        onExit={[Function]}
-                        onExited={[Function]}
-                        onExiting={[Function]}
-                        timeout={350}
-                        unmountOnExit={false}
+                      <div
+                        className="collapse navbar-collapse"
+                        style={Object {}}
                       >
-                        <div
-                          className="collapse navbar-collapse"
-                          style={Object {}}
+                        <Nav
+                          className="ml-auto"
+                          navbar={true}
+                          tag="ul"
+                          vertical={false}
                         >
-                          <Nav
-                            className="ml-auto"
-                            navbar={true}
-                            tag="ul"
-                            vertical={false}
+                          <ul
+                            className="ml-auto navbar-nav"
                           >
-                            <ul
-                              className="ml-auto navbar-nav"
+                            <NavLink
+                              activeClassName="active"
+                              className="nav-link"
+                              to="/login"
                             >
-                              <NavLink
-                                activeClassName="active"
-                                aria-current="page"
+                              <Link
+                                aria-current={null}
                                 className="nav-link"
                                 to="/login"
                               >
-                                <Route
-                                  path="\\\\/login"
+                                <a
+                                  aria-current={null}
+                                  className="nav-link"
+                                  href="/login"
+                                  onClick={[Function]}
                                 >
-                                  <Link
-                                    aria-current={null}
-                                    className="nav-link"
-                                    replace={false}
-                                    to="/login"
-                                  >
-                                    <a
-                                      aria-current={null}
-                                      className="nav-link"
-                                      href="/login"
-                                      onClick={[Function]}
-                                    >
-                                      Login
-                                    </a>
-                                  </Link>
-                                </Route>
-                              </NavLink>
-                            </ul>
-                          </Nav>
-                        </div>
-                      </Transition>
-                    </Collapse>
-                  </nav>
-                </Navbar>
-              </HeaderComponent>
-            </Route>
+                                  Login
+                                </a>
+                              </Link>
+                            </NavLink>
+                          </ul>
+                        </Nav>
+                      </div>
+                    </Transition>
+                  </Collapse>
+                </nav>
+              </Navbar>
+            </HeaderComponent>
           </withRouter(HeaderComponent)>
         </Connect(withRouter(HeaderComponent))>
         <div
@@ -252,34 +243,28 @@ exports[`App renders App correctly 1`] = `
                       >
                         <NavLink
                           activeClassName="active"
-                          aria-current="page"
                           className="nav-link navbar-inverse"
                           id="link-font"
                           to="/"
                         >
-                          <Route
-                            path="\\\\/"
+                          <Link
+                            aria-current="page"
+                            className="nav-link navbar-inverse active"
+                            id="link-font"
+                            style={Object {}}
+                            to="/"
                           >
-                            <Link
+                            <a
                               aria-current="page"
                               className="nav-link navbar-inverse active"
+                              href="/"
                               id="link-font"
-                              replace={false}
+                              onClick={[Function]}
                               style={Object {}}
-                              to="/"
                             >
-                              <a
-                                aria-current="page"
-                                className="nav-link navbar-inverse active"
-                                href="/"
-                                id="link-font"
-                                onClick={[Function]}
-                                style={Object {}}
-                              >
-                                Home
-                              </a>
-                            </Link>
-                          </Route>
+                              Home
+                            </a>
+                          </Link>
                         </NavLink>
                       </li>
                     </NavItem>
@@ -291,32 +276,26 @@ exports[`App renders App correctly 1`] = `
                       >
                         <NavLink
                           activeClassName="active"
-                          aria-current="page"
                           className="nav-link navbar-inverse"
                           id="link-font"
                           to="/log-face"
                         >
-                          <Route
-                            path="\\\\/log-face"
+                          <Link
+                            aria-current={null}
+                            className="nav-link navbar-inverse"
+                            id="link-font"
+                            to="/log-face"
                           >
-                            <Link
+                            <a
                               aria-current={null}
                               className="nav-link navbar-inverse"
+                              href="/log-face"
                               id="link-font"
-                              replace={false}
-                              to="/log-face"
+                              onClick={[Function]}
                             >
-                              <a
-                                aria-current={null}
-                                className="nav-link navbar-inverse"
-                                href="/log-face"
-                                id="link-font"
-                                onClick={[Function]}
-                              >
-                                Log Face
-                              </a>
-                            </Link>
-                          </Route>
+                              Log Face
+                            </a>
+                          </Link>
                         </NavLink>
                       </li>
                     </NavItem>

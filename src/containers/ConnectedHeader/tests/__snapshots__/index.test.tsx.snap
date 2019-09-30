@@ -7,7 +7,6 @@ Object {
       id="image-settings"
     >
       <Link
-        replace={false}
         to="/"
       >
         <img
@@ -49,7 +48,6 @@ Object {
       >
         <NavLink
           activeClassName="active"
-          aria-current="page"
           className="nav-link"
           to="/login"
         >
@@ -70,7 +68,6 @@ Object {
       id="image-settings"
     >
       <Link
-        replace={false}
         to="/"
       >
         <img
@@ -157,7 +154,6 @@ Object {
             >
               <NavLink
                 activeClassName="active"
-                aria-current="page"
                 className="nav-link"
                 to="/logout"
               >
