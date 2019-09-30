@@ -73,6 +73,7 @@ exports[`components/page/HeaderBreadcrumb renders HeaderBreadcrumb correctly 1`]
               >
                 <Link
                   key="0"
+                  replace={false}
                   to="/"
                 >
                   <a
@@ -93,6 +94,7 @@ exports[`components/page/HeaderBreadcrumb renders HeaderBreadcrumb correctly 1`]
               >
                 <Link
                   key="1"
+                  replace={false}
                   to="/programs"
                 >
                   <a

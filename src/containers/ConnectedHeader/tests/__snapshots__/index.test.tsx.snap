@@ -4,15 +4,17 @@ exports[`components/ConnectedHeader renders the ConnectedHeader component 1`] = 
 Object {
   "children": Array [
     <nav
-      className="navbar navbar-expand-md navbar-light bg-light"
+      id="image-settings"
     >
       <Link
-        className="navbar-brand"
+        replace={false}
         to="/"
       >
         <img
-          alt="OpenSRP"
+          alt="UNICEF"
+          height="100%"
           src="logo.png"
+          width="100%"
         />
       </Link>
     </nav>,
@@ -40,64 +42,14 @@ Object {
       unmountOnExit={false}
     >
       <Nav
-        className="mr-auto"
-        navbar={true}
-        tag="ul"
-        vertical={false}
-      >
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/"
-          >
-            Home
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            Users
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            About
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/clients"
-          >
-            Clients
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <Nav
-        className="ml-0"
+        className="ml-auto"
         navbar={true}
         tag="ul"
         vertical={false}
       >
         <NavLink
           activeClassName="active"
+          aria-current="page"
           className="nav-link"
           to="/login"
         >
@@ -106,9 +58,7 @@ Object {
       </Nav>
     </Collapse>,
   ],
-  "color": "light",
   "expand": "md",
-  "light": true,
   "tag": "nav",
 }
 `;
@@ -117,15 +67,17 @@ exports[`components/ConnectedHeader renders the ConnectedHeader when logged in 1
 Object {
   "children": Array [
     <nav
-      className="navbar navbar-expand-md navbar-light bg-light"
+      id="image-settings"
     >
       <Link
-        className="navbar-brand"
+        replace={false}
         to="/"
       >
         <img
-          alt="OpenSRP"
+          alt="UNICEF"
+          height="100%"
           src="logo.png"
+          width="100%"
         />
       </Link>
     </nav>,
@@ -153,58 +105,7 @@ Object {
       unmountOnExit={false}
     >
       <Nav
-        className="mr-auto"
-        navbar={true}
-        tag="ul"
-        vertical={false}
-      >
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/"
-          >
-            Home
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            Users
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/404"
-          >
-            About
-          </NavLink>
-        </NavItem>
-        <NavItem
-          tag="li"
-        >
-          <NavLink
-            activeClassName="active"
-            className="nav-link"
-            to="/clients"
-          >
-            Clients
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <Nav
-        className="ml-0"
+        className="ml-auto"
         navbar={true}
         tag="ul"
         vertical={false}
@@ -256,6 +157,7 @@ Object {
             >
               <NavLink
                 activeClassName="active"
+                aria-current="page"
                 className="nav-link"
                 to="/logout"
               >
@@ -267,9 +169,7 @@ Object {
       </Nav>
     </Collapse>,
   ],
-  "color": "light",
   "expand": "md",
-  "light": true,
   "tag": "nav",
 }
 `;
