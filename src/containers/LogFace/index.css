@@ -50,6 +50,11 @@ td {
   vertical-align: bottom;
 }
 
+.form-control {
+  margin-top: 2%;
+  width: auto;
+}
+
 #searchbox {
   display: flex;
   align-items: center;

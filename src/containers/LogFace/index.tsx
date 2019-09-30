@@ -1,5 +1,6 @@
 // import { any } from 'prop-types';
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -7,6 +8,7 @@ import { Form, FormGroup, Input, Table } from 'reactstrap';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
+import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
   getTestData,
@@ -14,7 +16,6 @@ import TestReducer, {
   SmsReducer,
 } from '../../store/ducks/sms_events';
 import './index.css';
-import { result as results } from './result';
 
 reducerRegistry.register(reducerName, TestReducer);
 
@@ -67,9 +68,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
-    // supersetFetch('2057').then((result: any) => {
-    fetchTestDataActionCreator(results);
-    // });
+    supersetFetch('2057').then((result: any) => {
+      fetchTestDataActionCreator(result);
+    });
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -97,18 +98,19 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <h2 id="logface_title">Log Face</h2>
         </div>
         <div className="filter-search-div">
-          <Form id="searchbox" onSubmit={this.handleSubmit}>
-            <FormGroup>
-              <div>
-                <Input
-                  type="text"
-                  id="input"
-                  placeholder="Search ID, Reporter, Patients"
-                  onChange={this.handleTermChange}
-                />
-              </div>
-            </FormGroup>
-          </Form>
+          {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
+          <Formik initialValues={{}} onSubmit={() => {}}>
+            {() => (
+              <Field
+                type="text"
+                name="input"
+                id="input"
+                placeholder="Search ID, Reporter, Patients"
+                className={`form-control`}
+                onChange={this.handleTermChange}
+              />
+            )}
+          </Formik>
           <div className="filters">
             <div className="location-type-filter">
               Select Location
@@ -185,14 +187,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       </div>
                       <td id="small-width">{dataObj.age}</td>
                       <td id="large-width">
-                        {dataObj.message.split('\n').map((item, key) => {
-                          return (
-                            <React.Fragment key={key}>
-                              {item}
-                              <br />
-                            </React.Fragment>
-                          );
-                        })}
+                        {typeof dataObj.message === 'string' &&
+                          dataObj.message.split('\n').map((item, key) => {
+                            return (
+                              <React.Fragment key={key}>
+                                {item}
+                                <br />
+                              </React.Fragment>
+                            );
+                          })}
                       </td>
                       <div>
                         <RiskColoring {...{ Risk: dataObj.logface_risk }} />
@@ -208,7 +211,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     );
   }
 
-  private handleLocationDropdownClick = (e: React.FormEvent<HTMLInputElement>) => {
+  private handleLocationDropdownClick = (e: React.MouseEvent) => {
     // console.log(e.target.innerText);
     const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
       return dataItem.health_worker_location_name.includes(
@@ -231,7 +234,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return Array.from(new Set(locations));
   };
 
-  private handleTypeDropdownClick = (e: React.FormEvent<HTMLInputElement>) => {
+  private handleTypeDropdownClick = (e: React.MouseEvent) => {
     // get e.target.innerText and use it to filter location
     const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
       return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
