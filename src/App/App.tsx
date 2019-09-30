@@ -7,18 +7,18 @@ import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL } from '../constants';
+import { LOGFACE_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
+import ConnectedHeader from '../containers/ConnectedHeader';
+import './App.css';
+
+import SidenavComponent from '../components/page/SideNav/sidenav';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
-import ConnectedHeader from '../containers/ConnectedHeader';
+import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
-import './App.css';
-import './App.css';
 
 library.add(faUser);
-
-import './App.css';
 
 /** Main App component */
 class App extends Component {
@@ -27,9 +27,10 @@ class App extends Component {
       <div className="main-app-container">
         <ConnectedHeader />
         <div className="main-container">
+          <div className="sidebar">
+            <SidenavComponent />
+          </div>
           <div className="content">
-            {/* <Row id="main-page-row">
-              <Col> */}
             <Switch>
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
@@ -69,6 +70,7 @@ class App extends Component {
                 path={LOGOUT_URL}
                 component={ConnectedLogout}
               />
+              <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
             </Switch>
             {/*  */}
           </div>
