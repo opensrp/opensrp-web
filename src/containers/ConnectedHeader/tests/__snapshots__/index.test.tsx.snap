@@ -10,7 +10,7 @@ Object {
         to="/"
       >
         <img
-          alt="UNICEF"
+          alt="OpenSRP"
           height="100%"
           src="logo.png"
           width="100%"
@@ -71,7 +71,7 @@ Object {
         to="/"
       >
         <img
-          alt="UNICEF"
+          alt="OpenSRP"
           height="100%"
           src="logo.png"
           width="100%"

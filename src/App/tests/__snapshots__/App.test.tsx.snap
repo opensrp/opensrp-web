@@ -117,7 +117,7 @@ exports[`App renders App correctly 1`] = `
                         onClick={[Function]}
                       >
                         <img
-                          alt="UNICEF"
+                          alt="OpenSRP"
                           height="100%"
                           src="logo.png"
                           width="100%"
