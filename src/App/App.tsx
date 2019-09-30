@@ -72,7 +72,6 @@ class App extends Component {
               />
               <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
             </Switch>
-            {/*  */}
           </div>
         </div>
       </div>
