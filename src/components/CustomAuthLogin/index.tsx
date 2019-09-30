@@ -1,5 +1,6 @@
 import { ProviderLinks, Providers } from '@onaio/gatekeeper';
 import React from 'react';
+import './index.css';
 
 /** interface for OauthLogin props */
 export interface OauthLoginProps {
@@ -13,27 +14,24 @@ export interface OauthLoginProps {
 const CustomOauthLogin = (props: OauthLoginProps) => {
   const { providers, ProviderLinksComponent } = props;
   return ProviderLinksComponent && providers ? (
-    <div className="login container-fluid">
-      <div className="row">
-        <div className="col-6">
-          <img src={require('./../../assets/images/child-hero.png')} alt="" className="child" />
+    <div className="row">
+      <div className="image col-lg col-xl" />
+      <div className="col-lg col-xl login-section">
+        <div className="logo">
+          <img
+            src={require('./../../assets/images/vietnam-moh.png')}
+            alt="unicef vietnam"
+            className="moh"
+          />
+          <img
+            src={require('./../../assets/images/uni-vietnam.png')}
+            alt="unicef vietnam"
+            className="unicef"
+          />
         </div>
-        <div className="col-6">
-          <div className="logo">
-            <img
-              src={require('./../../assets/images/vietnam-moh.png')}
-              alt="unicef vietnam"
-              className="moh"
-            />
-            <img
-              src={require('./../../assets/images/uni-vietnam.png')}
-              alt="unicef vietnam"
-              className="unicef"
-            />
-          </div>
-          <div className="center">
-            <ProviderLinksComponent {...{ providers }} />
-          </div>
+        <div className="center">
+          <h3>MIECD VIETNAM</h3>
+          <ProviderLinksComponent {...{ providers }} />
         </div>
       </div>
     </div>

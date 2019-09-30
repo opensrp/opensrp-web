@@ -1,11 +1,10 @@
-.container-fluid {
-  padding: 0;
+body {
   background: #00aeef;
-  min-width: 100em;
 }
 
 body {
   margin: 0;
+  height: 100%;
 }
 
 .child {
@@ -121,4 +120,16 @@ p {
 .image {
   background: url('../../assets/images/child-hero.png') center no-repeat;
   background-size: cover;
+}
+
+html {
+  height: 100%;
+}
+
+div#openSRP-root {
+  height: 100%;
+}
+
+.row {
+  height: 100%;
 }
