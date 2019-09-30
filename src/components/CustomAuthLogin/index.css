@@ -3,20 +3,25 @@
   background: #00aeef;
   min-width: 100em;
 }
+
 body {
   margin: 0;
 }
+
 .child {
   max-width: 120%;
   height: 100vh;
 }
-div[class='col-6'] {
+
+div[class='col-lg'] {
   padding: 0;
   overflow: hidden;
 }
+
 .col-6 .row {
   height: 100vh;
 }
+
 .center {
   background: white;
   border-radius: 1%;
@@ -27,12 +32,14 @@ div[class='col-6'] {
   position: relative;
   top: 25%;
 }
+
 .logo {
   top: 7%;
   margin: auto;
   width: 70%;
   position: relative;
 }
+
 .center h1 {
   width: 90%;
   color: #1b314b;
@@ -40,22 +47,27 @@ div[class='col-6'] {
   margin: auto;
   margin-top: 7%;
 }
+
 .center p {
   width: 90%;
   margin: auto;
 }
+
 input {
   display: block;
   width: 90%;
 }
+
 .MuiFormControl-root {
   display: block !important;
   margin: 0 !important;
   margin: 5% 0 5% 0 !important;
 }
+
 .MuiInputBase-root {
   width: 100%;
 }
+
 form {
   width: 90%;
   margin: auto !important;
@@ -81,6 +93,32 @@ button {
   margin-bottom: 11% !important;
 }
 
-row {
-  margin: auto;
+.gatekeeper-btn {
+  max-width: 100% !important;
+  text-align: center;
+  background: linear-gradient(#0e9dd4, #1cabe2);
+}
+
+div.gatekeeper-login {
+  margin-top: 0 !important;
+}
+
+h3 {
+  margin-top: 6%;
+  margin-left: 7%;
+  color: #1b314b;
+}
+
+p {
+  margin-bottom: 1rem !important;
+}
+
+.login-section {
+  background: url('../../assets/images/unicef-logo-bg.svg') center no-repeat;
+  background-position: left 0px top 25%;
+}
+
+.image {
+  background: url('../../assets/images/child-hero.png') center no-repeat;
+  background-size: cover;
 }

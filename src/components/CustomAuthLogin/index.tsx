@@ -1,6 +1,5 @@
 import { ProviderLinks, Providers } from '@onaio/gatekeeper';
 import React from 'react';
-import './index.css';
 
 /** interface for OauthLogin props */
 export interface OauthLoginProps {
