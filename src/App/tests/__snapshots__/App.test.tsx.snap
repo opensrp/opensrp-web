@@ -35,6 +35,11 @@ exports[`App renders App correctly 1`] = `
     }
   >
     <App>
+      <Route
+        exact={true}
+        path="/login"
+        render={[Function]}
+      />
       <Container
         tag="div"
       >
