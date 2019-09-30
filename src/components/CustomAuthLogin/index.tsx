@@ -14,7 +14,7 @@ export interface OauthLoginProps {
 const CustomOauthLogin = (props: OauthLoginProps) => {
   const { providers, ProviderLinksComponent } = props;
   return ProviderLinksComponent && providers ? (
-    <div className="row">
+    <div className="row login-row">
       <div className="image col-lg col-xl" />
       <div className="col-lg col-xl login-section">
         <div className="logo">
