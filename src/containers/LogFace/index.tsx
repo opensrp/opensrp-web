@@ -11,23 +11,23 @@ import { SmsTypes } from '../../configs/settings';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
-  getTestData,
+  getSmsData,
   reducerName,
-  SmsReducer,
+  SmsData,
 } from '../../store/ducks/sms_events';
 import './index.css';
 
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
-  testData: SmsReducer[];
+  testData: SmsData[];
   fetchTestDataActionCreator: typeof fetchSms;
 }
 
 interface State {
   dropdownOpenLocation: boolean;
   dropdownOpenType: boolean;
-  filteredData: SmsReducer[];
+  filteredData: SmsData[];
 }
 
 const defaultprops: PropsInterface = {
@@ -80,7 +80,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   // tslint:disable-next-line: no-empty
   public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const filteredData: SmsReducer[] = this.filterData((e.target as HTMLInputElement).value);
+    const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
     this.setState({
       filteredData,
     });
@@ -203,7 +203,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     // console.log(e.target.innerText);
-    const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
+    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
       return dataItem.health_worker_location_name.includes(
         (e.target as HTMLInputElement).innerText
       );
@@ -226,7 +226,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
     // get e.target.innerText and use it to filter location
-    const filteredData: SmsReducer[] = this.props.testData.filter(dataItem => {
+    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
       return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
     });
     this.setState({
@@ -234,7 +234,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   };
 
-  private filterData(filterString: string): SmsReducer[] {
+  private filterData(filterString: string): SmsData[] {
     return this.props.testData.filter(
       dataItem =>
         dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
@@ -256,7 +256,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any) => {
   const result = {
-    testData: getTestData(state),
+    testData: getSmsData(state),
   };
   return result;
 };

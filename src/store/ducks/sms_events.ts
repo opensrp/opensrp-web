@@ -6,7 +6,7 @@ export const reducerName = 'SmsReducer';
 
 /** Interface for SMS record object as received from discover */
 // tslint:disable-next-line: class-name
-export interface SmsReducer {
+export interface SmsData {
   age: string;
   EventDate: string;
   event_id: string;
@@ -25,13 +25,13 @@ export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 
 /** interface for sms fetch */
 // tslint:disable-next-line: class-name
-export interface FetchSmsInterface extends AnyAction {
-  payload: { [key: string]: SmsReducer };
+export interface FetchSmsAction extends AnyAction {
+  payload: { [key: string]: SmsData };
   type: typeof FETCHED_SMS;
 }
 
 /** Create type for SMS reducer actions */
-export type TestActionTypes = FetchSmsInterface | AnyAction;
+export type SmsActionTypes = FetchSmsAction | AnyAction;
 
 // action Creators
 
@@ -39,9 +39,9 @@ export type TestActionTypes = FetchSmsInterface | AnyAction;
  * @param {Client []} clientsList - clients array to add to store
  * @return {FetchClientsAction} - an action to add clients to redux store
  */
-export const fetchSms = (TrialData: SmsReducer[] = []): FetchSmsInterface => {
+export const fetchSms = (TrialData: SmsData[] = []): FetchSmsAction => {
   const actionCreated = {
-    payload: keyBy(TrialData, (trialObj: SmsReducer) => trialObj.event_id),
+    payload: keyBy(TrialData, (trialObj: SmsData) => trialObj.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
   //   console.log("gets called", actionCreated);
@@ -53,7 +53,7 @@ export const fetchSms = (TrialData: SmsReducer[] = []): FetchSmsInterface => {
 /** interface for sms state in redux store */
 // tslint:disable-next-line: class-name
 interface SmsStateReducer {
-  payload: { [key: string]: SmsReducer };
+  payload: { [key: string]: SmsData };
 }
 
 /** initial sms-state state */
@@ -64,7 +64,7 @@ const initialState: SmsStateReducer = {
 /** the sms reducer function */
 export default function reducer(
   state: SmsStateReducer = initialState,
-  action: TestActionTypes
+  action: SmsActionTypes
 ): SmsStateReducer {
   switch (action.type) {
     case FETCHED_SMS:
@@ -83,6 +83,6 @@ export default function reducer(
  * @param {Partial<Store>} state - the redux store
  * @return { { [key: string] : Client} } - clients object as values, reepective ids as keys
  */
-export function getTestData(state: Partial<Store>): SmsReducer[] {
+export function getSmsData(state: Partial<Store>): SmsData[] {
   return values((state as any)[reducerName].payload);
 }
