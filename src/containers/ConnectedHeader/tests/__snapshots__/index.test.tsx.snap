@@ -62,6 +62,28 @@ Object {
           <NavLink
             activeClassName="active"
             className="nav-link"
+            to="/404"
+          >
+            Users
+          </NavLink>
+        </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            className="nav-link"
+            to="/404"
+          >
+            About
+          </NavLink>
+        </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            className="nav-link"
             to="/clients"
           >
             Clients
@@ -145,6 +167,28 @@ Object {
             to="/"
           >
             Home
+          </NavLink>
+        </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            className="nav-link"
+            to="/404"
+          >
+            Users
+          </NavLink>
+        </NavItem>
+        <NavItem
+          tag="li"
+        >
+          <NavLink
+            activeClassName="active"
+            className="nav-link"
+            to="/404"
+          >
+            About
           </NavLink>
         </NavItem>
         <NavItem
