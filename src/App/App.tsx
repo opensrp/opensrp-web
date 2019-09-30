@@ -11,6 +11,7 @@ import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
+import CustomOauthLogin from '../components/CustomAuthLogin';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
@@ -23,53 +24,54 @@ library.add(faUser);
 class App extends Component {
   public render() {
     return (
-      <Container>
-        <ConnectedHeader />
-        <Row id="main-page-row">
-          <Col>
-            <Switch>
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path="/"
-                component={Home}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={CLIENT_URL}
-                component={ConnectedClientList}
-              />
-
-              {/* tslint:disable jsx-no-lambda */}
-              <Route
-                exact={true}
-                path={LOGIN_URL}
-                render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
-              />
-              <Route
-                exact={true}
-                path="/oauth/callback/:id"
-                render={routeProps => (
-                  <ConnectedOauthCallback
-                    LoadingComponent={Loading}
-                    providers={providers}
-                    oAuthUserInfoGetter={oAuthUserInfoGetter}
-                    {...routeProps}
-                  />
-                )}
-              />
-              {/* tslint:enable jsx-no-lambda */}
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={LOGOUT_URL}
-                component={ConnectedLogout}
-              />
-            </Switch>
-          </Col>
-        </Row>
-      </Container>
+      <React.Fragment>
+        {/* tslint:disable jsx-no-lambda */}
+        <Route
+          exact={true}
+          path={LOGIN_URL}
+          render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
+        />
+        <Container>
+          {!window.location.href.includes('login') && <ConnectedHeader />}
+          <Row id="main-page-row">
+            <Col>
+              <Switch>
+                <ConnectedPrivateRoute
+                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                  exact={true}
+                  path="/"
+                  component={Home}
+                />
+                <ConnectedPrivateRoute
+                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                  exact={true}
+                  path={CLIENT_URL}
+                  component={ConnectedClientList}
+                />
+                <Route
+                  exact={true}
+                  path="/oauth/callback/:id"
+                  render={routeProps => (
+                    <ConnectedOauthCallback
+                      LoadingComponent={Loading}
+                      providers={providers}
+                      oAuthUserInfoGetter={oAuthUserInfoGetter}
+                      {...routeProps}
+                    />
+                  )}
+                />
+                {/* tslint:enable jsx-no-lambda */}
+                <ConnectedPrivateRoute
+                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                  exact={true}
+                  path={LOGOUT_URL}
+                  component={ConnectedLogout}
+                />
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
     );
   }
 }
