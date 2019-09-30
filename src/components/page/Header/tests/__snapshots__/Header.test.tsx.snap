@@ -102,7 +102,7 @@ exports[`components/page/Header renders header correctly 1`] = `
                   onClick={[Function]}
                 >
                   <img
-                    alt="UNICEF"
+                    alt="OpenSRP"
                     src="logo.png"
                   />
                 </a>
@@ -373,7 +373,7 @@ exports[`components/page/Header renders header correctly when authenticated 1`] 
                   onClick={[Function]}
                 >
                   <img
-                    alt="UNICEF"
+                    alt="OpenSRP"
                     src="logo.png"
                   />
                 </a>
