@@ -4,7 +4,7 @@ import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, Input, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
