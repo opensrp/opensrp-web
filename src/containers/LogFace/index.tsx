@@ -124,7 +124,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 <DropdownMenu>
                   {map(this.getAllLocations(), location => {
                     return (
-                      <DropdownItem onClick={this.handleLocationDropdownClick}>
+                      <DropdownItem onClick={this.handleLocationDropdownClick} key={location}>
                         {location}
                       </DropdownItem>
                     );
@@ -141,7 +141,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 <DropdownMenu>
                   {map(SmsTypes, type => {
                     return (
-                      <DropdownItem onClick={this.handleTypeDropdownClick}>{type}</DropdownItem>
+                      <DropdownItem onClick={this.handleTypeDropdownClick} key={type}>
+                        {type}
+                      </DropdownItem>
                     );
                   })}
                 </DropdownMenu>
@@ -151,60 +153,48 @@ export class LogFace extends React.Component<PropsInterface, State> {
         </div>
         <div className="table-container">
           <Table striped={true} borderless={true}>
-            <div id="headdiv">
-              <thead>
-                <tr>
-                  <th id="default-width">ID</th>
-                  <th id="default-width">Event Date</th>
-                  <th id="default-width">Location</th>
-                  <th id="default-width">SMS Type</th>
-                  <th id="default-width">Reporter</th>
-                  <th id="default-width">Patient</th>
-                  <th id="small-width">Age</th>
-                  <th id="large-width">Message</th>
-                  <th id="default-width">Risk Level</th>
-                </tr>
-              </thead>
-            </div>
-            <div id="bodydiv">
-              <tbody>
-                {map(data, dataObj => {
-                  return (
-                    <tr key={dataObj.event_id}>
-                      <td id="default-width">{dataObj.event_id}</td>
-                      <td id="default-width">{dataObj.EventDate}</td>
-                      <div id="default-width">
-                        <td>{dataObj.health_worker_location_name}</td>
-                      </div>
-                      <div id="default-width">
-                        <td>{dataObj.sms_type}</td>
-                      </div>
-                      <div id="default-width">
-                        <td>{dataObj.health_worker_name}</td>
-                      </div>
-                      <div id="default-width">
-                        <td>{dataObj.anc_id}</td>
-                      </div>
-                      <td id="small-width">{dataObj.age}</td>
-                      <td id="large-width">
-                        {typeof dataObj.message === 'string' &&
-                          dataObj.message.split('\n').map((item, key) => {
-                            return (
-                              <React.Fragment key={key}>
-                                {item}
-                                <br />
-                              </React.Fragment>
-                            );
-                          })}
-                      </td>
-                      <div>
-                        <RiskColoring {...{ Risk: dataObj.logface_risk }} />
-                      </div>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </div>
+            <thead id="header">
+              <tr>
+                <th className="default-width">ID</th>
+                <th className="default-width">Event Date</th>
+                <th className="default-width">Location</th>
+                <th className="default-width">SMS Type</th>
+                <th className="default-width">Reporter</th>
+                <th className="default-width">Patient</th>
+                <th className="small-width">Age</th>
+                <th className="large-width">Message</th>
+                <th className="default-width">Risk Level</th>
+              </tr>
+            </thead>
+            <tbody id="body">
+              {map(data, dataObj => {
+                return (
+                  <tr key={dataObj.event_id}>
+                    <td className="default-width">{dataObj.event_id}</td>
+                    <td className="default-width">{dataObj.EventDate}</td>
+                    <td className="default-width">{dataObj.health_worker_location_name}</td>
+                    <td className="default-width">{dataObj.sms_type}</td>
+                    <td className="default-width">{dataObj.health_worker_name}</td>
+                    <td className="default-width">{dataObj.anc_id}</td>
+                    <td className="small-width">{dataObj.age}</td>
+                    <td className="large-width">
+                      {typeof dataObj.message === 'string' &&
+                        dataObj.message.split('\n').map((item, key) => {
+                          return (
+                            <React.Fragment key={key}>
+                              {item}
+                              <br />
+                            </React.Fragment>
+                          );
+                        })}
+                    </td>
+                    <td className="default-width">
+                      <RiskColoring {...{ Risk: dataObj.logface_risk }} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </Table>
         </div>
       </div>

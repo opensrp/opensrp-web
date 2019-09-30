@@ -15,39 +15,39 @@ const riskColoring = (props: RiskColoringProps) => {
   switch (Risk) {
     case 'No Risk':
       return (
-        <td className="green" id="default-width">
+        <span className="green" id="default-width">
           {Risk}
-        </td>
+        </span>
       );
     case 'no risk':
       return (
-        <td className="green" id="default-width">
+        <span className="green" id="default-width">
           No Risk
-        </td>
+        </span>
       );
     case 'low':
       return (
-        <td className="blue" id="default-width">
+        <span className="blue" id="default-width">
           Low Risk
-        </td>
+        </span>
       );
     case 'high':
       return (
-        <td className="yellow" id="default-width">
+        <span className="yellow" id="default-width">
           High Risk
-        </td>
+        </span>
       );
     case 'red':
       return (
-        <td className="red" id="default-width">
+        <span className="red" id="default-width">
           Red Alert
-        </td>
+        </span>
       );
     default:
       return (
-        <td className="risk-default" id="default-width">
+        <span className="risk-default" id="default-width">
           {Risk}
-        </td>
+        </span>
       );
   }
 };
