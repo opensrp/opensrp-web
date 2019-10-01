@@ -2,9 +2,10 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
-import './SubMenu.css';
+import './index.css';
 
 /** interface for a module i.e group of related pages
  * @property {string} parentNav - Page navigation for the module, collapses to reveal the page links
@@ -38,7 +39,6 @@ export interface ModulePageLink {
 /** props for this component
  * @property {ModulePageLink} parentNav - object describing navigation data for the module page link
  * @property {PageLink[]} childNavs - array of the pageNavigation links grouped under this navigation module
- * @property {string} pathName - current url, top most entry in browsers history stack
  * @property {string} collapsedModuleLabel - string literal with the label value of currently collapsed module navigation link
  * @property {setCollapsedModuleLabel} setCollapsedModuleLabel - callback to parent component;
  *            changes the collapsedModuleLabel entry in the parent component
@@ -46,7 +46,6 @@ export interface ModulePageLink {
 export interface SubMenuProps {
   parentNav: ModulePageLink;
   childNavs: PageLink[];
-  pathName?: string;
   collapsedModuleLabel: string;
   setCollapsedModuleLabel?: SetCollapsedModuleLabel;
 }
@@ -71,18 +70,17 @@ export const defaultSubMenuProps: SubMenuProps = {
     icon: ['far', 'user'],
     label: 'home',
   },
-  pathName: '/',
 };
 
 /** intersection of all types describing the props */
-type subMenuPropsTypes = SubMenuProps;
+type subMenuPropsTypes = SubMenuProps & RouteComponentProps;
 
 export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
   public static defaultProps = defaultSubMenuProps;
 
   public render() {
-    const { childNavs, parentNav, collapsedModuleLabel, pathName } = this.props;
-
+    const { childNavs, parentNav, collapsedModuleLabel, location } = this.props;
+    const pathName = location.pathname;
     /** whether to collapse the child pages for this navigation module */
     const collapseMenu: boolean = collapsedModuleLabel === parentNav.label;
     /** whether the navigation module is currently active; judging from the history.location pathname
@@ -143,3 +141,5 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
     this.props.setCollapsedModuleLabel!(this.props.parentNav.label);
   };
 }
+
+export default withRouter(SubMenu);
