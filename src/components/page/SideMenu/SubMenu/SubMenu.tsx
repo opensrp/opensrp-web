@@ -35,11 +35,6 @@ export interface ModulePageLink {
   url?: string;
 }
 
-/** takes a string and updates the current collapsed module label in the parent component
- * @param {string} label - label of clicked navigation module pagelink
- */
-type SetSideMenuToggle = (label: string) => void;
-
 /** props for this component
  * @property {ModulePageLink} parentNav - object describing navigation data for the module page link
  * @property {PageLink[]} childNavs - array of the pageNavigation links grouped under this navigation module
@@ -63,7 +58,11 @@ export interface SubMenuState {
   isActiveModule: boolean;
 }
 
+/** takes a string and updates the current collapsed-module-label in the parent component
+ * @param {string} label - label of clicked navigation module pagelink
+ */
 type SetCollapsedModuleLabel = (label: string) => void;
+
 /** Default props */
 export const defaultSubMenuProps: SubMenuProps = {
   childNavs: [],
