@@ -115,7 +115,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             )}
           </Formik>
           <div className="filters">
-            <div className="locaiton-type-filter">
+            <div className="location-type-filter">
               Risk Level
               <Dropdown
                 isOpen={this.state.dropdownOpenRiskLevel}
