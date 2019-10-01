@@ -11,7 +11,7 @@ export interface SmsData {
   EventDate: string;
   event_id: string;
   health_worker_location_name: string;
-  message: string;
+  message: string | number;
   anc_id: string;
   logface_risk: string;
   health_worker_name: string;
