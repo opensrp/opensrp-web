@@ -54,7 +54,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
   }
 
   public render() {
-    if (window.location.href.includes('login')) {
+    if (window.location.pathname.includes('login')) {
       return null;
     }
     const { authenticated, user } = this.props;

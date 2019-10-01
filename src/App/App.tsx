@@ -32,7 +32,7 @@ class App extends Component {
           render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
         />
         <Container>
-          {!window.location.href.includes('login') && <ConnectedHeader />}
+          <ConnectedHeader />
           <Row id="main-page-row">
             <Col>
               <Switch>
