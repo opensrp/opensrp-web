@@ -1,6 +1,7 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
+import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
@@ -22,4 +23,8 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
         return getOnadataUserInfo(apiResponse);
     }
   }
+}
+
+export function headerShouldRender() {
+  return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
