@@ -245,7 +245,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             </Table>
           </div>
         ) : (
-          <Ripple />
+          <Ripple borderColor="#0093DB" />
         )}
         <div className="paginator">
           {this.state.currentIndex > 1 && <button onClick={this.previousPage}>previous</button>}
