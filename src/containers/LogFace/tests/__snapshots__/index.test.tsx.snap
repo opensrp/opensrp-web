@@ -25,6 +25,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
+            disabled={true}
             id="dropdown-basic"
             variant="success"
           >
@@ -37,6 +38,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
+                  disabled={true}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -47,7 +49,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary"
+                    className="dropdown-toggle btn btn-secondary disabled"
+                    disabled={true}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -162,6 +165,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
+            disabled={true}
             id="dropdown-basic"
             variant="success"
           >
@@ -174,6 +178,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
+                  disabled={true}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -184,7 +189,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary"
+                    className="dropdown-toggle btn btn-secondary disabled"
+                    disabled={true}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -234,6 +240,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
+            disabled={true}
             id="dropdown-basic"
             variant="success"
           >
@@ -246,6 +253,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
+                  disabled={true}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -256,7 +264,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary"
+                    className="dropdown-toggle btn btn-secondary disabled"
+                    disabled={true}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -394,6 +403,7 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 exports[`components/ConnectedHeader renders correctly: search div 1`] = `
 <input
   className="form-control"
+  disabled={true}
   id="input"
   name="input"
   onBlur={[Function]}
@@ -403,70 +413,4 @@ exports[`components/ConnectedHeader renders correctly: search div 1`] = `
 />
 `;
 
-exports[`components/ConnectedHeader renders correctly: table snapshot 1`] = `
-<Table
-  borderless={true}
-  responsiveTag="div"
-  striped={true}
-  tag="table"
->
-  <table
-    className="table table-borderless table-striped"
-  >
-    <thead
-      id="header"
-    >
-      <tr>
-        <th
-          className="default-width"
-        >
-          ID
-        </th>
-        <th
-          className="default-width"
-        >
-          Event Date
-        </th>
-        <th
-          className="default-width"
-        >
-          Location
-        </th>
-        <th
-          className="default-width"
-        >
-          SMS Type
-        </th>
-        <th
-          className="default-width"
-        >
-          Reporter
-        </th>
-        <th
-          className="default-width"
-        >
-          Patient
-        </th>
-        <th
-          className="small-width"
-        >
-          Age
-        </th>
-        <th
-          className="large-width"
-        >
-          Message
-        </th>
-        <th
-          className="default-width"
-        >
-          Risk Level
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      id="body"
-    />
-  </table>
-</Table>
-`;
+exports[`components/ConnectedHeader renders correctly: table snapshot 1`] = `null`;
