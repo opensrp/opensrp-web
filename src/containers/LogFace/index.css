@@ -90,3 +90,7 @@ td {
 .small-width {
   width: 5%;
 }
+
+.paginator {
+  float: right;
+}

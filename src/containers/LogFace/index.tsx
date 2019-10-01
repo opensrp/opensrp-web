@@ -28,6 +28,7 @@ interface State {
   dropdownOpenLocation: boolean;
   dropdownOpenType: boolean;
   filteredData: SmsData[];
+  currentIndex: number;
 }
 
 const defaultprops: PropsInterface = {
@@ -63,6 +64,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
       dropdownOpenLocation: false,
       dropdownOpenType: false,
       filteredData: [],
+      // tslint:disable-next-line: object-literal-sort-keys
+      currentIndex: 1,
     };
   }
 
@@ -91,7 +94,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
     // const data = this.props.testData;
     // console.log(this.state.filteredData);
     const data = this.state.filteredData;
-
     return (
       <div className="logface-content">
         <div>
@@ -167,40 +169,63 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </tr>
             </thead>
             <tbody id="body">
-              {map(data, dataObj => {
-                return (
-                  <tr key={dataObj.event_id}>
-                    <td className="default-width">{dataObj.event_id}</td>
-                    <td className="default-width">{dataObj.EventDate}</td>
-                    <td className="default-width">{dataObj.health_worker_location_name}</td>
-                    <td className="default-width">{dataObj.sms_type}</td>
-                    <td className="default-width">{dataObj.health_worker_name}</td>
-                    <td className="default-width">{dataObj.anc_id}</td>
-                    <td className="small-width">{dataObj.age}</td>
-                    <td className="large-width">
-                      {typeof dataObj.message === 'string' &&
-                        dataObj.message.split('\n').map((item, key) => {
-                          return (
-                            <React.Fragment key={key}>
-                              {item}
-                              <br />
-                            </React.Fragment>
-                          );
-                        })}
-                    </td>
-                    <td className="default-width">
-                      <RiskColoring {...{ Risk: dataObj.logface_risk }} />
-                    </td>
-                  </tr>
-                );
-              })}
+              {map(
+                data.slice(
+                  (this.state.currentIndex - 1) * 10,
+                  (this.state.currentIndex - 1) * 10 + 10
+                ),
+                dataObj => {
+                  return (
+                    <tr key={dataObj.event_id}>
+                      <td className="default-width">{dataObj.event_id}</td>
+                      <td className="default-width">{dataObj.EventDate}</td>
+                      <td className="default-width">{dataObj.health_worker_location_name}</td>
+                      <td className="default-width">{dataObj.sms_type}</td>
+                      <td className="default-width">{dataObj.health_worker_name}</td>
+                      <td className="default-width">{dataObj.anc_id}</td>
+                      <td className="small-width">{dataObj.age}</td>
+                      <td className="large-width">
+                        {typeof dataObj.message === 'string' &&
+                          dataObj.message.split('\n').map((item, key) => {
+                            return (
+                              <React.Fragment key={key}>
+                                {item}
+                                <br />
+                              </React.Fragment>
+                            );
+                          })}
+                      </td>
+                      <td className="default-width">
+                        <RiskColoring {...{ Risk: dataObj.logface_risk }} />
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
             </tbody>
           </Table>
+        </div>
+        <div className="paginator">
+          {this.state.currentIndex < Math.ceil(data.length / 10) && (
+            <button onClick={this.nextPage}>next</button>
+          )}
+          {this.state.currentIndex > 1 && <button onClick={this.previousPage}>previous</button>}
         </div>
       </div>
     );
   }
 
+  private previousPage = () => {
+    this.setState({
+      currentIndex: this.state.currentIndex - 1,
+    });
+  };
+
+  private nextPage = () => {
+    this.setState({
+      currentIndex: this.state.currentIndex + 1,
+    });
+  };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     // console.log(e.target.innerText);
     const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
@@ -209,6 +234,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       );
     });
     this.setState({
+      currentIndex: 1,
       filteredData,
     });
   };
@@ -230,6 +256,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
     });
     this.setState({
+      currentIndex: 1,
       filteredData,
     });
   };
