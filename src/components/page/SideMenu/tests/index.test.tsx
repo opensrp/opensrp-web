@@ -3,8 +3,8 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
+import SideMenu from '..';
 import { CLIENT } from '../../../../constants';
-import SideMenu from '../SideMenu';
 
 const history = createBrowserHistory();
 

@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
-import SubMenu, { SubMenuProps } from '../SubMenu';
+import SubMenu, { SubMenuProps } from '..';
 
 const history = createBrowserHistory();
 
@@ -18,7 +18,7 @@ describe('components/page/SubMenu', () => {
       identifier: 'CLIENT',
       isCollapseMenuActive: true,
       isExpand: true,
-      parentNav: { navIcon: ['far', 'user'], navLabel: 'All client Records' },
+      parentNav: { icon: ['far', 'user'], label: 'All client Records' },
     };
     shallow(
       <Router history={history}>
@@ -29,11 +29,11 @@ describe('components/page/SubMenu', () => {
 
   it('renders expanded nav correctly', () => {
     const props: SubMenuProps = {
-      childNavs: [{ navLabel: 'Users', navURL: '/404' }, { navLabel: 'Roles', navURL: '/404' }],
+      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
       identifier: 'ADMIN',
       isCollapseMenuActive: true,
       isExpand: true,
-      parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
+      parentNav: { navIcon: ['fas', 'cog'], label: 'Admin' },
     };
     const wrapper = mount(
       <Router history={history}>
@@ -47,11 +47,11 @@ describe('components/page/SubMenu', () => {
 
   it('renders collapsed nav correctly', () => {
     const props: SubMenuProps = {
-      childNavs: [{ navLabel: 'Users', navURL: '/404' }],
+      childNavs: [{ label: 'Users', url: '/404' }],
       identifier: 'ADMIN',
       isCollapseMenuActive: true,
       isExpand: false,
-      parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
+      parentNav: { navIcon: ['fas', 'cog'], label: 'Admin' },
     };
     const wrapper = mount(
       <Router history={history}>
@@ -65,11 +65,11 @@ describe('components/page/SubMenu', () => {
   it('stimulates click and calls mock function properly', () => {
     const mockCallBack = jest.fn();
     const props: SubMenuProps = {
-      childNavs: [{ navLabel: 'Users', navURL: '/404' }],
+      childNavs: [{ label: 'Users', url: '/404' }],
       identifier: 'ADMIN',
       isCollapseMenuActive: true,
       isExpand: false,
-      parentNav: { navIcon: ['fas', 'cog'], navLabel: 'Admin' },
+      parentNav: { navIcon: ['fas', 'cog'], label: 'Admin' },
       setSideMenuToggle: mockCallBack,
     };
     const wrapper = mount(
@@ -82,5 +82,5 @@ describe('components/page/SubMenu', () => {
     wrapper.find('Nav .side-collapse-nav').simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(2);
     wrapper.unmount();
-  });
+  });\
 });
