@@ -43,4 +43,6 @@ if (ENABLE_ONADATA_OAUTH) {
   };
 }
 
+export const URLS_TO_HIDE_HEADER: string[] = ['login'];
+
 export { providers };
