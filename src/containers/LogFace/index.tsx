@@ -112,6 +112,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 placeholder="Search ID, Reporter, Patients"
                 className={`form-control`}
                 onChange={this.handleTermChange}
+                disabled={!data.length}
               />
             )}
           </Formik>
@@ -122,7 +123,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 isOpen={this.state.dropdownOpenRiskLevel}
                 toggle={this.toggleRiskLevelDropDown}
               >
-                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                <DropdownToggle
+                  variant="success"
+                  id="dropdown-basic"
+                  caret={true}
+                  disabled={!data.length}
+                >
                   Select risk
                 </DropdownToggle>
                 <DropdownMenu>
@@ -142,7 +148,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 isOpen={this.state.dropdownOpenLocation}
                 toggle={this.toggleLocationDropDown}
               >
-                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                <DropdownToggle
+                  variant="success"
+                  id="dropdown-basic"
+                  caret={true}
+                  disabled={!data.length}
+                >
                   Select Location
                 </DropdownToggle>
                 <DropdownMenu>
@@ -159,7 +170,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
             <div className="location-type-filter">
               Type
               <Dropdown isOpen={this.state.dropdownOpenType} toggle={this.toggleTypeDropDown}>
-                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                <DropdownToggle
+                  variant="success"
+                  id="dropdown-basic"
+                  caret={true}
+                  disabled={!data.length}
+                >
                   Select Type
                 </DropdownToggle>
                 <DropdownMenu>
@@ -232,10 +248,10 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <Ripple />
         )}
         <div className="paginator">
+          {this.state.currentIndex > 1 && <button onClick={this.previousPage}>previous</button>}
           {this.state.currentIndex < Math.ceil(data.length / 10) && (
             <button onClick={this.nextPage}>next</button>
           )}
-          {this.state.currentIndex > 1 && <button onClick={this.previousPage}>previous</button>}
         </div>
       </div>
     );
