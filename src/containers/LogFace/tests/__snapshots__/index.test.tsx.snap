@@ -400,6 +400,12 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 </h2>
 `;
 
+exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
+<div
+  className="paginator"
+/>
+`;
+
 exports[`components/ConnectedHeader renders correctly: search div 1`] = `
 <input
   className="form-control"
