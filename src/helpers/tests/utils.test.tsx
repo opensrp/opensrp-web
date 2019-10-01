@@ -1,7 +1,7 @@
 import * as gatekeeper from '@onaio/gatekeeper';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 
-import { oAuthUserInfoGetter } from '../utils';
+import { headerShouldRender, oAuthUserInfoGetter } from '../utils';
 
 jest.mock('@onaio/gatekeeper', () => ({
   getOnadataUserInfo: jest.fn(),
@@ -27,5 +27,10 @@ describe('helpers/utils', () => {
     oAuthUserInfoGetter(resp);
     expect(mock).toHaveBeenCalledWith(resp);
     mock.mockRestore();
+  });
+
+  it('Ensure header should render works correctly', () => {
+    window.history.pushState({}, 'Page Title', '/login');
+    expect(headerShouldRender()).toBe(true);
   });
 });
