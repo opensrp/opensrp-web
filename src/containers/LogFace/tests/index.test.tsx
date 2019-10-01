@@ -26,8 +26,10 @@ describe('components/ConnectedHeader', () => {
         <ConnectedLogFace />
       </Provider>
     );
-
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(wrapper.find('Table'))).toMatchSnapshot('table snapshot');
+    expect(toJson(wrapper.find('.location-type-filter'))).toMatchSnapshot('filter div');
+    expect(toJson(wrapper.find('input#input'))).toMatchSnapshot('search div');
+    expect(toJson(wrapper.find('#logface_title'))).toMatchSnapshot('logface title');
     wrapper.unmount();
   });
 });
