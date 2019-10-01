@@ -1,0 +1,566 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ConnectedHeader renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(LogFace)>
+    <LogFace
+      fetchTestDataActionCreator={[Function]}
+      testData={Array []}
+    >
+      <div
+        className="logface-content"
+      >
+        <div>
+          <h2
+            id="logface_title"
+          >
+            Log Face
+          </h2>
+        </div>
+        <div
+          className="filter-search-div"
+        >
+          <Formik
+            enableReinitialize={false}
+            initialValues={Object {}}
+            isInitialValid={false}
+            onSubmit={[Function]}
+            validateOnBlur={true}
+            validateOnChange={true}
+          >
+            <FormikConnect(FieldInner)
+              className="form-control"
+              id="input"
+              name="input"
+              onChange={[Function]}
+              placeholder="Search ID, Reporter, Patients"
+              type="text"
+            >
+              <FieldInner
+                className="form-control"
+                formik={
+                  Object {
+                    "dirty": false,
+                    "errors": Object {},
+                    "handleBlur": [Function],
+                    "handleChange": [Function],
+                    "handleReset": [Function],
+                    "handleSubmit": [Function],
+                    "initialValues": Object {},
+                    "isSubmitting": false,
+                    "isValid": false,
+                    "isValidating": false,
+                    "registerField": [Function],
+                    "resetForm": [Function],
+                    "setError": [Function],
+                    "setErrors": [Function],
+                    "setFieldError": [Function],
+                    "setFieldTouched": [Function],
+                    "setFieldValue": [Function],
+                    "setFormikState": [Function],
+                    "setStatus": [Function],
+                    "setSubmitting": [Function],
+                    "setTouched": [Function],
+                    "setValues": [Function],
+                    "status": undefined,
+                    "submitCount": 0,
+                    "submitForm": [Function],
+                    "touched": Object {},
+                    "unregisterField": [Function],
+                    "validate": undefined,
+                    "validateField": [Function],
+                    "validateForm": [Function],
+                    "validateOnBlur": true,
+                    "validateOnChange": true,
+                    "validationSchema": undefined,
+                    "values": Object {},
+                  }
+                }
+                id="input"
+                name="input"
+                onChange={[Function]}
+                placeholder="Search ID, Reporter, Patients"
+                type="text"
+              >
+                <input
+                  className="form-control"
+                  id="input"
+                  name="input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  placeholder="Search ID, Reporter, Patients"
+                  type="text"
+                />
+              </FieldInner>
+            </FormikConnect(FieldInner)>
+          </Formik>
+          <div
+            className="filters"
+          >
+            <div
+              className="locaiton-type-filter"
+            >
+              Risk Level
+              <Dropdown
+                active={false}
+                addonType={false}
+                direction="down"
+                inNavbar={false}
+                isOpen={false}
+                nav={false}
+                setActiveFromChild={false}
+                toggle={[Function]}
+              >
+                <Manager>
+                  <div
+                    className="dropdown"
+                    onKeyDown={[Function]}
+                  >
+                    <DropdownToggle
+                      aria-haspopup={true}
+                      caret={true}
+                      color="secondary"
+                      id="dropdown-basic"
+                      variant="success"
+                    >
+                      <Reference>
+                        <InnerReference
+                          setReferenceNode={[Function]}
+                        >
+                          <Button
+                            aria-expanded={false}
+                            aria-haspopup={true}
+                            className="dropdown-toggle"
+                            color="secondary"
+                            id="dropdown-basic"
+                            innerRef={[Function]}
+                            onClick={[Function]}
+                            tag="button"
+                            variant="success"
+                          >
+                            <button
+                              aria-expanded={false}
+                              aria-haspopup={true}
+                              aria-label={null}
+                              className="dropdown-toggle btn btn-secondary"
+                              id="dropdown-basic"
+                              onClick={[Function]}
+                              type="button"
+                              variant="success"
+                            >
+                              Select risk
+                            </button>
+                          </Button>
+                        </InnerReference>
+                      </Reference>
+                    </DropdownToggle>
+                    <DropdownMenu
+                      flip={true}
+                      tag="div"
+                    >
+                      <div
+                        aria-hidden={true}
+                        className="dropdown-menu"
+                        role="menu"
+                        tabIndex="-1"
+                      >
+                        <DropdownItem
+                          key="red"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            red
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="high"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            high
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="low"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            low
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="no risk"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            no risk
+                          </button>
+                        </DropdownItem>
+                      </div>
+                    </DropdownMenu>
+                  </div>
+                </Manager>
+              </Dropdown>
+            </div>
+            <div
+              className="location-type-filter"
+            >
+              Select Location
+              <Dropdown
+                active={false}
+                addonType={false}
+                direction="down"
+                inNavbar={false}
+                isOpen={false}
+                nav={false}
+                setActiveFromChild={false}
+                toggle={[Function]}
+              >
+                <Manager>
+                  <div
+                    className="dropdown"
+                    onKeyDown={[Function]}
+                  >
+                    <DropdownToggle
+                      aria-haspopup={true}
+                      caret={true}
+                      color="secondary"
+                      id="dropdown-basic"
+                      variant="success"
+                    >
+                      <Reference>
+                        <InnerReference
+                          setReferenceNode={[Function]}
+                        >
+                          <Button
+                            aria-expanded={false}
+                            aria-haspopup={true}
+                            className="dropdown-toggle"
+                            color="secondary"
+                            id="dropdown-basic"
+                            innerRef={[Function]}
+                            onClick={[Function]}
+                            tag="button"
+                            variant="success"
+                          >
+                            <button
+                              aria-expanded={false}
+                              aria-haspopup={true}
+                              aria-label={null}
+                              className="dropdown-toggle btn btn-secondary"
+                              id="dropdown-basic"
+                              onClick={[Function]}
+                              type="button"
+                              variant="success"
+                            >
+                              Select Location
+                            </button>
+                          </Button>
+                        </InnerReference>
+                      </Reference>
+                    </DropdownToggle>
+                    <DropdownMenu
+                      flip={true}
+                      tag="div"
+                    >
+                      <div
+                        aria-hidden={true}
+                        className="dropdown-menu"
+                        role="menu"
+                        tabIndex="-1"
+                      />
+                    </DropdownMenu>
+                  </div>
+                </Manager>
+              </Dropdown>
+            </div>
+            <div
+              className="location-type-filter"
+            >
+              Type
+              <Dropdown
+                active={false}
+                addonType={false}
+                direction="down"
+                inNavbar={false}
+                isOpen={false}
+                nav={false}
+                setActiveFromChild={false}
+                toggle={[Function]}
+              >
+                <Manager>
+                  <div
+                    className="dropdown"
+                    onKeyDown={[Function]}
+                  >
+                    <DropdownToggle
+                      aria-haspopup={true}
+                      caret={true}
+                      color="secondary"
+                      id="dropdown-basic"
+                      variant="success"
+                    >
+                      <Reference>
+                        <InnerReference
+                          setReferenceNode={[Function]}
+                        >
+                          <Button
+                            aria-expanded={false}
+                            aria-haspopup={true}
+                            className="dropdown-toggle"
+                            color="secondary"
+                            id="dropdown-basic"
+                            innerRef={[Function]}
+                            onClick={[Function]}
+                            tag="button"
+                            variant="success"
+                          >
+                            <button
+                              aria-expanded={false}
+                              aria-haspopup={true}
+                              aria-label={null}
+                              className="dropdown-toggle btn btn-secondary"
+                              id="dropdown-basic"
+                              onClick={[Function]}
+                              type="button"
+                              variant="success"
+                            >
+                              Select Type
+                            </button>
+                          </Button>
+                        </InnerReference>
+                      </Reference>
+                    </DropdownToggle>
+                    <DropdownMenu
+                      flip={true}
+                      tag="div"
+                    >
+                      <div
+                        aria-hidden={true}
+                        className="dropdown-menu"
+                        role="menu"
+                        tabIndex="-1"
+                      >
+                        <DropdownItem
+                          key="Response Report"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            Response Report
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="Red Alert Report"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            Red Alert Report
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="Social Determinants"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            Social Determinants
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="ANC Visit"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            ANC Visit
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="Delivery Planning"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            Delivery Planning
+                          </button>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="Pregnancy Detection"
+                          onClick={[Function]}
+                          tag="button"
+                          toggle={true}
+                        >
+                          <button
+                            className="dropdown-item"
+                            onClick={[Function]}
+                            role="menuitem"
+                            tabIndex="0"
+                            type="button"
+                          >
+                            Pregnancy Detection
+                          </button>
+                        </DropdownItem>
+                      </div>
+                    </DropdownMenu>
+                  </div>
+                </Manager>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
+        <div
+          className="table-container"
+        >
+          <Table
+            borderless={true}
+            responsiveTag="div"
+            striped={true}
+            tag="table"
+          >
+            <table
+              className="table table-borderless table-striped"
+            >
+              <thead
+                id="header"
+              >
+                <tr>
+                  <th
+                    className="default-width"
+                  >
+                    ID
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    Event Date
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    Location
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    SMS Type
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    Reporter
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    Patient
+                  </th>
+                  <th
+                    className="small-width"
+                  >
+                    Age
+                  </th>
+                  <th
+                    className="large-width"
+                  >
+                    Message
+                  </th>
+                  <th
+                    className="default-width"
+                  >
+                    Risk Level
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                id="body"
+              />
+            </table>
+          </Table>
+        </div>
+        <div
+          className="paginator"
+        />
+      </div>
+    </LogFace>
+  </Connect(LogFace)>
+</Provider>
+`;
