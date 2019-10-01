@@ -1,13 +1,10 @@
-import { forInStatement } from '@babel/types';
-import { authenticateUser } from '@onaio/session-reducer';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
 import ConnectedLogFace from '..';
 import store from '../../../store';
-import { fetchSms, getSmsData } from '../../../store/ducks/sms_events';
+import { fetchSms } from '../../../store/ducks/sms_events';
 import { smsSlice } from './fixtures';
 
 describe('components/ConnectedHeader', () => {
