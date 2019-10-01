@@ -25,6 +25,7 @@ interface PropsInterface {
 }
 
 interface State {
+  dropdownOpenRiskLevel: boolean;
   dropdownOpenLocation: boolean;
   dropdownOpenType: boolean;
   filteredData: SmsData[];
@@ -61,11 +62,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
     super(props);
 
     this.state = {
+      currentIndex: 1,
       dropdownOpenLocation: false,
+      dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
       filteredData: [],
-      // tslint:disable-next-line: object-literal-sort-keys
-      currentIndex: 1,
     };
   }
 
@@ -114,6 +115,26 @@ export class LogFace extends React.Component<PropsInterface, State> {
             )}
           </Formik>
           <div className="filters">
+            <div className="locaiton-type-filter">
+              Risk Level
+              <Dropdown
+                isOpen={this.state.dropdownOpenRiskLevel}
+                toggle={this.toggleRiskLevelDropDown}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  Select risk
+                </DropdownToggle>
+                <DropdownMenu>
+                  {map(['red', 'high', 'low', 'no risk'], risk => {
+                    return (
+                      <DropdownItem onClick={this.handleRiskLevelDropdownClick} key={risk}>
+                        {risk}
+                      </DropdownItem>
+                    );
+                  })}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
             <div className="location-type-filter">
               Select Location
               <Dropdown
@@ -226,6 +247,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
       currentIndex: this.state.currentIndex + 1,
     });
   };
+  private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
+    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
+      return dataItem.logface_risk.toLowerCase().includes((e.target as HTMLInputElement).innerText);
+    });
+    this.setState({
+      currentIndex: 1,
+      filteredData,
+    });
+  };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     // console.log(e.target.innerText);
     const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
@@ -278,6 +308,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private toggleLocationDropDown = () => {
     this.setState({ dropdownOpenLocation: !this.state.dropdownOpenLocation });
+  };
+
+  private toggleRiskLevelDropDown = () => {
+    this.setState({
+      dropdownOpenRiskLevel: !this.state.dropdownOpenRiskLevel,
+    });
   };
 }
 
