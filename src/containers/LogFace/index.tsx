@@ -248,9 +248,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <Ripple borderColor="#0093DB" />
         )}
         <div className="paginator">
-          {this.state.currentIndex > 1 && <button onClick={this.previousPage}>previous</button>}
+          {this.state.currentIndex > 1 && (
+            <button onClick={this.previousPage} id={'previous'}>
+              previous
+            </button>
+          )}
           {this.state.currentIndex < Math.ceil(data.length / 10) && (
-            <button onClick={this.nextPage}>next</button>
+            <button onClick={this.nextPage} id={'next'}>
+              next
+            </button>
           )}
         </div>
       </div>
