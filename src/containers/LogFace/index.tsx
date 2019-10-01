@@ -6,6 +6,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
 import supersetFetch from '../../services/superset';
@@ -174,58 +175,62 @@ export class LogFace extends React.Component<PropsInterface, State> {
             </div>
           </div>
         </div>
-        <div className="table-container">
-          <Table striped={true} borderless={true}>
-            <thead id="header">
-              <tr>
-                <th className="default-width">ID</th>
-                <th className="default-width">Event Date</th>
-                <th className="default-width">Location</th>
-                <th className="default-width">SMS Type</th>
-                <th className="default-width">Reporter</th>
-                <th className="default-width">Patient</th>
-                <th className="small-width">Age</th>
-                <th className="large-width">Message</th>
-                <th className="default-width">Risk Level</th>
-              </tr>
-            </thead>
-            <tbody id="body">
-              {map(
-                data.slice(
-                  (this.state.currentIndex - 1) * 10,
-                  (this.state.currentIndex - 1) * 10 + 10
-                ),
-                dataObj => {
-                  return (
-                    <tr key={dataObj.event_id}>
-                      <td className="default-width">{dataObj.event_id}</td>
-                      <td className="default-width">{dataObj.EventDate}</td>
-                      <td className="default-width">{dataObj.health_worker_location_name}</td>
-                      <td className="default-width">{dataObj.sms_type}</td>
-                      <td className="default-width">{dataObj.health_worker_name}</td>
-                      <td className="default-width">{dataObj.anc_id}</td>
-                      <td className="small-width">{dataObj.age}</td>
-                      <td className="large-width">
-                        {typeof dataObj.message === 'string' &&
-                          dataObj.message.split('\n').map((item, key) => {
-                            return (
-                              <React.Fragment key={key}>
-                                {item}
-                                <br />
-                              </React.Fragment>
-                            );
-                          })}
-                      </td>
-                      <td className="default-width">
-                        <RiskColoring {...{ Risk: dataObj.logface_risk }} />
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
-            </tbody>
-          </Table>
-        </div>
+        {data.length ? (
+          <div className="table-container">
+            <Table striped={true} borderless={true}>
+              <thead id="header">
+                <tr>
+                  <th className="default-width">ID</th>
+                  <th className="default-width">Event Date</th>
+                  <th className="default-width">Location</th>
+                  <th className="default-width">SMS Type</th>
+                  <th className="default-width">Reporter</th>
+                  <th className="default-width">Patient</th>
+                  <th className="small-width">Age</th>
+                  <th className="large-width">Message</th>
+                  <th className="default-width">Risk Level</th>
+                </tr>
+              </thead>
+              <tbody id="body">
+                {map(
+                  data.slice(
+                    (this.state.currentIndex - 1) * 10,
+                    (this.state.currentIndex - 1) * 10 + 10
+                  ),
+                  dataObj => {
+                    return (
+                      <tr key={dataObj.event_id}>
+                        <td className="default-width">{dataObj.event_id}</td>
+                        <td className="default-width">{dataObj.EventDate}</td>
+                        <td className="default-width">{dataObj.health_worker_location_name}</td>
+                        <td className="default-width">{dataObj.sms_type}</td>
+                        <td className="default-width">{dataObj.health_worker_name}</td>
+                        <td className="default-width">{dataObj.anc_id}</td>
+                        <td className="small-width">{dataObj.age}</td>
+                        <td className="large-width">
+                          {typeof dataObj.message === 'string' &&
+                            dataObj.message.split('\n').map((item, key) => {
+                              return (
+                                <React.Fragment key={key}>
+                                  {item}
+                                  <br />
+                                </React.Fragment>
+                              );
+                            })}
+                        </td>
+                        <td className="default-width">
+                          <RiskColoring {...{ Risk: dataObj.logface_risk }} />
+                        </td>
+                      </tr>
+                    );
+                  }
+                )}
+              </tbody>
+            </Table>
+          </div>
+        ) : (
+          <Ripple />
+        )}
         <div className="paginator">
           {this.state.currentIndex < Math.ceil(data.length / 10) && (
             <button onClick={this.nextPage}>next</button>
