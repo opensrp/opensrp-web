@@ -17,7 +17,7 @@ import {
 import logo from '../../../assets/images/logo.png';
 import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
 import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
-import { headerShouldRender } from '../../../helpers/utils';
+import { headerShouldNotRender } from '../../../helpers/utils';
 import './Header.css';
 
 /** interface for Header state */
@@ -55,7 +55,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
   }
 
   public render() {
-    if (headerShouldRender()) {
+    if (headerShouldNotRender()) {
       return null;
     }
     const { authenticated, user } = this.props;

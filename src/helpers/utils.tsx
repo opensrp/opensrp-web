@@ -25,6 +25,6 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
   }
 }
 
-export function headerShouldRender() {
+export function headerShouldNotRender() {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
