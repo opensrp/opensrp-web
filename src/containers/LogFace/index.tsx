@@ -189,6 +189,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
+            <button id="export-button">Export data</button>
           </div>
         </div>
         {data.length ? (
