@@ -102,7 +102,7 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
     });
 
     return (
-      <div>
+      <div id="sub-menu">
         <Nav className="side-collapse-nav" onClick={this.setModuleLabel}>
           <NavItem>
             {parentNav.url ? (
@@ -138,7 +138,10 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
 
   /** updates parent component with the label of the currently collapsed navigation module */
   private setModuleLabel = () => {
-    this.props.setCollapsedModuleLabel!(this.props.parentNav.label);
+    const labelAlreadySet = this.props.collapsedModuleLabel === this.props.parentNav.label;
+    labelAlreadySet && this.props.setCollapsedModuleLabel !== undefined
+      ? this.props.setCollapsedModuleLabel('')
+      : this.props.setCollapsedModuleLabel!(this.props.parentNav.label);
   };
 }
 
