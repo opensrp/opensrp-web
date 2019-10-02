@@ -50,6 +50,19 @@ export const SmsTypes = [
   'ANC Visit',
   'Delivery Planning',
   'Pregnancy Detection',
+  'Pregnancy Identification',
+  'Pregnancy registration',
+  'ANC Report',
+  'Home Visit Report',
+  'Birth Report',
+  'Death Report',
+  'Postnatal and Newborn Care',
+  'Nutrition Registration',
+  'Nutrition Report',
+  'Monthly Nutrition Report',
+  'Departure Code',
+  'Refusal Code',
+  'Account Check',
 ] as const;
 
 export { providers };
