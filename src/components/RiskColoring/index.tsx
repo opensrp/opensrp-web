@@ -15,31 +15,31 @@ const riskColoring = (props: RiskColoringProps) => {
   switch (Risk.toLowerCase()) {
     case 'no risk':
       return (
-        <span className="green" id="default-width">
+        <span className="badge badge-success" id="default-width">
           No Risk
         </span>
       );
     case 'low':
       return (
-        <span className="blue" id="default-width">
+        <span className="badge badge-primary" id="default-width">
           Low Risk
         </span>
       );
     case 'high':
       return (
-        <span className="yellow" id="default-width">
+        <span className="badge badge-warning" id="default-width">
           High Risk
         </span>
       );
     case 'red':
       return (
-        <span className="red" id="default-width">
+        <span className="badge badge-danger" id="default-width">
           Red Alert
         </span>
       );
     default:
       return (
-        <span className="risk-default" id="default-width">
+        <span className="badge badge-info" id="default-width">
           {Risk}
         </span>
       );
