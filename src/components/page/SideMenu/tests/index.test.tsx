@@ -1,10 +1,12 @@
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
+import { cloneDeep } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router';
+import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { CLIENT } from '../../../../constants';
+import { ALL_CLIENTS, CLIENT } from '../../../../constants';
 
 const history = createBrowserHistory();
 
@@ -32,40 +34,45 @@ describe('components/page/SideMenu', () => {
     wrapper.unmount();
   });
 
-  it('renders expanded menus correctly', () => {
-    const wrapper = mount(
-      <Router history={history}>
-        <SideMenu />
-      </Router>
-    );
-    /** expands first SubMenu */
-    wrapper
-      .find('Nav .side-collapse-nav')
-      .first()
-      .simulate('click');
-    expect(toJson(wrapper.find('Collapse').first())).toMatchSnapshot();
-    /** collapse first SubMenu */
-    wrapper
-      .find('Nav .side-collapse-nav')
-      .first()
-      .simulate('click');
-    expect(toJson(wrapper.find('Collapse').first())).toMatchSnapshot();
-    wrapper.unmount();
-  });
-
   it('manages state correctly', () => {
     const wrapper = mount(
       <Router history={history}>
         <SideMenu />
       </Router>
     );
-    wrapper.find('SideMenu').simulate('click');
-    expect(wrapper.find('SideMenu').state('expandedNavs')).toEqual([]);
-    wrapper
-      .find('Nav .side-collapse-nav')
-      .first()
-      .simulate('click');
-    expect(wrapper.find('SideMenu').state('expandedNavs')).toEqual([CLIENT]);
+
+    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual('');
+
+    wrapper.find(`ul#${ALL_CLIENTS.replace(' ', '-')}`).simulate('click');
+    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(ALL_CLIENTS);
+    wrapper.unmount();
+  });
+
+  it('sets the collapsedModuleLabel correctly from clicks on parentNavs', () => {
+    // clicking changes the collapsedModuleLabel state and collapses
+    // nav to reveal child navigation
+
+    const wrapper = mount(
+      <Router history={history}>
+        <SideMenu />)
+      </Router>
+    );
+
+    // starts with sub-menu as closed, not collapsed
+    const clientChildNav = wrapper.find('div.collapse.show a[href="/clients"]');
+    expect(clientChildNav.length).toEqual(0);
+    const beforeClickWrapper = toJson(wrapper);
+
+    // clicking on a parent nav changes the collapsedState for that navigation module
+    const clientParentNav = wrapper.find(`ul#${ALL_CLIENTS.replace(' ', '-')}`);
+    expect(clientParentNav.length).toEqual(1);
+    clientParentNav.simulate('click');
+    wrapper.update();
+    const afterClickWrapper = toJson(wrapper);
+
+    // isOpen value for collapsible div holding child navs changes from false to true
+    expect(snapshotDiff(beforeClickWrapper, afterClickWrapper)).toMatchSnapshot('Everything');
+
     wrapper.unmount();
   });
 });
