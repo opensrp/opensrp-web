@@ -1,12 +1,11 @@
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
-import { cloneDeep } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router';
 import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { ALL_CLIENTS, CLIENT } from '../../../../constants';
+import { ALL_CLIENTS } from '../../../../constants';
 
 const history = createBrowserHistory();
 
