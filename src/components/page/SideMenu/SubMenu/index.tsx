@@ -102,8 +102,12 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
     });
 
     return (
-      <div id="sub-menu">
-        <Nav className="side-collapse-nav" onClick={this.setModuleLabel}>
+      <div id={`sub-menu-${parentNav.label.replace(' ', '-')}`}>
+        <Nav
+          id={parentNav.label.replace(' ', '-')}
+          className="side-collapse-nav"
+          onClick={this.setModuleLabel}
+        >
           <NavItem>
             {parentNav.url ? (
               <NavLink to={parentNav.url} className={moduleLinkClassName}>
