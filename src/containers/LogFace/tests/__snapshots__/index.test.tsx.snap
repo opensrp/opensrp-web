@@ -383,6 +383,214 @@ Array [
                   Pregnancy Detection
                 </button>
               </DropdownItem>
+              <DropdownItem
+                key="Pregnancy Identification"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Pregnancy Identification
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Pregnancy registration"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Pregnancy registration
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="ANC Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  ANC Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Home Visit Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Home Visit Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Birth Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Birth Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Death Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Death Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Postnatal and Newborn Care"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Postnatal and Newborn Care
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Nutrition Registration"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Nutrition Registration
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Nutrition Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Nutrition Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Monthly Nutrition Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Monthly Nutrition Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Departure Code"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Departure Code
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Refusal Code"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Refusal Code
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Account Check"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Account Check
+                </button>
+              </DropdownItem>
             </div>
           </DropdownMenu>
         </div>
