@@ -34,16 +34,10 @@ import {
   USER_URL,
   USERS,
 } from '../../../constants';
-import {
-  ModulePageLink,
-  NavigationModule,
-  PageLink,
-  SubMenu,
-  SubMenuProps,
-} from '../SubMenu/SubMenu';
+import SubMenu, { ModulePageLink, NavigationModule, PageLink, SubMenuProps } from './SubMenu';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import './SideMenu.css';
+import './index.css';
 
 // Page links
 
@@ -149,14 +143,13 @@ const defaultSideMenuState: SideMenuState = {
   collapsedModuleLabel: '',
 };
 
-class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
+class SideMenu extends React.Component<{}, SideMenuState> {
   constructor(props: RouteComponentProps) {
     super(props);
     this.state = defaultSideMenuState;
   }
 
   public render() {
-    const pathName = this.props.location.pathname;
     const collapsedModuleLabel = this.state.collapsedModuleLabel;
 
     // props for subMenu components
@@ -164,19 +157,16 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      pathName,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      pathName,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      pathName,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     return (
@@ -200,4 +190,4 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
   };
 }
 
-export default withRouter(SideMenu);
+export default SideMenu;
