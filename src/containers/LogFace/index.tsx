@@ -112,7 +112,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 placeholder="Search ID, Reporter, Patients"
                 className={`form-control`}
                 onChange={this.handleTermChange}
-                disabled={!data.length}
+                disabled={!this.props.testData.length}
               />
             )}
           </Formik>
@@ -127,7 +127,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!data.length}
+                  disabled={!this.props.testData.length}
                 >
                   Select risk
                 </DropdownToggle>
@@ -152,7 +152,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!data.length}
+                  disabled={!this.props.testData.length}
                 >
                   Select Location
                 </DropdownToggle>
@@ -174,7 +174,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!data.length}
+                  disabled={!this.props.testData}
                 >
                   Select Type
                 </DropdownToggle>
@@ -195,7 +195,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             <button id="export-button">Export data</button>
           </div>
         </div>
-        {data.length ? (
+        {this.props.testData.length ? (
           <div className="table-container">
             <Table striped={true} borderless={true}>
               <thead id="header">
