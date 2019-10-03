@@ -132,7 +132,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   Select risk
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(['red', 'high', 'low', 'no risk'], risk => {
+                  {map(['red', 'high', 'low', 'no risk', 'all'], risk => {
                     return (
                       <DropdownItem onClick={this.handleRiskLevelDropdownClick} key={risk}>
                         {risk}
@@ -157,7 +157,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   Select Location
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(this.getAllLocations(), location => {
+                  {map(this.getAllLocations().concat('all'), location => {
                     return (
                       <DropdownItem onClick={this.handleLocationDropdownClick} key={location}>
                         {location}
@@ -186,6 +186,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       </DropdownItem>
                     );
                   })}
+                  <DropdownItem onClick={this.handleTypeDropdownClick} key={'all'}>
+                    all
+                  </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -246,7 +249,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             </Table>
           </div>
         ) : (
-          <Ripple borderColor="#0093DB" />
+          <Ripple />
         )}
         <div className="paginator">
           {this.state.currentIndex > 1 && (
@@ -276,25 +279,40 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   };
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
-    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-      return dataItem.logface_risk.toLowerCase().includes((e.target as HTMLInputElement).innerText);
-    });
-    this.setState({
-      currentIndex: 1,
-      filteredData,
-    });
+    if ((e.target as HTMLInputElement).innerText === 'all') {
+      this.setState({
+        currentIndex: 1,
+        filteredData: this.props.testData,
+      });
+    } else {
+      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
+        return dataItem.logface_risk
+          .toLowerCase()
+          .includes((e.target as HTMLInputElement).innerText);
+      });
+      this.setState({
+        currentIndex: 1,
+        filteredData,
+      });
+    }
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
-    // console.log(e.target.innerText);
-    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-      return dataItem.health_worker_location_name.includes(
-        (e.target as HTMLInputElement).innerText
-      );
-    });
-    this.setState({
-      currentIndex: 1,
-      filteredData,
-    });
+    if ((e.target as HTMLInputElement).innerText === 'all') {
+      this.setState({
+        currentIndex: 1,
+        filteredData: this.props.testData,
+      });
+    } else {
+      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
+        return dataItem.health_worker_location_name.includes(
+          (e.target as HTMLInputElement).innerText
+        );
+      });
+      this.setState({
+        currentIndex: 1,
+        filteredData,
+      });
+    }
   };
 
   private getAllLocations = (): string[] => {
@@ -309,14 +327,20 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
-    // get e.target.innerText and use it to filter location
-    const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-      return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
-    });
-    this.setState({
-      currentIndex: 1,
-      filteredData,
-    });
+    if ((e.target as HTMLInputElement).innerText === 'all') {
+      this.setState({
+        currentIndex: 1,
+        filteredData: this.props.testData,
+      });
+    } else {
+      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
+        return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
+      });
+      this.setState({
+        currentIndex: 1,
+        filteredData,
+      });
+    }
   };
 
   private filterData(filterString: string): SmsData[] {
