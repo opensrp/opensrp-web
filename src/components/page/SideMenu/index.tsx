@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { Col, Row } from 'reactstrap';
 import { ENABLE_REPORT_MODULE } from '../../../configs/env';
 import {
