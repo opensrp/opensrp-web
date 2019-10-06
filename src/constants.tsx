@@ -52,3 +52,7 @@ export const TEAMS = 'Teams';
 export type TEAMS = typeof TEAMS;
 export const LOCATIONS = 'Locations';
 export type LOCATIONS = typeof LOCATIONS;
+export const LOGIN = 'Login';
+export type LOGIN = typeof LOGIN;
+export const SIGN_OUT = 'Sign Out';
+export type SIGN_OUT = typeof SIGN_OUT;
