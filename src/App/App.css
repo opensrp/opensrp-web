@@ -71,15 +71,18 @@ fieldset[disabled] .gatekeeper-btn.active {
   overflow-x: hidden;
   height: 100%;
   position: fixed;
-  background-color: #f8f9fd;
+  background-color: inherit;
   box-shadow: inset -1px 0 0 0 #dfe3e8;
 }
 
 .container-section {
   margin-left: 16%;
   margin-top: 68px;
+  padding: 24px;
 }
-
+.main-page-row {
+  background-color: #f8f9fd;
+}
 @media screen and (min-width: 700px) and (max-width: 1360px) {
   .side-menu-container {
     font-size: 80%;
