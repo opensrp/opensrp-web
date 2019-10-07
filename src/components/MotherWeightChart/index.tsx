@@ -34,7 +34,7 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
 
       series: [
         {
-          data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
+          data: [1, 2, 3, 4, 5, 6, 2, 3, 1, 4, 1],
           name: 'Installation',
           type: undefined,
         },
