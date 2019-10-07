@@ -18,6 +18,7 @@ import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
+import PatientDetails from '../containers/PatientDetails';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
 library.add(faUser);
