@@ -136,6 +136,22 @@ Array [
                   no risk
                 </button>
               </DropdownItem>
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
+                </button>
+              </DropdownItem>
             </div>
           </DropdownMenu>
         </div>
@@ -211,7 +227,24 @@ Array [
               className="dropdown-menu"
               role="menu"
               tabIndex="-1"
-            />
+            >
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
+                </button>
+              </DropdownItem>
+            </div>
           </DropdownMenu>
         </div>
       </Manager>
@@ -240,7 +273,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
-            disabled={true}
+            disabled={false}
             id="dropdown-basic"
             variant="success"
           >
@@ -253,7 +286,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
-                  disabled={true}
+                  disabled={false}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -264,8 +297,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary disabled"
-                    disabled={true}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -589,6 +622,22 @@ Array [
                   type="button"
                 >
                   Account Check
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
                 </button>
               </DropdownItem>
             </div>
