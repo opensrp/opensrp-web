@@ -25,3 +25,21 @@
 .risk-default {
   background-color: None;
 }
+
+.badge {
+  padding: 0;
+  width: 60%;
+  height: 25px;
+  border-radius: 1.25em;
+}
+
+.badge div {
+  height: 100%;
+  position: relative;
+}
+
+.badge div p {
+  text-align: center;
+  position: relative;
+  top: 35%;
+}

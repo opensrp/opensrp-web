@@ -110,7 +110,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 name="input"
                 id="input"
                 placeholder="Search ID, Reporter, Patients"
-                className={`form-control`}
+                className={`form-control logface-search`}
                 onChange={this.handleTermChange}
                 disabled={!this.props.testData.length}
               />
@@ -129,7 +129,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData.length}
                 >
-                  Select risk
+                  <span>Select risk</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(['red', 'high', 'low', 'no risk', 'all'], risk => {
@@ -154,7 +154,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData.length}
                 >
-                  Select Location
+                  <span>Select Location</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(this.getAllLocations().concat('all'), location => {
@@ -176,7 +176,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData}
                 >
-                  Select Type
+                  <span>Select Type</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(SmsTypes, type => {

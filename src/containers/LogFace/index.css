@@ -1,5 +1,5 @@
 thead {
-  width: 98%;
+  width: 100%;
   position: absolute;
   display: table;
 }
@@ -25,11 +25,20 @@ td {
   font-size: 10;
 }
 
+.main-container .content {
+  margin: 20px 70px 20px 20px;
+}
+
 .table-container {
   font-size: 11px;
   height: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 2px 4px 0 #d7d7e0;
   display: block;
+}
+
+.table-container table {
+  border: none !important;
+  background: #fff;
 }
 
 .filter-search-div {
@@ -44,6 +53,7 @@ td {
   justify-content: flex-start;
   margin-left: 3%;
   flex-grow: 2;
+  padding: 0 0 20px;
 }
 
 .location-type-filter {
@@ -73,7 +83,7 @@ td {
 }
 
 #header {
-  position: sticky;
+  position: relative;
   top: 0;
   height: 50px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
@@ -100,16 +110,44 @@ td {
   float: right;
 }
 
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff !important;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(117, 117, 117, 0.05) !important;
+}
+
 #export-button {
   align-self: center;
   margin-left: auto;
-  margin-right: 5%;
   margin-top: 2em;
   background: #0093db;
   color: #fff;
-  border-radius: 2px;
+  border-radius: 3px;
+  border: 1px solid #0093db;
   width: 120px;
   height: 32px;
+}
+
+.filters .location-type-filter .dropdown button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  height: 40px;
+}
+
+.filters .location-type-filter .dropdown button {
+  color: inherit;
+}
+
+.dropdown button span {
+  padding-right: 35px;
+  color: #666666;
+}
+
+.filter-search-div input.logface-search {
+  border-radius: 0;
+  width: 25%;
 }
 
 .btn-secondary {

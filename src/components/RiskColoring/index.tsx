@@ -16,25 +16,41 @@ const riskColoring = (props: RiskColoringProps) => {
     case 'no risk':
       return (
         <span className="badge badge-success" id="default-width">
-          No Risk
+          <div>
+            <p>No Risk</p>
+          </div>
         </span>
       );
     case 'low':
       return (
         <span className="badge badge-primary" id="default-width">
-          Low Risk
+          <div>
+            <p>Low Risk</p>
+          </div>
         </span>
       );
     case 'high':
       return (
         <span className="badge badge-warning" id="default-width">
-          High Risk
+          <div>
+            <p>High Risk</p>
+          </div>
         </span>
       );
     case 'red':
       return (
         <span className="badge badge-danger" id="default-width">
-          Red Alert
+          <div>
+            <p>Red Alert</p>
+          </div>
+        </span>
+      );
+    case 'not set':
+      return (
+        <span className="badge badge-info" id="default-width">
+          <div>
+            <p>Not Set</p>
+          </div>
         </span>
       );
     default:
