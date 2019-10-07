@@ -1,41 +1,47 @@
 import * as Highcharts from 'highcharts';
 import * as React from 'react';
+import './index.css';
 
 export default class MotherWeightChart extends React.Component<{}, {}> {
   public componentDidMount() {
-    Highcharts.chart('container', {
+    Highcharts.chart('chart-wrapper', {
+      chart: {
+        type: 'line',
+        width: 0.7 * window.innerWidth,
+      },
       legend: {
         align: 'right',
         layout: 'vertical',
         verticalAlign: 'middle',
       },
       title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016',
+        text: "Mother's Weight Tracking",
       },
 
       subtitle: {
-        text: 'Source: thesolarfoundation.com',
+        text: undefined,
       },
 
       yAxis: {
         title: {
-          text: 'Number of Employees',
+          text: "mother's weight",
         },
       },
 
-      plotOptions: {
-        series: {
-          label: {
-            connectorAllowed: false,
-          },
-          pointStart: 2010,
+      xAxis: {
+        type: 'datetime',
+        // tslint:disable-next-line: object-literal-sort-keys
+        dateTimeLabelFormats: {
+          day: '%b %Y',
         },
       },
 
       series: [
         {
-          data: [1, 2, 3, 4, 5, 6, 2, 3, 1, 4, 1],
-          name: 'Installation',
+          data: [78, 99, 99, 98, 90, 100, 89, 100],
+          name: 'weight',
+          pointInterval: 24 * 3600 * 1000,
+          pointStart: Date.UTC(2010, 0, 1),
           type: undefined,
         },
       ] as any,
@@ -59,6 +65,6 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
     });
   }
   public render() {
-    return <div id="container" />;
+    return <div id="chart-wrapper" />;
   }
 }
