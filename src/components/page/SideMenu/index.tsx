@@ -19,7 +19,7 @@ import {
   ANC_URL,
   CHILD,
   CHILD_URL,
-  CLIENT,
+  CLIENT_RECORDS,
   CLIENT_URL,
   HOUSEHOLD,
   HOUSEHOLD_URL,
@@ -42,7 +42,7 @@ import './index.css';
 // Page links
 
 export const CLIENT_PAGE_NAVIGATION: PageLink = {
-  label: CLIENT,
+  label: ALL_CLIENTS,
   url: CLIENT_URL,
 };
 export const HOUSEHOLD_PAGE_NAVIGATION: PageLink = {
@@ -84,7 +84,7 @@ export const adminModuleNavIcon: IconProp = ['fas', 'cog'];
 
 export const CLIENT_MODULE_PARENT_NAV: ModulePageLink = {
   icon: clientModuleNavIcon,
-  label: ALL_CLIENTS,
+  label: CLIENT_RECORDS,
 };
 export const REPORT_MODULE_PARENT_NAV: ModulePageLink = {
   icon: reportModuleNavIcon,
