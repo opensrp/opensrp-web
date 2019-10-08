@@ -16,3 +16,15 @@
 .left {
   text-align: left;
 }
+
+.row {
+  margin: auto;
+}
+
+#detailsRow {
+  width: 84%;
+}
+
+#detailsCard {
+  width: 100%;
+}
