@@ -1,5 +1,6 @@
 import * as Highcharts from 'highcharts';
 import * as React from 'react';
+import { Card } from 'reactstrap';
 import './index.css';
 
 export default class MotherWeightChart extends React.Component<{}, {}> {
@@ -7,7 +8,7 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
     Highcharts.chart('chart-wrapper', {
       chart: {
         type: 'line',
-        width: 0.7 * window.innerWidth,
+        width: 0.8 * window.innerWidth,
       },
       legend: {
         align: 'right',
@@ -57,7 +58,7 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
               },
             },
             condition: {
-              maxWidth: 500,
+              maxWidth: 5000,
             },
           },
         ],
@@ -65,6 +66,10 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
     });
   }
   public render() {
-    return <div id="chart-wrapper" />;
+    return (
+      <Card>
+        <div id="chart-wrapper" />
+      </Card>
+    );
   }
 }
