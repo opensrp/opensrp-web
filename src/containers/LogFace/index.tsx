@@ -29,6 +29,9 @@ interface State {
   dropdownOpenRiskLevel: boolean;
   dropdownOpenLocation: boolean;
   dropdownOpenType: boolean;
+  riskLabel: string;
+  locationLabel: string;
+  typeLabel: string;
   filteredData: SmsData[];
   currentIndex: number;
 }
@@ -68,6 +71,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
       dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
       filteredData: [],
+      locationLabel: '',
+      riskLabel: '',
+      typeLabel: '',
     };
   }
 
@@ -118,7 +124,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
           </Formik>
           <div className="filters">
             <div className="location-type-filter">
-              Risk Level
+              <span>Risk Level</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenRiskLevel}
                 toggle={this.toggleRiskLevelDropDown}
@@ -129,7 +135,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData.length}
                 >
-                  <span>Select risk</span>
+                  <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(['red', 'high', 'low', 'no risk', 'all'], risk => {
@@ -143,7 +149,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              Select Location
+              <span>Select Location</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenLocation}
                 toggle={this.toggleLocationDropDown}
@@ -154,7 +160,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData.length}
                 >
-                  <span>Select Location</span>
+                  <span>
+                    {this.state.locationLabel.length ? this.state.locationLabel : 'Select Location'}
+                  </span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(this.getAllLocations().concat('all'), location => {
@@ -168,7 +176,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              Type
+              <span>Type</span>
               <Dropdown isOpen={this.state.dropdownOpenType} toggle={this.toggleTypeDropDown}>
                 <DropdownToggle
                   variant="success"
@@ -176,7 +184,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.testData}
                 >
-                  <span>Select Type</span>
+                  <span>{this.state.typeLabel.length ? this.state.typeLabel : 'Select Type'}</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(SmsTypes, type => {
@@ -283,6 +291,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData: this.props.testData,
+        riskLabel: (e.target as HTMLInputElement).innerText,
       });
     } else {
       const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
@@ -293,6 +302,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData,
+        riskLabel: (e.target as HTMLInputElement).innerText,
       });
     }
   };
@@ -301,6 +311,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData: this.props.testData,
+        locationLabel: (e.target as HTMLInputElement).innerText,
       });
     } else {
       const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
@@ -311,6 +322,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData,
+        locationLabel: (e.target as HTMLInputElement).innerText,
       });
     }
   };
@@ -331,6 +343,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData: this.props.testData,
+        typeLabel: (e.target as HTMLInputElement).innerText,
       });
     } else {
       const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
@@ -339,6 +352,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       this.setState({
         currentIndex: 1,
         filteredData,
+        typeLabel: (e.target as HTMLInputElement).innerText,
       });
     }
   };
