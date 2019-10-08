@@ -3,7 +3,7 @@
 exports[`components/page/SideMenu renders side menu correctly 1`] = `
 <ul
   className="side-collapse-nav nav"
-  id="All-clients"
+  id="Client-Records"
   onClick={[Function]}
 >
   <NavItem
@@ -60,7 +60,7 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
           className="collapse-menu-title"
         >
            
-          All clients
+          Client Records
            
         </span>
       </span>
@@ -74,33 +74,33 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -65,11 +65,11 @@
-                        \\"label\\": \\"Child\\",
-                        \\"url\\": \\"/404\\",
+@@ -53,11 +53,11 @@
+                        \\"label\\": \\"All clients\\",
+                        \\"url\\": \\"/clients\\",
                       },
                     ]
                   }
 -                 collapsedModuleLabel=\\"\\"
-+                 collapsedModuleLabel=\\"All clients\\"
++                 collapsedModuleLabel=\\"Client Records\\"
                   parentNav={
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
                         \\"user\\",
-@@ -98,11 +98,11 @@
-                          \\"label\\": \\"Child\\",
-                          \\"url\\": \\"/404\\",
+@@ -74,11 +74,11 @@
+                          \\"label\\": \\"All clients\\",
+                          \\"url\\": \\"/clients\\",
                         },
                       ]
                     }
 -                   collapsedModuleLabel=\\"\\"
-+                   collapsedModuleLabel=\\"All clients\\"
++                   collapsedModuleLabel=\\"Client Records\\"
                     history={
                       Object {
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -228,11 +228,11 @@
+@@ -204,11 +204,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -113,7 +113,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -244,11 +244,11 @@
+@@ -220,11 +220,11 @@
                       >
                         <Transition
                           appear={false}
@@ -126,7 +126,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -256,12 +256,16 @@
+@@ -232,12 +232,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
@@ -144,57 +144,5 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             <Nav
                               key=\\"child-nav-0\\"
                               tag=\\"ul\\"
-                              vertical={false}
-@@ -439,11 +443,11 @@
-                    </div>
-                  </SubMenu>
-                </withRouter(SubMenu)>
-                <withRouter(SubMenu)
-                  childNavs={Array []}
--                 collapsedModuleLabel=\\"\\"
-+                 collapsedModuleLabel=\\"All clients\\"
-                  parentNav={
-                    Object {
-                      \\"icon\\": Array [
-                        \\"fas\\",
-                        \\"chart-line\\",
-@@ -454,11 +458,11 @@
-                  }
-                  setCollapsedModuleLabel={[Function anonymous]}
-                >
-                  <SubMenu
-                    childNavs={Array []}
--                   collapsedModuleLabel=\\"\\"
-+                   collapsedModuleLabel=\\"All clients\\"
-                    history={
-                      Object {
-                        \\"action\\": \\"POP\\",
-                        \\"block\\": [Function block],
-                        \\"createHref\\": [Function createHref],
-@@ -656,11 +660,11 @@
-                        \\"label\\": \\"Locations\\",
-                        \\"url\\": \\"/404\\",
-                      },
-                    ]
-                  }
--                 collapsedModuleLabel=\\"\\"
-+                 collapsedModuleLabel=\\"All clients\\"
-                  parentNav={
-                    Object {
-                      \\"icon\\": Array [
-                        \\"fas\\",
-                        \\"cog\\",
-@@ -689,11 +693,11 @@
-                          \\"label\\": \\"Locations\\",
-                          \\"url\\": \\"/404\\",
-                        },
-                      ]
-                    }
--                   collapsedModuleLabel=\\"\\"
-+                   collapsedModuleLabel=\\"All clients\\"
-                    history={
-                      Object {
-                        \\"action\\": \\"POP\\",
-                        \\"block\\": [Function block],
-                        \\"createHref\\": [Function createHref],"
+                              vertical={false}"
 `;
