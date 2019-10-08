@@ -82,6 +82,10 @@ td {
   border-left: 5px solid rgb(23, 181, 255);
 }
 
+.logface-content .table-container table .badge-warning {
+  color: #fff;
+}
+
 #header {
   position: relative;
   top: 0;
@@ -121,7 +125,7 @@ td {
 #export-button {
   align-self: center;
   margin-left: auto;
-  margin-top: 2em;
+  margin-top: 1em;
   background: #0093db;
   color: #fff;
   border-radius: 3px;
@@ -140,14 +144,33 @@ td {
   color: inherit;
 }
 
+.filters .location-type-filter .dropdown button:focus {
+  background-color: inherit;
+}
+
 .dropdown button span {
   padding-right: 35px;
   color: #666666;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.filters .location-type-filter span {
+  color: #212121;
 }
 
 .filter-search-div input.logface-search {
   border-radius: 0;
+  margin-top: 35px;
   width: 25%;
+  background: url('../../assets/images/search-icon.svg') no-repeat;
+  background-position: 3% 50%;
+  padding-left: 35px;
+  box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
+}
+
+.filter-search-div input.logface-search::placeholder {
+  color: #c2c2c2;
 }
 
 .btn-secondary {

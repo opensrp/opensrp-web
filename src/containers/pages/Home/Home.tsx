@@ -24,6 +24,7 @@ class Home extends React.Component<{}, {}> {
               <div className="sub-container-heading">
                 <p>Log face</p>
               </div>
+              <hr />
               <div className="sub-container-message">
                 <div id="cont-size">
                   <p>Display of all messages receioved from MIECD in chronological order</p>
@@ -41,6 +42,7 @@ class Home extends React.Component<{}, {}> {
               <div className="sub-container-heading">
                 <p>Client</p>
               </div>
+              <hr />
               <div className="sub-container-message">
                 <div id="cont-size">
                   <p>This is the aggregation and categorization of patients data</p>
@@ -56,6 +58,7 @@ class Home extends React.Component<{}, {}> {
               <div className="sub-container-heading">
                 <p>Analysis</p>
               </div>
+              <hr />
               <div className="sub-container-message">
                 <div id="cont-size">
                   <p>Important analysis and indicators generated from collected data</p>

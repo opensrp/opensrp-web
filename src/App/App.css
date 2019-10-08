@@ -70,10 +70,6 @@ fieldset[disabled] .gatekeeper-btn.active {
   background-color: #ffffff;
 }
 
-.main-container {
-  background-color: #f9fdff;
-}
-
 /* .home-main {
   padding: 20px 20px
 } */
@@ -87,6 +83,19 @@ fieldset[disabled] .gatekeeper-btn.active {
   border: 0;
   margin: 0;
   padding: 0;
+}
+
+.main-app-container .main-container {
+  top: 60px;
+  height: calc(100% - 60px);
+  position: relative;
+}
+
+.main-app-container .navbar {
+  height: 60px;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 }
 
 .content {

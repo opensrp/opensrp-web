@@ -1,6 +1,10 @@
 #image-settings {
-  width: 15vw;
-  height: 7vh;
+  width: 15%;
+  height: 100%;
+}
+
+.main-app-container .main-container .sidebar {
+  position: relative;
 }
 
 .navbar {

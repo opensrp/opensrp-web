@@ -5,6 +5,7 @@
 .components-list {
   display: flex;
   height: 40vh;
+  padding-left: 25px;
 }
 
 .nav {
@@ -32,9 +33,11 @@
 }
 
 .button-style {
-  padding: 10px 20px;
+  padding: 14px 20px;
   border: 1px solid rgb(55, 175, 255);
-  width: 75%;
+  width: 100%;
+  color: #ffffff;
+  background: #0093db;
 }
 
 .home-sub-containers {
@@ -47,15 +50,15 @@
 }
 
 .sub-container-heading {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 1.2rem;
+  border: none;
+  font-size: 22px;
+  margin: 5px 5px 5px 20px;
   text-align: left;
-  height: 16%;
 }
 
 .sub-container-message {
   font-size: 1rem;
-  margin: 10%;
+  margin: 5%;
   height: 84%;
 }
 
@@ -71,9 +74,17 @@ h4 p {
 
 #cont-size {
   height: 50%;
+  color: #637381;
+}
+
+.home-sub-containers hr {
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 #cont-sized {
-  height: 50%;
+  top: 15px;
+  background: #0093db;
+  position: relative;
   text-align: center;
 }
