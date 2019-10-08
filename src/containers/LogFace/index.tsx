@@ -9,6 +9,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
+import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
@@ -275,6 +276,22 @@ export class LogFace extends React.Component<PropsInterface, State> {
     );
   }
 
+  private isAllSelected = (e: React.MouseEvent) => {
+    return (e.target as HTMLInputElement).innerText === 'all';
+  };
+
+  private getFilteredData = (
+    e: React.MouseEvent,
+    data: SmsData[],
+    field: string,
+    lowerCase: boolean
+  ) => {
+    return data.filter((dataItem: FlexObject) => {
+      const val = lowerCase ? dataItem[field].toLowerCase() : dataItem[field];
+      return val.includes((e.target as HTMLInputElement).innerText);
+    });
+  };
+
   private previousPage = () => {
     this.setState({
       currentIndex: this.state.currentIndex - 1,
@@ -287,44 +304,22 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   };
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLInputElement).innerText === 'all') {
-      this.setState({
-        currentIndex: 1,
-        filteredData: this.props.testData,
-        riskLabel: (e.target as HTMLInputElement).innerText,
-      });
-    } else {
-      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-        return dataItem.logface_risk
-          .toLowerCase()
-          .includes((e.target as HTMLInputElement).innerText);
-      });
-      this.setState({
-        currentIndex: 1,
-        filteredData,
-        riskLabel: (e.target as HTMLInputElement).innerText,
-      });
-    }
+    this.setState({
+      currentIndex: 1,
+      filteredData: this.isAllSelected(e)
+        ? this.props.testData
+        : this.getFilteredData(e, this.props.testData, 'logface_risk', true),
+      riskLabel: (e.target as HTMLInputElement).innerText,
+    });
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLInputElement).innerText === 'all') {
-      this.setState({
-        currentIndex: 1,
-        filteredData: this.props.testData,
-        locationLabel: (e.target as HTMLInputElement).innerText,
-      });
-    } else {
-      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-        return dataItem.health_worker_location_name.includes(
-          (e.target as HTMLInputElement).innerText
-        );
-      });
-      this.setState({
-        currentIndex: 1,
-        filteredData,
-        locationLabel: (e.target as HTMLInputElement).innerText,
-      });
-    }
+    this.setState({
+      currentIndex: 1,
+      filteredData: this.isAllSelected(e)
+        ? this.props.testData
+        : this.getFilteredData(e, this.props.testData, 'health_worker_location_name', false),
+      locationLabel: (e.target as HTMLInputElement).innerText,
+    });
   };
 
   private getAllLocations = (): string[] => {
@@ -339,22 +334,13 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLInputElement).innerText === 'all') {
-      this.setState({
-        currentIndex: 1,
-        filteredData: this.props.testData,
-        typeLabel: (e.target as HTMLInputElement).innerText,
-      });
-    } else {
-      const filteredData: SmsData[] = this.props.testData.filter(dataItem => {
-        return dataItem.sms_type.includes((e.target as HTMLInputElement).innerText);
-      });
-      this.setState({
-        currentIndex: 1,
-        filteredData,
-        typeLabel: (e.target as HTMLInputElement).innerText,
-      });
-    }
+    this.setState({
+      currentIndex: 1,
+      filteredData: this.isAllSelected(e)
+        ? this.props.testData
+        : this.getFilteredData(e, this.props.testData, 'sms_type', false),
+      typeLabel: (e.target as HTMLInputElement).innerText,
+    });
   };
 
   private filterData(filterString: string): SmsData[] {
