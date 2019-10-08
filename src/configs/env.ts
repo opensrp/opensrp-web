@@ -9,39 +9,40 @@ export const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME || 'http://localhos
 export type DOMAIN_NAME = typeof DOMAIN_NAME;
 
 /** Do you want to enable the Client Page of Client Records Module? */
-export const ENABLE_CLIENT_PAGE = process.env.REACT_APP_ENABLE_CLIENT_PAGE === 'true';
+export const ENABLE_CLIENT_PAGE = process.env.REACT_APP_ENABLE_CLIENT_PAGE === 'true' || false;
 export type ENABLE_CLIENT_PAGE = typeof ENABLE_CLIENT_PAGE;
 
 /** Do you want to enable the Household Page of Client Records Module? */
-export const ENABLE_HOUSEHOLD_PAGE = process.env.REACT_APP_ENABLE_HOUSEHOLD_PAGE === 'true';
+export const ENABLE_HOUSEHOLD_PAGE =
+  process.env.REACT_APP_ENABLE_HOUSEHOLD_PAGE === 'true' || false;
 export type ENABLE_HOUSEHOLD_PAGE = typeof ENABLE_HOUSEHOLD_PAGE;
 
 /** Do you want to enable the ANC Page of Client Records Module? */
-export const ENABLE_ANC_PAGE = process.env.REACT_APP_ENABLE_ANC_PAGE === 'true';
+export const ENABLE_ANC_PAGE = process.env.REACT_APP_ENABLE_ANC_PAGE === 'true' || false;
 export type ENABLE_ANC_PAGE = typeof ENABLE_ANC_PAGE;
 
 /** Do you want to enable the Child Page of Client Records Module? */
-export const ENABLE_CHILD_PAGE = process.env.REACT_APP_ENABLE_CHILD_PAGE === 'true';
+export const ENABLE_CHILD_PAGE = process.env.REACT_APP_ENABLE_CHILD_PAGE === 'true' || false;
 export type ENABLE_CHILD_PAGE = typeof ENABLE_CHILD_PAGE;
 
 /** Do you want to enable the Reports Module? */
-export const ENABLE_REPORT_MODULE = process.env.REACT_APP_ENABLE_REPORT_MODULE === 'true';
+export const ENABLE_REPORT_MODULE = process.env.REACT_APP_ENABLE_REPORT_MODULE === 'true' || false;
 export type ENABLE_REPORT_MODULE = typeof ENABLE_REPORT_MODULE;
 
 /** Do you want to enable User page of Admin Module? */
-export const ENABLE_USER_PAGE = process.env.REACT_APP_ENABLE_USER_PAGE === 'true';
+export const ENABLE_USER_PAGE = process.env.REACT_APP_ENABLE_USER_PAGE === 'true' || false;
 export type ENABLE_USER_PAGE = typeof ENABLE_USER_PAGE;
 
 /** Do you want to enable Role page of Admin Module? */
-export const ENABLE_ROLE_PAGE = process.env.REACT_APP_ENABLE_ROLE_PAGE === 'true';
+export const ENABLE_ROLE_PAGE = process.env.REACT_APP_ENABLE_ROLE_PAGE === 'true' || false;
 export type ENABLE_ROLE_PAGE = typeof ENABLE_ROLE_PAGE;
 
 /** Do you want to enable Team page of Admin Module? */
-export const ENABLE_TEAM_PAGE = process.env.REACT_APP_ENABLE_TEAM_PAGE === 'true';
+export const ENABLE_TEAM_PAGE = process.env.REACT_APP_ENABLE_TEAM_PAGE === 'true' || false;
 export type ENABLE_TEAM_PAGE = typeof ENABLE_TEAM_PAGE;
 
 /** Do you want to enable Location page of Admin Module? */
-export const ENABLE_LOCATION_PAGE = process.env.REACT_APP_ENABLE_LOCATION_PAGE === 'true';
+export const ENABLE_LOCATION_PAGE = process.env.REACT_APP_ENABLE_LOCATION_PAGE === 'true' || false;
 export type ENABLE_LOCATION_PAGE = typeof ENABLE_LOCATION_PAGE;
 
 /** Do you want to disable login protection? */

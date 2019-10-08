@@ -9,7 +9,7 @@ class Home extends React.Component<{}, {}> {
       <div className="text-center">
         <Row className="welcome-box">
           <Col>
-            <h3>Welcome to OpenSRp</h3>
+            <h3>Welcome to OpenSRP</h3>
           </Col>
         </Row>
       </div>
