@@ -5,7 +5,7 @@ import React from 'react';
 import { Router } from 'react-router';
 import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { ALL_CLIENTS } from '../../../../constants';
+import { CLIENT_RECORDS } from '../../../../constants';
 
 const history = createBrowserHistory();
 
@@ -42,8 +42,8 @@ describe('components/page/SideMenu', () => {
 
     expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual('');
 
-    wrapper.find(`ul#${ALL_CLIENTS.replace(' ', '-')}`).simulate('click');
-    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(ALL_CLIENTS);
+    wrapper.find(`ul#${CLIENT_RECORDS.replace(' ', '-')}`).simulate('click');
+    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(CLIENT_RECORDS);
     wrapper.unmount();
   });
 
@@ -63,7 +63,7 @@ describe('components/page/SideMenu', () => {
     const beforeClickWrapper = toJson(wrapper);
 
     // clicking on a parent nav changes the collapsedState for that navigation module
-    const clientParentNav = wrapper.find(`ul#${ALL_CLIENTS.replace(' ', '-')}`);
+    const clientParentNav = wrapper.find(`ul#${CLIENT_RECORDS.replace(' ', '-')}`);
     expect(clientParentNav.length).toEqual(1);
     clientParentNav.simulate('click');
     wrapper.update();
