@@ -67,7 +67,6 @@ fieldset[disabled] .gatekeeper-btn.active {
 }
 
 .side-menu-section {
-  z-index: 1;
   overflow-x: hidden;
   height: 100%;
   position: fixed;
