@@ -47,9 +47,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  
-                    <button className="button-style">View</button>
-                  
+                  <button className="button-style">View</button>
                 </div>
               </div>
             </div>
@@ -67,9 +65,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  
-                    <button className="button-style">View</button>
-                  
+                  <button className="button-style">View</button>
                 </div>
               </div>
             </div>

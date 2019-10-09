@@ -54,6 +54,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
   }
 
   public render() {
+    console.log("fg ", this.props.authenticated)
     if (headerShouldNotRender()) {
       return null;
     }

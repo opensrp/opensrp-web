@@ -78,6 +78,10 @@ fieldset[disabled] .gatekeeper-btn.active {
   width: 15vw;
 }
 
+.hidden-container {
+  display: none !important;
+}
+
 .main-app-container {
   height: 100vh;
   border: 0;
