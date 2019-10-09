@@ -12,7 +12,7 @@ interface State {
 }
 export default class MotherWeightChart extends React.Component<Props, State> {
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    if (prevState.chart.series) {
+    if (prevState.chart && prevState.chart.series) {
       return {
         chart: prevState.chart.series[0].setData(nextProps.weights),
       };
