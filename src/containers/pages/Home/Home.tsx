@@ -11,28 +11,24 @@ class Home extends React.Component<{}, {}> {
     return (
       <div className="home-main">
         <div className="welcome-text">
-          <h1>Welcome to the pregnancy dashboard</h1>
-          <p>
-            This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
-            patients in your geographical location. The Module covers the whole pregnancy period
-            from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
-            reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
-          </p>
+          <h1>Welcome to the MIECD dashboard</h1>
         </div>
         <div className="components-list">
           <div className="spacer">
             <div className="home-sub-containers">
-              <div className="sub-container-heading">
+              {/* <div className="sub-container-heading">
                 <p>Log face</p>
-              </div>
-              <hr />
+              </div> */}
               <div className="sub-container-message">
                 <div id="cont-size">
-                  <p>Display of all messages receioved from MIECD in chronological order</p>
+                  <h1>Pregnancy</h1>
+                </div>
+                <div id="cont-size">
+                  <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <Link to={LOGFACE_URL}>
-                    <button className="button-style">View</button>
+                  <Link to={'/pregnancy'}>
+                    <button className="button-style default">View</button>
                   </Link>
                 </div>
               </div>
@@ -40,32 +36,40 @@ class Home extends React.Component<{}, {}> {
           </div>
           <div className="spacer">
             <div className="home-sub-containers">
-              <div className="sub-container-heading">
-                <p>Client</p>
-              </div>
-              <hr />
+              {/* <div className="sub-container-heading">
+                <p>Log face</p>
+              </div> */}
               <div className="sub-container-message">
                 <div id="cont-size">
-                  <p>This is the aggregation and categorization of patients data</p>
+                  <h1>NBC & PNC</h1>
+                </div>
+                <div id="cont-size">
+                  <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  
+                    <button className="button-style">View</button>
+                  
                 </div>
               </div>
             </div>
           </div>
           <div className="spacer">
             <div className="home-sub-containers">
-              <div className="sub-container-heading">
-                <p>Analysis</p>
-              </div>
-              <hr />
+              {/* <div className="sub-container-heading">
+                <p>Log face</p>
+              </div> */}
               <div className="sub-container-message">
                 <div id="cont-size">
-                  <p>Important analysis and indicators generated from collected data</p>
+                  <h1>Nutrition</h1>
+                </div>
+                <div id="cont-size">
+                  <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  
+                    <button className="button-style">View</button>
+                  
                 </div>
               </div>
             </div>

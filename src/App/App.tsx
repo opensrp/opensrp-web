@@ -17,6 +17,7 @@ import SidenavComponent from '../components/page/SideNav/sidenav';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
+import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 
@@ -46,6 +47,12 @@ class App extends Component {
                   exact={true}
                   path="/"
                   component={Home}
+                />
+                <ConnectedPrivateRoute
+                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                  exact={true}
+                  path="/pregnancy"
+                  component={PregnancyHome}
                 />
                 <ConnectedPrivateRoute
                   disableLoginProtection={DISABLE_LOGIN_PROTECTION}
