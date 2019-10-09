@@ -12,7 +12,7 @@ import ConnectedHeader from '../containers/ConnectedHeader';
 import { headerShouldNotRender } from '../helpers/utils';
 import './App.css';
 
-import CustomOauthLogin from '../components/CustomAuthLogin';
+import { Container, Row } from 'reactstrap';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
@@ -27,33 +27,23 @@ library.add(faUser);
 class App extends Component {
   public render() {
     return (
-      <div className="main-app-container">
-        {/* tslint:enable jsx-no-lambda */}
-        <Route
-          exact={true}
-          path={LOGIN_URL}
-          render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
-        />
+      <Container fluid={true} className="main-app-container">
         <ConnectedHeader />
-        {!headerShouldNotRender() && (
-          <div className="main-container">
-            <div className="sidebar">
-              <SidenavComponent />
-            </div>
-            <div className="content">
-              <Switch>
-                <ConnectedPrivateRoute
-                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                  exact={true}
-                  path="/"
-                  component={Home}
-                />
-                <ConnectedPrivateRoute
-                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                  exact={true}
-                  path={CLIENT_URL}
-                  component={ConnectedClientList}
-                />
+        <Row id="main-page-row" className="main-container">
+          <div className="content">
+            <Switch>
+              {/* tslint:disable jsx-no-lambda */}
+              <Route
+                exact={true}
+                path="/"
+                render={routeProps => <PatientDetails patientId={'100NMV'} />}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={CLIENT_URL}
+                component={ConnectedClientList}
+              />
 
                 {/* tslint:disable jsx-no-lambda */}
                 <Route
@@ -83,8 +73,8 @@ class App extends Component {
               </Switch>
             </div>
           </div>
-        )}
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
