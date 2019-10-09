@@ -147,8 +147,12 @@ class ReportTable extends Component<Props, State> {
       <Fragment>
         <Row id="dropdownRow">
           <p>Showing reports for: </p>
-          <Dropdown isOpen={this.state.dropdownOpenPregnancy} toggle={this.togglePregnancyDropDown}>
-            <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+          <Dropdown
+            isOpen={this.state.dropdownOpenPregnancy}
+            toggle={this.togglePregnancyDropDown}
+            className="dropdown"
+          >
+            <DropdownToggle variant="success" id="dropdown-basic" caret={true} className="dropdown">
               select pregnancy
             </DropdownToggle>
             <DropdownMenu>
