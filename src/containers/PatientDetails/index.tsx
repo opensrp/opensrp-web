@@ -40,6 +40,13 @@ class PatientDetails extends Component<Props, State> {
         return 0;
       });
   };
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      filteredData: [],
+    };
+  }
 
   public componentDidMount() {
     // this will be removed later because this data
