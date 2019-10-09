@@ -35,8 +35,18 @@ exports[`App renders App correctly 1`] = `
     }
   >
     <App>
+<<<<<<< HEAD
       <div
         className="main-app-container"
+=======
+      <Route
+        exact={true}
+        path="/login"
+        render={[Function]}
+      />
+      <Container
+        tag="div"
+>>>>>>> origin/OathPage
       >
         <Connect(withRouter(HeaderComponent))>
           <withRouter(HeaderComponent)
