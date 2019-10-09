@@ -3,6 +3,7 @@ import { map } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import { SmsData } from '../../store/ducks/sms_events';
+import MotherWeightChart from '../MotherWeightChart';
 import './index.css';
 
 interface Props {
@@ -15,7 +16,7 @@ interface PregnancySmsData {
   sms_type: string;
 }
 interface State {
-  pregnacyArray: string[][][];
+  pregnancyEventsArray: PregnancySmsData[][];
   dropdownOpenPregnancy: boolean;
   currentPregnancy: number;
 }
@@ -29,7 +30,7 @@ const convertToStringArray = (smsData: PregnancySmsData): string[] => {
   return arr;
 };
 
-const getPregnancyArray = (singlePatientEvents: SmsData[]): string[][][] => {
+const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsData[][] => {
   // remove event types that we are not interested in and retain
   // only pregnancy registration, ANC and birth reports
   singlePatientEvents = singlePatientEvents.filter((event: SmsData) => {
@@ -41,15 +42,6 @@ const getPregnancyArray = (singlePatientEvents: SmsData[]): string[][][] => {
   });
 
   const data: PregnancySmsData[][] = [];
-  singlePatientEvents.sort((event1: SmsData, event2: SmsData): number => {
-    if (event1.EventDate < event2.EventDate) {
-      return -1;
-    }
-    if (event1.EventDate > event2.EventDate) {
-      return 1;
-    }
-    return 0;
-  });
 
   let pregnancyIndex: number = 0;
   const gestation: number = 24192000000;
@@ -78,13 +70,32 @@ const getPregnancyArray = (singlePatientEvents: SmsData[]): string[][][] => {
     }
   }
 
+  return data;
+};
+
+const getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): number[][] => {
+  const weights: number[][] = [];
+  for (const element in pregnancySmsData) {
+    if (pregnancySmsData[element]) {
+      weights[element] = pregnancySmsData[element].map((sms: any): number => {
+        return sms.weight;
+      });
+    }
+  }
+  return weights;
+};
+
+const getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string[][][] => {
   const pregnancySmsStrings: string[][][] = [];
 
-  for (const element in data) {
-    if (data[element]) {
-      pregnancySmsStrings[element] = data[element].map((sms: PregnancySmsData): string[] => {
-        return convertToStringArray(sms);
-      });
+  const gestation: number = 24192000000;
+  for (const element in pregnancySmsData) {
+    if (pregnancySmsData[element]) {
+      pregnancySmsStrings[element] = pregnancySmsData[element].map(
+        (sms: PregnancySmsData): string[] => {
+          return convertToStringArray(sms);
+        }
+      );
     }
   }
 
@@ -101,13 +112,14 @@ const getPregnancyArray = (singlePatientEvents: SmsData[]): string[][][] => {
       }
     }
   }
+
   return pregnancySmsStrings;
 };
 
 class ReportTable extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      pregnacyArray: getPregnancyArray(props.singlePatientEvents),
+      pregnancyEventsArray: getEventsPregnancyArray(props.singlePatientEvents),
     };
   }
   constructor(props: Readonly<Props>) {
@@ -116,14 +128,14 @@ class ReportTable extends Component<Props, State> {
     this.state = {
       currentPregnancy: 0,
       dropdownOpenPregnancy: false,
-      pregnacyArray: [],
+      pregnancyEventsArray: [],
     };
   }
 
   public render() {
     const listViewProps = {
-      data: this.state.pregnacyArray[this.state.currentPregnancy]
-        ? this.state.pregnacyArray[this.state.currentPregnancy]
+      data: getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
+        ? getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
         : [],
       headerItems: ['Report', 'Date', 'Reporter', 'Message'],
       tableClass: 'table-striped',
@@ -143,13 +155,13 @@ class ReportTable extends Component<Props, State> {
               select pregnancy
             </DropdownToggle>
             <DropdownMenu>
-              {map(this.state.pregnacyArray, type => {
+              {map(this.state.pregnancyEventsArray, type => {
                 return (
                   <DropdownItem
                     onClick={this.handlePregnancyDropDownClick}
-                    key={this.state.pregnacyArray.indexOf(type)}
+                    key={this.state.pregnancyEventsArray.indexOf(type)}
                   >
-                    {this.state.pregnacyArray.indexOf(type)}
+                    {this.state.pregnancyEventsArray.indexOf(type)}
                   </DropdownItem>
                 );
               })}
@@ -158,6 +170,11 @@ class ReportTable extends Component<Props, State> {
         </Row>
         <Row id="tableRow">
           <ListView {...listViewProps} />
+        </Row>
+        <Row id={'chart'}>
+          <MotherWeightChart
+            weights={getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]}
+          />
         </Row>
       </Fragment>
     );
