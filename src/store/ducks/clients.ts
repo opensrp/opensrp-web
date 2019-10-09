@@ -44,6 +44,8 @@ export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
 export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/clients/HOUSEHOLDS_FETCHED';
 /** REMOVE_HOUSEHOLDS action type */
 export const REMOVE_HOUSEHOLDS = 'opensrp/reducer/clients/REMOVE_HOUSEHOLDS';
+/** SET_TOTAL_RECORDS action type */
+export const SET_TOTAL_RECORDS = 'opensrp/reducer/clients/SET_TOTAL_RECORDS';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -69,12 +71,19 @@ interface RemoveHouseholdsAction extends AnyAction {
   type: typeof REMOVE_HOUSEHOLDS;
 }
 
+/** Interface for setTotalRecordsAction */
+interface SetTotalRecordsAction extends AnyAction {
+  totalRecords: number;
+  type: typeof SET_TOTAL_RECORDS;
+}
+
 /** Create type for clients reducer actions */
 export type ClientsActionTypes =
   | FetchClientsAction
   | FetchHouseholdsAction
   | RemoveClientsAction
   | RemoveHouseholdsAction
+  | SetTotalRecordsAction
   | AnyAction;
 
 // action Creators
@@ -110,6 +119,12 @@ export const removeHouseholdsAction: RemoveHouseholdsAction = {
   householdsById: {},
   type: REMOVE_HOUSEHOLDS,
 };
+
+/** setTotalRecords action */
+export const setTotalRecordsAction = (totalCount: number): SetTotalRecordsAction => ({
+  totalRecords: totalCount,
+  type: SET_TOTAL_RECORDS,
+});
 
 // The reducer
 
