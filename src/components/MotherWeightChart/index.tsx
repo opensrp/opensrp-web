@@ -3,9 +3,32 @@ import * as React from 'react';
 import { Card } from 'reactstrap';
 import './index.css';
 
-export default class MotherWeightChart extends React.Component<{}, {}> {
+interface Props {
+  weights: number[];
+}
+
+interface State {
+  chart: any;
+}
+export default class MotherWeightChart extends React.Component<Props, State> {
+  public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    if (prevState.chart.series) {
+      return {
+        chart: prevState.chart.series[0].setData(nextProps.weights),
+      };
+    } else {
+      return {
+        chart: prevState.chart,
+      };
+    }
+  }
+  constructor(props: Props) {
+    super(props);
+    // Init state.
+    this.state = { chart: {} };
+  }
   public componentDidMount() {
-    Highcharts.chart('chart-wrapper', {
+    const chart = Highcharts.chart('chart-wrapper', {
       chart: {
         type: 'line',
         width: 0.8 * window.innerWidth,
@@ -39,7 +62,7 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
 
       series: [
         {
-          data: [78, 99, 99, 98, 90, 100, 89, 100],
+          data: this.props.weights,
           name: 'weight',
           pointInterval: 24 * 3600 * 1000,
           pointStart: Date.UTC(2010, 0, 1),
@@ -64,7 +87,9 @@ export default class MotherWeightChart extends React.Component<{}, {}> {
         ],
       },
     });
+    this.setState({ chart });
   }
+
   public render() {
     return (
       <Card>
