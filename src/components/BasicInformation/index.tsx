@@ -30,7 +30,7 @@ export default function BasicInformation(props: Props) {
           <Col className={'detailsColumn'} sm="12" lg="6">
             <span className={'right'}>Location</span>
             <span />
-            <span className={'left'}>props.location</span>
+            <span className={'left'}>{props.location}</span>
             <span className={'right'}>Current EDD</span>
             <span />
             <span className={'left'}>{props.currentEdd}</span>
