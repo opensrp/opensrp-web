@@ -132,6 +132,7 @@ export const setTotalRecordsAction = (totalCount: number): SetTotalRecordsAction
 interface ClientState {
   clientsById: { [key: string]: Client };
   householdsById: { [key: string]: Household };
+  totalRecords: number;
 }
 
 /** Create an immutable clients state */
@@ -141,6 +142,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
   householdsById: {},
+  totalRecords: 0,
 });
 
 /** the clients reducer function */
@@ -168,6 +170,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         householdsById: action.householdsById,
+      });
+    case SET_TOTAL_RECORDS:
+      return SeamlessImmutable({
+        ...state,
+        totalRecords: action.totalRecords,
       });
     default:
       return state;
