@@ -1,5 +1,6 @@
 // this is the home page component
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
@@ -30,9 +31,9 @@ class Home extends React.Component<{}, {}> {
                   <p>Display of all messages receioved from MIECD in chronological order</p>
                 </div>
                 <div id="cont-sized">
-                  <a href={LOGFACE_URL}>
+                  <Link to={LOGFACE_URL}>
                     <button className="button-style">View</button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
