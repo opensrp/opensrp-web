@@ -138,12 +138,9 @@ class ReportTable extends Component<Props, State> {
         ? getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
         : [],
       headerItems: ['Report', 'Date', 'Reporter', 'Message'],
-      tableClass: 'table-striped',
-      tbodyClass: 'table-active',
-      tdClass: 'td-primary',
-      thClass: 'th-primary',
-      theadClass: 'thead-dark',
-      trClass: 'tr-warning',
+      tableClass: 'table-container',
+      tbodyClass: 'body',
+      tdClass: 'default-width',
     };
 
     return (

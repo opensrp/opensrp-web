@@ -13,3 +13,18 @@ tbody tr {
 #dropdownRow {
   width: 84%;
 }
+
+thead {
+  position: relative;
+  top: 0;
+  height: 50px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+td {
+  width: 25%;
+}
+
+.table-container {
+  width: 100%;
+}
