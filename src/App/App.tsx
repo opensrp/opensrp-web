@@ -45,33 +45,33 @@ class App extends Component {
                 component={ConnectedClientList}
               />
 
-                {/* tslint:disable jsx-no-lambda */}
-                <Route
-                  exact={true}
-                  path="/oauth/callback/:id"
-                  render={routeProps => (
-                    <ConnectedOauthCallback
-                      LoadingComponent={Loading}
-                      providers={providers}
-                      oAuthUserInfoGetter={oAuthUserInfoGetter}
-                      {...routeProps}
-                    />
-                  )}
-                />
-                {/* tslint:enable jsx-no-lambda */}
-                <ConnectedPrivateRoute
-                  disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                  exact={true}
-                  path={LOGOUT_URL}
-                  component={ConnectedLogout}
-                />
-                <ConnectedPrivateRoute
-                  exact={true}
-                  path={LOGFACE_URL}
-                  component={ConnectedLogFace}
-                />
-              </Switch>
-            </div>
+              {/* tslint:disable jsx-no-lambda */}
+              <Route
+                exact={true}
+                path={LOGIN_URL}
+                render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
+              />
+              <Route
+                exact={true}
+                path="/oauth/callback/:id"
+                render={routeProps => (
+                  <ConnectedOauthCallback
+                    LoadingComponent={Loading}
+                    providers={providers}
+                    oAuthUserInfoGetter={oAuthUserInfoGetter}
+                    {...routeProps}
+                  />
+                )}
+              />
+              {/* tslint:enable jsx-no-lambda */}
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={LOGOUT_URL}
+                component={ConnectedLogout}
+              />
+              <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
+            </Switch>
           </div>
         </Row>
       </Container>
