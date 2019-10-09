@@ -268,3 +268,11 @@ export function getHouseholdById(state: Partial<Store>, id: string): Household |
 export function getTotalRecords(state: Partial<Store>): number {
   return (state as any)[reducerName].totalRecords;
 }
+
+/** returns the current navigation page
+ * @param {Partial<Store>} state - the redux store
+ * @return { number } - navigation page value from the store
+ */
+export function getNavigationPage(state: Partial<Store>): number {
+  return (state as any)[reducerName].navigationPage;
+}
