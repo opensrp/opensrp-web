@@ -46,6 +46,8 @@ export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/clients/HOUSEHOLDS_FETCHED';
 export const REMOVE_HOUSEHOLDS = 'opensrp/reducer/clients/REMOVE_HOUSEHOLDS';
 /** SET_TOTAL_RECORDS action type */
 export const SET_TOTAL_RECORDS = 'opensrp/reducer/clients/SET_TOTAL_RECORDS';
+/** SET NAVIGATION PAGE */
+export const SET_NAVIGATION_PAGE = 'opensrp/reducer/clients/SET_NAVIGATION_PAGE';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -77,6 +79,12 @@ interface SetTotalRecordsAction extends AnyAction {
   type: typeof SET_TOTAL_RECORDS;
 }
 
+/** interface for setNavigationPageAction */
+interface SetNavigationPageAction extends AnyAction {
+  navigationPage: number;
+  type: typeof SET_NAVIGATION_PAGE;
+}
+
 /** Create type for clients reducer actions */
 export type ClientsActionTypes =
   | FetchClientsAction
@@ -84,6 +92,7 @@ export type ClientsActionTypes =
   | RemoveClientsAction
   | RemoveHouseholdsAction
   | SetTotalRecordsAction
+  | SetNavigationPageAction
   | AnyAction;
 
 // action Creators
@@ -124,6 +133,12 @@ export const removeHouseholdsAction: RemoveHouseholdsAction = {
 export const setTotalRecordsAction = (totalCount: number): SetTotalRecordsAction => ({
   totalRecords: totalCount,
   type: SET_TOTAL_RECORDS,
+});
+
+/** setNavigationPage action */
+export const setNavigationPage = (requestedPage: number): SetNavigationPageAction => ({
+  navigationPage: requestedPage,
+  type: SET_NAVIGATION_PAGE,
 });
 
 // The reducer
