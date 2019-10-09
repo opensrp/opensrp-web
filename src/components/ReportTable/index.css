@@ -1,0 +1,15 @@
+tbody tr {
+  display: table-row;
+}
+
+#tableRow {
+  width: 84%;
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d7d7e0;
+}
+
+#dropdownRow {
+  width: 84%;
+}
