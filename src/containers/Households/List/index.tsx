@@ -2,7 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Input, InputGroup, InputGroupAddon, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
@@ -55,6 +55,10 @@ class HouseholdList extends React.Component<HouseholdListProps, {}> {
     }
     return (
       <div>
+        <InputGroup>
+          <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+          <Input placeholder="search" />
+        </InputGroup>
         <Table striped={true}>
           <thead>
             <tr>
