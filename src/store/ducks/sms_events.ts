@@ -16,6 +16,12 @@ export interface SmsData {
   logface_risk: string;
   health_worker_name: string;
   sms_type: string;
+  height: number;
+  weight: number;
+  previous_risks: string;
+  lmp_edd: number;
+  parity: number;
+  gravidity: number;
 }
 
 // actions
@@ -44,7 +50,6 @@ export const fetchSms = (TrialData: SmsData[] = []): FetchSmsAction => {
     payload: keyBy(TrialData, (trialObj: SmsData) => trialObj.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
-  //   console.log("gets called", actionCreated);
   return actionCreated;
 };
 
