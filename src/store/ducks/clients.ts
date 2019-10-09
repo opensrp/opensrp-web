@@ -238,3 +238,11 @@ export function getHouseholdsArray(state: Partial<Store>): Household[] {
 export function getHouseholdById(state: Partial<Store>, id: string): Household | null {
   return get(getHouseholdsById(state), id) || null;
 }
+
+/** returns the count of all records present in server
+ * @param {Partial<Store>} state - the redux store
+ * @return { number } - total records value from the store
+ */
+export function getTotalRecords(state: Partial<Store>): number {
+  return (state as any)[reducerName].totalRecords;
+}
