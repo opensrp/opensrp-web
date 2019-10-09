@@ -115,6 +115,18 @@ export const fetchHouseholds = (householdsList: Household[] = []): FetchHousehol
   type: HOUSEHOLDS_FETCHED,
 });
 
+/** setTotalRecords action */
+export const setTotalRecords = (totalCount: number): SetTotalRecordsAction => ({
+  totalRecords: totalCount,
+  type: SET_TOTAL_RECORDS,
+});
+
+/** setNavigationPage action */
+export const setNavigationPage = (requestedPage: number): SetNavigationPageAction => ({
+  navigationPage: requestedPage,
+  type: SET_NAVIGATION_PAGE,
+});
+
 // actions
 
 /** removeClientsAction action */
@@ -128,18 +140,6 @@ export const removeHouseholdsAction: RemoveHouseholdsAction = {
   householdsById: {},
   type: REMOVE_HOUSEHOLDS,
 };
-
-/** setTotalRecords action */
-export const setTotalRecordsAction = (totalCount: number): SetTotalRecordsAction => ({
-  totalRecords: totalCount,
-  type: SET_TOTAL_RECORDS,
-});
-
-/** setNavigationPage action */
-export const setNavigationPage = (requestedPage: number): SetNavigationPageAction => ({
-  navigationPage: requestedPage,
-  type: SET_NAVIGATION_PAGE,
-});
 
 // The reducer
 
