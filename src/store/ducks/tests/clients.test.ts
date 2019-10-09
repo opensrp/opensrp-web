@@ -12,10 +12,12 @@ import reducer, {
   getHouseholdById,
   getHouseholdsArray,
   getHouseholdsById,
+  getNavigationPage,
   getTotalRecords,
   reducerName,
   removeClientsAction,
   removeHouseholdsAction,
+  setNavigationPage,
   setTotalRecords,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
@@ -120,5 +122,15 @@ describe('reducers/clients', () => {
     store.dispatch(setTotalRecords(0));
     numberOfRecords = getTotalRecords(store.getState());
     expect(numberOfRecords).toEqual(0);
+  });
+
+  it('sets navigation page', () => {
+    store.dispatch(setNavigationPage(4));
+    let currentPageNumber = getNavigationPage(store.getState());
+    expect(currentPageNumber).toEqual(4);
+
+    store.dispatch(setNavigationPage(2));
+    currentPageNumber = getNavigationPage(store.getState());
+    expect(currentPageNumber).toEqual(2);
   });
 });
