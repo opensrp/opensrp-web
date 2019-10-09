@@ -148,6 +148,7 @@ interface ClientState {
   clientsById: { [key: string]: Client };
   householdsById: { [key: string]: Household };
   totalRecords: number;
+  navigationPage: number;
 }
 
 /** Create an immutable clients state */
@@ -157,6 +158,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
   householdsById: {},
+  navigationPage: 0,
   totalRecords: 0,
 });
 
@@ -190,6 +192,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         totalRecords: action.totalRecords,
+      });
+    case SET_NAVIGATION_PAGE:
+      return SeamlessImmutable({
+        ...state,
+        navigationPage: action.navigationPage,
       });
     default:
       return state;
