@@ -1,5 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -19,6 +20,7 @@ import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
 library.add(faUser);
+library.add(faSearch);
 
 /** Main App component */
 class App extends Component {

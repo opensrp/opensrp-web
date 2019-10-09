@@ -1,8 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Col, Input, InputGroup, InputGroupAddon, Row, Table } from 'reactstrap';
+import { Col, Input, InputGroup, InputGroupAddon, Row, Table, InputGroupText } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
@@ -70,7 +71,11 @@ class HouseholdList extends React.Component<HouseholdListProps> {
         <Row>
           <Col md={5}>
             <InputGroup>
-              <InputGroupAddon addonType="prepend">@</InputGroupAddon>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <FontAwesomeIcon icon={['fas', 'search']} />
+                </InputGroupText>
+              </InputGroupAddon>
               <Input placeholder="search" />
             </InputGroup>
           </Col>
