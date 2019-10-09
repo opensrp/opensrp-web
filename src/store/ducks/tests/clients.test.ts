@@ -12,9 +12,11 @@ import reducer, {
   getHouseholdById,
   getHouseholdsArray,
   getHouseholdsById,
+  getTotalRecords,
   reducerName,
   removeClientsAction,
   removeHouseholdsAction,
+  setTotalRecords,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
@@ -108,5 +110,15 @@ describe('reducers/clients', () => {
     store.dispatch(removeHouseholdsAction);
     numberOfHouseholds = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(0);
+  });
+
+  it('sets total records', () => {
+    store.dispatch(setTotalRecords(3));
+    let numberOfRecords = getTotalRecords(store.getState());
+    expect(numberOfRecords).toEqual(3);
+
+    store.dispatch(setTotalRecords(0));
+    numberOfRecords = getTotalRecords(store.getState());
+    expect(numberOfRecords).toEqual(0);
   });
 });
