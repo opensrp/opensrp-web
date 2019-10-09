@@ -14,6 +14,13 @@ tbody tr {
   width: 84%;
 }
 
+#dropdown {
+  background-color: #ffffff;
+  border: 0.5px solid #bababa;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
+}
+
 thead {
   position: relative;
   top: 0;
@@ -27,4 +34,14 @@ td {
 
 .table-container {
   width: 100%;
+}
+
+path.highcharts-tracker-line {
+  fill: #0093db;
+}
+
+td:nth-child(2n),
+th:nth-child(2n) {
+  background-color: #fcfcfc;
+  border: 1px solid #e8e8e8;
 }
