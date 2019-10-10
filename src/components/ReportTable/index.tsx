@@ -165,12 +165,12 @@ class ReportTable extends Component<Props, State> {
                   >
                     {(() => {
                       if (this.state.pregnancyEventsArray.indexOf(pregnancy) === 0) {
-                        return 'current';
+                        return 'current pregnancy';
                       } else {
                         const pregnancyIndex =
                           this.state.pregnancyEventsArray.length -
                           this.state.pregnancyEventsArray.indexOf(pregnancy);
-                        return pregnancyIndex + getNumberSuffix(pregnancyIndex);
+                        return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
                       }
                     })()}
                   </DropdownItem>
@@ -199,9 +199,15 @@ class ReportTable extends Component<Props, State> {
 
   private handlePregnancyDropDownClick = (e: React.MouseEvent) => {
     // here we will take the new index and change the state using that index
-    this.setState({
-      currentPregnancy: parseInt((e.target as HTMLInputElement).innerText, 10),
-    });
+    if ((e.target as HTMLInputElement).innerText === 'current pregnancy') {
+      this.setState({
+        currentPregnancy: 0,
+      });
+    } else {
+      this.setState({
+        currentPregnancy: parseInt((e.target as HTMLInputElement).innerText, 10),
+      });
+    }
   };
 }
 
