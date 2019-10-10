@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faCog, faHome } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -19,7 +19,7 @@ import ConnectedRoutes from './Routes';
 library.add(faUser);
 library.add(faChartLine);
 library.add(faCog);
-
+library.add(faHome);
 /** Main App component */
 class App extends Component {
   public render() {

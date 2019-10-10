@@ -21,6 +21,26 @@
 .side-menu-extend ul.nav {
   background: initial;
   background-color: initial;
+  max-width: initial;
+  width: 100%;
+}
+
+.sidebar .side-menu-extend a:hover {
+  text-decoration: none;
+}
+
+.sidebar .side-menu-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1 1;
+  border: 1px;
+  border-right-style: solid;
+  border-right-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .side-menu-container .row {
+  margin: auto;
 }
 
 .side-menu-container .side-menu-extend ul.side-collapse-nav .collapse {

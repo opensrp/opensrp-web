@@ -11,6 +11,9 @@ import {
   ENABLE_ROLE_PAGE,
   ENABLE_TEAM_PAGE,
   ENABLE_USER_PAGE,
+  ENABLE_NUTRITION_MODULE,
+  ENABLE_PREGNANCY_MODULE,
+  ENABLE_NEWBORN_AND_POSTNATAL_MODULE,
 } from '../../../configs/env';
 import {
   ADMIN,
@@ -21,8 +24,22 @@ import {
   CHILD_URL,
   CLIENT_RECORDS,
   CLIENT_URL,
+  HOME,
+  HOME_URL,
+  PREGNANCY,
+  PREGNANCY_URL,
   HOUSEHOLD,
   HOUSEHOLD_URL,
+  NEWBORN_AND_POSTNATAL,
+  NEWBORN_AND_POSTNATAL_URL,
+  ANALYSIS,
+  ANALYSIS_URL,
+  COMPARTMENTS,
+  COMPARTMENTS_URL,
+  LOGFACE,
+  LOGFACE_URL,
+  NUTRITION,
+  NUTRITION_URL,
   LOCATIONS,
   LOCATIONS_URL,
   REPORTS,
@@ -75,12 +92,60 @@ export const LOCATIONS_PAGE_NAVIGATION: PageLink = {
   url: LOCATIONS_URL,
 };
 
+export const PREGNANCY_PAGE_NAVIGATION: PageLink = {
+  label: PREGNANCY,
+  url: PREGNANCY_URL,
+};
+
+export const NUTRITION_PAGE_NAVIGATION: PageLink = {
+  label: NUTRITION,
+  url: NUTRITION_URL,
+};
+
+export const NEWBORN_AND_POSTNATAL_PAGE_NAVIGATION: PageLink = {
+  label: NEWBORN_AND_POSTNATAL,
+  url: NEWBORN_AND_POSTNATAL_URL,
+};
+
+export const COMPARTMENTS_PAGE_NAVIGATION: PageLink = {
+  label: COMPARTMENTS,
+  url: COMPARTMENTS_URL,
+};
+
+export const LOGFACE_PAGE_NAVIGATION: PageLink = {
+  label: LOGFACE,
+  url: LOGFACE_URL,
+};
+
+export const ANALYSIS_PAGE_NAVIGATION: PageLink = {
+  label: ANALYSIS,
+  url: ANALYSIS_URL,
+};
+
 // icons
+export const homeNavIcon: IconProp = ['fas', 'home'];
+export const prengancyNavIcon: IconProp = ['far', 'user'];
+export const newbornAndPostnatalNavIcon: IconProp = ['far', 'user'];
+export const nutritionNavIcon: IconProp = ['far', 'user'];
 export const clientModuleNavIcon: IconProp = ['far', 'user'];
 export const reportModuleNavIcon: IconProp = ['fas', 'chart-line'];
 export const adminModuleNavIcon: IconProp = ['fas', 'cog'];
 
 // Navigation links for navigation module. collapses when clicked to display the pageLinks
+
+export const HOME_PARENT_NAV: ModulePageLink = {
+  icon: homeNavIcon,
+  label: HOME,
+  url: HOME_URL,
+}
+
+
+export const PREGNANCY_MODULE_PARENT_NAV: ModulePageLink = {
+  icon: prengancyNavIcon,
+  label: PREGNANCY,
+  url: PREGNANCY_URL
+};
+
 
 export const CLIENT_MODULE_PARENT_NAV: ModulePageLink = {
   icon: clientModuleNavIcon,
@@ -97,6 +162,22 @@ export const ADMIN_MODULE_PARENT_NAV: ModulePageLink = {
 };
 
 // nav module objects
+export const HOME_NAVIGATION_MODULE: NavigationModule = {
+  childNavs: [],
+  parentNav: HOME_PARENT_NAV,
+};
+
+export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
+  childNavs: [
+    LOGFACE_PAGE_NAVIGATION,
+    COMPARTMENTS_PAGE_NAVIGATION,
+    ANALYSIS_PAGE_NAVIGATION
+  ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
+  parentNav: PREGNANCY_MODULE_PARENT_NAV,
+};
+
+
+
 export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
     ENABLE_CLIENT_PAGE && CLIENT_PAGE_NAVIGATION,
@@ -154,25 +235,44 @@ class SideMenu extends React.Component<{}, SideMenuState> {
 
     // props for subMenu components
 
+    const homeMenuProps: SubMenuProps = {
+      ...HOME_NAVIGATION_MODULE,
+      collapsedModuleLabel,
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+      linkTo: HOME_URL,
+    }
+
+    const pregnancyMenuProps: SubMenuProps = {
+      ...PREGNANCY_NAVIGATION_MODULE,
+      collapsedModuleLabel,
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+      linkTo: PREGNANCY_URL,
+    }
+
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE,
       collapsedModuleLabel,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+      linkTo: CLIENT_URL
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE,
       collapsedModuleLabel,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+      linkTo: REPORTS_URL,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE,
       collapsedModuleLabel,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+      linkTo: ADMIN,
     };
     return (
       <div className="side-menu-container">
         <Row>
           <Col className="side-menu-extend">
+            {<SubMenu {...homeMenuProps} />}
+            {ENABLE_PREGNANCY_MODULE && <SubMenu {...pregnancyMenuProps} />}
             {ENABLE_CLIENT_RECORDS_MODULE && <SubMenu {...clientSubMenuProps} />}
             {ENABLE_REPORT_MODULE && <SubMenu {...reportSubMenuProps} />}
             {ENABLE_ADMIN_MODULE && <SubMenu {...adminSubMenuProps} />}

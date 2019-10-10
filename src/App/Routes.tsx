@@ -7,28 +7,28 @@ import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
 
-import { Route, Switch, RouteComponentProps, withRouter, match } from 'react-router';
+import { exportSpecifier } from '@babel/types';
+import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
+import SideMenu from '../components/page/SideMenu';
+import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import { LOGFACE_URL, LOGOUT_URL } from '../constants';
-import './App.css';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
-import SidenavComponent from '../components/page/SideNav/sidenav';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import { oAuthUserInfoGetter } from '../helpers/utils';
-import { exportSpecifier } from '@babel/types';
-import { HeaderProps } from '../components/page/Header/Header';
-import SideMenu from '../components/page/SideMenu';
+import './App.css';
 
 library.add(faUser);
 
 const mapStateToProps = (state: Partial<Store>) => {
   return {
-    authenticated: isAuthenticated(state)
+    authenticated: isAuthenticated(state),
   };
 };
 
@@ -37,9 +37,9 @@ export interface RoutesProps {
 }
 
 const XXX = (props: any) => {
-  console.log("here")
+  console.log('here');
   return <div>xxxxxxxxxxxxxxxxxxxxxx</div>;
-}
+};
 
 export const Routes = (props: RoutesProps) => {
   const { authenticated } = props;
@@ -49,38 +49,34 @@ export const Routes = (props: RoutesProps) => {
         <SideMenu />
       </div>
       <div className="content">
-      <Switch>
-        <ConnectedPrivateRoute
-          disableLoginProtection={false}
-          exact={true}
-          path="/"
-          component={Home}
-        />
-        <ConnectedPrivateRoute
-          disableLoginProtection={false}
-          exact={true}
-          path="/pregnancy"
-          component={PregnancyHome}
-        />
-        <ConnectedPrivateRoute
-          disableLoginProtection={false}
-          exact={true}
-          path={CLIENT_URL}
-          component={ConnectedClientList}
-        />
-        <ConnectedPrivateRoute
-          disableLoginProtection={false}
-          exact={true}
-          path={LOGOUT_URL}
-          component={ConnectedLogout}
-        />
-        <ConnectedPrivateRoute
-          exact={true}
-          path={LOGFACE_URL}
-          component={ConnectedLogFace}
-        />
-        {/* tslint:disable jsx-no-lambda */}
-        <Route
+        <Switch>
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path="/"
+            component={Home}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path="/pregnancy"
+            component={PregnancyHome}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={CLIENT_URL}
+            component={ConnectedClientList}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={LOGOUT_URL}
+            component={ConnectedLogout}
+          />
+          <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
+          {/* tslint:disable jsx-no-lambda */}
+          <Route
             exact={true}
             path="/oauth/callback/:id"
             render={routeProps => (
@@ -88,17 +84,17 @@ export const Routes = (props: RoutesProps) => {
                 LoadingComponent={Loading}
                 providers={providers}
                 oAuthUserInfoGetter={oAuthUserInfoGetter}
-                SuccessfulLoginComponent={Home}
+                SuccessfulLoginComponent={authenticated ? Home : undefined}
                 {...routeProps}
               />
             )}
           />
           {/* tslint:enable jsx-no-lambda */}
-      </Switch>
+        </Switch>
+      </div>
     </div>
-    </div>
-  ); 
-}
+  );
+};
 
 // class Routes extends Component<{}, {}> {
 

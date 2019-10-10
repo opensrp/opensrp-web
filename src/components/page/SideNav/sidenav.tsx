@@ -15,8 +15,8 @@ import {
   UncontrolledDropdown,
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
-// import { ENABLE_ABOUT, ENABLE_CLIENTS, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
-// import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
+  // import { ENABLE_ABOUT, ENABLE_CLIENTS, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
+  // import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import './sidenav.css';
 
 /** The side navigation component */
