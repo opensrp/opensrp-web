@@ -106,7 +106,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">Log Face</h2>
+          <h2 id="logface_title">Log Face - Pregnancy</h2>
         </div>
         <div className="filter-search-div">
           {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}

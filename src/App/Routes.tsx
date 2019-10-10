@@ -39,7 +39,11 @@ export interface RoutesProps {
 export const Routes = (props: RoutesProps) => {
   const { authenticated } = props;
   return (
-    <div className={`${!headerShouldNotRender() ? 'main-container' : 'hidden-container'}`}>
+    <div
+      className={`${
+        authenticated && !headerShouldNotRender() ? 'main-container' : 'hidden-container'
+      }`}
+    >
       <div
         className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
       >
