@@ -36,7 +36,7 @@ class App extends Component {
               <Route
                 exact={true}
                 path="/"
-                render={routeProps => <PatientDetails patientId={'100NMV'} />}
+                render={routeProps => <PatientDetails patientId={'100NG6'} />}
               />
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
