@@ -20,6 +20,7 @@ interface State {
   pregnancyEventsArray: PregnancySmsData[][];
   dropdownOpenPregnancy: boolean;
   currentPregnancy: number;
+  pregnancyDropdownLabel: string;
 }
 
 const convertToStringArray = (smsData: PregnancySmsData): string[] => {
@@ -129,6 +130,7 @@ class ReportTable extends Component<Props, State> {
     this.state = {
       currentPregnancy: 0,
       dropdownOpenPregnancy: false,
+      pregnancyDropdownLabel: '',
       pregnancyEventsArray: [],
     };
   }
@@ -154,7 +156,9 @@ class ReportTable extends Component<Props, State> {
             className="dropdown"
           >
             <DropdownToggle variant="success" id="dropdown-basic" caret={true} className="dropdown">
-              select pregnancy
+              {this.state.pregnancyDropdownLabel.length
+                ? this.state.pregnancyDropdownLabel
+                : 'select pregnancy'}
             </DropdownToggle>
             <DropdownMenu>
               {map(this.state.pregnancyEventsArray, pregnancy => {
@@ -202,10 +206,12 @@ class ReportTable extends Component<Props, State> {
     if ((e.target as HTMLInputElement).innerText === 'current pregnancy') {
       this.setState({
         currentPregnancy: 0,
+        pregnancyDropdownLabel: 'current pregnancy',
       });
     } else {
       this.setState({
         currentPregnancy: parseInt((e.target as HTMLInputElement).innerText, 10),
+        pregnancyDropdownLabel: (e.target as HTMLInputElement).innerText,
       });
     }
   };
