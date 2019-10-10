@@ -28,3 +28,16 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
 export function headerShouldNotRender() {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
+
+export function getNumberSuffix(num: number) {
+  const divisionBy10Remaninder: number = num % 10;
+  if (divisionBy10Remaninder === 1) {
+    return 'st';
+  } else if (divisionBy10Remaninder === 2) {
+    return 'nd';
+  } else if (divisionBy10Remaninder === 3) {
+    return 'rd';
+  } else {
+    return 'th';
+  }
+}
