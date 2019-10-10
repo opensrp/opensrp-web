@@ -1,6 +1,7 @@
-.side-collapse-nav {
+.side-collapse-nav.nav {
   cursor: pointer;
-  padding: 4px 12px 2px 12px;
+  padding: 4px 12px 2px 45px;
+  max-width: initial !important;
 }
 
 .nav-item-extend {
@@ -16,6 +17,20 @@
   color: #007bff !important;
 }
 .side-nav-active {
-  background: #deeef8;
   border-right: 4px solid #209fd9;
+}
+
+.side-menu-container .side-menu-extend ul.nav .collapse.show {
+  padding-right: initial;
+  padding-left: 33px;
+}
+
+.side-nav-item.nav {
+  max-width: initial;
+  background-color: initial;
+}
+
+.side-menu-container .collapse {
+  padding-right: initial;
+  padding-left: 33px;
 }

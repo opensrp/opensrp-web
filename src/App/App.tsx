@@ -6,15 +6,15 @@ import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gate
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import Loading from '../components/page/Loading';
-import { oAuthUserInfoGetter } from '../helpers/utils';
 import { providers } from '../configs/settings';
 import { LOGIN_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
+import { oAuthUserInfoGetter } from '../helpers/utils';
 import { headerShouldNotRender } from '../helpers/utils';
 import './App.css';
 
-import ConnectedRoutes from './Routes';
 import CustomOauthLogin from '../components/CustomAuthLogin';
+import ConnectedRoutes from './Routes';
 
 library.add(faUser);
 library.add(faChartLine);
@@ -32,9 +32,7 @@ class App extends Component {
           render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
         />
         <ConnectedHeader />
-        {!headerShouldNotRender() && (
-          <ConnectedRoutes />
-        )}
+        {!headerShouldNotRender() && <ConnectedRoutes />}
       </div>
     );
   }

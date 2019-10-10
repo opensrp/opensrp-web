@@ -23,7 +23,7 @@ export const TEAM_URL = '/404';
 export type TEAM_URL = typeof TEAM_URL;
 export const LOCATIONS_URL = '/404';
 export type LOCATION_URL = typeof LOCATIONS_URL;
-export const REPORTS_URL = '/404';
+export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals

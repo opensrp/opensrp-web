@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
 import './index.css';
 
@@ -119,6 +119,7 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
           </NavItem>
         </Nav>
 
+        <Link to="/">
         <Collapse isOpen={collapseMenu}>
           {childNavs.map((childNavObj, key) => {
             return (
@@ -135,7 +136,8 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
               </Nav>
             );
           })}
-        </Collapse>
+        </Collapse>  
+        </Link>
       </div>
     );
   }

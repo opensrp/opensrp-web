@@ -18,6 +18,12 @@
   padding: 16px 0 0 0;
 }
 
-.side-menu-container {
-  margin-top: 67px;
+.side-menu-extend ul.nav {
+  background: initial;
+  background-color: initial;
+}
+
+.side-menu-container .side-menu-extend ul.side-collapse-nav .collapse {
+  padding-right: initial;
+  padding-left: 33px;
 }

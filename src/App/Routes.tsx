@@ -22,6 +22,7 @@ import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import { exportSpecifier } from '@babel/types';
 import { HeaderProps } from '../components/page/Header/Header';
+import SideMenu from '../components/page/SideMenu';
 
 library.add(faUser);
 
@@ -45,30 +46,30 @@ export const Routes = (props: RoutesProps) => {
   return (
     <div className={`${authenticated ? 'main-container' : ''}`}>
       <div className={`${authenticated ? 'sidebar' : 'hidden-container'}`}>
-        <SidenavComponent />
+        <SideMenu />
       </div>
       <div className="content">
       <Switch>
         <ConnectedPrivateRoute
-          disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+          disableLoginProtection={false}
           exact={true}
           path="/"
           component={Home}
         />
         <ConnectedPrivateRoute
-          disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+          disableLoginProtection={false}
           exact={true}
           path="/pregnancy"
           component={PregnancyHome}
         />
         <ConnectedPrivateRoute
-          disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+          disableLoginProtection={false}
           exact={true}
           path={CLIENT_URL}
           component={ConnectedClientList}
         />
         <ConnectedPrivateRoute
-          disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+          disableLoginProtection={false}
           exact={true}
           path={LOGOUT_URL}
           component={ConnectedLogout}
