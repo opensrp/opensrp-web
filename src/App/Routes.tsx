@@ -21,7 +21,7 @@ import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
-import { oAuthUserInfoGetter } from '../helpers/utils';
+import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
 library.add(faUser);
@@ -36,16 +36,13 @@ export interface RoutesProps {
   authenticated: boolean;
 }
 
-const XXX = (props: any) => {
-  console.log('here');
-  return <div>xxxxxxxxxxxxxxxxxxxxxx</div>;
-};
-
 export const Routes = (props: RoutesProps) => {
   const { authenticated } = props;
   return (
-    <div className={`${authenticated ? 'main-container' : ''}`}>
-      <div className={`${authenticated ? 'sidebar' : 'hidden-container'}`}>
+    <div className={`${!headerShouldNotRender() ? 'main-container' : 'hidden-container'}`}>
+      <div
+        className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
+      >
         <SideMenu />
       </div>
       <div className="content">
@@ -84,7 +81,6 @@ export const Routes = (props: RoutesProps) => {
                 LoadingComponent={Loading}
                 providers={providers}
                 oAuthUserInfoGetter={oAuthUserInfoGetter}
-                SuccessfulLoginComponent={authenticated ? Home : undefined}
                 {...routeProps}
               />
             )}

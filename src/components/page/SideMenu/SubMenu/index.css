@@ -14,8 +14,13 @@
 }
 
 .active-collapse-menu {
-  color: #007bff !important;
+  color: #0192d4 !important;
 }
+
+.active-collapse-menu:hover {
+  color: #0192d4 !important;
+}
+
 .side-nav-active {
   border-right: 4px solid #209fd9;
 }
@@ -28,6 +33,10 @@
 .side-nav-item.nav {
   max-width: initial;
   background-color: initial;
+}
+
+.side-nav-item.nav:hover {
+  color: #0192d4 !important;
 }
 
 .side-menu-container .collapse {

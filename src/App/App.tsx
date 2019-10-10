@@ -31,6 +31,7 @@ class App extends Component {
           path={LOGIN_URL}
           render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
         />
+        {/* tslint:enable jsx-no-lambda */}
         <ConnectedHeader />
         {!headerShouldNotRender() && <ConnectedRoutes />}
       </div>

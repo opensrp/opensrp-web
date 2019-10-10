@@ -8,40 +8,40 @@ import {
   ENABLE_CLIENT_PAGE,
   ENABLE_HOUSEHOLD_PAGE,
   ENABLE_LOCATION_PAGE,
+  ENABLE_NEWBORN_AND_POSTNATAL_MODULE,
+  ENABLE_NUTRITION_MODULE,
+  ENABLE_PREGNANCY_MODULE,
   ENABLE_ROLE_PAGE,
   ENABLE_TEAM_PAGE,
   ENABLE_USER_PAGE,
-  ENABLE_NUTRITION_MODULE,
-  ENABLE_PREGNANCY_MODULE,
-  ENABLE_NEWBORN_AND_POSTNATAL_MODULE,
 } from '../../../configs/env';
 import {
   ADMIN,
   ALL_CLIENTS,
+  ANALYSIS,
+  ANALYSIS_URL,
   ANC,
   ANC_URL,
   CHILD,
   CHILD_URL,
   CLIENT_RECORDS,
   CLIENT_URL,
-  HOME,
-  HOME_URL,
-  PREGNANCY,
-  PREGNANCY_URL,
-  HOUSEHOLD,
-  HOUSEHOLD_URL,
-  NEWBORN_AND_POSTNATAL,
-  NEWBORN_AND_POSTNATAL_URL,
-  ANALYSIS,
-  ANALYSIS_URL,
   COMPARTMENTS,
   COMPARTMENTS_URL,
-  LOGFACE,
-  LOGFACE_URL,
-  NUTRITION,
-  NUTRITION_URL,
+  HOME,
+  HOME_URL,
+  HOUSEHOLD,
+  HOUSEHOLD_URL,
   LOCATIONS,
   LOCATIONS_URL,
+  LOGFACE,
+  LOGFACE_URL,
+  NEWBORN_AND_POSTNATAL,
+  NEWBORN_AND_POSTNATAL_URL,
+  NUTRITION,
+  NUTRITION_URL,
+  PREGNANCY,
+  PREGNANCY_URL,
   REPORTS,
   REPORTS_URL,
   ROLE_URL,
@@ -137,15 +137,13 @@ export const HOME_PARENT_NAV: ModulePageLink = {
   icon: homeNavIcon,
   label: HOME,
   url: HOME_URL,
-}
-
+};
 
 export const PREGNANCY_MODULE_PARENT_NAV: ModulePageLink = {
   icon: prengancyNavIcon,
   label: PREGNANCY,
-  url: PREGNANCY_URL
+  url: PREGNANCY_URL,
 };
-
 
 export const CLIENT_MODULE_PARENT_NAV: ModulePageLink = {
   icon: clientModuleNavIcon,
@@ -171,12 +169,10 @@ export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
     LOGFACE_PAGE_NAVIGATION,
     COMPARTMENTS_PAGE_NAVIGATION,
-    ANALYSIS_PAGE_NAVIGATION
+    ANALYSIS_PAGE_NAVIGATION,
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: PREGNANCY_MODULE_PARENT_NAV,
 };
-
-
 
 export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
@@ -238,34 +234,34 @@ class SideMenu extends React.Component<{}, SideMenuState> {
     const homeMenuProps: SubMenuProps = {
       ...HOME_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
       linkTo: HOME_URL,
-    }
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+    };
 
     const pregnancyMenuProps: SubMenuProps = {
       ...PREGNANCY_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
       linkTo: PREGNANCY_URL,
-    }
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
+    };
 
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE,
       collapsedModuleLabel,
+      linkTo: CLIENT_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-      linkTo: CLIENT_URL
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
       linkTo: REPORTS_URL,
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
       linkTo: ADMIN,
+      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     return (
       <div className="side-menu-container">

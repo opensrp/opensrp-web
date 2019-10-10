@@ -8,13 +8,16 @@ export type WEBSITE_NAME = typeof WEBSITE_NAME;
 export const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME || 'http://localhost:3000';
 export type DOMAIN_NAME = typeof DOMAIN_NAME;
 
-export const ENABLE_PREGNANCY_MODULE = process.env.REACT_APP_ENABLE_PREGNANCY_MODULE === 'true' || false;
+export const ENABLE_PREGNANCY_MODULE =
+  process.env.REACT_APP_ENABLE_PREGNANCY_MODULE === 'true' || false;
 export type ENABLE_PREGNANCY_MODULE = typeof ENABLE_PREGNANCY_MODULE;
 
-export const ENABLE_NUTRITION_MODULE = process.env.REACT_APP_ENABLE_NUTRITION_MODULE === 'true' || false;
+export const ENABLE_NUTRITION_MODULE =
+  process.env.REACT_APP_ENABLE_NUTRITION_MODULE === 'true' || false;
 export type ENABLE_NUTRITION_MODULE = typeof ENABLE_NUTRITION_MODULE;
 
-export const ENABLE_NEWBORN_AND_POSTNATAL_MODULE = process.env.REACT_APP_ENABLE_NEWBORN_AND_POSTNATAL_MODULE === 'true' || false;
+export const ENABLE_NEWBORN_AND_POSTNATAL_MODULE =
+  process.env.REACT_APP_ENABLE_NEWBORN_AND_POSTNATAL_MODULE === 'true' || false;
 export type ENABLE_NEWBORN_AND_POSTNATAL_MODULE = typeof ENABLE_NEWBORN_AND_POSTNATAL_MODULE;
 
 /** Do you want to enable the Client Page of Client Records Module? */

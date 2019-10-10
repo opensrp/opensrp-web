@@ -7,6 +7,7 @@
 }
 
 .side-nav-active {
+  background: rgba(1, 146, 212, 0.1);
   color: #0192d4 !important;
   font-family: Roboto;
   font-weight: 500;
@@ -27,6 +28,7 @@
 
 .sidebar .side-menu-extend a:hover {
   text-decoration: none;
+  color: #0192d4;
 }
 
 .sidebar .side-menu-container {

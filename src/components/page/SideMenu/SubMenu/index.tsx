@@ -66,8 +66,8 @@ type SetCollapsedModuleLabel = (label: string) => void;
 /** Default props */
 export const defaultSubMenuProps: SubMenuProps = {
   childNavs: [],
-  linkTo: '',
   collapsedModuleLabel: '',
+  linkTo: '',
   parentNav: {
     icon: ['far', 'user'],
     label: 'home',
