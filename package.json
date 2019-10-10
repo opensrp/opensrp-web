@@ -29,6 +29,7 @@
     "@types/reactstrap": "^8.0.1",
     "@types/seamless-immutable": "^7.1.10",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "client-oauth2": "^4.2.5",
     "connected-react-router": "^6.5.2",
     "fetch-mock": "^7.3.9",
@@ -47,6 +48,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "seamless-immutable": "^7.1.4",
+    "snapshot-diff": "^0.5.2",
     "typescript": "^3.5.3"
   },
   "scripts": {
@@ -82,6 +84,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/enzyme-to-json": "^1.5.3",

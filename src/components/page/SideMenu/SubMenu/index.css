@@ -1,0 +1,21 @@
+.side-collapse-nav {
+  cursor: pointer;
+  padding: 4px 12px 2px 12px;
+}
+
+.nav-item-extend {
+  width: 100%;
+  padding-left: 49px;
+}
+
+.collapse-menu-title {
+  padding-left: 12px;
+}
+
+.active-collapse-menu {
+  color: #007bff !important;
+}
+.side-nav-active {
+  background: #deeef8;
+  border-right: 4px solid #209fd9;
+}

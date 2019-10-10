@@ -1,12 +1,15 @@
 // This is used to set up stuff for tests e.g. configs, icons, etc
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
 import enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { GlobalWithFetchMock } from 'jest-fetch-mock';
 
 enzyme.configure({ adapter: new Adapter() });
 library.add(faUser);
+library.add(faCog);
+library.add(faChartLine);
 
 const customGlobal: GlobalWithFetchMock = global as GlobalWithFetchMock;
 /* tslint:disable-next-line no-var-requires */
