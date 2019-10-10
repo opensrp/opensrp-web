@@ -2,6 +2,7 @@ import ListView from '@onaio/list-view';
 import { map } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
 import MotherWeightChart from '../MotherWeightChart';
 import './index.css';
@@ -156,13 +157,22 @@ class ReportTable extends Component<Props, State> {
               select pregnancy
             </DropdownToggle>
             <DropdownMenu>
-              {map(this.state.pregnancyEventsArray, type => {
+              {map(this.state.pregnancyEventsArray, pregnancy => {
                 return (
                   <DropdownItem
                     onClick={this.handlePregnancyDropDownClick}
-                    key={this.state.pregnancyEventsArray.indexOf(type)}
+                    key={this.state.pregnancyEventsArray.indexOf(pregnancy)}
                   >
-                    {this.state.pregnancyEventsArray.indexOf(type)}
+                    {(() => {
+                      if (this.state.pregnancyEventsArray.indexOf(pregnancy) === 0) {
+                        return 'current';
+                      } else {
+                        const pregnancyIndex =
+                          this.state.pregnancyEventsArray.length -
+                          this.state.pregnancyEventsArray.indexOf(pregnancy);
+                        return pregnancyIndex + getNumberSuffix(pregnancyIndex);
+                      }
+                    })()}
                   </DropdownItem>
                 );
               })}
