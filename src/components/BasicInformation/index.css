@@ -4,9 +4,17 @@
 }
 
 .detailsColumn {
-  padding: 0;
+  padding: 60px;
   display: grid;
   grid-template-columns: 10fr 1fr 10fr;
+}
+
+.detailsColumn:nth-child(1) {
+  grid-template-columns: 4fr 1fr 10fr;
+}
+
+.detailsColumn:nth-child(2) {
+  grid-template-columns: 10fr 1fr 4fr;
 }
 
 .right {
@@ -22,9 +30,14 @@
 }
 
 #detailsRow {
-  width: 84%;
+  width: 100%;
+  padding: 30px 0;
 }
 
 #detailsCard {
   width: 100%;
+}
+
+#detailsCard .row {
+  margin: 0 !important;
 }

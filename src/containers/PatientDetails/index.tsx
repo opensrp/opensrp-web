@@ -51,13 +51,16 @@ class PatientDetails extends Component<Props, State> {
 
   public render() {
     return (
-      <Container fluid={true} id={'patient-details'}>
-        <Link to={LOGFACE_URL}>back to Log Face</Link>
+      <div className="patient-details">
+        <Link to={LOGFACE_URL}>Back to Pregnancy Log Face</Link>
+        <div>
+          <h2 id="patients_title">Patient Details</h2>
+        </div>
         <Row>
           <BasicInformation {...this.getBasicInformationProps()} />
         </Row>
         <ReportTable singlePatientEvents={this.state.filteredData} />
-      </Container>
+      </div>
     );
   }
 

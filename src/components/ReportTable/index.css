@@ -3,7 +3,7 @@ tbody tr {
 }
 
 #tableRow {
-  width: 84%;
+  margin: 10px 0px 50px 0;
   background-color: #ffffff;
   border: 1px solid #dadce0;
   border-radius: 5px;
@@ -11,7 +11,7 @@ tbody tr {
 }
 
 #dropdownRow {
-  width: 84%;
+  width: 100%;
 }
 
 #dropdown {
