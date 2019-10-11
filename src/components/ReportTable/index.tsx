@@ -51,17 +51,19 @@ const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsDa
     if (singlePatientEvents) {
       if (data[pregnancyIndex]) {
         if (
-          singlePatientEvents[dataItem].sms_type === 'Pregnancy registration' ||
-          (data[-1] &&
-            gestation >
+          singlePatientEvents[dataItem].sms_type === 'Pregnancy Registration' ||
+          (data[pregnancyIndex][parseInt(dataItem, 10) - 1] &&
+            gestation <
               Date.parse(singlePatientEvents[dataItem].EventDate) -
-                Date.parse(data[pregnancyIndex][-1].EventDate))
+                Date.parse(data[pregnancyIndex][parseInt(dataItem, 10) - 1].EventDate))
         ) {
           pregnancyIndex = pregnancyIndex + 1;
+          if (!data[pregnancyIndex]) {
+            data[pregnancyIndex] = [];
+          }
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
         } else if (singlePatientEvents[dataItem].sms_type === 'Birth Report') {
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
-          pregnancyIndex++;
         } else {
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
         }
@@ -88,7 +90,7 @@ const getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): number[][] => 
 };
 
 const getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string[][][] => {
-  const pregnancySmsStrings: string[][][] = [];
+  let pregnancySmsStrings: string[][][] = [];
 
   const gestation: number = 24192000000;
   for (const element in pregnancySmsData) {
@@ -102,19 +104,26 @@ const getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string
   }
 
   // filter out duplicate pregnancy registrations
+  const indicesToRemove: number[] = [];
   if (pregnancySmsStrings.length > 1) {
     for (const pregnancy in pregnancySmsStrings) {
       if (
+        pregnancySmsStrings.length - 1 !== parseInt(pregnancy, 10) &&
         pregnancySmsStrings[parseInt(pregnancy, 10)].length === 1 &&
         gestation >
           Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10)][0][1]) -
-            Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][1])
+            Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][1]) &&
+        pregnancySmsStrings[parseInt(pregnancy, 10)][0][0] === 'Pregnancy Registration' &&
+        pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][0] === 'Pregnancy Registration'
       ) {
-        pregnancySmsStrings.splice(parseInt(pregnancy, 10), 1);
+        indicesToRemove.push(parseInt(pregnancy, 10));
       }
     }
   }
 
+  pregnancySmsStrings = pregnancySmsStrings.filter(
+    (pregnancy, index) => !indicesToRemove.includes(index)
+  );
   return pregnancySmsStrings;
 };
 
