@@ -36,10 +36,6 @@ td {
   width: 100%;
 }
 
-path.highcharts-tracker-line {
-  fill: #0093db;
-}
-
 td:nth-child(2n),
 th:nth-child(2n) {
   background-color: #fcfcfc;
