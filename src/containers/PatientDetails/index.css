@@ -12,9 +12,14 @@ h2#patients_title {
 
 div#titleDiv {
   border-bottom: 1px solid #dadce0;
+  margin-top: 0.5%;
 }
 
 a,
 a:hover {
   color: #0292d3;
+}
+
+.patient-details {
+  padding-top: 1%;
 }

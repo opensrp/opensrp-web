@@ -16,6 +16,7 @@ tbody tr {
 
 #dropdown {
   background-color: #ffffff;
+  color: #666666;
   border: 0.5px solid #bababa;
   border-radius: 2px;
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
@@ -54,4 +55,45 @@ th:nth-child(2n) {
 th:nth-child(2n + 1) {
   background-color: #fafafa;
   border: 1px solid #dadce0;
+}
+
+#dropdownRow > p {
+  color: #001429;
+}
+
+#dropdown-basic {
+  padding-top: 0;
+  margin-top: -0.2em;
+}
+
+#dropdown-basic.dropdown.dropdown-toggle,
+#dropdown-basic:hover {
+  color: #666666;
+  box-shadow: none;
+  color: black;
+  background-color: #ffffff;
+  border: 0.5px solid #bababa;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
+}
+
+th {
+  color: #001429;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+  line-height: 19px;
+  width: 50.52px;
+  text-align: left;
+  padding-left: 0.5em;
+}
+
+td {
+  color: #334354;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
 }

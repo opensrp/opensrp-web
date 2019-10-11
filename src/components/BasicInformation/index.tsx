@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Row } from 'reactstrap';
+import { Card, CardTitle, Col, Row } from 'reactstrap';
 import './index.css';
 
 interface Props {
@@ -15,6 +15,7 @@ export default function BasicInformation(props: Props) {
   return (
     <Row id={'detailsRow'}>
       <Card id={'detailsCard'}>
+        <CardTitle>Basic Information</CardTitle>
         <Row>
           <Col className={'detailsColumn'} sm="12" lg="6">
             <span className={'right'}>ID</span>

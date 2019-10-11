@@ -163,7 +163,7 @@ class ReportTable extends Component<Props, State> {
     return (
       <Fragment>
         <Row id="dropdownRow">
-          <p>Showing reports for: </p>
+          <p>Showing reports for:&emsp;</p>
           <Dropdown
             isOpen={this.state.dropdownOpenPregnancy}
             toggle={this.togglePregnancyDropDown}

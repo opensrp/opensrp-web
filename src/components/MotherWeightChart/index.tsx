@@ -1,6 +1,6 @@
 import * as Highcharts from 'highcharts';
 import * as React from 'react';
-import { Card } from 'reactstrap';
+import { Card, CardTitle } from 'reactstrap';
 import './index.css';
 
 interface Props {
@@ -39,7 +39,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         verticalAlign: 'middle',
       },
       title: {
-        text: "Mother's Weight Tracking",
+        text: '',
       },
 
       subtitle: {
@@ -48,7 +48,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
 
       yAxis: {
         title: {
-          text: "mother's weight",
+          text: '',
         },
       },
 
@@ -93,6 +93,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
   public render() {
     return (
       <Card>
+        <CardTitle>Mother's Weight Tracking</CardTitle>
         <div id="chart-wrapper" />
       </Card>
     );
