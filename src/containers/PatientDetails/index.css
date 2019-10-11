@@ -13,3 +13,8 @@ h2#patients_title {
 div#titleDiv {
   border-bottom: 1px solid #dadce0;
 }
+
+a,
+a:hover {
+  color: #0292d3;
+}
