@@ -1,8 +1,8 @@
-tbody tr {
+.patient-details tbody tr {
   display: table-row;
 }
 
-#tableRow {
+.patient-details #tableRow {
   margin: 10px 0px 50px 0;
   background-color: #ffffff;
   border: 1px solid #dadce0;
@@ -10,11 +10,11 @@ tbody tr {
   box-shadow: 0 1px 3px 0 #d7d7e0;
 }
 
-#dropdownRow {
+.patient-details #dropdownRow {
   width: 100%;
 }
 
-#dropdown {
+.patient-details #dropdown {
   background-color: #ffffff;
   color: #666666;
   border: 0.5px solid #bababa;
@@ -22,52 +22,52 @@ tbody tr {
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
 }
 
-thead {
+.patient-details thead {
   position: relative;
   top: 0;
   height: 50px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
-td {
+.patient-details td {
   width: 25%;
 }
 
-.table-container {
+.patient-details .table-container {
   width: 100%;
 }
 
-td:nth-child(2n) {
+.patient-details td:nth-child(2n) {
   background-color: #fcfcfc;
   border: 1px solid #e8e8e8;
 }
 
-td:nth-child(2n + 1) {
+.patient-details td:nth-child(2n + 1) {
   background-color: #ffffff;
   border: 1px solid #dadce0;
 }
 
-th:nth-child(2n) {
+.patient-details th:nth-child(2n) {
   background-color: #f5f5f5;
   border: 1px solid #e8e8e8;
 }
 
-th:nth-child(2n + 1) {
+.patient-details th:nth-child(2n + 1) {
   background-color: #fafafa;
   border: 1px solid #dadce0;
 }
 
-#dropdownRow > p {
+.patient-details #dropdownRow > p {
   color: #001429;
 }
 
-#dropdown-basic {
+.patient-details #dropdown-basic {
   padding-top: 0;
   margin-top: -0.2em;
 }
 
-#dropdown-basic.dropdown.dropdown-toggle,
-#dropdown-basic:hover {
+.patient-details #dropdown-basic.dropdown.dropdown-toggle,
+.patient-details #dropdown-basic:hover {
   color: #666666;
   box-shadow: none;
   color: black;
@@ -77,7 +77,7 @@ th:nth-child(2n + 1) {
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
 }
 
-th {
+.patient-details th {
   color: #001429;
   font-family: Roboto;
   font-size: 16px;
@@ -89,7 +89,7 @@ th {
   padding-left: 0.5em;
 }
 
-td {
+.patient-details td {
   color: #334354;
   font-family: Roboto;
   font-size: 15px;
