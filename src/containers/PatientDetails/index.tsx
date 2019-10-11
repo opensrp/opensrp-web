@@ -11,7 +11,6 @@ import './index.css';
 interface Props {
   patientId: string;
   testData: SmsData[];
-  fetchTestDataActionCreator: typeof fetchSms;
 }
 
 interface State {
@@ -48,14 +47,6 @@ class PatientDetails extends Component<Props, State> {
     };
   }
 
-  public componentDidMount() {
-    // this will be removed later because this data
-    // will aready be in the store by now
-    const { fetchTestDataActionCreator } = this.props;
-    // supersetFetch('2263').then((result: any) => {
-    fetchTestDataActionCreator(smsSlice);
-    // });
-  }
   public render() {
     return (
       <Container fluid={true} id={'patient-details'}>
@@ -133,18 +124,18 @@ class PatientDetails extends Component<Props, State> {
   }
 }
 
-const mapStateToprops = (state: any) => {
+const mapStateToprops = (state: any, ownProps: any) => {
+  const patient_id = ownProps.match.params.patient_id;
   const result = {
+    patientId: patient_id,
     testData: getSmsData(state),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchTestDataActionCreator: fetchSms };
-
 const ConnectedPatientDetails = connect(
   mapStateToprops,
-  mapPropsToActions
+  null
 )(PatientDetails);
 
 export default ConnectedPatientDetails;
