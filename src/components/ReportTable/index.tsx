@@ -21,6 +21,7 @@ interface State {
   dropdownOpenPregnancy: boolean;
   currentPregnancy: number;
   pregnancyDropdownLabel: string;
+  indicesToRemove: number[];
 }
 
 const convertToStringArray = (smsData: PregnancySmsData): string[] => {
@@ -77,56 +78,6 @@ const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsDa
   return data;
 };
 
-const getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): number[][] => {
-  const weights: number[][] = [];
-  for (const element in pregnancySmsData) {
-    if (pregnancySmsData[element]) {
-      weights[element] = pregnancySmsData[element].map((sms: any): number => {
-        return sms.weight;
-      });
-    }
-  }
-  return weights;
-};
-
-const getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string[][][] => {
-  let pregnancySmsStrings: string[][][] = [];
-
-  const gestation: number = 24192000000;
-  for (const element in pregnancySmsData) {
-    if (pregnancySmsData[element]) {
-      pregnancySmsStrings[element] = pregnancySmsData[element].map(
-        (sms: PregnancySmsData): string[] => {
-          return convertToStringArray(sms);
-        }
-      );
-    }
-  }
-
-  // filter out duplicate pregnancy registrations
-  const indicesToRemove: number[] = [];
-  if (pregnancySmsStrings.length > 1) {
-    for (const pregnancy in pregnancySmsStrings) {
-      if (
-        pregnancySmsStrings.length - 1 !== parseInt(pregnancy, 10) &&
-        pregnancySmsStrings[parseInt(pregnancy, 10)].length === 1 &&
-        gestation >
-          Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10)][0][1]) -
-            Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][1]) &&
-        pregnancySmsStrings[parseInt(pregnancy, 10)][0][0] === 'Pregnancy Registration' &&
-        pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][0] === 'Pregnancy Registration'
-      ) {
-        indicesToRemove.push(parseInt(pregnancy, 10));
-      }
-    }
-  }
-
-  pregnancySmsStrings = pregnancySmsStrings.filter(
-    (pregnancy, index) => !indicesToRemove.includes(index)
-  );
-  return pregnancySmsStrings;
-};
-
 class ReportTable extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
@@ -139,15 +90,69 @@ class ReportTable extends Component<Props, State> {
     this.state = {
       currentPregnancy: 0,
       dropdownOpenPregnancy: false,
+      indicesToRemove: [],
       pregnancyDropdownLabel: '',
       pregnancyEventsArray: [],
     };
   }
 
+  public getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string[][][] => {
+    let pregnancySmsStrings: string[][][] = [];
+
+    const gestation: number = 24192000000;
+    for (const element in pregnancySmsData) {
+      if (pregnancySmsData[element]) {
+        pregnancySmsStrings[element] = pregnancySmsData[element].map(
+          (sms: PregnancySmsData): string[] => {
+            return convertToStringArray(sms);
+          }
+        );
+      }
+    }
+
+    // filter out duplicate pregnancy registrations
+    if (pregnancySmsStrings.length > 1) {
+      for (const pregnancy in pregnancySmsStrings) {
+        if (
+          pregnancySmsStrings.length - 1 !== parseInt(pregnancy, 10) &&
+          pregnancySmsStrings[parseInt(pregnancy, 10)].length === 1 &&
+          gestation >
+            Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10)][0][1]) -
+              Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][1]) &&
+          pregnancySmsStrings[parseInt(pregnancy, 10)][0][0] === 'Pregnancy Registration' &&
+          pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][0] === 'Pregnancy Registration'
+        ) {
+          this.state.indicesToRemove.push(parseInt(pregnancy, 10));
+        }
+      }
+    }
+
+    pregnancySmsStrings = pregnancySmsStrings.filter(
+      (pregnancy, index) => !this.state.indicesToRemove.includes(index)
+    );
+    return pregnancySmsStrings;
+  };
+
+  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): number[][] => {
+    let weights: number[][] = [];
+    for (const element in pregnancySmsData) {
+      if (pregnancySmsData[element]) {
+        weights[element] = pregnancySmsData[element].map((sms: any): number => {
+          return sms.weight;
+        });
+      }
+    }
+
+    weights = weights.filter((pregnancy, index) => !this.state.indicesToRemove.includes(index));
+    return weights;
+  };
+
   public render() {
     const listViewProps = {
-      data: getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
-        ? getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
+      data: this.getPregnancyStringArray(this.state.pregnancyEventsArray)[
+        this.state.currentPregnancy
+      ]
+        ? this.getPregnancyStringArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
         : [],
       headerItems: ['Report', 'Date', 'Reporter', 'Message'],
       tableClass: 'table-container',
@@ -170,19 +175,15 @@ class ReportTable extends Component<Props, State> {
                 : 'select pregnancy'}
             </DropdownToggle>
             <DropdownMenu>
-              {map(this.state.pregnancyEventsArray, pregnancy => {
+              {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map((pregnancy, i) => {
                 return (
-                  <DropdownItem
-                    onClick={this.handlePregnancyDropDownClick}
-                    key={this.state.pregnancyEventsArray.indexOf(pregnancy)}
-                  >
+                  <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
                     {(() => {
-                      if (this.state.pregnancyEventsArray.indexOf(pregnancy) === 0) {
+                      if (i === 0) {
                         return 'current pregnancy';
                       } else {
                         const pregnancyIndex =
-                          this.state.pregnancyEventsArray.length -
-                          this.state.pregnancyEventsArray.indexOf(pregnancy);
+                          this.getPregnancyStringArray(this.state.pregnancyEventsArray).length - i;
                         return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
                       }
                     })()}
@@ -197,7 +198,9 @@ class ReportTable extends Component<Props, State> {
         </Row>
         <Row id={'chart'}>
           <MotherWeightChart
-            weights={getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]}
+            weights={
+              this.getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
+            }
           />
         </Row>
       </Fragment>
