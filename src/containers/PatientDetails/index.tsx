@@ -53,7 +53,7 @@ class PatientDetails extends Component<Props, State> {
     return (
       <div className="patient-details">
         <Link to={LOGFACE_URL}>Back to Pregnancy Log Face</Link>
-        <div>
+        <div id="titleDiv">
           <h2 id="patients_title">Patient Details</h2>
         </div>
         <Row>
