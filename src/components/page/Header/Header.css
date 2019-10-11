@@ -22,6 +22,18 @@
   padding: 5px;
 }
 
+.main-app-container .navbar .navbar-collapse ul li.dropdown a:hover {
+  color: #ffffff;
+}
+
+.main-app-container .navbar .navbar-collapse ul li.dropdown button a {
+  color: #666666;
+}
+
+.main-app-container .navbar .navbar-collapse ul li.dropdown button a:hover {
+  color: #666666 !important;
+}
+
 .bg-navbar {
   background: #2b475e !important;
   box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59);
