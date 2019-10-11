@@ -21,6 +21,7 @@ import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
+import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
@@ -68,6 +69,12 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={CLIENT_URL}
             component={ConnectedClientList}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={'/patient_detail/:patient_id'}
+            component={ConnectedPatientDetails}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
