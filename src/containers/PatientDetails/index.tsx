@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
+import { LOGFACE_URL } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData } from '../../store/ducks/sms_events';
 import { smsSlice } from '../LogFace/tests/fixtures';
@@ -50,6 +52,7 @@ class PatientDetails extends Component<Props, State> {
   public render() {
     return (
       <Container fluid={true} id={'patient-details'}>
+        <Link to={LOGFACE_URL}>back to Log Face</Link>
         <Row>
           <BasicInformation {...this.getBasicInformationProps()} />
         </Row>
