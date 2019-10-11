@@ -4,8 +4,9 @@ import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
@@ -234,7 +235,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                         <td className="default-width">{dataObj.health_worker_location_name}</td>
                         <td className="default-width">{dataObj.sms_type}</td>
                         <td className="default-width">{dataObj.health_worker_name}</td>
-                        <td className="default-width">{dataObj.anc_id}</td>
+                        <td className="default-width">
+                          <Link to={`/patient_detail/${dataObj.anc_id}`}>{dataObj.anc_id}</Link>
+                        </td>
                         <td className="small-width">{dataObj.age}</td>
                         <td className="large-width">
                           {typeof dataObj.message === 'string' &&
