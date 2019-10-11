@@ -80,7 +80,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
-    supersetFetch('2057').then((result: any) => {
+    supersetFetch('2263').then((result: any) => {
       fetchTestDataActionCreator(result);
     });
   }
