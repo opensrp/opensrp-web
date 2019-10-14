@@ -59,6 +59,20 @@ import './index.css';
 
 // Page links
 
+export const LOG_FACE: PageLink = {
+  label: 'logface',
+  url: '/logface',
+};
+
+export const CompartMents: PageLink = {
+  label: 'compartments',
+  url: '/compartments',
+};
+
+export const Analysis: PageLink = {
+  label: 'Analysis',
+  url: '/analysis',
+};
 export const CLIENT_PAGE_NAVIGATION: PageLink = {
   label: ALL_CLIENTS,
   url: CLIENT_URL,
@@ -184,6 +198,7 @@ export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: CLIENT_MODULE_PARENT_NAV,
 };
+
 export const REPORT_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [],
   parentNav: REPORT_MODULE_PARENT_NAV,
