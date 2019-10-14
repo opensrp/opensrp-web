@@ -1,4 +1,5 @@
 // internal urls
+export const PREGNANCY_URL = '/pregnancy';
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
 export const LOGOUT_URL = '/logout';
@@ -13,7 +14,6 @@ export const COMPARTMENTS_URL = '/compartments';
 export type COMPARTMENTS_URL = typeof COMPARTMENTS_URL;
 export const ANALYSIS_URL = '/analysis';
 export type ANALYSIS_URL = typeof ANALYSIS_URL;
-export const PREGNANCY_URL = '/pregnancy';
 export type PREGNANCY_URL = typeof PREGNANCY_URL;
 export const NUTRITION_URL = '/nutrition';
 export type NUTRITION_URL = typeof NUTRITION_URL;
