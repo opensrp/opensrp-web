@@ -26,7 +26,11 @@ import Compartments from '../containers/pages/Compartments';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
-import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
+import {
+  headerShouldNotRender,
+  oAuthUserInfoGetter,
+  sideNavShouldNotRender,
+} from '../helpers/utils';
 import './App.css';
 
 library.add(faUser);
@@ -77,7 +81,7 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={true}
             exact={true}
-            path={`${COMPARTMENTS_URL}/:current_level?/:direction?/:node_id?`}
+            path={`${COMPARTMENTS_URL}/:current_level?/:direction?/:node_id?/:from_level?`}
             component={Compartments}
           />
           <ConnectedPrivateRoute

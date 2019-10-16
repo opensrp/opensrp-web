@@ -9,6 +9,7 @@ class Compartments extends Component<any, {}> {
         current_level={parseInt(this.props.match.params.current_level, 10)}
         node_id={this.props.match.params.node_id}
         direction={this.props.match.params.direction}
+        from_level={this.props.match.params.from_level}
       />
     );
   }

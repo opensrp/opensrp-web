@@ -85,6 +85,15 @@ export const hfcs = [
     spray_effectiveness: '80%',
   },
 ] as any;
+export const dataChildren = [
+  {
+    id: 22,
+    location: 'HFC 1',
+    parent_id: 13,
+    spray_coverage: '80%',
+    spray_effectiveness: '80%',
+  },
+] as any;
 export const data = [
   {
     id: 9,
@@ -116,7 +125,7 @@ export const data = [
   },
   {
     id: 13,
-    location: 'Operational Area 13',
+    location: <Link to={COMPARTMENTS_URL + '/3/down/13'}>Operational Area 13</Link>,
     parent_id: 6,
     spray_coverage: '86%',
     spray_effectiveness: '100%',
@@ -167,6 +176,7 @@ interface Props {
   current_level: number;
   node_id?: number;
   direction: string; // this can be down or up
+  from_level?: number;
 }
 
 const defaultProps: Props = {
@@ -181,12 +191,25 @@ export default class HierarchichalDataTable extends Component<Props, State> {
       dataToShow = districts;
     } else if (nextProps.direction === 'up' && nextProps.current_level === 1) {
       dataToShow = hfcs;
+      let parentId: number;
+      if (nextProps.from_level === 2) {
+        parentId = dataToShow.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
+          .parent_id;
+      } else {
+        parentId = data.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
+          .parent_id;
+        parentId = dataToShow.find((dataItem: any) => dataItem.id === parentId).parent_id;
+      }
+      dataToShow = dataToShow.filter((dataItem: any) => dataItem.parent_id === parentId);
+    } else if (nextProps.direction === 'up' && nextProps.current_level === 2) {
+      dataToShow = data;
       const parent_id = dataToShow.find(
         (dataItem: any) => dataItem.id.toString() === nextProps.node_id
       ).parent_id;
       dataToShow = dataToShow.filter((dataItem: any) => dataItem.parent_id === parent_id);
     } else {
-      dataToShow = nextProps.current_level === 1 ? hfcs : data;
+      dataToShow =
+        nextProps.current_level === 1 ? hfcs : nextProps.current_level === 2 ? data : dataChildren;
       dataToShow = nextProps.node_id
         ? dataToShow.filter((dataItem: any) => dataItem.parent_id.toString() === nextProps.node_id)
         : dataToShow;
@@ -255,7 +278,10 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     let province = <span>province</span>;
     if (this.props.current_level > 0) {
       province = (
-        <Link to={COMPARTMENTS_URL + '/0/up/' + this.props.node_id} key={0}>
+        <Link
+          to={`${COMPARTMENTS_URL}/0/up/${this.props.node_id}/${this.props.current_level}`}
+          key={0}
+        >
           Province
         </Link>
       );
@@ -266,12 +292,30 @@ export default class HierarchichalDataTable extends Component<Props, State> {
       district = <span key={1}>/District</span>;
     } else {
       district = (
-        <Link to={COMPARTMENTS_URL + '/1/up/' + this.props.node_id} key={1}>
+        <Link
+          to={`${COMPARTMENTS_URL}/1/up/${this.props.node_id}/${this.props.current_level}`}
+          key={1}
+        >
           &nbsp;/ District
         </Link>
       );
     }
-    const commune = <span> / Commune</span>;
+
+    let commune = <span> / Commune</span>;
+    if (this.props.current_level === 2) {
+      commune = <span key={2}>/Commune</span>;
+    } else {
+      commune = (
+        <Link
+          to={`${COMPARTMENTS_URL}/2/up/${this.props.node_id}/${this.props.current_level}`}
+          key={2}
+        >
+          &nbsp;/ Commune
+        </Link>
+      );
+    }
+
+    const village = <span key={3}> / Village</span>;
     switch (this.props.current_level) {
       case 0:
         return province;
@@ -279,6 +323,8 @@ export default class HierarchichalDataTable extends Component<Props, State> {
         return [province, district];
       case 2:
         return [province, district, commune];
+      case 3:
+        return [province, district, commune, village];
       default:
         return province;
     }
