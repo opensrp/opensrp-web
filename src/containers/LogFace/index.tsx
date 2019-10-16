@@ -94,6 +94,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
   // tslint:disable-next-line: no-empty
   public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
     const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
+    if (this.state.currentIndex > 1) {
+      this.setState({
+        currentIndex: this.state.currentIndex - 1,
+      });
+    }
     this.setState({
       filteredData,
     });
