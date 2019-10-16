@@ -16,11 +16,12 @@ import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { COMPARTMENTS_URL, LOGFACE_URL, LOGOUT_URL } from '../constants';
+import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL, LOGOUT_URL } from '../constants';
 import { CLIENT_URL } from '../constants';
 import Analysis from '../containers/Clients/Analysis/';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
+import Analysis from '../containers/pages/Analysis';
 import Compartments from '../containers/pages/Compartments';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
@@ -78,6 +79,12 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={`${COMPARTMENTS_URL}/:current_level?/:direction?/:node_id?`}
             component={Compartments}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={true}
+            exact={true}
+            path={ANALYSIS_URL}
+            component={Analysis}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
