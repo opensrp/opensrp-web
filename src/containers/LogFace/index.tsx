@@ -96,7 +96,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
     if (this.state.currentIndex > 1) {
       this.setState({
-        currentIndex: this.state.currentIndex - 1,
+        currentIndex: 1,
       });
     }
     this.setState({
