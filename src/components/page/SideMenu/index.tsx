@@ -244,9 +244,6 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
   }
 
   public render() {
-    if (sideNavShouldNotRender()) {
-      return null;
-    }
     const collapsedModuleLabel = this.state.collapsedModuleLabel;
 
     // props for subMenu components
