@@ -109,7 +109,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
         <div>
           <h2 id="logface_title">Log Face - Pregnancy</h2>
         </div>
-        <div className="filter-search-div">
+        <div className="filter-panel">
           {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
           <Formik initialValues={{}} onSubmit={() => {}}>
             {() => (

@@ -162,36 +162,39 @@ class ReportTable extends Component<Props, State> {
 
     return (
       <Fragment>
-        <Row id="dropdownRow">
+        <Row id="filter-panel">
           <p>Showing reports for:&emsp;</p>
-          <Dropdown
-            isOpen={this.state.dropdownOpenPregnancy}
-            toggle={this.togglePregnancyDropDown}
-            className="dropdown"
-          >
-            <DropdownToggle variant="success" id="dropdown-basic" caret={true} className="dropdown">
-              {this.state.pregnancyDropdownLabel.length
-                ? this.state.pregnancyDropdownLabel
-                : 'select pregnancy'}
-            </DropdownToggle>
-            <DropdownMenu>
-              {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map((pregnancy, i) => {
-                return (
-                  <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
-                    {(() => {
-                      if (i === 0) {
-                        return 'current pregnancy';
-                      } else {
-                        const pregnancyIndex =
-                          this.getPregnancyStringArray(this.state.pregnancyEventsArray).length - i;
-                        return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
-                      }
-                    })()}
-                  </DropdownItem>
-                );
-              })}
-            </DropdownMenu>
-          </Dropdown>
+          <div className="filters">
+            <Dropdown
+              isOpen={this.state.dropdownOpenPregnancy}
+              toggle={this.togglePregnancyDropDown}
+            >
+              <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                <span>
+                {this.state.pregnancyDropdownLabel.length
+                  ? this.state.pregnancyDropdownLabel
+                  : 'select pregnancy'}
+                </span>
+              </DropdownToggle>
+              <DropdownMenu>
+                {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map((pregnancy, i) => {
+                  return (
+                    <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
+                      {(() => {
+                        if (i === 0) {
+                          return 'current pregnancy';
+                        } else {
+                          const pregnancyIndex =
+                            this.getPregnancyStringArray(this.state.pregnancyEventsArray).length - i;
+                          return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
+                        }
+                      })()}
+                    </DropdownItem>
+                  );
+                })}
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </Row>
         <Row id="tableRow">
           <ListView {...listViewProps} />

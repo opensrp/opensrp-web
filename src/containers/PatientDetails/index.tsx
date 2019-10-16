@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import ReportTable from '../../components/ReportTable';
 import { LOGFACE_URL } from '../../constants';
 import supersetFetch from '../../services/superset';
@@ -18,6 +20,8 @@ interface Props {
 interface State {
   filteredData: SmsData[];
 }
+
+export const backPageIcon: IconProp = ['fas', 'arrow-left']
 
 class PatientDetails extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
@@ -52,7 +56,12 @@ class PatientDetails extends Component<Props, State> {
   public render() {
     return (
       <div className="patient-details">
-        <Link to={LOGFACE_URL}>Back to Pregnancy Log Face</Link>
+        <Link to={LOGFACE_URL} className="back-page">
+          <FontAwesomeIcon icon={backPageIcon} size="lg" />
+          <span>
+            Back to Pregnancy Log Face
+          </span>
+        </Link>
         <div id="titleDiv">
           <h2 id="patients_title">Patient Details</h2>
         </div>

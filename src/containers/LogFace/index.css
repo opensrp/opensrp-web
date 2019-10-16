@@ -41,7 +41,7 @@ td {
   background: #fff;
 }
 
-.filter-search-div {
+.filter-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -158,7 +158,7 @@ td {
   color: #212121;
 }
 
-.filter-search-div input.logface-search {
+.filter-panel input.logface-search {
   border-radius: 0;
   margin-top: 35px;
   width: 25%;
@@ -168,7 +168,7 @@ td {
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
 }
 
-.filter-search-div input.logface-search::placeholder {
+.filter-panel input.logface-search::placeholder {
   color: #c2c2c2;
 }
 

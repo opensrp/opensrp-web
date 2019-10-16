@@ -1,5 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
