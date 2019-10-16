@@ -55,6 +55,7 @@ import {
 import SubMenu, { ModulePageLink, NavigationModule, PageLink, SubMenuProps } from './SubMenu';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { sideNavShouldNotRender } from '../../../helpers/utils';
 import './index.css';
 
 // Page links
@@ -243,6 +244,9 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
   }
 
   public render() {
+    if (sideNavShouldNotRender()) {
+      return null;
+    }
     const collapsedModuleLabel = this.state.collapsedModuleLabel;
 
     // props for subMenu components
@@ -250,33 +254,28 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
     const homeMenuProps: SubMenuProps = {
       ...HOME_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: HOME_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
 
     const pregnancyMenuProps: SubMenuProps = {
       ...PREGNANCY_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: PREGNANCY_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
 
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: CLIENT_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: REPORTS_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: ADMIN,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     return (
