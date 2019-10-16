@@ -26,11 +26,7 @@ import Compartments from '../containers/pages/Compartments';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
-import {
-  headerShouldNotRender,
-  oAuthUserInfoGetter,
-  sideNavShouldNotRender,
-} from '../helpers/utils';
+import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
 library.add(faUser);

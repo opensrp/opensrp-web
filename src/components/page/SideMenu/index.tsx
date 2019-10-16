@@ -55,7 +55,6 @@ import {
 import SubMenu, { ModulePageLink, NavigationModule, PageLink, SubMenuProps } from './SubMenu';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { sideNavShouldNotRender } from '../../../helpers/utils';
 import './index.css';
 
 // Page links
