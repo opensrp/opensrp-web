@@ -1,6 +1,5 @@
 import { cloneDeep } from '@babel/types';
 import DrillDownTable from '@onaio/drill-down-table/';
-import HeaderBreadCrumb from '@onaio/head-bread-crumb';
 import { disconnect } from 'cluster';
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
