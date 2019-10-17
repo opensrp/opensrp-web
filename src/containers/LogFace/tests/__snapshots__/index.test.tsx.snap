@@ -5,7 +5,9 @@ Array [
   <div
     className="location-type-filter"
   >
-    Risk Level
+    <span>
+      Risk Level
+    </span>
     <Dropdown
       active={false}
       addonType={false}
@@ -56,7 +58,9 @@ Array [
                     type="button"
                     variant="success"
                   >
-                    Select risk
+                    <span>
+                      Select risk
+                    </span>
                   </button>
                 </Button>
               </InnerReference>
@@ -161,7 +165,9 @@ Array [
   <div
     className="location-type-filter"
   >
-    Select Location
+    <span>
+      Select Location
+    </span>
     <Dropdown
       active={false}
       addonType={false}
@@ -212,7 +218,9 @@ Array [
                     type="button"
                     variant="success"
                   >
-                    Select Location
+                    <span>
+                      Select Location
+                    </span>
                   </button>
                 </Button>
               </InnerReference>
@@ -253,7 +261,9 @@ Array [
   <div
     className="location-type-filter"
   >
-    Type
+    <span>
+      Type
+    </span>
     <Dropdown
       active={false}
       addonType={false}
@@ -304,7 +314,9 @@ Array [
                     type="button"
                     variant="success"
                   >
-                    Select Type
+                    <span>
+                      Select Type
+                    </span>
                   </button>
                 </Button>
               </InnerReference>
@@ -653,7 +665,7 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 <h2
   id="logface_title"
 >
-  Log Face
+  Log Face - Pregnancy
 </h2>
 `;
 
@@ -665,7 +677,7 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
 
 exports[`components/ConnectedHeader renders correctly: search div 1`] = `
 <input
-  className="form-control"
+  className="form-control logface-search"
   disabled={true}
   id="input"
   name="input"
