@@ -1,10 +1,6 @@
-import { cloneDeep } from '@babel/types';
-import DrillDownTable from '@onaio/drill-down-table/';
-import { disconnect } from 'cluster';
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
 import { Card, CardBody, CardFooter, CardTitle } from 'reactstrap';
-import { FlexObject } from '../../helpers/utils';
 import './index.css';
 
 import { Link } from 'react-router-dom';
@@ -15,29 +11,29 @@ export const districts = [
     id: 18,
     location: 'District D',
     parent_id: null,
-    spray_coverage: '0%',
-    spray_effectiveness: '0%',
+    spray_coverage: 20,
+    spray_effectiveness: 20,
   },
   {
     id: 1,
     location: <Link to={COMPARTMENTS_URL + '/1/down/1'}>District A</Link>,
     parent_id: null,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
   {
     id: 2,
     location: 'District B',
     parent_id: null,
-    spray_coverage: '75%',
-    spray_effectiveness: '85%',
+    spray_coverage: 75,
+    spray_effectiveness: 85,
   },
   {
     id: 3,
     location: 'District C',
     parent_id: null,
-    spray_coverage: '90%',
-    spray_effectiveness: '90%',
+    spray_coverage: 90,
+    spray_effectiveness: 90,
   },
 ];
 
@@ -46,43 +42,43 @@ export const hfcs = [
     id: 3,
     location: 'HFC 3',
     parent_id: 2,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
   {
     id: 17,
     location: 'HFC 17',
     parent_id: 2,
-    spray_coverage: '0%',
-    spray_effectiveness: '0%',
+    spray_coverage: 20,
+    spray_effectiveness: 20,
   },
   {
     id: 7,
     location: 'HFC 4',
     parent_id: 3,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
   {
     id: 8,
     location: 'HFC 5',
     parent_id: 3,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
   {
     id: 6,
     location: <Link to={COMPARTMENTS_URL + '/2/down/6'}>HFC 2</Link>,
     parent_id: 1,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
   {
     id: 4,
     location: 'HFC 1',
     parent_id: 1,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
 ] as any;
 export const dataChildren = [
@@ -90,8 +86,8 @@ export const dataChildren = [
     id: 22,
     location: 'HFC 1',
     parent_id: 13,
-    spray_coverage: '80%',
-    spray_effectiveness: '80%',
+    spray_coverage: 80,
+    spray_effectiveness: 80,
   },
 ] as any;
 export const data = [
@@ -99,71 +95,71 @@ export const data = [
     id: 9,
     location: 'Operational Area 9',
     parent_id: 4,
-    spray_coverage: '70%',
-    spray_effectiveness: '90%',
+    spray_coverage: 70,
+    spray_effectiveness: 90,
   },
   {
     id: 10,
     location: 'Operational Area 10',
     parent_id: 4,
-    spray_coverage: '80%',
-    spray_effectiveness: '100%',
+    spray_coverage: 80,
+    spray_effectiveness: 100,
   },
   {
     id: 11,
     location: 'Operational Area 11',
     parent_id: 4,
-    spray_coverage: '100%',
-    spray_effectiveness: '100%',
+    spray_coverage: 100,
+    spray_effectiveness: 100,
   },
   {
     id: 12,
     location: 'Operational Area 12',
     parent_id: 5,
-    spray_coverage: '86%',
-    spray_effectiveness: '100%',
+    spray_coverage: 86,
+    spray_effectiveness: 100,
   },
   {
     id: 13,
     location: <Link to={COMPARTMENTS_URL + '/3/down/13'}>Operational Area 13</Link>,
     parent_id: 6,
-    spray_coverage: '86%',
-    spray_effectiveness: '100%',
+    spray_coverage: 86,
+    spray_effectiveness: 100,
   },
   {
     id: 14,
     location: 'Operational Area 14',
     parent_id: 6,
-    spray_coverage: '86%',
-    spray_effectiveness: '90%',
+    spray_coverage: 86,
+    spray_effectiveness: 90,
   },
   {
     id: 17,
     location: 'Operational Area 17',
     parent_id: 6,
-    spray_coverage: '86%',
-    spray_effectiveness: '78%',
+    spray_coverage: 86,
+    spray_effectiveness: 78,
   },
   {
     id: 18,
     location: 'Operational Area 18',
     parent_id: 6,
-    spray_coverage: '80%',
-    spray_effectiveness: '100%',
+    spray_coverage: 80,
+    spray_effectiveness: 100,
   },
   {
     id: 15,
     location: 'Operational Area 15',
     parent_id: 6,
-    spray_coverage: '80%',
-    spray_effectiveness: '100%',
+    spray_coverage: 80,
+    spray_effectiveness: 100,
   },
   {
     id: 16,
     location: 'Operational Area 16',
     parent_id: 6,
-    spray_coverage: '80%',
-    spray_effectiveness: '100%',
+    spray_coverage: 80,
+    spray_effectiveness: 100,
   },
 ] as any;
 
@@ -176,7 +172,7 @@ interface Props {
   current_level: number;
   node_id?: number;
   direction: string; // this can be down or up
-  from_level?: number;
+  from_level?: string;
 }
 
 const defaultProps: Props = {
@@ -192,9 +188,9 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     } else if (nextProps.direction === 'up' && nextProps.current_level === 1) {
       dataToShow = hfcs;
       let parentId: number;
-      if (nextProps.from_level === 2) {
-        parentId = dataToShow.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
-          .parent_id;
+      const node = dataToShow.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id);
+      if (nextProps.from_level === '2' && node) {
+        parentId = node.parent_id;
       } else {
         parentId = data.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
           .parent_id;
@@ -254,21 +250,13 @@ export default class HierarchichalDataTable extends Component<Props, State> {
       },
     ];
 
-    // Add a function called computeTotals
-    // that sums up the totals for all the
-    // fields and concatenates that to the
-    // end of this.state.data to represent totals
     return (
       <Card className="table-card">
         <CardTitle>{this.header()}</CardTitle>
         <CardBody>
-          <DrillDownTable
-            columns={columns}
-            data={this.state.data}
-            linkerField={'location'}
-            showPagination={false}
-            defaultPageSize={this.state.data.length}
-          />
+          {this.state.data.map((element: any) => {
+            return element.location;
+          })}
         </CardBody>
       </Card>
     );
@@ -330,3 +318,16 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     }
   };
 }
+
+const getTotals = (dataToShow: any[]) => {
+  const reducer = (accumulator: any, currentValue: any) => {
+    return {
+      id: 100,
+      location: 'total',
+      parent_id: null,
+      spray_coverage: accumulator.spray_coverage + currentValue.spray_coverage,
+      spray_effectiveness: accumulator.spray_effectiveness + currentValue.spray_effectiveness,
+    };
+  };
+  return dataToShow.reduce(reducer, { spray_coverage: 0, spray_effectiveness: 0 });
+};
