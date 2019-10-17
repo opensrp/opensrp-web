@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Store } from 'redux';
+import { MICROSECONDS_IN_A_WEEK } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
 import './index.css';
@@ -32,26 +33,35 @@ class Compartments extends Component<Props, {}> {
         <Row>
           <h2 id="compartment_title">Compartment</h2>
         </Row>
-        <Row>
-          <p>the locations breadcrumbs go here</p>
+        <Row className="breadcrumb-row">
+          <p id="breadcrumb">Province</p>
         </Row>
-        <Row>
+        <Row className="cards-row">
           <p>the cards go here</p>
         </Row>
       </Container>
     );
   }
-}
-
-function filterSms(
-  last1Week?: boolean,
-  last2Weeks?: boolean,
-  province?: string,
-  district?: string,
-  commune?: string,
-  village?: string
-): null {
-  return null;
+  private filterSms = (
+    last1Week?: boolean,
+    last2Weeks?: boolean,
+    province?: string,
+    district?: string,
+    commune?: string,
+    village?: string
+  ): void => {
+    let filteredData: SmsData[] = [];
+    if (last2Weeks) {
+      filteredData = this.props.smsData.filter((dataItem: SmsData): boolean => {
+        return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+      });
+    } else if (last1Week) {
+      filteredData = this.props.smsData.filter((dataItem: SmsData): boolean => {
+        return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
+      });
+    }
+    // in the very near future we should be able to filter by an administrative unit
+  };
 }
 
 const mapStateToprops = (state: Partial<Store>) => {
