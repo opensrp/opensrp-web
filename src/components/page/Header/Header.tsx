@@ -46,28 +46,23 @@ export class HeaderComponent extends React.Component<HeaderProps> {
     const { authenticated, user } = this.props;
     return (
       <Row>
-        <Navbar
-          color="light"
-          className="nav-fill w-100 bg-navbar fixed-top"
-          light={true}
-          expand="md"
-        >
-          <Col md={2} className="bg-top-nav">
+        <Navbar className="w-100 bg-navbar" expand="sm" fixed="top">
+          <Col sm={3} md={2} className="bg-top-nav">
             <nav className="navbar navbar-expand-md navbar-light">
               <Link to="/" className="navbar-brand">
                 <img src={logo} alt={WEBSITE_NAME} />
               </Link>
             </nav>
           </Col>
-          <Col md={8} />
-          <Col md={2} className="bg-top-nav">
+          <Col sm={5} md={8} />
+          <Col sm={4} md={2} className="bg-top-nav">
             <Nav className="navbar navbar-expand-md center-account-text">
               {authenticated ? (
                 <UncontrolledDropdown nav={true} inNavbar={true}>
                   <DropdownToggle nav={true} caret={true} className="account-text">
                     <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
                   </DropdownToggle>
-                  <DropdownMenu right={true}>
+                  <DropdownMenu left={true}>
                     <DropdownItem>
                       <NavLink
                         to={LOGOUT_URL}

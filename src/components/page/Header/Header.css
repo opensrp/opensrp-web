@@ -1,46 +1,35 @@
 .navbar-brand img {
-  max-height: 30px;
-  position: relative;
+  max-height: 64px;
   max-width: 100%;
-  max-height: 100%;
 }
 
-.reveal-breadcrumb {
-  margin-top: 15px;
-}
-
-.reveal-breadcrumb .breadcrumb {
-  background-color: #eceeef;
-}
-
-.bg-navbar{
-  background: #2B475E !important;
-  box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59);
+.bg-navbar {
+  background: #2b475e !important;
   padding: 0;
 }
 
-.bg-top-nav{
-  background: #233F56;
+.bg-top-nav {
+  background: #233f56;
   /* box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59); */
-  text-align: center; 
+  text-align: center;
 }
 
-.account-text{
+.account-text {
   justify-content: center;
   color: #ffffff;
 }
 
-.account-text:hover{
-  color: #D7D7E0;
+.account-text:hover {
+  color: #d7d7e0;
 }
-.bg-dropdown-text{
+.bg-dropdown-text {
   justify-content: center;
   text-align: center;
   font-family: roboto;
-  color: #233F56;
+  color: #233f56;
 }
 
-.center-account-text{
+.center-account-text {
   justify-content: center;
   font-family: roboto;
 }
