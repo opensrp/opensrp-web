@@ -38,6 +38,9 @@ class Compartments extends Component<Props, {}> {
         </Row>
         <Row className="cards-row">
           <p>the cards go here</p>
+          <p>{this.getNumberOfSmsWithRisk('high')}</p>
+          <p>{this.getNumberOfSmsWithRisk('low')}</p>
+          <p>{this.getNumberOfSmsWithRisk('no risk')}</p>
         </Row>
       </Container>
     );
@@ -61,6 +64,22 @@ class Compartments extends Component<Props, {}> {
       });
     }
     // in the very near future we should be able to filter by an administrative unit
+  };
+
+  /**
+   * get the number of sms_reports with a certain value in their logface_risk
+   * field
+   * @param {string} risk - value of logface_risk to look for
+   */
+  private getNumberOfSmsWithRisk = (risk: string) => {
+    function reducer(accumulator: number, currentValue: SmsData) {
+      if (currentValue.logface_risk.toLowerCase().includes(risk)) {
+        return accumulator + 1;
+      } else {
+        return accumulator;
+      }
+    }
+    return this.props.smsData.reduce(reducer, 0);
   };
 }
 
