@@ -29,6 +29,7 @@ describe('components/page/Header', () => {
   });
 
   it('renders header correctly', () => {
+    // can check for certain crucial parts.
     const props = {
       authenticated: false,
       user: {
@@ -42,8 +43,16 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    /** compares the navbar of header component */
-    expect(toJson(wrapper.find('Navbar'))).toMatchSnapshot();
+    // snapshot for the first col; should have the brand-image
+    const brandWrapper = wrapper.find('a.navbar-brand');
+    expect(brandWrapper.length).toEqual(1);
+    expect(toJson(brandWrapper)).toMatchSnapshot('Brand-image');
+
+    // the login/logout
+    const accntMgmtWrapper = wrapper.find('NavLink');
+    expect(toJson(accntMgmtWrapper)).toMatchSnapshot('Login');
+    expect(accntMgmtWrapper.text()).toEqual('Login');
+
     wrapper.unmount();
   });
 
@@ -61,8 +70,12 @@ describe('components/page/Header', () => {
         <HeaderComponent {...props} />
       </Router>
     );
-    /** compares the navbar of header component */
-    expect(toJson(wrapper.find('Navbar'))).toMatchSnapshot();
+
+    // the login/logout
+    const accntMgmtWrapper = wrapper.find('NavLink');
+    expect(toJson(accntMgmtWrapper)).toMatchSnapshot('Sign Out');
+    expect(accntMgmtWrapper.text()).toEqual('Sign Out');
+
     wrapper.unmount();
   });
 });

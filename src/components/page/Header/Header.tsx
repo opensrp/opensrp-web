@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
 import { WEBSITE_NAME } from '../../../configs/env';
-import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { LOGIN, LOGIN_URL, LOGOUT_URL, SIGN_OUT } from '../../../constants';
 import './Header.css';
 
 /** interface for HeaderProps */
@@ -37,10 +37,6 @@ const defaultHeaderProps: Partial<HeaderProps> = {
 /** The Header component */
 export class HeaderComponent extends React.Component<HeaderProps> {
   public static defaultProps = defaultHeaderProps;
-
-  constructor(props: HeaderProps) {
-    super(props);
-  }
 
   public render() {
     const { authenticated, user } = this.props;
@@ -69,14 +65,14 @@ export class HeaderComponent extends React.Component<HeaderProps> {
                         className="nav-link bg-dropdown-text"
                         activeClassName="active"
                       >
-                        Sign Out
+                        {SIGN_OUT}
                       </NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               ) : (
                 <NavLink to={LOGIN_URL} className="nav-link account-text" activeClassName="active">
-                  Login
+                  {LOGIN}
                 </NavLink>
               )}
             </Nav>

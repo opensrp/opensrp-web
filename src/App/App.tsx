@@ -12,7 +12,7 @@ import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
-import SideMenu from '../components/page/SideMenu/SideMenu';
+import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
