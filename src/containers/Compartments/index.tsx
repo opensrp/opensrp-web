@@ -2,13 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Store } from 'redux';
-import { fetchSms, getSmsData, SmsData } from '../../store/ducks/sms_events';
+import supersetFetch from '../../services/superset';
+import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
   smsData: SmsData[];
+  fetchSmsDataActionCreator: typeof fetchSms;
+  dataFetched: boolean;
 }
+const defaultProps: Props = {
+  dataFetched: false,
+  fetchSmsDataActionCreator: fetchSms,
+  smsData: [],
+};
 class Compartments extends Component<Props, {}> {
+  public static defaultProps = defaultProps;
+  public componentDidMount() {
+    const { fetchSmsDataActionCreator } = this.props;
+    if (!this.props.dataFetched) {
+      supersetFetch('2263').then((result: any) => {
+        fetchSmsDataActionCreator(result);
+      });
+    }
+  }
   public render() {
     return (
       <Container fluid={true}>
@@ -39,12 +56,13 @@ function filterSms(
 
 const mapStateToprops = (state: Partial<Store>) => {
   const result = {
+    dataFetched: smsDataFetched(state),
     smsData: getSmsData(state),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchTestDataActionCreator: fetchSms };
+const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
 
 const ConnectedCompartments = connect(
   mapStateToprops,
