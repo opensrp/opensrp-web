@@ -1,167 +1,11 @@
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
-import { Card, CardBody, CardFooter, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardTitle, Table } from 'reactstrap';
 import './index.css';
 
 import { Link } from 'react-router-dom';
 import { COMPARTMENTS_URL } from '../../constants';
-
-export const districts = [
-  {
-    id: 18,
-    location: 'District D',
-    parent_id: null,
-    spray_coverage: 20,
-    spray_effectiveness: 20,
-  },
-  {
-    id: 1,
-    location: <Link to={COMPARTMENTS_URL + '/1/down/1'}>District A</Link>,
-    parent_id: null,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-  {
-    id: 2,
-    location: 'District B',
-    parent_id: null,
-    spray_coverage: 75,
-    spray_effectiveness: 85,
-  },
-  {
-    id: 3,
-    location: 'District C',
-    parent_id: null,
-    spray_coverage: 90,
-    spray_effectiveness: 90,
-  },
-];
-
-export const hfcs = [
-  {
-    id: 3,
-    location: 'HFC 3',
-    parent_id: 2,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-  {
-    id: 17,
-    location: 'HFC 17',
-    parent_id: 2,
-    spray_coverage: 20,
-    spray_effectiveness: 20,
-  },
-  {
-    id: 7,
-    location: 'HFC 4',
-    parent_id: 3,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-  {
-    id: 8,
-    location: 'HFC 5',
-    parent_id: 3,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-  {
-    id: 6,
-    location: <Link to={COMPARTMENTS_URL + '/2/down/6'}>HFC 2</Link>,
-    parent_id: 1,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-  {
-    id: 4,
-    location: 'HFC 1',
-    parent_id: 1,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-] as any;
-export const dataChildren = [
-  {
-    id: 22,
-    location: 'HFC 1',
-    parent_id: 13,
-    spray_coverage: 80,
-    spray_effectiveness: 80,
-  },
-] as any;
-export const data = [
-  {
-    id: 9,
-    location: 'Operational Area 9',
-    parent_id: 4,
-    spray_coverage: 70,
-    spray_effectiveness: 90,
-  },
-  {
-    id: 10,
-    location: 'Operational Area 10',
-    parent_id: 4,
-    spray_coverage: 80,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 11,
-    location: 'Operational Area 11',
-    parent_id: 4,
-    spray_coverage: 100,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 12,
-    location: 'Operational Area 12',
-    parent_id: 5,
-    spray_coverage: 86,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 13,
-    location: <Link to={COMPARTMENTS_URL + '/3/down/13'}>Operational Area 13</Link>,
-    parent_id: 6,
-    spray_coverage: 86,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 14,
-    location: 'Operational Area 14',
-    parent_id: 6,
-    spray_coverage: 86,
-    spray_effectiveness: 90,
-  },
-  {
-    id: 17,
-    location: 'Operational Area 17',
-    parent_id: 6,
-    spray_coverage: 86,
-    spray_effectiveness: 78,
-  },
-  {
-    id: 18,
-    location: 'Operational Area 18',
-    parent_id: 6,
-    spray_coverage: 80,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 15,
-    location: 'Operational Area 15',
-    parent_id: 6,
-    spray_coverage: 80,
-    spray_effectiveness: 100,
-  },
-  {
-    id: 16,
-    location: 'Operational Area 16',
-    parent_id: 6,
-    spray_coverage: 80,
-    spray_effectiveness: 100,
-  },
-] as any;
+import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
   data: any;
@@ -184,28 +28,32 @@ export default class HierarchichalDataTable extends Component<Props, State> {
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     let dataToShow: any = [];
     if ((nextProps.direction === 'up' && nextProps.current_level === 0) || !nextProps.node_id) {
-      dataToShow = districts;
+      dataToShow = provinces;
     } else if (nextProps.direction === 'up' && nextProps.current_level === 1) {
-      dataToShow = hfcs;
+      dataToShow = districts;
       let parentId: number;
       const node = dataToShow.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id);
       if (nextProps.from_level === '2' && node) {
         parentId = node.parent_id;
       } else {
-        parentId = data.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
+        parentId = communes.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id)
           .parent_id;
         parentId = dataToShow.find((dataItem: any) => dataItem.id === parentId).parent_id;
       }
       dataToShow = dataToShow.filter((dataItem: any) => dataItem.parent_id === parentId);
     } else if (nextProps.direction === 'up' && nextProps.current_level === 2) {
-      dataToShow = data;
+      dataToShow = communes;
       const parent_id = dataToShow.find(
         (dataItem: any) => dataItem.id.toString() === nextProps.node_id
       ).parent_id;
       dataToShow = dataToShow.filter((dataItem: any) => dataItem.parent_id === parent_id);
     } else {
       dataToShow =
-        nextProps.current_level === 1 ? hfcs : nextProps.current_level === 2 ? data : dataChildren;
+        nextProps.current_level === 1
+          ? districts
+          : nextProps.current_level === 2
+          ? communes
+          : villages;
       dataToShow = nextProps.node_id
         ? dataToShow.filter((dataItem: any) => dataItem.parent_id.toString() === nextProps.node_id)
         : dataToShow;
@@ -221,47 +69,90 @@ export default class HierarchichalDataTable extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      data: districts,
+      data: provinces,
       district: '',
     };
   }
 
   public render() {
-    const columns = [
-      {
-        Header: '',
-        accessor: 'location',
-      },
-      {
-        Header: 'High Risk',
-        accessor: 'spray_coverage',
-      },
-      {
-        Header: 'Low Risk',
-        accessor: 'spray_effectiveness',
-      },
-      {
-        Header: 'No Risk',
-        accessor: 'spray_effectiveness',
-      },
-      {
-        Header: 'Total',
-        accessor: 'id',
-      },
-    ];
-
     return (
       <Card className="table-card">
         <CardTitle>{this.header()}</CardTitle>
         <CardBody>
-          {this.state.data.map((element: any) => {
-            return element.location;
-          })}
+          <Table striped={true} borderless={true}>
+            <thead id="header">
+              <tr>
+                <th className="default-width" />
+                <th className="default-width">Hight Risk</th>
+                <th className="default-width">Low Risk</th>
+                <th className="default-width">No Risk</th>
+                <th className="default-width">Total</th>
+              </tr>
+            </thead>
+            <tbody id="body">
+              {this.state.data.length ? (
+                this.state.data.map((element: any) => {
+                  return (
+                    <tr key={element.id}>
+                      <td className="default-width">
+                        {element.location}
+                        <Link
+                          to={
+                            COMPARTMENTS_URL +
+                            `/${this.props.current_level ? this.props.current_level + 1 : 1}/down/${
+                              element.id
+                            }`
+                          }
+                        >
+                          {element.name}
+                        </Link>
+                      </td>
+                      <td className="default-width">{element.high_risk}</td>
+                      <td className="default-width">{element.low_risk}</td>
+                      <td className="default-width">{element.no_risk}</td>
+                      <td className="default-width">{element.total}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr id="no-rows">
+                  <td>There seems to be no rows here :-(</td>
+                </tr>
+              )}
+              {(() => {
+                const element = getTotals(this.state.data);
+                return (
+                  <tr key={'total'}>
+                    <td className="default-width" id="total">
+                      Total({this.getLevelString()})
+                    </td>
+                    <td className="default-width">{element.high_risk}</td>
+                    <td className="default-width">{element.low_risk}</td>
+                    <td className="default-width">{element.no_risk}</td>
+                    <td className="default-width">{element.total}</td>
+                  </tr>
+                );
+              })()}
+            </tbody>
+          </Table>
         </CardBody>
       </Card>
     );
   }
 
+  private getLevelString = () => {
+    if (this.props.current_level === 0) {
+      return 'Province';
+    } else if (this.props.current_level === 1) {
+      return 'District';
+    } else if (this.props.current_level === 2) {
+      return 'Commune';
+    } else if (this.props.current_level === 3) {
+      return 'Village';
+    } else {
+      return 'Province';
+    }
+  };
   private header = () => {
     let province = <span>province</span>;
     if (this.props.current_level > 0) {
@@ -322,12 +213,11 @@ export default class HierarchichalDataTable extends Component<Props, State> {
 const getTotals = (dataToShow: any[]) => {
   const reducer = (accumulator: any, currentValue: any) => {
     return {
-      id: 100,
-      location: 'total',
-      parent_id: null,
-      spray_coverage: accumulator.spray_coverage + currentValue.spray_coverage,
-      spray_effectiveness: accumulator.spray_effectiveness + currentValue.spray_effectiveness,
+      high_risk: accumulator.high_risk + currentValue.high_risk,
+      low_risk: accumulator.low_risk + currentValue.low_risk,
+      no_risk: accumulator.no_risk + currentValue.no_risk,
+      total: accumulator.total + currentValue.total,
     };
   };
-  return dataToShow.reduce(reducer, { spray_coverage: 0, spray_effectiveness: 0 });
+  return dataToShow.reduce(reducer, { high_risk: 0, low_risk: 0, no_risk: 0, total: 0 });
 };
