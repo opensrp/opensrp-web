@@ -41,17 +41,6 @@ describe('App', () => {
     const headerWrapper = wrapper.find('HeaderComponent');
     expect(headerWrapper.length).toEqual(1);
 
-    // these test are not valid anymore as when the user
-    // is not logged in, we show the CustomOathLogin page
-
-    // should have a sidebar for the side navigation
-    // const sideMenuWrapper = wrapper.find('.sidebar');
-    // expect(sideMenuWrapper.length).toEqual(1);
-
-    // should have the main page where the page views are rendered
-    // const mainPageWrapper = wrapper.find('div.container-section');
-    // expect(mainPageWrapper.length).toEqual(1);
-
     const customOathLoginChildren = wrapper.find(CustomOauthLogin).children();
 
     expect(toJson(customOathLoginChildren)).toMatchSnapshot();
