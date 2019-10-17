@@ -20,9 +20,9 @@ import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL, LOGOUT_URL } from '../cons
 import { CLIENT_URL } from '../constants';
 import Analysis from '../containers/Clients/Analysis/';
 import ConnectedClientList from '../containers/Clients/List';
+import Compartments from '../containers/Compartments';
 import ConnectedLogFace from '../containers/LogFace';
 import Analysis from '../containers/pages/Analysis';
-import Compartments from '../containers/pages/Compartments';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
