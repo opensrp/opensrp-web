@@ -27,6 +27,7 @@ class App extends Component {
         <Route
           exact={true}
           path={LOGIN_URL}
+          // tslint:disable-next-line: jsx-no-lambda
           render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
         />
         {/* tslint:enable jsx-no-lambda */}
