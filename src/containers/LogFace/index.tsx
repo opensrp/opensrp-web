@@ -25,6 +25,7 @@ reducerRegistry.register(reducerName, TestReducer);
 interface PropsInterface {
   testData: SmsData[];
   fetchTestDataActionCreator: typeof fetchSms;
+  dataFetched: boolean;
 }
 
 interface State {
@@ -39,6 +40,7 @@ interface State {
 }
 
 const defaultprops: PropsInterface = {
+  dataFetched: false,
   fetchTestDataActionCreator: fetchSms,
   testData: [],
 };
@@ -81,9 +83,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   public componentDidMount() {
     const { fetchTestDataActionCreator } = this.props;
-    supersetFetch('2263').then((result: any) => {
-      fetchTestDataActionCreator(result);
-    });
+    if (!this.props.dataFetched) {
+      supersetFetch('2263').then((result: any) => {
+        fetchTestDataActionCreator(result);
+      });
+    }
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -379,6 +383,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any) => {
   const result = {
+    smsData: getSmsData(state),
     testData: getSmsData(state),
   };
   return result;
