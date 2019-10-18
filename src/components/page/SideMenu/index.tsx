@@ -244,45 +244,33 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
 
   public render() {
     const collapsedModuleLabel = this.state.collapsedModuleLabel;
-
-    // props for subMenu components
-
-    const homeMenuProps: SubMenuProps = {
-      ...HOME_NAVIGATION_MODULE,
-      collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-    };
-
-    const pregnancyMenuProps: SubMenuProps = {
-      ...PREGNANCY_NAVIGATION_MODULE,
-      collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-    };
-
-    const clientSubMenuProps: SubMenuProps = {
-      ...CLIENT_NAVIGATION_MODULE,
-      collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-    };
-    const reportSubMenuProps: SubMenuProps = {
-      ...REPORT_NAVIGATION_MODULE,
-      collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-    };
-    const adminSubMenuProps: SubMenuProps = {
-      ...ADMIN_NAVIGATION_MODULE,
-      collapsedModuleLabel,
-      setCollapsedModuleLabel: this.setCollapsedModuleLabel,
-    };
+    interface SubMenuToRender {
+      shouldRender: boolean;
+      subMenuProps: Partial<SubMenuProps>;
+    }
+    const navigationModules: SubMenuToRender[] = [
+      { shouldRender: true, subMenuProps: HOME_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_PREGNANCY_MODULE, subMenuProps: PREGNANCY_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_REPORT_MODULE, subMenuProps: REPORT_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_CLIENT_RECORDS_MODULE, subMenuProps: CLIENT_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_ADMIN_MODULE, subMenuProps: ADMIN_NAVIGATION_MODULE },
+    ];
     return (
       <div className="side-menu-container">
         <Row>
           <Col className="side-menu-extend">
-            {<SubMenu {...homeMenuProps} />}
-            {ENABLE_PREGNANCY_MODULE && <SubMenu {...pregnancyMenuProps} />}
-            {ENABLE_CLIENT_RECORDS_MODULE && <SubMenu {...clientSubMenuProps} />}
-            {ENABLE_REPORT_MODULE && <SubMenu {...reportSubMenuProps} />}
-            {ENABLE_ADMIN_MODULE && <SubMenu {...adminSubMenuProps} />}
+            {navigationModules.map((navigationModule: any) => {
+              if (navigationModule.shouldRender) {
+                return (
+                  <SubMenu
+                    childNavs={navigationModule.subMenuProps.childNavs}
+                    collapsedModuleLabel={collapsedModuleLabel}
+                    setCollapsedModuleLabel={this.setCollapsedModuleLabel}
+                    parentNav={navigationModule.subMenuProps.parentNav}
+                  />
+                );
+              }
+            })}
           </Col>
         </Row>
       </div>
