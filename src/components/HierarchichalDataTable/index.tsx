@@ -22,12 +22,14 @@ interface Props {
   direction: string; // this can be down or up
   from_level?: string;
   risk_highligter?: 'high-risk' | 'low-risk' | 'no-risk' | 'none';
+  title: string;
 }
 
 const defaultProps: Props = {
   current_level: 0,
   direction: 'down',
   risk_highligter: 'none',
+  title: '',
 };
 
 class HierarchichalDataTable extends Component<Props, State> {
@@ -86,6 +88,7 @@ class HierarchichalDataTable extends Component<Props, State> {
           <FontAwesomeIcon icon={backPageIcon} size="lg" />
           <span>Back to Pregnancy Log Face</span>
         </Link>
+        <h1>{this.props.title}</h1>
         <Row>
           <Card className="table-card">
             <CardTitle>{this.header()}</CardTitle>
@@ -109,6 +112,8 @@ class HierarchichalDataTable extends Component<Props, State> {
                             {element.location}
                             <Link
                               to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
+                                this.props.title
+                              }/${
                                 this.props.current_level ? this.props.current_level + 1 : 1
                               }/down/${element.id}`}
                             >
@@ -216,7 +221,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/0/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/0/up/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           Province
@@ -230,7 +235,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/1/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/1/up/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ District
@@ -244,7 +249,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/2/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/2/up/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ Commune
@@ -287,6 +292,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): Props => {
     from_level: ownProps.match.params.from_level,
     node_id: ownProps.match.params.node_id,
     risk_highligter: ownProps.match.params.risk_highlighter,
+    title: ownProps.match.params.title,
   };
 };
 
