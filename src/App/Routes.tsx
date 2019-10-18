@@ -9,13 +9,13 @@ import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
 import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
-import ConnectedHierarchichalDataTable from '../components/HierarchichalDataTable';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
+import { CLIENT_URL } from '../constants';
 import {
   ANALYSIS_URL,
   COMPARTMENTS_URL,
@@ -23,10 +23,10 @@ import {
   LOGFACE_URL,
   LOGOUT_URL,
 } from '../constants';
-import { CLIENT_URL } from '../constants';
 import Analysis from '../containers/Clients/Analysis/';
 import ConnectedClientList from '../containers/Clients/List';
 import Compartments from '../containers/Compartments';
+import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
