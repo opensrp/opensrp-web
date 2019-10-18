@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router';
 import { Col, Container, Row } from 'reactstrap';
 import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
+import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
 import { LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
@@ -19,9 +20,7 @@ import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
-library.add(faUser);
-library.add(faChartLine);
-library.add(faCog);
+library.add(faUser, faChartLine, faCog);
 
 /** Main App component */
 class App extends Component {
@@ -31,7 +30,7 @@ class App extends Component {
         <ConnectedHeader />
         <Row id="main-page-row">
           <Col md={2} className="side-menu-section">
-            <SideMenu />
+            <SideMenu {...sideMenuProps} />
           </Col>
           <Col md={10} className="container-section">
             <Switch>
