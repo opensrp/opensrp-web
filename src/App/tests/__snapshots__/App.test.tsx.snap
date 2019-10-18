@@ -110,18 +110,18 @@ exports[`App renders App correctly 1`] = `
                     className="row"
                   >
                     <Navbar
-                      className="nav-fill w-100 bg-navbar fixed-top"
-                      color="light"
-                      expand="md"
-                      light={true}
+                      className="w-100 bg-navbar"
+                      expand="sm"
+                      fixed="top"
                       tag="nav"
                     >
                       <nav
-                        className="nav-fill w-100 bg-navbar fixed-top navbar navbar-expand-md navbar-light bg-light"
+                        className="w-100 bg-navbar navbar navbar-expand-sm fixed-top"
                       >
                         <Col
                           className="bg-top-nav"
                           md={2}
+                          sm={3}
                           tag="div"
                           widths={
                             Array [
@@ -134,7 +134,7 @@ exports[`App renders App correctly 1`] = `
                           }
                         >
                           <div
-                            className="bg-top-nav col-md-2"
+                            className="bg-top-nav col-sm-3 col-md-2"
                           >
                             <nav
                               className="navbar navbar-expand-md navbar-light"
@@ -159,6 +159,7 @@ exports[`App renders App correctly 1`] = `
                         </Col>
                         <Col
                           md={8}
+                          sm={5}
                           tag="div"
                           widths={
                             Array [
@@ -171,12 +172,13 @@ exports[`App renders App correctly 1`] = `
                           }
                         >
                           <div
-                            className="col-md-8"
+                            className="col-sm-5 col-md-8"
                           />
                         </Col>
                         <Col
                           className="bg-top-nav"
                           md={2}
+                          sm={4}
                           tag="div"
                           widths={
                             Array [
@@ -189,7 +191,7 @@ exports[`App renders App correctly 1`] = `
                           }
                         >
                           <div
-                            className="bg-top-nav col-md-2"
+                            className="bg-top-nav col-sm-4 col-md-2"
                           >
                             <Nav
                               className="navbar navbar-expand-md center-account-text"
@@ -255,7 +257,57 @@ exports[`App renders App correctly 1`] = `
                 <div
                   className="side-menu-section col-md-2"
                 >
-                  <SideMenu>
+                  <SideMenu
+                    navigationModules={
+                      Array [
+                        Object {
+                          "enabled": true,
+                          "module": Object {
+                            "childNavs": Array [
+                              Object {
+                                "label": "All clients",
+                                "url": "/clients",
+                              },
+                            ],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "far",
+                                "user",
+                              ],
+                              "label": "Client Records",
+                            },
+                          },
+                        },
+                        Object {
+                          "enabled": false,
+                          "module": Object {
+                            "childNavs": Array [],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "fas",
+                                "chart-line",
+                              ],
+                              "label": "Reports",
+                              "url": "/404",
+                            },
+                          },
+                        },
+                        Object {
+                          "enabled": false,
+                          "module": Object {
+                            "childNavs": Array [],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "fas",
+                                "cog",
+                              ],
+                              "label": "Admin",
+                            },
+                          },
+                        },
+                      ]
+                    }
+                  >
                     <div
                       className="side-menu-container"
                     >
@@ -291,6 +343,7 @@ exports[`App renders App correctly 1`] = `
                                   ]
                                 }
                                 collapsedModuleLabel=""
+                                key="0"
                                 parentNav={
                                   Object {
                                     "icon": Array [

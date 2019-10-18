@@ -6,6 +6,7 @@ Object {
     <Col
       className="bg-top-nav"
       md={2}
+      sm={3}
       tag="div"
       widths={
         Array [
@@ -33,6 +34,7 @@ Object {
     </Col>,
     <Col
       md={8}
+      sm={5}
       tag="div"
       widths={
         Array [
@@ -47,6 +49,7 @@ Object {
     <Col
       className="bg-top-nav"
       md={2}
+      sm={4}
       tag="div"
       widths={
         Array [
@@ -73,10 +76,9 @@ Object {
       </Nav>
     </Col>,
   ],
-  "className": "nav-fill w-100 bg-navbar fixed-top",
-  "color": "light",
-  "expand": "md",
-  "light": true,
+  "className": "w-100 bg-navbar",
+  "expand": "sm",
+  "fixed": "top",
   "tag": "nav",
 }
 `;
@@ -87,6 +89,7 @@ Object {
     <Col
       className="bg-top-nav"
       md={2}
+      sm={3}
       tag="div"
       widths={
         Array [
@@ -114,6 +117,7 @@ Object {
     </Col>,
     <Col
       md={8}
+      sm={5}
       tag="div"
       widths={
         Array [
@@ -128,6 +132,7 @@ Object {
     <Col
       className="bg-top-nav"
       md={2}
+      sm={4}
       tag="div"
       widths={
         Array [
@@ -183,7 +188,7 @@ Object {
           </DropdownToggle>
           <DropdownMenu
             flip={true}
-            right={true}
+            left={true}
             tag="div"
           >
             <DropdownItem
@@ -203,10 +208,9 @@ Object {
       </Nav>
     </Col>,
   ],
-  "className": "nav-fill w-100 bg-navbar fixed-top",
-  "color": "light",
-  "expand": "md",
-  "light": true,
+  "className": "w-100 bg-navbar",
+  "expand": "sm",
+  "fixed": "top",
   "tag": "nav",
 }
 `;
