@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
+import Ripple from '../../components/page/Loading';
 import { MICROSECONDS_IN_A_WEEK } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
@@ -60,11 +61,15 @@ class Compartments extends Component<Props, {}> {
         <Row className="breadcrumb-row">
           <p id="breadcrumb">Province</p>
         </Row>
-        <Row className="cards-row">
-          <DataCircleCard {...dataCircleCard1Props} />
-          <DataCircleCard {...dataCircleCard2Props} />
-          <DataCircleCard {...dataCircleCard3Props} />
-        </Row>
+        {this.props.smsData.length ? (
+          <Row className="cards-row">
+            <DataCircleCard {...dataCircleCard1Props} />
+            <DataCircleCard {...dataCircleCard2Props} />
+            <DataCircleCard {...dataCircleCard3Props} />
+          </Row>
+        ) : (
+          <Ripple />
+        )}
       </Container>
     );
   }
