@@ -110,7 +110,12 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         ],
       },
     });
+    window.addEventListener('resize', () => this.calcChartWidth(chart));
     this.setState({ chart });
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener('resize', () => this.calcChartWidth(this.state.chart));
   }
 
   public render() {
@@ -122,8 +127,10 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     );
   }
 
-  private calcChartWidth() {
-    const chart = this.state.chart;
-    this.setState({});
-  }
+  private calcChartWidth = (chart: any) => {
+    if (chart) {
+      chart.setSize(0.8 * window.innerWidth, null);
+      this.setState({ chart });
+    }
+  };
 }
