@@ -54,7 +54,7 @@ class Compartments extends Component<Props, {}> {
     };
 
     return (
-      <Container fluid={true} className="compartment-wrapper">
+      <Container fluid={true} className="compartment-wrapper compartments">
         <Row>
           <h2 id="compartment_title">Compartment</h2>
         </Row>
