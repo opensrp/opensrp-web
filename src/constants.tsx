@@ -1,3 +1,5 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 // internal urls
 export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
 export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
@@ -87,3 +89,6 @@ export type SIGN_OUT = typeof SIGN_OUT;
 // TIME constants
 export const MICROSECONDS_IN_A_WEEK = 604800000;
 export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
+
+// Back arrow constant
+export const backPageIcon: IconProp = ['fas', 'arrow-left'];
