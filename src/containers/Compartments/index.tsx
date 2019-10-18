@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { Store } from 'redux';
+import DataCircleCard from '../../components/DataCircleCard';
 import { MICROSECONDS_IN_A_WEEK } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
@@ -28,6 +29,13 @@ class Compartments extends Component<Props, {}> {
     }
   }
   public render() {
+    const dataCircleCardProps = {
+      highRisk: this.getNumberOfSmsWithRisk('high'),
+      lowRisk: this.getNumberOfSmsWithRisk('low'),
+      noRisk: this.getNumberOfSmsWithRisk('no risk'),
+      title: 'test title',
+    };
+
     return (
       <Container fluid={true}>
         <Row>
@@ -37,10 +45,9 @@ class Compartments extends Component<Props, {}> {
           <p id="breadcrumb">Province</p>
         </Row>
         <Row className="cards-row">
-          <p>the cards go here</p>
-          <p>{this.getNumberOfSmsWithRisk('high')}</p>
-          <p>{this.getNumberOfSmsWithRisk('low')}</p>
-          <p>{this.getNumberOfSmsWithRisk('no risk')}</p>
+          <DataCircleCard {...dataCircleCardProps} />
+          <DataCircleCard {...dataCircleCardProps} />
+          <DataCircleCard {...dataCircleCardProps} />
         </Row>
       </Container>
     );
