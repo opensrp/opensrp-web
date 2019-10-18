@@ -17,7 +17,7 @@ ul {
   padding: 0;
 }
 
-.card-body {
+.dataCircleCard > .card-body {
   padding: 0;
   background-color: #ffffff;
   border: 0.063em solid #dadce0;
