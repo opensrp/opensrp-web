@@ -15,7 +15,7 @@ thead tr {
 
 tbody tr {
   align-items: center;
-  display: flex;
+  /* display: flex; */
 }
 
 td {
