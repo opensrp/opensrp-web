@@ -1,4 +1,4 @@
-.circlesRow > li {
+.compartment-wrapper .circlesRow > li {
   list-style-type: none;
   width: 5.5em;
   height: 5.5em;
@@ -9,21 +9,21 @@
   align-items: center;
 }
 
-.card-body > p {
+.compartment-wrapper .card-body > p {
   margin-top: 12%;
 }
 
-ul {
+.compartment-wrapper ul {
   padding: 0;
 }
 
-.dataCircleCard > .card-body {
+.compartment-wrapper .dataCircleCard > .card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.dataCircleCard {
+.compartment-wrapper .dataCircleCard {
   padding: 0;
   background-color: #ffffff;
   border: 0.063em solid #dadce0;
@@ -33,35 +33,35 @@ ul {
   height: 14.375em;
 }
 
-.circlesRow {
+.compartment-wrapper .circlesRow {
   display: flex;
   justify-content: space-around;
 }
 
-.card {
+.compartment-wrapper .card {
   border: 0px;
 }
 
-.circlesRow > .red {
+.compartment-wrapper .circlesRow > .red {
   background-color: #ff1e1e;
 }
 
-.circlesRow > .orange {
+.compartment-wrapper .circlesRow > .orange {
   background-color: #ff8533;
 }
 
-.circlesRow > .green {
+.compartment-wrapper .circlesRow > .green {
   background-color: #37ae12;
 }
 
-.circlesRow > .green,
-.circlesRow > .red,
-.circlesRow > .orange {
+.compartment-wrapper .circlesRow > .green,
+.compartment-wrapper .circlesRow > .red,
+.compartment-wrapper .circlesRow > .orange {
   border: none !important;
 }
 
-.card-title {
-  padding: 1.5em 0 0 1.7em;
+.compartment-wrapper .card-title {
+  padding: 15px 20px;
   border-bottom: 0.063em solid #dadce0;
   color: #001429;
   font-family: Roboto;
@@ -71,7 +71,7 @@ ul {
   text-align: left;
 }
 
-span.number {
+.compartment-wrapper span.number {
   color: #ffffff;
   font-family: Roboto;
   font-size: 1.25em;
@@ -79,7 +79,7 @@ span.number {
   line-height: 0.875em;
 }
 
-span.risk-level {
+.compartment-wrapper span.risk-level {
   color: #ffffff;
   font-family: Roboto;
   font-size: 0.75em;
@@ -87,8 +87,8 @@ span.risk-level {
   line-height: 0.875em;
 }
 
-.circleRow > a,
-a:hover {
+.compartment-wrapper .circleRow > a,
+.compartment-wrapper a:hover {
   color: inherit;
   text-decoration: inherit;
 }

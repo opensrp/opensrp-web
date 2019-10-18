@@ -83,7 +83,7 @@ class HierarchichalDataTable extends Component<Props, State> {
 
   public render() {
     return (
-      <Container fluid={true}>
+      <Container fluid={true} className="compartment-data-table">
         <Link to={COMPARTMENTS_URL} className="back-page">
           <FontAwesomeIcon icon={backPageIcon} size="lg" />
           <span>Back to Pregnancy Log Face</span>
@@ -217,7 +217,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
   };
   private header = () => {
-    let province = <span>province</span>;
+    let province = <span>Province</span>;
     if (this.props.current_level > 0) {
       province = (
         <Link
@@ -231,7 +231,7 @@ class HierarchichalDataTable extends Component<Props, State> {
 
     let district = <span>''</span>;
     if (this.props.current_level === 1) {
-      district = <span key={1}>/District</span>;
+      district = <span key={1}> / District</span>;
     } else {
       district = (
         <Link
@@ -245,7 +245,7 @@ class HierarchichalDataTable extends Component<Props, State> {
 
     let commune = <span> / Commune</span>;
     if (this.props.current_level === 2) {
-      commune = <span key={2}>/Commune</span>;
+      commune = <span key={2}> / Commune</span>;
     } else {
       commune = (
         <Link
