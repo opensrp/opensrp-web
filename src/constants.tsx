@@ -1,4 +1,6 @@
 // internal urls
+export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
+export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
 export const PREGNANCY_URL = '/pregnancy';
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
