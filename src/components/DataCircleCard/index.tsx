@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardText, CardTitle, Col } from 'reactstrap';
+import { HIERARCHICAL_DATA_URL } from '../../constants';
 import './index.css';
 
 interface Props {
@@ -19,19 +20,19 @@ function DataCircleCard({ highRisk, lowRisk, noRisk, title }: Props) {
           <CardText>
             <ul className="circlesRow">
               <li className="red">
-                <Link to="#">
+                <Link to={HIERARCHICAL_DATA_URL}>
                   <span className="number">{highRisk}</span>
                 </Link>
                 <span className="risk-level">High Risk</span>
               </li>
               <li className="orange">
-                <Link to="#">
+                <Link to={HIERARCHICAL_DATA_URL}>
                   <span className="number">{lowRisk}</span>
                 </Link>
                 <span className="risk-level">Low Risk</span>
               </li>
               <li className="green">
-                <Link to="#">
+                <Link to={HIERARCHICAL_DATA_URL}>
                   <span className="number">{noRisk}</span>
                 </Link>
                 <span className="risk-level">No Risk</span>
