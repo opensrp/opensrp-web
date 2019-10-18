@@ -14,25 +14,25 @@ interface Props {
 function DataCircleCard({ highRisk, lowRisk, noRisk, title }: Props) {
   return (
     <Col lg="3">
-      <Card>
+      <Card className="dataCircleCard">
         <CardBody>
           <CardTitle>{title}</CardTitle>
           <CardText>
             <ul className="circlesRow">
               <li className="red">
-                <Link to={HIERARCHICAL_DATA_URL}>
+                <Link to={`${HIERARCHICAL_DATA_URL}/high-risk`}>
                   <span className="number">{highRisk}</span>
                 </Link>
                 <span className="risk-level">High Risk</span>
               </li>
               <li className="orange">
-                <Link to={HIERARCHICAL_DATA_URL}>
+                <Link to={`${HIERARCHICAL_DATA_URL}/low-risk`}>
                   <span className="number">{lowRisk}</span>
                 </Link>
                 <span className="risk-level">Low Risk</span>
               </li>
               <li className="green">
-                <Link to={HIERARCHICAL_DATA_URL}>
+                <Link to={`${HIERARCHICAL_DATA_URL}/no-risk`}>
                   <span className="number">{noRisk}</span>
                 </Link>
                 <span className="risk-level">No Risk</span>
