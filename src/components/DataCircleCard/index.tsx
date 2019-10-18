@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardBody, CardText, CardTitle, Col } from 'reactstrap';
 import './index.css';
 
@@ -18,15 +19,21 @@ function DataCircleCard({ highRisk, lowRisk, noRisk, title }: Props) {
           <CardText>
             <ul className="circlesRow">
               <li className="red">
-                <span className="number">{highRisk}</span>
+                <Link to="#">
+                  <span className="number">{highRisk}</span>
+                </Link>
                 <span className="risk-level">High Risk</span>
               </li>
               <li className="orange">
-                <span className="number">{lowRisk}</span>
+                <Link to="#">
+                  <span className="number">{lowRisk}</span>
+                </Link>
                 <span className="risk-level">Low Risk</span>
               </li>
               <li className="green">
-                <span className="number">{noRisk}</span>
+                <Link to="#">
+                  <span className="number">{noRisk}</span>
+                </Link>
                 <span className="risk-level">No Risk</span>
               </li>
             </ul>
