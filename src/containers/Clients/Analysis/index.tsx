@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Ripple from '../../../components/page/Loading';
 
 import './index.css';
 
@@ -21,16 +22,24 @@ export class Analysis extends React.Component<{}, State> {
           <h2 id="analysis_title">Pregnancy - Analysis</h2>
         </div>
         <div className="analysis-wrapper">
+          {this.state.loading ? <Ripple /> : null}
           <iframe
             seamless={true}
             scrolling="yes"
             frameBorder="0"
-            src="https://superset.ona.io/superset/dashboard/164/?standalone=true"
+            onLoad={this.hideSpinner}
+            src="https://discover.ona.io/superset/dashboard/25/?standalone=true"
           />
         </div>
       </div>
     );
   }
+
+  private hideSpinner = () => {
+    this.setState({
+      loading: false,
+    });
+  };
 }
 
 export default Analysis;
