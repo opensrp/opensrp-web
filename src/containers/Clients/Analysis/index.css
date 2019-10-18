@@ -1,0 +1,17 @@
+.analysis-content {
+  width: 100%;
+  height: 85vh;
+}
+
+.analysis-content iframe {
+  position: relative;
+  top: 20px;
+  left: 0px;
+  width: 100%;
+  height: 80vh;
+}
+
+.analysis-content #analysis_title {
+  padding: 0px 15px;
+  border-left: 5px solid rgb(23, 181, 255);
+}

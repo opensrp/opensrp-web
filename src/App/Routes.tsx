@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
-import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import { match, Route, RouteComponentProps, Switch } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
@@ -17,6 +18,7 @@ import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import { LOGFACE_URL, LOGOUT_URL } from '../constants';
 import { CLIENT_URL } from '../constants';
+import Analysis from '../containers/Clients/Analysis/';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedLogFace from '../containers/LogFace';
 import Home from '../containers/pages/Home/Home';
@@ -48,7 +50,7 @@ export const Routes = (props: RoutesProps) => {
       <div
         className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
       >
-        <SideMenu />
+        {<SideMenu />}
       </div>
       <div className="content">
         <Switch>
@@ -69,6 +71,12 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={CLIENT_URL}
             component={ConnectedClientList}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={'/analysis'}
+            component={Analysis}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}

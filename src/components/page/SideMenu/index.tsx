@@ -287,6 +287,6 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
   };
 }
 
-const connectedSideMenu = withRouter((props: RouteComponentProps) => <SideMenu {...props}/>)
+const connectedSideMenu = withRouter((props: RouteComponentProps) => <SideMenu {...props} />);
 
 export default connectedSideMenu;

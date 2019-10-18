@@ -112,19 +112,19 @@ export class LogFace extends React.Component<PropsInterface, State> {
         <div className="filter-panel">
           <div className="filters">
             {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
-          <Formik initialValues={{}} onSubmit={() => {}}>
-            {() => (
-              <Field
-                type="text"
-                name="input"
-                id="input"
-                placeholder="Search ID, Reporter, Patients"
-                className={`form-control logface-search`}
-                onChange={this.handleTermChange}
-                disabled={!this.props.testData.length}
-              />
-            )}
-          </Formik>
+            <Formik initialValues={{}} onSubmit={() => {}}>
+              {() => (
+                <Field
+                  type="text"
+                  name="input"
+                  id="input"
+                  placeholder="Search ID, Reporter, Patients"
+                  className={`form-control logface-search`}
+                  onChange={this.handleTermChange}
+                  disabled={!this.props.testData.length}
+                />
+              )}
+            </Formik>
             <div className="location-type-filter">
               <span>Risk Level</span>
               <Dropdown

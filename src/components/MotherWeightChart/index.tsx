@@ -31,7 +31,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     const chart = Highcharts.chart('chart-wrapper', {
       chart: {
         type: 'line',
-        width: 0.8 * window.innerWidth
+        width: 0.8 * window.innerWidth,
       },
       legend: {
         align: 'right',
@@ -90,13 +90,6 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     this.setState({ chart });
   }
 
-  private calcChartWidth() {
-    const chart = this.state.chart;
-    this.setState({
-
-    });
-  }
-
   public render() {
     return (
       <Card>
@@ -104,5 +97,10 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         <div id="chart-wrapper" />
       </Card>
     );
+  }
+
+  private calcChartWidth() {
+    const chart = this.state.chart;
+    this.setState({});
   }
 }
