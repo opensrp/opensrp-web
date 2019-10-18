@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
 import { COMPARTMENTS_URL, HIERARCHICAL_DATA_URL } from '../../constants';
-import { backPageIcon } from '../../containers/PatientDetails';
+import { backPageIcon } from '../PatientDetails';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
