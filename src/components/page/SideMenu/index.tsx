@@ -56,13 +56,13 @@ class SideMenu extends React.Component<SideMenuProps, SideMenuState> {
       <div className="side-menu-container">
         <Row>
           <Col className="side-menu-extend">
-            {this.props.navigationModules.map(({ enabled, module }) => {
+            {this.props.navigationModules.map(({ enabled, module }, index) => {
               const props = {
                 ...module,
                 collapsedModuleLabel,
                 setCollapsedModuleLabel: this.setCollapsedModuleLabel,
               };
-              return enabled && <SubMenu {...props} />;
+              return enabled && <SubMenu key={index} {...props} />;
             })}
           </Col>
         </Row>
