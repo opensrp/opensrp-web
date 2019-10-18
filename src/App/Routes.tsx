@@ -88,7 +88,7 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={true}
             exact={true}
-            path={`${HIERARCHICAL_DATA_URL}/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={`${HIERARCHICAL_DATA_URL}/:risk_highlighter?/:current_level?/:direction?/:node_id?/:from_level?`}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
