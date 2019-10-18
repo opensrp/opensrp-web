@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ENABLE_REPORT_MODULE } from '../../../configs/env';
 import {
@@ -220,7 +221,7 @@ const defaultSideMenuState: SideMenuState = {
   collapsedModuleLabel: '',
 };
 
-class SideMenu extends React.Component<{}, SideMenuState> {
+class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
   constructor(props: RouteComponentProps) {
     super(props);
     this.state = defaultSideMenuState;
@@ -286,4 +287,6 @@ class SideMenu extends React.Component<{}, SideMenuState> {
   };
 }
 
-export default SideMenu;
+const connectedSideMenu = withRouter((props: RouteComponentProps) => <SideMenu {...props}/>)
+
+export default connectedSideMenu;

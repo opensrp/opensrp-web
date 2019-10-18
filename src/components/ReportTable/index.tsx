@@ -171,27 +171,30 @@ class ReportTable extends Component<Props, State> {
             >
               <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
                 <span>
-                {this.state.pregnancyDropdownLabel.length
-                  ? this.state.pregnancyDropdownLabel
-                  : 'select pregnancy'}
+                  {this.state.pregnancyDropdownLabel.length
+                    ? this.state.pregnancyDropdownLabel
+                    : 'select pregnancy'}
                 </span>
               </DropdownToggle>
               <DropdownMenu>
-                {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map((pregnancy, i) => {
-                  return (
-                    <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
-                      {(() => {
-                        if (i === 0) {
-                          return 'current pregnancy';
-                        } else {
-                          const pregnancyIndex =
-                            this.getPregnancyStringArray(this.state.pregnancyEventsArray).length - i;
-                          return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
-                        }
-                      })()}
-                    </DropdownItem>
-                  );
-                })}
+                {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map(
+                  (pregnancy, i) => {
+                    return (
+                      <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
+                        {(() => {
+                          if (i === 0) {
+                            return 'current pregnancy';
+                          } else {
+                            const pregnancyIndex =
+                              this.getPregnancyStringArray(this.state.pregnancyEventsArray).length -
+                              i;
+                            return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
+                          }
+                        })()}
+                      </DropdownItem>
+                    );
+                  }
+                )}
               </DropdownMenu>
             </Dropdown>
           </div>

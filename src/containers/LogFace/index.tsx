@@ -110,7 +110,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <h2 id="logface_title">Log Face - Pregnancy</h2>
         </div>
         <div className="filter-panel">
-          {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
+          <div className="filters">
+            {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
           <Formik initialValues={{}} onSubmit={() => {}}>
             {() => (
               <Field
@@ -124,7 +125,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
               />
             )}
           </Formik>
-          <div className="filters">
             <div className="location-type-filter">
               <span>Risk Level</span>
               <Dropdown

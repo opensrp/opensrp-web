@@ -30,6 +30,10 @@ div#titleDiv {
   color: #333;
 }
 
+.patient-details #dropdown-basic {
+  padding: 1px 25px;
+}
+
 .back-page > span {
   padding-left: 15px;
 }

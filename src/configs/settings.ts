@@ -64,6 +64,6 @@ export const SmsTypes = [
   'Refusal Code',
   'Account Check',
 ] as const;
-export const URLS_TO_HIDE_HEADER: string[] = ['login'];
+export const URLS_TO_HIDE_HEADER: string[] = ['login', 'home'];
 
 export { providers };

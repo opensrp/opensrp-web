@@ -133,3 +133,15 @@ h4 p {
   position: relative;
   text-align: center;
 }
+
+@media screen and (max-width: 1100px) {
+  .home-main .components-list {
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+  }
+
+  .home-main .spacer {
+    width: 100%;
+  }
+}

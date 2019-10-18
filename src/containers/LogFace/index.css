@@ -36,6 +36,10 @@ td {
   display: block;
 }
 
+.table-container table tbody tr td:first-child {
+  overflow-wrap: break-word;
+}
+
 .table-container table {
   border: none !important;
   background: #fff;
@@ -48,17 +52,16 @@ td {
   justify-content: start;
 }
 
-.filters {
+.logface-content .filter-panel .filters {
   display: flex;
   justify-content: flex-start;
-  margin-left: 3%;
   flex-grow: 2;
-  padding: 0 0 20px;
+  padding: 0px 0px 10px;
 }
 
-.location-type-filter {
+.logface-content .filter-panel .filters .location-type-filter {
   display: block;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .form-group {
@@ -129,8 +132,9 @@ td {
   color: #fff;
   border-radius: 3px;
   border: 1px solid #0093db;
-  width: 120px;
-  height: 32px;
+  width: auto;
+  height: auto;
+  padding: 5px 15px;
 }
 
 .filters .location-type-filter .dropdown button {
