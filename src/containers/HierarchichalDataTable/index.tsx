@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
-import { Card, CardBody, CardFooter, CardTitle, Container, Row, Table } from 'reactstrap';
+import { Card, CardBody, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
-import { COMPARTMENTS_URL, HIERARCHICAL_DATA_URL } from '../../constants';
-import { backPageIcon } from '../PatientDetails';
+import { backPageIcon, COMPARTMENTS_URL, HIERARCHICAL_DATA_URL } from '../../constants';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
@@ -34,7 +33,7 @@ const defaultProps: Props = {
 
 class HierarchichalDataTable extends Component<Props, State> {
   public static defaultProps = defaultProps;
-  public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+  public static getDerivedStateFromProps(nextProps: Props) {
     let dataToShow: any = [];
     if ((nextProps.direction === 'up' && nextProps.current_level === 0) || !nextProps.node_id) {
       dataToShow = provinces;
