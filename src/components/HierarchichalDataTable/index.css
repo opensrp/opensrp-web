@@ -21,7 +21,7 @@
   letter-spacing: -0.018em;
   line-height: 1em;
   text-align: left;
-  padding: 0.3em;
+  padding: 0.6em !important;
 }
 
 .rt-tr.-odd {
