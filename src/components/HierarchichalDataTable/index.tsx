@@ -3,10 +3,12 @@ import 'react-table/react-table.css';
 import { Card, CardBody, CardFooter, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
-import { HIERARCHICAL_DATA_URL } from '../../constants';
+import { COMPARTMENTS_URL, HIERARCHICAL_DATA_URL } from '../../constants';
+import { backPageIcon } from '../../containers/PatientDetails';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
@@ -80,6 +82,10 @@ class HierarchichalDataTable extends Component<Props, State> {
   public render() {
     return (
       <Container fluid={true}>
+        <Link to={COMPARTMENTS_URL} className="back-page">
+          <FontAwesomeIcon icon={backPageIcon} size="lg" />
+          <span>Back to Pregnancy Log Face</span>
+        </Link>
         <Row>
           <Card className="table-card">
             <CardTitle>{this.header()}</CardTitle>
