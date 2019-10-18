@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
-import { Card, CardBody, CardFooter, CardTitle, Table } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
 
 import { connect } from 'react-redux';
@@ -77,67 +77,71 @@ class HierarchichalDataTable extends Component<Props, State> {
 
   public render() {
     return (
-      <Card className="table-card">
-        <CardTitle>{this.header()}</CardTitle>
-        <CardBody>
-          <Table striped={true} borderless={true}>
-            <thead id="header">
-              <tr>
-                <th className="default-width" />
-                <th className="default-width">Hight Risk</th>
-                <th className="default-width">Low Risk</th>
-                <th className="default-width">No Risk</th>
-                <th className="default-width">Total</th>
-              </tr>
-            </thead>
-            <tbody id="body">
-              {this.state.data.length ? (
-                this.state.data.map((element: any) => {
-                  return (
-                    <tr key={element.id}>
-                      <td className="default-width">
-                        {element.location}
-                        <Link
-                          to={
-                            HIERARCHICAL_DATA_URL +
-                            `/${this.props.current_level ? this.props.current_level + 1 : 1}/down/${
-                              element.id
-                            }`
-                          }
-                        >
-                          {element.name}
-                        </Link>
-                      </td>
-                      <td className="default-width">{element.high_risk}</td>
-                      <td className="default-width">{element.low_risk}</td>
-                      <td className="default-width">{element.no_risk}</td>
-                      <td className="default-width">{element.total}</td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr id="no-rows">
-                  <td>There seems to be no rows here :-(</td>
-                </tr>
-              )}
-              {(() => {
-                const element = getTotals(this.state.data);
-                return (
-                  <tr key={'total'}>
-                    <td className="default-width" id="total">
-                      Total({this.getLevelString()})
-                    </td>
-                    <td className="default-width">{element.high_risk}</td>
-                    <td className="default-width">{element.low_risk}</td>
-                    <td className="default-width">{element.no_risk}</td>
-                    <td className="default-width">{element.total}</td>
+      <Container fluid={true}>
+        <Row>
+          <Card className="table-card">
+            <CardTitle>{this.header()}</CardTitle>
+            <CardBody>
+              <Table striped={true} borderless={true}>
+                <thead id="header">
+                  <tr>
+                    <th className="default-width" />
+                    <th className="default-width">Hight Risk</th>
+                    <th className="default-width">Low Risk</th>
+                    <th className="default-width">No Risk</th>
+                    <th className="default-width">Total</th>
                   </tr>
-                );
-              })()}
-            </tbody>
-          </Table>
-        </CardBody>
-      </Card>
+                </thead>
+                <tbody id="body">
+                  {this.state.data.length ? (
+                    this.state.data.map((element: any) => {
+                      return (
+                        <tr key={element.id}>
+                          <td className="default-width">
+                            {element.location}
+                            <Link
+                              to={
+                                HIERARCHICAL_DATA_URL +
+                                `/${
+                                  this.props.current_level ? this.props.current_level + 1 : 1
+                                }/down/${element.id}`
+                              }
+                            >
+                              {element.name}
+                            </Link>
+                          </td>
+                          <td className="default-width">{element.high_risk}</td>
+                          <td className="default-width">{element.low_risk}</td>
+                          <td className="default-width">{element.no_risk}</td>
+                          <td className="default-width">{element.total}</td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr id="no-rows">
+                      <td>There seems to be no rows here :-(</td>
+                    </tr>
+                  )}
+                  {(() => {
+                    const element = getTotals(this.state.data);
+                    return (
+                      <tr key={'total'}>
+                        <td className="default-width" id="total">
+                          Total({this.getLevelString()})
+                        </td>
+                        <td className="default-width">{element.high_risk}</td>
+                        <td className="default-width">{element.low_risk}</td>
+                        <td className="default-width">{element.no_risk}</td>
+                        <td className="default-width">{element.total}</td>
+                      </tr>
+                    );
+                  })()}
+                </tbody>
+              </Table>
+            </CardBody>
+          </Card>
+        </Row>
+      </Container>
     );
   }
 
