@@ -19,13 +19,13 @@ interface Props {
   node_id?: number;
   direction: string; // this can be down or up
   from_level?: string;
-  risk_highligter?: string;
+  risk_highligter?: 'high-risk' | 'low-risk' | 'no-risk' | 'none';
 }
 
 const defaultProps: Props = {
   current_level: 0,
   direction: 'down',
-  risk_highligter: '',
+  risk_highligter: 'none',
 };
 
 class HierarchichalDataTable extends Component<Props, State> {
@@ -102,20 +102,41 @@ class HierarchichalDataTable extends Component<Props, State> {
                           <td className="default-width">
                             {element.location}
                             <Link
-                              to={
-                                HIERARCHICAL_DATA_URL +
-                                `/${
-                                  this.props.current_level ? this.props.current_level + 1 : 1
-                                }/down/${element.id}`
-                              }
+                              to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
+                                this.props.current_level ? this.props.current_level + 1 : 1
+                              }/down/${element.id}`}
                             >
                               {element.name}
                             </Link>
                           </td>
-                          <td className="default-width">{element.high_risk}</td>
-                          <td className="default-width">{element.low_risk}</td>
-                          <td className="default-width">{element.no_risk}</td>
-                          <td className="default-width">{element.total}</td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === 'high-risk'
+                                ? this.props.risk_highligter
+                                : ''
+                            }`}
+                          >
+                            {element.high_risk}
+                          </td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === 'low-risk'
+                                ? this.props.risk_highligter
+                                : ''
+                            }`}
+                          >
+                            {element.low_risk}
+                          </td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === 'no-risk'
+                                ? this.props.risk_highligter
+                                : ''
+                            }`}
+                          >
+                            {element.no_risk}
+                          </td>
+                          <td className={'default-width'}>{element.total}</td>
                         </tr>
                       );
                     })
@@ -131,9 +152,33 @@ class HierarchichalDataTable extends Component<Props, State> {
                         <td className="default-width" id="total">
                           Total({this.getLevelString()})
                         </td>
-                        <td className="default-width">{element.high_risk}</td>
-                        <td className="default-width">{element.low_risk}</td>
-                        <td className="default-width">{element.no_risk}</td>
+                        <td
+                          className={`default-width ${
+                            this.props.risk_highligter === 'high-risk'
+                              ? this.props.risk_highligter
+                              : ''
+                          }`}
+                        >
+                          {element.high_risk}
+                        </td>
+                        <td
+                          className={`default-width ${
+                            this.props.risk_highligter === 'low-risk'
+                              ? this.props.risk_highligter
+                              : ''
+                          }`}
+                        >
+                          {element.low_risk}
+                        </td>
+                        <td
+                          className={`default-width ${
+                            this.props.risk_highligter === 'no-risk'
+                              ? this.props.risk_highligter
+                              : ''
+                          }`}
+                        >
+                          {element.no_risk}
+                        </td>
                         <td className="default-width">{element.total}</td>
                       </tr>
                     );
@@ -165,7 +210,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/0/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/0/up/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           Province
@@ -179,7 +224,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/1/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/1/up/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ District
@@ -193,7 +238,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/2/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/2/up/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ Commune
@@ -235,6 +280,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): Props => {
     direction: ownProps.match.params.direction,
     from_level: ownProps.match.params.from_level,
     node_id: ownProps.match.params.node_id,
+    risk_highligter: ownProps.match.params.risk_highlighter,
   };
 };
 
