@@ -7,58 +7,54 @@ import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
 import './index.css';
 
-/** interface for a module i.e group of related pages
- * @property {string} parentNav - Page navigation for the module, collapses to reveal the page links
- * @property {PageLink[]} childNavs - pageLinks to pages under this navigational module
- */
+/** interface for a module i.e group of related pages */
 export interface NavigationModule {
+  /** Page navigation for the module, collapses to reveal the page links */
   parentNav: ModulePageLink;
+  /** pageLinks to pages under this navigational module */
   childNavs: PageLink[];
 }
 
-/** interface for objs describing links to different pages
- * @property {string} label - the link's displayable text
- * @property {string} url - URL to get redirected on click
- */
+/** interface for objs describing links to different pages */
 export interface PageLink {
+  /** the link's displayable text */
   label: string;
+  /** URL to get redirected on click */
   url: string;
 }
 
-/** interface for the module page links, module represents collection of related page links
- * @property {string} label - text label visible on menu item
- * @property {IconProp} icon- fontAwesome icon displayed on menu item
- * @property {string} url - url that module link will redirect to
- */
+/** interface for the module page links, module represents collection of related page links */
 export interface ModulePageLink {
+  /** text label visible on menu item */
   label: string;
+  /** fontAwesome icon displayed on menu item */
   icon: IconProp;
+  /** url that module link will redirect to */
   url?: string;
 }
 
-/** props for this component
- * @property {ModulePageLink} parentNav - object describing navigation data for the module page link
- * @property {PageLink[]} childNavs - array of the pageNavigation links grouped under this navigation module
- * @property {string} collapsedModuleLabel - string literal with the label value of currently collapsed module navigation link
- * @property {setCollapsedModuleLabel} setCollapsedModuleLabel - callback to parent component;
- *            changes the collapsedModuleLabel entry in the parent component
- */
+/** props for this component */
 export interface SubMenuProps {
+  /** object describing navigation data for the module page link */
   parentNav: ModulePageLink;
+  /** array of the pageNavigation links grouped under this navigation module */
   childNavs: PageLink[];
+  /** string literal with the label value of currently collapsed module navigation link */
   collapsedModuleLabel: string;
+  /** callback to parent component changes the collapsedModuleLabel
+   *  entry in the parent component
+   */
   setCollapsedModuleLabel?: SetCollapsedModuleLabel;
 }
 
-/** this components state
- * @property {boolean} collapseMenu - whether the child navigation links should be collapsed or hidden
- */
+/** this components state */
 export interface SubMenuState {
+  /** whether the child navigation links should be collapsed or hidden */
   isActiveModule: boolean;
 }
 
 /** takes a string and updates the current collapsed-module-label in the parent component
- * @param {string} label - label of clicked navigation module pagelink
+ * @param {string} label - label of clicked navigation module page link
  */
 type SetCollapsedModuleLabel = (label: string) => void;
 
@@ -75,6 +71,7 @@ export const defaultSubMenuProps: SubMenuProps = {
 /** intersection of all types describing the props */
 type subMenuPropsTypes = SubMenuProps & RouteComponentProps;
 
+/** The SubMenu component */
 export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
   public static defaultProps = defaultSubMenuProps;
 
