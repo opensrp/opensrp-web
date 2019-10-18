@@ -3,8 +3,10 @@ import 'react-table/react-table.css';
 import { Card, CardBody, CardFooter, CardTitle, Table } from 'reactstrap';
 import './index.css';
 
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { COMPARTMENTS_URL } from '../../constants';
+import { Store } from 'redux';
+import { HIERARCHICAL_DATA_URL } from '../../constants';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
@@ -24,7 +26,8 @@ const defaultProps: Props = {
   direction: 'down',
 };
 
-export default class HierarchichalDataTable extends Component<Props, State> {
+class HierarchichalDataTable extends Component<Props, State> {
+  public static defaultProps = defaultProps;
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     let dataToShow: any = [];
     if ((nextProps.direction === 'up' && nextProps.current_level === 0) || !nextProps.node_id) {
@@ -64,8 +67,6 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     };
   }
 
-  private static defaultProps = defaultProps;
-
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -98,7 +99,7 @@ export default class HierarchichalDataTable extends Component<Props, State> {
                         {element.location}
                         <Link
                           to={
-                            COMPARTMENTS_URL +
+                            HIERARCHICAL_DATA_URL +
                             `/${this.props.current_level ? this.props.current_level + 1 : 1}/down/${
                               element.id
                             }`
@@ -158,7 +159,7 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${COMPARTMENTS_URL}/0/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/0/up/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           Province
@@ -172,7 +173,7 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${COMPARTMENTS_URL}/1/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/1/up/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ District
@@ -186,7 +187,7 @@ export default class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${COMPARTMENTS_URL}/2/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/2/up/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ Commune
@@ -221,3 +222,19 @@ const getTotals = (dataToShow: any[]) => {
   };
   return dataToShow.reduce(reducer, { high_risk: 0, low_risk: 0, no_risk: 0, total: 0 });
 };
+
+const mapStateToProps = (state: Partial<Store>, ownProps: any): Props => {
+  return {
+    current_level: parseInt(ownProps.match.params.current_level, 10),
+    direction: ownProps.match.params.direction,
+    from_level: ownProps.match.params.from_level,
+    node_id: ownProps.match.params.node_id,
+  };
+};
+
+const ConnectedHierarchichalDataTable = connect(
+  mapStateToProps,
+  null
+)(HierarchichalDataTable);
+
+export default ConnectedHierarchichalDataTable;
