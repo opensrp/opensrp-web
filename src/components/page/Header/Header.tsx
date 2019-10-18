@@ -58,7 +58,7 @@ export class HeaderComponent extends React.Component<HeaderProps> {
                   <DropdownToggle nav={true} caret={true} className="account-text">
                     <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
                   </DropdownToggle>
-                  <DropdownMenu left={true}>
+                  <DropdownMenu right={true}>
                     <DropdownItem>
                       <NavLink
                         to={LOGOUT_URL}

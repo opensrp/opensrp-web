@@ -188,7 +188,7 @@ Object {
           </DropdownToggle>
           <DropdownMenu
             flip={true}
-            left={true}
+            right={true}
             tag="div"
           >
             <DropdownItem
