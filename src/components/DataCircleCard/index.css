@@ -36,16 +36,22 @@ ul {
   border: 0px;
 }
 
-.red {
+.circlesRow > .red {
   background-color: #ff1e1e;
 }
 
-.orange {
+.circlesRow > .orange {
   background-color: #ff8533;
 }
 
-.green {
+.circlesRow > .green {
   background-color: #37ae12;
+}
+
+.circlesRow > .green,
+.circlesRow > .red,
+.circlesRow > .orange {
+  border: none !important;
 }
 
 .card-title {
