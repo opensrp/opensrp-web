@@ -8,7 +8,6 @@ h2#compartment_title {
   color: #0292d3;
 }
 
-.breadcrumb-row.row,
-.cards-row {
+.breadcrumb-row.row {
   padding-left: 1.5em;
 }
