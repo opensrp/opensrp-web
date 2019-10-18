@@ -8,21 +8,26 @@ import { connect } from 'react-redux';
 import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
-import { match, Route, RouteComponentProps, Switch } from 'react-router';
-import { withRouter } from 'react-router-dom';
+import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import ConnectedHierarchichalDataTable from '../components/HierarchichalDataTable';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL, LOGOUT_URL } from '../constants';
+import {
+  ANALYSIS_URL,
+  COMPARTMENTS_URL,
+  HIERARCHICAL_DATA_URL,
+  LOGFACE_URL,
+  LOGOUT_URL,
+} from '../constants';
 import { CLIENT_URL } from '../constants';
 import Analysis from '../containers/Clients/Analysis/';
 import ConnectedClientList from '../containers/Clients/List';
 import Compartments from '../containers/Compartments';
 import ConnectedLogFace from '../containers/LogFace';
-import Analysis from '../containers/pages/Analysis';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
@@ -77,8 +82,14 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={true}
             exact={true}
-            path={`${COMPARTMENTS_URL}/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={COMPARTMENTS_URL}
             component={Compartments}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={true}
+            exact={true}
+            path={`${HIERARCHICAL_DATA_URL}/:current_level?/:direction?/:node_id?/:from_level?`}
+            component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={true}
