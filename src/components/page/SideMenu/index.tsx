@@ -3,58 +3,9 @@ import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ENABLE_REPORT_MODULE } from '../../../configs/env';
-import {
-  ENABLE_ANC_PAGE,
-  ENABLE_CHILD_PAGE,
-  ENABLE_CLIENT_PAGE,
-  ENABLE_HOUSEHOLD_PAGE,
-  ENABLE_LOCATION_PAGE,
-  ENABLE_NEWBORN_AND_POSTNATAL_MODULE,
-  ENABLE_NUTRITION_MODULE,
-  ENABLE_PREGNANCY_MODULE,
-  ENABLE_ROLE_PAGE,
-  ENABLE_TEAM_PAGE,
-  ENABLE_USER_PAGE,
-} from '../../../configs/env';
-import {
-  ADMIN,
-  ALL_CLIENTS,
-  ANALYSIS,
-  ANALYSIS_URL,
-  ANC,
-  ANC_URL,
-  CHILD,
-  CHILD_URL,
-  CLIENT_RECORDS,
-  CLIENT_URL,
-  COMPARTMENTS,
-  COMPARTMENTS_URL,
-  HOME,
-  HOME_URL,
-  HOUSEHOLD,
-  HOUSEHOLD_URL,
-  LOCATIONS,
-  LOCATIONS_URL,
-  LOGFACE,
-  LOGFACE_URL,
-  NEWBORN_AND_POSTNATAL,
-  NEWBORN_AND_POSTNATAL_URL,
-  NUTRITION,
-  NUTRITION_URL,
-  PREGNANCY,
-  PREGNANCY_URL,
-  REPORTS,
-  REPORTS_URL,
-  ROLE_URL,
-  ROLES,
-  TEAM_URL,
-  TEAMS,
-  USER_URL,
-  USERS,
-} from '../../../constants';
-import SubMenu, { ModulePageLink, NavigationModule, PageLink, SubMenuProps } from './SubMenu';
+import { ENABLE_PREGNANCY_MODULE } from '../../../configs/env';
+import SubMenu, { SubMenuProps } from './SubMenu';
 
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   ADMIN_NAVIGATION_MODULE,
   CLIENT_NAVIGATION_MODULE,
