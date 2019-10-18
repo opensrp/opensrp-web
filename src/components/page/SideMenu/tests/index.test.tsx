@@ -5,6 +5,7 @@ import React from 'react';
 import { Router } from 'react-router';
 import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
+import { sideMenuProps } from '../../../../configs/navigationConfigs';
 import { CLIENT_RECORDS } from '../../../../constants';
 
 const history = createBrowserHistory();
@@ -17,7 +18,7 @@ describe('components/page/SideMenu', () => {
   it('renders without crashing', () => {
     shallow(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu {...sideMenuProps} />
       </Router>
     );
   });
@@ -25,7 +26,7 @@ describe('components/page/SideMenu', () => {
   it('renders side menu correctly', () => {
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu {...sideMenuProps} />
       </Router>
     );
     /** client Collapse SubMenu renders correctly */
@@ -36,7 +37,7 @@ describe('components/page/SideMenu', () => {
   it('manages state correctly', () => {
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu {...sideMenuProps} />
       </Router>
     );
 
@@ -53,7 +54,7 @@ describe('components/page/SideMenu', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />)
+        <SideMenu {...sideMenuProps} />)
       </Router>
     );
 

@@ -74,7 +74,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -53,11 +53,11 @@
+@@ -103,11 +103,11 @@
                         \\"label\\": \\"All clients\\",
                         \\"url\\": \\"/clients\\",
                       },
@@ -82,12 +82,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                   }
 -                 collapsedModuleLabel=\\"\\"
 +                 collapsedModuleLabel=\\"Client Records\\"
+                  key=\\"0\\"
                   parentNav={
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
-                        \\"user\\",
-@@ -74,11 +74,11 @@
+@@ -125,11 +125,11 @@
                           \\"label\\": \\"All clients\\",
                           \\"url\\": \\"/clients\\",
                         },
@@ -100,7 +100,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -204,11 +204,11 @@
+@@ -255,11 +255,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -113,7 +113,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -220,11 +220,11 @@
+@@ -271,11 +271,11 @@
                       >
                         <Transition
                           appear={false}
@@ -126,7 +126,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -232,12 +232,16 @@
+@@ -283,12 +283,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
