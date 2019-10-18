@@ -29,11 +29,27 @@ class Compartments extends Component<Props, {}> {
     }
   }
   public render() {
-    const dataCircleCardProps = {
-      highRisk: this.getNumberOfSmsWithRisk('high'),
-      lowRisk: this.getNumberOfSmsWithRisk('low'),
-      noRisk: this.getNumberOfSmsWithRisk('no risk'),
-      title: 'test title',
+    const dataCircleCard1Props = {
+      highRisk: this.getNumberOfSmsWithRisk('high', this.props.smsData),
+      lowRisk: this.getNumberOfSmsWithRisk('low', this.props.smsData),
+      noRisk: this.getNumberOfSmsWithRisk('no risk', this.props.smsData),
+      title: this.props.smsData.length + ' Total Pregnancies',
+    };
+
+    const last2WeeksSmsData = this.filterSms(false, true);
+    const dataCircleCard2Props = {
+      highRisk: this.getNumberOfSmsWithRisk('high', last2WeeksSmsData),
+      lowRisk: this.getNumberOfSmsWithRisk('low', last2WeeksSmsData),
+      noRisk: this.getNumberOfSmsWithRisk('no risk', last2WeeksSmsData),
+      title: last2WeeksSmsData.length + ' Total Pregnancies',
+    };
+
+    const last1WeekSmsData = this.filterSms(true);
+    const dataCircleCard3Props = {
+      highRisk: this.getNumberOfSmsWithRisk('high', last1WeekSmsData),
+      lowRisk: this.getNumberOfSmsWithRisk('low', last1WeekSmsData),
+      noRisk: this.getNumberOfSmsWithRisk('no risk', last1WeekSmsData),
+      title: last1WeekSmsData.length + ' Total Pregnancies',
     };
 
     return (
@@ -45,21 +61,14 @@ class Compartments extends Component<Props, {}> {
           <p id="breadcrumb">Province</p>
         </Row>
         <Row className="cards-row">
-          <DataCircleCard {...dataCircleCardProps} />
-          <DataCircleCard {...dataCircleCardProps} />
-          <DataCircleCard {...dataCircleCardProps} />
+          <DataCircleCard {...dataCircleCard1Props} />
+          <DataCircleCard {...dataCircleCard2Props} />
+          <DataCircleCard {...dataCircleCard3Props} />
         </Row>
       </Container>
     );
   }
-  private filterSms = (
-    last1Week?: boolean,
-    last2Weeks?: boolean,
-    province?: string,
-    district?: string,
-    commune?: string,
-    village?: string
-  ): void => {
+  private filterSms = (last1Week?: boolean, last2Weeks?: boolean): SmsData[] => {
     let filteredData: SmsData[] = [];
     if (last2Weeks) {
       filteredData = this.props.smsData.filter((dataItem: SmsData): boolean => {
@@ -70,7 +79,14 @@ class Compartments extends Component<Props, {}> {
         return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
       });
     }
-    // in the very near future we should be able to filter by an administrative unit
+    return filteredData;
+    /**  in the very near future we should be able to filter by an administrative unit
+     * by passing in the following arguments
+     * province?: string,
+     * district?: string,
+     * commune?: string,
+     * village?: string
+     */
   };
 
   /**
@@ -78,7 +94,7 @@ class Compartments extends Component<Props, {}> {
    * field
    * @param {string} risk - value of logface_risk to look for
    */
-  private getNumberOfSmsWithRisk = (risk: string) => {
+  private getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[]) => {
     function reducer(accumulator: number, currentValue: SmsData) {
       if (currentValue.logface_risk.toLowerCase().includes(risk)) {
         return accumulator + 1;
@@ -86,7 +102,7 @@ class Compartments extends Component<Props, {}> {
         return accumulator;
       }
     }
-    return this.props.smsData.reduce(reducer, 0);
+    return smsData.reduce(reducer, 0);
   };
 }
 
