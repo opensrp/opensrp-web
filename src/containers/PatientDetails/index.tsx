@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import { LOGFACE_URL } from '../../constants';
+import { backPageIcon, LOGFACE_URL } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData } from '../../store/ducks/sms_events';
 import { smsSlice } from '../LogFace/tests/fixtures';
@@ -20,8 +20,6 @@ interface Props {
 interface State {
   filteredData: SmsData[];
 }
-
-export const backPageIcon: IconProp = ['fas', 'arrow-left'];
 
 class PatientDetails extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
