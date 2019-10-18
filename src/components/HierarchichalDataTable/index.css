@@ -1,0 +1,125 @@
+.card-body {
+  padding: 0;
+}
+
+.table-card {
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d7d7e0;
+  width: 1056px;
+  margin: 0 !important;
+}
+
+.card-title {
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  color: #3a484f;
+  font-family: Roboto;
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1em;
+  text-align: left;
+  padding: 0.6em !important;
+}
+
+.rt-tr.-odd {
+  background-color: #f8f9fa;
+}
+
+.ReactTable .rt-thead.-header {
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.15);
+}
+
+td {
+  border: 1px solid rgba(209, 216, 245);
+  text-align: center;
+}
+
+a,
+a:hover,
+a:active,
+a:visited {
+  color: #0292d3;
+  text-decoration: none;
+}
+
+td:nth-child(1) {
+  text-align: left;
+  padding-left: 1%;
+  color: #0292d3;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.card-title > span {
+  color: #7c7c7c;
+}
+
+.rt-th.rt-resizable-header.-cursor-pointer,
+td {
+  color: #3a484f;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  width: 57px;
+}
+
+.table-container table #body {
+  overflow: auto;
+}
+
+#header {
+  position: relative;
+  top: 0;
+  height: 50px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+.default-width {
+  width: 20%;
+}
+
+table {
+  margin: 0;
+}
+
+td#total,
+#header {
+  color: #3a484f;
+  font-family: Roboto;
+  font-size: 0.875em;
+  font-weight: 400;
+  line-height: 1.063em;
+}
+
+table.table.table-borderless.table-striped,
+.card-title {
+  margin: 0;
+  border: none;
+}
+
+td.default-width {
+  border: 1px solid rgba(209, 216, 245, 0.6000000238418579);
+  margin: 0;
+}
+
+#no-rows > td {
+  width: 100%;
+}
+
+.high-risk {
+  background-color: #ffe8e6;
+}
+
+.low-risk {
+  background-color: #ffe9db;
+}
+
+.no-risk {
+  background-color: rgba(55, 174, 18, 0.10000000149011612);
+}

@@ -1,577 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App renders App correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
+<div
+  className="row login-row"
 >
-  <Router
-    history={
-      Object {
-        "action": "POP",
-        "block": [Function],
-        "createHref": [Function],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "length": 1,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
-      }
-    }
+  <div
+    className="image col-lg col-xl"
+  />
+  <div
+    className="col-lg col-xl login-section"
   >
-    <App>
-<<<<<<< HEAD
-      <div
-        className="main-app-container"
-=======
-      <Route
-        exact={true}
-        path="/login"
-        render={[Function]}
+    <div
+      className="logo"
+    >
+      <img
+        alt="unicef vietnam"
+        className="moh"
+        src="vietnam-moh.png"
       />
-      <Container
-        tag="div"
->>>>>>> origin/OathPage
+      <img
+        alt="unicef vietnam"
+        className="unicef"
+        src="uni-vietnam.png"
+      />
+    </div>
+    <div
+      className="center"
+    >
+      <h3>
+        MIECD VIETNAM
+      </h3>
+      <ProviderLinks
+        providers={
+          Object {
+            "Ona": Object {
+              "accessTokenUri": "https://api.ona.io/o/token/",
+              "authorizationUri": "https://api.ona.io/o/authorize/",
+              "clientId": "9qoIMXO7AVcYvGCn8R2sYVTpg50INPhD5HwMWOLz",
+              "redirectUri": "http://localhost:3000/oauth/callback/Ona/",
+              "scopes": Array [
+                "read",
+                "write",
+              ],
+              "state": "onadata",
+              "userUri": "https://api.ona.io/api/v1/user.json",
+            },
+            "OpenSRP": Object {
+              "accessTokenUri": "https://reveal-stage.smartregister.org/opensrp/oauth/token",
+              "authorizationUri": "https://reveal-stage.smartregister.org/opensrp/oauth/authorize",
+              "clientId": "ZS2Ll4u9HxEVVFTjafQDKQXV83iSgLj7kKHf",
+              "redirectUri": "http://localhost:3000/oauth/callback/OpenSRP/",
+              "scopes": Array [
+                "read",
+                "write",
+              ],
+              "state": "opensrp",
+              "userUri": "https://reveal-stage.smartregister.org/opensrp/user-details",
+            },
+          }
+        }
       >
-        <Connect(withRouter(HeaderComponent))>
-          <withRouter(HeaderComponent)
-            authenticated={false}
-            logOutUser={[Function]}
-            user={
-              Object {
-                "email": "",
-                "gravatar": "",
-                "name": "",
-                "username": "",
-              }
-            }
-          >
-            <HeaderComponent
-              authenticated={false}
-              history={
-                Object {
-                  "action": "POP",
-                  "block": [Function],
-                  "createHref": [Function],
-                  "go": [Function],
-                  "goBack": [Function],
-                  "goForward": [Function],
-                  "length": 1,
-                  "listen": [Function],
-                  "location": Object {
-                    "hash": "",
-                    "pathname": "/",
-                    "search": "",
-                    "state": undefined,
-                  },
-                  "push": [Function],
-                  "replace": [Function],
-                }
-              }
-              location={
-                Object {
-                  "hash": "",
-                  "pathname": "/",
-                  "search": "",
-                  "state": undefined,
-                }
-              }
-              logOutUser={[Function]}
-              match={
-                Object {
-                  "isExact": true,
-                  "params": Object {},
-                  "path": "/",
-                  "url": "/",
-                }
-              }
-              user={
-                Object {
-                  "email": "",
-                  "gravatar": "",
-                  "name": "",
-                  "username": "",
-                }
-              }
-            >
-              <Navbar
-                expand="md"
-                tag="nav"
-              >
-                <nav
-                  className="navbar navbar-expand-md"
-                >
-                  <nav
-                    id="image-settings"
-                  >
-                    <Link
-                      to="/"
-                    >
-                      <a
-                        href="/"
-                        onClick={[Function]}
-                      >
-                        <img
-                          alt="OpenSRP"
-                          height="100%"
-                          src="logo.png"
-                          width="100%"
-                        />
-                      </a>
-                    </Link>
-                  </nav>
-                  <NavbarToggler
-                    onClick={[Function]}
-                    tag="button"
-                    type="button"
-                  >
-                    <button
-                      className="navbar-toggler"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      <span
-                        className="navbar-toggler-icon"
-                      />
-                    </button>
-                  </NavbarToggler>
-                  <Collapse
-                    appear={false}
-                    enter={true}
-                    exit={true}
-                    in={false}
-                    isOpen={false}
-                    mountOnEnter={false}
-                    navbar={true}
-                    onEnter={[Function]}
-                    onEntered={[Function]}
-                    onEntering={[Function]}
-                    onExit={[Function]}
-                    onExited={[Function]}
-                    onExiting={[Function]}
-                    tag="div"
-                    timeout={350}
-                    unmountOnExit={false}
-                  >
-                    <Transition
-                      appear={false}
-                      enter={true}
-                      exit={true}
-                      in={false}
-                      mountOnEnter={false}
-                      onEnter={[Function]}
-                      onEntered={[Function]}
-                      onEntering={[Function]}
-                      onExit={[Function]}
-                      onExited={[Function]}
-                      onExiting={[Function]}
-                      timeout={350}
-                      unmountOnExit={false}
-                    >
-                      <div
-                        className="collapse navbar-collapse"
-                        style={Object {}}
-                      >
-                        <Nav
-                          className="ml-auto"
-                          navbar={true}
-                          tag="ul"
-                          vertical={false}
-                        >
-                          <ul
-                            className="ml-auto navbar-nav"
-                          >
-                            <NavLink
-                              activeClassName="active"
-                              className="nav-link"
-                              to="/login"
-                            >
-                              <Link
-                                aria-current={null}
-                                className="nav-link"
-                                to="/login"
-                              >
-                                <a
-                                  aria-current={null}
-                                  className="nav-link"
-                                  href="/login"
-                                  onClick={[Function]}
-                                >
-                                  Login
-                                </a>
-                              </Link>
-                            </NavLink>
-                          </ul>
-                        </Nav>
-                      </div>
-                    </Transition>
-                  </Collapse>
-                </nav>
-              </Navbar>
-            </HeaderComponent>
-          </withRouter(HeaderComponent)>
-        </Connect(withRouter(HeaderComponent))>
         <div
-          className="main-container"
+          className="gatekeeper-login"
         >
-          <div
-            className="sidebar"
+          <p
+            className="gatekeeper-p"
           >
-            <SidenavComponent>
-              <div
-                id="sidenav"
-              >
-                <Nav
-                  className="flex-column"
-                  navbar={true}
-                  tag="ul"
-                  vertical={false}
-                >
-                  <ul
-                    className="flex-column navbar-nav"
-                  >
-                    <NavItem
-                      tag="li"
-                    >
-                      <li
-                        className="nav-item"
-                      >
-                        <NavLink
-                          activeClassName="active"
-                          className="nav-link navbar-inverse"
-                          id="link-font"
-                          to="/"
-                        >
-                          <Link
-                            aria-current="page"
-                            className="nav-link navbar-inverse active"
-                            id="link-font"
-                            style={Object {}}
-                            to="/"
-                          >
-                            <a
-                              aria-current="page"
-                              className="nav-link navbar-inverse active"
-                              href="/"
-                              id="link-font"
-                              onClick={[Function]}
-                              style={Object {}}
-                            >
-                              Home
-                            </a>
-                          </Link>
-                        </NavLink>
-                      </li>
-                    </NavItem>
-                    <NavItem
-                      tag="li"
-                    >
-                      <li
-                        className="nav-item"
-                      >
-                        <NavLink
-                          activeClassName="active"
-                          className="nav-link navbar-inverse"
-                          id="link-font"
-                          to="/log-face"
-                        >
-                          <Link
-                            aria-current={null}
-                            className="nav-link navbar-inverse"
-                            id="link-font"
-                            to="/log-face"
-                          >
-                            <a
-                              aria-current={null}
-                              className="nav-link navbar-inverse"
-                              href="/log-face"
-                              id="link-font"
-                              onClick={[Function]}
-                            >
-                              Log Face
-                            </a>
-                          </Link>
-                        </NavLink>
-                      </li>
-                    </NavItem>
-                  </ul>
-                </Nav>
-              </div>
-            </SidenavComponent>
-          </div>
-          <div
-            className="content"
+            Please log in with one of the following providers
+          </p>
+          <p
+            className="gatekeeper-p item"
+            key="OpenSRP"
           >
-            <Switch>
-              <Connect(PrivateRoute)
-                component={[Function]}
-                computedMatch={
-                  Object {
-                    "isExact": true,
-                    "params": Object {},
-                    "path": "/",
-                    "url": "/",
-                  }
-                }
-                disableLoginProtection={true}
-                exact={true}
-                location={
-                  Object {
-                    "hash": "",
-                    "pathname": "/",
-                    "search": "",
-                    "state": undefined,
-                  }
-                }
-                path="/"
-              >
-                <PrivateRoute
-                  authenticated={false}
-                  component={[Function]}
-                  computedMatch={
-                    Object {
-                      "isExact": true,
-                      "params": Object {},
-                      "path": "/",
-                      "url": "/",
-                    }
-                  }
-                  disableLoginProtection={true}
-                  dispatch={[Function]}
-                  exact={true}
-                  location={
-                    Object {
-                      "hash": "",
-                      "pathname": "/",
-                      "search": "",
-                      "state": undefined,
-                    }
-                  }
-                  path="/"
-                  redirectPath="/login"
-                >
-                  <Route
-                    computedMatch={
-                      Object {
-                        "isExact": true,
-                        "params": Object {},
-                        "path": "/",
-                        "url": "/",
-                      }
-                    }
-                    dispatch={[Function]}
-                    exact={true}
-                    location={
-                      Object {
-                        "hash": "",
-                        "pathname": "/",
-                        "search": "",
-                        "state": undefined,
-                      }
-                    }
-                    path="/"
-                    render={[Function]}
-                  >
-                    <Home
-                      computedMatch={
-                        Object {
-                          "isExact": true,
-                          "params": Object {},
-                          "path": "/",
-                          "url": "/",
-                        }
-                      }
-                      dispatch={[Function]}
-                      exact={true}
-                      history={
-                        Object {
-                          "action": "POP",
-                          "block": [Function],
-                          "createHref": [Function],
-                          "go": [Function],
-                          "goBack": [Function],
-                          "goForward": [Function],
-                          "length": 1,
-                          "listen": [Function],
-                          "location": Object {
-                            "hash": "",
-                            "pathname": "/",
-                            "search": "",
-                            "state": undefined,
-                          },
-                          "push": [Function],
-                          "replace": [Function],
-                        }
-                      }
-                      location={
-                        Object {
-                          "hash": "",
-                          "pathname": "/",
-                          "search": "",
-                          "state": undefined,
-                        }
-                      }
-                      match={
-                        Object {
-                          "isExact": true,
-                          "params": Object {},
-                          "path": "/",
-                          "url": "/",
-                        }
-                      }
-                      path="/"
-                    >
-                      <div
-                        className="home-main"
-                      >
-                        <div
-                          className="welcome-text"
-                        >
-                          <h1>
-                            Welcome to the pregnancy dashboard
-                          </h1>
-                          <p>
-                            This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for patients in your geographical location. The Module covers the whole pregnancy period from conception to delivery and includes Pregnancy Registration, ANC visits, Birth reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
-                          </p>
-                        </div>
-                        <div
-                          className="components-list"
-                        >
-                          <div
-                            className="spacer"
-                          >
-                            <div
-                              className="home-sub-containers"
-                            >
-                              <div
-                                className="sub-container-heading"
-                              >
-                                <p>
-                                  Log face
-                                </p>
-                              </div>
-                              <div
-                                className="sub-container-message"
-                              >
-                                <div
-                                  id="cont-size"
-                                >
-                                  <p>
-                                    Display of all messages receioved from MIECD in chronological order
-                                  </p>
-                                </div>
-                                <div
-                                  id="cont-sized"
-                                >
-                                  <a
-                                    href="/log-face"
-                                  >
-                                    <button
-                                      className="button-style"
-                                    >
-                                      View
-                                    </button>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="spacer"
-                          >
-                            <div
-                              className="home-sub-containers"
-                            >
-                              <div
-                                className="sub-container-heading"
-                              >
-                                <p>
-                                  Client
-                                </p>
-                              </div>
-                              <div
-                                className="sub-container-message"
-                              >
-                                <div
-                                  id="cont-size"
-                                >
-                                  <p>
-                                    This is the aggregation and categorization of patients data
-                                  </p>
-                                </div>
-                                <div
-                                  id="cont-sized"
-                                >
-                                  <button
-                                    className="button-style"
-                                  >
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="spacer"
-                          >
-                            <div
-                              className="home-sub-containers"
-                            >
-                              <div
-                                className="sub-container-heading"
-                              >
-                                <p>
-                                  Analysis
-                                </p>
-                              </div>
-                              <div
-                                className="sub-container-message"
-                              >
-                                <div
-                                  id="cont-size"
-                                >
-                                  <p>
-                                    Important analysis and indicators generated from collected data
-                                  </p>
-                                </div>
-                                <div
-                                  id="cont-sized"
-                                >
-                                  <button
-                                    className="button-style"
-                                  >
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Home>
-                  </Route>
-                </PrivateRoute>
-              </Connect(PrivateRoute)>
-            </Switch>
-          </div>
+            <a
+              className="gatekeeper-btn"
+              href="https://reveal-stage.smartregister.org/opensrp/oauth/authorize?client_id=ZS2Ll4u9HxEVVFTjafQDKQXV83iSgLj7kKHf&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fcallback%2FOpenSRP%2F&scope=read%20write&response_type=token&state=opensrp"
+            >
+              OpenSRP
+            </a>
+          </p>
+          <p
+            className="gatekeeper-p item"
+            key="Ona"
+          >
+            <a
+              className="gatekeeper-btn"
+              href="https://api.ona.io/o/authorize/?client_id=9qoIMXO7AVcYvGCn8R2sYVTpg50INPhD5HwMWOLz&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fcallback%2FOna%2F&scope=read%20write&response_type=token&state=onadata"
+            >
+              Ona
+            </a>
+          </p>
         </div>
-      </div>
-    </App>
-  </Router>
-</Provider>
+      </ProviderLinks>
+    </div>
+  </div>
+</div>
 `;

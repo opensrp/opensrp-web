@@ -1,19 +1,21 @@
 // internal urls
+export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
+export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
+export const PREGNANCY_URL = '/pregnancy';
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
 export const LOGOUT_URL = '/logout';
 export type LOGOUT_URL = typeof LOGOUT_URL;
 export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
+export const COMPARTMENTS_URL = '/compartments';
+export type COMPARTMENTS_URL = typeof COMPARTMENTS_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 export const LOGFACE_URL = '/log-face';
 export type LOGFACE_URL = typeof LOGFACE_URL;
-export const COMPARTMENTS_URL = '/compartments';
-export type COMPARTMENTS_URL = typeof COMPARTMENTS_URL;
 export const ANALYSIS_URL = '/analysis';
 export type ANALYSIS_URL = typeof ANALYSIS_URL;
-export const PREGNANCY_URL = '/pregnancy';
 export type PREGNANCY_URL = typeof PREGNANCY_URL;
 export const NUTRITION_URL = '/nutrition';
 export type NUTRITION_URL = typeof NUTRITION_URL;
@@ -81,3 +83,7 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+
+// TIME constants
+export const MICROSECONDS_IN_A_WEEK = 604800000;
+export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;

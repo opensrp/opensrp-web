@@ -1,3 +1,5 @@
+import { history } from '@onaio/connected-reducer-registry';
+import { ConnectedRouter } from 'connected-react-router';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
@@ -38,7 +40,9 @@ describe('components/ConnectedHeader', () => {
     store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
     // 11 here is to include the header
@@ -50,7 +54,9 @@ describe('components/ConnectedHeader', () => {
     store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
 
@@ -64,12 +70,14 @@ describe('components/ConnectedHeader', () => {
   it('search works correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
 
     expect(wrapper.find('input').length).toBe(1);
     wrapper.find('input').simulate('change', { target: { value: '1569837448461' } });
-    expect(wrapper.find('tr').length).toBe(2);
+    expect(wrapper.find('tr').length).toBe(11);
   });
 });

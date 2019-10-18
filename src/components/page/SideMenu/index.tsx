@@ -59,6 +59,20 @@ import './index.css';
 
 // Page links
 
+export const LOG_FACE: PageLink = {
+  label: 'logface',
+  url: '/logface',
+};
+
+export const CompartMents: PageLink = {
+  label: 'compartments',
+  url: '/compartments',
+};
+
+export const Analysis: PageLink = {
+  label: 'Analysis',
+  url: '/analysis',
+};
 export const CLIENT_PAGE_NAVIGATION: PageLink = {
   label: ALL_CLIENTS,
   url: CLIENT_URL,
@@ -184,6 +198,7 @@ export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: CLIENT_MODULE_PARENT_NAV,
 };
+
 export const REPORT_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [],
   parentNav: REPORT_MODULE_PARENT_NAV,
@@ -235,33 +250,28 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
     const homeMenuProps: SubMenuProps = {
       ...HOME_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: HOME_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
 
     const pregnancyMenuProps: SubMenuProps = {
       ...PREGNANCY_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: PREGNANCY_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
 
     const clientSubMenuProps: SubMenuProps = {
       ...CLIENT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: CLIENT_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const reportSubMenuProps: SubMenuProps = {
       ...REPORT_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: REPORTS_URL,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     const adminSubMenuProps: SubMenuProps = {
       ...ADMIN_NAVIGATION_MODULE,
       collapsedModuleLabel,
-      linkTo: ADMIN,
       setCollapsedModuleLabel: this.setCollapsedModuleLabel,
     };
     return (

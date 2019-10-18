@@ -41,6 +41,23 @@ export default class MotherWeightChart extends React.Component<Props, State> {
       title: {
         text: '',
       },
+      // tslint:disable-next-line: object-literal-sort-keys
+      tooltip: {
+        backgroundColor: 'white',
+        borderColor: '#DADCE0',
+        borderRadius: 10,
+        borderWidth: 1,
+        shadow: {
+          color: '#D7D7E0',
+          offsetX: 0,
+          offsetY: 2,
+          opacity: 0.2,
+          width: 8,
+        },
+        formatter() {
+          return `Mother's weight - ${this.x}<br> weight <b>${this.y}</b>`;
+        },
+      },
 
       subtitle: {
         text: undefined,
@@ -53,20 +70,26 @@ export default class MotherWeightChart extends React.Component<Props, State> {
       },
 
       xAxis: {
-        type: 'datetime',
-        // tslint:disable-next-line: object-literal-sort-keys
-        dateTimeLabelFormats: {
-          day: '%b %Y',
-        },
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
       },
 
       series: [
         {
           data: this.props.weights,
           name: 'weight',
-          pointInterval: 24 * 3600 * 1000,
-          pointStart: Date.UTC(2010, 0, 1),
-          type: undefined,
         },
       ] as any,
 
