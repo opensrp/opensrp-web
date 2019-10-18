@@ -18,6 +18,12 @@ ul {
 }
 
 .dataCircleCard > .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dataCircleCard {
   padding: 0;
   background-color: #ffffff;
   border: 0.063em solid #dadce0;
