@@ -41,7 +41,7 @@ class Compartments extends Component<Props, {}> {
       highRisk: this.getNumberOfSmsWithRisk('high', last2WeeksSmsData),
       lowRisk: this.getNumberOfSmsWithRisk('low', last2WeeksSmsData),
       noRisk: this.getNumberOfSmsWithRisk('no risk', last2WeeksSmsData),
-      title: last2WeeksSmsData.length + ' Total Pregnancies',
+      title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
     };
 
     const last1WeekSmsData = this.filterSms(true);
@@ -49,7 +49,7 @@ class Compartments extends Component<Props, {}> {
       highRisk: this.getNumberOfSmsWithRisk('high', last1WeekSmsData),
       lowRisk: this.getNumberOfSmsWithRisk('low', last1WeekSmsData),
       noRisk: this.getNumberOfSmsWithRisk('no risk', last1WeekSmsData),
-      title: last1WeekSmsData.length + ' Total Pregnancies',
+      title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
     };
 
     return (
