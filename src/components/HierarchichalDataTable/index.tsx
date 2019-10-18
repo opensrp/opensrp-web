@@ -19,11 +19,13 @@ interface Props {
   node_id?: number;
   direction: string; // this can be down or up
   from_level?: string;
+  risk_highligter?: string;
 }
 
 const defaultProps: Props = {
   current_level: 0,
   direction: 'down',
+  risk_highligter: '',
 };
 
 class HierarchichalDataTable extends Component<Props, State> {
@@ -86,7 +88,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                 <thead id="header">
                   <tr>
                     <th className="default-width" />
-                    <th className="default-width">Hight Risk</th>
+                    <th className="default-width">High Risk</th>
                     <th className="default-width">Low Risk</th>
                     <th className="default-width">No Risk</th>
                     <th className="default-width">Total</th>
