@@ -2,7 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
-class SearchBox extends React.Component {
+/** state interface for SearchBox  */
+interface SearchBoxState {
+  searchText: '';
+}
+
+class SearchBox extends React.Component<{}, SearchBoxState> {
   public render() {
     return (
       <InputGroup>
