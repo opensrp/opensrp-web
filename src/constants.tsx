@@ -146,7 +146,7 @@ export const MICROSECONDS_IN_A_WEEK = 604800000;
 export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
 
 // Back arrow constant
-export const backPageIcon: IconProp = ['fas', 'arrow-left'];
+export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];

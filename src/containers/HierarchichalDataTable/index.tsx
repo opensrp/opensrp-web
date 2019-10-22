@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Store } from 'redux';
 import {
   BACK_TO_PREGNANCY_LOGFACE,
-  backPageIcon,
+  BACKPAGE_ICON,
   COMMUNE,
   COMPARTMENTS_URL,
   DISTRICT,
@@ -98,7 +98,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     return (
       <Container fluid={true} className="compartment-data-table">
         <Link to={COMPARTMENTS_URL} className="back-page">
-          <FontAwesomeIcon icon={backPageIcon} size="lg" />
+          <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
           <span>{BACK_TO_PREGNANCY_LOGFACE}</span>
         </Link>
         <h1>{this.props.title}</h1>

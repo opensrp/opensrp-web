@@ -8,7 +8,7 @@ import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
 import {
   BACK_TO_PREGNANCY_LOGFACE,
-  backPageIcon,
+  BACKPAGE_ICON,
   LOGFACE_URL,
   PATIENT_DETAILS,
 } from '../../constants';
@@ -60,7 +60,7 @@ class PatientDetails extends Component<Props, State> {
     return (
       <div className="patient-details">
         <Link to={LOGFACE_URL} className="back-page">
-          <FontAwesomeIcon icon={backPageIcon} size="lg" />
+          <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
           <span>{BACK_TO_PREGNANCY_LOGFACE}</span>
         </Link>
         <div id="titleDiv">
