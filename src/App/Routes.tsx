@@ -15,7 +15,7 @@ import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { CLIENT_URL } from '../constants';
+import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import {
   ANALYSIS_URL,
   COMPARTMENTS_URL,
@@ -70,7 +70,7 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path="/pregnancy"
+            path={PREGNANCY_URL}
             component={PregnancyHome}
           />
           <ConnectedPrivateRoute
@@ -100,7 +100,7 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={'/analysis'}
+            path={ANALYSIS}
             component={Analysis}
           />
           <ConnectedPrivateRoute
