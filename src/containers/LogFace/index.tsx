@@ -10,6 +10,7 @@ import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
+import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
@@ -44,7 +45,7 @@ interface State {
 const defaultprops: PropsInterface = {
   dataFetched: false,
   fetchTestDataActionCreator: fetchSms,
-  numberOfRows: 5,
+  numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   smsData: [],
 };
 
