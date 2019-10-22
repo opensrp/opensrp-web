@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Ripple from '../../../components/page/Loading';
 
+import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT } from '../../../configs/env';
 import './index.css';
 
 interface State {
@@ -28,7 +29,7 @@ export class Analysis extends React.Component<{}, State> {
             scrolling="yes"
             frameBorder="0"
             onLoad={this.hideSpinner}
-            src="https://discover.ona.io/superset/dashboard/25/?standalone=true"
+            src={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
           />
         </div>
       </div>
