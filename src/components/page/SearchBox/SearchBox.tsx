@@ -12,7 +12,15 @@ interface SearchBoxState {
   searchText: string;
 }
 
+/** default state for searchBox */
+const defaultSearchBoxState = {
+  searchText: '',
+};
+
 class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
+  public componentDidMount() {
+    this.setState(defaultSearchBoxState);
+  }
   public render() {
     return (
       <InputGroup>
