@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
 import {
-  BACK_TO_PREGNANCY_FROM_LOGFACE,
+  BACK_TO_PREGNANCY_LOGFACE,
   backPageIcon,
   COMMUNE,
   COMPARTMENTS_URL,
@@ -99,7 +99,7 @@ class HierarchichalDataTable extends Component<Props, State> {
       <Container fluid={true} className="compartment-data-table">
         <Link to={COMPARTMENTS_URL} className="back-page">
           <FontAwesomeIcon icon={backPageIcon} size="lg" />
-          <span>{BACK_TO_PREGNANCY_FROM_LOGFACE}</span>
+          <span>{BACK_TO_PREGNANCY_LOGFACE}</span>
         </Link>
         <h1>{this.props.title}</h1>
         <Row>
@@ -244,7 +244,7 @@ class HierarchichalDataTable extends Component<Props, State> {
 
     let district = <span>''</span>;
     if (this.props.current_level === 1) {
-      district = <span key={1}>`/ ${DISTRICT}`</span>;
+      district = <span key={1}>/ {DISTRICT}</span>;
     } else {
       district = (
         <Link
@@ -256,9 +256,9 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     }
 
-    let commune = <span>` / ${COMMUNE}`</span>;
+    let commune = <span> / {COMMUNE}</span>;
     if (this.props.current_level === 2) {
-      commune = <span key={2}>` / ${COMMUNE}`</span>;
+      commune = <span key={2}> / {COMMUNE}</span>;
     } else {
       commune = (
         <Link
@@ -270,7 +270,7 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     }
 
-    const village = <span key={3}>` / ${VILLAGE}`</span>;
+    const village = <span key={3}> / {VILLAGE}</span>;
     switch (this.props.current_level) {
       case 0:
         return province;

@@ -6,7 +6,12 @@ import { Link } from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import { backPageIcon, LOGFACE_URL } from '../../constants';
+import {
+  BACK_TO_PREGNANCY_LOGFACE,
+  backPageIcon,
+  LOGFACE_URL,
+  PATIENT_DETAILS,
+} from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData } from '../../store/ducks/sms_events';
 import { smsSlice } from '../LogFace/tests/fixtures';
@@ -56,10 +61,10 @@ class PatientDetails extends Component<Props, State> {
       <div className="patient-details">
         <Link to={LOGFACE_URL} className="back-page">
           <FontAwesomeIcon icon={backPageIcon} size="lg" />
-          <span>Back to Pregnancy Log Face</span>
+          <span>{BACK_TO_PREGNANCY_LOGFACE}</span>
         </Link>
         <div id="titleDiv">
-          <h2 id="patients_title">Patient Details</h2>
+          <h2 id="patients_title">{PATIENT_DETAILS}</h2>
         </div>
         <Row>
           <BasicInformation {...this.getBasicInformationProps()} />
