@@ -2,6 +2,30 @@ import { AnyAction } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
 
+/** Interface for event object as received from event search */
+export interface Event {
+  type: 'Event';
+  dateCreated: number;
+  serverVersion: number;
+  clientApplicationVersion: number;
+  clientDatabaseVersion: number;
+  identifiers: { [key: string]: string | null };
+  baseEntityId: string;
+  locationId: string;
+  eventDate: number;
+  eventType: string;
+  formSubmissionId: string;
+  providerId: string;
+  duration: number;
+  obs: { [key: string]: string[] | string | null };
+  entityType: string;
+  version: number;
+  teamId: string;
+  team: string;
+  _id: string;
+  _rev: string;
+}
+
 /** The reducer name */
 export const reducerName = 'client';
 
@@ -21,7 +45,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** the client reducer function */
 export default function reducer(
   state: ImmutableClientsState,
-  action: ClientsActionTypes
+  action: ClientActionTypes
 ): ImmutableClientsState {
   switch (action.type) {
     default:
