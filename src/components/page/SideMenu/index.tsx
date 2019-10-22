@@ -51,7 +51,7 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
       <div className="side-menu-container">
         <Row>
           <Col className="side-menu-extend">
-            {navigationModules.map((navigationModule: any) => {
+            {navigationModules.map((navigationModule: any, index: number) => {
               if (navigationModule.shouldRender) {
                 return (
                   <SubMenu
@@ -59,6 +59,7 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
                     collapsedModuleLabel={collapsedModuleLabel}
                     setCollapsedModuleLabel={this.setCollapsedModuleLabel}
                     parentNav={navigationModule.subMenuProps.parentNav}
+                    key={index}
                   />
                 );
               }
