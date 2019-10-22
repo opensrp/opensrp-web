@@ -23,7 +23,7 @@ import './index.css';
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
-  testData: SmsData[];
+  smsData: SmsData[];
   fetchTestDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
   numberOfRows: number;
@@ -44,7 +44,7 @@ const defaultprops: PropsInterface = {
   dataFetched: false,
   fetchTestDataActionCreator: fetchSms,
   numberOfRows: 5,
-  testData: [],
+  smsData: [],
 };
 
 export class LogFace extends React.Component<PropsInterface, State> {
@@ -59,7 +59,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       )
     ) {
       return {
-        filteredData: nextProps.testData,
+        filteredData: nextProps.smsData,
       };
     } else {
       return {
@@ -112,7 +112,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   public render() {
-    // const data = this.props.testData;
+    // const data = this.props.smsData;
     // console.log(this.state.filteredData);
     const data = this.state.filteredData;
     return (
@@ -132,7 +132,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   placeholder="Search ID, Reporter, Patients"
                   className={`form-control logface-search`}
                   onChange={this.handleTermChange}
-                  disabled={!this.props.testData.length}
+                  disabled={!this.props.smsData.length}
                 />
               )}
             </Formik>
@@ -146,7 +146,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData.length}
+                  disabled={!this.props.smsData.length}
                 >
                   <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
                 </DropdownToggle>
@@ -171,7 +171,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData.length}
+                  disabled={!this.props.smsData.length}
                 >
                   <span>
                     {this.state.locationLabel.length ? this.state.locationLabel : 'Select Location'}
@@ -195,7 +195,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData}
+                  disabled={!this.props.smsData}
                 >
                   <span>{this.state.typeLabel.length ? this.state.typeLabel : 'Select Type'}</span>
                 </DropdownToggle>
@@ -216,7 +216,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             <button id="export-button">Export data</button>
           </div>
         </div>
-        {this.props.testData.length ? (
+        {this.props.smsData.length ? (
           <div className="table-container">
             <Table striped={true} borderless={true}>
               <thead id="header">
@@ -322,8 +322,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'logface_risk', true),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
       riskLabel: (e.target as HTMLInputElement).innerText,
     });
   };
@@ -331,17 +331,17 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'health_worker_location_name', false),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
       locationLabel: (e.target as HTMLInputElement).innerText,
     });
   };
 
   private getAllLocations = (): string[] => {
     const locations = [];
-    for (const i in this.props.testData) {
-      if (this.props.testData[i].health_worker_location_name) {
-        locations.push(this.props.testData[i].health_worker_location_name);
+    for (const i in this.props.smsData) {
+      if (this.props.smsData[i].health_worker_location_name) {
+        locations.push(this.props.smsData[i].health_worker_location_name);
       }
     }
 
@@ -352,14 +352,14 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'sms_type', false),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'sms_type', false),
       typeLabel: (e.target as HTMLInputElement).innerText,
     });
   };
 
   private filterData(filterString: string): SmsData[] {
-    return this.props.testData.filter(
+    return this.props.smsData.filter(
       dataItem =>
         dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
         dataItem.health_worker_name
@@ -387,7 +387,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
 const mapStateToprops = (state: any) => {
   const result = {
     smsData: getSmsData(state),
-    testData: getSmsData(state),
   };
   return result;
 };
