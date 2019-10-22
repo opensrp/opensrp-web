@@ -1,3 +1,4 @@
+import { keyBy } from 'lodash';
 import { AnyAction } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
@@ -32,10 +33,19 @@ export const reducerName = 'client';
 /** CLIENT_FETCHED action type */
 export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
 
+/** EVENTS_FETCHED action type */
+export const EVENTS_FETCHED = 'opensrp/reducer/client/EVENTS_FETCHED';
+
 /** interface for fetch client */
 export interface FetchClientAction extends AnyAction {
   clientById: { [key: string]: Client };
   type: typeof CLIENT_FETCHED;
+}
+
+/** interface for fetch events */
+export interface FetchEventsAction extends AnyAction {
+  eventsById: { [key: string]: Event };
+  type: typeof EVENTS_FETCHED;
 }
 
 // actions
@@ -49,6 +59,15 @@ export interface FetchClientAction extends AnyAction {
 export const fetchClient = (client: Client): FetchClientAction => ({
   clientById: { [client.baseEntityId]: client },
   type: CLIENT_FETCHED,
+});
+
+/** Fetch events action creator
+ * @param {Event} events - events to add to store
+ * @return {FetchEventsAction} - an action to add events to redux store
+ */
+export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
+  eventsById: keyBy(eventsList, (event: Event) => event.baseEntityId),
+  type: EVENTS_FETCHED,
 });
 
 /** Create type for client reducer actions */
