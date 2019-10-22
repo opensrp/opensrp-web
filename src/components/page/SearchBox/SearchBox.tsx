@@ -4,7 +4,7 @@ import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
 /** state interface for SearchBox  */
 interface SearchBoxState {
-  searchText: '';
+  searchText: string;
 }
 
 class SearchBox extends React.Component<{}, SearchBoxState> {
@@ -16,10 +16,14 @@ class SearchBox extends React.Component<{}, SearchBoxState> {
             <FontAwesomeIcon icon={['fas', 'search']} />
           </InputGroupText>
         </InputGroupAddon>
-        <Input placeholder="search" />
+        <Input placeholder="search" onChange={this.handleChange} />
       </InputGroup>
     );
   }
+
+  private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    return this.setState({ searchText: event.target.value });
+  };
 }
 
 export default SearchBox;
