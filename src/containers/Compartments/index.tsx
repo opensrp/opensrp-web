@@ -5,7 +5,7 @@ import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
-import { MICROSECONDS_IN_A_WEEK } from '../../constants';
+import { COMPARTMENTS, MICROSECONDS_IN_A_WEEK, PROVINCE } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
 import './index.css';
@@ -57,10 +57,10 @@ class Compartments extends Component<Props, {}> {
     return (
       <Container fluid={true} className="compartment-wrapper compartments">
         <Row>
-          <h2 id="compartment_title">Compartment</h2>
+          <h2 id="compartment_title">{COMPARTMENTS}</h2>
         </Row>
         <Row className="breadcrumb-row">
-          <p id="breadcrumb">Province</p>
+          <p id="breadcrumb">{PROVINCE}</p>
         </Row>
         {this.props.dataFetched ? (
           <Row className="cards-row">
