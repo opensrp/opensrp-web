@@ -89,7 +89,11 @@ export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
 });
 
 /** Create type for client reducer actions */
-export type ClientActionTypes = FetchClientAction | FetchEventsAction | AnyAction;
+export type ClientActionTypes =
+  | FetchClientAction
+  | FetchEventsAction
+  | FetchMembersAction
+  | AnyAction;
 
 // The reducer
 
@@ -125,6 +129,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         eventsById: action.eventsById,
+      });
+    case MEMBERS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        membersById: action.membersById,
       });
     default:
       return state;
