@@ -34,7 +34,7 @@ export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
 
 /** interface for fetch client */
 export interface FetchClientAction extends AnyAction {
-  client: Client;
+  clientById: { [key: string]: Client };
   type: typeof CLIENT_FETCHED;
 }
 
@@ -47,7 +47,7 @@ export interface FetchClientAction extends AnyAction {
  * @return {FetchClientAction} - an action to add client to redux store
  */
 export const fetchClient = (client: Client): FetchClientAction => ({
-  client,
+  clientById: { [client.baseEntityId]: client },
   type: CLIENT_FETCHED,
 });
 
