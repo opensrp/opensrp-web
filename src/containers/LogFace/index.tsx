@@ -15,7 +15,8 @@ import {
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   LOGFACE_SEARCH_PLACEHOLDER,
   PREGNANCY_LOGFACE_HEADING,
-  RISK_CARTEGORIES,
+  RISK_LEVEL,
+  RISK_LEVELS,
 } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
@@ -145,7 +146,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               )}
             </Formik>
             <div className="location-type-filter">
-              <span>Risk Level</span>
+              <span>{RISK_LEVEL}</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenRiskLevel}
                 toggle={this.toggleRiskLevelDropDown}
@@ -159,7 +160,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(RISK_CARTEGORIES, risk => {
+                  {map(RISK_LEVELS, risk => {
                     return (
                       <DropdownItem onClick={this.handleRiskLevelDropdownClick} key={risk}>
                         {risk}
