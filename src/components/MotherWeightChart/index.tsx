@@ -1,6 +1,7 @@
 import * as Highcharts from 'highcharts';
 import * as React from 'react';
 import { Card, CardTitle } from 'reactstrap';
+import { MOTHER_WEIGHT_TRACKING } from '../../constants';
 import './index.css';
 
 interface Props {
@@ -121,7 +122,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
   public render() {
     return (
       <Card>
-        <CardTitle>Mother's Weight Tracking</CardTitle>
+        <CardTitle>{MOTHER_WEIGHT_TRACKING}</CardTitle>
         <div id="chart-wrapper" />
       </Card>
     );

@@ -111,6 +111,10 @@ export const LOW_RISK = 'Low Risk';
 export type LOW_RISK = typeof LOW_RISK;
 export const NO_RISK = 'No Risk';
 export type NO_RISK = typeof NO_RISK;
+export const RED_ALERT = 'Red Alert';
+export type RED_ALERT = typeof RED_ALERT;
+export const NOT_SET = 'Not Set';
+export type NOT_SET = typeof NOT_SET;
 export const TOTAL = 'Total';
 export type TOTAL = typeof TOTAL;
 export const DISTRICT = 'District';
@@ -137,6 +141,12 @@ export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
 export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
 export const CURRENT_EDD = 'Current EDD';
 export type CURRENT_EDD = typeof CURRENT_EDD;
+export const MIECD_VIETNAM = 'MIECD VIETNAM';
+export type MIECD_VIETNAM = typeof MIECD_VIETNAM;
+export const NO_PROVIDERS = 'No providers';
+export type NO_PROVIDERS = typeof NO_PROVIDERS;
+export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
+export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
@@ -144,6 +154,8 @@ export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_RO
 // TIME constants
 export const MICROSECONDS_IN_A_WEEK = 604800000;
 export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
+export const GESTATION_PERIOD = 24192000000;
+export type GESTATION_PERIOD = typeof GESTATION_PERIOD;
 
 // Back arrow constant
 export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
