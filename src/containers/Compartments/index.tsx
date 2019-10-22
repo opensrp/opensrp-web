@@ -61,7 +61,7 @@ class Compartments extends Component<Props, {}> {
         <Row className="breadcrumb-row">
           <p id="breadcrumb">Province</p>
         </Row>
-        {this.props.smsData.length ? (
+        {this.props.dataFetched ? (
           <Row className="cards-row">
             <DataCircleCard {...dataCircleCard1Props} />
             <DataCircleCard {...dataCircleCard2Props} />
