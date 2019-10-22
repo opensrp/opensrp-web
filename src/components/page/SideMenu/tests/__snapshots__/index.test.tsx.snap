@@ -80,12 +80,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                       childNavs={Array []}
 -                     collapsedModuleLabel=\\"\\"
 +                     collapsedModuleLabel=\\"Pregnancy\\"
+                      key=\\"0\\"
                       parentNav={
                         Object {
                           \\"icon\\": Array [
                             \\"fas\\",
-                            \\"home\\",
-@@ -137,11 +137,11 @@
+@@ -138,11 +138,11 @@
                       }
                       setCollapsedModuleLabel={[Function anonymous]}
                     >
@@ -98,7 +98,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"action\\": \\"POP\\",
                             \\"block\\": [Function block],
                             \\"createHref\\": [Function createHref],
-@@ -319,11 +319,11 @@
+@@ -320,11 +320,11 @@
                             \\"label\\": \\"Analysis\\",
                             \\"url\\": \\"/analysis\\",
                           },
@@ -106,12 +106,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                       }
 -                     collapsedModuleLabel=\\"\\"
 +                     collapsedModuleLabel=\\"Pregnancy\\"
+                      key=\\"1\\"
                       parentNav={
                         Object {
                           \\"icon\\": Array [
                             \\"far\\",
-                            \\"user\\",
-@@ -349,11 +349,11 @@
+@@ -351,11 +351,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/analysis\\",
                             },
@@ -124,7 +124,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"action\\": \\"POP\\",
                             \\"block\\": [Function block],
                             \\"createHref\\": [Function createHref],
-@@ -494,11 +494,11 @@
+@@ -496,11 +496,11 @@
                           <Collapse
                             appear={false}
                             enter={true}
@@ -137,7 +137,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             onEntered={[Function noop]}
                             onEntering={[Function noop]}
                             onExit={[Function noop]}
-@@ -510,11 +510,11 @@
+@@ -512,11 +512,11 @@
                           >
                             <Transition
                               appear={false}
@@ -150,7 +150,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               onEntered={[Function bound onEntered]}
                               onEntering={[Function bound onEntering]}
                               onExit={[Function bound onExit]}
-@@ -522,12 +522,16 @@
+@@ -524,12 +524,16 @@
                               onExiting={[Function bound onExiting]}
                               timeout={350}
                               unmountOnExit={false}
