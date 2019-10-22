@@ -52,7 +52,7 @@ export const fetchClient = (client: Client): FetchClientAction => ({
 });
 
 /** Create type for client reducer actions */
-export type ClientActionTypes = AnyAction;
+export type ClientActionTypes = FetchClientAction | AnyAction;
 
 // The reducer
 
@@ -72,6 +72,11 @@ export default function reducer(
   action: ClientActionTypes
 ): ImmutableClientsState {
   switch (action.type) {
+    case CLIENT_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        client: action.client,
+      });
     default:
       return state;
   }
