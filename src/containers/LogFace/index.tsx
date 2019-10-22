@@ -26,7 +26,7 @@ reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
   smsData: SmsData[];
-  fetchTestDataActionCreator: typeof fetchSms;
+  fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
   numberOfRows: number;
 }
@@ -44,7 +44,7 @@ interface State {
 
 const defaultprops: PropsInterface = {
   dataFetched: false,
-  fetchTestDataActionCreator: fetchSms,
+  fetchSmsDataActionCreator: fetchSms,
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   smsData: [],
 };
@@ -86,10 +86,10 @@ export class LogFace extends React.Component<PropsInterface, State> {
   }
 
   public componentDidMount() {
-    const { fetchTestDataActionCreator } = this.props;
+    const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
       supersetFetch('2263').then((result: any) => {
-        fetchTestDataActionCreator(result);
+        fetchSmsDataActionCreator(result);
       });
     }
   }
@@ -394,7 +394,7 @@ const mapStateToprops = (state: any) => {
   return result;
 };
 
-const mapPropsToActions = { fetchTestDataActionCreator: fetchSms };
+const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
 
 const ConnectedLogFace = connect(
   mapStateToprops,
