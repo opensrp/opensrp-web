@@ -12,11 +12,16 @@ import RiskColoring from '../../components/RiskColoring';
 import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
+  ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   LOGFACE_SEARCH_PLACEHOLDER,
   PREGNANCY_LOGFACE_HEADING,
   RISK_LEVEL,
   RISK_LEVELS,
+  SELECT_LOCATION,
+  SELECT_RISK,
+  SELECT_TYPE,
+  TYPE,
 } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
@@ -157,7 +162,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.smsData.length}
                 >
-                  <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
+                  <span>{this.state.riskLabel.length ? this.state.riskLabel : SELECT_RISK}</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(RISK_LEVELS, risk => {
@@ -171,7 +176,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              <span>Select Location</span>
+              <span>{SELECT_LOCATION}</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenLocation}
                 toggle={this.toggleLocationDropDown}
@@ -183,11 +188,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   disabled={!this.props.smsData.length}
                 >
                   <span>
-                    {this.state.locationLabel.length ? this.state.locationLabel : 'Select Location'}
+                    {this.state.locationLabel.length ? this.state.locationLabel : SELECT_LOCATION}
                   </span>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(this.getAllLocations().concat('all'), location => {
+                  {map(this.getAllLocations().concat(ALL), location => {
                     return (
                       <DropdownItem onClick={this.handleLocationDropdownClick} key={location}>
                         {location}
@@ -198,7 +203,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              <span>Type</span>
+              <span>{TYPE}</span>
               <Dropdown isOpen={this.state.dropdownOpenType} toggle={this.toggleTypeDropDown}>
                 <DropdownToggle
                   variant="success"
@@ -206,7 +211,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   caret={true}
                   disabled={!this.props.smsData}
                 >
-                  <span>{this.state.typeLabel.length ? this.state.typeLabel : 'Select Type'}</span>
+                  <span>{this.state.typeLabel.length ? this.state.typeLabel : SELECT_TYPE}</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(SmsTypes, type => {
@@ -216,8 +221,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       </DropdownItem>
                     );
                   })}
-                  <DropdownItem onClick={this.handleTypeDropdownClick} key={'all'}>
-                    all
+                  <DropdownItem onClick={this.handleTypeDropdownClick} key={ALL}>
+                    {ALL}
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -301,7 +306,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   }
 
   private isAllSelected = (e: React.MouseEvent) => {
-    return (e.target as HTMLInputElement).innerText === 'all';
+    return (e.target as HTMLInputElement).innerText === ALL;
   };
 
   private getFilteredData = (
