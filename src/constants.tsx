@@ -89,6 +89,8 @@ export const PREGNANCY_LOGFACE_HEADING = 'Log Face - Pregnancy';
 export type PREGNANCY_LOGFACE_HEADING = typeof PREGNANCY_LOGFACE_HEADING;
 export const LOGFACE_SEARCH_PLACEHOLDER = 'Search ID, Reporter, Patients';
 export type LOGFACE_SEARCH_PLACEHOLDER = typeof LOGFACE_SEARCH_PLACEHOLDER;
+export const RISK_LEVEL = 'Risk Level';
+export type RISK_LEVEL = typeof RISK_LEVEL;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
@@ -101,5 +103,5 @@ export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
 export const backPageIcon: IconProp = ['fas', 'arrow-left'];
 
 // Risk cartegories in the logface component
-export const RISK_CARTEGORIES = ['red', 'high', 'low', 'no risk', 'all'];
-export type RISK_CARTEGORIES = typeof RISK_CARTEGORIES;
+export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
+export type RISK_LEVELS = typeof RISK_LEVELS;
