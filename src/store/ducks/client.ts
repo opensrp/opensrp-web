@@ -36,6 +36,9 @@ export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
 /** EVENTS_FETCHED action type */
 export const EVENTS_FETCHED = 'opensrp/reducer/client/EVENTS_FETCHED';
 
+/** MEMBERS_FETCHED action type */
+export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
+
 /** interface for fetch client */
 export interface FetchClientAction extends AnyAction {
   clientById: { [key: string]: Client };
@@ -46,6 +49,12 @@ export interface FetchClientAction extends AnyAction {
 export interface FetchEventsAction extends AnyAction {
   eventsById: { [key: string]: Event };
   type: typeof EVENTS_FETCHED;
+}
+
+/** interface for fetch members */
+export interface FetchMembersAction extends AnyAction {
+  membersById: { [key: string]: Client };
+  type: typeof MEMBERS_FETCHED;
 }
 
 // actions
@@ -68,6 +77,15 @@ export const fetchClient = (client: Client): FetchClientAction => ({
 export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
   eventsById: keyBy(eventsList, (event: Event) => event.baseEntityId),
   type: EVENTS_FETCHED,
+});
+
+/** Fetch members action creator
+ * @param {Event} members - members to add to store
+ * @return {FetchMembersAction} - an action to add members to redux store
+ */
+export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
+  membersById: keyBy(membersList, (member: Client) => member.baseEntityId),
+  type: MEMBERS_FETCHED,
 });
 
 /** Create type for client reducer actions */
