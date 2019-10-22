@@ -58,24 +58,31 @@ export type ClientActionTypes = FetchClientAction | AnyAction;
 
 /** interface for client state in redux store */
 interface ClientState {
-  client: Client;
-  events: Event[];
-  members: Client[];
+  clientById: { [key: string]: Client };
+  eventsById: { [key: string]: Event };
+  membersById: { [key: string]: Client };
 }
 
 /** Create an immutable client state */
 export type ImmutableClientState = ClientState & SeamlessImmutable.ImmutableObject<ClientState>;
 
+/** initial clients-state state */
+const initialState: ImmutableClientState = SeamlessImmutable({
+  clientById: {},
+  eventsById: {},
+  membersById: {},
+});
+
 /** the client reducer function */
 export default function reducer(
-  state: ImmutableClientState,
+  state: ImmutableClientState = initialState,
   action: ClientActionTypes
 ): ImmutableClientState {
   switch (action.type) {
     case CLIENT_FETCHED:
       return SeamlessImmutable({
         ...state,
-        client: action.client,
+        clientById: action.client,
       });
     default:
       return state;
