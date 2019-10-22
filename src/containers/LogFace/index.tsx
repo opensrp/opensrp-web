@@ -17,6 +17,7 @@ import TestReducer, {
   getSmsData,
   reducerName,
   SmsData,
+  smsDataFetched,
 } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -216,7 +217,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             <button id="export-button">Export data</button>
           </div>
         </div>
-        {this.props.smsData.length ? (
+        {this.props.dataFetched ? (
           <div className="table-container">
             <Table striped={true} borderless={true}>
               <thead id="header">
@@ -386,6 +387,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any) => {
   const result = {
+    dataFetched: smsDataFetched(state),
     smsData: getSmsData(state),
   };
   return result;
