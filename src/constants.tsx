@@ -85,6 +85,8 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const PREGNANCY_LOGFACE_HEADING = 'Log Face - Pregnancy';
+export type PREGNANCY_LOGFACE_HEADING = typeof PREGNANCY_LOGFACE_HEADING;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
