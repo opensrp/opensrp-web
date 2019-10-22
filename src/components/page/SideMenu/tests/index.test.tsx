@@ -42,7 +42,7 @@ describe('components/page/SideMenu', () => {
 
     expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual('');
 
-    wrapper.find(`ul#${PREGNANCY.replace(' ', '-')}`).simulate('click');
+    wrapper.find(`ul#${PREGNANCY}`).simulate('click');
     expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(PREGNANCY);
     wrapper.unmount();
   });
@@ -63,7 +63,7 @@ describe('components/page/SideMenu', () => {
     const beforeClickWrapper = toJson(wrapper);
 
     // clicking on a parent nav changes the collapsedState for that navigation module
-    const PregnancyNav = wrapper.find(`ul#${PREGNANCY.replace(' ', '-')}`);
+    const PregnancyNav = wrapper.find(`ul#${PREGNANCY}`);
     expect(PregnancyNav.length).toEqual(1);
     PregnancyNav.simulate('click');
     wrapper.update();
