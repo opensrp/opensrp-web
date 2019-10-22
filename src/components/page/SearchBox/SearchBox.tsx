@@ -12,7 +12,7 @@ interface SearchBoxState {
   searchText: string;
 }
 
-class SearchBox extends React.Component<{}, SearchBoxState> {
+class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
   public render() {
     return (
       <InputGroup>
@@ -21,13 +21,21 @@ class SearchBox extends React.Component<{}, SearchBoxState> {
             <FontAwesomeIcon icon={['fas', 'search']} />
           </InputGroupText>
         </InputGroupAddon>
-        <Input placeholder="search" onChange={this.handleChange} />
+        <Input placeholder="search" onChange={this.handleChange} onKeyPress={this.search} />
       </InputGroup>
     );
   }
 
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     return this.setState({ searchText: event.target.value });
+  };
+
+  private search = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const { searchCallBack } = this.props;
+    const { searchText } = this.state;
+    if (event.key === 'Enter') {
+      searchCallBack(searchText);
+    }
   };
 }
 
