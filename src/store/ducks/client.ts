@@ -71,7 +71,7 @@ export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
 });
 
 /** Create type for client reducer actions */
-export type ClientActionTypes = FetchClientAction | AnyAction;
+export type ClientActionTypes = FetchClientAction | FetchEventsAction | AnyAction;
 
 // The reducer
 
@@ -101,7 +101,12 @@ export default function reducer(
     case CLIENT_FETCHED:
       return SeamlessImmutable({
         ...state,
-        clientById: action.client,
+        clientById: action.clientById,
+      });
+    case EVENTS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        eventsById: action.eventsById,
       });
     default:
       return state;
