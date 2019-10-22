@@ -7,7 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
-import { backPageIcon, COMPARTMENTS_URL, HIERARCHICAL_DATA_URL } from '../../constants';
+import {
+  BACK_TO_PREGNANCY_FROM_LOGFACE,
+  backPageIcon,
+  COMMUNE,
+  COMPARTMENTS_URL,
+  DISTRICT,
+  HIERARCHICAL_DATA_URL,
+  HIGH_RISK,
+  LOW_RISK,
+  NO_RISK,
+  PROVINCE,
+  TOTAL,
+  UP,
+  VILLAGE,
+} from '../../constants';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
@@ -35,9 +49,9 @@ class HierarchichalDataTable extends Component<Props, State> {
   public static defaultProps = defaultProps;
   public static getDerivedStateFromProps(nextProps: Props) {
     let dataToShow: any = [];
-    if ((nextProps.direction === 'up' && nextProps.current_level === 0) || !nextProps.node_id) {
+    if ((nextProps.direction === UP && nextProps.current_level === 0) || !nextProps.node_id) {
       dataToShow = provinces;
-    } else if (nextProps.direction === 'up' && nextProps.current_level === 1) {
+    } else if (nextProps.direction === UP && nextProps.current_level === 1) {
       dataToShow = districts;
       let parentId: number;
       const node = dataToShow.find((dataItem: any) => dataItem.id.toString() === nextProps.node_id);
@@ -49,7 +63,7 @@ class HierarchichalDataTable extends Component<Props, State> {
         parentId = dataToShow.find((dataItem: any) => dataItem.id === parentId).parent_id;
       }
       dataToShow = dataToShow.filter((dataItem: any) => dataItem.parent_id === parentId);
-    } else if (nextProps.direction === 'up' && nextProps.current_level === 2) {
+    } else if (nextProps.direction === UP && nextProps.current_level === 2) {
       dataToShow = communes;
       const parent_id = dataToShow.find(
         (dataItem: any) => dataItem.id.toString() === nextProps.node_id
@@ -85,7 +99,7 @@ class HierarchichalDataTable extends Component<Props, State> {
       <Container fluid={true} className="compartment-data-table">
         <Link to={COMPARTMENTS_URL} className="back-page">
           <FontAwesomeIcon icon={backPageIcon} size="lg" />
-          <span>Back to Pregnancy Log Face</span>
+          <span>{BACK_TO_PREGNANCY_FROM_LOGFACE}</span>
         </Link>
         <h1>{this.props.title}</h1>
         <Row>
@@ -96,10 +110,10 @@ class HierarchichalDataTable extends Component<Props, State> {
                 <thead id="header">
                   <tr>
                     <th className="default-width" />
-                    <th className="default-width">High Risk</th>
-                    <th className="default-width">Low Risk</th>
-                    <th className="default-width">No Risk</th>
-                    <th className="default-width">Total</th>
+                    <th className="default-width">{HIGH_RISK}</th>
+                    <th className="default-width">{LOW_RISK}</th>
+                    <th className="default-width">{NO_RISK}</th>
+                    <th className="default-width">{TOTAL}</th>
                   </tr>
                 </thead>
                 <tbody id="body">
@@ -204,59 +218,59 @@ class HierarchichalDataTable extends Component<Props, State> {
 
   private getLevelString = () => {
     if (this.props.current_level === 0) {
-      return 'Province';
+      return PROVINCE;
     } else if (this.props.current_level === 1) {
-      return 'District';
+      return DISTRICT;
     } else if (this.props.current_level === 2) {
-      return 'Commune';
+      return COMMUNE;
     } else if (this.props.current_level === 3) {
-      return 'Village';
+      return VILLAGE;
     } else {
-      return 'Province';
+      return PROVINCE;
     }
   };
   private header = () => {
-    let province = <span>Province</span>;
+    let province = <span>{PROVINCE}</span>;
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/0/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
-          Province
+          {PROVINCE}
         </Link>
       );
     }
 
     let district = <span>''</span>;
     if (this.props.current_level === 1) {
-      district = <span key={1}> / District</span>;
+      district = <span key={1}>`/ ${DISTRICT}`</span>;
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/1/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
-          &nbsp;/ District
+          &nbsp;/ {DISTRICT}
         </Link>
       );
     }
 
-    let commune = <span> / Commune</span>;
+    let commune = <span>` / ${COMMUNE}`</span>;
     if (this.props.current_level === 2) {
-      commune = <span key={2}> / Commune</span>;
+      commune = <span key={2}>` / ${COMMUNE}`</span>;
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/2/up/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
-          &nbsp;/ Commune
+          &nbsp;/ {COMMUNE}
         </Link>
       );
     }
 
-    const village = <span key={3}> / Village</span>;
+    const village = <span key={3}>` / ${VILLAGE}`</span>;
     switch (this.props.current_level) {
       case 0:
         return province;
