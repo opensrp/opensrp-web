@@ -86,6 +86,9 @@ export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
 
+export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
+export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
+
 // TIME constants
 export const MICROSECONDS_IN_A_WEEK = 604800000;
 export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
