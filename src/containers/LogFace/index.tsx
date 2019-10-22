@@ -11,7 +11,7 @@ import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
-import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../constants';
+import { DEFAULT_NUMBER_OF_LOGFACE_ROWS, PREGNANCY_LOGFACE_HEADING } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
@@ -121,7 +121,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">Log Face - Pregnancy</h2>
+          <h2 id="logface_title">{PREGNANCY_LOGFACE_HEADING}</h2>
         </div>
         <div className="filter-panel">
           <div className="filters">
