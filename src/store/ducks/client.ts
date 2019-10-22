@@ -5,8 +5,8 @@ import { Client } from './clients';
 /** The reducer name */
 export const reducerName = 'client';
 
-/** Create type for clients reducer actions */
-export type ClientsActionTypes = AnyAction;
+/** Create type for client reducer actions */
+export type ClientActionTypes = AnyAction;
 
 // The reducer
 
