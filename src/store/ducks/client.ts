@@ -37,6 +37,8 @@ export type ClientActionTypes = AnyAction;
 /** interface for client state in redux store */
 interface ClientState {
   client: Client;
+  events: Event[];
+  members: Client[];
 }
 
 /** Create an immutable client state */
