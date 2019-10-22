@@ -2,6 +2,7 @@ import ListView from '@onaio/list-view';
 import { map } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+import { GESTATION_PERIOD } from '../../constants';
 import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
 import MotherWeightChart from '../MotherWeightChart';
@@ -47,14 +48,13 @@ const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsDa
   const data: PregnancySmsData[][] = [];
 
   let pregnancyIndex: number = 0;
-  const gestation: number = 24192000000;
   for (const dataItem in singlePatientEvents) {
     if (singlePatientEvents) {
       if (data[pregnancyIndex]) {
         if (
           singlePatientEvents[dataItem].sms_type === 'Pregnancy Registration' ||
           (data[pregnancyIndex][parseInt(dataItem, 10) - 1] &&
-            gestation <
+            GESTATION_PERIOD <
               Date.parse(singlePatientEvents[dataItem].EventDate) -
                 Date.parse(data[pregnancyIndex][parseInt(dataItem, 10) - 1].EventDate))
         ) {
