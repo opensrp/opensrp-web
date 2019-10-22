@@ -26,6 +26,7 @@ interface PropsInterface {
   testData: SmsData[];
   fetchTestDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
+  numberOfRows: number;
 }
 
 interface State {
@@ -42,6 +43,7 @@ interface State {
 const defaultprops: PropsInterface = {
   dataFetched: false,
   fetchTestDataActionCreator: fetchSms,
+  numberOfRows: 5,
   testData: [],
 };
 
@@ -233,8 +235,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
               <tbody id="body">
                 {map(
                   data.slice(
-                    (this.state.currentIndex - 1) * 10,
-                    (this.state.currentIndex - 1) * 10 + 10
+                    (this.state.currentIndex - 1) * this.props.numberOfRows,
+                    (this.state.currentIndex - 1) * this.props.numberOfRows +
+                      this.props.numberOfRows
                   ),
                   dataObj => {
                     return (
@@ -278,7 +281,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               previous
             </button>
           )}
-          {this.state.currentIndex < Math.ceil(data.length / 10) && (
+          {this.state.currentIndex < Math.ceil(data.length / this.props.numberOfRows) && (
             <button onClick={this.nextPage} id={'next'}>
               next
             </button>
