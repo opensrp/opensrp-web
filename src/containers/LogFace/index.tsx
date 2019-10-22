@@ -9,6 +9,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
+import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
@@ -88,7 +89,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch('2263').then((result: any) => {
+      supersetFetch(REACT_APP_SUPERSET_SMS_DATA_SLICE).then((result: any) => {
         fetchSmsDataActionCreator(result);
       });
     }
