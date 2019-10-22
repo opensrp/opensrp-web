@@ -91,6 +91,16 @@ export const LOGFACE_SEARCH_PLACEHOLDER = 'Search ID, Reporter, Patients';
 export type LOGFACE_SEARCH_PLACEHOLDER = typeof LOGFACE_SEARCH_PLACEHOLDER;
 export const RISK_LEVEL = 'Risk Level';
 export type RISK_LEVEL = typeof RISK_LEVEL;
+export const SELECT_RISK = 'Select risk';
+export type SELECT_RISK = typeof SELECT_RISK;
+export const SELECT_LOCATION = 'Select Location';
+export type SELECT_LOCATION = typeof SELECT_LOCATION;
+export const SELECT_TYPE = 'Select Type';
+export type SELECT_TYPE = typeof SELECT_TYPE;
+export const ALL = 'all';
+export type ALL = typeof ALL;
+export const TYPE = 'Type';
+export type TYPE = typeof TYPE;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
