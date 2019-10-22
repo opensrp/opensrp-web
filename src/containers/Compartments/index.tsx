@@ -4,6 +4,7 @@ import { Container, Row } from 'reactstrap';
 import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
+import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { MICROSECONDS_IN_A_WEEK } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
@@ -24,7 +25,7 @@ class Compartments extends Component<Props, {}> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch('2263').then((result: any) => {
+      supersetFetch(REACT_APP_SUPERSET_SMS_DATA_SLICE).then((result: any) => {
         fetchSmsDataActionCreator(result);
       });
     }
