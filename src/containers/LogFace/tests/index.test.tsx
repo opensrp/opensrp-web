@@ -46,8 +46,9 @@ describe('components/ConnectedHeader', () => {
         </ConnectedRouter>
       </Provider>
     );
-    // 11 here is to include the header
-    expect(wrapper.find('tr').length).toBe(11);
+
+    // + 1 is added here to unclude the header `tr`
+    expect(wrapper.find('tr').length).toBe(DEFAULT_NUMBER_OF_LOGFACE_ROWS + 1);
     wrapper.unmount();
   });
 
@@ -79,6 +80,7 @@ describe('components/ConnectedHeader', () => {
 
     expect(wrapper.find('input').length).toBe(1);
     wrapper.find('input').simulate('change', { target: { value: '1569837448461' } });
+    // + 1 is added here to unclude the header `tr`
     expect(wrapper.find('tr').length).toBe(DEFAULT_NUMBER_OF_LOGFACE_ROWS + 1);
   });
 });
