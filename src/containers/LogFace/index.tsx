@@ -11,7 +11,12 @@ import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { REACT_APP_SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
-import { DEFAULT_NUMBER_OF_LOGFACE_ROWS, PREGNANCY_LOGFACE_HEADING } from '../../constants';
+import {
+  DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  LOGFACE_SEARCH_PLACEHOLDER,
+  PREGNANCY_LOGFACE_HEADING,
+  RISK_CARTEGORIES,
+} from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
@@ -132,7 +137,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   type="text"
                   name="input"
                   id="input"
-                  placeholder="Search ID, Reporter, Patients"
+                  placeholder={LOGFACE_SEARCH_PLACEHOLDER}
                   className={`form-control logface-search`}
                   onChange={this.handleTermChange}
                   disabled={!this.props.smsData.length}
@@ -154,7 +159,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(['red', 'high', 'low', 'no risk', 'all'], risk => {
+                  {map(RISK_CARTEGORIES, risk => {
                     return (
                       <DropdownItem onClick={this.handleRiskLevelDropdownClick} key={risk}>
                         {risk}
