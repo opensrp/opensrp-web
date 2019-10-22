@@ -151,3 +151,6 @@ export const backPageIcon: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
+
+export const SUPERSET_SMS_DATA_SLICE = '2263';
+export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
