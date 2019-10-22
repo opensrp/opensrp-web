@@ -29,6 +29,28 @@ export interface Event {
 /** The reducer name */
 export const reducerName = 'client';
 
+/** CLIENT_FETCHED action type */
+export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
+
+/** interface for fetch client */
+export interface FetchClientAction extends AnyAction {
+  client: Client;
+  type: typeof CLIENT_FETCHED;
+}
+
+// actions
+
+// action Creators
+
+/** Fetch client action creator
+ * @param {Client} client - client to add to store
+ * @return {FetchClientAction} - an action to add client to redux store
+ */
+export const fetchClient = (client: Client): FetchClientAction => ({
+  client,
+  type: CLIENT_FETCHED,
+});
+
 /** Create type for client reducer actions */
 export type ClientActionTypes = AnyAction;
 
