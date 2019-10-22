@@ -2,6 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
+/** props interface for SearchBox */
+interface SearchBoxProps {
+  searchCallBack(searchString: string): void;
+}
+
 /** state interface for SearchBox  */
 interface SearchBoxState {
   searchText: string;
