@@ -64,13 +64,13 @@ interface ClientState {
 }
 
 /** Create an immutable client state */
-export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObject<ClientState>;
+export type ImmutableClientState = ClientState & SeamlessImmutable.ImmutableObject<ClientState>;
 
 /** the client reducer function */
 export default function reducer(
-  state: ImmutableClientsState,
+  state: ImmutableClientState,
   action: ClientActionTypes
-): ImmutableClientsState {
+): ImmutableClientState {
   switch (action.type) {
     case CLIENT_FETCHED:
       return SeamlessImmutable({
