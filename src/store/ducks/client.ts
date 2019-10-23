@@ -1,5 +1,5 @@
 import { keyBy } from 'lodash';
-import { AnyAction } from 'redux';
+import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
 
@@ -138,4 +138,23 @@ export default function reducer(
     default:
       return state;
   }
+}
+
+// Selectors
+
+/** returns the client in the store by its id
+ * @param {Partial<Store>} state - the redux store
+ * @return { Client } - client object as value, id as key
+ */
+export function getClientById(state: Partial<Store>): { [key: string]: Client } {
+  return (state as any)[reducerName].clientById;
+}
+
+/** returns the client object in the store
+ * @param {Partial<Store>} state - the redux store
+ * @return { Client } - client object
+ */
+export function getClient(state: Partial<Store>): Client {
+  const client = getClientById(state);
+  return client[Object.keys(client)[0]];
 }
