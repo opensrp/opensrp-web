@@ -9,7 +9,9 @@ interface HouseholdProfileURLParams {
 
 /** interface for HouseholdProfileProps */
 export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
-  Household: Household;
+  household: Household;
+  event: Event;
+  members: Household[];
 }
 
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
