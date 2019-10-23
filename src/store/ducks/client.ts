@@ -177,7 +177,7 @@ export function getEventsArray(state: Partial<Store>): Event[] {
 
 /** returns the members of the client in the store by their ids
  * @param {Partial<Store>} state - the redux store
- * @return { Event } - client objects as values, respective ids as keys
+ * @return { Client } - client objects as values, respective ids as keys
  */
 export function getMembersById(state: Partial<Store>): { [key: string]: Client } {
   return (state as any)[reducerName].membersById;
