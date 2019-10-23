@@ -158,3 +158,11 @@ export function getClient(state: Partial<Store>): Client {
   const client = getClientById(state);
   return client[Object.keys(client)[0]];
 }
+
+/** returns the events in the store by its id
+ * @param {Partial<Store>} state - the redux store
+ * @return { Event } - event objects as value, respective ids as key
+ */
+export function getEventsById(state: Partial<Store>): { [key: string]: Event } {
+  return (state as any)[reducerName].eventsById;
+}
