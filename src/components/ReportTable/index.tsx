@@ -99,7 +99,7 @@ class ReportTable extends Component<Props, State> {
   public getPregnancyStringArray = (pregnancySmsData: PregnancySmsData[][]): string[][][] => {
     let pregnancySmsStrings: string[][][] = [];
 
-    const gestation: number = 24192000000;
+    const gestation: number = GESTATION_PERIOD;
     for (const element in pregnancySmsData) {
       if (pregnancySmsData[element]) {
         pregnancySmsStrings[element] = pregnancySmsData[element].map(
