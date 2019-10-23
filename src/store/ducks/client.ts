@@ -1,4 +1,4 @@
-import { keyBy } from 'lodash';
+import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
@@ -156,7 +156,7 @@ export function getClientById(state: Partial<Store>): { [key: string]: Client } 
  */
 export function getClient(state: Partial<Store>): Client {
   const client = getClientById(state);
-  return client[Object.keys(client)[0]];
+  return values(client)[0];
 }
 
 /** returns the events of the client in the store by their ids
