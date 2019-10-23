@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compartments must render correctly: compartment title 1`] = `ReactWrapper {}`;
+
+exports[`Compartments must render correctly: subtitle 1`] = `ReactWrapper {}`;
