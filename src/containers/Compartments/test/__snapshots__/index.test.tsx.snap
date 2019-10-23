@@ -1,5 +1,304 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Compartments must render correctly: compartment title 1`] = `ReactWrapper {}`;
+exports[`Compartments must display the correct data: compartments 1`] = `
+Array [
+  <div
+    className="dataCircleCard card"
+  >
+    <CardTitle
+      tag="div"
+    >
+      <div
+        className="card-title"
+      >
+        22 Total Pregnancies
+      </div>
+    </CardTitle>
+    <CardBody
+      tag="div"
+    >
+      <div
+        className="card-body"
+      >
+        <ul
+          className="circlesRow"
+        >
+          <li
+            className="red"
+          >
+            <Link
+              to="/hierarchicaldata/high-risk/22 Total Pregnancies"
+            >
+              <a
+                href="/hierarchicaldata/high-risk/22 Total Pregnancies"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  4
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              High Risk
+            </span>
+          </li>
+          <li
+            className="orange"
+          >
+            <Link
+              to="/hierarchicaldata/low-risk/22 Total Pregnancies"
+            >
+              <a
+                href="/hierarchicaldata/low-risk/22 Total Pregnancies"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  2
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              Low Risk
+            </span>
+          </li>
+          <li
+            className="green"
+          >
+            <Link
+              to="/hierarchicaldata/no-risk/22 Total Pregnancies"
+            >
+              <a
+                href="/hierarchicaldata/no-risk/22 Total Pregnancies"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  5
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              No Risk
+            </span>
+          </li>
+        </ul>
+      </div>
+    </CardBody>
+  </div>,
+  <div
+    className="dataCircleCard card"
+  >
+    <CardTitle
+      tag="div"
+    >
+      <div
+        className="card-title"
+      >
+        7 Total Pregnancies due in 2 weeks
+      </div>
+    </CardTitle>
+    <CardBody
+      tag="div"
+    >
+      <div
+        className="card-body"
+      >
+        <ul
+          className="circlesRow"
+        >
+          <li
+            className="red"
+          >
+            <Link
+              to="/hierarchicaldata/high-risk/7 Total Pregnancies due in 2 weeks"
+            >
+              <a
+                href="/hierarchicaldata/high-risk/7 Total Pregnancies due in 2 weeks"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  2
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              High Risk
+            </span>
+          </li>
+          <li
+            className="orange"
+          >
+            <Link
+              to="/hierarchicaldata/low-risk/7 Total Pregnancies due in 2 weeks"
+            >
+              <a
+                href="/hierarchicaldata/low-risk/7 Total Pregnancies due in 2 weeks"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  0
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              Low Risk
+            </span>
+          </li>
+          <li
+            className="green"
+          >
+            <Link
+              to="/hierarchicaldata/no-risk/7 Total Pregnancies due in 2 weeks"
+            >
+              <a
+                href="/hierarchicaldata/no-risk/7 Total Pregnancies due in 2 weeks"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  2
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              No Risk
+            </span>
+          </li>
+        </ul>
+      </div>
+    </CardBody>
+  </div>,
+  <div
+    className="dataCircleCard card"
+  >
+    <CardTitle
+      tag="div"
+    >
+      <div
+        className="card-title"
+      >
+        0 Total Pregnancies due in 1 week
+      </div>
+    </CardTitle>
+    <CardBody
+      tag="div"
+    >
+      <div
+        className="card-body"
+      >
+        <ul
+          className="circlesRow"
+        >
+          <li
+            className="red"
+          >
+            <Link
+              to="/hierarchicaldata/high-risk/0 Total Pregnancies due in 1 week"
+            >
+              <a
+                href="/hierarchicaldata/high-risk/0 Total Pregnancies due in 1 week"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  0
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              High Risk
+            </span>
+          </li>
+          <li
+            className="orange"
+          >
+            <Link
+              to="/hierarchicaldata/low-risk/0 Total Pregnancies due in 1 week"
+            >
+              <a
+                href="/hierarchicaldata/low-risk/0 Total Pregnancies due in 1 week"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  0
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              Low Risk
+            </span>
+          </li>
+          <li
+            className="green"
+          >
+            <Link
+              to="/hierarchicaldata/no-risk/0 Total Pregnancies due in 1 week"
+            >
+              <a
+                href="/hierarchicaldata/no-risk/0 Total Pregnancies due in 1 week"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  0
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              No Risk
+            </span>
+          </li>
+        </ul>
+      </div>
+    </CardBody>
+  </div>,
+]
+`;
 
-exports[`Compartments must render correctly: subtitle 1`] = `ReactWrapper {}`;
+exports[`Compartments must render correctly: compartment title 1`] = `
+<h2
+  id="compartment_title"
+>
+  Compartments
+</h2>
+`;
+
+exports[`Compartments must render correctly: subtitle 1`] = `
+<p
+  id="breadcrumb"
+>
+  Province
+</p>
+`;
