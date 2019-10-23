@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
-import './PregnancyHome.css';
+import './index.css';
 
 class PregnancyHome extends React.Component<{}, {}> {
   public render() {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
-import './Home.css';
+import './index.css';
 
 class Home extends React.Component<{}, {}> {
   public render() {
