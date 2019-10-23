@@ -15,7 +15,6 @@ import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import {
   ANALYSIS_URL,
   COMPARTMENTS_URL,
@@ -23,11 +22,12 @@ import {
   LOGFACE_URL,
   LOGOUT_URL,
 } from '../constants';
-import Analysis from '../containers/Clients/Analysis/';
+import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
+import Analysis from '../containers/pages/Analysis';
 import Home from '../containers/pages/Home/Home';
 import PregnancyHome from '../containers/pages/Home/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
