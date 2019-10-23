@@ -9,6 +9,7 @@ import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
 import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import CustomOauthLogin from '../components/CustomAuthLogin';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
@@ -125,6 +126,8 @@ export const Routes = (props: RoutesProps) => {
                 LoadingComponent={Loading}
                 providers={providers}
                 oAuthUserInfoGetter={oAuthUserInfoGetter}
+                SuccessfulLoginComponent={Home}
+                UnSuccessfulLoginComponent={() => <CustomOauthLogin providers={providers} />}
                 {...routeProps}
               />
             )}

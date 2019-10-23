@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row } from 'reactstrap';
+import { Card, CardGroup, Container, Row } from 'reactstrap';
 import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
@@ -59,7 +59,7 @@ class Compartments extends Component<Props, {}> {
     };
 
     return (
-      <Container fluid={true} className="compartment-wrapper compartments">
+      <div className="compartment-wrapper compartments">
         <Row>
           <h2 id="compartment_title">{COMPARTMENTS}</h2>
         </Row>
@@ -67,15 +67,17 @@ class Compartments extends Component<Props, {}> {
           <p id="breadcrumb">{PROVINCE}</p>
         </Row>
         {this.props.dataFetched ? (
-          <Row className="cards-row">
-            <DataCircleCard {...dataCircleCard1Props} />
-            <DataCircleCard {...dataCircleCard2Props} />
-            <DataCircleCard {...dataCircleCard3Props} />
-          </Row>
+          <div className="cards-row">
+            <CardGroup>
+              <DataCircleCard {...dataCircleCard1Props} />
+              <DataCircleCard {...dataCircleCard2Props} />
+              <DataCircleCard {...dataCircleCard3Props} />
+            </CardGroup>
+          </div>
         ) : (
           <Ripple />
         )}
-      </Container>
+      </div>
     );
   }
   private filterSms = (last1Week?: boolean, last2Weeks?: boolean): SmsData[] => {

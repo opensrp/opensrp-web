@@ -26,6 +26,10 @@
   width: 100%;
 }
 
+.main-container .sidebar {
+  width: 300px;
+}
+
 .sidebar .side-menu-extend a:hover {
   text-decoration: none;
   color: #0192d4;
