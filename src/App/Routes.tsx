@@ -29,7 +29,7 @@ import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTabl
 import ConnectedLogFace from '../containers/LogFace';
 import Analysis from '../containers/pages/Analysis';
 import Home from '../containers/pages/Home/Home';
-import PregnancyHome from '../containers/pages/Home/PregnancyHome';
+import PregnancyHome from '../containers/pages/PregnancyHome/PregnancyHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
