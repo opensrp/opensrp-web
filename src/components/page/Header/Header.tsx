@@ -14,6 +14,7 @@ import {
   UncontrolledDropdown,
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
+import logo2 from '../../../assets/images/vietnam-moh.png';
 import { WEBSITE_NAME } from '../../../configs/env';
 import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import { headerShouldNotRender } from '../../../helpers/utils';
@@ -62,7 +63,8 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
       <Navbar expand="md">
         <nav id="image-settings">
           <Link to="/">
-            <img src={logo} height="100%" width="100%" alt={WEBSITE_NAME} />
+            <img src={logo} alt={WEBSITE_NAME} />
+            <img src={logo2} />
           </Link>
         </nav>
         <NavbarToggler onClick={this.toggle} />
