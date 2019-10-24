@@ -20,4 +20,6 @@ describe('ReportTable', () => {
     // I have found a blocker here. This throws a scary error that still
     // makes no sense to me.
   });
+
+  // TODO: test the functions in ReportTable
 });

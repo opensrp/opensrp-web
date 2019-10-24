@@ -166,3 +166,7 @@ export type RISK_LEVELS = typeof RISK_LEVELS;
 
 export const SUPERSET_SMS_DATA_SLICE = '2263';
 export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
+
+export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
+  'https://discover.ona.io/superset/dashboard/25/?standalone=true';
+export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
