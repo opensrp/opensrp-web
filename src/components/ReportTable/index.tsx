@@ -25,7 +25,7 @@ interface State {
   indicesToRemove: number[];
 }
 
-const convertToStringArray = (smsData: PregnancySmsData): string[] => {
+export const convertToStringArray = (smsData: PregnancySmsData): string[] => {
   const arr: string[] = [];
   arr.push(smsData.sms_type);
   arr.push(smsData.EventDate);
@@ -34,7 +34,7 @@ const convertToStringArray = (smsData: PregnancySmsData): string[] => {
   return arr;
 };
 
-const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsData[][] => {
+export const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): PregnancySmsData[][] => {
   // remove event types that we are not interested in and retain
   // only pregnancy registration, ANC and birth reports
   singlePatientEvents = singlePatientEvents.filter((event: SmsData) => {
