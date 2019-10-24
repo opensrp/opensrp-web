@@ -1,5 +1,6 @@
 import { exportAllDeclaration } from '@babel/types';
 import { mount, shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReportTable, { convertToStringArray, getEventsPregnancyArray } from '..';
@@ -29,8 +30,6 @@ describe('ReportTable', () => {
   it('must render correctly', () => {
     // const wrapper = mount(<ReportTable singlePatientEvents={[]} />);
     // expect(toJson(wrapper)).toMatchSnapshot();
-    // I have found a blocker here. This throws a scary error that still
-    // makes no sense to me.
   });
 });
 
