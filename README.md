@@ -1,6 +1,7 @@
 # OpenSRP Web Frontend
 
 [![CircleCI](https://circleci.com/gh/OpenSRP/opensrp-web.svg?style=svg)](https://circleci.com/gh/OpenSRP/opensrp-web)
+[![Coverage Status](https://coveralls.io/repos/github/OpenSRP/opensrp-web/badge.svg?branch=master)](https://coveralls.io/github/OpenSRP/opensrp-web?branch=master)
 
 ## Summary
 
