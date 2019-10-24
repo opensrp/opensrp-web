@@ -14,9 +14,13 @@ import {
   getEventsPregnancyArrayInput2,
   getEventsPregnancyArrayOutput1,
   getEventsPregnancyArrayOutput2,
+  reportTableProps,
 } from './fixtures';
 
 const history = createBrowserHistory();
+
+jest.genMockFromModule('highcharts');
+jest.mock('highcharts');
 
 describe('ReportTable', () => {
   beforeEach(() => {
@@ -28,9 +32,8 @@ describe('ReportTable', () => {
   });
 
   it('must render correctly', () => {
-    // const wrapper = mount(<ReportTable singlePatientEvents={[]} />);
-    // expect(toJson(wrapper)).toMatchSnapshot();
-    //  Highcharts error #13 is thrown here.
+    const wrapper = mount(<ReportTable singlePatientEvents={reportTableProps as SmsData[]} />);
+    expect(toJson(wrapper.find('tbody'))).toMatchSnapshot();
   });
 });
 
