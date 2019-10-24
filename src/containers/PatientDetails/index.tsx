@@ -1,20 +1,12 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Row } from 'reactstrap';
+import { Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import {
-  BACK_TO_PREGNANCY_LOGFACE,
-  BACKPAGE_ICON,
-  LOGFACE_URL,
-  PATIENT_DETAILS,
-} from '../../constants';
-import supersetFetch from '../../services/superset';
-import { fetchSms, getSmsData, SmsData } from '../../store/ducks/sms_events';
-import { smsSlice } from '../LogFace/tests/fixtures';
+import { BACK, BACKPAGE_ICON, LOGFACE_URL, PATIENT_DETAILS } from '../../constants';
+import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
@@ -61,7 +53,7 @@ class PatientDetails extends Component<Props, State> {
       <div className="patient-details">
         <Link to={LOGFACE_URL} className="back-page">
           <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
-          <span>{BACK_TO_PREGNANCY_LOGFACE}</span>
+          <span>{BACK}</span>
         </Link>
         <div id="titleDiv">
           <h2 id="patients_title">{PATIENT_DETAILS}</h2>

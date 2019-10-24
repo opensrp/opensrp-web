@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { Store } from 'redux';
 import {
   BACK_TO_PREGNANCY_COMPARTMENTS,
-  BACK_TO_PREGNANCY_LOGFACE,
   BACKPAGE_ICON,
   COMMUNE,
   COMPARTMENTS_URL,
