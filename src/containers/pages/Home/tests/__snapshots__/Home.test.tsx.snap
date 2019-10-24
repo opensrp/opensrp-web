@@ -50,7 +50,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
               className="col"
             >
               <h3>
-                Welcome to OpenSRp
+                Welcome to OpenSRP
               </h3>
             </div>
           </Col>

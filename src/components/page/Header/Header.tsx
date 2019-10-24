@@ -4,25 +4,19 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import {
-  Collapse,
+  Col,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
   Navbar,
-  NavbarToggler,
-  NavItem,
+  Row,
   UncontrolledDropdown,
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
-import { ENABLE_ABOUT, ENABLE_USERS, WEBSITE_NAME } from '../../../configs/env';
-import { CLIENT_URL, LOGIN_URL, LOGOUT_URL } from '../../../constants';
+import { WEBSITE_NAME } from '../../../configs/env';
+import { LOGIN, LOGIN_URL, LOGOUT_URL, SIGN_OUT } from '../../../constants';
 import './Header.css';
-
-/** interface for Header state */
-interface State {
-  isOpen: boolean;
-}
 
 /** interface for HeaderProps */
 export interface HeaderProps extends RouteComponentProps {
@@ -41,84 +35,51 @@ const defaultHeaderProps: Partial<HeaderProps> = {
 };
 
 /** The Header component */
-export class HeaderComponent extends React.Component<HeaderProps, State> {
+export class HeaderComponent extends React.Component<HeaderProps> {
   public static defaultProps = defaultHeaderProps;
-
-  constructor(props: HeaderProps) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-    };
-  }
 
   public render() {
     const { authenticated, user } = this.props;
     return (
-      <div>
-        <Navbar color="light" light={true} expand="md">
-          <nav className="navbar navbar-expand-md navbar-light bg-light">
-            <Link to="/" className="navbar-brand">
-              <img src={logo} alt={WEBSITE_NAME} />
-            </Link>
-          </nav>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar={true}>
-            <Nav className="mr-auto" navbar={true}>
-              <NavItem>
-                <NavLink to="/" className="nav-link" activeClassName="active">
-                  Home
-                </NavLink>
-              </NavItem>
-              {ENABLE_USERS && (
-                <NavItem>
-                  <NavLink to="/404" className="nav-link" activeClassName="active">
-                    Users
-                  </NavLink>
-                </NavItem>
-              )}
-              {ENABLE_ABOUT && (
-                <NavItem>
-                  <NavLink to="/404" className="nav-link" activeClassName="active">
-                    About
-                  </NavLink>
-                </NavItem>
-              )}
-              <NavItem>
-                <NavLink to={CLIENT_URL} className="nav-link" activeClassName="active">
-                  Clients
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <Nav className="ml-0" navbar={true}>
+      <Row>
+        <Navbar className="w-100 bg-navbar" expand="sm" fixed="top">
+          <Col sm={3} md={2} className="bg-top-nav">
+            <nav className="navbar navbar-expand-md navbar-light">
+              <Link to="/" className="navbar-brand">
+                <img src={logo} alt={WEBSITE_NAME} />
+              </Link>
+            </nav>
+          </Col>
+          <Col sm={5} md={8} />
+          <Col sm={4} md={2} className="bg-top-nav">
+            <Nav className="navbar navbar-expand-md center-account-text">
               {authenticated ? (
                 <UncontrolledDropdown nav={true} inNavbar={true}>
-                  <DropdownToggle nav={true} caret={true}>
+                  <DropdownToggle nav={true} caret={true} className="account-text">
                     <FontAwesomeIcon icon={['far', 'user']} /> {user.username}
                   </DropdownToggle>
                   <DropdownMenu right={true}>
                     <DropdownItem>
-                      <NavLink to={LOGOUT_URL} className="nav-link" activeClassName="active">
-                        Sign Out
+                      <NavLink
+                        to={LOGOUT_URL}
+                        className="nav-link bg-dropdown-text"
+                        activeClassName="active"
+                      >
+                        {SIGN_OUT}
                       </NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               ) : (
-                <NavLink to={LOGIN_URL} className="nav-link" activeClassName="active">
-                  Login
+                <NavLink to={LOGIN_URL} className="nav-link account-text" activeClassName="active">
+                  {LOGIN}
                 </NavLink>
               )}
             </Nav>
-          </Collapse>
+          </Col>
         </Navbar>
-      </div>
+      </Row>
     );
-  }
-
-  private toggle() {
-    this.setState({ isOpen: !this.state.isOpen });
   }
 }
 
