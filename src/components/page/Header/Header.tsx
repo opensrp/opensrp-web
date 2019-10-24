@@ -62,7 +62,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
       <Navbar expand="md">
         <nav id="image-settings">
           <Link to="/">
-            <img src={logo} height="100%" width="100%" alt={WEBSITE_NAME} />
+            <img src={logo} height="100%" width="90%" alt={WEBSITE_NAME} />
           </Link>
         </nav>
         <NavbarToggler onClick={this.toggle} />
