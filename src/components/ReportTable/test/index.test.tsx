@@ -30,6 +30,7 @@ describe('ReportTable', () => {
   it('must render correctly', () => {
     // const wrapper = mount(<ReportTable singlePatientEvents={[]} />);
     // expect(toJson(wrapper)).toMatchSnapshot();
+    //  Highcharts error #13 is thrown here.
   });
 });
 
