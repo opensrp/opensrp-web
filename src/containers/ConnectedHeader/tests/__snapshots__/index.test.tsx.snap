@@ -13,7 +13,7 @@ Object {
           alt="OpenSRP"
           height="100%"
           src="logo.png"
-          width="100%"
+          width="90%"
         />
       </Link>
     </nav>,
@@ -74,7 +74,7 @@ Object {
           alt="OpenSRP"
           height="100%"
           src="logo.png"
-          width="100%"
+          width="90%"
         />
       </Link>
     </nav>,
