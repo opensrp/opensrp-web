@@ -52,7 +52,9 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={'/pregnancy'}>
+                    <button className="button-style default">View</button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -71,7 +73,9 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={'/pregnancy'}>
+                    <button className="button-style default">View</button>
+                  </Link>
                 </div>
               </div>
             </div>
