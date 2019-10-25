@@ -26,7 +26,7 @@ export interface SmsData {
 
 // actions
 
-/** SMS_FETCHED action type */
+/** fETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 
 /** interface for sms fetch */
@@ -42,12 +42,12 @@ export type SmsActionTypes = FetchSmsAction | AnyAction;
 // action Creators
 
 /** Fetch SMS action creator
- * @param {Client []} clientsList - clients array to add to store
- * @return {FetchClientsAction} - an action to add clients to redux store
+ * @param {SmsData[]} smsData - SmsData array to add to store
+ * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
-export const fetchSms = (TrialData: SmsData[] = []): FetchSmsAction => {
+export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
   const actionCreated = {
-    payload: keyBy(TrialData, (trialObj: SmsData) => trialObj.event_id),
+    payload: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
   return actionCreated;
@@ -86,7 +86,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
 
 /** returns all data in the store as values whose keys are their respective ids
  * @param {Partial<Store>} state - the redux store
- * @return { { [key: string] : Client} } - clients object as values, reepective ids as keys
+ * @return { { [key: string] : SmsData}[] } - SmsData object[] as values, respective ids as keys
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
   return values((state as any)[reducerName].payload);
