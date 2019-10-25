@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
 
 // TODO - see if this can be made an enum
