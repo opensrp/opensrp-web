@@ -71,7 +71,7 @@ export default function reducer(
         ...state,
         locations: { ...state.locations, ...action.locations },
       };
-    case REMOVE_LOCATION:
+    case REMOVE_LOCATIONS:
       return {
         ...state,
         locations: action.locations,
