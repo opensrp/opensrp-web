@@ -61,7 +61,7 @@ const initialState: LocationsState = {
   locations: {},
 };
 
-export default function reducer(
+export default function locationsReducer(
   state: LocationsState = initialState,
   action: LocationActionTypes
 ): LocationState {
@@ -98,7 +98,7 @@ export function getLocations(state: Partial<Store>): Location[] {
  * @param {String} level - the level/aministrative unit we would like to get from the store
  * @return {Location[]} - an array of location objects
  */
-export function getLocationsOfLeve(state: Partial<Store>, level: string): Location[] {
+export function getLocationsOfLevel(state: Partial<Store>, level: string): Location[] {
   return values((state as any)[reducerName].locations).filter((location: Location) => {
     return location.level === level;
   });
