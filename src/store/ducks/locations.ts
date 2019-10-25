@@ -1,7 +1,6 @@
 import { LocationState } from 'history';
 import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
-import SeamlessImmutable from 'seamless-immutable';
 import { COMMUNE, DISTRICT, PROVINCE, VILLAGE } from '../../constants';
 
 /** the reducer name */
