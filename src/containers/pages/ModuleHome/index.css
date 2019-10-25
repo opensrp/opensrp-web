@@ -99,3 +99,8 @@ h4 p {
     height: 350px;
   }
 }
+
+button.button-style.deactivated {
+  background: white;
+  color: rgba(55, 168, 255, 1);
+}
