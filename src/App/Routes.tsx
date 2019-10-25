@@ -24,6 +24,7 @@ import {
   LOGOUT_URL,
   NBC_AND_PNC_URL,
   NUTRITION_URL,
+  PREGNANCY_DESCRIPTION,
 } from '../constants';
 import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
@@ -32,7 +33,7 @@ import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTabl
 import ConnectedLogFace from '../containers/LogFace';
 import Analysis from '../containers/pages/Analysis';
 import Home from '../containers/pages/Home';
-import PregnancyHome from '../containers/pages/PregnancyHome';
+import ModuleHome from '../containers/pages/ModuleHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -71,21 +72,33 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={PREGNANCY_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <PregnancyHome title="Welcome to the pregnancy dashboard" />}
+            component={() => (
+              <ModuleHome
+                title="Welcome to the pregnancy dashboard"
+                description={PREGNANCY_DESCRIPTION}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
             path={NBC_AND_PNC_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <PregnancyHome title="Welcome to Newborn and Postnatal Care" />}
+            component={() => (
+              <ModuleHome
+                title="Welcome to Newborn and Postnatal Care"
+                description={PREGNANCY_DESCRIPTION}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
             path={NUTRITION_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <PregnancyHome title="Welcome to Nutrition Care" />}
+            component={() => (
+              <ModuleHome title="Welcome to Nutrition Care" description={PREGNANCY_DESCRIPTION} />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}

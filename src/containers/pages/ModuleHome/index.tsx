@@ -8,25 +8,22 @@ import './index.css';
 
 interface Props {
   title: string;
+  description: string;
 }
 
 const defaultProps: Props = {
+  description: '',
   title: '',
 };
-class PregnancyHome extends React.Component<Props, {}> {
+class ModuleHome extends React.Component<Props, {}> {
   public static defaultProps = defaultProps;
 
   public render() {
     return (
-      <div className="pregnancy-home-main">
+      <div className="module-home-main">
         <div className="welcome-text">
           <h1>{this.props.title}</h1>
-          <p>
-            This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
-            patients in your geographical location. The Module covers the whole pregnancy period
-            from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
-            reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
-          </p>
+          <p>{this.props.description}</p>
         </div>
         <div className="components-list">
           <div className="spacer">
@@ -89,4 +86,4 @@ class PregnancyHome extends React.Component<Props, {}> {
   }
 }
 
-export default PregnancyHome;
+export default ModuleHome;
