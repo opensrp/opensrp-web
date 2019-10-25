@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import womanchild1 from '../../../assets/images/womanchild1.png';
 import womanchild2 from '../../../assets/images/womanchild2.png';
 import womanchild3 from '../../../assets/images/womanchild3.png';
-import { LOGFACE_URL } from '../../../constants';
+import { LOGFACE_URL, NBC_AND_PNC_URL, NUTRITION_URL, PREGNANCY_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
 import './index.css';
 
@@ -31,7 +31,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <Link to={'/pregnancy'}>
+                  <Link to={PREGNANCY_URL}>
                     <button className="button-style default">View</button>
                   </Link>
                 </div>
@@ -52,7 +52,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <Link to={'/pregnancy'}>
+                  <Link to={NBC_AND_PNC_URL}>
                     <button className="button-style default">View</button>
                   </Link>
                 </div>
@@ -73,7 +73,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <Link to={'/pregnancy'}>
+                  <Link to={NUTRITION_URL}>
                     <button className="button-style default">View</button>
                   </Link>
                 </div>

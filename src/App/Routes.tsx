@@ -22,6 +22,8 @@ import {
   HIERARCHICAL_DATA_URL,
   LOGFACE_URL,
   LOGOUT_URL,
+  NBC_AND_PNC_URL,
+  NUTRITION_URL,
 } from '../constants';
 import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
@@ -68,7 +70,22 @@ export const Routes = (props: RoutesProps) => {
             disableLoginProtection={false}
             exact={true}
             path={PREGNANCY_URL}
-            component={PregnancyHome}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <PregnancyHome title="Welcome to the pregnancy dashboard" />}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NBC_AND_PNC_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <PregnancyHome title="Welcome to Newborn and Postnatal Care" />}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NUTRITION_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <PregnancyHome title="Welcome to Nutrition Care" />}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
