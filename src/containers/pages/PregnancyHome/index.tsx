@@ -6,12 +6,21 @@ import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL } from '../../../constants'
 import { LogFace } from '../../LogFace';
 import './index.css';
 
-class PregnancyHome extends React.Component<{}, {}> {
+interface Props {
+  title: string;
+}
+
+const defaultProps: Props = {
+  title: '',
+};
+class PregnancyHome extends React.Component<Props, {}> {
+  public static defaultProps = defaultProps;
+
   public render() {
     return (
       <div className="pregnancy-home-main">
         <div className="welcome-text">
-          <h1>Welcome to the pregnancy dashboard</h1>
+          <h1>{this.props.title}</h1>
           <p>
             This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
             patients in your geographical location. The Module covers the whole pregnancy period

@@ -1,6 +1,8 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // internal urls
+export const NBC_AND_PNC_URL = '/nbc_and_pnc';
+export type NBC_AND_PNC_URL = typeof NBC_AND_PNC_URL;
 export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
 export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
 export const PREGNANCY_URL = '/pregnancy';
