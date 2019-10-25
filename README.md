@@ -65,7 +65,7 @@ See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/d
 
 See [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.
 
-##Deployment
+## Deployment
 
 [Follow these steps](https://github.com/onaio/playbooks/tree/master/docs#generic-ansible-deployment-steps) to log in into admin host
 
