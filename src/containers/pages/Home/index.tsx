@@ -2,6 +2,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
+import womanchild1 from '../../../assets/images/womanchild1.png';
+import womanchild2 from '../../../assets/images/womanchild2.png';
+import womanchild3 from '../../../assets/images/womanchild3.png';
 import { LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
 import './index.css';
@@ -15,6 +18,7 @@ class Home extends React.Component<{}, {}> {
         </div>
         <div className="components-list">
           <div className="spacer">
+            <img src={womanchild1} id="womanchild1" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>
@@ -35,6 +39,7 @@ class Home extends React.Component<{}, {}> {
             </div>
           </div>
           <div className="spacer">
+            <img src={womanchild2} id="womanchild2" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>
@@ -53,6 +58,7 @@ class Home extends React.Component<{}, {}> {
             </div>
           </div>
           <div className="spacer">
+            <img src={womanchild3} id="womanchild3" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>

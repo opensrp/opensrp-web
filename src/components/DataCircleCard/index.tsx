@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardText, CardTitle, Col } from 'reactstrap';
+import { Card, CardBody, CardText, CardTitle, Col, Row } from 'reactstrap';
 import { HIERARCHICAL_DATA_URL, HIGH_RISK, LOW_RISK, NO_RISK } from '../../constants';
 import './index.css';
 
@@ -13,33 +13,31 @@ interface Props {
 
 function DataCircleCard({ highRisk, lowRisk, noRisk, title }: Props) {
   return (
-    <Col lg="3">
-      <Card className="dataCircleCard">
-        <CardTitle>{title}</CardTitle>
-        <CardBody>
-          <ul className="circlesRow">
-            <li className="red">
-              <Link to={`${HIERARCHICAL_DATA_URL}/high-risk/${title}`}>
-                <span className="number">{highRisk}</span>
-              </Link>
-              <span className="risk-level">{HIGH_RISK}</span>
-            </li>
-            <li className="orange">
-              <Link to={`${HIERARCHICAL_DATA_URL}/low-risk/${title}`}>
-                <span className="number">{lowRisk}</span>
-              </Link>
-              <span className="risk-level">{LOW_RISK}</span>
-            </li>
-            <li className="green">
-              <Link to={`${HIERARCHICAL_DATA_URL}/no-risk/${title}`}>
-                <span className="number">{noRisk}</span>
-              </Link>
-              <span className="risk-level">{NO_RISK}</span>
-            </li>
-          </ul>
-        </CardBody>
-      </Card>
-    </Col>
+    <Card className="dataCircleCard">
+      <CardTitle>{title}</CardTitle>
+      <CardBody>
+        <ul className="circlesRow">
+          <li className="red">
+            <Link to={`${HIERARCHICAL_DATA_URL}/high-risk/${title}`}>
+              <span className="number">{highRisk}</span>
+            </Link>
+            <span className="risk-level">{HIGH_RISK}</span>
+          </li>
+          <li className="orange">
+            <Link to={`${HIERARCHICAL_DATA_URL}/low-risk/${title}`}>
+              <span className="number">{lowRisk}</span>
+            </Link>
+            <span className="risk-level">{LOW_RISK}</span>
+          </li>
+          <li className="green">
+            <Link to={`${HIERARCHICAL_DATA_URL}/no-risk/${title}`}>
+              <span className="number">{noRisk}</span>
+            </Link>
+            <span className="risk-level">{NO_RISK}</span>
+          </li>
+        </ul>
+      </CardBody>
+    </Card>
   );
 }
 

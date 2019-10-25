@@ -9,6 +9,7 @@ import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
 import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import CustomOauthLogin from '../components/CustomAuthLogin';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
@@ -54,11 +55,7 @@ export const Routes = (props: RoutesProps) => {
         authenticated && !headerShouldNotRender() ? 'main-container' : 'hidden-container'
       }`}
     >
-      <div
-        className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
-      >
-        {<SideMenu />}
-      </div>
+      <SideMenu authenticated={authenticated} />
       <div className="content">
         <Switch>
           <ConnectedPrivateRoute
@@ -80,19 +77,19 @@ export const Routes = (props: RoutesProps) => {
             component={ConnectedClientList}
           />
           <ConnectedPrivateRoute
-            disableLoginProtection={true}
+            disableLoginProtection={false}
             exact={true}
             path={COMPARTMENTS_URL}
             component={Compartments}
           />
           <ConnectedPrivateRoute
-            disableLoginProtection={true}
+            disableLoginProtection={false}
             exact={true}
             path={`${HIERARCHICAL_DATA_URL}/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
-            disableLoginProtection={true}
+            disableLoginProtection={false}
             exact={true}
             path={ANALYSIS_URL}
             component={Analysis}
@@ -115,7 +112,7 @@ export const Routes = (props: RoutesProps) => {
             path={LOGOUT_URL}
             component={ConnectedLogout}
           />
-          <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
+          <ConnectedPrivateRoute exact={false} path={LOGFACE_URL} component={ConnectedLogFace} />
           {/* tslint:disable jsx-no-lambda */}
           <Route
             exact={true}
@@ -125,6 +122,7 @@ export const Routes = (props: RoutesProps) => {
                 LoadingComponent={Loading}
                 providers={providers}
                 oAuthUserInfoGetter={oAuthUserInfoGetter}
+                SuccessfulLoginComponent={Home}
                 {...routeProps}
               />
             )}

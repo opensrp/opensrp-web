@@ -1,6 +1,22 @@
 #image-settings {
-  width: 15%;
   height: 100%;
+}
+
+#image-settings a {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background: #001429;
+  padding: 0px 55px 0px 20px;
+}
+
+#image-settings a img {
+  height: 40px;
+  margin-top: 10px;
+}
+
+#image-settings a img:nth-child(2) {
+  width: 40px;
 }
 
 .main-app-container .main-container .sidebar {

@@ -19,11 +19,19 @@
   padding: 16px 0 0 0;
 }
 
+.main-container .hidden-container {
+  display: none !important;
+}
+
 .side-menu-extend ul.nav {
   background: initial;
   background-color: initial;
   max-width: initial;
   width: 100%;
+}
+
+.main-container .sidebar {
+  width: 300px;
 }
 
 .sidebar .side-menu-extend a:hover {

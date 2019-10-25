@@ -103,8 +103,10 @@ export const TYPE = 'Type';
 export type TYPE = typeof TYPE;
 export const UP = 'up';
 export type UP = typeof UP;
-export const BACK_TO_PREGNANCY_LOGFACE = 'Back to Pregnancy Log Face';
-export type BACK_TO_PREGNANCY_LOGFACE = typeof BACK_TO_PREGNANCY_LOGFACE;
+export const BACK = 'Back';
+export type BACK = typeof BACK;
+export const BACK_TO_PREGNANCY_COMPARTMENTS = 'Back to Pregnancy Compartments';
+export type BACK_TO_PREGNANCY_COMPARTMENTS = typeof BACK_TO_PREGNANCY_COMPARTMENTS;
 export const HIGH_RISK = 'High Risk';
 export type HIGH_RISK = typeof HIGH_RISK;
 export const LOW_RISK = 'Low Risk';
@@ -166,6 +168,8 @@ export type RISK_LEVELS = typeof RISK_LEVELS;
 
 export const SUPERSET_SMS_DATA_SLICE = '2263';
 export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
+
+// analysis page iframes
 
 export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
   'https://discover.ona.io/superset/dashboard/25/?standalone=true';
