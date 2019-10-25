@@ -22,6 +22,7 @@ import {
   UP,
   VILLAGE,
 } from '../../constants';
+import { fetchLocations, FetchLocationsAction } from '../../store/ducks/locations';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
@@ -36,11 +37,13 @@ interface Props {
   from_level?: string;
   risk_highligter?: 'high-risk' | 'low-risk' | 'no-risk' | 'none';
   title: string;
+  fetchLocations: typeof fetchLocations;
 }
 
 const defaultProps: Props = {
   current_level: 0,
   direction: 'down',
+  fetchLocations,
   risk_highligter: 'none',
   title: '',
 };
@@ -298,7 +301,7 @@ const getTotals = (dataToShow: any[]) => {
   return dataToShow.reduce(reducer, { high_risk: 0, low_risk: 0, no_risk: 0, total: 0 });
 };
 
-const mapStateToProps = (state: Partial<Store>, ownProps: any): Props => {
+const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
   return {
     current_level: parseInt(ownProps.match.params.current_level, 10),
     direction: ownProps.match.params.direction,
@@ -309,9 +312,11 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): Props => {
   };
 };
 
+const mapDispatchToProps = { fetchLocations };
+
 const ConnectedHierarchichalDataTable = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(HierarchichalDataTable);
 
 export default ConnectedHierarchichalDataTable;
