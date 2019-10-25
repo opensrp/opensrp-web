@@ -82,7 +82,8 @@ function groupFilterData<T>(
   periods.forEach(period => {
     categories.forEach(category => {
       dictionary[`${period.howLong}-${period.unit}-${category}`] = data.filter(
-        entry => (entry as any)[categoryField] === category && isInPeriod<T>(entry, period, etaField)
+        entry =>
+          (entry as any)[categoryField] === category && isInPeriod<T>(entry, period, etaField)
       );
     });
   });
@@ -93,7 +94,7 @@ function groupFilterData<T>(
  */
 function isInPeriod<T>(dataObj: T, period: DurationType, etaField: string): boolean {
   const now = moment();
-  return false
+  return false;
 }
 
 /** so if length of data = length of one the groups from groupFilter then
