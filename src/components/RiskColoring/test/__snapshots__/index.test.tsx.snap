@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RiskColoring must show correct Risk level depending on the string passed as a prop: default 1`] = `
+<riskColoring
+  risk="red-alert"
+>
+  <span
+    className="badge badge-info"
+    id="default-width"
+  >
+    red-alert
+  </span>
+</riskColoring>
+`;
+
+exports[`RiskColoring must show correct Risk level depending on the string passed as a prop: hight_risk 1`] = `
+<riskColoring
+  risk="high"
+>
+  <span
+    className="badge badge-warning"
+    id="default-width"
+  >
+    <div>
+      <p>
+        High Risk
+      </p>
+    </div>
+  </span>
+</riskColoring>
+`;
+
+exports[`RiskColoring must show correct Risk level depending on the string passed as a prop: low_risk 1`] = `
+<riskColoring
+  risk="low"
+>
+  <span
+    className="badge badge-primary"
+    id="default-width"
+  >
+    <div>
+      <p>
+        Low Risk
+      </p>
+    </div>
+  </span>
+</riskColoring>
+`;
+
+exports[`RiskColoring must show correct Risk level depending on the string passed as a prop: not_set 1`] = `
+<riskColoring
+  risk="not set"
+>
+  <span
+    className="badge badge-info"
+    id="default-width"
+  >
+    <div>
+      <p>
+        Not Set
+      </p>
+    </div>
+  </span>
+</riskColoring>
+`;
+
+exports[`RiskColoring must show correct Risk level depending on the string passed as a prop: red_alert 1`] = `
+<riskColoring
+  risk="red"
+>
+  <span
+    className="badge badge-danger"
+    id="default-width"
+  >
+    <div>
+      <p>
+        Red Alert
+      </p>
+    </div>
+  </span>
+</riskColoring>
+`;

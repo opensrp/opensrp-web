@@ -277,7 +277,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                             })}
                         </td>
                         <td className="default-width">
-                          <RiskColoring {...{ Risk: dataObj.logface_risk }} />
+                          <RiskColoring {...{ risk: dataObj.logface_risk }} />
                         </td>
                       </tr>
                     );

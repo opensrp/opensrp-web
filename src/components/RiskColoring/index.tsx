@@ -3,17 +3,17 @@ import { HIGH_RISK, LOW_RISK, NO_RISK, NOT_SET, RED_ALERT } from '../../constant
 import './index.css';
 
 interface RiskColoringProps {
-  Risk: string;
+  risk: string;
 }
 
 const riskColoringDefaultProps: RiskColoringProps = {
-  Risk: 'red-alert',
+  risk: 'red-alert',
 };
 
 /** Colour codes risk levels */
 const riskColoring = (props: RiskColoringProps) => {
-  const { Risk } = props;
-  switch (Risk.toLowerCase()) {
+  const { risk } = props;
+  switch (risk.toLowerCase()) {
     case 'no risk':
       return (
         <span className="badge badge-success" id="default-width">
@@ -57,7 +57,7 @@ const riskColoring = (props: RiskColoringProps) => {
     default:
       return (
         <span className="badge badge-info" id="default-width">
-          {Risk}
+          {risk}
         </span>
       );
   }

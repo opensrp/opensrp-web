@@ -7,7 +7,7 @@ import womanchild2 from '../../../assets/images/womanchild2.png';
 import womanchild3 from '../../../assets/images/womanchild3.png';
 import { LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
-import './Home.css';
+import './index.css';
 
 class Home extends React.Component<{}, {}> {
   public render() {
