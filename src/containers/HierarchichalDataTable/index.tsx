@@ -22,7 +22,7 @@ import {
   UP,
   VILLAGE,
 } from '../../constants';
-import { fetchLocations, FetchLocationsAction } from '../../store/ducks/locations';
+import { fetchLocations } from '../../store/ducks/locations';
 import { communes, districts, provinces, villages } from './test/fixtures';
 
 interface State {
