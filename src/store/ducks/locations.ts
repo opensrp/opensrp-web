@@ -21,7 +21,7 @@ export const FETCHED_LOCATION = 'opensrp/reducer/FETCH_LOCATION';
 
 /** Interface for FetchLocationAction */
 export interface FetchLocationsAction extends AnyAction {
-  payload: { [key: string]: Location };
+  locations: { [key: string]: Location };
   type: typeof FETCHED_LOCATION;
 }
 
@@ -37,7 +37,7 @@ export type LocationActionTypes = FetchLocationsAction | AnyAction;
  */
 export const fetchLocations = (locations: Location[] = []): FetchLocationsAction => {
   const fetchLocationsAction = {
-    payload: keyBy(locations, (location: Location) => location.location_id),
+    locations: keyBy(locations, (location: Location) => location.location_id),
     type: FETCHED_LOCATION as typeof FETCHED_LOCATION,
   };
   return fetchLocationsAction;
@@ -45,12 +45,12 @@ export const fetchLocations = (locations: Location[] = []): FetchLocationsAction
 
 /** interface for locations state in redux store */
 interface LocationsState {
-  payload: { [key: string]: Location };
+  locations: { [key: string]: Location };
 }
 
 /** Initial location-state state */
 const initialState: LocationsState = {
-  payload: {},
+  locations: {},
 };
 
 export default function reducer(
@@ -61,7 +61,7 @@ export default function reducer(
     case FETCHED_LOCATION:
       return {
         ...state,
-        payload: { ...state.payload, ...action.payload },
+        locations: { ...state.locations, ...action.locations },
       };
     default:
       return state;
@@ -76,7 +76,7 @@ export default function reducer(
  * @return {Location[]}} - an array of Location objects
  */
 export function getLocations(state: Partial<Store>): Location[] {
-  return values((state as any)[reducerName].smsDataFetched);
+  return values((state as any)[reducerName].locations);
 }
 
 /**
@@ -86,7 +86,7 @@ export function getLocations(state: Partial<Store>): Location[] {
  * @return {Location[]} - an array of location objects
  */
 export function getLocationsOfLeve(state: Partial<Store>, level: string): Location[] {
-  return values((state as any)[reducerName].smsDataFetched).filter((location: Location) => {
+  return values((state as any)[reducerName].locations).filter((location: Location) => {
     return location.level === level;
   });
 }
