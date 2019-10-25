@@ -166,6 +166,11 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
 
+// slices
+
+export const LOCATION_SLICES = ['2754', '2755', '2756', '2757'];
+export type LOCATION_SLICES = typeof LOCATION_SLICES;
+
 export const SUPERSET_SMS_DATA_SLICE = '2263';
 export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
 

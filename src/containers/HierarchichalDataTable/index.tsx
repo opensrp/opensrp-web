@@ -16,6 +16,7 @@ import {
   DISTRICT,
   HIERARCHICAL_DATA_URL,
   HIGH_RISK,
+  LOCATION_SLICES,
   LOW_RISK,
   NO_RISK,
   PROVINCE,
@@ -30,7 +31,6 @@ import locationsReducer, {
   Location,
   reducerName,
 } from '../../store/ducks/locations';
-// import { communes, districts, provinces, villages } from './test/fixtures';
 
 reducerRegistry.register(reducerName, locationsReducer);
 
@@ -151,10 +151,9 @@ class HierarchichalDataTable extends Component<Props, State> {
 
   public componentDidMount() {
     const { fetchLocationsActionCreator } = this.props;
-    const locationSlices = ['2754', '2755', '2756', '2757'];
-    for (const slice in locationSlices) {
+    for (const slice in LOCATION_SLICES) {
       if (slice) {
-        supersetFetch(locationSlices[slice]).then((result: Location[]) => {
+        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
           fetchLocationsActionCreator(result);
         });
       }
