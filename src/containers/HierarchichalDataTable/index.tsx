@@ -4,6 +4,7 @@ import { Card, CardBody, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
@@ -22,8 +23,15 @@ import {
   UP,
   VILLAGE,
 } from '../../constants';
-import { fetchLocations } from '../../store/ducks/locations';
+import supersetFetch from '../../services/superset';
+import locationsReducer, {
+  fetchLocations,
+  getLocationsOfLevel,
+  reducerName,
+} from '../../store/ducks/locations';
 import { communes, districts, provinces, villages } from './test/fixtures';
+
+reducerRegistry.register(reducerName, locationsReducer);
 
 interface State {
   data: any;
@@ -37,15 +45,23 @@ interface Props {
   from_level?: string;
   risk_highligter?: 'high-risk' | 'low-risk' | 'no-risk' | 'none';
   title: string;
-  fetchLocations: typeof fetchLocations;
+  fetchLocationsActionCreator: typeof fetchLocations;
+  provinces: Location[];
+  districts: Location[];
+  communes: Location[];
+  villages: Location[];
 }
 
 const defaultProps: Props = {
+  communes: [],
   current_level: 0,
   direction: 'down',
-  fetchLocations,
+  districts: [],
+  fetchLocationsActionCreator: fetchLocations,
+  provinces: [],
   risk_highligter: 'none',
   title: '',
+  villages: [],
 };
 
 class HierarchichalDataTable extends Component<Props, State> {
@@ -95,6 +111,18 @@ class HierarchichalDataTable extends Component<Props, State> {
       data: provinces,
       district: '',
     };
+  }
+
+  public componentDidMount() {
+    const { fetchLocationsActionCreator } = this.props;
+    const locationSlices = ['2754', '2755', '2756', '2757'];
+    for (const slice in locationSlices) {
+      if (slice) {
+        supersetFetch(locationSlices[slice]).then((result: any) => {
+          fetchLocationsActionCreator(result);
+        });
+      }
+    }
   }
 
   public render() {
@@ -303,16 +331,20 @@ const getTotals = (dataToShow: any[]) => {
 
 const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
   return {
+    commune: getLocationsOfLevel(state, 'Commune'),
     current_level: parseInt(ownProps.match.params.current_level, 10),
     direction: ownProps.match.params.direction,
+    districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
     node_id: ownProps.match.params.node_id,
+    provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
     title: ownProps.match.params.title,
+    village: getLocationsOfLevel(state, 'Village'),
   };
 };
 
-const mapDispatchToProps = { fetchLocations };
+const mapDispatchToProps = { fetchLocationsActionCreator: fetchLocations };
 
 const ConnectedHierarchichalDataTable = connect(
   mapStateToProps,
