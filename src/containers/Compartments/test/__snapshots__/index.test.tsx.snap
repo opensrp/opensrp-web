@@ -105,7 +105,7 @@ Array [
       <div
         className="card-title"
       >
-        7 Total Pregnancies due in 2 weeks
+        0 Total Pregnancies due in 2 weeks
       </div>
     </CardTitle>
     <CardBody
@@ -121,16 +121,16 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high-risk/7 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/high-risk/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/high-risk/7 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/high-risk/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  2
+                  0
                 </span>
               </a>
             </Link>
@@ -144,10 +144,10 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low-risk/7 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/low-risk/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/low-risk/7 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/low-risk/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -167,16 +167,16 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no-risk/7 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/no-risk/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/no-risk/7 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/no-risk/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  2
+                  0
                 </span>
               </a>
             </Link>

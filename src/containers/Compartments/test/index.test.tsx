@@ -31,12 +31,6 @@ describe('Compartments', () => {
       </Provider>
     );
 
-    // container should have the correct classes
-    expect(wrapper.find('Container').props().className).toEqual('compartment-wrapper compartments');
-    expect((wrapper.find('Container').props() as any).fluid).toEqual(true);
-    expect((wrapper.find('Container').props() as any).tag).toEqual('div');
-    expect(wrapper.find('Container').find('div')).toHaveLength(16);
-
     // compartment title should have the correct text
     expect(toJson(wrapper.find('#compartment_title'))).toMatchSnapshot('compartment title');
 
@@ -46,7 +40,7 @@ describe('Compartments', () => {
     // ensure 3 data circle cards are found
     expect(wrapper.find('DataCircleCard')).toHaveLength(3);
 
-    expect(wrapper.find('Compartments').find('Row')).toHaveLength(3);
+    expect(wrapper.find('div.compartment-wrapper.compartments').find('Row')).toHaveLength(2);
   });
 
   it('must display the correct data', () => {
@@ -60,8 +54,8 @@ describe('Compartments', () => {
     );
 
     // the numbers in this snapshot encode the correctness of the private functions in the Compartments component
-    expect(toJson(wrapper.find('Compartments').find('.dataCircleCard.card'))).toMatchSnapshot(
-      'compartments'
-    );
+    expect(
+      toJson(wrapper.find('div.compartment-wrapper.compartments').find('.dataCircleCard.card'))
+    ).toMatchSnapshot('compartments');
   });
 });
