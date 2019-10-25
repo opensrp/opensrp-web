@@ -28,11 +28,13 @@ export interface SmsData {
 
 /** fETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
+/** REMOVE_SMS action type */
+export const REMOVE_SMS = 'opensrp/reducer/REMOVE_SMS';
 
 /** interface for sms fetch */
 // tslint:disable-next-line: class-name
 export interface FetchSmsAction extends AnyAction {
-  payload: { [key: string]: SmsData };
+  smsData: { [key: string]: SmsData };
   type: typeof FETCHED_SMS;
 }
 
@@ -47,24 +49,28 @@ export type SmsActionTypes = FetchSmsAction | AnyAction;
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
   const actionCreated = {
-    payload: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
+    smsData: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
   return actionCreated;
 };
 
+export const removeSms = {
+  smsDataById: {},
+  type: REMOVE_SMS,
+};
 // The reducer
 
 /** interface for sms state in redux store */
 // tslint:disable-next-line: class-name
 interface SmsState {
-  payload: { [key: string]: SmsData };
+  smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
 }
 
 /** initial sms-state state */
 const initialState: SmsState = {
-  payload: {},
+  smsData: {},
   smsDataFetched: false,
 };
 
@@ -74,8 +80,13 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
     case FETCHED_SMS:
       return {
         ...state,
-        payload: { ...state.payload, ...action.payload },
+        smsData: { ...state.smsData, ...action.smsData },
         smsDataFetched: true,
+      };
+    case REMOVE_SMS:
+      return {
+        ...state,
+        smsData: action.smsData,
       };
     default:
       return state;
@@ -89,7 +100,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
  * @return { { [key: string] : SmsData}[] } - SmsData object[] as values, respective ids as keys
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
-  return values((state as any)[reducerName].payload);
+  return values((state as any)[reducerName].smsData);
 }
 
 /** returns true if sms data has been fetched from superset and false
