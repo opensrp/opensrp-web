@@ -170,6 +170,11 @@ export const NO_PROVIDERS = 'No providers';
 export type NO_PROVIDERS = typeof NO_PROVIDERS;
 export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
 export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
+export const PREGNANCY_DESCRIPTION = `This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
+patients in your geographical location. The Module covers the whole pregnancy period
+from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
+reports/Death reports, Risk Reports, Risk alerts and ResponseReports.`;
+export type PREGNANCY_DESCRIPTION = typeof PREGNANCY_DESCRIPTION;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
