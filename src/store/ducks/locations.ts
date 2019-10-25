@@ -7,7 +7,7 @@ import { COMMUNE, DISTRICT, PROVINCE, VILLAGE } from '../../constants';
 export const reducerName = 'LocationReducer';
 
 /** Interface for Location object received from discover */
-interface Location {
+export interface Location {
   location_id: string;
   location_name: string;
   level: VILLAGE | COMMUNE | DISTRICT | PROVINCE;
