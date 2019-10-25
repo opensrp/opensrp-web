@@ -19,11 +19,19 @@ interface Location {
 /** FETCH_LOCATION action type */
 export const FETCHED_LOCATION = 'opensrp/reducer/FETCH_LOCATION';
 
+/** REMOVE_LOCATION action type */
+export const REMOVE_LOCATIONS = 'opensrp/reducer/REMOVE_LOCATIONS';
+
 /** Interface for FetchLocationAction */
 export interface FetchLocationsAction extends AnyAction {
   locations: { [key: string]: Location };
   type: typeof FETCHED_LOCATION;
 }
+
+export const removeLocations = {
+  locations: [],
+  type: REMOVE_LOCATIONS,
+};
 
 /** Location action types */
 export type LocationActionTypes = FetchLocationsAction | AnyAction;
@@ -62,6 +70,11 @@ export default function reducer(
       return {
         ...state,
         locations: { ...state.locations, ...action.locations },
+      };
+    case REMOVE_LOCATION:
+      return {
+        ...state,
+        locations: action.locations,
       };
     default:
       return state;
