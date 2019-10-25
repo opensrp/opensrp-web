@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardBody, Col, Row } from 'reactstrap';
 
 // TODO - see if this can be made an enum
@@ -59,12 +59,22 @@ export const defaultProps: Props<{}> = {
   periods: [{ howLong: 1, unit: 'weeks' }, { howLong: 2, unit: 'weeks' }],
 };
 
+interface GroupedFilters<T>{
+  [key: string]: T[];
+}
+
 /**  track category + period  in state so as to know what card to be active */
 
-const FilterCards: React.FC<{}> = props => {
+function FilterCards<T>(props: Props<T>) {
+  const {periods, data, etaField, categoryField, categories} = props
+  const [groupedFilters, setGroupedFilters] = useState<GroupedFilters<T>>({})
+
+  useEffect(() => {
+    
+  })
   return (
     <Row>
-      <FilterCard />
+      {({render(groupFilterData<T>())})}
     </Row>
   );
 };
@@ -76,8 +86,8 @@ function groupFilterData<T>(
   categories: Set<string>,
   categoryField: string,
   etaField: string
-) {
-  const dictionary: { [key: string]: number } = {};
+): GroupedFilters<T> {
+  const dictionary: GroupedFilters<T> = {};
   // TODO - the period is in the form given by the server, need to parse that in an identifible format.
   periods.forEach(period => {
     categories.forEach(category => {
@@ -87,39 +97,19 @@ function groupFilterData<T>(
       );
     });
   });
+  return dictionary
 }
 
 /** returns boolean showing whether the data object etaField's value
  * is in between the Date.now through to Date.now + period
  */
 function isInPeriod<T>(dataObj: T, period: DurationType, etaField: string): boolean {
-  const now = moment();
-  return false;
+  const now = new moment();
+  const eta = new moment((dataObj as any)[etaField])
+  const inPeriod = moment.duration(period.howLong, period.unit)
+  // from now
+  const durationToPeriodEnd = moment.duration(now.diff(eta))
+
+  return inPeriod <= durationToPeriodEnd
 }
 
-/** so if length of data = length of one the groups from groupFilter then
- * we have a match for the active filter.
- */
-
-/**
- * A util function that when given an edd, it returns a boolean that tels
- */
-FilterCards.defaultProps = defaultProps;
-
-export { FilterCards };
-
-/** single filter card */
-export const FilterCard = (props: any) => {
-  return (
-    <Col md={1}>
-      <Card>
-        <CardBody>
-          <p>24</p>
-          <p>High Risk in 2 weeks</p>
-          // tslint:disable-next-line: jsx-no-lambda
-          <p onClick={() => alert('clicked')}> applyFilter </p>
-        </CardBody>
-      </Card>
-    </Col>
-  );
-};

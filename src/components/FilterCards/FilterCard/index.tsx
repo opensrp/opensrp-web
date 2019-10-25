@@ -1,1 +1,0 @@
-/** a custom-Bootstrap powered card that used for filtering */
