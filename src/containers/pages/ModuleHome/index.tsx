@@ -9,9 +9,11 @@ import './index.css';
 interface Props {
   title: string;
   description: string;
+  deactivateLinks: boolean;
 }
 
 const defaultProps: Props = {
+  deactivateLinks: false,
   description: '',
   title: '',
 };
@@ -38,7 +40,7 @@ class ModuleHome extends React.Component<Props, {}> {
                 </div>
                 <div id="cont-sized">
                   <Link to={LOGFACE_URL}>
-                    <button className="button-style">View</button>
+                    <button className="button-style ">View</button>
                   </Link>
                 </div>
               </div>
@@ -55,8 +57,12 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>This is the aggregation and categorization of patients data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={COMPARTMENTS_URL}>
-                    <button className="button-style">View</button>
+                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                    <button
+                      className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
+                    >
+                      View
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -73,8 +79,12 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>Important analysis and indicators generated from collected data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={ANALYSIS_URL}>
-                    <button className="button-style">View</button>
+                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                    <button
+                      className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
+                    >
+                      View
+                    </button>
                   </Link>
                 </div>
               </div>

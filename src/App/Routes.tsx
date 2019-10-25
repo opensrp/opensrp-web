@@ -88,6 +88,7 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title="Welcome to Newborn and Postnatal Care"
                 description={PREGNANCY_DESCRIPTION}
+                deactivateLinks={true}
               />
             )}
           />
@@ -97,7 +98,11 @@ export const Routes = (props: RoutesProps) => {
             path={NUTRITION_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <ModuleHome title="Welcome to Nutrition Care" description={PREGNANCY_DESCRIPTION} />
+              <ModuleHome
+                title="Welcome to Nutrition Care"
+                description={PREGNANCY_DESCRIPTION}
+                deactivateLinks={true}
+              />
             )}
           />
           <ConnectedPrivateRoute
