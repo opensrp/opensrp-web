@@ -40,6 +40,10 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
         <div
           className="spacer"
         >
+          <img
+            id="womanchild1"
+            src="womanchild1.png"
+          />
           <div
             className="home-sub-containers"
           >
@@ -84,6 +88,10 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
         <div
           className="spacer"
         >
+          <img
+            id="womanchild2"
+            src="womanchild2.png"
+          />
           <div
             className="home-sub-containers"
           >
@@ -119,6 +127,10 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
         <div
           className="spacer"
         >
+          <img
+            id="womanchild3"
+            src="womanchild3.png"
+          />
           <div
             className="home-sub-containers"
           >

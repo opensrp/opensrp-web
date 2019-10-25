@@ -55,11 +55,7 @@ export const Routes = (props: RoutesProps) => {
         authenticated && !headerShouldNotRender() ? 'main-container' : 'hidden-container'
       }`}
     >
-      <div
-        className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
-      >
-        {<SideMenu />}
-      </div>
+      <SideMenu authenticated={authenticated} />
       <div className="content">
         <Switch>
           <ConnectedPrivateRoute

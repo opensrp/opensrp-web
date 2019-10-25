@@ -2,8 +2,10 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
+import { RoutesProps } from '../../../App/Routes';
 import { ENABLE_REPORT_MODULE } from '../../../configs/env';
 import { ENABLE_PREGNANCY_MODULE } from '../../../configs/env';
+import { headerShouldNotRender } from '../../../helpers/utils';
 import SubMenu, { SubMenuProps } from './SubMenu';
 
 import {
@@ -28,8 +30,10 @@ const defaultSideMenuState: SideMenuState = {
   collapsedModuleLabel: '',
 };
 
-class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
-  constructor(props: RouteComponentProps) {
+type HeaderPropsTypes = RoutesProps & RouteComponentProps;
+
+class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
+  constructor(props: HeaderPropsTypes) {
     super(props);
     this.state = defaultSideMenuState;
   }
@@ -48,24 +52,32 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
       { shouldRender: ENABLE_ADMIN_MODULE, subMenuProps: ADMIN_NAVIGATION_MODULE },
     ];
     return (
-      <div className="side-menu-container">
-        <Row>
-          <Col className="side-menu-extend">
-            {navigationModules.map((navigationModule: any, index: number) => {
-              if (navigationModule.shouldRender) {
-                return (
-                  <SubMenu
-                    childNavs={navigationModule.subMenuProps.childNavs}
-                    collapsedModuleLabel={collapsedModuleLabel}
-                    setCollapsedModuleLabel={this.setCollapsedModuleLabel}
-                    parentNav={navigationModule.subMenuProps.parentNav}
-                    key={index}
-                  />
-                );
-              }
-            })}
-          </Col>
-        </Row>
+      <div
+        className={`${
+          this.props.authenticated && !headerShouldNotRender() && !this.checkHomePageURL(this.props)
+            ? 'sidebar'
+            : 'hidden-container'
+        }`}
+      >
+        <div className="side-menu-container">
+          <Row>
+            <Col className="side-menu-extend">
+              {navigationModules.map((navigationModule: any, index: number) => {
+                if (navigationModule.shouldRender) {
+                  return (
+                    <SubMenu
+                      childNavs={navigationModule.subMenuProps.childNavs}
+                      collapsedModuleLabel={collapsedModuleLabel}
+                      setCollapsedModuleLabel={this.setCollapsedModuleLabel}
+                      parentNav={navigationModule.subMenuProps.parentNav}
+                      key={index}
+                    />
+                  );
+                }
+              })}
+            </Col>
+          </Row>
+        </div>
       </div>
     );
   }
@@ -76,8 +88,13 @@ class SideMenu extends React.Component<RouteComponentProps, SideMenuState> {
       collapsedModuleLabel: label,
     });
   };
+
+  private checkHomePageURL = (props: HeaderPropsTypes) => {
+    const { location } = props;
+    return location.pathname.includes('oauth') || location.pathname === '/';
+  };
 }
 
-const connectedSideMenu = withRouter((props: RouteComponentProps) => <SideMenu {...props} />);
+const connectedSideMenu = withRouter((props: HeaderPropsTypes) => <SideMenu {...props} />);
 
 export default connectedSideMenu;

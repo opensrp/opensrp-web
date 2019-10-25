@@ -19,6 +19,10 @@
   padding: 16px 0 0 0;
 }
 
+.main-container .hidden-container {
+  display: none !important;
+}
+
 .side-menu-extend ul.nav {
   background: initial;
   background-color: initial;
