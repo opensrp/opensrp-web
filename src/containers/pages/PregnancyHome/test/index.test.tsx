@@ -3,27 +3,19 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
-import Home from '..';
+import PregnancyHome from '..';
 
 const history = createBrowserHistory();
 
-describe('containers/pages/Home', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
+describe('PregnancyHome', () => {
+  it('must render without crashing', () => {
+    shallow(<PregnancyHome />);
   });
 
-  it('renders without crashing', () => {
-    shallow(
-      <Router history={history}>
-        <Home />
-      </Router>
-    );
-  });
-
-  it('renders Home correctly', () => {
+  it('must render correctly', () => {
     const wrapper = mount(
       <Router history={history}>
-        <Home />
+        <PregnancyHome />
       </Router>
     );
     expect(toJson(wrapper)).toMatchSnapshot();

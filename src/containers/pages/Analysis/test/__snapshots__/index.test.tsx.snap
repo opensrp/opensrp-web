@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Analysis must render correctly: Analysis snapshot 1`] = `
+<Analysis>
+  <div
+    className="analysis-content"
+  >
+    <div>
+      <h2
+        id="analysis_title"
+      >
+        Pregnancy - Analysis
+      </h2>
+    </div>
+    <div
+      className="analysis-wrapper"
+    >
+      <Ripple
+        borderColor="#ff5d00"
+        borderStyle="solid"
+        borderWidth="4px"
+        height="64px"
+        minHeight="80vh"
+        width="64px"
+      >
+        <div
+          className="lds-ripple-parent"
+          style={
+            Object {
+              "minHeight": "80vh",
+            }
+          }
+        >
+          <div
+            className="lds-ripple"
+            style={
+              Object {
+                "height": "64px",
+                "width": "64px",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "borderColor": "#ff5d00",
+                  "borderStyle": "solid",
+                  "borderWidth": "4px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "borderColor": "#ff5d00",
+                  "borderStyle": "solid",
+                  "borderWidth": "4px",
+                }
+              }
+            />
+          </div>
+        </div>
+      </Ripple>
+      <iframe
+        frameBorder="0"
+        onLoad={[Function]}
+        scrolling="yes"
+        seamless={true}
+        src="https://discover.ona.io/superset/dashboard/25/?standalone=true"
+      />
+    </div>
+  </div>
+</Analysis>
+`;

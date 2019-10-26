@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataCircleCard must render correctly 1`] = `
+<Card
+  className="dataCircleCard"
+  tag="div"
+>
+  <div
+    className="dataCircleCard card"
+  >
+    <CardTitle
+      tag="div"
+    >
+      <div
+        className="card-title"
+      >
+        test title
+      </div>
+    </CardTitle>
+    <CardBody
+      tag="div"
+    >
+      <div
+        className="card-body"
+      >
+        <ul
+          className="circlesRow"
+        >
+          <li
+            className="red"
+          >
+            <Link
+              to="/hierarchicaldata/high-risk/test title"
+            >
+              <a
+                href="/hierarchicaldata/high-risk/test title"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  10
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              High Risk
+            </span>
+          </li>
+          <li
+            className="orange"
+          >
+            <Link
+              to="/hierarchicaldata/low-risk/test title"
+            >
+              <a
+                href="/hierarchicaldata/low-risk/test title"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  10
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              Low Risk
+            </span>
+          </li>
+          <li
+            className="green"
+          >
+            <Link
+              to="/hierarchicaldata/no-risk/test title"
+            >
+              <a
+                href="/hierarchicaldata/no-risk/test title"
+                onClick={[Function]}
+              >
+                <span
+                  className="number"
+                >
+                  10
+                </span>
+              </a>
+            </Link>
+            <span
+              className="risk-level"
+            >
+              No Risk
+            </span>
+          </li>
+        </ul>
+      </div>
+    </CardBody>
+  </div>
+</Card>
+`;

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomOAuth login must render correctly 1`] = `
+<CustomOauthLogin
+  ProviderLinksComponent={[Function]}
+  providers={
+    Object {
+      "onadata": Object {
+        "accessTokenUri": "https://stage-api.ona.io/o/token/",
+        "authorizationUri": "https://stage-api.ona.io/o/authorize/",
+        "clientId": "hunter2",
+        "redirectUri": "https://example.com/oauth/callback/onadata/",
+        "scopes": Array [
+          "read",
+          "write",
+        ],
+        "state": "abc",
+        "userUri": "https://stage-api.ona.io/api/v1/user.json",
+      },
+    }
+  }
+>
+  <div
+    className="row login-row"
+  >
+    <div
+      className="image col-lg col-xl"
+    />
+    <div
+      className="col-lg col-xl login-section"
+    >
+      <div
+        className="logo"
+      >
+        <img
+          alt="unicef vietnam"
+          className="moh"
+          src="vietnam-moh.png"
+        />
+        <img
+          alt="unicef vietnam"
+          className="unicef"
+          src="uni-vietnam.png"
+        />
+      </div>
+      <div
+        className="center"
+      >
+        <h3>
+          MIECD VIETNAM
+        </h3>
+        <ProviderLinks
+          providers={
+            Object {
+              "onadata": Object {
+                "accessTokenUri": "https://stage-api.ona.io/o/token/",
+                "authorizationUri": "https://stage-api.ona.io/o/authorize/",
+                "clientId": "hunter2",
+                "redirectUri": "https://example.com/oauth/callback/onadata/",
+                "scopes": Array [
+                  "read",
+                  "write",
+                ],
+                "state": "abc",
+                "userUri": "https://stage-api.ona.io/api/v1/user.json",
+              },
+            }
+          }
+        >
+          <div
+            className="gatekeeper-login"
+          >
+            <p
+              className="gatekeeper-p"
+            >
+              Please log in with one of the following providers
+            </p>
+            <p
+              className="gatekeeper-p item"
+              key="onadata"
+            >
+              <a
+                className="gatekeeper-btn"
+                href="https://stage-api.ona.io/o/authorize/?client_id=hunter2&redirect_uri=https%3A%2F%2Fexample.com%2Foauth%2Fcallback%2Fonadata%2F&scope=read%20write&response_type=token&state=abc"
+              >
+                onadata
+              </a>
+            </p>
+          </div>
+        </ProviderLinks>
+      </div>
+    </div>
+  </div>
+</CustomOauthLogin>
+`;

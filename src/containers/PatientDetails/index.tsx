@@ -18,7 +18,13 @@ interface State {
   filteredData: SmsData[];
 }
 
-class PatientDetails extends Component<Props, State> {
+const defaultProps: Props = {
+  patientId: 'none',
+  testData: [],
+};
+
+export class PatientDetails extends Component<Props, State> {
+  public static defaultProps: Props = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
       filteredData: PatientDetails.filterByPatientAndSort(props),
