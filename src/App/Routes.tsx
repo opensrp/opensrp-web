@@ -9,18 +9,29 @@ import { Store } from 'redux';
 
 import { exportSpecifier } from '@babel/types';
 import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import CustomOauthLogin from '../components/CustomAuthLogin';
 import { HeaderProps } from '../components/page/Header/Header';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
 import SidenavComponent from '../components/page/SideNav/sidenav';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
-import { LOGFACE_URL, LOGOUT_URL } from '../constants';
-import { CLIENT_URL } from '../constants';
+import {
+  ANALYSIS_URL,
+  COMPARTMENTS_URL,
+  HIERARCHICAL_DATA_URL,
+  LOGFACE_URL,
+  LOGOUT_URL,
+} from '../constants';
+import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
+import Compartments from '../containers/Compartments';
+import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
-import Home from '../containers/pages/Home/Home';
-import PregnancyHome from '../containers/pages/Home/PregnancyHome';
+import Analysis from '../containers/pages/Analysis';
+import Home from '../containers/pages/Home';
+import PregnancyHome from '../containers/pages/PregnancyHome';
+import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
@@ -44,11 +55,7 @@ export const Routes = (props: RoutesProps) => {
         authenticated && !headerShouldNotRender() ? 'main-container' : 'hidden-container'
       }`}
     >
-      <div
-        className={`${authenticated && !headerShouldNotRender() ? 'sidebar' : 'hidden-container'}`}
-      >
-        <SideMenu />
-      </div>
+      <SideMenu authenticated={authenticated} />
       <div className="content">
         <Switch>
           <ConnectedPrivateRoute
@@ -60,7 +67,7 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path="/pregnancy"
+            path={PREGNANCY_URL}
             component={PregnancyHome}
           />
           <ConnectedPrivateRoute
@@ -72,10 +79,40 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
+            path={COMPARTMENTS_URL}
+            component={Compartments}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={`${HIERARCHICAL_DATA_URL}/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
+            component={ConnectedHierarchichalDataTable}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={ANALYSIS_URL}
+            component={Analysis}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={ANALYSIS}
+            component={Analysis}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={'/patient_detail/:patient_id'}
+            component={ConnectedPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
             path={LOGOUT_URL}
             component={ConnectedLogout}
           />
-          <ConnectedPrivateRoute exact={true} path={LOGFACE_URL} component={ConnectedLogFace} />
+          <ConnectedPrivateRoute exact={false} path={LOGFACE_URL} component={ConnectedLogFace} />
           {/* tslint:disable jsx-no-lambda */}
           <Route
             exact={true}
@@ -85,6 +122,7 @@ export const Routes = (props: RoutesProps) => {
                 LoadingComponent={Loading}
                 providers={providers}
                 oAuthUserInfoGetter={oAuthUserInfoGetter}
+                SuccessfulLoginComponent={Home}
                 {...routeProps}
               />
             )}
@@ -95,73 +133,6 @@ export const Routes = (props: RoutesProps) => {
     </div>
   );
 };
-
-// class Routes extends Component<{}, {}> {
-
-//   public render() {
-//     console.log("props??", this.props);
-//     //const { authenticated } = this.props;
-//     debugger;
-//     // if (!authenticated) {
-//     //   return null;
-//     // }
-//     return (
-//       <div className="main-container">
-//         <div className="sidebar">
-//           <SidenavComponent />
-//         </div>
-//         <div className="content">
-//         <Switch>
-//           <ConnectedPrivateRoute
-//             disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-//             exact={true}
-//             path="/"
-//             component={Home}
-//           />
-//           <ConnectedPrivateRoute
-//             disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-//             exact={true}
-//             path="/pregnancy"
-//             component={PregnancyHome}
-//           />
-//           <ConnectedPrivateRoute
-//             disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-//             exact={true}
-//             path={CLIENT_URL}
-//             component={ConnectedClientList}
-//           />
-
-//           {/* tslint:disable jsx-no-lambda */}
-//           <Route
-//             exact={true}
-//             path="/oauth/callback/:id"
-//             render={routeProps => (
-//               <ConnectedOauthCallback
-//                 LoadingComponent={Loading}
-//                 providers={providers}
-//                 oAuthUserInfoGetter={oAuthUserInfoGetter}
-//                 {...routeProps}
-//               />
-//             )}
-//           />
-//           {/* tslint:enable jsx-no-lambda */}
-//           <ConnectedPrivateRoute
-//             disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-//             exact={true}
-//             path={LOGOUT_URL}
-//             component={ConnectedLogout}
-//           />
-//           <ConnectedPrivateRoute
-//             exact={true}
-//             path={LOGFACE_URL}
-//             component={ConnectedLogFace}
-//           />
-//         </Switch>
-//       </div>
-//       </div>
-//     );
-//   }
-// }
 
 const ConnectedRoutes = connect(mapStateToProps)(Routes);
 

@@ -4,11 +4,25 @@ import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
+import {
+  ALL,
+  DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  LOGFACE_SEARCH_PLACEHOLDER,
+  PREGNANCY_LOGFACE_HEADING,
+  RISK_LEVEL,
+  RISK_LEVELS,
+  SELECT_LOCATION,
+  SELECT_RISK,
+  SELECT_TYPE,
+  SUPERSET_SMS_DATA_SLICE,
+  TYPE,
+} from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
@@ -16,14 +30,17 @@ import TestReducer, {
   getSmsData,
   reducerName,
   SmsData,
+  smsDataFetched,
 } from '../../store/ducks/sms_events';
 import './index.css';
 
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
-  testData: SmsData[];
-  fetchTestDataActionCreator: typeof fetchSms;
+  smsData: SmsData[];
+  fetchSmsDataActionCreator: typeof fetchSms;
+  dataFetched: boolean;
+  numberOfRows: number;
 }
 
 interface State {
@@ -38,8 +55,10 @@ interface State {
 }
 
 const defaultprops: PropsInterface = {
-  fetchTestDataActionCreator: fetchSms,
-  testData: [],
+  dataFetched: false,
+  fetchSmsDataActionCreator: fetchSms,
+  numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  smsData: [],
 };
 
 export class LogFace extends React.Component<PropsInterface, State> {
@@ -54,7 +73,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       )
     ) {
       return {
-        filteredData: nextProps.testData,
+        filteredData: nextProps.smsData,
       };
     } else {
       return {
@@ -79,10 +98,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
   }
 
   public componentDidMount() {
-    const { fetchTestDataActionCreator } = this.props;
-    supersetFetch('2057').then((result: any) => {
-      fetchTestDataActionCreator(result);
-    });
+    const { fetchSmsDataActionCreator } = this.props;
+    if (!this.props.dataFetched) {
+      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
+        fetchSmsDataActionCreator(result);
+      });
+    }
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -93,6 +114,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
   // tslint:disable-next-line: no-empty
   public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
     const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
+    if (this.state.currentIndex > 1) {
+      this.setState({
+        currentIndex: 1,
+      });
+    }
     this.setState({
       filteredData,
     });
@@ -100,32 +126,32 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   public render() {
-    // const data = this.props.testData;
+    // const data = this.props.smsData;
     // console.log(this.state.filteredData);
     const data = this.state.filteredData;
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">Log Face - Pregnancy</h2>
+          <h2 id="logface_title">{PREGNANCY_LOGFACE_HEADING}</h2>
         </div>
-        <div className="filter-search-div">
-          {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
-          <Formik initialValues={{}} onSubmit={() => {}}>
-            {() => (
-              <Field
-                type="text"
-                name="input"
-                id="input"
-                placeholder="Search ID, Reporter, Patients"
-                className={`form-control logface-search`}
-                onChange={this.handleTermChange}
-                disabled={!this.props.testData.length}
-              />
-            )}
-          </Formik>
+        <div className="filter-panel">
           <div className="filters">
+            {/*tslint:disable-next-line: jsx-no-lambda no-empty*/}
+            <Formik initialValues={{}} onSubmit={() => {}}>
+              {() => (
+                <Field
+                  type="text"
+                  name="input"
+                  id="input"
+                  placeholder={LOGFACE_SEARCH_PLACEHOLDER}
+                  className={`form-control logface-search`}
+                  onChange={this.handleTermChange}
+                  disabled={!this.props.smsData.length}
+                />
+              )}
+            </Formik>
             <div className="location-type-filter">
-              <span>Risk Level</span>
+              <span>{RISK_LEVEL}</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenRiskLevel}
                 toggle={this.toggleRiskLevelDropDown}
@@ -134,12 +160,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData.length}
+                  disabled={!this.props.smsData.length}
                 >
-                  <span>{this.state.riskLabel.length ? this.state.riskLabel : 'Select risk'}</span>
+                  <span>{this.state.riskLabel.length ? this.state.riskLabel : SELECT_RISK}</span>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(['red', 'high', 'low', 'no risk', 'all'], risk => {
+                  {map(RISK_LEVELS, risk => {
                     return (
                       <DropdownItem onClick={this.handleRiskLevelDropdownClick} key={risk}>
                         {risk}
@@ -150,7 +176,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              <span>Select Location</span>
+              <span>{SELECT_LOCATION}</span>
               <Dropdown
                 isOpen={this.state.dropdownOpenLocation}
                 toggle={this.toggleLocationDropDown}
@@ -159,14 +185,14 @@ export class LogFace extends React.Component<PropsInterface, State> {
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData.length}
+                  disabled={!this.props.smsData.length}
                 >
                   <span>
-                    {this.state.locationLabel.length ? this.state.locationLabel : 'Select Location'}
+                    {this.state.locationLabel.length ? this.state.locationLabel : SELECT_LOCATION}
                   </span>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {map(this.getAllLocations().concat('all'), location => {
+                  {map(this.getAllLocations().concat(ALL), location => {
                     return (
                       <DropdownItem onClick={this.handleLocationDropdownClick} key={location}>
                         {location}
@@ -177,15 +203,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
               </Dropdown>
             </div>
             <div className="location-type-filter">
-              <span>Type</span>
+              <span>{TYPE}</span>
               <Dropdown isOpen={this.state.dropdownOpenType} toggle={this.toggleTypeDropDown}>
                 <DropdownToggle
                   variant="success"
                   id="dropdown-basic"
                   caret={true}
-                  disabled={!this.props.testData}
+                  disabled={!this.props.smsData}
                 >
-                  <span>{this.state.typeLabel.length ? this.state.typeLabel : 'Select Type'}</span>
+                  <span>{this.state.typeLabel.length ? this.state.typeLabel : SELECT_TYPE}</span>
                 </DropdownToggle>
                 <DropdownMenu>
                   {map(SmsTypes, type => {
@@ -195,8 +221,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
                       </DropdownItem>
                     );
                   })}
-                  <DropdownItem onClick={this.handleTypeDropdownClick} key={'all'}>
-                    all
+                  <DropdownItem onClick={this.handleTypeDropdownClick} key={ALL}>
+                    {ALL}
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -204,7 +230,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             <button id="export-button">Export data</button>
           </div>
         </div>
-        {this.props.testData.length ? (
+        {this.props.dataFetched ? (
           <div className="table-container">
             <Table striped={true} borderless={true}>
               <thead id="header">
@@ -223,8 +249,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
               <tbody id="body">
                 {map(
                   data.slice(
-                    (this.state.currentIndex - 1) * 10,
-                    (this.state.currentIndex - 1) * 10 + 10
+                    (this.state.currentIndex - 1) * this.props.numberOfRows,
+                    (this.state.currentIndex - 1) * this.props.numberOfRows +
+                      this.props.numberOfRows
                   ),
                   dataObj => {
                     return (
@@ -234,7 +261,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                         <td className="default-width">{dataObj.health_worker_location_name}</td>
                         <td className="default-width">{dataObj.sms_type}</td>
                         <td className="default-width">{dataObj.health_worker_name}</td>
-                        <td className="default-width">{dataObj.anc_id}</td>
+                        <td className="default-width">
+                          <Link to={`/patient_detail/${dataObj.anc_id}`}>{dataObj.anc_id}</Link>
+                        </td>
                         <td className="small-width">{dataObj.age}</td>
                         <td className="large-width">
                           {typeof dataObj.message === 'string' &&
@@ -248,7 +277,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                             })}
                         </td>
                         <td className="default-width">
-                          <RiskColoring {...{ Risk: dataObj.logface_risk }} />
+                          <RiskColoring {...{ risk: dataObj.logface_risk }} />
                         </td>
                       </tr>
                     );
@@ -266,7 +295,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
               previous
             </button>
           )}
-          {this.state.currentIndex < Math.ceil(data.length / 10) && (
+          {this.state.currentIndex < Math.ceil(data.length / this.props.numberOfRows) && (
             <button onClick={this.nextPage} id={'next'}>
               next
             </button>
@@ -277,7 +306,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   }
 
   private isAllSelected = (e: React.MouseEvent) => {
-    return (e.target as HTMLInputElement).innerText === 'all';
+    return (e.target as HTMLInputElement).innerText === ALL;
   };
 
   private getFilteredData = (
@@ -307,8 +336,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'logface_risk', true),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
       riskLabel: (e.target as HTMLInputElement).innerText,
     });
   };
@@ -316,17 +345,17 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'health_worker_location_name', false),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
       locationLabel: (e.target as HTMLInputElement).innerText,
     });
   };
 
   private getAllLocations = (): string[] => {
     const locations = [];
-    for (const i in this.props.testData) {
-      if (this.props.testData[i].health_worker_location_name) {
-        locations.push(this.props.testData[i].health_worker_location_name);
+    for (const i in this.props.smsData) {
+      if (this.props.smsData[i].health_worker_location_name) {
+        locations.push(this.props.smsData[i].health_worker_location_name);
       }
     }
 
@@ -337,14 +366,14 @@ export class LogFace extends React.Component<PropsInterface, State> {
     this.setState({
       currentIndex: 1,
       filteredData: this.isAllSelected(e)
-        ? this.props.testData
-        : this.getFilteredData(e, this.props.testData, 'sms_type', false),
+        ? this.props.smsData
+        : this.getFilteredData(e, this.props.smsData, 'sms_type', false),
       typeLabel: (e.target as HTMLInputElement).innerText,
     });
   };
 
   private filterData(filterString: string): SmsData[] {
-    return this.props.testData.filter(
+    return this.props.smsData.filter(
       dataItem =>
         dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
         dataItem.health_worker_name
@@ -371,12 +400,13 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any) => {
   const result = {
-    testData: getSmsData(state),
+    dataFetched: smsDataFetched(state),
+    smsData: getSmsData(state),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchTestDataActionCreator: fetchSms };
+const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
 
 const ConnectedLogFace = connect(
   mapStateToprops,

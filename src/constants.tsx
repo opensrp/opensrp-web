@@ -1,20 +1,24 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 // internal urls
+export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
+export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
+export const PREGNANCY_URL = '/pregnancy';
+export type PREGNANCY_URL = typeof PREGNANCY_URL;
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
 export const LOGOUT_URL = '/logout';
 export type LOGOUT_URL = typeof LOGOUT_URL;
 export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
+export const COMPARTMENTS_URL = '/compartments';
+export type COMPARTMENTS_URL = typeof COMPARTMENTS_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 export const LOGFACE_URL = '/log-face';
 export type LOGFACE_URL = typeof LOGFACE_URL;
-export const COMPARTMENTS_URL = '/compartments';
-export type COMPARTMENTS_URL = typeof COMPARTMENTS_URL;
 export const ANALYSIS_URL = '/analysis';
 export type ANALYSIS_URL = typeof ANALYSIS_URL;
-export const PREGNANCY_URL = '/pregnancy';
-export type PREGNANCY_URL = typeof PREGNANCY_URL;
 export const NUTRITION_URL = '/nutrition';
 export type NUTRITION_URL = typeof NUTRITION_URL;
 export const NEWBORN_AND_POSTNATAL_URL = '/nbc-pnc';
@@ -81,3 +85,92 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const PREGNANCY_LOGFACE_HEADING = 'Log Face - Pregnancy';
+export type PREGNANCY_LOGFACE_HEADING = typeof PREGNANCY_LOGFACE_HEADING;
+export const LOGFACE_SEARCH_PLACEHOLDER = 'Search ID, Reporter, Patients';
+export type LOGFACE_SEARCH_PLACEHOLDER = typeof LOGFACE_SEARCH_PLACEHOLDER;
+export const RISK_LEVEL = 'Risk Level';
+export type RISK_LEVEL = typeof RISK_LEVEL;
+export const SELECT_RISK = 'Select risk';
+export type SELECT_RISK = typeof SELECT_RISK;
+export const SELECT_LOCATION = 'Select Location';
+export type SELECT_LOCATION = typeof SELECT_LOCATION;
+export const SELECT_TYPE = 'Select Type';
+export type SELECT_TYPE = typeof SELECT_TYPE;
+export const ALL = 'all';
+export type ALL = typeof ALL;
+export const TYPE = 'Type';
+export type TYPE = typeof TYPE;
+export const UP = 'up';
+export type UP = typeof UP;
+export const BACK = 'Back';
+export type BACK = typeof BACK;
+export const BACK_TO_PREGNANCY_COMPARTMENTS = 'Back to Pregnancy Compartments';
+export type BACK_TO_PREGNANCY_COMPARTMENTS = typeof BACK_TO_PREGNANCY_COMPARTMENTS;
+export const HIGH_RISK = 'High Risk';
+export type HIGH_RISK = typeof HIGH_RISK;
+export const LOW_RISK = 'Low Risk';
+export type LOW_RISK = typeof LOW_RISK;
+export const NO_RISK = 'No Risk';
+export type NO_RISK = typeof NO_RISK;
+export const RED_ALERT = 'Red Alert';
+export type RED_ALERT = typeof RED_ALERT;
+export const NOT_SET = 'Not Set';
+export type NOT_SET = typeof NOT_SET;
+export const TOTAL = 'Total';
+export type TOTAL = typeof TOTAL;
+export const DISTRICT = 'District';
+export type DISTRICT = typeof DISTRICT;
+export const PROVINCE = 'Province';
+export type PROVINCE = typeof PROVINCE;
+export const COMMUNE = 'Commune';
+export type COMMUNE = typeof COMMUNE;
+export const VILLAGE = 'Village';
+export type VILLAGE = typeof VILLAGE;
+export const PATIENT_DETAILS = 'Patient Details';
+export type PATIENT_DETAILS = typeof PATIENT_DETAILS;
+export const BASIC_INFORMATION = 'Basic Information';
+export type BASIC_INFORMATION = typeof BASIC_INFORMATION;
+export const ID = 'ID';
+export type ID = typeof ID;
+export const CURRENT_GRAVIDITY = 'Current Gravidity';
+export type CURRENT_GRAVIDITY = typeof CURRENT_GRAVIDITY;
+export const CURRENT_PARITY = 'Current Parity';
+export type CURRENT_PARITY = typeof CURRENT_PARITY;
+export const LOCATION = 'Location';
+export type LOCATION = typeof LOCATION;
+export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
+export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
+export const CURRENT_EDD = 'Current EDD';
+export type CURRENT_EDD = typeof CURRENT_EDD;
+export const MIECD_VIETNAM = 'MIECD VIETNAM';
+export type MIECD_VIETNAM = typeof MIECD_VIETNAM;
+export const NO_PROVIDERS = 'No providers';
+export type NO_PROVIDERS = typeof NO_PROVIDERS;
+export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
+export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
+
+export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
+export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
+
+// TIME constants
+export const MICROSECONDS_IN_A_WEEK = 604800000;
+export type MICROSECONDS_IN_A_WEEK = typeof MICROSECONDS_IN_A_WEEK;
+export const GESTATION_PERIOD = 24192000000;
+export type GESTATION_PERIOD = typeof GESTATION_PERIOD;
+
+// Back arrow constant
+export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
+
+// Risk cartegories in the logface component
+export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
+export type RISK_LEVELS = typeof RISK_LEVELS;
+
+export const SUPERSET_SMS_DATA_SLICE = '2263';
+export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
+
+// analysis page iframes
+
+export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
+  'https://discover.ona.io/superset/dashboard/25/?standalone=true';
+export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;

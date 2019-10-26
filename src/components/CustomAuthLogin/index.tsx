@@ -1,5 +1,6 @@
 import { ProviderLinks, Providers } from '@onaio/gatekeeper';
 import React from 'react';
+import { MIECD_VIETNAM, NO_PROVIDERS } from '../../constants';
 import './index.css';
 
 /** interface for OauthLogin props */
@@ -30,14 +31,14 @@ const CustomOauthLogin = (props: OauthLoginProps) => {
           />
         </div>
         <div className="center">
-          <h3>MIECD VIETNAM</h3>
+          <h3>{MIECD_VIETNAM}</h3>
           <ProviderLinksComponent {...{ providers }} />
         </div>
       </div>
     </div>
   ) : (
     <div className="gatekeeper-login">
-      <p className="gatekeeper-p">No providers</p>
+      <p className="gatekeeper-p">{NO_PROVIDERS}</p>
     </div>
   );
 };

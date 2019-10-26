@@ -1,0 +1,13 @@
+div#chart-wrapper {
+  margin: auto;
+}
+
+.card {
+  margin: auto;
+}
+
+.highcharts-point {
+  fill: white;
+  stroke: #0093db;
+  stroke-width: 2px;
+}

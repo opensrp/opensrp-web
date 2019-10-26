@@ -1,8 +1,11 @@
+import { history } from '@onaio/connected-reducer-registry';
+import { ConnectedRouter } from 'connected-react-router';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ConnectedLogFace from '..';
+import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../../constants';
 import store from '../../../store';
 import { fetchSms } from '../../../store/ducks/sms_events';
 import { smsSlice } from './fixtures';
@@ -38,11 +41,14 @@ describe('components/ConnectedHeader', () => {
     store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
-    // 11 here is to include the header
-    expect(wrapper.find('tr').length).toBe(11);
+
+    // + 1 is added here to unclude the header `tr`
+    expect(wrapper.find('tr').length).toBe(DEFAULT_NUMBER_OF_LOGFACE_ROWS + 1);
     wrapper.unmount();
   });
 
@@ -50,7 +56,9 @@ describe('components/ConnectedHeader', () => {
     store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
 
@@ -64,12 +72,15 @@ describe('components/ConnectedHeader', () => {
   it('search works correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace />
+        </ConnectedRouter>
       </Provider>
     );
 
     expect(wrapper.find('input').length).toBe(1);
     wrapper.find('input').simulate('change', { target: { value: '1569837448461' } });
-    expect(wrapper.find('tr').length).toBe(2);
+    // + 1 is added here to unclude the header `tr`
+    expect(wrapper.find('tr').length).toBe(DEFAULT_NUMBER_OF_LOGFACE_ROWS + 1);
   });
 });

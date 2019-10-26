@@ -44,9 +44,9 @@ describe('components/page/Header', () => {
       </Router>
     );
     // snapshot for the first col; should have the brand-image
-    const brandWrapper = wrapper.find('a.navbar-brand');
-    expect(brandWrapper.length).toEqual(1);
-    expect(toJson(brandWrapper)).toMatchSnapshot('Brand-image');
+    // const brandWrapper = wrapper.find('a.navbar-brand');
+    // expect(brandWrapper.length).toEqual(1);
+    // expect(toJson(brandWrapper)).toMatchSnapshot('Brand-image');
 
     // the login/logout
     const accntMgmtWrapper = wrapper.find('NavLink');

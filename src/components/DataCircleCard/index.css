@@ -1,0 +1,101 @@
+.compartment-wrapper .circlesRow > li {
+  list-style-type: none;
+  width: 5.5em;
+  height: 5.5em;
+  border-radius: 3.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.compartment-wrapper .card-body > p {
+  margin-top: 12%;
+}
+
+.compartment-wrapper ul {
+  padding: 0;
+}
+
+.compartment-wrapper .dataCircleCard > .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.compartment-wrapper .dataCircleCard {
+  padding: 0;
+  background-color: #ffffff;
+  border: 0.063em solid #dadce0;
+  border-radius: 0.313em;
+  box-shadow: 0 0.063em 0.188em 0 #d7d7e0;
+  height: 14.375em;
+}
+
+.compartment-wrapper .circlesRow {
+  display: flex;
+  justify-content: space-around;
+}
+
+.compartment-wrapper .card-group > .card {
+  flex: 1 1 auto;
+}
+
+.compartment-wrapper .card {
+  border: 0px;
+  margin: 20px 50px 20px 0;
+}
+
+.compartment-wrapper .circlesRow > .red {
+  background-color: #ff1e1e;
+}
+
+.compartment-wrapper .circlesRow > .orange {
+  background-color: #ff8533;
+}
+
+.compartment-wrapper .circlesRow > .green {
+  background-color: #37ae12;
+}
+
+.compartment-wrapper .circlesRow > .green,
+.compartment-wrapper .circlesRow > .red,
+.compartment-wrapper .circlesRow > .orange {
+  border: none !important;
+}
+
+.compartments .card-title {
+  border-bottom: 0.063em solid #dadce0;
+  color: #001429;
+  font-family: Roboto;
+  font-size: 1.125em;
+  font-weight: 400;
+  line-height: 1.375em;
+  text-align: left;
+  padding: 1em;
+}
+
+.compartment-wrapper span.number {
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 1.25em;
+  font-weight: 400;
+  line-height: 0.875em;
+}
+
+.compartment-wrapper span.risk-level {
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 0.75em;
+  font-weight: 400;
+  line-height: 0.875em;
+}
+
+.compartment-wrapper .circleRow > a,
+.compartment-wrapper a:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+@media (max-width: 1365px) {
+}

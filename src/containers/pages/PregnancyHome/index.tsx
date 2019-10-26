@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
-import { LOGFACE_URL } from '../../../constants';
+import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL } from '../../../constants';
 import { LogFace } from '../../LogFace';
-import './PregnancyHome.css';
+import './index.css';
 
 class PregnancyHome extends React.Component<{}, {}> {
   public render() {
@@ -41,7 +41,7 @@ class PregnancyHome extends React.Component<{}, {}> {
           <div className="spacer">
             <div className="home-sub-containers">
               <div className="sub-container-heading">
-                <p>Client</p>
+                <p>Compartments</p>
               </div>
               <hr />
               <div className="sub-container-message">
@@ -49,7 +49,9 @@ class PregnancyHome extends React.Component<{}, {}> {
                   <p>This is the aggregation and categorization of patients data</p>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={COMPARTMENTS_URL}>
+                    <button className="button-style">View</button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -65,7 +67,9 @@ class PregnancyHome extends React.Component<{}, {}> {
                   <p>Important analysis and indicators generated from collected data</p>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={ANALYSIS_URL}>
+                    <button className="button-style">View</button>
+                  </Link>
                 </div>
               </div>
             </div>

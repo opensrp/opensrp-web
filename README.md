@@ -64,3 +64,13 @@ See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/d
 ## Code Quality
 
 See [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.
+
+## Deployment
+
+[Follow these steps](https://github.com/onaio/playbooks/tree/master/docs#generic-ansible-deployment-steps) to log in into admin host
+
+### Staging
+
+```
+$ ansible-playbook -i inventories/unicef-miecd/staging/ opensrp-web.yml --vault-password-file=~/opensrp/.vault_pass.txt
+```

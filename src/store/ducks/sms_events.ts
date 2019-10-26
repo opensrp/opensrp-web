@@ -16,6 +16,12 @@ export interface SmsData {
   logface_risk: string;
   health_worker_name: string;
   sms_type: string;
+  height: number;
+  weight: number;
+  previous_risks: string;
+  lmp_edd: number;
+  parity: number;
+  gravidity: number;
 }
 
 // actions
@@ -44,7 +50,6 @@ export const fetchSms = (TrialData: SmsData[] = []): FetchSmsAction => {
     payload: keyBy(TrialData, (trialObj: SmsData) => trialObj.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
-  //   console.log("gets called", actionCreated);
   return actionCreated;
 };
 
@@ -52,25 +57,25 @@ export const fetchSms = (TrialData: SmsData[] = []): FetchSmsAction => {
 
 /** interface for sms state in redux store */
 // tslint:disable-next-line: class-name
-interface SmsStateReducer {
+interface SmsState {
   payload: { [key: string]: SmsData };
+  smsDataFetched: boolean;
 }
 
 /** initial sms-state state */
-const initialState: SmsStateReducer = {
+const initialState: SmsState = {
   payload: {},
+  smsDataFetched: false,
 };
 
 /** the sms reducer function */
-export default function reducer(
-  state: SmsStateReducer = initialState,
-  action: SmsActionTypes
-): SmsStateReducer {
+export default function reducer(state: SmsState = initialState, action: SmsActionTypes): SmsState {
   switch (action.type) {
     case FETCHED_SMS:
       return {
         ...state,
         payload: { ...state.payload, ...action.payload },
+        smsDataFetched: true,
       };
     default:
       return state;
@@ -85,4 +90,11 @@ export default function reducer(
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
   return values((state as any)[reducerName].payload);
+}
+
+/** returns true if sms data has been fetched from superset and false
+ * if the data has not been fetched
+ */
+export function smsDataFetched(state: Partial<Store>): boolean {
+  return (state as any)[reducerName].smsDataFetched;
 }

@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import CustomOauthLogin from '../../components/CustomAuthLogin';
 import store from '../../store';
 import App from '../App';
 
@@ -40,15 +41,9 @@ describe('App', () => {
     const headerWrapper = wrapper.find('HeaderComponent');
     expect(headerWrapper.length).toEqual(1);
 
-    // should have a sidebar for the side navigation
-    const sideMenuWrapper = wrapper.find('div.side-menu-section');
-    expect(sideMenuWrapper.length).toEqual(1);
+    const customOathLoginChildren = wrapper.find(CustomOauthLogin).children();
 
-    // should have the main page where the page views are rendered
-    const mainPageWrapper = wrapper.find('div.container-section');
-    expect(mainPageWrapper.length).toEqual(1);
-
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(customOathLoginChildren)).toMatchSnapshot();
     wrapper.unmount();
   });
 });

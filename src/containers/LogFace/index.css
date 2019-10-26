@@ -15,7 +15,7 @@ thead tr {
 
 tbody tr {
   align-items: center;
-  display: flex;
+  /* display: flex; */
 }
 
 td {
@@ -36,29 +36,32 @@ td {
   display: block;
 }
 
+.table-container table tbody tr td:first-child {
+  overflow-wrap: break-word;
+}
+
 .table-container table {
   border: none !important;
   background: #fff;
 }
 
-.filter-search-div {
+.filter-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: start;
 }
 
-.filters {
+.logface-content .filter-panel .filters {
   display: flex;
   justify-content: flex-start;
-  margin-left: 3%;
   flex-grow: 2;
-  padding: 0 0 20px;
+  padding: 0px 0px 10px;
 }
 
-.location-type-filter {
+.logface-content .filter-panel .filters .location-type-filter {
   display: block;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .form-group {
@@ -93,9 +96,8 @@ td {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
-#body {
+.table-container table #body {
   overflow: auto;
-  height: 661px;
 }
 
 .large-width {
@@ -130,8 +132,9 @@ td {
   color: #fff;
   border-radius: 3px;
   border: 1px solid #0093db;
-  width: 120px;
-  height: 32px;
+  width: auto;
+  height: auto;
+  padding: 5px 15px;
 }
 
 .filters .location-type-filter .dropdown button {
@@ -159,7 +162,7 @@ td {
   color: #212121;
 }
 
-.filter-search-div input.logface-search {
+.filter-panel input.logface-search {
   border-radius: 0;
   margin-top: 35px;
   width: 25%;
@@ -169,7 +172,7 @@ td {
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
 }
 
-.filter-search-div input.logface-search::placeholder {
+.filter-panel input.logface-search::placeholder {
   color: #c2c2c2;
 }
 
