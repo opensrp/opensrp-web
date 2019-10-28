@@ -6,18 +6,19 @@ import { RoutesProps } from '../../../App/Routes';
 import { ENABLE_REPORT_MODULE } from '../../../configs/env';
 import { ENABLE_PREGNANCY_MODULE } from '../../../configs/env';
 import { headerShouldNotRender } from '../../../helpers/utils';
-import SubMenu, { SubMenuProps } from './SubMenu';
-
 import {
   ADMIN_NAVIGATION_MODULE,
   CLIENT_NAVIGATION_MODULE,
   ENABLE_ADMIN_MODULE,
   ENABLE_CLIENT_RECORDS_MODULE,
   HOME_NAVIGATION_MODULE,
+  NBC_AND_PNC_NAVIGATION_MODULE,
+  NUTRITION_MODULE,
   PREGNANCY_NAVIGATION_MODULE,
   REPORT_NAVIGATION_MODULE,
 } from './constants';
 import './index.css';
+import SubMenu, { SubMenuProps } from './SubMenu';
 
 /** interface for the local state for this component
  * @property {string} collapsedModuleLabel - label pointing to active navigation module
@@ -47,6 +48,8 @@ class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
     const navigationModules: SubMenuToRender[] = [
       { shouldRender: true, subMenuProps: HOME_NAVIGATION_MODULE },
       { shouldRender: ENABLE_PREGNANCY_MODULE, subMenuProps: PREGNANCY_NAVIGATION_MODULE },
+      { shouldRender: true, subMenuProps: NBC_AND_PNC_NAVIGATION_MODULE },
+      { shouldRender: true, subMenuProps: NUTRITION_MODULE },
       { shouldRender: ENABLE_REPORT_MODULE, subMenuProps: REPORT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_CLIENT_RECORDS_MODULE, subMenuProps: CLIENT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_ADMIN_MODULE, subMenuProps: ADMIN_NAVIGATION_MODULE },
