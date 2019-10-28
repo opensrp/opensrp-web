@@ -158,5 +158,57 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                   <Nav
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
-                                    vertical={false}"
+                                    vertical={false}
+@@ -674,11 +678,11 @@
+                              \\"label\\": \\"Logface\\",
+                              \\"url\\": \\"/log-face\\",
+                            },
+                          ]
+                        }
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"2\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -697,11 +701,11 @@
+                                \\"label\\": \\"Logface\\",
+                                \\"url\\": \\"/log-face\\",
+                              },
+                            ]
+                          }
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -931,11 +935,11 @@
+                              \\"label\\": \\"Logface\\",
+                              \\"url\\": \\"/log-face\\",
+                            },
+                          ]
+                        }
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"3\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -954,11 +958,11 @@
+                                \\"label\\": \\"Logface\\",
+                                \\"url\\": \\"/log-face\\",
+                              },
+                            ]
+                          }
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],"
 `;

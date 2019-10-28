@@ -23,19 +23,19 @@ exports[`PregnancyHome must render correctly 1`] = `
     }
   }
 >
-  <PregnancyHome>
+  <ModuleHome
+    deactivateLinks={false}
+    description=""
+    title=""
+  >
     <div
-      className="pregnancy-home-main"
+      className="module-home-main"
     >
       <div
         className="welcome-text"
       >
-        <h1>
-          Welcome to the pregnancy dashboard
-        </h1>
-        <p>
-          This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for patients in your geographical location. The Module covers the whole pregnancy period from conception to delivery and includes Pregnancy Registration, ANC visits, Birth reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
-        </p>
+        <h1 />
+        <p />
       </div>
       <div
         className="components-list"
@@ -75,7 +75,7 @@ exports[`PregnancyHome must render correctly 1`] = `
                     onClick={[Function]}
                   >
                     <button
-                      className="button-style"
+                      className="button-style "
                     >
                       View
                     </button>
@@ -120,7 +120,7 @@ exports[`PregnancyHome must render correctly 1`] = `
                     onClick={[Function]}
                   >
                     <button
-                      className="button-style"
+                      className="button-style "
                     >
                       View
                     </button>
@@ -158,14 +158,14 @@ exports[`PregnancyHome must render correctly 1`] = `
                 id="cont-sized"
               >
                 <Link
-                  to="/analysis"
+                  to="/compartments"
                 >
                   <a
-                    href="/analysis"
+                    href="/compartments"
                     onClick={[Function]}
                   >
                     <button
-                      className="button-style"
+                      className="button-style "
                     >
                       View
                     </button>
@@ -177,6 +177,6 @@ exports[`PregnancyHome must render correctly 1`] = `
         </div>
       </div>
     </div>
-  </PregnancyHome>
+  </ModuleHome>
 </Router>
 `;
