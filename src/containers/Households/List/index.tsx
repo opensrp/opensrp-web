@@ -133,6 +133,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
     };
     const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await clientService.list(params);
+    removeHouseholdsActionCreator();
     fetchHouseholdsActionCreator(response.clients);
     setTotalRecordsActionCreator(response.total);
   }
