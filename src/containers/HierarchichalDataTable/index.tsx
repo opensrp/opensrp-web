@@ -31,6 +31,7 @@ import locationsReducer, {
   Location,
   reducerName,
 } from '../../store/ducks/locations';
+import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 
 reducerRegistry.register(reducerName, locationsReducer);
 
@@ -58,6 +59,7 @@ interface Props {
   districts: Location[];
   communes: Location[];
   villages: Location[];
+  smsData: SmsData[];
 }
 
 const defaultProps: Props = {
@@ -68,34 +70,88 @@ const defaultProps: Props = {
   fetchLocationsActionCreator: fetchLocations,
   provinces: [],
   risk_highligter: 'none',
+  smsData: [],
   title: '',
   villages: [],
 };
 
-function addDataToLocations(locations: Location[]): LocationWithData[] {
-  return locations.map(location => {
-    return {
-      ...location,
-      high_risk: 10,
-      low_risk: 20,
-      no_risk: 30,
-      total: 60,
-    };
-  });
+function addDataToLocations(locations: {
+  [key: string]: Location[];
+}): { [key: string]: LocationWithData[] } {
+  const villagesWithData: LocationWithData[] = [];
+  for (const village in locations.villages) {
+    if (locations.villages[village]) {
+      villagesWithData.push({
+        ...locations.villages[village],
+        high_risk: 0,
+        low_risk: 0,
+        no_risk: 0,
+        total: 0,
+      });
+    }
+  }
+
+  const districtsWithData: LocationWithData[] = [];
+  for (const district in locations.districts) {
+    if (locations.districts[district]) {
+      districtsWithData.push({
+        ...locations.districts[district],
+        high_risk: 0,
+        low_risk: 0,
+        no_risk: 0,
+        total: 0,
+      });
+    }
+  }
+
+  const communesWithData: LocationWithData[] = [];
+  for (const commune in locations.communes) {
+    if (locations.communes[commune]) {
+      communesWithData.push({
+        ...locations.communes[commune],
+        high_risk: 0,
+        low_risk: 0,
+        no_risk: 0,
+        total: 0,
+      });
+    }
+  }
+
+  const provincesWithData: LocationWithData[] = [];
+  for (const province in locations.provinces) {
+    if (locations.provinces[province]) {
+      provincesWithData.push({
+        ...locations.provinces[province],
+        high_risk: 0,
+        low_risk: 0,
+        no_risk: 0,
+        total: 0,
+      });
+    }
+  }
+
+  return {
+    communes: communesWithData,
+    districts: districtsWithData,
+    provinces: provincesWithData,
+    villages: villagesWithData,
+  };
 }
 
 class HierarchichalDataTable extends Component<Props, State> {
   public static defaultProps = defaultProps;
-  public static getDerivedStateFromProps(nextProps: Props) {
-    const provinces = addDataToLocations(nextProps.provinces);
-    const districts = addDataToLocations(nextProps.districts);
-    const communes = addDataToLocations(nextProps.communes);
-    const villages = addDataToLocations(nextProps.villages);
+  public static getDerivedStateFromProps(nextProps: Props, state: State) {
+    const locationsWithData = addDataToLocations({
+      communes: nextProps.communes,
+      districts: nextProps.districts,
+      provinces: nextProps.provinces,
+      villages: nextProps.villages,
+    });
     let dataToShow: LocationWithData[] = [];
     if ((nextProps.direction === UP && nextProps.current_level === 0) || !nextProps.node_id) {
-      dataToShow = provinces;
+      dataToShow = locationsWithData.provinces;
     } else if (nextProps.direction === UP && nextProps.current_level === 1) {
-      dataToShow = districts;
+      dataToShow = locationsWithData.districts;
       let parentId: string;
       const node = dataToShow.find(
         (dataItem: LocationWithData) => dataItem.location_id === nextProps.node_id
@@ -103,7 +159,7 @@ class HierarchichalDataTable extends Component<Props, State> {
       if (nextProps.from_level === '2' && node) {
         parentId = node.parent_id;
       } else {
-        const commune = communes.find(
+        const commune = locationsWithData.communes.find(
           (dataItem: LocationWithData) => dataItem.location_id === nextProps.node_id
         );
         if (commune) {
@@ -119,7 +175,7 @@ class HierarchichalDataTable extends Component<Props, State> {
         (dataItem: LocationWithData) => dataItem.parent_id === parentId
       );
     } else if (nextProps.direction === UP && nextProps.current_level === 2) {
-      dataToShow = communes;
+      dataToShow = locationsWithData.communes;
       const node = dataToShow.find(
         (dataItem: LocationWithData) => dataItem.location_id === nextProps.node_id
       );
@@ -135,10 +191,10 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       dataToShow =
         nextProps.current_level === 1
-          ? districts
+          ? locationsWithData.districts
           : nextProps.current_level === 2
-          ? communes
-          : villages;
+          ? locationsWithData.communes
+          : locationsWithData.villages;
       dataToShow = nextProps.node_id
         ? dataToShow.filter(
             (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
@@ -154,11 +210,29 @@ class HierarchichalDataTable extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      data: addDataToLocations(props.provinces),
+      data: [],
       district: '',
     };
   }
+  /**
+   * Given a village return it's commune's location ID
+   * @param {Location} village - village Location to find commnue
+   */
+  public getCommune = (village: Location & Partial<{ level: VILLAGE }>): string => {
+    return village.parent_id;
+  };
 
+  public getDistrict = (village: Location & Partial<{ level: VILLAGE }>): string => {
+    const communeId = this.getCommune(village);
+    return this.props.communes.find((location: Location) => location.location_id === communeId)!
+      .parent_id;
+  };
+
+  public getProvince = (village: Location & Partial<{ level: VILLAGE }>): string => {
+    const districtId = this.getDistrict(village);
+    return this.props.districts.find((location: Location) => location.location_id === districtId)!
+      .parent_id;
+  };
   public componentDidMount() {
     const { fetchLocationsActionCreator } = this.props;
     for (const slice in LOCATION_SLICES) {
@@ -384,6 +458,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     node_id: ownProps.match.params.node_id,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
+    smsData: getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
   };
