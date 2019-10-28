@@ -106,7 +106,11 @@ class HierarchichalDataTable extends Component<Props, State> {
         const commune = communes.find(
           (dataItem: LocationWithData) => dataItem.location_id === nextProps.node_id
         );
-        parentId = commune!.parent_id;
+        if (commune) {
+          parentId = commune.parent_id;
+        } else {
+          return [];
+        }
         parentId = dataToShow.find(
           (dataItem: LocationWithData) => dataItem.location_id === parentId
         )!.parent_id;
@@ -116,11 +120,17 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     } else if (nextProps.direction === UP && nextProps.current_level === 2) {
       dataToShow = communes;
-      const parent_id = dataToShow.find(
+      const node = dataToShow.find(
         (dataItem: LocationWithData) => dataItem.location_id === nextProps.node_id
-      )!.parent_id;
+      );
+      let parentId: null | string = null;
+      if (node) {
+        parentId = node.parent_id;
+      } else {
+        return [];
+      }
       dataToShow = dataToShow.filter(
-        (dataItem: LocationWithData) => dataItem.parent_id === parent_id
+        (dataItem: LocationWithData) => dataItem.parent_id === parentId
       );
     } else {
       dataToShow =
