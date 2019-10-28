@@ -22,6 +22,7 @@ export interface SmsData {
   lmp_edd: number;
   parity: number;
   gravidity: number;
+  location_id: string;
 }
 
 // actions
