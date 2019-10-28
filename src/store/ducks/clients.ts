@@ -127,6 +127,9 @@ export const setNavigationPage = (requestedPage: number): SetNavigationPageActio
   type: SET_NAVIGATION_PAGE,
 });
 
+/** removeHouseholds action */
+export const removeHouseholds = (): RemoveHouseholdsAction => removeHouseholdsAction;
+
 // actions
 
 /** removeClientsAction action */
