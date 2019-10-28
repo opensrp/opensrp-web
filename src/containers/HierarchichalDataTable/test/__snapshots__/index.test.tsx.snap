@@ -43,10 +43,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
       id="body"
     >
       <tr
-        id="no-rows"
+        key="d79168ed-ae95-43d1-8e45-9078212815f6"
       >
-        <td>
-          There seems to be no rows here :-(
+        <td
+          className="default-width"
+        >
+          <Link
+            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          >
+            <a
+              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+              onClick={[Function]}
+            >
+              Lang Son Province
+            </a>
+          </Link>
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          20
+        </td>
+        <td
+          className="default-width "
+        >
+          30
+        </td>
+        <td
+          className="default-width"
+        >
+          60
+        </td>
+      </tr>
+      <tr
+        key="c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <td
+          className="default-width"
+        >
+          <Link
+            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          >
+            <a
+              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+              onClick={[Function]}
+            >
+              Dien Bien
+            </a>
+          </Link>
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          20
+        </td>
+        <td
+          className="default-width "
+        >
+          30
+        </td>
+        <td
+          className="default-width"
+        >
+          60
+        </td>
+      </tr>
+      <tr
+        key="78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <td
+          className="default-width"
+        >
+          <Link
+            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+          >
+            <a
+              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+              onClick={[Function]}
+            >
+              Hanoi
+            </a>
+          </Link>
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          20
+        </td>
+        <td
+          className="default-width "
+        >
+          30
+        </td>
+        <td
+          className="default-width"
+        >
+          60
+        </td>
+      </tr>
+      <tr
+        key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <td
+          className="default-width"
+        >
+          <Link
+            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          >
+            <a
+              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+              onClick={[Function]}
+            >
+              Loc Binh
+            </a>
+          </Link>
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          20
+        </td>
+        <td
+          className="default-width "
+        >
+          30
+        </td>
+        <td
+          className="default-width"
+        >
+          60
         </td>
       </tr>
       <tr
@@ -63,22 +208,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
         <td
           className="default-width "
         >
-          0
+          40
         </td>
         <td
           className="default-width "
         >
-          0
+          80
         </td>
         <td
           className="default-width "
         >
-          0
+          120
         </td>
         <td
           className="default-width"
         >
-          0
+          240
         </td>
       </tr>
     </tbody>
@@ -229,10 +374,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 5`] = 
   id="body"
 >
   <tr
-    id="no-rows"
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
   >
-    <td>
-      There seems to be no rows here :-(
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/3/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/3/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          onClick={[Function]}
+        >
+          Lang Son Province
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/3/down/c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/3/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          onClick={[Function]}
+        >
+          Dien Bien
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/3/down/78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/3/down/78a12165-3c12-471f-8755-c96bac123292"
+          onClick={[Function]}
+        >
+          Hanoi
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/3/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/3/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          onClick={[Function]}
+        >
+          Loc Binh
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
     </td>
   </tr>
   <tr
@@ -249,22 +539,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 5`] = 
     <td
       className="default-width "
     >
-      0
+      40
     </td>
     <td
       className="default-width "
     >
-      0
+      80
     </td>
     <td
       className="default-width "
     >
-      0
+      120
     </td>
     <td
       className="default-width"
     >
-      0
+      240
     </td>
   </tr>
 </tbody>
@@ -275,10 +565,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 6`] = 
   id="body"
 >
   <tr
-    id="no-rows"
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
   >
-    <td>
-      There seems to be no rows here :-(
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          onClick={[Function]}
+        >
+          Lang Son Province
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          onClick={[Function]}
+        >
+          Dien Bien
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/78a12165-3c12-471f-8755-c96bac123292"
+          onClick={[Function]}
+        >
+          Hanoi
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          onClick={[Function]}
+        >
+          Loc Binh
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
     </td>
   </tr>
   <tr
@@ -295,22 +730,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 6`] = 
     <td
       className="default-width "
     >
-      0
+      40
     </td>
     <td
       className="default-width "
     >
-      0
+      80
     </td>
     <td
       className="default-width "
     >
-      0
+      120
     </td>
     <td
       className="default-width"
     >
-      0
+      240
     </td>
   </tr>
 </tbody>
@@ -321,10 +756,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
   id="body"
 >
   <tr
-    id="no-rows"
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
   >
-    <td>
-      There seems to be no rows here :-(
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          onClick={[Function]}
+        >
+          Lang Son Province
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          onClick={[Function]}
+        >
+          Dien Bien
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+          onClick={[Function]}
+        >
+          Hanoi
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          onClick={[Function]}
+        >
+          Loc Binh
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
     </td>
   </tr>
   <tr
@@ -341,22 +921,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
     <td
       className="default-width "
     >
-      0
+      40
     </td>
     <td
       className="default-width "
     >
-      0
+      80
     </td>
     <td
       className="default-width "
     >
-      0
+      120
     </td>
     <td
       className="default-width"
     >
-      0
+      240
     </td>
   </tr>
 </tbody>
@@ -367,10 +947,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 8`] = 
   id="body"
 >
   <tr
-    id="no-rows"
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
   >
-    <td>
-      There seems to be no rows here :-(
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          onClick={[Function]}
+        >
+          Lang Son Province
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          onClick={[Function]}
+        >
+          Dien Bien
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/78a12165-3c12-471f-8755-c96bac123292"
+          onClick={[Function]}
+        >
+          Hanoi
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/2/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/2/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          onClick={[Function]}
+        >
+          Loc Binh
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
     </td>
   </tr>
   <tr
@@ -387,22 +1112,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 8`] = 
     <td
       className="default-width "
     >
-      0
+      40
     </td>
     <td
       className="default-width "
     >
-      0
+      80
     </td>
     <td
       className="default-width "
     >
-      0
+      120
     </td>
     <td
       className="default-width"
     >
-      0
+      240
     </td>
   </tr>
 </tbody>
@@ -413,10 +1138,155 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
   id="body"
 >
   <tr
-    id="no-rows"
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
   >
-    <td>
-      There seems to be no rows here :-(
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          onClick={[Function]}
+        >
+          Lang Son Province
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          onClick={[Function]}
+        >
+          Dien Bien
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+          onClick={[Function]}
+        >
+          Hanoi
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+  >
+    <td
+      className="default-width"
+    >
+      <Link
+        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+      >
+        <a
+          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          onClick={[Function]}
+        >
+          Loc Binh
+        </a>
+      </Link>
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      20
+    </td>
+    <td
+      className="default-width "
+    >
+      30
+    </td>
+    <td
+      className="default-width"
+    >
+      60
     </td>
   </tr>
   <tr
@@ -433,22 +1303,22 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
     <td
       className="default-width "
     >
-      0
+      40
     </td>
     <td
       className="default-width "
     >
-      0
+      80
     </td>
     <td
       className="default-width "
     >
-      0
+      120
     </td>
     <td
       className="default-width"
     >
-      0
+      240
     </td>
   </tr>
 </tbody>

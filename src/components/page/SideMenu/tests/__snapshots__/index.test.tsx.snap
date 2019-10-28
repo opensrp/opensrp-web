@@ -30,28 +30,18 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
             style={Object {}}
           >
             <FontAwesomeIcon
-              border={false}
-              className=""
-              fixedWidth={false}
-              flip={null}
               icon={
                 Array [
                   "fas",
                   "home",
                 ]
               }
-              inverse={false}
-              listItem={false}
-              mask={null}
-              pull={null}
-              pulse={false}
-              rotation={null}
               size="lg"
-              spin={false}
-              symbol={false}
-              title=""
-              transform={null}
-            />
+            >
+              <i
+                className="fa fas,home"
+              />
+            </FontAwesomeIcon>
             <span
               className="collapse-menu-title"
             >
@@ -98,7 +88,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"action\\": \\"POP\\",
                               \\"block\\": [Function block],
                               \\"createHref\\": [Function createHref],
-@@ -323,11 +323,11 @@
+@@ -313,11 +313,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/analysis\\",
                             },
@@ -111,7 +101,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           Object {
                             \\"icon\\": Array [
                               \\"far\\",
-@@ -354,11 +354,11 @@
+@@ -344,11 +344,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/analysis\\",
                               },
@@ -124,7 +114,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"action\\": \\"POP\\",
                               \\"block\\": [Function block],
                               \\"createHref\\": [Function createHref],
-@@ -499,11 +499,11 @@
+@@ -461,11 +461,11 @@
                             <Collapse
                               appear={false}
                               enter={true}
@@ -137,7 +127,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               onEntered={[Function noop]}
                               onEntering={[Function noop]}
                               onExit={[Function noop]}
-@@ -515,11 +515,11 @@
+@@ -477,11 +477,11 @@
                             >
                               <Transition
                                 appear={false}
@@ -150,7 +140,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                 onEntered={[Function bound onEntered]}
                                 onEntering={[Function bound onEntering]}
                                 onExit={[Function bound onExit]}
-@@ -527,12 +527,16 @@
+@@ -489,12 +489,16 @@
                                 onExiting={[Function bound onExiting]}
                                 timeout={350}
                                 unmountOnExit={false}
