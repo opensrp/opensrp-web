@@ -37,6 +37,31 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
 }
 
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
+  public async componentDidMount() {
+    const {
+      fetchClientActionCreator,
+      fetchMembersActionCreator,
+      fetchEventsActionCreator,
+      match,
+    } = this.props;
+    const householdId = match.params.id || '';
+    const params = { identifier: householdId };
+    const clientService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
+    const clientResponse = await clientService.list(params);
+    if (clientResponse[0]) {
+      fetchClientActionCreator(clientResponse[0]);
+      const eventService = new OpenSRPService('event/search');
+      const eventsResponse = await eventService.list(params);
+      fetchEventsActionCreator(eventsResponse);
+      const memberParams = {
+        baseEntityId: householdId,
+        clientType: 'householdMember',
+      };
+      const memberService = new OpenSRPService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
+      const membersResponse = await memberService.list(memberParams);
+      fetchMembersActionCreator(membersResponse.clients);
+    }
+  }
   public render() {
     const { match } = this.props;
     const householdId = match.params.id || '';
