@@ -3,7 +3,12 @@ import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { RoutesProps } from '../../../App/Routes';
-import { ENABLE_REPORT_MODULE } from '../../../configs/env';
+import {
+  ENABLE_HOME_NAVIGATION,
+  ENABLE_NBC_AND_PNC_MODULE,
+  ENABLE_NUTRITION_MODULE,
+  ENABLE_REPORT_MODULE,
+} from '../../../configs/env';
 import { ENABLE_PREGNANCY_MODULE } from '../../../configs/env';
 import { headerShouldNotRender } from '../../../helpers/utils';
 import {
@@ -45,11 +50,15 @@ class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
       shouldRender: boolean;
       subMenuProps: Partial<SubMenuProps>;
     }
+
+    // REACT_APP_ENABLE_NUTRITION_MODULE=true
+    // REACT_APP_ENABLE_NBC_AND_PNC_MODULE=true
+    // REACT_APP_ENABLE_HOME_NAVIGATION=true
     const navigationModules: SubMenuToRender[] = [
-      { shouldRender: true, subMenuProps: HOME_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_HOME_NAVIGATION, subMenuProps: HOME_NAVIGATION_MODULE },
       { shouldRender: ENABLE_PREGNANCY_MODULE, subMenuProps: PREGNANCY_NAVIGATION_MODULE },
-      { shouldRender: true, subMenuProps: NBC_AND_PNC_NAVIGATION_MODULE },
-      { shouldRender: true, subMenuProps: NUTRITION_MODULE },
+      { shouldRender: ENABLE_NBC_AND_PNC_MODULE, subMenuProps: NBC_AND_PNC_NAVIGATION_MODULE },
+      { shouldRender: ENABLE_NUTRITION_MODULE, subMenuProps: NUTRITION_MODULE },
       { shouldRender: ENABLE_REPORT_MODULE, subMenuProps: REPORT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_CLIENT_RECORDS_MODULE, subMenuProps: CLIENT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_ADMIN_MODULE, subMenuProps: ADMIN_NAVIGATION_MODULE },
