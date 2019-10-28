@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Col, Input, InputGroup, InputGroupAddon, Row, Table, InputGroupText } from 'reactstrap';
+import { Col, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
+import SearchBox from '../../../components/page/SearchBox/SearchBox';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientsReducer, {
@@ -70,14 +70,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
         <h3> Household ({totalRecordsCount}) </h3>
         <Row>
           <Col md={5}>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
-                  <FontAwesomeIcon icon={['fas', 'search']} />
-                </InputGroupText>
-              </InputGroupAddon>
-              <Input placeholder="search" />
-            </InputGroup>
+            <SearchBox searchCallBack={this.search} />
           </Col>
         </Row>
         <Row>
@@ -116,6 +109,28 @@ class HouseholdList extends React.Component<HouseholdListProps> {
         </Row>
       </div>
     );
+  }
+
+  private search = (searchString: string) => {
+    this.getHouseholdList(searchString);
+  };
+
+  private async getHouseholdList(searchText: string) {
+    const {
+      fetchHouseholdsActionCreator,
+      setTotalRecordsActionCreator,
+      opensrpService,
+    } = this.props;
+    const params = {
+      clientType: 'ec_household',
+      pageNumber: '0',
+      pageSize: PAGINATION_SIZE,
+      searchText,
+    };
+    const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
+    const response = await clientService.list(params);
+    fetchHouseholdsActionCreator(response.clients);
+    setTotalRecordsActionCreator(response.total);
   }
 }
 
