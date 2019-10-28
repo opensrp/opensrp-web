@@ -6,9 +6,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedHierarchichalDataTable from '..';
 import { fetchLocations, removeLocations } from '../../../store/ducks/locations';
-import { fetchSms } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
-import { smsDataFixtures } from '../../Compartments/test/fixtures';
 import { communes, districts, provinces, villages } from './fixtures';
 
 jest.genMockFromModule('@fortawesome/react-fontawesome');
