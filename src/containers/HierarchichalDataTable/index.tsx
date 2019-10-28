@@ -355,16 +355,19 @@ class HierarchichalDataTable extends Component<Props, State> {
                       return (
                         <tr key={element.location_id}>
                           <td className="default-width">
-                            {/* {element.location} */}
-                            <Link
-                              to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
-                                this.props.title
-                              }/${
-                                this.props.current_level ? this.props.current_level + 1 : 1
-                              }/down/${element.location_id}`}
-                            >
-                              {element.location_name}
-                            </Link>
+                            {this.props.current_level === 3 ? (
+                              element.location_name
+                            ) : (
+                              <Link
+                                to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
+                                  this.props.title
+                                }/${
+                                  this.props.current_level ? this.props.current_level + 1 : 1
+                                }/down/${element.location_id}`}
+                              >
+                                {element.location_name}
+                              </Link>
+                            )}
                           </td>
                           <td
                             className={`default-width ${
