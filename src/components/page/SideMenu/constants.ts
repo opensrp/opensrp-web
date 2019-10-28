@@ -21,8 +21,8 @@ import {
   LOCATIONS_URL,
   LOGFACE,
   LOGFACE_URL,
-  NEWBORN_AND_POSTNATAL,
-  NEWBORN_AND_POSTNATAL_URL,
+  NBC_AND_PNC,
+  NBC_AND_PNC_URL,
   NUTRITION,
   NUTRITION_URL,
   PREGNANCY,
@@ -111,8 +111,8 @@ export const NUTRITION_PAGE_NAVIGATION: PageLink = {
 };
 
 export const NEWBORN_AND_POSTNATAL_PAGE_NAVIGATION: PageLink = {
-  label: NEWBORN_AND_POSTNATAL,
-  url: NEWBORN_AND_POSTNATAL_URL,
+  label: NBC_AND_PNC,
+  url: NBC_AND_PNC_URL,
 };
 
 export const COMPARTMENTS_PAGE_NAVIGATION: PageLink = {
@@ -132,9 +132,10 @@ export const ANALYSIS_PAGE_NAVIGATION: PageLink = {
 
 // icons
 export const homeNavIcon: IconProp = ['fas', 'home'];
-export const prengancyNavIcon: IconProp = ['far', 'user'];
-export const newbornAndPostnatalNavIcon: IconProp = ['far', 'user'];
+export const pregancyNavIcon: IconProp = ['far', 'user'];
+export const nbcandpncNavIcon: IconProp = ['far', 'user'];
 export const nutritionNavIcon: IconProp = ['far', 'user'];
+export const newbornAndPostnatalNavIcon: IconProp = ['far', 'user'];
 export const clientModuleNavIcon: IconProp = ['far', 'user'];
 export const reportModuleNavIcon: IconProp = ['fas', 'chart-line'];
 export const adminModuleNavIcon: IconProp = ['fas', 'cog'];
@@ -147,8 +148,20 @@ export const HOME_PARENT_NAV: ModulePageLink = {
   url: HOME_URL,
 };
 
+export const NBC_AND_PNC_PARENT_NAV: ModulePageLink = {
+  icon: nbcandpncNavIcon,
+  label: NBC_AND_PNC,
+  url: NBC_AND_PNC_URL,
+};
+
+export const NUTRITION_PARENT_NAVIGATION: ModulePageLink = {
+  icon: nutritionNavIcon,
+  label: NUTRITION,
+  url: NUTRITION_URL,
+};
+
 export const PREGNANCY_MODULE_PARENT_NAV: ModulePageLink = {
-  icon: prengancyNavIcon,
+  icon: pregancyNavIcon,
   label: PREGNANCY,
   url: PREGNANCY_URL,
 };
@@ -180,6 +193,16 @@ export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
     ANALYSIS_PAGE_NAVIGATION,
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: PREGNANCY_MODULE_PARENT_NAV,
+};
+
+export const NBC_AND_PNC_NAVIGATION_MODULE: NavigationModule = {
+  childNavs: [LOGFACE_PAGE_NAVIGATION],
+  parentNav: NBC_AND_PNC_PARENT_NAV,
+};
+
+export const NUTRITION_MODULE: NavigationModule = {
+  childNavs: [LOGFACE_PAGE_NAVIGATION],
+  parentNav: NUTRITION_PARENT_NAVIGATION,
 };
 
 export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
