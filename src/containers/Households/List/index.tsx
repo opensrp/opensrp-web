@@ -14,6 +14,7 @@ import clientsReducer, {
   getTotalRecords,
   Household,
   reducerName as clientsReducerName,
+  removeHouseholdsAction,
   setTotalRecords,
 } from '../../../store/ducks/clients';
 import './householdList.css';
@@ -28,6 +29,7 @@ export interface HouseholdListProps {
   totalRecordsCount: number;
   fetchHouseholdsActionCreator: typeof fetchHouseholds;
   setTotalRecordsActionCreator: typeof setTotalRecords;
+  removeHouseholdsActionCreator: typeof removeHouseholdsAction;
 }
 
 /** default props for the householdList component */
@@ -35,6 +37,7 @@ export const defaultHouseholdListProps: HouseholdListProps = {
   fetchHouseholdsActionCreator: fetchHouseholds,
   householdsArray: [],
   opensrpService: OpenSRPService,
+  removeHouseholdsActionCreator: removeHouseholdsAction,
   setTotalRecordsActionCreator: setTotalRecords,
   totalRecordsCount: 0,
 };
@@ -156,6 +159,7 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 /** map props to actions */
 const mapDispatchToProps = {
   fetchHouseholdsActionCreator: fetchHouseholds,
+  removeHouseholdsActionCreator: removeHouseholdsAction,
   setTotalRecordsActionCreator: setTotalRecords,
 };
 
