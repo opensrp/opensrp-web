@@ -17,6 +17,7 @@ import clientReducer, {
   reducerName as clientReducerName,
 } from '../../../store/ducks/client';
 import { Event } from '../../../store/ducks/client';
+import {Client} from '../../../store/ducks/clients';
 import { Household } from '../../../store/ducks/clients';
 
 /** register the client reducer */
@@ -72,7 +73,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     return (
       <div>
         <h3> {household.lastName} </h3>
-        <div id="basic information">
+        <div id="basic-info-container">
           <Row>
             <Col>
               <span> Basic Information</span>
@@ -80,7 +81,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
             </Col>
           </Row>
           <Row>
-            <Table>
+            <Table borderless={true}>
               <tbody>
                 <tr>
                   <td>HHID Number</td>
@@ -104,6 +105,42 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
                   <td>Register date</td>
                   <td>{household.dateCreated || ''}</td>
                 </tr>
+              </tbody>
+            </Table>
+          </Row>
+        </div>
+        <div id="members-list-container">
+          <Row>
+            <Col>
+              <span> Members List</span>
+            </Col>
+          </Row>
+          <Row>
+            <Table striped={true}>
+              <thead>
+                <tr>
+                  <td>First Name</td>
+                  <td>Last Name</td>
+                  <td>Age</td>
+                  <td>Register Status</td>
+                  <td>Actions</td>
+                </tr>
+              </thead>
+              <tbody>
+                {members.map((member: Client) => {
+                  return (
+                    <tr key={member.baseEntityId}>
+                      <td>{member.firstName}</td>
+                      <td>{member.lastName}</td>
+                      <td>{member.attributes.age_year_part}</td>
+                      <td>{member.attributes.registration_status}</td>
+                      <td>
+                        <a href={`${'#'}`}> View </a>
+                        <a href={`${'#'}`}> Remove </a>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </Row>
