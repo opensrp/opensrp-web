@@ -11,6 +11,9 @@ import store from '../../../store/index';
 import { smsDataFixtures } from '../../Compartments/test/fixtures';
 import { communes, districts, provinces, villages } from './fixtures';
 
+jest.genMockFromModule('@fortawesome/react-fontawesome');
+jest.mock('@fortawesome/react-fontawesome');
+
 const history = createBrowserHistory();
 
 describe('HierarchichalDataTable', () => {
