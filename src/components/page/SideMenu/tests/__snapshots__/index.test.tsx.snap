@@ -161,7 +161,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     vertical={false}
 @@ -674,11 +678,11 @@
                               \\"label\\": \\"Logface\\",
-                              \\"url\\": \\"/log-face\\",
+                              \\"url\\": \\"/pnc_and_nbc_log_face\\",
                             },
                           ]
                         }
@@ -174,7 +174,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"far\\",
 @@ -697,11 +701,11 @@
                                 \\"label\\": \\"Logface\\",
-                                \\"url\\": \\"/log-face\\",
+                                \\"url\\": \\"/pnc_and_nbc_log_face\\",
                               },
                             ]
                           }
@@ -187,7 +187,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"createHref\\": [Function createHref],
 @@ -931,11 +935,11 @@
                               \\"label\\": \\"Logface\\",
-                              \\"url\\": \\"/log-face\\",
+                              \\"url\\": \\"/nutrition_logface_url\\",
                             },
                           ]
                         }
@@ -200,7 +200,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"far\\",
 @@ -954,11 +958,11 @@
                                 \\"label\\": \\"Logface\\",
-                                \\"url\\": \\"/log-face\\",
+                                \\"url\\": \\"/nutrition_logface_url\\",
                               },
                             ]
                           }

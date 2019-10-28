@@ -26,6 +26,7 @@ exports[`PregnancyHome must render correctly 1`] = `
   <ModuleHome
     deactivateLinks={false}
     description=""
+    logfaceUrl="#"
     title=""
   >
     <div
@@ -68,10 +69,10 @@ exports[`PregnancyHome must render correctly 1`] = `
                 id="cont-sized"
               >
                 <Link
-                  to="/log-face"
+                  to="#"
                 >
                   <a
-                    href="/log-face"
+                    href="/"
                     onClick={[Function]}
                   >
                     <button
