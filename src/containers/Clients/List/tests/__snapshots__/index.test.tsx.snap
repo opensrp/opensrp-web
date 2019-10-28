@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/clients/list/ClientList renders without crashing 1`] = `
+exports[`containers/clients/list/ClientList renders correctly 1`] = `
 <ClientList
   clientsArray={
     Array [
@@ -490,6 +490,55 @@ exports[`containers/clients/list/ClientList renders without crashing 1`] = `
     </Table>
   </div>
 </ClientList>
+`;
+
+exports[`containers/clients/list/ClientList renders correctly when clientsArray is an empty array: Ripple Loader 1`] = `
+<Ripple
+  borderColor="#ff5d00"
+  borderStyle="solid"
+  borderWidth="4px"
+  height="64px"
+  minHeight="80vh"
+  width="64px"
+>
+  <div
+    className="lds-ripple-parent"
+    style={
+      Object {
+        "minHeight": "80vh",
+      }
+    }
+  >
+    <div
+      className="lds-ripple"
+      style={
+        Object {
+          "height": "64px",
+          "width": "64px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderColor": "#ff5d00",
+            "borderStyle": "solid",
+            "borderWidth": "4px",
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "borderColor": "#ff5d00",
+            "borderStyle": "solid",
+            "borderWidth": "4px",
+          }
+        }
+      />
+    </div>
+  </div>
+</Ripple>
 `;
 
 exports[`containers/clients/list/ClientList works correctly with the redux store 1`] = `

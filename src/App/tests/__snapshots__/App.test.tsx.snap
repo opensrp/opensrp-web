@@ -36,10 +36,11 @@ exports[`App renders App correctly 1`] = `
   >
     <App>
       <Container
+        fluid={true}
         tag="div"
       >
         <div
-          className="container"
+          className="container-fluid"
         >
           <Connect(withRouter(HeaderComponent))>
             <withRouter(HeaderComponent)
@@ -102,234 +103,117 @@ exports[`App renders App correctly 1`] = `
                   }
                 }
               >
-                <div>
-                  <Navbar
-                    color="light"
-                    expand="md"
-                    light={true}
-                    tag="nav"
+                <Row
+                  tag="div"
+                >
+                  <div
+                    className="row"
                   >
-                    <nav
-                      className="navbar navbar-expand-md navbar-light bg-light"
+                    <Navbar
+                      className="w-100 bg-navbar"
+                      expand="sm"
+                      fixed="top"
+                      tag="nav"
                     >
                       <nav
-                        className="navbar navbar-expand-md navbar-light bg-light"
+                        className="w-100 bg-navbar navbar navbar-expand-sm fixed-top"
                       >
-                        <Link
-                          className="navbar-brand"
-                          to="/"
-                        >
-                          <a
-                            className="navbar-brand"
-                            href="/"
-                            onClick={[Function]}
-                          >
-                            <img
-                              alt="OpenSRP"
-                              src="logo.png"
-                            />
-                          </a>
-                        </Link>
-                      </nav>
-                      <NavbarToggler
-                        onClick={[Function]}
-                        tag="button"
-                        type="button"
-                      >
-                        <button
-                          className="navbar-toggler"
-                          onClick={[Function]}
-                          type="button"
-                        >
-                          <span
-                            className="navbar-toggler-icon"
-                          />
-                        </button>
-                      </NavbarToggler>
-                      <Collapse
-                        appear={false}
-                        enter={true}
-                        exit={true}
-                        in={false}
-                        isOpen={false}
-                        mountOnEnter={false}
-                        navbar={true}
-                        onEnter={[Function]}
-                        onEntered={[Function]}
-                        onEntering={[Function]}
-                        onExit={[Function]}
-                        onExited={[Function]}
-                        onExiting={[Function]}
-                        tag="div"
-                        timeout={350}
-                        unmountOnExit={false}
-                      >
-                        <Transition
-                          appear={false}
-                          enter={true}
-                          exit={true}
-                          in={false}
-                          mountOnEnter={false}
-                          onEnter={[Function]}
-                          onEntered={[Function]}
-                          onEntering={[Function]}
-                          onExit={[Function]}
-                          onExited={[Function]}
-                          onExiting={[Function]}
-                          timeout={350}
-                          unmountOnExit={false}
+                        <Col
+                          className="bg-top-nav"
+                          md={2}
+                          sm={3}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
                         >
                           <div
-                            className="collapse navbar-collapse"
-                            style={Object {}}
+                            className="bg-top-nav col-sm-3 col-md-2"
+                          >
+                            <nav
+                              className="navbar navbar-expand-md navbar-light"
+                            >
+                              <Link
+                                className="navbar-brand"
+                                to="/"
+                              >
+                                <a
+                                  className="navbar-brand"
+                                  href="/"
+                                  onClick={[Function]}
+                                >
+                                  <img
+                                    alt="OpenSRP"
+                                    src="logo.png"
+                                  />
+                                </a>
+                              </Link>
+                            </nav>
+                          </div>
+                        </Col>
+                        <Col
+                          md={8}
+                          sm={5}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
+                        >
+                          <div
+                            className="col-sm-5 col-md-8"
+                          />
+                        </Col>
+                        <Col
+                          className="bg-top-nav"
+                          md={2}
+                          sm={4}
+                          tag="div"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
+                        >
+                          <div
+                            className="bg-top-nav col-sm-4 col-md-2"
                           >
                             <Nav
-                              className="mr-auto"
-                              navbar={true}
+                              className="navbar navbar-expand-md center-account-text"
                               tag="ul"
                               vertical={false}
                             >
                               <ul
-                                className="mr-auto navbar-nav"
-                              >
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/"
-                                    >
-                                      <Link
-                                        aria-current="page"
-                                        className="nav-link active"
-                                        style={Object {}}
-                                        to="/"
-                                      >
-                                        <a
-                                          aria-current="page"
-                                          className="nav-link active"
-                                          href="/"
-                                          onClick={[Function]}
-                                          style={Object {}}
-                                        >
-                                          Home
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/404"
-                                    >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/404"
-                                      >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/404"
-                                          onClick={[Function]}
-                                        >
-                                          Users
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/404"
-                                    >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/404"
-                                      >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/404"
-                                          onClick={[Function]}
-                                        >
-                                          About
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                                <NavItem
-                                  tag="li"
-                                >
-                                  <li
-                                    className="nav-item"
-                                  >
-                                    <NavLink
-                                      activeClassName="active"
-                                      className="nav-link"
-                                      to="/clients"
-                                    >
-                                      <Link
-                                        aria-current={null}
-                                        className="nav-link"
-                                        to="/clients"
-                                      >
-                                        <a
-                                          aria-current={null}
-                                          className="nav-link"
-                                          href="/clients"
-                                          onClick={[Function]}
-                                        >
-                                          Clients
-                                        </a>
-                                      </Link>
-                                    </NavLink>
-                                  </li>
-                                </NavItem>
-                              </ul>
-                            </Nav>
-                            <Nav
-                              className="ml-0"
-                              navbar={true}
-                              tag="ul"
-                              vertical={false}
-                            >
-                              <ul
-                                className="ml-0 navbar-nav"
+                                className="navbar navbar-expand-md center-account-text nav"
                               >
                                 <NavLink
                                   activeClassName="active"
-                                  className="nav-link"
+                                  className="nav-link account-text"
                                   to="/login"
                                 >
                                   <Link
                                     aria-current={null}
-                                    className="nav-link"
+                                    className="nav-link account-text"
                                     to="/login"
                                   >
                                     <a
                                       aria-current={null}
-                                      className="nav-link"
+                                      className="nav-link account-text"
                                       href="/login"
                                       onClick={[Function]}
                                     >
@@ -340,11 +224,11 @@ exports[`App renders App correctly 1`] = `
                               </ul>
                             </Nav>
                           </div>
-                        </Transition>
-                      </Collapse>
-                    </nav>
-                  </Navbar>
-                </div>
+                        </Col>
+                      </nav>
+                    </Navbar>
+                  </div>
+                </Row>
               </HeaderComponent>
             </withRouter(HeaderComponent)>
           </Connect(withRouter(HeaderComponent))>
@@ -357,6 +241,8 @@ exports[`App renders App correctly 1`] = `
               id="main-page-row"
             >
               <Col
+                className="side-menu-section"
+                md={2}
                 tag="div"
                 widths={
                   Array [
@@ -369,7 +255,349 @@ exports[`App renders App correctly 1`] = `
                 }
               >
                 <div
-                  className="col"
+                  className="side-menu-section col-md-2"
+                >
+                  <SideMenu
+                    navigationModules={
+                      Array [
+                        Object {
+                          "enabled": true,
+                          "module": Object {
+                            "childNavs": Array [
+                              Object {
+                                "label": "All clients",
+                                "url": "/clients",
+                              },
+                            ],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "far",
+                                "user",
+                              ],
+                              "label": "Client Records",
+                            },
+                          },
+                        },
+                        Object {
+                          "enabled": false,
+                          "module": Object {
+                            "childNavs": Array [],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "fas",
+                                "chart-line",
+                              ],
+                              "label": "Reports",
+                              "url": "/404",
+                            },
+                          },
+                        },
+                        Object {
+                          "enabled": false,
+                          "module": Object {
+                            "childNavs": Array [],
+                            "parentNav": Object {
+                              "icon": Array [
+                                "fas",
+                                "cog",
+                              ],
+                              "label": "Admin",
+                            },
+                          },
+                        },
+                      ]
+                    }
+                  >
+                    <div
+                      className="side-menu-container"
+                    >
+                      <Row
+                        tag="div"
+                      >
+                        <div
+                          className="row"
+                        >
+                          <Col
+                            className="side-menu-extend"
+                            tag="div"
+                            widths={
+                              Array [
+                                "xs",
+                                "sm",
+                                "md",
+                                "lg",
+                                "xl",
+                              ]
+                            }
+                          >
+                            <div
+                              className="side-menu-extend col"
+                            >
+                              <withRouter(SubMenu)
+                                childNavs={
+                                  Array [
+                                    Object {
+                                      "label": "All clients",
+                                      "url": "/clients",
+                                    },
+                                  ]
+                                }
+                                collapsedModuleLabel=""
+                                key="0"
+                                parentNav={
+                                  Object {
+                                    "icon": Array [
+                                      "far",
+                                      "user",
+                                    ],
+                                    "label": "Client Records",
+                                  }
+                                }
+                                setCollapsedModuleLabel={[Function]}
+                              >
+                                <SubMenu
+                                  childNavs={
+                                    Array [
+                                      Object {
+                                        "label": "All clients",
+                                        "url": "/clients",
+                                      },
+                                    ]
+                                  }
+                                  collapsedModuleLabel=""
+                                  history={
+                                    Object {
+                                      "action": "POP",
+                                      "block": [Function],
+                                      "createHref": [Function],
+                                      "go": [Function],
+                                      "goBack": [Function],
+                                      "goForward": [Function],
+                                      "length": 1,
+                                      "listen": [Function],
+                                      "location": Object {
+                                        "hash": "",
+                                        "pathname": "/",
+                                        "search": "",
+                                        "state": undefined,
+                                      },
+                                      "push": [Function],
+                                      "replace": [Function],
+                                    }
+                                  }
+                                  location={
+                                    Object {
+                                      "hash": "",
+                                      "pathname": "/",
+                                      "search": "",
+                                      "state": undefined,
+                                    }
+                                  }
+                                  match={
+                                    Object {
+                                      "isExact": true,
+                                      "params": Object {},
+                                      "path": "/",
+                                      "url": "/",
+                                    }
+                                  }
+                                  parentNav={
+                                    Object {
+                                      "icon": Array [
+                                        "far",
+                                        "user",
+                                      ],
+                                      "label": "Client Records",
+                                    }
+                                  }
+                                  setCollapsedModuleLabel={[Function]}
+                                >
+                                  <div
+                                    id="sub-menu-Client-Records"
+                                  >
+                                    <Nav
+                                      className="side-collapse-nav"
+                                      id="Client-Records"
+                                      onClick={[Function]}
+                                      tag="ul"
+                                      vertical={false}
+                                    >
+                                      <ul
+                                        className="side-collapse-nav nav"
+                                        id="Client-Records"
+                                        onClick={[Function]}
+                                      >
+                                        <NavItem
+                                          tag="li"
+                                        >
+                                          <li
+                                            className="nav-item"
+                                          >
+                                            <span
+                                              className="nav nav-link side-nav-item"
+                                            >
+                                              <FontAwesomeIcon
+                                                border={false}
+                                                className=""
+                                                fixedWidth={false}
+                                                flip={null}
+                                                icon={
+                                                  Array [
+                                                    "far",
+                                                    "user",
+                                                  ]
+                                                }
+                                                inverse={false}
+                                                listItem={false}
+                                                mask={null}
+                                                pull={null}
+                                                pulse={false}
+                                                rotation={null}
+                                                size="lg"
+                                                spin={false}
+                                                symbol={false}
+                                                title=""
+                                                transform={null}
+                                              >
+                                                <svg
+                                                  aria-hidden="true"
+                                                  className="svg-inline--fa fa-user fa-w-14 fa-lg "
+                                                  data-icon="user"
+                                                  data-prefix="far"
+                                                  focusable="false"
+                                                  role="img"
+                                                  style={Object {}}
+                                                  viewBox="0 0 448 512"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                  <path
+                                                    d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"
+                                                    fill="currentColor"
+                                                    style={Object {}}
+                                                  />
+                                                </svg>
+                                              </FontAwesomeIcon>
+                                              <span
+                                                className="collapse-menu-title"
+                                              >
+                                                 
+                                                Client Records
+                                                 
+                                              </span>
+                                            </span>
+                                          </li>
+                                        </NavItem>
+                                      </ul>
+                                    </Nav>
+                                    <Collapse
+                                      appear={false}
+                                      enter={true}
+                                      exit={true}
+                                      in={false}
+                                      isOpen={false}
+                                      mountOnEnter={false}
+                                      onEnter={[Function]}
+                                      onEntered={[Function]}
+                                      onEntering={[Function]}
+                                      onExit={[Function]}
+                                      onExited={[Function]}
+                                      onExiting={[Function]}
+                                      tag="div"
+                                      timeout={350}
+                                      unmountOnExit={false}
+                                    >
+                                      <Transition
+                                        appear={false}
+                                        enter={true}
+                                        exit={true}
+                                        in={false}
+                                        mountOnEnter={false}
+                                        onEnter={[Function]}
+                                        onEntered={[Function]}
+                                        onEntering={[Function]}
+                                        onExit={[Function]}
+                                        onExited={[Function]}
+                                        onExiting={[Function]}
+                                        timeout={350}
+                                        unmountOnExit={false}
+                                      >
+                                        <div
+                                          className="collapse"
+                                          style={Object {}}
+                                        >
+                                          <Nav
+                                            key="child-nav-0"
+                                            tag="ul"
+                                            vertical={false}
+                                          >
+                                            <ul
+                                              className="nav"
+                                            >
+                                              <NavItem
+                                                className="nav-item-extend"
+                                                tag="li"
+                                              >
+                                                <li
+                                                  className="nav-item-extend nav-item"
+                                                >
+                                                  <NavLink
+                                                    activeClassName="side-nav-active"
+                                                    className="nav-link side-nav-item"
+                                                    to="/clients"
+                                                  >
+                                                    <Link
+                                                      aria-current={null}
+                                                      className="nav-link side-nav-item"
+                                                      to="/clients"
+                                                    >
+                                                      <a
+                                                        aria-current={null}
+                                                        className="nav-link side-nav-item"
+                                                        href="/clients"
+                                                        onClick={[Function]}
+                                                      >
+                                                        <span>
+                                                           
+                                                          All clients
+                                                           
+                                                        </span>
+                                                      </a>
+                                                    </Link>
+                                                  </NavLink>
+                                                </li>
+                                              </NavItem>
+                                            </ul>
+                                          </Nav>
+                                        </div>
+                                      </Transition>
+                                    </Collapse>
+                                  </div>
+                                </SubMenu>
+                              </withRouter(SubMenu)>
+                            </div>
+                          </Col>
+                        </div>
+                      </Row>
+                    </div>
+                  </SideMenu>
+                </div>
+              </Col>
+              <Col
+                className="container-section"
+                md={10}
+                tag="div"
+                widths={
+                  Array [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl",
+                  ]
+                }
+              >
+                <div
+                  className="container-section col-md-10"
                 >
                   <Switch>
                     <Connect(PrivateRoute)
@@ -516,7 +744,7 @@ exports[`App renders App correctly 1`] = `
                                       className="col"
                                     >
                                       <h3>
-                                        Welcome to OpenSRp
+                                        Welcome to OpenSRP
                                       </h3>
                                     </div>
                                   </Col>

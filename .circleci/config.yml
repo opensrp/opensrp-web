@@ -14,8 +14,7 @@ jobs:
           REACT_APP_WEBSITE_NAME: "OpenSRP"
           REACT_APP_DOMAIN_NAME: "http://localhost:3000"
           REACT_APP_THEME_COLOR: "000000"
-          REACT_APP_ENABLE_USERS: "true"
-          REACT_APP_ENABLE_ABOUT: "true"
+          REACT_APP_ENABLE_CLIENT_PAGE: "true"
           REACT_APP_DISABLE_LOGIN_PROTECTION: "true"
           REACT_APP_SUPERSET_API_BASE: "https://superset.reveal-stage.smartregister.org/"
           REACT_APP_SUPERSET_API_ENDPOINT: "slice"
@@ -29,6 +28,7 @@ jobs:
           REACT_APP_ONADATA_USER_URL: "https://stage-api.ona.io/api/v1/user.json"
           REACT_APP_ONADATA_OAUTH_STATE: "onadata"
           REACT_APP_ONADATA_CLIENT_ID: "hunter2"
+          COVERALLS_REPO_TOKEN: ""
 
     working_directory: ~/repo
 
@@ -50,6 +50,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run linter
-      - run: yarn lint-ts
+      - run: 
+          name: lint Ts
+          command: yarn lint-ts
       # run tests!
-      - run: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run: 
+          name: Run test with coverage
+          command: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run:
+          name: upload coverage to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      - store_artifacts:
+          path: coverage

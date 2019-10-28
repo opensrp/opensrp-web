@@ -29,7 +29,7 @@ describe('containers/clients/list/ClientList', () => {
     shallow(<ClientList {...props} />);
   });
 
-  it('renders without crashing', () => {
+  it('renders correctly', () => {
     const mock: any = jest.fn();
     const opensrpServiceMock: any = jest.fn();
     const props = {
@@ -41,6 +41,21 @@ describe('containers/clients/list/ClientList', () => {
     };
     const wrapper = mount(<ClientList {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.unmount();
+  });
+
+  it('renders correctly when clientsArray is an empty array', () => {
+    const mock: any = jest.fn();
+    const opensrpServiceMock: any = jest.fn();
+    const props = {
+      clientsArray: [],
+      fetchClientsActionCreator: mock,
+      location: mock,
+      match: mock,
+      opensrpService: opensrpServiceMock,
+    };
+    const wrapper = mount(<ClientList {...props} />);
+    expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
     wrapper.unmount();
   });
 

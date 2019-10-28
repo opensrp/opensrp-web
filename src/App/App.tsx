@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faCog, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -8,10 +8,12 @@ import { Route, Switch } from 'react-router';
 import { Col, Container, Row } from 'reactstrap';
 import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
+import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
 import { HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
+import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedHouseholdList from '../containers/Households/List';
@@ -19,17 +21,19 @@ import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
-library.add(faUser);
-library.add(faSearch);
+library.add(faUser, faChartLine, faCog, faSearch);
 
 /** Main App component */
 class App extends Component {
   public render() {
     return (
-      <Container>
+      <Container fluid={true}>
         <ConnectedHeader />
         <Row id="main-page-row">
-          <Col>
+          <Col md={2} className="side-menu-section">
+            <SideMenu {...sideMenuProps} />
+          </Col>
+          <Col md={10} className="container-section">
             <Switch>
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
