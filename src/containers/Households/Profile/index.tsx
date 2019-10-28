@@ -37,6 +37,23 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
   }
 }
 
+/** Interface to describe props from mapStateToProps */
+interface DispatchedStateProps {
+  household: Household;
+  events: Event[];
+  members: Household[];
+}
+
+/** Map props to state  */
+const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
+  const result = {
+    events: getEventsArray(state),
+    household: getClient(state),
+    members: getMembersArray(state),
+  };
+  return result;
+};
+
 const ConnectedHouseholdProfile = withRouter(HouseholdProfile);
 
 export default ConnectedHouseholdProfile;
