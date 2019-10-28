@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Store } from 'redux';
 import { OpenSRPService } from '../../../services/opensrp';
-import { fetchClient, fetchEvents, fetchMembers } from '../../../store/ducks/client';
+import {
+  fetchClient,
+  fetchEvents,
+  fetchMembers,
+  getClient,
+  getEventsArray,
+  getMembersArray,
+} from '../../../store/ducks/client';
+import { Event } from '../../../store/ducks/client';
 import { Household } from '../../../store/ducks/clients';
 
 /** interface for HouseholdProfile URL params */
@@ -12,7 +21,7 @@ interface HouseholdProfileURLParams {
 /** interface for HouseholdProfileProps */
 export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
   household: Household;
-  event: Event;
+  events: Event[];
   members: Household[];
   fetchClientActionCreator: typeof fetchClient;
   fetchMembersActionCreator: typeof fetchMembers;
@@ -27,6 +36,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     return <div> Household Profile {householdId} </div>;
   }
 }
+
 const ConnectedHouseholdProfile = withRouter(HouseholdProfile);
 
 export default ConnectedHouseholdProfile;
