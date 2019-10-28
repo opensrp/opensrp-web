@@ -17,6 +17,7 @@ import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
 import ConnectedHouseholdList from '../containers/Households/List';
+import ConnectedHouseholdProfile from '../containers/Households/Profile';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -52,6 +53,12 @@ class App extends Component {
                 exact={true}
                 path={HOUSEHOLD_URL}
                 component={ConnectedHouseholdList}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path="/household/profile/:id"
+                component={ConnectedHouseholdProfile}
               />
               {/* tslint:disable jsx-no-lambda */}
               <Route

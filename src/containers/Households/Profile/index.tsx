@@ -17,7 +17,7 @@ import clientReducer, {
   reducerName as clientReducerName,
 } from '../../../store/ducks/client';
 import { Event } from '../../../store/ducks/client';
-import {Client} from '../../../store/ducks/clients';
+import { Client } from '../../../store/ducks/clients';
 import { Household } from '../../../store/ducks/clients';
 
 /** register the client reducer */

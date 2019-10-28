@@ -2,6 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Col, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
@@ -101,7 +102,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
                       <td>{household.dateCreated}</td>
                       <td>{household.attributes.memberCount}</td>
                       <td>
-                        <a href={`${'#'}`}> view </a>
+                        <Link to={`/household/profile/${household.baseEntityId}/`}>view</Link>
                       </td>
                     </tr>
                   );
