@@ -2,7 +2,9 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Col, Container, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
+import Loading from '../../../components/page/Loading';
 import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_HOUSEHOLD_ENDPOINT } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
@@ -63,9 +65,51 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     }
   }
   public render() {
-    const { match } = this.props;
-    const householdId = match.params.id || '';
-    return <div> Household Profile {householdId} </div>;
+    const { household, events, members } = this.props;
+    if (!household) {
+      return <Loading />;
+    }
+    return (
+      <div>
+        <h3> {household.lastName} </h3>
+        <div id="basic information">
+          <Row>
+            <Col>
+              <span> Basic Information</span>
+              <div className="float-right">Edit Profile</div>
+            </Col>
+          </Row>
+          <Row>
+            <Table>
+              <tbody>
+                <tr>
+                  <td>HHID Number</td>
+                  <td>{household.baseEntityId}</td>
+                  <td>Phone</td>
+                  <td>{household.attributes.phoneNumber || ''}</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Family Name</td>
+                  <td>{household.lastName}</td>
+                  <td>Provider</td>
+                  <td>{events[0] ? events[0].providerId : ''}</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Head of Household</td>
+                  <td>{household.firstName}</td>
+                  <td>Register date</td>
+                  <td>{household.dateCreated || ''}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Row>
+        </div>
+      </div>
+    );
   }
 }
 
