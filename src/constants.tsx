@@ -41,6 +41,15 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const HIGH = 'high';
+export type HIGH = typeof HIGH;
+export const LOW = 'low';
+export type LOW = typeof LOW;
+export const RED = 'red';
+export type RED = typeof RED;
+export const NOT_SET_LOWERCASE = 'not set';
+export type NOT_SET_LOWERCASE = typeof NOT_SET_LOWERCASE;
+export type INDIVIDUAL_RISK_LEVELS = RED | HIGH | LOW | NOT_SET_LOWERCASE;
 export const HOME = 'Home';
 export type HOME = typeof HOME;
 export const PREGNANCY = 'Pregnancy';

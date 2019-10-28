@@ -15,8 +15,11 @@ import {
   COMPARTMENTS_URL,
   DISTRICT,
   HIERARCHICAL_DATA_URL,
+  HIGH,
   HIGH_RISK,
+  INDIVIDUAL_RISK_LEVELS,
   LOCATION_SLICES,
+  LOW,
   LOW_RISK,
   NO_RISK,
   PROVINCE,
@@ -75,31 +78,79 @@ const defaultProps: Props = {
   villages: [],
 };
 
-function addDataToLocations(locations: {
-  [key: string]: Location[];
-}): { [key: string]: LocationWithData[] } {
+interface RiskTotals {
+  high_risk: number;
+  low_risk: number;
+  no_risk: number;
+}
+
+function getVillageRiskTotals(location: Location, smsData: SmsData[]): RiskTotals {
+  const reducer = (accumulator: RiskTotals, dataItem: SmsData) => {
+    switch (dataItem.logface_risk) {
+      case HIGH:
+        return {
+          ...accumulator,
+          high_risk: accumulator.high_risk + 1,
+        };
+      case LOW:
+        return {
+          ...accumulator,
+          low_risk: accumulator.low_risk + 1,
+        };
+      case NO_RISK:
+        return {
+          ...accumulator,
+          no_risk: accumulator.no_risk + 1,
+        };
+      default:
+        return accumulator;
+    }
+  };
+  return smsData
+    .filter((dataItem: SmsData) => dataItem.location_id === location.location_id)
+    .reduce(reducer, {
+      high_risk: 0,
+      low_risk: 0,
+      no_risk: 0,
+    });
+}
+function getRiskTotals(locations: LocationWithData[]) {
+  const reducer = (accumulator: RiskTotals, location: LocationWithData): RiskTotals => {
+    return {
+      high_risk: accumulator.high_risk + location.high_risk,
+      low_risk: accumulator.low_risk + location.low_risk,
+      no_risk: accumulator.no_risk + location.no_risk,
+    };
+  };
+  return locations.reduce(reducer, {
+    high_risk: 0,
+    low_risk: 0,
+    no_risk: 0,
+  });
+}
+function getTotal(riskTotals: RiskTotals) {
+  return riskTotals.high_risk + riskTotals.low_risk + riskTotals.no_risk;
+}
+function addDataToLocations(
+  locations: {
+    [key: string]: Location[];
+  },
+  smsData: SmsData[]
+): { [key: string]: LocationWithData[] } {
   const villagesWithData: LocationWithData[] = [];
   for (const village in locations.villages) {
     if (locations.villages[village]) {
+      const villageRiskTotals: RiskTotals = getVillageRiskTotals(
+        locations.villages[village],
+        smsData
+      );
+      const totalRisk = getTotal(villageRiskTotals);
       villagesWithData.push({
         ...locations.villages[village],
-        high_risk: 0,
-        low_risk: 0,
-        no_risk: 0,
-        total: 0,
-      });
-    }
-  }
-
-  const districtsWithData: LocationWithData[] = [];
-  for (const district in locations.districts) {
-    if (locations.districts[district]) {
-      districtsWithData.push({
-        ...locations.districts[district],
-        high_risk: 0,
-        low_risk: 0,
-        no_risk: 0,
-        total: 0,
+        high_risk: villageRiskTotals.high_risk,
+        low_risk: villageRiskTotals.low_risk,
+        no_risk: villageRiskTotals.no_risk,
+        total: totalRisk,
       });
     }
   }
@@ -107,12 +158,36 @@ function addDataToLocations(locations: {
   const communesWithData: LocationWithData[] = [];
   for (const commune in locations.communes) {
     if (locations.communes[commune]) {
+      const villagesInThisCommune = villagesWithData.filter(
+        (village: LocationWithData) => village.parent_id === locations.communes[commune].location_id
+      );
+      const communeRisktotals = getRiskTotals(villagesInThisCommune);
+      const totalRisk = getTotal(communeRisktotals);
       communesWithData.push({
         ...locations.communes[commune],
-        high_risk: 0,
-        low_risk: 0,
-        no_risk: 0,
-        total: 0,
+        high_risk: communeRisktotals.high_risk,
+        low_risk: communeRisktotals.low_risk,
+        no_risk: communeRisktotals.no_risk,
+        total: totalRisk,
+      });
+    }
+  }
+
+  const districtsWithData: LocationWithData[] = [];
+  for (const district in locations.districts) {
+    if (locations.districts[district]) {
+      const communesInThisDistrict = communesWithData.filter(
+        (commune: LocationWithData) =>
+          commune.parent_id === locations.districts[district].location_id
+      );
+      const districtRisktotals = getRiskTotals(communesInThisDistrict);
+      const totalRisk = getTotal(districtRisktotals);
+      districtsWithData.push({
+        ...locations.districts[district],
+        high_risk: districtRisktotals.high_risk,
+        low_risk: districtRisktotals.low_risk,
+        no_risk: districtRisktotals.no_risk,
+        total: totalRisk,
       });
     }
   }
@@ -120,12 +195,18 @@ function addDataToLocations(locations: {
   const provincesWithData: LocationWithData[] = [];
   for (const province in locations.provinces) {
     if (locations.provinces[province]) {
+      const districtsInThisProvince = districtsWithData.filter(
+        (district: LocationWithData) =>
+          district.parent_id === locations.provinces[province].location_id
+      );
+      const provinceRisktotals = getRiskTotals(districtsInThisProvince);
+      const totalRisk = getTotal(provinceRisktotals);
       provincesWithData.push({
         ...locations.provinces[province],
-        high_risk: 0,
-        low_risk: 0,
-        no_risk: 0,
-        total: 0,
+        high_risk: provinceRisktotals.high_risk,
+        low_risk: provinceRisktotals.low_risk,
+        no_risk: provinceRisktotals.no_risk,
+        total: totalRisk,
       });
     }
   }
@@ -141,12 +222,15 @@ function addDataToLocations(locations: {
 class HierarchichalDataTable extends Component<Props, State> {
   public static defaultProps = defaultProps;
   public static getDerivedStateFromProps(nextProps: Props, state: State) {
-    const locationsWithData = addDataToLocations({
-      communes: nextProps.communes,
-      districts: nextProps.districts,
-      provinces: nextProps.provinces,
-      villages: nextProps.villages,
-    });
+    const locationsWithData = addDataToLocations(
+      {
+        communes: nextProps.communes,
+        districts: nextProps.districts,
+        provinces: nextProps.provinces,
+        villages: nextProps.villages,
+      },
+      nextProps.smsData
+    );
     let dataToShow: LocationWithData[] = [];
     if ((nextProps.direction === UP && nextProps.current_level === 0) || !nextProps.node_id) {
       dataToShow = locationsWithData.provinces;
