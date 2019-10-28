@@ -54,6 +54,13 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
   return result;
 };
 
+/** map props to actions */
+const mapDispatchToProps = {
+  fetchClientActionCreator: fetchClient,
+  fetchEventsActionCreator: fetchEvents,
+  fetchMembersActionCreator: fetchMembers,
+};
+
 const ConnectedHouseholdProfile = withRouter(HouseholdProfile);
 
 export default ConnectedHouseholdProfile;
