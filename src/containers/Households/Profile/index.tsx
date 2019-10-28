@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import { OpenSRPService } from '../../../services/opensrp';
@@ -61,6 +62,11 @@ const mapDispatchToProps = {
   fetchMembersActionCreator: fetchMembers,
 };
 
-const ConnectedHouseholdProfile = withRouter(HouseholdProfile);
+const ConnectedHouseholdProfile = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(HouseholdProfile)
+);
 
 export default ConnectedHouseholdProfile;
