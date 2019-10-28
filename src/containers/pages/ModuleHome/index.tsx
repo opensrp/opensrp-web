@@ -1,20 +1,20 @@
 // this is the home page component
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Row } from 'reactstrap';
-import { ANALYSIS_URL, COMPARTMENTS_URL, LOGFACE_URL } from '../../../constants';
-import { LogFace } from '../../LogFace';
+import { COMPARTMENTS_URL } from '../../../constants';
 import './index.css';
 
 interface Props {
   title: string;
   description: string;
   deactivateLinks: boolean;
+  logfaceUrl: string;
 }
 
 const defaultProps: Props = {
   deactivateLinks: false,
   description: '',
+  logfaceUrl: '#',
   title: '',
 };
 class ModuleHome extends React.Component<Props, {}> {
@@ -39,7 +39,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>Display of all messages receioved from MIECD in chronological order</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={LOGFACE_URL}>
+                  <Link to={this.props.logfaceUrl}>
                     <button className="button-style ">View</button>
                   </Link>
                 </div>

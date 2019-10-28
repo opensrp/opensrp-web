@@ -24,8 +24,11 @@ import {
   NBC_AND_PNC,
   NBC_AND_PNC_URL,
   NUTRITION,
+  NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
+  PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
+  PREGNANCY_LOGFACE_URL,
   PREGNANCY_URL,
   REPORTS,
   REPORTS_URL,
@@ -120,9 +123,19 @@ export const COMPARTMENTS_PAGE_NAVIGATION: PageLink = {
   url: COMPARTMENTS_URL,
 };
 
-export const LOGFACE_PAGE_NAVIGATION: PageLink = {
+export const NBC_AND_PNC_LOGFACE_PAGE_NAVIGATION: PageLink = {
   label: LOGFACE,
-  url: LOGFACE_URL,
+  url: PNC_AND_NBC_LOGFACE_URL,
+};
+
+export const PREGNANCY_LOGFACE_PAGE_NAVIGATION: PageLink = {
+  label: LOGFACE,
+  url: PREGNANCY_LOGFACE_URL,
+};
+
+export const NUTRITION_LOGFACE_PAGE_NAVIGATION: PageLink = {
+  label: LOGFACE,
+  url: NUTRITION_LOGFACE_URL,
 };
 
 export const ANALYSIS_PAGE_NAVIGATION: PageLink = {
@@ -188,7 +201,7 @@ export const HOME_NAVIGATION_MODULE: NavigationModule = {
 
 export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
-    LOGFACE_PAGE_NAVIGATION,
+    PREGNANCY_LOGFACE_PAGE_NAVIGATION,
     COMPARTMENTS_PAGE_NAVIGATION,
     ANALYSIS_PAGE_NAVIGATION,
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
@@ -196,12 +209,12 @@ export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
 };
 
 export const NBC_AND_PNC_NAVIGATION_MODULE: NavigationModule = {
-  childNavs: [LOGFACE_PAGE_NAVIGATION],
+  childNavs: [NBC_AND_PNC_LOGFACE_PAGE_NAVIGATION],
   parentNav: NBC_AND_PNC_PARENT_NAV,
 };
 
 export const NUTRITION_MODULE: NavigationModule = {
-  childNavs: [LOGFACE_PAGE_NAVIGATION],
+  childNavs: [NUTRITION_LOGFACE_PAGE_NAVIGATION],
   parentNav: NUTRITION_PARENT_NAVIGATION,
 };
 
