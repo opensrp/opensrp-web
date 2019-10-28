@@ -100,10 +100,19 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
-        fetchSmsDataActionCreator(result);
-      });
+      const self: any = this;
+      self.timer = setInterval(() => {
+        supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
+          fetchSmsDataActionCreator(result);
+        });
+      }, 10000);
     }
+  }
+
+  public componentWillUnmount() {
+    const self: any = this;
+    clearInterval(self.timer);
+    self.timer = null;
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -227,7 +236,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <button id="export-button">Export data</button>
+            {/* tslint:enable jsx-no-lambda */}
+            <a id="export-button" onClick={(e: any) => this.exportCSV(e, 'test')}>
+              Export data
+            </a>
+            {/* tslint:enable jsx-no-lambda */}
           </div>
         </div>
         {this.props.dataFetched ? (
@@ -304,6 +317,37 @@ export class LogFace extends React.Component<PropsInterface, State> {
       </div>
     );
   }
+
+  private convertJSONToCSV = (data: any) => {
+    if (data.length) {
+      let str = '';
+      for (let i: number = 0; i < data.length; i++) {
+        let line = '';
+        for (const idx in data[i] as FlexObject) {
+          if (data[i]) {
+            if (line !== '') {
+              line += ',';
+            }
+            line += data[i][idx];
+          }
+        }
+        str += line + '\r\n';
+      }
+      return str;
+    }
+  };
+
+  private exportCSV = (e: React.MouseEvent, fileTitle: string) => {
+    const self: any = this;
+    const csvData: any = this.convertJSONToCSV(self.state.filteredData);
+    const exportedFileName = fileTitle + '.csv' || 'export.csv';
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    if ((e.target as HTMLInputElement).getAttribute('download') !== undefined) {
+      const url: string = URL.createObjectURL(blob);
+      (e.target as HTMLInputElement).setAttribute('href', url);
+      (e.target as HTMLInputElement).setAttribute('download', exportedFileName);
+    }
+  };
 
   private isAllSelected = (e: React.MouseEvent) => {
     return (e.target as HTMLInputElement).innerText === ALL;

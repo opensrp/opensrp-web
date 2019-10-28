@@ -129,6 +129,7 @@ td {
   margin-left: auto;
   margin-top: 1em;
   background: #0093db;
+  cursor: pointer;
   color: #fff;
   border-radius: 3px;
   border: 1px solid #0093db;
