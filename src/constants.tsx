@@ -172,5 +172,5 @@ export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
 // analysis page iframes
 
 export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
-  'https://discover.ona.io/superset/dashboard/25/?standalone=true';
+  'https://discover.ona.io/superset/dashboard/53/?standalone=true';
 export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
