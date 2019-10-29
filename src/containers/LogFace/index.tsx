@@ -126,9 +126,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   public render() {
-    // const data = this.props.smsData;
-    // console.log(this.state.filteredData);
-    const data = this.state.filteredData;
+    const data = this.state.filteredData.sort((a: FlexObject, b: FlexObject) => {
+      return (new Date(b.EventDate) as any) - (new Date(a.EventDate) as any);
+    });
     return (
       <div className="logface-content">
         <div>
