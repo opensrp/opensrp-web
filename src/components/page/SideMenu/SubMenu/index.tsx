@@ -49,6 +49,7 @@ export interface SubMenuProps {
   childNavs: PageLink[];
   collapsedModuleLabel: string;
   setCollapsedModuleLabel?: SetCollapsedModuleLabel;
+  customIcon?: any;
 }
 
 /** this components state
@@ -93,7 +94,11 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
 
     const moduleLinkJsx = (
       <Fragment>
-        <FontAwesomeIcon icon={parentNav.icon} size="lg" />
+        {this.props.customIcon ? (
+          this.props.customIcon
+        ) : (
+          <FontAwesomeIcon icon={parentNav.icon} size="lg" />
+        )}
         <span className="collapse-menu-title"> {parentNav.label} </span>
       </Fragment>
     );
