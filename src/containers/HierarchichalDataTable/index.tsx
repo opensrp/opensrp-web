@@ -454,8 +454,12 @@ class HierarchichalDataTable extends Component<Props, State> {
         <VillageData
           {...{
             current_level: this.props.current_level,
-            data: this.state.data,
-            smsData: this.props.smsData,
+            smsData: this.props.smsData.filter((dataItem: SmsData) => {
+              const locationIds = this.state.data.map(
+                (location: LocationWithData) => location.location_id
+              );
+              return locationIds.includes(dataItem.location_id);
+            }),
           }}
         />
       </Container>
