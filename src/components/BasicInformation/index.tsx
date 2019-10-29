@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, Col, Row } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Table } from 'reactstrap';
 import {
   BASIC_INFORMATION,
   CURRENT_EDD,
@@ -27,26 +27,40 @@ export default function BasicInformation(props: Props) {
         <CardTitle>{BASIC_INFORMATION}</CardTitle>
         <Row>
           <Col className={'detailsColumn'} sm="12" lg="6">
-            <span className={'right'}>{ID}</span>
-            <span />
-            <span className={'left'}>{props.id}</span>
-            <span className={'right'}>{CURRENT_GRAVIDITY}</span>
-            <span />
-            <span className={'left'}>{props.currentGravidity}</span>
-            <span className={'right'}>{CURRENT_PARITY}</span>
-            <span />
-            <span className={'left'}>{props.currentParity}</span>
+            <Table borderless={true}>
+              <tbody>
+                <tr>
+                  <td>{ID}</td>
+                  <td>{props.id}</td>
+                </tr>
+                <tr>
+                  <td>{CURRENT_GRAVIDITY}</td>
+                  <td>{props.currentGravidity}</td>
+                </tr>
+                <tr>
+                  <td>{CURRENT_PARITY}</td>
+                  <td>{props.currentParity}</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
           <Col className={'detailsColumn'} sm="12" lg="6">
-            <span className={'right'}>{LOCATION}</span>
-            <span />
-            <span className={'left'}>{props.location}</span>
-            <span className={'right'}>{CURRENT_EDD}</span>
-            <span />
-            <span className={'left'}>{props.currentEdd}</span>
-            <span className={'right'}>{PREVIOUS_PREGNANCY_RISK}</span>
-            <span />
-            <span className={'left'}>{props.previousPregnancyRisk}</span>
+            <Table borderless={true}>
+              <tbody>
+                <tr>
+                  <td>{LOCATION}</td>
+                  <td>{props.location}</td>
+                </tr>
+                <tr>
+                  <td>{CURRENT_EDD}</td>
+                  <td>{props.currentEdd}</td>
+                </tr>
+                <tr>
+                  <td>{PREVIOUS_PREGNANCY_RISK}</td>
+                  <td>{props.previousPregnancyRisk}</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </Card>

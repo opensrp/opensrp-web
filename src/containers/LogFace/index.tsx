@@ -227,7 +227,15 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <button id="export-button">Export data</button>
+            <a
+              id="export-button"
+              href={encodeURIComponent(
+                'https://discover.ona.io/superset/explore_json/?form_data={%22slice_id%22:2263}&csv=true'
+              )}
+              download={true}
+            >
+              Export data
+            </a>
           </div>
         </div>
         {this.props.dataFetched ? (
