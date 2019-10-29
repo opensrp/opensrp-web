@@ -1,12 +1,12 @@
 .side-collapse-nav.nav {
   cursor: pointer;
-  padding: 4px 12px 2px 45px;
+  padding: 4px 12px 2px 20px;
   max-width: initial !important;
 }
 
 .nav-item-extend {
   width: 100%;
-  padding-left: 49px;
+  padding-left: 20px;
 }
 
 .collapse-menu-title {
@@ -33,6 +33,9 @@
 .side-nav-item.nav {
   max-width: initial;
   background-color: initial;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .side-nav-item.nav:hover {
