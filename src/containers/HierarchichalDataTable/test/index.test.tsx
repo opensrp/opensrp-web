@@ -5,8 +5,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedHierarchichalDataTable from '..';
-import { fetchLocations, removeLocations } from '../../../store/ducks/locations';
+import { fetchLocations } from '../../../store/ducks/locations';
+import { fetchSms } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
+import { smsSlice } from '../../LogFace/tests/fixtures';
 import { communes, districts, provinces, villages } from './fixtures';
 
 jest.genMockFromModule('@fortawesome/react-fontawesome');
@@ -15,17 +17,6 @@ jest.mock('@fortawesome/react-fontawesome');
 const history = createBrowserHistory();
 
 describe('HierarchichalDataTable', () => {
-  beforeEach(() => {
-    store.dispatch(fetchLocations(districts));
-    store.dispatch(fetchLocations(provinces));
-    store.dispatch(fetchLocations(communes));
-    store.dispatch(fetchLocations(villages));
-  });
-
-  afterEach(() => {
-    store.dispatch(removeLocations);
-  });
-
   it('renders without crashing', () => {
     shallow(
       <Provider store={store}>
@@ -35,6 +26,12 @@ describe('HierarchichalDataTable', () => {
   });
 
   it('renders correctly', () => {
+    store.dispatch(fetchLocations(districts));
+    store.dispatch(fetchLocations(provinces));
+    store.dispatch(fetchLocations(communes));
+    store.dispatch(fetchLocations(villages));
+    store.dispatch(fetchSms(smsSlice));
+
     let props = {
       match: {
         params: {
