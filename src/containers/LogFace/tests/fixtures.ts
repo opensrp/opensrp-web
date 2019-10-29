@@ -1,7 +1,7 @@
 // tslint:disable object-literal-sort-keys
 import { SmsData } from '../../../store/ducks/sms_events';
 
-export const smsSlice: SmsData[] = [
+export const smsSlice: SmsData[] = ([
   {
     EventDate: '2019-10-02',
     sms_type: 'Pregnancy Registration',
@@ -2072,4 +2072,4 @@ export const smsSlice: SmsData[] = [
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
   },
-] as SmsData[];
+] as unknown) as SmsData[];
