@@ -100,19 +100,10 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      const self: any = this;
-      self.timer = setInterval(() => {
-        supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
-          fetchSmsDataActionCreator(result);
-        });
-      }, 10000);
+      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
+        fetchSmsDataActionCreator(result);
+      });
     }
-  }
-
-  public componentWillUnmount() {
-    const self: any = this;
-    clearInterval(self.timer);
-    self.timer = null;
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -236,11 +227,11 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            {/* tslint:enable jsx-no-lambda */}
-            <a id="export-button" onClick={(e: any) => this.exportCSV(e, 'test')}>
+            {/* tslint:disable jsx-no-lambda */}
+            <a id="export-button" onClick={(e: any) => this.exportCSV(e, 'export')}>
               Export data
             </a>
-            {/* tslint:enable jsx-no-lambda */}
+            {/* tslint:disable jsx-no-lambda */}
           </div>
         </div>
         {this.props.dataFetched ? (
@@ -318,34 +309,65 @@ export class LogFace extends React.Component<PropsInterface, State> {
     );
   }
 
-  private convertJSONToCSV = (data: any) => {
-    if (data.length) {
-      let str = '';
-      for (let i: number = 0; i < data.length; i++) {
-        let line = '';
-        for (const idx in data[i] as FlexObject) {
-          if (data[i]) {
-            if (line !== '') {
-              line += ',';
-            }
-            line += data[i][idx];
-          }
+  private convertJSONToCSV = (csvData: SmsData[]) => {
+    const data: any = [...csvData].map((d: FlexObject) => {
+      // Return required fields only
+      // To Do: Make this dynamic/configurable
+      // Bypass alphabetical sorting since this should be
+      // the order of columns in  the csv
+
+      /* tslint:disable  object-literal-sort-keys*/
+      return {
+        id: d.event_id,
+        eventDate: d.EventDate,
+        location: d.health_worker_location_name,
+        smsType: d.sms_type,
+        reporter: d.health_worker_name,
+        patient: d.anc_id,
+        age: d.age,
+        riskLevel: d.logface_risk,
+      };
+    });
+    // adds csv column headers
+    // To Do: Make this dynamic/configurable
+    /* tslint:disable  object-literal-sort-keys*/
+    data.unshift({
+      id: 'ID',
+      eventDate: 'Event Date',
+      location: 'Location',
+      smsType: 'SMS Type',
+      reporter: 'Reporter',
+      patient: 'Patient',
+      age: 'Age',
+      riskLevel: 'Risk Level',
+    });
+    let str = '';
+    data.forEach((datum: FlexObject) => {
+      let line = '';
+      Object.keys(datum).forEach((element: any) => {
+        if (line !== '') {
+          line += ',';
         }
-        str += line + '\r\n';
-      }
-      return str;
-    }
+        line += datum[element];
+      });
+      str += line + '\r\n';
+    });
+    return str;
   };
 
   private exportCSV = (e: React.MouseEvent, fileTitle: string) => {
-    const self: any = this;
-    const csvData: any = this.convertJSONToCSV(self.state.filteredData);
-    const exportedFileName = fileTitle + '.csv' || 'export.csv';
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    if ((e.target as HTMLInputElement).getAttribute('download') !== undefined) {
-      const url: string = URL.createObjectURL(blob);
-      (e.target as HTMLInputElement).setAttribute('href', url);
-      (e.target as HTMLInputElement).setAttribute('download', exportedFileName);
+    // To do: make this reusable across other modules
+    // Long term: Move this to js-tools
+    const self: FlexObject = this;
+    if (self.state.filteredData.length) {
+      const csvData: string = this.convertJSONToCSV(self.state.filteredData);
+      const exportedFileName = fileTitle + '.csv' || 'export.csv';
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+      if ((e.target as HTMLInputElement).getAttribute('download') !== undefined) {
+        const url: string = URL.createObjectURL(blob);
+        (e.target as HTMLInputElement).setAttribute('href', url);
+        (e.target as HTMLInputElement).setAttribute('download', exportedFileName);
+      }
     }
   };
 
@@ -364,7 +386,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
       return val.includes((e.target as HTMLInputElement).innerText);
     });
   };
-
   private previousPage = () => {
     this.setState({
       currentIndex: this.state.currentIndex - 1,
