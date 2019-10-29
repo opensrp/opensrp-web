@@ -88,6 +88,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
       return {
         ...state,
         smsData: action.smsData,
+        smsDataFetched: false,
       };
     default:
       return state;
