@@ -2,7 +2,7 @@
  * to be used with clickHandlers.
  */
 import React, { useState } from 'react';
-import { BasePaginator, PaginationData } from './base';
+import { BasePaginator } from './base';
 
 /** interface for Paginator props */
 export interface PaginatorProps {
@@ -14,6 +14,13 @@ export interface PaginatorProps {
   pageNeighbours: number;
   previousLabel: string;
   startLabel: string;
+  totalRecords: number;
+}
+
+export interface PaginationData {
+  currentPage: number;
+  pageLimit: number;
+  totalPages: number;
   totalRecords: number;
 }
 
@@ -59,4 +66,4 @@ const Paginator = (props: PaginatorProps) => {
 
 Paginator.defaultProps = defaultPaginatorProps;
 
-export { Paginator, PaginationData };
+export { Paginator };
