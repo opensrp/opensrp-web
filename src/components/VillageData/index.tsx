@@ -9,9 +9,9 @@ import {
   PREVIOUS_PREGNANCY_RISK,
   RISK_CATEGORY,
 } from '../../constants';
-import { LocationWithData } from '../../containers/HierarchichalDataTable';
 import { SmsData } from '../../store/ducks/sms_events';
 import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
+import RiskColoring from '../RiskColoring';
 import './index.css';
 
 interface Props {
@@ -89,7 +89,9 @@ export default class VillageData extends React.Component<Props, State> {
                                   <td className="default-width">{dataItem.location_id}</td>
                                   <td className="default-width">{dataItem.lmp_edd}</td>
                                   <td className="default-width">{dataItem.previous_risks}</td>
-                                  <td className="default-width">{dataItem.logface_risk}</td>
+                                  <td className="default-width">
+                                    <RiskColoring {...{ risk: dataItem.logface_risk }} />
+                                  </td>
                                 </tr>
                               );
                             })
