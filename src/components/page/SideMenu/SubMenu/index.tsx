@@ -95,7 +95,7 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
     const moduleLinkJsx = (
       <Fragment>
         {this.props.customIcon ? (
-          this.props.customIcon
+          <this.props.customIcon />
         ) : (
           <FontAwesomeIcon icon={parentNav.icon} size="lg" />
         )}
