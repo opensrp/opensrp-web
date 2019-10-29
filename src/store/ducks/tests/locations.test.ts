@@ -1,5 +1,4 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { FlushThunks } from 'redux-testkit';
 import { COMMUNE, DISTRICT, PROVINCE, VILLAGE } from '../../../constants';
 import { districts, provinces } from '../../../containers/HierarchichalDataTable/test/fixtures';
 import store from '../../index';
