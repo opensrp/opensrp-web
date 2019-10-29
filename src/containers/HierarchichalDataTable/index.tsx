@@ -34,9 +34,11 @@ import locationsReducer, {
   Location,
   reducerName,
 } from '../../store/ducks/locations';
+import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 
 reducerRegistry.register(reducerName, locationsReducer);
+reducerRegistry.register(smsReducerName, smsReducer);
 
 export interface LocationWithData extends Location {
   high_risk: number;
