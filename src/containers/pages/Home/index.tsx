@@ -53,7 +53,7 @@ class Home extends React.Component<{}, {}> {
                 </div>
                 <div id="cont-sized">
                   <Link to={NBC_AND_PNC_URL}>
-                    <button className="button-style default">View</button>
+                    <button className="button-style">View</button>
                   </Link>
                 </div>
               </div>
@@ -74,7 +74,7 @@ class Home extends React.Component<{}, {}> {
                 </div>
                 <div id="cont-sized">
                   <Link to={NUTRITION_URL}>
-                    <button className="button-style default">View</button>
+                    <button className="button-style">View</button>
                   </Link>
                 </div>
               </div>
