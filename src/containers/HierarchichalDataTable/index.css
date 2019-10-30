@@ -97,6 +97,18 @@
   margin: 0;
 }
 
+.compartment-data-table table thead tr th {
+  text-align: center;
+  font-family: Roboto;
+  color: #3a484f;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.compartment-data-table table tbody tr:first-child td {
+  border-top: none;
+}
+
 .compartment-data-table td#total,
 .compartment-data-table #header {
   color: #3a484f;

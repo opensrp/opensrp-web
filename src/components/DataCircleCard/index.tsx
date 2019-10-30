@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardText, CardTitle, Col, Row } from 'reactstrap';
-import { HIERARCHICAL_DATA_URL, HIGH_RISK, LOW_RISK, NO_RISK } from '../../constants';
+import {
+  HIERARCHICAL_DATA_URL,
+  HIGH_RISK,
+  LOW_RISK,
+  NO_RISK,
+  PREGNANCY_LOGFACE_URL,
+} from '../../constants';
 import './index.css';
 
 interface Props {

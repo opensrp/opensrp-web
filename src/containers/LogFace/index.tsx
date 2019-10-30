@@ -20,6 +20,7 @@ import {
   SELECT_LOCATION,
   SELECT_RISK,
   SELECT_TYPE,
+  SUPERSET_PREGNANCY_DATA_EXPORT,
   SUPERSET_SMS_DATA_SLICE,
   TYPE,
 } from '../../constants';
@@ -227,13 +228,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <a
-              id="export-button"
-              href={encodeURIComponent(
-                'https://discover.ona.io/superset/explore_json/?form_data={%22slice_id%22:2263}&csv=true'
-              )}
-              download={true}
-            >
+            <a id="export-button" href={SUPERSET_PREGNANCY_DATA_EXPORT} download={true}>
               Export data
             </a>
           </div>

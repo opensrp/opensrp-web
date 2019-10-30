@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';

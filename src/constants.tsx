@@ -185,3 +185,8 @@ export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
 export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
   'https://discover.ona.io/superset/dashboard/53/?standalone=true';
 export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
+
+// csv export links
+export const SUPERSET_PREGNANCY_DATA_EXPORT =
+  'https://discover.ona.io/superset/explore_json/?form_data={"slice_id":2263}&csv=true';
+export type SUPERSET_PREGNANCY_DATA_EXPORT = typeof SUPERSET_PREGNANCY_DATA_EXPORT;

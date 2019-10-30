@@ -244,7 +244,7 @@ class HierarchichalDataTable extends Component<Props, State> {
 
     let district = <span>''</span>;
     if (this.props.current_level === 1) {
-      district = <span key={1}>/ {DISTRICT}</span>;
+      district = <span key={1}> / {DISTRICT}</span>;
     } else {
       district = (
         <Link
