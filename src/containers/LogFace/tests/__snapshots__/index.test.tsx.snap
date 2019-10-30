@@ -672,7 +672,186 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
 <div
   className="paginator"
-/>
+>
+  <Paginator
+    ariaLabel="page navigation"
+    endLabel="last"
+    nextLabel="next"
+    onPageChange={[Function]}
+    pageLimit={5}
+    pageNeighbours={3}
+    previousLabel="previous"
+    startLabel="first"
+    totalRecords={0}
+  >
+    <BasePaginator
+      ariaLabel="page navigation"
+      currentPage={1}
+      endLabel="last"
+      nextLabel="next"
+      onPageChange={[Function]}
+      pageChangeHandler={[Function]}
+      pageLimit={5}
+      pageNeighbours={3}
+      previousLabel="previous"
+      startLabel="first"
+      totalRecords={0}
+    >
+      <Pagination
+        aria-label="page navigation"
+        listTag="ul"
+        size="sm"
+        tag="nav"
+      >
+        <nav
+          aria-label="page navigation"
+          className=""
+        >
+          <ul
+            className="pagination pagination-sm"
+          >
+            <PaginationItem
+              className="page-item disabled"
+              tag="li"
+            >
+              <li
+                className="page-item disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="first"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="first"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      first
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      first
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item disabled"
+              tag="li"
+            >
+              <li
+                className="page-item disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="previous"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="previous"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      previous
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      previous
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item  disabled"
+              tag="li"
+            >
+              <li
+                className="page-item  disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="next"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="next"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      next
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      next
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item disabled"
+              tag="li"
+            >
+              <li
+                className="page-item disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="last"
+                  className="page-link disabled"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="last"
+                    className="page-link disabled page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      last
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      last
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+          </ul>
+        </nav>
+      </Pagination>
+    </BasePaginator>
+  </Paginator>
+</div>
 `;
 
 exports[`components/ConnectedHeader renders correctly: search div 1`] = `
