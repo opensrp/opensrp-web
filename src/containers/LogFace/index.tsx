@@ -25,7 +25,7 @@ import {
   SUPERSET_SMS_DATA_SLICE,
   TYPE,
 } from '../../constants';
-import { FlexObject } from '../../helpers/utils';
+import { FlexObject, sortFunction } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
@@ -140,9 +140,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       startLabel: 'first',
       totalRecords: this.props.smsData.length,
     };
-    const data = this.state.filteredData.sort((a: FlexObject, b: FlexObject) => {
-      return (new Date(b.EventDate) as any) - (new Date(a.EventDate) as any);
-    });
+    const data = this.state.filteredData.sort(sortFunction);
     return (
       <div className="logface-content">
         <div>

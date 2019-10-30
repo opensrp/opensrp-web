@@ -2,6 +2,7 @@ import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
+import { SmsData } from '../store/ducks/sms_events';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
@@ -41,3 +42,18 @@ export function getNumberSuffix(num: number) {
     return 'th';
   }
 }
+
+/**
+ * Sort function for a list of SmsData
+ * @param firstE1
+ * @param secondE1
+ */
+export const sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
+  if (firstE1.event_id < secondE1.event_id) {
+    return 1;
+  } else if (firstE1.event_id > secondE1.event_id) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
