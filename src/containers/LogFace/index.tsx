@@ -1,4 +1,3 @@
-// import { any } from 'prop-types';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { Field, Formik } from 'formik';
 import { map } from 'lodash';
@@ -66,7 +65,7 @@ const defaultprops: PropsInterface = {
 export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
-  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+  public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
     if (
       !prevState.filteredData.length &&
       !(
@@ -84,7 +83,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     }
   }
 
-  constructor(props: any) {
+  constructor(props: PropsInterface) {
     super(props);
 
     this.state = {
@@ -102,7 +101,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
+      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
     }
