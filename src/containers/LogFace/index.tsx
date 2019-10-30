@@ -101,6 +101,16 @@ export class LogFace extends React.Component<PropsInterface, State> {
     };
   }
 
+  public sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
+    if (firstE1.event_id < secondE1.event_id) {
+      return 1;
+    } else if (firstE1.event_id > secondE1.event_id) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
@@ -109,15 +119,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       });
     } else {
       const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(
-        (firstE1, secondE1) => {
-          if (firstE1.event_id < secondE1.event_id) {
-            return 1;
-          } else if (firstE1.event_id > secondE1.event_id) {
-            return -1;
-          } else {
-            return 0;
-          }
-        }
+        this.sortFunction
       );
 
       // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
