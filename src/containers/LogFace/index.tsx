@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
+import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
 import {
@@ -51,7 +52,7 @@ interface State {
   locationLabel: string;
   typeLabel: string;
   filteredData: SmsData[];
-  currentIndex: number;
+  currentPage: number;
 }
 
 const defaultprops: PropsInterface = {
@@ -86,7 +87,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     super(props);
 
     this.state = {
-      currentIndex: 1,
+      currentPage: 1,
       dropdownOpenLocation: false,
       dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
@@ -111,21 +112,33 @@ export class LogFace extends React.Component<PropsInterface, State> {
     e.preventDefault();
   }
 
-  // tslint:disable-next-line: no-empty
   public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
     const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
-    if (this.state.currentIndex > 1) {
+    if (this.state.currentPage > 1) {
       this.setState({
-        currentIndex: 1,
+        currentPage: 1,
       });
     }
     this.setState({
       filteredData,
     });
-    // console.log(e.target.value);
   };
 
   public render() {
+    const routePaginatorProps: PaginatorProps = {
+      endLabel: 'last',
+      nextLabel: 'next',
+      onPageChange: (paginationData: PaginationData) => {
+        this.setState({
+          currentPage: paginationData.currentPage,
+        });
+      },
+      pageLimit: 5,
+      pageNeighbours: 3,
+      previousLabel: 'previous',
+      startLabel: 'first',
+      totalRecords: this.props.smsData.length,
+    };
     const data = this.state.filteredData.sort((a: FlexObject, b: FlexObject) => {
       return (new Date(b.EventDate) as any) - (new Date(a.EventDate) as any);
     });
@@ -257,9 +270,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
               <tbody id="body">
                 {map(
                   data.slice(
-                    (this.state.currentIndex - 1) * this.props.numberOfRows,
-                    (this.state.currentIndex - 1) * this.props.numberOfRows +
-                      this.props.numberOfRows
+                    (this.state.currentPage - 1) * this.props.numberOfRows,
+                    (this.state.currentPage - 1) * this.props.numberOfRows + this.props.numberOfRows
                   ),
                   dataObj => {
                     return (
@@ -298,16 +310,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <Ripple />
         )}
         <div className="paginator">
-          {this.state.currentIndex > 1 && (
-            <button onClick={this.previousPage} id={'previous'}>
-              previous
-            </button>
-          )}
-          {this.state.currentIndex < Math.ceil(data.length / this.props.numberOfRows) && (
-            <button onClick={this.nextPage} id={'next'}>
-              next
-            </button>
-          )}
+          <Paginator {...routePaginatorProps} />
         </div>
       </div>
     );
@@ -329,20 +332,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   };
 
-  private previousPage = () => {
-    this.setState({
-      currentIndex: this.state.currentIndex - 1,
-    });
-  };
-
-  private nextPage = () => {
-    this.setState({
-      currentIndex: this.state.currentIndex + 1,
-    });
-  };
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
@@ -351,7 +343,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
@@ -372,7 +364,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'sms_type', false),
