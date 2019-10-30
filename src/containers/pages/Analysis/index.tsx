@@ -29,6 +29,7 @@ export class Analysis extends React.Component<{}, State> {
             frameBorder="0"
             onLoad={this.hideSpinner}
             src={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+            title="pregnancy sms events analysis"
           />
         </div>
       </div>

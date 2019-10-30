@@ -1,16 +1,11 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faArrowLeft, faChartLine, faCog, faHome } from '@fortawesome/free-solid-svg-icons';
-import ConnectedPrivateRoute from '@onaio/connected-private-route';
-import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { withRouter } from 'react-router-dom';
-import Loading from '../components/page/Loading';
 import { providers } from '../configs/settings';
 import { LOGIN_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
-import { oAuthUserInfoGetter } from '../helpers/utils';
 import { headerShouldNotRender } from '../helpers/utils';
 import './App.css';
 
