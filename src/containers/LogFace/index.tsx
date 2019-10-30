@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import superset from '@onaio/superset-connector';
 import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
@@ -33,6 +34,7 @@ import TestReducer, {
   smsDataFetched,
 } from '../../store/ducks/sms_events';
 import './index.css';
+// import { getFormData } from '@onaio/superset-connector/dist/types/utils';
 
 reducerRegistry.register(reducerName, TestReducer);
 
@@ -105,6 +107,33 @@ export class LogFace extends React.Component<PropsInterface, State> {
       supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
+    } else {
+      const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(
+        (firstE1, secondE1) => {
+          if (firstE1.event_id < secondE1.event_id) {
+            return 1;
+          } else if (firstE1.event_id > secondE1.event_id) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+      );
+
+      // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
+      if (smsDataInDescendingOrderByEventId.length) {
+        const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
+        const supersetParams = superset.getFormData(2000, [
+          { comparator: largestEventID, operator: '>', subject: 'event_id' },
+        ]);
+        supersetFetch(SUPERSET_SMS_DATA_SLICE, supersetParams)
+          .then((result: SmsData[]) => {
+            fetchSmsDataActionCreator(result);
+          })
+          .catch(error => {
+            // console.log(error);
+          });
+      }
     }
   }
 
