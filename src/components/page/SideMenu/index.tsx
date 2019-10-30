@@ -104,6 +104,8 @@ class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
                       customIcon={navigationModule.icon}
                     />
                   );
+                } else {
+                  return null;
                 }
               })}
             </Col>
