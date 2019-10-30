@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardGroup, Container, Row } from 'reactstrap';
+import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';

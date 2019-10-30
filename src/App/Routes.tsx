@@ -2,19 +2,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback } from '@onaio/gatekeeper';
-import { getUser, isAuthenticated, logOutUser } from '@onaio/session-reducer';
-import React, { Component, useEffect } from 'react';
+import { isAuthenticated } from '@onaio/session-reducer';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
 
-import { exportSpecifier } from '@babel/types';
-import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
-import CustomOauthLogin from '../components/CustomAuthLogin';
-import { HeaderProps } from '../components/page/Header/Header';
+import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import SidenavComponent from '../components/page/SideNav/sidenav';
-import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   ANALYSIS_URL,
