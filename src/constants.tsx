@@ -41,6 +41,15 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const HIGH = 'high';
+export type HIGH = typeof HIGH;
+export const LOW = 'low';
+export type LOW = typeof LOW;
+export const RED = 'red';
+export type RED = typeof RED;
+export const NOT_SET_LOWERCASE = 'not set';
+export type NOT_SET_LOWERCASE = typeof NOT_SET_LOWERCASE;
+export type INDIVIDUAL_RISK_LEVELS = RED | HIGH | LOW | NOT_SET_LOWERCASE;
 export const HOME = 'Home';
 export type HOME = typeof HOME;
 export const PREGNANCY = 'Pregnancy';
@@ -135,14 +144,24 @@ export const ID = 'ID';
 export type ID = typeof ID;
 export const CURRENT_GRAVIDITY = 'Current Gravidity';
 export type CURRENT_GRAVIDITY = typeof CURRENT_GRAVIDITY;
+export const GRAVIDITY = 'Gravidity';
+export type GRAVIDITY = typeof GRAVIDITY;
+export const PATIENT_ID = 'Patient ID';
+export type PATIENT_ID = typeof PATIENT_ID;
 export const CURRENT_PARITY = 'Current Parity';
 export type CURRENT_PARITY = typeof CURRENT_PARITY;
+export const PARITY = 'Parity';
+export type PARITY = typeof PARITY;
 export const LOCATION = 'Location';
 export type LOCATION = typeof LOCATION;
 export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
 export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
 export const CURRENT_EDD = 'Current EDD';
 export type CURRENT_EDD = typeof CURRENT_EDD;
+export const EDD = 'EDD';
+export type EDD = typeof EDD;
+export const RISK_CATEGORY = 'Risk category';
+export type RISK_CATEGORY = typeof RISK_CATEGORY;
 export const MIECD_VIETNAM = 'MIECD VIETNAM';
 export type MIECD_VIETNAM = typeof MIECD_VIETNAM;
 export const NO_PROVIDERS = 'No providers';
@@ -165,6 +184,11 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
+
+// slices
+
+export const LOCATION_SLICES = ['2754', '2755', '2756', '2757'];
+export type LOCATION_SLICES = typeof LOCATION_SLICES;
 
 export const SUPERSET_SMS_DATA_SLICE = '2263';
 export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
