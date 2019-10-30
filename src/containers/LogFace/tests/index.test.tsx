@@ -11,6 +11,7 @@ import { fetchSms } from '../../../store/ducks/sms_events';
 import { smsSlice } from './fixtures';
 
 describe('components/ConnectedHeader', () => {
+  const props = { header: 'Pregnancy' };
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -18,7 +19,7 @@ describe('components/ConnectedHeader', () => {
   it('renders without crashing', () => {
     shallow(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedLogFace {...props} />
       </Provider>
     );
   });
@@ -26,7 +27,7 @@ describe('components/ConnectedHeader', () => {
   it('renders correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace />
+        <ConnectedLogFace {...props} />
       </Provider>
     );
     expect(toJson(wrapper.find('table'))).toMatchSnapshot('table snapshot');
@@ -42,7 +43,7 @@ describe('components/ConnectedHeader', () => {
     const wrapper = mount(
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <ConnectedLogFace />
+          <ConnectedLogFace {...props} />
         </ConnectedRouter>
       </Provider>
     );
@@ -56,7 +57,7 @@ describe('components/ConnectedHeader', () => {
     const wrapper = mount(
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <ConnectedLogFace />
+          <ConnectedLogFace {...props} />
         </ConnectedRouter>
       </Provider>
     );
