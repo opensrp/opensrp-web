@@ -56,7 +56,7 @@ export default class VillageData extends React.Component<Props, State> {
       <React.Fragment>
         {this.props.current_level === 3 ? (
           <React.Fragment>
-            <Row className="village">
+            <Row className="village villageDataRow">
               <Card className="table-card">
                 <CardTitle>Selected Commune</CardTitle>
                 <CardBody>
@@ -101,7 +101,7 @@ export default class VillageData extends React.Component<Props, State> {
                 </CardBody>
               </Card>
             </Row>
-            <Row id="navrow">
+            <Row id="navrow" className="villageDataRow">
               <Paginator {...routePaginatorProps} />
             </Row>
           </React.Fragment>
