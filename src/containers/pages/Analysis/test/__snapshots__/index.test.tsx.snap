@@ -67,6 +67,7 @@ exports[`Analysis must render correctly: Analysis snapshot 1`] = `
         scrolling="yes"
         seamless={true}
         src="https://discover.ona.io/superset/dashboard/53/?standalone=true"
+        title="pregnancy sms events analysis"
       />
     </div>
   </div>
