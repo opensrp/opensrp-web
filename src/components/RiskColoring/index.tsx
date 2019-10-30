@@ -1,5 +1,15 @@
 import React from 'react';
-import { HIGH_RISK, LOW_RISK, NO_RISK, NOT_SET, RED_ALERT } from '../../constants';
+import {
+  HIGH,
+  HIGH_RISK,
+  LOW,
+  LOW_RISK,
+  NO_RISK,
+  NOT_SET,
+  NOT_SET_LOWERCASE,
+  RED,
+  RED_ALERT,
+} from '../../constants';
 import './index.css';
 
 interface RiskColoringProps {
@@ -14,7 +24,7 @@ const riskColoringDefaultProps: RiskColoringProps = {
 const riskColoring = (props: RiskColoringProps) => {
   const { risk } = props;
   switch (risk.toLowerCase()) {
-    case 'no risk':
+    case NO_RISK:
       return (
         <span className="badge badge-success" id="default-width">
           <div>
@@ -22,7 +32,7 @@ const riskColoring = (props: RiskColoringProps) => {
           </div>
         </span>
       );
-    case 'low':
+    case LOW:
       return (
         <span className="badge badge-primary" id="default-width">
           <div>
@@ -30,7 +40,7 @@ const riskColoring = (props: RiskColoringProps) => {
           </div>
         </span>
       );
-    case 'high':
+    case HIGH:
       return (
         <span className="badge badge-warning" id="default-width">
           <div>
@@ -38,7 +48,7 @@ const riskColoring = (props: RiskColoringProps) => {
           </div>
         </span>
       );
-    case 'red':
+    case RED:
       return (
         <span className="badge badge-danger" id="default-width">
           <div>
@@ -46,7 +56,7 @@ const riskColoring = (props: RiskColoringProps) => {
           </div>
         </span>
       );
-    case 'not set':
+    case NOT_SET_LOWERCASE:
       return (
         <span className="badge badge-info" id="default-width">
           <div>

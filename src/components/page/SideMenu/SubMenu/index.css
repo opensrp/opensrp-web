@@ -46,3 +46,11 @@
   padding-right: initial;
   padding-left: 33px;
 }
+
+.active-collapse-menu path {
+  fill: #0192d4;
+}
+
+path {
+  fill: #1b314b;
+}

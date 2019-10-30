@@ -1,211 +1,67 @@
-import { number, string } from 'prop-types';
-import { Link } from 'react-router-dom';
-import { COMPARTMENTS_URL } from '../../../constants';
+import { Location } from '../../../store/ducks/locations';
 
-interface LocationData {
-  id: number;
-  name: string | Element;
-  parent_id: number | null;
-  high_risk: number;
-  low_risk: number;
-  no_risk: number;
-  total: number;
-}
-export const provinces: LocationData[] = [
+export const districts: Location[] = [
   {
-    high_risk: 2,
-    id: 18,
-    low_risk: 3,
-    name: 'District D',
-    no_risk: 4,
-    parent_id: null,
-    total: 9,
+    level: 'District',
+    location_id: '623b644d-a1f2-4c5e-b065-d60c0ae6501f',
+    location_name: 'Tay Ho District',
+    parent_id: '78a12165-3c12-471f-8755-c96bac123292',
   },
   {
-    high_risk: 2,
-    id: 1,
-    low_risk: 3,
-    name: 'District A',
-    no_risk: 4,
-    parent_id: null,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 2,
-    low_risk: 3,
-    name: 'District B',
-    no_risk: 4,
-    parent_id: null,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 3,
-    low_risk: 3,
-    name: 'District C',
-    no_risk: 4,
-    parent_id: null,
-    total: 9,
+    level: 'District',
+    location_id: 'ecb1b238-90a2-4462-abef-6a4d9dd10a81',
+    location_name: 'Tuan Giao',
+    parent_id: 'c13b5c95-55c3-4848-9509-b82596274d96',
   },
 ];
 
-export const districts: LocationData[] = [
+export const provinces: Location[] = [
   {
-    high_risk: 2,
-    id: 3,
-    low_risk: 3,
-    name: 'HFC 3',
-    no_risk: 4,
-    parent_id: 2,
-    total: 9,
+    level: 'Province',
+    location_id: 'd79168ed-ae95-43d1-8e45-9078212815f6',
+    location_name: 'Lang Son Province',
+    parent_id: 'eca48e41-8cbb-4cb2-ba15-5de0394416f6',
   },
   {
-    high_risk: 2,
-    id: 17,
-    low_risk: 3,
-    name: 'HFC 17',
-    no_risk: 4,
-    parent_id: 2,
-    total: 9,
+    level: 'Province',
+    location_id: 'c13b5c95-55c3-4848-9509-b82596274d96',
+    location_name: 'Dien Bien',
+    parent_id: 'eca48e41-8cbb-4cb2-ba15-5de0394416f6',
   },
   {
-    high_risk: 2,
-    id: 7,
-    low_risk: 3,
-    name: 'HFC 4',
-    no_risk: 4,
-    parent_id: 3,
-    total: 9,
+    level: 'Province',
+    location_id: '78a12165-3c12-471f-8755-c96bac123292',
+    location_name: 'Hanoi',
+    parent_id: 'eca48e41-8cbb-4cb2-ba15-5de0394416f6',
   },
   {
-    high_risk: 2,
-    id: 8,
-    low_risk: 3,
-    name: 'HFC 5',
-    no_risk: 4,
-    parent_id: 3,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 6,
-    low_risk: 3,
-    name: 'HF 2',
-    no_risk: 4,
-    parent_id: 1,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 4,
-    low_risk: 3,
-    name: 'HFC 1',
-    no_risk: 4,
-    parent_id: 1,
-    total: 9,
+    level: 'Province',
+    location_id: 'f7d1d9bb-95dc-43bc-8434-0dddd1f3d374',
+    location_name: 'Loc Binh',
+    parent_id: 'd79168ed-ae95-43d1-8e45-9078212815f6',
   },
 ];
-export const villages: LocationData[] = [
+
+export const communes: Location[] = [
   {
-    high_risk: 2,
-    id: 22,
-    low_risk: 3,
-    name: 'HFC 1',
-    no_risk: 4,
-    parent_id: 13,
-    total: 9,
-  },
-] as any;
-export const communes = [
-  {
-    high_risk: 2,
-    id: 9,
-    low_risk: 3,
-    name: 'Operational Area 9',
-    no_risk: 4,
-    parent_id: 4,
-    total: 9,
+    level: 'Commune',
+    location_id: '46d98781-7cc4-4c28-8379-a3552a57acfe',
+    location_name: 'Yen Phu Ward',
+    parent_id: '623b644d-a1f2-4c5e-b065-d60c0ae6501f',
   },
   {
-    high_risk: 2,
-    id: 10,
-    low_risk: 3,
-    name: 'Operational Area 10',
-    no_risk: 4,
-    parent_id: 4,
-    total: 9,
+    level: 'Commune',
+    location_id: '18ee2dfd-8a59-412d-943f-b9fd10ca4209',
+    location_name: 'Muong Thin',
+    parent_id: 'ecb1b238-90a2-4462-abef-6a4d9dd10a81',
   },
+];
+
+export const villages: Location[] = [
   {
-    high_risk: 2,
-    id: 11,
-    low_risk: 3,
-    name: 'Operational Area 11',
-    no_risk: 4,
-    parent_id: 4,
-    total: 9,
+    level: 'Village',
+    location_id: 'bb37165f-2ee9-4cad-a3b5-020c0cc75ccf',
+    location_name: 'Yen Phu Village',
+    parent_id: '46d98781-7cc4-4c28-8379-a3552a57acfe',
   },
-  {
-    high_risk: 2,
-    id: 12,
-    low_risk: 3,
-    name: 'Operational Area 12',
-    no_risk: 4,
-    parent_id: 5,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 13,
-    low_risk: 3,
-    name: 'Operational Area 13',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 14,
-    low_risk: 3,
-    name: 'Operational Area 14',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 17,
-    low_risk: 3,
-    name: 'Operational Area 17',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 18,
-    low_risk: 3,
-    name: 'Operational Area 18',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 15,
-    low_risk: 3,
-    name: 'Operational Area 15',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-  {
-    high_risk: 2,
-    id: 16,
-    low_risk: 3,
-    name: 'Operational Area 16',
-    no_risk: 4,
-    parent_id: 6,
-    total: 9,
-  },
-] as any;
+];

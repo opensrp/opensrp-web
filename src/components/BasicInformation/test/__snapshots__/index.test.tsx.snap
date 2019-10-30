@@ -58,39 +58,42 @@ exports[`BasicInformation must render correctly 1`] = `
                 <div
                   className="detailsColumn col-sm-12 col-lg-6"
                 >
-                  <span
-                    className="right"
+                  <Table
+                    borderless={true}
+                    responsiveTag="div"
+                    tag="table"
                   >
-                    ID
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    test
-                  </span>
-                  <span
-                    className="right"
-                  >
-                    Current Gravidity
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    20
-                  </span>
-                  <span
-                    className="right"
-                  >
-                    Current Parity
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    20
-                  </span>
+                    <table
+                      className="table table-borderless"
+                    >
+                      <tbody>
+                        <tr>
+                          <td>
+                            ID
+                          </td>
+                          <td>
+                            test
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Current Gravidity
+                          </td>
+                          <td>
+                            20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Current Parity
+                          </td>
+                          <td>
+                            20
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Table>
                 </div>
               </Col>
               <Col
@@ -111,39 +114,42 @@ exports[`BasicInformation must render correctly 1`] = `
                 <div
                   className="detailsColumn col-sm-12 col-lg-6"
                 >
-                  <span
-                    className="right"
+                  <Table
+                    borderless={true}
+                    responsiveTag="div"
+                    tag="table"
                   >
-                    Location
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    Test Location
-                  </span>
-                  <span
-                    className="right"
-                  >
-                    Current EDD
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    test edd
-                  </span>
-                  <span
-                    className="right"
-                  >
-                    Previous Pregnancy Risk
-                  </span>
-                  <span />
-                  <span
-                    className="left"
-                  >
-                    no risk
-                  </span>
+                    <table
+                      className="table table-borderless"
+                    >
+                      <tbody>
+                        <tr>
+                          <td>
+                            Location
+                          </td>
+                          <td>
+                            Test Location
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Current EDD
+                          </td>
+                          <td>
+                            test edd
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Previous Pregnancy Risk
+                          </td>
+                          <td>
+                            no risk
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Table>
                 </div>
               </Col>
             </div>

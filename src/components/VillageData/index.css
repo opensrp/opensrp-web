@@ -1,0 +1,28 @@
+#navrow {
+  display: flex;
+  justify-content: center;
+}
+
+.village .card {
+  width: 100%;
+}
+
+.villageDataRow {
+  margin-top: 3% !important;
+}
+
+.village td:nth-of-type(2),
+.village th:nth-of-type(2),
+.village td:nth-of-type(3),
+.village th:nth-of-type(3),
+.village td:nth-of-type(7),
+.village th:nth-of-type(7),
+.village td:nth-of-type(5),
+.village th:nth-of-type(5) {
+  width: 6%;
+}
+
+.village td:first-of-type,
+.village th:first-of-type {
+  width: 9%;
+}

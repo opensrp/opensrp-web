@@ -113,7 +113,9 @@ td {
 }
 
 .paginator {
-  float: right;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
