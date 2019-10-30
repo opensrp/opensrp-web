@@ -8,6 +8,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
+import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import {
   BACK,
@@ -32,6 +33,7 @@ import locationsReducer, {
   fetchLocations,
   getLocationsOfLevel,
   Location,
+  locationsDataFetched,
   reducerName,
 } from '../../store/ducks/locations';
 import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
@@ -65,6 +67,7 @@ interface Props {
   communes: Location[];
   villages: Location[];
   smsData: SmsData[];
+  locationsFetched: boolean;
 }
 
 const defaultProps: Props = {
@@ -73,6 +76,7 @@ const defaultProps: Props = {
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  locationsFetched: false,
   provinces: [],
   risk_highligter: 'none',
   smsData: [],
@@ -331,46 +335,90 @@ class HierarchichalDataTable extends Component<Props, State> {
   }
 
   public render() {
-    return (
-      <Container fluid={true} className="compartment-data-table">
-        <Link to={COMPARTMENTS_URL} className="back-page">
-          <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
-          <span>{BACK}</span>
-        </Link>
-        <h1>{this.props.title}</h1>
-        <Row>
-          <Card className="table-card">
-            <CardTitle>{this.header()}</CardTitle>
-            <CardBody>
-              <Table striped={true} borderless={true}>
-                <thead id="header">
-                  <tr>
-                    <th className="default-width" />
-                    <th className="default-width">{HIGH_RISK}</th>
-                    <th className="default-width">{LOW_RISK}</th>
-                    <th className="default-width">{NO_RISK}</th>
-                    <th className="default-width">{TOTAL}</th>
-                  </tr>
-                </thead>
-                <tbody id="body">
-                  {this.state.data.length ? (
-                    this.state.data.map((element: LocationWithData) => {
+    if (this.props.locationsFetched) {
+      return (
+        <Container fluid={true} className="compartment-data-table">
+          <Link to={COMPARTMENTS_URL} className="back-page">
+            <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
+            <span>{BACK}</span>
+          </Link>
+          <h1>{this.props.title}</h1>
+          <Row>
+            <Card className="table-card">
+              <CardTitle>{this.header()}</CardTitle>
+              <CardBody>
+                <Table striped={true} borderless={true}>
+                  <thead id="header">
+                    <tr>
+                      <th className="default-width" />
+                      <th className="default-width">{HIGH_RISK}</th>
+                      <th className="default-width">{LOW_RISK}</th>
+                      <th className="default-width">{NO_RISK}</th>
+                      <th className="default-width">{TOTAL}</th>
+                    </tr>
+                  </thead>
+                  <tbody id="body">
+                    {this.state.data.length ? (
+                      this.state.data.map((element: LocationWithData) => {
+                        return (
+                          <tr key={element.location_id}>
+                            <td className="default-width">
+                              {this.props.current_level === 3 ? (
+                                element.location_name
+                              ) : (
+                                <Link
+                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
+                                    this.props.title
+                                  }/${
+                                    this.props.current_level ? this.props.current_level + 1 : 1
+                                  }/down/${element.location_id}`}
+                                >
+                                  {element.location_name}
+                                </Link>
+                              )}
+                            </td>
+                            <td
+                              className={`default-width ${
+                                this.props.risk_highligter === 'high-risk'
+                                  ? this.props.risk_highligter
+                                  : ''
+                              }`}
+                            >
+                              {element.high_risk}
+                            </td>
+                            <td
+                              className={`default-width ${
+                                this.props.risk_highligter === 'low-risk'
+                                  ? this.props.risk_highligter
+                                  : ''
+                              }`}
+                            >
+                              {element.low_risk}
+                            </td>
+                            <td
+                              className={`default-width ${
+                                this.props.risk_highligter === 'no-risk'
+                                  ? this.props.risk_highligter
+                                  : ''
+                              }`}
+                            >
+                              {element.no_risk}
+                            </td>
+                            <td className={'default-width'}>{element.total}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr id="no-rows">
+                        <td>There seems to be no rows here :-(</td>
+                      </tr>
+                    )}
+                    {(() => {
+                      const element = getTotals(this.state.data);
                       return (
-                        <tr key={element.location_id}>
-                          <td className="default-width">
-                            {this.props.current_level === 3 ? (
-                              element.location_name
-                            ) : (
-                              <Link
-                                to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
-                                  this.props.title
-                                }/${
-                                  this.props.current_level ? this.props.current_level + 1 : 1
-                                }/down/${element.location_id}`}
-                              >
-                                {element.location_name}
-                              </Link>
-                            )}
+                        <tr key={'total'}>
+                          <td className="default-width" id="total">
+                            Total({this.getLevelString()})
                           </td>
                           <td
                             className={`default-width ${
@@ -399,71 +447,31 @@ class HierarchichalDataTable extends Component<Props, State> {
                           >
                             {element.no_risk}
                           </td>
-                          <td className={'default-width'}>{element.total}</td>
+                          <td className="default-width">{element.total}</td>
                         </tr>
                       );
-                    })
-                  ) : (
-                    <tr id="no-rows">
-                      <td>There seems to be no rows here :-(</td>
-                    </tr>
-                  )}
-                  {(() => {
-                    const element = getTotals(this.state.data);
-                    return (
-                      <tr key={'total'}>
-                        <td className="default-width" id="total">
-                          Total({this.getLevelString()})
-                        </td>
-                        <td
-                          className={`default-width ${
-                            this.props.risk_highligter === 'high-risk'
-                              ? this.props.risk_highligter
-                              : ''
-                          }`}
-                        >
-                          {element.high_risk}
-                        </td>
-                        <td
-                          className={`default-width ${
-                            this.props.risk_highligter === 'low-risk'
-                              ? this.props.risk_highligter
-                              : ''
-                          }`}
-                        >
-                          {element.low_risk}
-                        </td>
-                        <td
-                          className={`default-width ${
-                            this.props.risk_highligter === 'no-risk'
-                              ? this.props.risk_highligter
-                              : ''
-                          }`}
-                        >
-                          {element.no_risk}
-                        </td>
-                        <td className="default-width">{element.total}</td>
-                      </tr>
-                    );
-                  })()}
-                </tbody>
-              </Table>
-            </CardBody>
-          </Card>
-        </Row>
-        <VillageData
-          {...{
-            current_level: this.props.current_level,
-            smsData: this.props.smsData.filter((dataItem: SmsData) => {
-              const locationIds = this.state.data.map(
-                (location: LocationWithData) => location.location_id
-              );
-              return locationIds.includes(dataItem.location_id);
-            }),
-          }}
-        />
-      </Container>
-    );
+                    })()}
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Row>
+          <VillageData
+            {...{
+              current_level: this.props.current_level,
+              smsData: this.props.smsData.filter((dataItem: SmsData) => {
+                const locationIds = this.state.data.map(
+                  (location: LocationWithData) => location.location_id
+                );
+                return locationIds.includes(dataItem.location_id);
+              }),
+            }}
+          />
+        </Container>
+      );
+    } else {
+      return <Loading />;
+    }
   }
 
   private getLevelString = () => {
@@ -555,6 +563,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     direction: ownProps.match.params.direction,
     districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
+    locationsFetched: locationsDataFetched(state),
     node_id: ownProps.match.params.node_id,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
