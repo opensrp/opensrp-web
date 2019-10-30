@@ -54,11 +54,13 @@ export const fetchLocations = (locations: Location[] = []): FetchLocationsAction
 /** interface for locations state in redux store */
 interface LocationsState {
   locations: { [key: string]: Location };
+  locationsFetched: boolean;
 }
 
 /** Initial location-state state */
 const initialState: LocationsState = {
   locations: {},
+  locationsFetched: false,
 };
 
 export default function locationsReducer(
@@ -70,11 +72,13 @@ export default function locationsReducer(
       return {
         ...state,
         locations: { ...state.locations, ...action.locations },
+        locationsFetched: true,
       };
     case REMOVE_LOCATIONS:
       return {
         ...state,
         locations: action.locations,
+        locationsFetched: false,
       };
     default:
       return state;
@@ -102,4 +106,11 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
   return values((state as any)[reducerName].locations).filter((location: Location) => {
     return location.level === level;
   });
+}
+
+/** Returns true if location data has been fetched from superset
+ * and false otherwise
+ */
+export function locationsDataFetched(state: Partial<Store>): boolean {
+  return (state as any)[reducerName].locationsFetched;
 }
