@@ -343,7 +343,7 @@ class HierarchichalDataTable extends Component<Props, State> {
             <span>{BACK}</span>
           </Link>
           <h1>{this.props.title}</h1>
-          <Row>
+          <Row className="villageDataRow">
             <Card className="table-card">
               <CardTitle>{this.header()}</CardTitle>
               <CardBody>
