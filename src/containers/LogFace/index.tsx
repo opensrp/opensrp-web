@@ -15,7 +15,6 @@ import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   LOGFACE_SEARCH_PLACEHOLDER,
-  PREGNANCY_LOGFACE_HEADING,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
@@ -39,6 +38,7 @@ import './index.css';
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
+  header: string;
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
@@ -59,6 +59,7 @@ interface State {
 const defaultprops: PropsInterface = {
   dataFetched: false,
   fetchSmsDataActionCreator: fetchSms,
+  header: '',
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   smsData: [],
 };
@@ -79,7 +80,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       };
     } else {
       return {
-        filtereData: prevState.filteredData,
+        filteredData: prevState.filteredData,
       };
     }
   }
@@ -146,7 +147,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">{PREGNANCY_LOGFACE_HEADING}</h2>
+          <h2 id="logface_title">{`Log Face - ${this.props.header}`}</h2>
         </div>
         <div className="filter-panel">
           <div className="filters">

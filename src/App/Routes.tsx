@@ -21,10 +21,13 @@ import {
   COMPARTMENTS_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
+  NBC_AND_PNC,
   NBC_AND_PNC_URL,
+  NUTRITION,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PNC_AND_NBC_LOGFACE_URL,
+  PREGNANCY,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
 } from '../constants';
@@ -92,7 +95,7 @@ export const Routes = (props: RoutesProps) => {
                 title="Welcome to Newborn and Postnatal Care"
                 description={PREGNANCY_DESCRIPTION}
                 deactivateLinks={true}
-                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                logfaceUrl={PNC_AND_NBC_LOGFACE_URL}
               />
             )}
           />
@@ -106,7 +109,7 @@ export const Routes = (props: RoutesProps) => {
                 title="Welcome to Nutrition Care"
                 description={PREGNANCY_DESCRIPTION}
                 deactivateLinks={true}
-                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                logfaceUrl={NUTRITION_LOGFACE_URL}
               />
             )}
           />
@@ -152,20 +155,24 @@ export const Routes = (props: RoutesProps) => {
             path={LOGOUT_URL}
             component={ConnectedLogout}
           />
+
           <ConnectedPrivateRoute
             exact={false}
             path={PREGNANCY_LOGFACE_URL}
-            component={ConnectedLogFace}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={PREGNANCY} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={PNC_AND_NBC_LOGFACE_URL}
-            component={ConnectedLogFace}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={NBC_AND_PNC} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NUTRITION_LOGFACE_URL}
-            component={ConnectedLogFace}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={NUTRITION} />}
           />
           {/* tslint:disable jsx-no-lambda */}
           <Route
