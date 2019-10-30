@@ -52,23 +52,6 @@ describe('components/ConnectedHeader', () => {
     wrapper.unmount();
   });
 
-  it('next and previous pagination buttons work correctly', () => {
-    store.dispatch(fetchSms(smsSlice));
-    const wrapper = mount(
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ConnectedLogFace />
-        </ConnectedRouter>
-      </Provider>
-    );
-
-    expect(wrapper.find('#next').length).toBe(1);
-    expect(wrapper.find('#previous').length).toBe(0);
-    wrapper.find('#next').simulate('click');
-    expect(wrapper.find('#previous').length).toBe(1);
-    wrapper.unmount();
-  });
-
   it('search works correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
