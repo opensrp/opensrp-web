@@ -31,34 +31,7 @@ exports[`App renders App correctly 1`] = `
         MIECD VIETNAM
       </h3>
       <ProviderLinks
-        providers={
-          Object {
-            "Ona": Object {
-              "accessTokenUri": "https://api.ona.io/o/token/",
-              "authorizationUri": "https://api.ona.io/o/authorize/",
-              "clientId": "9qoIMXO7AVcYvGCn8R2sYVTpg50INPhD5HwMWOLz",
-              "redirectUri": "http://localhost:3000/oauth/callback/Ona/",
-              "scopes": Array [
-                "read",
-                "write",
-              ],
-              "state": "onadata",
-              "userUri": "https://api.ona.io/api/v1/user.json",
-            },
-            "OpenSRP": Object {
-              "accessTokenUri": "https://reveal-stage.smartregister.org/opensrp/oauth/token",
-              "authorizationUri": "https://reveal-stage.smartregister.org/opensrp/oauth/authorize",
-              "clientId": "ZS2Ll4u9HxEVVFTjafQDKQXV83iSgLj7kKHf",
-              "redirectUri": "http://localhost:3000/oauth/callback/OpenSRP/",
-              "scopes": Array [
-                "read",
-                "write",
-              ],
-              "state": "opensrp",
-              "userUri": "https://reveal-stage.smartregister.org/opensrp/user-details",
-            },
-          }
-        }
+        providers={Object {}}
       >
         <div
           className="gatekeeper-login"
@@ -67,28 +40,6 @@ exports[`App renders App correctly 1`] = `
             className="gatekeeper-p"
           >
             Please log in with one of the following providers
-          </p>
-          <p
-            className="gatekeeper-p item"
-            key="OpenSRP"
-          >
-            <a
-              className="gatekeeper-btn"
-              href="https://reveal-stage.smartregister.org/opensrp/oauth/authorize?client_id=ZS2Ll4u9HxEVVFTjafQDKQXV83iSgLj7kKHf&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fcallback%2FOpenSRP%2F&scope=read%20write&response_type=token&state=opensrp"
-            >
-              OpenSRP
-            </a>
-          </p>
-          <p
-            className="gatekeeper-p item"
-            key="Ona"
-          >
-            <a
-              className="gatekeeper-btn"
-              href="https://api.ona.io/o/authorize/?client_id=9qoIMXO7AVcYvGCn8R2sYVTpg50INPhD5HwMWOLz&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth%2Fcallback%2FOna%2F&scope=read%20write&response_type=token&state=onadata"
-            >
-              Ona
-            </a>
           </p>
         </div>
       </ProviderLinks>
