@@ -49,7 +49,7 @@ export interface SubMenuProps {
   childNavs: PageLink[];
   collapsedModuleLabel: string;
   setCollapsedModuleLabel?: SetCollapsedModuleLabel;
-  customIcon?: any;
+  customIcon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
 /** this components state
