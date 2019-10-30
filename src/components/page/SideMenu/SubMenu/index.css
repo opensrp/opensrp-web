@@ -47,10 +47,10 @@
   padding-left: 33px;
 }
 
-.active-collapse-menu path {
+.side-menu-container .active-collapse-menu path {
   fill: #0192d4;
 }
 
-path {
+.side-menu-container path {
   fill: #1b314b;
 }

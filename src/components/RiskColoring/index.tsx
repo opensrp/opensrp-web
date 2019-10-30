@@ -23,8 +23,10 @@ const riskColoringDefaultProps: RiskColoringProps = {
 /** Colour codes risk levels */
 const riskColoring = (props: RiskColoringProps) => {
   const { risk } = props;
-  switch (risk.toLowerCase()) {
+  switch (risk.toLowerCase().trim()) {
     case NO_RISK:
+    case 'no risk':
+    case 'null':
       return (
         <span className="badge badge-success" id="default-width">
           <div>
