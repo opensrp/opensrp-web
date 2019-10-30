@@ -14,3 +14,9 @@ export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 /** The website name */
 export const WEBSITE_NAME = 'OpenSRP';
 export type WEBSITE_NAME = typeof WEBSITE_NAME;
+
+export const ONADATA_CLIENT_ID = 'hunter2';
+export type ONADATA_CLIENT_ID = typeof ONADATA_CLIENT_ID;
+
+export const OPENSRP_CLIENT_ID = 'hunter1';
+export type OPENSRP_CLIENT_ID = typeof OPENSRP_CLIENT_ID;
