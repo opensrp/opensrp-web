@@ -123,7 +123,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
                     onClick={[Function]}
                   >
                     <button
-                      className="button-style"
+                      className="button-style default"
                     >
                       View
                     </button>
@@ -171,7 +171,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
                     onClick={[Function]}
                   >
                     <button
-                      className="button-style"
+                      className="button-style default"
                     >
                       View
                     </button>
