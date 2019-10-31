@@ -336,6 +336,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
     );
   }
 
+  public componentWillUnmount() {
+    if (this.state.intervalId) {
+      clearInterval(this.state.intervalId);
+    }
+  }
+
   private isAllSelected = (e: React.MouseEvent) => {
     return (e.target as HTMLInputElement).innerText === ALL;
   };
