@@ -274,9 +274,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                         <td className="default-width">{dataObj.health_worker_location_name}</td>
                         <td className="default-width">{dataObj.sms_type}</td>
                         <td className="default-width">{dataObj.health_worker_name}</td>
-                        <td className="default-width">
-                          <Link to={`/patient_detail/${dataObj.anc_id}`}>{dataObj.anc_id}</Link>
-                        </td>
+                        <td className="default-width">{dataObj.anc_id}</td>
                         <td className="small-width">{dataObj.age}</td>
                         <td className="large-width">{dataObj.message}</td>
                         <td className="default-width">
