@@ -197,22 +197,3 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
-
-// slices
-
-export const LOCATION_SLICES = ['2754', '2755', '2756', '2757'];
-export type LOCATION_SLICES = typeof LOCATION_SLICES;
-
-export const SUPERSET_SMS_DATA_SLICE = '2263';
-export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
-
-// analysis page iframes
-
-export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
-  'https://discover.ona.io/superset/dashboard/53/?standalone=true';
-export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
-
-// csv export links
-export const SUPERSET_PREGNANCY_DATA_EXPORT =
-  'https://discover.ona.io/superset/explore_json/?form_data={"slice_id":2263}&csv=true';
-export type SUPERSET_PREGNANCY_DATA_EXPORT = typeof SUPERSET_PREGNANCY_DATA_EXPORT;
