@@ -10,6 +10,7 @@ import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
+import { SUPERSET_FETCH_TIMEOUT_INTERVAL } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
@@ -55,6 +56,7 @@ interface State {
   typeLabel: string;
   filteredData: SmsData[];
   currentPage: number;
+  intervalId: NodeJS.Timeout | null;
 }
 
 const defaultprops: PropsInterface = {
@@ -95,6 +97,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
       filteredData: [],
+      intervalId: null,
       locationLabel: '',
       riskLabel: '',
       typeLabel: '',
@@ -118,24 +121,29 @@ export class LogFace extends React.Component<PropsInterface, State> {
         fetchSmsDataActionCreator(result);
       });
     } else {
-      const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(
-        this.sortFunction
-      );
+      const intervalId: NodeJS.Timeout = setInterval(() => {
+        const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(
+          this.sortFunction
+        );
 
-      // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
-      if (smsDataInDescendingOrderByEventId.length) {
-        const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
-        const supersetParams = superset.getFormData(2000, [
-          { comparator: largestEventID, operator: '>', subject: 'event_id' },
-        ]);
-        supersetFetch(SUPERSET_SMS_DATA_SLICE, supersetParams)
-          .then((result: SmsData[]) => {
-            fetchSmsDataActionCreator(result);
-          })
-          .catch(error => {
-            // console.log(error);
-          });
-      }
+        // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
+        if (smsDataInDescendingOrderByEventId.length) {
+          const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
+          const supersetParams = superset.getFormData(2000, [
+            { comparator: largestEventID, operator: '>', subject: 'event_id' },
+          ]);
+          supersetFetch(SUPERSET_SMS_DATA_SLICE, supersetParams)
+            .then((result: SmsData[]) => {
+              fetchSmsDataActionCreator(result);
+            })
+            .catch(error => {
+              // console.log(error);
+            });
+        }
+      }, SUPERSET_FETCH_TIMEOUT_INTERVAL);
+      this.setState({
+        intervalId,
+      });
     }
   }
 
