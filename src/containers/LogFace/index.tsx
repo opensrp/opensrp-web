@@ -278,17 +278,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
                           <Link to={`/patient_detail/${dataObj.anc_id}`}>{dataObj.anc_id}</Link>
                         </td>
                         <td className="small-width">{dataObj.age}</td>
-                        <td className="large-width">
-                          {typeof dataObj.message === 'string' &&
-                            dataObj.message.split('\n').map((item, key) => {
-                              return (
-                                <React.Fragment key={key}>
-                                  {item}
-                                  <br />
-                                </React.Fragment>
-                              );
-                            })}
-                        </td>
+                        <td className="large-width">{dataObj.message}</td>
                         <td className="default-width">
                           <RiskColoring {...{ risk: dataObj.logface_risk }} />
                         </td>
