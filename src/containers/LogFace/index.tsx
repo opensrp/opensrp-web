@@ -112,29 +112,28 @@ export class LogFace extends React.Component<PropsInterface, State> {
       supersetFetch(this.props.sliceId).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
-    } else {
-      const intervalId: NodeJS.Timeout = setInterval(() => {
-        const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(sortFunction);
-
-        // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
-        if (smsDataInDescendingOrderByEventId.length) {
-          const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
-          const supersetParams = superset.getFormData(GET_FORM_DATA_ROW_LIMIT, [
-            { comparator: largestEventID, operator: '>', subject: 'event_id' },
-          ]);
-          supersetFetch(this.props.sliceId, supersetParams)
-            .then((result: SmsData[]) => {
-              fetchSmsDataActionCreator(result);
-            })
-            .catch(error => {
-              // console.log(error);
-            });
-        }
-      }, SUPERSET_FETCH_TIMEOUT_INTERVAL);
-      this.setState({
-        intervalId,
-      });
     }
+    const intervalId: NodeJS.Timeout = setInterval(() => {
+      const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(sortFunction);
+
+      // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
+      if (smsDataInDescendingOrderByEventId.length) {
+        const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
+        const supersetParams = superset.getFormData(GET_FORM_DATA_ROW_LIMIT, [
+          { comparator: largestEventID, operator: '>', subject: 'event_id' },
+        ]);
+        supersetFetch(this.props.sliceId, supersetParams)
+          .then((result: SmsData[]) => {
+            fetchSmsDataActionCreator(result);
+          })
+          .catch(error => {
+            // console.log(error);
+          });
+      }
+    }, SUPERSET_FETCH_TIMEOUT_INTERVAL);
+    this.setState({
+      intervalId,
+    });
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
