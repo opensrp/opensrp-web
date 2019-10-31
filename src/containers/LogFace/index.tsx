@@ -10,7 +10,7 @@ import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
-import { SUPERSET_FETCH_TIMEOUT_INTERVAL } from '../../configs/env';
+import { GET_FORM_DATA_ROW_LIMIT, SUPERSET_FETCH_TIMEOUT_INTERVAL } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
@@ -119,7 +119,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
         // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
         if (smsDataInDescendingOrderByEventId.length) {
           const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
-          const supersetParams = superset.getFormData(2000, [
+          const supersetParams = superset.getFormData(GET_FORM_DATA_ROW_LIMIT, [
             { comparator: largestEventID, operator: '>', subject: 'event_id' },
           ]);
           supersetFetch(this.props.sliceId, supersetParams)
