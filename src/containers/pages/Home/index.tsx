@@ -1,12 +1,10 @@
 // this is the home page component
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Row } from 'reactstrap';
 import womanchild1 from '../../../assets/images/womanchild1.png';
 import womanchild2 from '../../../assets/images/womanchild2.png';
 import womanchild3 from '../../../assets/images/womanchild3.png';
-import { LOGFACE_URL } from '../../../constants';
-import { LogFace } from '../../LogFace';
+import { NBC_AND_PNC_URL, NUTRITION_URL, PREGNANCY_URL } from '../../../constants';
 import './index.css';
 
 class Home extends React.Component<{}, {}> {
@@ -18,7 +16,7 @@ class Home extends React.Component<{}, {}> {
         </div>
         <div className="components-list">
           <div className="spacer">
-            <img src={womanchild1} id="womanchild1" />
+            <img src={womanchild1} id="womanchild1" alt="woman" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>
@@ -31,7 +29,7 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <Link to={'/pregnancy'}>
+                  <Link to={PREGNANCY_URL}>
                     <button className="button-style default">View</button>
                   </Link>
                 </div>
@@ -39,7 +37,7 @@ class Home extends React.Component<{}, {}> {
             </div>
           </div>
           <div className="spacer">
-            <img src={womanchild2} id="womanchild2" />
+            <img src={womanchild2} id="womanchild2" alt="woman" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>
@@ -52,13 +50,15 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={NBC_AND_PNC_URL}>
+                    <button className="button-style default">View</button>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
           <div className="spacer">
-            <img src={womanchild3} id="womanchild3" />
+            <img src={womanchild3} id="womanchild3" alt="woman" />
             <div className="home-sub-containers">
               {/* <div className="sub-container-heading">
                 <p>Log face</p>
@@ -71,7 +71,9 @@ class Home extends React.Component<{}, {}> {
                   <h4>View the latest message updates about your patients.</h4>
                 </div>
                 <div id="cont-sized">
-                  <button className="button-style">View</button>
+                  <Link to={NUTRITION_URL}>
+                    <button className="button-style default">View</button>
+                  </Link>
                 </div>
               </div>
             </div>

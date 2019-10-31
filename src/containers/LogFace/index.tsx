@@ -1,4 +1,3 @@
-// import { any } from 'prop-types';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { Field, Formik } from 'formik';
 import { map } from 'lodash';
@@ -8,22 +7,23 @@ import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
+import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   LOGFACE_SEARCH_PLACEHOLDER,
-  PREGNANCY_LOGFACE_HEADING,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
   SELECT_RISK,
   SELECT_TYPE,
+  SUPERSET_PREGNANCY_DATA_EXPORT,
   SUPERSET_SMS_DATA_SLICE,
   TYPE,
 } from '../../constants';
-import { FlexObject } from '../../helpers/utils';
+import { FlexObject, sortFunction } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import TestReducer, {
   fetchSms,
@@ -37,6 +37,7 @@ import './index.css';
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
+  header: string;
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
@@ -51,12 +52,13 @@ interface State {
   locationLabel: string;
   typeLabel: string;
   filteredData: SmsData[];
-  currentIndex: number;
+  currentPage: number;
 }
 
 const defaultprops: PropsInterface = {
   dataFetched: false,
   fetchSmsDataActionCreator: fetchSms,
+  header: '',
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   smsData: [],
 };
@@ -64,7 +66,7 @@ const defaultprops: PropsInterface = {
 export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
-  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+  public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
     if (
       !prevState.filteredData.length &&
       !(
@@ -77,16 +79,16 @@ export class LogFace extends React.Component<PropsInterface, State> {
       };
     } else {
       return {
-        filtereData: prevState.filteredData,
+        filteredData: prevState.filteredData,
       };
     }
   }
 
-  constructor(props: any) {
+  constructor(props: PropsInterface) {
     super(props);
 
     this.state = {
-      currentIndex: 1,
+      currentPage: 1,
       dropdownOpenLocation: false,
       dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
@@ -100,7 +102,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
+      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
     }
@@ -111,28 +113,38 @@ export class LogFace extends React.Component<PropsInterface, State> {
     e.preventDefault();
   }
 
-  // tslint:disable-next-line: no-empty
   public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
     const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
-    if (this.state.currentIndex > 1) {
+    if (this.state.currentPage > 1) {
       this.setState({
-        currentIndex: 1,
+        currentPage: 1,
       });
     }
     this.setState({
       filteredData,
     });
-    // console.log(e.target.value);
   };
 
   public render() {
-    const data = this.state.filteredData.sort((a: FlexObject, b: FlexObject) => {
-      return (new Date(b.EventDate) as any) - (new Date(a.EventDate) as any);
-    });
+    const routePaginatorProps: PaginatorProps = {
+      endLabel: 'last',
+      nextLabel: 'next',
+      onPageChange: (paginationData: PaginationData) => {
+        this.setState({
+          currentPage: paginationData.currentPage,
+        });
+      },
+      pageLimit: 5,
+      pageNeighbours: 3,
+      previousLabel: 'previous',
+      startLabel: 'first',
+      totalRecords: this.props.smsData.length,
+    };
+    const data = this.state.filteredData.sort(sortFunction);
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">{PREGNANCY_LOGFACE_HEADING}</h2>
+          <h2 id="logface_title">{`Log Face - ${this.props.header}`}</h2>
         </div>
         <div className="filter-panel">
           <div className="filters">
@@ -227,7 +239,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <button id="export-button">Export data</button>
+            <a id="export-button" href={SUPERSET_PREGNANCY_DATA_EXPORT} download={true}>
+              Export data
+            </a>
           </div>
         </div>
         {this.props.dataFetched ? (
@@ -249,9 +263,8 @@ export class LogFace extends React.Component<PropsInterface, State> {
               <tbody id="body">
                 {map(
                   data.slice(
-                    (this.state.currentIndex - 1) * this.props.numberOfRows,
-                    (this.state.currentIndex - 1) * this.props.numberOfRows +
-                      this.props.numberOfRows
+                    (this.state.currentPage - 1) * this.props.numberOfRows,
+                    (this.state.currentPage - 1) * this.props.numberOfRows + this.props.numberOfRows
                   ),
                   dataObj => {
                     return (
@@ -261,21 +274,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
                         <td className="default-width">{dataObj.health_worker_location_name}</td>
                         <td className="default-width">{dataObj.sms_type}</td>
                         <td className="default-width">{dataObj.health_worker_name}</td>
-                        <td className="default-width">
-                          <Link to={`/patient_detail/${dataObj.anc_id}`}>{dataObj.anc_id}</Link>
-                        </td>
+                        <td className="default-width">{dataObj.anc_id}</td>
                         <td className="small-width">{dataObj.age}</td>
-                        <td className="large-width">
-                          {typeof dataObj.message === 'string' &&
-                            dataObj.message.split('\n').map((item, key) => {
-                              return (
-                                <React.Fragment key={key}>
-                                  {item}
-                                  <br />
-                                </React.Fragment>
-                              );
-                            })}
-                        </td>
+                        <td className="large-width">{dataObj.message}</td>
                         <td className="default-width">
                           <RiskColoring {...{ risk: dataObj.logface_risk }} />
                         </td>
@@ -290,16 +291,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
           <Ripple />
         )}
         <div className="paginator">
-          {this.state.currentIndex > 1 && (
-            <button onClick={this.previousPage} id={'previous'}>
-              previous
-            </button>
-          )}
-          {this.state.currentIndex < Math.ceil(data.length / this.props.numberOfRows) && (
-            <button onClick={this.nextPage} id={'next'}>
-              next
-            </button>
-          )}
+          <Paginator {...routePaginatorProps} />
         </div>
       </div>
     );
@@ -321,20 +313,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   };
 
-  private previousPage = () => {
-    this.setState({
-      currentIndex: this.state.currentIndex - 1,
-    });
-  };
-
-  private nextPage = () => {
-    this.setState({
-      currentIndex: this.state.currentIndex + 1,
-    });
-  };
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
@@ -343,7 +324,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
@@ -364,7 +345,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
     this.setState({
-      currentIndex: 1,
+      currentPage: 1,
       filteredData: this.isAllSelected(e)
         ? this.props.smsData
         : this.getFilteredData(e, this.props.smsData, 'sms_type', false),

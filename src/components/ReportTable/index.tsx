@@ -1,5 +1,4 @@
 import ListView from '@onaio/list-view';
-import { map } from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import { GESTATION_PERIOD } from '../../constants';

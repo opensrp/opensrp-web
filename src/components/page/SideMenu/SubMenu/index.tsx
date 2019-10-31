@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Collapse, Nav, NavItem } from 'reactstrap';
 import './index.css';
 
@@ -49,6 +49,7 @@ export interface SubMenuProps {
   childNavs: PageLink[];
   collapsedModuleLabel: string;
   setCollapsedModuleLabel?: SetCollapsedModuleLabel;
+  customIcon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
 /** this components state
@@ -93,7 +94,11 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
 
     const moduleLinkJsx = (
       <Fragment>
-        <FontAwesomeIcon icon={parentNav.icon} size="lg" />
+        {this.props.customIcon ? (
+          <this.props.customIcon />
+        ) : (
+          <FontAwesomeIcon icon={parentNav.icon} size="lg" />
+        )}
         <span className="collapse-menu-title"> {parentNav.label} </span>
       </Fragment>
     );

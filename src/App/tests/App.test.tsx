@@ -11,6 +11,8 @@ import App from '../App';
 
 const history = createBrowserHistory();
 
+jest.mock('../../configs/env');
+
 describe('App', () => {
   beforeEach(() => {
     jest.resetAllMocks();

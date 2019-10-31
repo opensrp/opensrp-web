@@ -41,6 +41,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           className="spacer"
         >
           <img
+            alt="woman"
             id="womanchild1"
             src="womanchild1.png"
           />
@@ -89,6 +90,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           className="spacer"
         >
           <img
+            alt="woman"
             id="womanchild2"
             src="womanchild2.png"
           />
@@ -115,11 +117,20 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
               <div
                 id="cont-sized"
               >
-                <button
-                  className="button-style"
+                <Link
+                  to="/nbc_and_pnc"
                 >
-                  View
-                </button>
+                  <a
+                    href="/nbc_and_pnc"
+                    onClick={[Function]}
+                  >
+                    <button
+                      className="button-style default"
+                    >
+                      View
+                    </button>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -128,6 +139,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           className="spacer"
         >
           <img
+            alt="woman"
             id="womanchild3"
             src="womanchild3.png"
           />
@@ -154,11 +166,20 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
               <div
                 id="cont-sized"
               >
-                <button
-                  className="button-style"
+                <Link
+                  to="/nutrition"
                 >
-                  View
-                </button>
+                  <a
+                    href="/nutrition"
+                    onClick={[Function]}
+                  >
+                    <button
+                      className="button-style default"
+                    >
+                      View
+                    </button>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

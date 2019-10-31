@@ -31,7 +31,7 @@ td {
 
 .table-container {
   font-size: 11px;
-  height: 80%;
+  height: 500px;
   box-shadow: 0 2px 4px 0 #d7d7e0;
   display: block;
 }
@@ -43,13 +43,14 @@ td {
 .table-container table {
   border: none !important;
   background: #fff;
+  height: 100%;
 }
 
 .filter-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .logface-content .filter-panel .filters {
@@ -98,6 +99,12 @@ td {
 
 .table-container table #body {
   overflow: auto;
+  height: 100%;
+}
+
+.table-container table #body > tr td:nth-child(8) {
+  width: 25%;
+  height: 20%;
 }
 
 .large-width {
@@ -113,7 +120,9 @@ td {
 }
 
 .paginator {
-  float: right;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -134,6 +143,7 @@ td {
   border: 1px solid #0093db;
   width: auto;
   height: auto;
+  text-decoration: none;
   padding: 5px 15px;
 }
 

@@ -27,8 +27,9 @@ jobs:
           REACT_APP_ONADATA_ACCESS_TOKEN_URL: "https://api.ona.io/o/token/"
           REACT_APP_ONADATA_AUTHORIZATION_URL: "https://api.ona.io/o/authorize/"
           REACT_APP_ONADATA_USER_URL: "https://api.ona.io/api/v1/user.json"
-          REACT_APP_ONADATA_CLIENT_ID: "9qoIMXO7AVcYvGCn8R2sYVTpg50INPhD5HwMWOLz"
-          REACT_APP_OPENSRP_CLIENT_ID: "ZS2Ll4u9HxEVVFTjafQDKQXV83iSgLj7kKHf"
+          REACT_APP_ENABLE_NUTRITION_MODULE: "true"
+          REACT_APP_ENABLE_NBC_AND_PNC_MODULE: "true"
+          REACT_APP_ENABLE_HOME_NAVIGATION: "true"
 
     working_directory: ~/repo
 

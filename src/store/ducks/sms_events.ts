@@ -1,4 +1,4 @@
-import { get, keyBy, keys, values } from 'lodash';
+import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 
 /** The reducer name */

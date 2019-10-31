@@ -3,21 +3,31 @@ import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { RoutesProps } from '../../../App/Routes';
-import { ENABLE_REPORT_MODULE } from '../../../configs/env';
+import { ReactComponent as HomeLogo } from '../../../assets/menuIcons/home.svg';
+import { ReactComponent as NbcAndPncLogo } from '../../../assets/menuIcons/nbcandpnc.svg';
+import { ReactComponent as NutritionLogo } from '../../../assets/menuIcons/nutrition.svg';
+import { ReactComponent as PregnancyLogo } from '../../../assets/menuIcons/pregnancy.svg';
 import { ENABLE_PREGNANCY_MODULE } from '../../../configs/env';
+import {
+  ENABLE_HOME_NAVIGATION,
+  ENABLE_NBC_AND_PNC_MODULE,
+  ENABLE_NUTRITION_MODULE,
+  ENABLE_REPORT_MODULE,
+} from '../../../configs/env';
 import { headerShouldNotRender } from '../../../helpers/utils';
-import SubMenu, { SubMenuProps } from './SubMenu';
-
 import {
   ADMIN_NAVIGATION_MODULE,
   CLIENT_NAVIGATION_MODULE,
   ENABLE_ADMIN_MODULE,
   ENABLE_CLIENT_RECORDS_MODULE,
   HOME_NAVIGATION_MODULE,
+  NBC_AND_PNC_NAVIGATION_MODULE,
+  NUTRITION_MODULE,
   PREGNANCY_NAVIGATION_MODULE,
   REPORT_NAVIGATION_MODULE,
 } from './constants';
 import './index.css';
+import SubMenu, { ModulePageLink, PageLink, SubMenuProps } from './SubMenu';
 
 /** interface for the local state for this component
  * @property {string} collapsedModuleLabel - label pointing to active navigation module
@@ -43,10 +53,30 @@ class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
     interface SubMenuToRender {
       shouldRender: boolean;
       subMenuProps: Partial<SubMenuProps>;
+      icon?: any;
     }
+
     const navigationModules: SubMenuToRender[] = [
-      { shouldRender: true, subMenuProps: HOME_NAVIGATION_MODULE },
-      { shouldRender: ENABLE_PREGNANCY_MODULE, subMenuProps: PREGNANCY_NAVIGATION_MODULE },
+      {
+        icon: HomeLogo,
+        shouldRender: ENABLE_HOME_NAVIGATION,
+        subMenuProps: HOME_NAVIGATION_MODULE,
+      },
+      {
+        icon: PregnancyLogo,
+        shouldRender: ENABLE_PREGNANCY_MODULE,
+        subMenuProps: PREGNANCY_NAVIGATION_MODULE,
+      },
+      {
+        icon: NbcAndPncLogo,
+        shouldRender: ENABLE_NBC_AND_PNC_MODULE,
+        subMenuProps: NBC_AND_PNC_NAVIGATION_MODULE,
+      },
+      {
+        icon: NutritionLogo,
+        shouldRender: ENABLE_NUTRITION_MODULE,
+        subMenuProps: NUTRITION_MODULE,
+      },
       { shouldRender: ENABLE_REPORT_MODULE, subMenuProps: REPORT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_CLIENT_RECORDS_MODULE, subMenuProps: CLIENT_NAVIGATION_MODULE },
       { shouldRender: ENABLE_ADMIN_MODULE, subMenuProps: ADMIN_NAVIGATION_MODULE },
@@ -62,17 +92,20 @@ class SideMenu extends React.Component<HeaderPropsTypes, SideMenuState> {
         <div className="side-menu-container">
           <Row>
             <Col className="side-menu-extend">
-              {navigationModules.map((navigationModule: any, index: number) => {
+              {navigationModules.map((navigationModule: SubMenuToRender, index: number) => {
                 if (navigationModule.shouldRender) {
                   return (
                     <SubMenu
-                      childNavs={navigationModule.subMenuProps.childNavs}
+                      childNavs={navigationModule.subMenuProps.childNavs as PageLink[]}
                       collapsedModuleLabel={collapsedModuleLabel}
                       setCollapsedModuleLabel={this.setCollapsedModuleLabel}
-                      parentNav={navigationModule.subMenuProps.parentNav}
+                      parentNav={navigationModule.subMenuProps.parentNav as ModulePageLink}
                       key={index}
+                      customIcon={navigationModule.icon}
                     />
                   );
+                } else {
+                  return null;
                 }
               })}
             </Col>

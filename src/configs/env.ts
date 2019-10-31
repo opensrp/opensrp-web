@@ -41,6 +41,16 @@ export type ENABLE_CHILD_PAGE = typeof ENABLE_CHILD_PAGE;
 export const ENABLE_REPORT_MODULE = process.env.REACT_APP_ENABLE_REPORT_MODULE === 'true' || false;
 export type ENABLE_REPORT_MODULE = typeof ENABLE_REPORT_MODULE;
 
+/** Do you want to enable the nbc and pnc Module? */
+export const ENABLE_NBC_AND_PNC_MODULE =
+  process.env.REACT_APP_ENABLE_NBC_AND_PNC_MODULE === 'true' || false;
+export type ENABLE_NBC_AND_PNC_MODULE = typeof ENABLE_NBC_AND_PNC_MODULE;
+
+/** Do you want to enable the  home navigation? */
+export const ENABLE_HOME_NAVIGATION =
+  process.env.REACT_APP_ENABLE_HOME_NAVIGATION === 'true' || false;
+export type ENABLE_HOME_NAVIGATION = typeof ENABLE_HOME_NAVIGATION;
+
 /** Do you want to enable User page of Admin Module? */
 export const ENABLE_USER_PAGE = process.env.REACT_APP_ENABLE_USER_PAGE === 'true' || false;
 export type ENABLE_USER_PAGE = typeof ENABLE_USER_PAGE;

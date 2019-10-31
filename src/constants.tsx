@@ -1,6 +1,8 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 // internal urls
+export const NBC_AND_PNC_URL = '/nbc_and_pnc';
+export type NBC_AND_PNC_URL = typeof NBC_AND_PNC_URL;
 export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';
 export type HIERARCHICAL_DATA_URL = typeof HIERARCHICAL_DATA_URL;
 export const PREGNANCY_URL = '/pregnancy';
@@ -17,12 +19,16 @@ export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 export const LOGFACE_URL = '/log-face';
 export type LOGFACE_URL = typeof LOGFACE_URL;
+export const PREGNANCY_LOGFACE_URL = '/pregnancy_log_face';
+export type PREGNANCY_LOGFACE_URL = typeof PREGNANCY_LOGFACE_URL;
+export const PNC_AND_NBC_LOGFACE_URL = '/pnc_and_nbc_log_face';
+export type PNC_AND_NBC_LOGFACE_URL = typeof PNC_AND_NBC_LOGFACE_URL;
+export const NUTRITION_LOGFACE_URL = '/nutrition_logface_url';
+export type NUTRITION_LOGFACE_URL = typeof NUTRITION_LOGFACE_URL;
 export const ANALYSIS_URL = '/analysis';
 export type ANALYSIS_URL = typeof ANALYSIS_URL;
 export const NUTRITION_URL = '/nutrition';
 export type NUTRITION_URL = typeof NUTRITION_URL;
-export const NEWBORN_AND_POSTNATAL_URL = '/nbc-pnc';
-export type NEWBORN_AND_POSTNATAL_URL = typeof NEWBORN_AND_POSTNATAL_URL;
 export const HOUSEHOLD_URL = '/404';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
 export const ANC_URL = '/404';
@@ -54,9 +60,9 @@ export const HOME = 'Home';
 export type HOME = typeof HOME;
 export const PREGNANCY = 'Pregnancy';
 export type PREGNANCY = typeof PREGNANCY;
-export const NEWBORN_AND_POSTNATAL = 'NBC & PNC';
-export type NEWBORN_AND_POSTNATAL = typeof NEWBORN_AND_POSTNATAL;
-export const NUTRITION = 'NUTRITION';
+export const NBC_AND_PNC = 'NBC & PNC';
+export type NBC_AND_PNC = typeof NBC_AND_PNC;
+export const NUTRITION = 'Nutrition';
 export type NUTRITION = typeof NUTRITION;
 export const LOGFACE = 'Logface';
 export type LOGFACE = typeof LOGFACE;
@@ -168,6 +174,11 @@ export const NO_PROVIDERS = 'No providers';
 export type NO_PROVIDERS = typeof NO_PROVIDERS;
 export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
 export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
+export const PREGNANCY_DESCRIPTION = `This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
+patients in your geographical location. The Module covers the whole pregnancy period
+from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
+reports/Death reports, Risk Reports, Risk alerts and ResponseReports.`;
+export type PREGNANCY_DESCRIPTION = typeof PREGNANCY_DESCRIPTION;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
@@ -198,3 +209,8 @@ export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
 export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
   'https://discover.ona.io/superset/dashboard/53/?standalone=true';
 export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
+
+// csv export links
+export const SUPERSET_PREGNANCY_DATA_EXPORT =
+  'https://discover.ona.io/superset/explore_json/?form_data={"slice_id":2263}&csv=true';
+export type SUPERSET_PREGNANCY_DATA_EXPORT = typeof SUPERSET_PREGNANCY_DATA_EXPORT;

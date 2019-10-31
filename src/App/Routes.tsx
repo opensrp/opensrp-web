@@ -2,26 +2,29 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback } from '@onaio/gatekeeper';
-import { getUser, isAuthenticated, logOutUser } from '@onaio/session-reducer';
-import React, { Component, useEffect } from 'react';
+import { isAuthenticated } from '@onaio/session-reducer';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
 
-import { exportSpecifier } from '@babel/types';
-import { match, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
-import CustomOauthLogin from '../components/CustomAuthLogin';
-import { HeaderProps } from '../components/page/Header/Header';
+import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import SidenavComponent from '../components/page/SideNav/sidenav';
-import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   ANALYSIS_URL,
   COMPARTMENTS_URL,
   HIERARCHICAL_DATA_URL,
-  LOGFACE_URL,
   LOGOUT_URL,
+  NBC_AND_PNC,
+  NBC_AND_PNC_URL,
+  NUTRITION,
+  NUTRITION_LOGFACE_URL,
+  NUTRITION_URL,
+  PNC_AND_NBC_LOGFACE_URL,
+  PREGNANCY,
+  PREGNANCY_DESCRIPTION,
+  PREGNANCY_LOGFACE_URL,
 } from '../constants';
 import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
@@ -30,7 +33,7 @@ import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTabl
 import ConnectedLogFace from '../containers/LogFace';
 import Analysis from '../containers/pages/Analysis';
 import Home from '../containers/pages/Home';
-import PregnancyHome from '../containers/pages/PregnancyHome';
+import ModuleHome from '../containers/pages/ModuleHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -68,7 +71,42 @@ export const Routes = (props: RoutesProps) => {
             disableLoginProtection={false}
             exact={true}
             path={PREGNANCY_URL}
-            component={PregnancyHome}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <ModuleHome
+                title="Welcome to the pregnancy dashboard"
+                description={PREGNANCY_DESCRIPTION}
+                logfaceUrl={PREGNANCY_LOGFACE_URL}
+              />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NBC_AND_PNC_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <ModuleHome
+                title="Welcome to Newborn and Postnatal Care"
+                description={PREGNANCY_DESCRIPTION}
+                deactivateLinks={true}
+                logfaceUrl={PNC_AND_NBC_LOGFACE_URL}
+              />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NUTRITION_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <ModuleHome
+                title="Welcome to Nutrition Care"
+                description={PREGNANCY_DESCRIPTION}
+                deactivateLinks={true}
+                logfaceUrl={NUTRITION_LOGFACE_URL}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
@@ -112,7 +150,25 @@ export const Routes = (props: RoutesProps) => {
             path={LOGOUT_URL}
             component={ConnectedLogout}
           />
-          <ConnectedPrivateRoute exact={false} path={LOGFACE_URL} component={ConnectedLogFace} />
+
+          <ConnectedPrivateRoute
+            exact={false}
+            path={PREGNANCY_LOGFACE_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={PREGNANCY} />}
+          />
+          <ConnectedPrivateRoute
+            exact={false}
+            path={PNC_AND_NBC_LOGFACE_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={NBC_AND_PNC} />}
+          />
+          <ConnectedPrivateRoute
+            exact={false}
+            path={NUTRITION_LOGFACE_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogFace header={NUTRITION} />}
+          />
           {/* tslint:disable jsx-no-lambda */}
           <Route
             exact={true}
