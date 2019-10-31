@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle, Row, Table } from 'reactstrap';
 import {
   EDD,
@@ -83,7 +84,11 @@ export default class VillageData extends React.Component<Props, State> {
                             .map((dataItem: SmsData) => {
                               return (
                                 <tr key={dataItem.event_id}>
-                                  <td className="default-width">{dataItem.anc_id}</td>
+                                  <td className="default-width">
+                                    <Link to={`/patient_detail/${dataItem.anc_id}`}>
+                                      {dataItem.anc_id}
+                                    </Link>
+                                  </td>
                                   <td className="default-width">{dataItem.gravidity}</td>
                                   <td className="default-width">{dataItem.parity}</td>
                                   <td className="default-width">{dataItem.location_id}</td>
