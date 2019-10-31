@@ -25,6 +25,7 @@ import {
   PREGNANCY,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
+  SUPERSET_SMS_DATA_SLICE,
 } from '../constants';
 import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
@@ -155,19 +156,25 @@ export const Routes = (props: RoutesProps) => {
             exact={false}
             path={PREGNANCY_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={PREGNANCY} />}
+            component={() => (
+              <ConnectedLogFace header={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={PNC_AND_NBC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={NBC_AND_PNC} />}
+            component={() => (
+              <ConnectedLogFace header={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NUTRITION_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={NUTRITION} />}
+            component={() => (
+              <ConnectedLogFace header={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           {/* tslint:disable jsx-no-lambda */}
           <Route

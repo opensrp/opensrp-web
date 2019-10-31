@@ -45,6 +45,7 @@ interface PropsInterface {
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
   numberOfRows: number;
+  sliceId: string;
 }
 
 interface State {
@@ -64,6 +65,7 @@ const defaultprops: PropsInterface = {
   fetchSmsDataActionCreator: fetchSms,
   header: '',
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  sliceId: '0',
   smsData: [],
 };
 
@@ -107,7 +109,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
+      supersetFetch(this.props.sliceId).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
     } else {
@@ -120,7 +122,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
           const supersetParams = superset.getFormData(2000, [
             { comparator: largestEventID, operator: '>', subject: 'event_id' },
           ]);
-          supersetFetch(SUPERSET_SMS_DATA_SLICE, supersetParams)
+          supersetFetch(this.props.sliceId, supersetParams)
             .then((result: SmsData[]) => {
               fetchSmsDataActionCreator(result);
             })
