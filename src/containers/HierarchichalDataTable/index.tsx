@@ -22,6 +22,7 @@ import {
   LOCATION_SLICES,
   LOW,
   LOW_RISK,
+  NO,
   NO_RISK,
   PROVINCE,
   TOTAL,
@@ -59,7 +60,7 @@ interface Props {
   node_id?: string;
   direction: string; // this can be down or up
   from_level?: string;
-  risk_highligter?: 'high-risk' | 'low-risk' | 'no-risk' | 'none';
+  risk_highligter?: HIGH | LOW | NO | '';
   title: string;
   fetchLocationsActionCreator: typeof fetchLocations;
   provinces: Location[];
@@ -78,7 +79,7 @@ const defaultProps: Props = {
   fetchLocationsActionCreator: fetchLocations,
   locationsFetched: false,
   provinces: [],
-  risk_highligter: 'none',
+  risk_highligter: '',
   smsData: [],
   title: '',
   villages: [],
@@ -379,7 +380,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === 'high-risk'
+                                this.props.risk_highligter === HIGH
                                   ? this.props.risk_highligter
                                   : ''
                               }`}
@@ -388,18 +389,14 @@ class HierarchichalDataTable extends Component<Props, State> {
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === 'low-risk'
-                                  ? this.props.risk_highligter
-                                  : ''
+                                this.props.risk_highligter === LOW ? this.props.risk_highligter : ''
                               }`}
                             >
                               {element.low_risk}
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === 'no-risk'
-                                  ? this.props.risk_highligter
-                                  : ''
+                                this.props.risk_highligter === NO ? this.props.risk_highligter : ''
                               }`}
                             >
                               {element.no_risk}
@@ -422,27 +419,21 @@ class HierarchichalDataTable extends Component<Props, State> {
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === 'high-risk'
-                                ? this.props.risk_highligter
-                                : ''
+                              this.props.risk_highligter === HIGH ? this.props.risk_highligter : ''
                             }`}
                           >
                             {element.high_risk}
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === 'low-risk'
-                                ? this.props.risk_highligter
-                                : ''
+                              this.props.risk_highligter === LOW ? this.props.risk_highligter : ''
                             }`}
                           >
                             {element.low_risk}
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === 'no-risk'
-                                ? this.props.risk_highligter
-                                : ''
+                              this.props.risk_highligter === NO ? this.props.risk_highligter : ''
                             }`}
                           >
                             {element.no_risk}
@@ -456,6 +447,7 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
+          {}
           <VillageData
             {...{
               current_level: this.props.current_level,
@@ -463,7 +455,12 @@ class HierarchichalDataTable extends Component<Props, State> {
                 const locationIds = this.state.data.map(
                   (location: LocationWithData) => location.location_id
                 );
-                return locationIds.includes(dataItem.location_id);
+                return (
+                  locationIds.includes(dataItem.location_id) &&
+                  (this.props.risk_highligter
+                    ? dataItem.logface_risk.includes(this.props.risk_highligter)
+                    : true)
+                );
               }),
             }}
           />

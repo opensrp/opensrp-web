@@ -133,14 +133,14 @@
   width: 100%;
 }
 
-.compartment-data-table .high-risk {
+.compartment-data-table .high {
   background-color: #ffe8e6;
 }
 
-.compartment-data-table .low-risk {
+.compartment-data-table .low {
   background-color: #ffe9db;
 }
 
-.compartment-data-table .no-risk {
+.compartment-data-table .no {
   background-color: rgba(55, 174, 18, 0.10000000149011612);
 }
