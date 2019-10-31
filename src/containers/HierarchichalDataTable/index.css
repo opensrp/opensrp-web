@@ -32,6 +32,10 @@
   background-color: #f8f9fa;
 }
 
+.back-page > span > span {
+  padding-left: 15px;
+}
+
 .compartment-data-table .ReactTable .rt-thead.-header {
   box-shadow: 0 0px 0px 0 #dadce0;
 }
