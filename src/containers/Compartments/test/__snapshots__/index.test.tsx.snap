@@ -27,10 +27,10 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high-risk/22 Total Pregnancies"
+              to="/hierarchicaldata/high/22 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/high-risk/22 Total Pregnancies"
+                href="/hierarchicaldata/high/22 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -50,10 +50,10 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low-risk/22 Total Pregnancies"
+              to="/hierarchicaldata/low/22 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/low-risk/22 Total Pregnancies"
+                href="/hierarchicaldata/low/22 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -73,10 +73,10 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no-risk/22 Total Pregnancies"
+              to="/hierarchicaldata/no/22 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/no-risk/22 Total Pregnancies"
+                href="/hierarchicaldata/no/22 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -121,10 +121,10 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high-risk/0 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/high/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/high-risk/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/high/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -144,10 +144,10 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low-risk/0 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/low/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/low-risk/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/low/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -167,10 +167,10 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no-risk/0 Total Pregnancies due in 2 weeks"
+              to="/hierarchicaldata/no/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/no-risk/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/no/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -215,10 +215,10 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high-risk/0 Total Pregnancies due in 1 week"
+              to="/hierarchicaldata/high/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/high-risk/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/high/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -238,10 +238,10 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low-risk/0 Total Pregnancies due in 1 week"
+              to="/hierarchicaldata/low/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/low-risk/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/low/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -261,10 +261,10 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no-risk/0 Total Pregnancies due in 1 week"
+              to="/hierarchicaldata/no/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/no-risk/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/no/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
