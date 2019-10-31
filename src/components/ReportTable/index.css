@@ -63,6 +63,7 @@
 .patient-details .table-container {
   width: 100%;
   box-shadow: initial;
+  height: auto;
 }
 
 .patient-details td:nth-child(2n) {

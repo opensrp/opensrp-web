@@ -340,8 +340,10 @@ class HierarchichalDataTable extends Component<Props, State> {
       return (
         <Container fluid={true} className="compartment-data-table">
           <Link to={COMPARTMENTS_URL} className="back-page">
-            <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
-            <span>{BACK}</span>
+            <span>
+              <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
+              <span>{BACK}</span>
+            </span>
           </Link>
           <h1>{this.props.title}</h1>
           <Row className="villageDataRow">

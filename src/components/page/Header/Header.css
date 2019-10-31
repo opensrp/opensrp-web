@@ -90,3 +90,11 @@
   justify-content: center;
   font-family: roboto;
 }
+
+@media screen and (min-width: 480px) {
+  .navbar-expand-md .navbar-collapse {
+    display: flex;
+    flex-basis: 100%;
+    flex: 1;
+  }
+}
