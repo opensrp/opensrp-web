@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import { BACK, BACKPAGE_ICON, PATIENT_DETAILS, PREGNANCY_LOGFACE_URL } from '../../constants';
+import { BACK, BACKPAGE_ICON, PATIENT_DETAILS } from '../../constants';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 

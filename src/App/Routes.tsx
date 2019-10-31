@@ -27,8 +27,7 @@ import {
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
 } from '../constants';
-import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
-import ConnectedClientList from '../containers/Clients/List';
+import { ANALYSIS, PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
@@ -108,12 +107,6 @@ export const Routes = (props: RoutesProps) => {
                 logfaceUrl={NUTRITION_LOGFACE_URL}
               />
             )}
-          />
-          <ConnectedPrivateRoute
-            disableLoginProtection={false}
-            exact={true}
-            path={CLIENT_URL}
-            component={ConnectedClientList}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
