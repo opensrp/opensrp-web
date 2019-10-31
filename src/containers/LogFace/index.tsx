@@ -10,7 +10,11 @@ import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
-import { GET_FORM_DATA_ROW_LIMIT, SUPERSET_FETCH_TIMEOUT_INTERVAL } from '../../configs/env';
+import {
+  GET_FORM_DATA_ROW_LIMIT,
+  SUPERSET_FETCH_TIMEOUT_INTERVAL,
+  SUPERSET_PREGNANCY_DATA_EXPORT,
+} from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
@@ -21,8 +25,6 @@ import {
   SELECT_LOCATION,
   SELECT_RISK,
   SELECT_TYPE,
-  SUPERSET_PREGNANCY_DATA_EXPORT,
-  SUPERSET_SMS_DATA_SLICE,
   TYPE,
 } from '../../constants';
 import { FlexObject, sortFunction } from '../../helpers/utils';

@@ -10,6 +10,7 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
+import { SUPERSET_SMS_DATA_SLICE } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   ANALYSIS_URL,
@@ -25,7 +26,6 @@ import {
   PREGNANCY,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
-  SUPERSET_SMS_DATA_SLICE,
 } from '../constants';
 import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';

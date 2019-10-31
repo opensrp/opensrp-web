@@ -4,12 +4,8 @@ import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
 import DataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
-import {
-  COMPARTMENTS,
-  MICROSECONDS_IN_A_WEEK,
-  PROVINCE,
-  SUPERSET_SMS_DATA_SLICE,
-} from '../../constants';
+import { SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
+import { COMPARTMENTS, MICROSECONDS_IN_A_WEEK, PROVINCE } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
 import './index.css';

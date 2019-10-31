@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Store } from 'redux';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
+import { LOCATION_SLICES } from '../../configs/env';
 import {
   BACK,
   BACKPAGE_ICON,
@@ -19,7 +20,6 @@ import {
   HIERARCHICAL_DATA_URL,
   HIGH,
   HIGH_RISK,
-  LOCATION_SLICES,
   LOW,
   LOW_RISK,
   NO,
