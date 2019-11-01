@@ -47,6 +47,8 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const EVENT_ID = 'event_id';
+export type EVENT_ID = typeof EVENT_ID;
 export const HIGH = 'high';
 export type HIGH = typeof HIGH;
 export const LOW = 'low';
