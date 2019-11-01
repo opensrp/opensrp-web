@@ -36,7 +36,6 @@ import TestReducer, {
   smsDataFetched,
 } from '../../store/ducks/sms_events';
 import './index.css';
-// import { getFormData } from '@onaio/superset-connector/dist/types/utils';
 
 reducerRegistry.register(reducerName, TestReducer);
 
