@@ -34,10 +34,14 @@ export interface FilterArgs {
 
 // actions
 
-/** fETCH_SMS action type */
+/** FETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 /** REMOVE_SMS action type */
 export const REMOVE_SMS = 'opensrp/reducer/REMOVE_SMS';
+/** ADD_FILTER_ARGS type */
+export const ADD_FILTER_ARGS = 'opensrp/reducer/ADD_FILTER_ARGS';
+/** REMOVE_FILTER_ARGS type */
+export const REMOVE_FILTER_ARGS = 'opensrp/reducer/REMOVE_FILTER_ARGS';
 
 /** interface for sms fetch */
 // tslint:disable-next-line: class-name
@@ -46,8 +50,32 @@ export interface FetchSmsAction extends AnyAction {
   type: typeof FETCHED_SMS;
 }
 
+/** interface for Remove Sms action */
+export interface RemoveSmsAction extends AnyAction {
+  // tslint:disable-next-line: no-empty
+  smsData: {};
+  type: typeof REMOVE_SMS;
+}
+
+/** Interface for Remove  filter args action */
+export interface RemoveFilterArgs extends AnyAction {
+  filterArgs: null;
+  type: typeof REMOVE_FILTER_ARGS;
+}
+
+/** Interface for AddFilterArgs */
+export interface AddFilterArgsAction extends AnyAction {
+  filterArgs: FilterArgs;
+  type: typeof ADD_FILTER_ARGS;
+}
+
 /** Create type for SMS reducer actions */
-export type SmsActionTypes = FetchSmsAction | AnyAction;
+export type SmsActionTypes =
+  | FetchSmsAction
+  | AddFilterArgsAction
+  | RemoveSmsAction
+  | RemoveFilterArgs
+  | AnyAction;
 
 // action Creators
 
@@ -63,9 +91,24 @@ export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
   return actionCreated;
 };
 
-export const removeSms = {
-  smsDataById: {},
+/** REMOVE SMS action */
+export const removeSms: RemoveSmsAction = {
+  smsData: {},
   type: REMOVE_SMS,
+};
+
+/** Add filter args action creator */
+export const addFilterArgs = (filterArgs: FilterArgs): AddFilterArgsAction => {
+  const actionCreated = {
+    filterArgs,
+    type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
+  };
+  return actionCreated;
+};
+
+export const removeFilterArgs: RemoveFilterArgs = {
+  filterArgs: null,
+  type: REMOVE_FILTER_ARGS,
 };
 // The reducer
 
@@ -74,10 +117,12 @@ export const removeSms = {
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
+  filterArgs: FilterArgs | null;
 }
 
 /** initial sms-state state */
 const initialState: SmsState = {
+  filterArgs: null,
   smsData: {},
   smsDataFetched: false,
 };
@@ -96,6 +141,16 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
         ...state,
         smsData: action.smsData,
         smsDataFetched: false,
+      };
+    case ADD_FILTER_ARGS:
+      return {
+        ...state,
+        filterArgs: action.filterArgs,
+      };
+    case REMOVE_FILTER_ARGS:
+      return {
+        ...state,
+        filterArgs: action.filterArgs,
       };
     default:
       return state;
