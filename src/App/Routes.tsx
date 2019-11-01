@@ -92,8 +92,9 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title="Welcome to Newborn and Postnatal Care"
                 description={PREGNANCY_DESCRIPTION}
-                deactivateLinks={true}
-                logfaceUrl={PNC_AND_NBC_LOGFACE_URL}
+                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
+                analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
             )}
           />
