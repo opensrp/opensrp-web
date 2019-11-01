@@ -25,6 +25,13 @@ export interface SmsData {
   location_id: string;
 }
 
+/** Interface for arguments used to filter SmsData with the getFilterSmsData function */
+export interface FilterArgs {
+  field: string;
+  comparator: ComparatorOptions;
+  value: string | number;
+}
+
 // actions
 
 /** fETCH_SMS action type */
@@ -120,14 +127,11 @@ type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
  * @param {field} string - the name of the field to filter by
  * @param {value} string | number - the string or number value of the field specified
  */
-export function getFilteredSmsData(
-  state: Partial<Store>,
-  field: string,
-  comparator: ComparatorOptions,
-  value: string | number
-) {
+export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs) {
   return values((state as any)[reducerName].smsData).filter((smsData: SmsData) => {
-    return field in smsData ? doComparison((smsData as any)[field], comparator, value) : [];
+    return filterArgs.field in smsData
+      ? doComparison((smsData as any)[filterArgs.field], filterArgs.comparator, filterArgs.value)
+      : [];
   });
 }
 
