@@ -30,6 +30,7 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="red"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/high/test title"
             >
               <a
@@ -53,6 +54,7 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="orange"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/low/test title"
             >
               <a
@@ -76,6 +78,7 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="green"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/no/test title"
             >
               <a

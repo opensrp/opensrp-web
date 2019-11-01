@@ -148,12 +148,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
         <td
           className="default-width "
         >
-          0
+          6
         </td>
         <td
           className="default-width"
         >
-          9
+          15
         </td>
       </tr>
       <tr
@@ -218,12 +218,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
         <td
           className="default-width "
         >
-          0
+          6
         </td>
         <td
           className="default-width"
         >
-          9
+          15
         </td>
       </tr>
     </tbody>
@@ -576,12 +576,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
   <tr
@@ -646,12 +646,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
 </tbody>
@@ -813,12 +813,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
   <tr
@@ -883,12 +883,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
 </tbody>

@@ -11,7 +11,7 @@ Array [
       <div
         className="card-title"
       >
-        22 Total Pregnancies
+        2 Total Pregnancies
       </div>
     </CardTitle>
     <CardBody
@@ -27,16 +27,17 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/high/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/high/22 Total Pregnancies"
+                href="/hierarchicaldata/high/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  4
+                  1
                 </span>
               </a>
             </Link>
@@ -50,16 +51,17 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/low/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/low/22 Total Pregnancies"
+                href="/hierarchicaldata/low/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  2
+                  0
                 </span>
               </a>
             </Link>
@@ -73,16 +75,17 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/no/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/no/22 Total Pregnancies"
+                href="/hierarchicaldata/no/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  5
+                  0
                 </span>
               </a>
             </Link>
@@ -121,6 +124,7 @@ Array [
             className="red"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/high/0 Total Pregnancies due in 2 weeks"
             >
               <a
@@ -144,6 +148,7 @@ Array [
             className="orange"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/low/0 Total Pregnancies due in 2 weeks"
             >
               <a
@@ -167,6 +172,7 @@ Array [
             className="green"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/no/0 Total Pregnancies due in 2 weeks"
             >
               <a
@@ -215,6 +221,7 @@ Array [
             className="red"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/high/0 Total Pregnancies due in 1 week"
             >
               <a
@@ -238,6 +245,7 @@ Array [
             className="orange"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/low/0 Total Pregnancies due in 1 week"
             >
               <a
@@ -261,6 +269,7 @@ Array [
             className="green"
           >
             <Link
+              onClick={[Function]}
               to="/hierarchicaldata/no/0 Total Pregnancies due in 1 week"
             >
               <a
