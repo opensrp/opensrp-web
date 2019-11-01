@@ -1,13 +1,21 @@
 import * as React from 'react';
 import Ripple from '../../../components/page/Loading';
-import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT } from '../../../configs/env';
 import './index.css';
 
 interface State {
   loading: boolean;
 }
 
-export class Analysis extends React.Component<{}, State> {
+interface Props {
+  endpoint: string;
+}
+
+const defaultProps: Props = {
+  endpoint: '',
+};
+
+export class Analysis extends React.Component<Props, State> {
+  public static defaultProps = defaultProps;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -28,7 +36,7 @@ export class Analysis extends React.Component<{}, State> {
             scrolling="yes"
             frameBorder="0"
             onLoad={this.hideSpinner}
-            src={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+            src={this.props.endpoint}
             title="pregnancy sms events analysis"
           />
         </div>
