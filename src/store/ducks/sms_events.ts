@@ -23,6 +23,7 @@ export interface SmsData {
   parity: number;
   gravidity: number;
   location_id: string;
+  client_type: string;
 }
 
 /** Interface for arguments used to filter SmsData with the getFilterSmsData function */
