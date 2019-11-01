@@ -65,7 +65,7 @@ export interface RemoveFilterArgs extends AnyAction {
 
 /** Interface for AddFilterArgs */
 export interface AddFilterArgsAction extends AnyAction {
-  filterArgs: FilterArgs;
+  filterArgs: FilterArgs[];
   type: typeof ADD_FILTER_ARGS;
 }
 
@@ -98,7 +98,7 @@ export const removeSms: RemoveSmsAction = {
 };
 
 /** Add filter args action creator */
-export const addFilterArgs = (filterArgs: FilterArgs): AddFilterArgsAction => {
+export const addFilterArgs = (filterArgs: FilterArgs[]): AddFilterArgsAction => {
   const actionCreated = {
     filterArgs,
     type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
@@ -106,9 +106,8 @@ export const addFilterArgs = (filterArgs: FilterArgs): AddFilterArgsAction => {
   return actionCreated;
 };
 
-export const removeFilterArgs: RemoveFilterArgs = {
-  filterArgs: null,
-  type: REMOVE_FILTER_ARGS,
+export const removeFilterArgs = (): RemoveFilterArgs => {
+  return { filterArgs: null, type: REMOVE_FILTER_ARGS };
 };
 // The reducer
 
@@ -117,7 +116,7 @@ export const removeFilterArgs: RemoveFilterArgs = {
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
-  filterArgs: FilterArgs | null;
+  filterArgs: FilterArgs[] | null;
 }
 
 /** initial sms-state state */
@@ -145,7 +144,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
     case ADD_FILTER_ARGS:
       return {
         ...state,
-        filterArgs: action.filterArgs,
+        filterArgs: [...(state.filterArgs ? state.filterArgs : []), ...action.filterArgs],
       };
     case REMOVE_FILTER_ARGS:
       return {
@@ -182,14 +181,27 @@ type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
  * @param {field} string - the name of the field to filter by
  * @param {value} string | number - the string or number value of the field specified
  */
-export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs) {
+export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs[]): SmsData[] {
   // in the future we may have to modify this selector to receive more than one FilterArgs object
   // i.e an array of these objects and then each one of them, one after another to do the filtering
-  return values((state as any)[reducerName].smsData).filter((smsData: SmsData) => {
-    return filterArgs.field in smsData
-      ? doComparison((smsData as any)[filterArgs.field], filterArgs.comparator, filterArgs.value)
-      : [];
-  });
+
+  let results = values((state as any)[reducerName].smsData);
+  for (const filterArg in filterArgs) {
+    if (filterArg) {
+      results = results.filter((smsData: SmsData) => {
+        return filterArgs[filterArg].field in smsData
+          ? doComparison(
+              filterArgs[filterArg].field === 'EventDate'
+                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArg].field])
+                : (smsData as any)[filterArgs[filterArg].field],
+              filterArgs[filterArg].comparator,
+              filterArgs[filterArg].value
+            )
+          : [];
+      });
+    }
+  }
+  return results;
 }
 
 export function doComparison(
@@ -216,6 +228,6 @@ export function doComparison(
 }
 
 /** Returns the filterArgs currently in the store */
-export function getFilterArgs(state: Partial<Store>): FilterArgs | null {
+export function getFilterArgs(state: Partial<Store>): FilterArgs[] | null {
   return (state as any)[reducerName].filterArgs;
 }
