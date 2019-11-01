@@ -183,6 +183,8 @@ type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
  * @param {value} string | number - the string or number value of the field specified
  */
 export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs) {
+  // in the future we may have to modify this selector to receive more than one FilterArgs object
+  // i.e an array of these objects and then each one of them, one after another to do the filtering
   return values((state as any)[reducerName].smsData).filter((smsData: SmsData) => {
     return filterArgs.field in smsData
       ? doComparison((smsData as any)[filterArgs.field], filterArgs.comparator, filterArgs.value)
