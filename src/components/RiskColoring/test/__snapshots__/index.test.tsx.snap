@@ -18,7 +18,7 @@ exports[`RiskColoring must show correct Risk level depending on the string passe
   risk="high"
 >
   <span
-    className="badge badge-warning"
+    className="badge badge-danger"
     id="default-width"
   >
     <div>
@@ -35,7 +35,7 @@ exports[`RiskColoring must show correct Risk level depending on the string passe
   risk="low"
 >
   <span
-    className="badge badge-primary"
+    className="badge badge-warning"
     id="default-width"
   >
     <div>
@@ -69,7 +69,7 @@ exports[`RiskColoring must show correct Risk level depending on the string passe
   risk="red"
 >
   <span
-    className="badge badge-danger"
+    className="badge badge-primary"
     id="default-width"
   >
     <div>
