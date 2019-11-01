@@ -2,10 +2,14 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { smsDataFixtures } from '../../../containers/Compartments/test/fixtures';
 import store from '../../index';
 import reducer, {
+  addFilterArgs,
   fetchSms,
+  FilterArgs,
+  getFilterArgs,
   getFilteredSmsData,
   getSmsData,
   reducerName,
+  removeFilterArgs,
   removeSms,
   SmsData,
   smsDataFetched,
@@ -20,7 +24,7 @@ describe('reducers/sms_events/store', () => {
   });
 });
 
-describe('reducers/sms_events/fetchSms action creator', () => {
+describe('reducers/sms_events/fetchSms action creator and selector', () => {
   it('must work correctly', () => {
     store.dispatch(fetchSms(smsDataFixtures));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures);
@@ -34,6 +38,20 @@ describe('reducers/sms_events/fetchSms action creator', () => {
     expect(smsDataFetched(store.getState())).toEqual(true);
     store.dispatch(fetchSms(smsDataFixtures.slice(2, 5)));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures.slice(0, 5));
+  });
+});
+
+describe('reducers/sms_events/addFilterArgs action creator and selector', () => {
+  it('must work correctly', () => {
+    const filterArgs: FilterArgs = {
+      comparator: '!==',
+      field: 'height',
+      value: 48,
+    };
+    store.dispatch(addFilterArgs(filterArgs));
+    expect(getFilterArgs(store.getState())).toEqual(filterArgs);
+    store.dispatch(removeFilterArgs);
+    expect(getFilterArgs(store.getState())).toEqual(null);
   });
 });
 
