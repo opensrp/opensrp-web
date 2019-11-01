@@ -12,7 +12,13 @@ const history = createBrowserHistory();
 describe('DataCircleCard', () => {
   it('must render without crashing', () => {
     const props = { highRisk: 10, lowRisk: 10, noRisk: 10, title: 'test title' };
-    shallow(<DataCircleCard {...props} />);
+    shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <DataCircleCard {...props} />
+        </Router>
+      </Provider>
+    );
   });
   it('must render correctly', () => {
     const props = { highRisk: 10, lowRisk: 10, noRisk: 10, title: 'test title' };
