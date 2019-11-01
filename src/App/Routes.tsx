@@ -10,11 +10,9 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import { SUPERSET_SMS_DATA_SLICE } from '../configs/env';
+import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT, SUPERSET_SMS_DATA_SLICE } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
-  ANALYSIS_URL,
-  COMPARTMENTS_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
@@ -24,6 +22,8 @@ import {
   NUTRITION_URL,
   PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
+  PREGNANCY_ANALYSIS_URL,
+  PREGNANCY_COMPARTMENTS_URL,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
 } from '../constants';
@@ -77,6 +77,8 @@ export const Routes = (props: RoutesProps) => {
                 title="Welcome to the pregnancy dashboard"
                 description={PREGNANCY_DESCRIPTION}
                 logfaceUrl={PREGNANCY_LOGFACE_URL}
+                compartmentUrl={PREGNANCY_COMPARTMENTS_URL}
+                analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
             )}
           />
@@ -111,26 +113,33 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={COMPARTMENTS_URL}
-            component={Compartments}
+            path={PREGNANCY_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Compartments
+                filterArgs={[
+                  {
+                    comparator: '===',
+                    field: 'sms_type',
+                    value: 'Pregnancy Registration',
+                  },
+                ]}
+                module={PREGNANCY}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={`${HIERARCHICAL_DATA_URL}/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={`${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={ANALYSIS_URL}
-            component={Analysis}
-          />
-          <ConnectedPrivateRoute
-            disableLoginProtection={false}
-            exact={true}
-            path={ANALYSIS}
-            component={Analysis}
+            path={PREGNANCY_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
