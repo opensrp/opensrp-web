@@ -112,6 +112,7 @@ export function smsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].smsDataFetched;
 }
 
+type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
 /**
  * Returns a list of SmsData that has been filtered based on the value
  * of a field specified.
@@ -119,6 +120,36 @@ export function smsDataFetched(state: Partial<Store>): boolean {
  * @param {field} string - the name of the field to filter by
  * @param {value} string | number - the string or number value of the field specified
  */
-export function getFilteredSmsData(state: Partial<Store>, field: string, value: string | number) {
-  return [];
+export function getFilteredSmsData(
+  state: Partial<Store>,
+  field: string,
+  comparator: ComparatorOptions,
+  value: string | number
+) {
+  return values((state as any)[reducerName].smsData).filter((smsData: SmsData) => {
+    return field in smsData ? doComparison((smsData as any)[field], comparator, value) : [];
+  });
+}
+
+export function doComparison(
+  actualValue: string | number,
+  comparator: ComparatorOptions,
+  targetValue: string | number
+) {
+  switch (comparator) {
+    case '===':
+      return actualValue === targetValue;
+    case '!==':
+      return actualValue !== targetValue;
+    case '>=':
+      return actualValue >= targetValue;
+    case '<=':
+      return actualValue <= targetValue;
+    case '>':
+      return actualValue > targetValue;
+    case '<':
+      return actualValue < targetValue;
+    default:
+      return false;
+  }
 }
