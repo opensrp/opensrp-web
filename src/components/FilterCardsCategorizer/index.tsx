@@ -87,9 +87,9 @@ export const defaultProps: Props<{}> = {
   timeField: '',
 };
 
-/**  track category + period  in state so as to know what card to be active */
-
-function FilterCards<T>(props: Props<T>) {
+// TODO -   track category + period  in state so as to know what card to be active */
+/** the FilterCardsCategorizer component */
+function FilterCardsCategorizer<T>(props: Props<T>) {
   const { periods, data, timeField, categoryField, categories, renderCard } = props;
   const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T>>>([]);
 
