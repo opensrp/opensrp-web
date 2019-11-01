@@ -27,7 +27,7 @@ import {
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
 } from '../constants';
-import { ANALYSIS, PREGNANCY_URL } from '../constants';
+import { PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
