@@ -47,12 +47,16 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const EVENT_ID = 'event_id';
+export type EVENT_ID = typeof EVENT_ID;
 export const HIGH = 'high';
 export type HIGH = typeof HIGH;
 export const LOW = 'low';
 export type LOW = typeof LOW;
 export const RED = 'red';
 export type RED = typeof RED;
+export const NO = 'no';
+export type NO = typeof NO;
 export const NOT_SET_LOWERCASE = 'not set';
 export type NOT_SET_LOWERCASE = typeof NOT_SET_LOWERCASE;
 export type INDIVIDUAL_RISK_LEVELS = RED | HIGH | LOW | NOT_SET_LOWERCASE;
@@ -195,22 +199,3 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
-
-// slices
-
-export const LOCATION_SLICES = ['2754', '2755', '2756', '2757'];
-export type LOCATION_SLICES = typeof LOCATION_SLICES;
-
-export const SUPERSET_SMS_DATA_SLICE = '2263';
-export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
-
-// analysis page iframes
-
-export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
-  'https://discover.ona.io/superset/dashboard/53/?standalone=true';
-export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
-
-// csv export links
-export const SUPERSET_PREGNANCY_DATA_EXPORT =
-  'https://discover.ona.io/superset/explore_json/?form_data={"slice_id":2263}&csv=true';
-export type SUPERSET_PREGNANCY_DATA_EXPORT = typeof SUPERSET_PREGNANCY_DATA_EXPORT;

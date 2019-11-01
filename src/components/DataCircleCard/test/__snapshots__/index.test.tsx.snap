@@ -30,10 +30,10 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high-risk/test title"
+              to="/hierarchicaldata/high/test title"
             >
               <a
-                href="/hierarchicaldata/high-risk/test title"
+                href="/hierarchicaldata/high/test title"
                 onClick={[Function]}
               >
                 <span
@@ -53,10 +53,10 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low-risk/test title"
+              to="/hierarchicaldata/low/test title"
             >
               <a
-                href="/hierarchicaldata/low-risk/test title"
+                href="/hierarchicaldata/low/test title"
                 onClick={[Function]}
               >
                 <span
@@ -76,10 +76,10 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no-risk/test title"
+              to="/hierarchicaldata/no/test title"
             >
               <a
-                href="/hierarchicaldata/no-risk/test title"
+                href="/hierarchicaldata/no/test title"
                 onClick={[Function]}
               >
                 <span

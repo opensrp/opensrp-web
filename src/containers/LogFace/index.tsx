@@ -1,26 +1,30 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import superset from '@onaio/superset-connector';
 import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
 import { PaginationData, Paginator, PaginatorProps } from '../../components/Paginator';
 import RiskColoring from '../../components/RiskColoring';
+import {
+  GET_FORM_DATA_ROW_LIMIT,
+  SUPERSET_FETCH_TIMEOUT_INTERVAL,
+  SUPERSET_PREGNANCY_DATA_EXPORT,
+} from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  EVENT_ID,
   LOGFACE_SEARCH_PLACEHOLDER,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
   SELECT_RISK,
   SELECT_TYPE,
-  SUPERSET_PREGNANCY_DATA_EXPORT,
-  SUPERSET_SMS_DATA_SLICE,
   TYPE,
 } from '../../constants';
 import { FlexObject, sortFunction } from '../../helpers/utils';
@@ -42,6 +46,7 @@ interface PropsInterface {
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
   numberOfRows: number;
+  sliceId: string;
 }
 
 interface State {
@@ -53,6 +58,7 @@ interface State {
   typeLabel: string;
   filteredData: SmsData[];
   currentPage: number;
+  intervalId: NodeJS.Timeout | null;
 }
 
 const defaultprops: PropsInterface = {
@@ -60,6 +66,7 @@ const defaultprops: PropsInterface = {
   fetchSmsDataActionCreator: fetchSms,
   header: '',
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  sliceId: '0',
   smsData: [],
 };
 
@@ -93,6 +100,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       dropdownOpenRiskLevel: false,
       dropdownOpenType: false,
       filteredData: [],
+      intervalId: null,
       locationLabel: '',
       riskLabel: '',
       typeLabel: '',
@@ -102,10 +110,31 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
-      supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
+      supersetFetch(this.props.sliceId).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
       });
     }
+    const intervalId: NodeJS.Timeout = setInterval(() => {
+      const smsDataInDescendingOrderByEventId: SmsData[] = this.props.smsData.sort(sortFunction);
+
+      // pick the lartgest ID if this smsDataInDescendingOrderByEventId list is not empty
+      if (smsDataInDescendingOrderByEventId.length) {
+        const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
+        const supersetParams = superset.getFormData(GET_FORM_DATA_ROW_LIMIT, [
+          { comparator: largestEventID, operator: '>', subject: EVENT_ID },
+        ]);
+        supersetFetch(this.props.sliceId, supersetParams)
+          .then((result: SmsData[]) => {
+            fetchSmsDataActionCreator(result);
+          })
+          .catch(error => {
+            // console.log(error);
+          });
+      }
+    }, SUPERSET_FETCH_TIMEOUT_INTERVAL);
+    this.setState({
+      intervalId,
+    });
   }
 
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -295,6 +324,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
         </div>
       </div>
     );
+  }
+
+  public componentWillUnmount() {
+    if (this.state.intervalId) {
+      clearInterval(this.state.intervalId);
+    }
   }
 
   private isAllSelected = (e: React.MouseEvent) => {

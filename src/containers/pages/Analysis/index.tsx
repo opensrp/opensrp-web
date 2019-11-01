@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Ripple from '../../../components/page/Loading';
-import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT } from '../../../constants';
+import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT } from '../../../configs/env';
 import './index.css';
 
 interface State {

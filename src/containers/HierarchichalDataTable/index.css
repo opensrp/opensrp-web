@@ -32,6 +32,10 @@
   background-color: #f8f9fa;
 }
 
+.back-page > span > span {
+  padding-left: 15px;
+}
+
 .compartment-data-table .ReactTable .rt-thead.-header {
   box-shadow: 0 0px 0px 0 #dadce0;
 }
@@ -133,14 +137,14 @@
   width: 100%;
 }
 
-.compartment-data-table .high-risk {
+.compartment-data-table .high {
   background-color: #ffe8e6;
 }
 
-.compartment-data-table .low-risk {
+.compartment-data-table .low {
   background-color: #ffe9db;
 }
 
-.compartment-data-table .no-risk {
+.compartment-data-table .no {
   background-color: rgba(55, 174, 18, 0.10000000149011612);
 }

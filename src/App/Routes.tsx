@@ -10,6 +10,7 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
+import { SUPERSET_SMS_DATA_SLICE } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   ANALYSIS_URL,
@@ -26,8 +27,7 @@ import {
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
 } from '../constants';
-import { ANALYSIS, CLIENT_URL, PREGNANCY_URL } from '../constants';
-import ConnectedClientList from '../containers/Clients/List';
+import { ANALYSIS, PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
@@ -111,12 +111,6 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={CLIENT_URL}
-            component={ConnectedClientList}
-          />
-          <ConnectedPrivateRoute
-            disableLoginProtection={false}
-            exact={true}
             path={COMPARTMENTS_URL}
             component={Compartments}
           />
@@ -155,19 +149,25 @@ export const Routes = (props: RoutesProps) => {
             exact={false}
             path={PREGNANCY_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={PREGNANCY} />}
+            component={() => (
+              <ConnectedLogFace header={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={PNC_AND_NBC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={NBC_AND_PNC} />}
+            component={() => (
+              <ConnectedLogFace header={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NUTRITION_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogFace header={NUTRITION} />}
+            component={() => (
+              <ConnectedLogFace header={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
+            )}
           />
           {/* tslint:disable jsx-no-lambda */}
           <Route

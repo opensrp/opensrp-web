@@ -12,6 +12,10 @@ export const ENABLE_PREGNANCY_MODULE =
   process.env.REACT_APP_ENABLE_PREGNANCY_MODULE === 'true' || false;
 export type ENABLE_PREGNANCY_MODULE = typeof ENABLE_PREGNANCY_MODULE;
 
+export const SUPERSET_FETCH_TIMEOUT_INTERVAL =
+  Number(process.env.REACT_APP_SUPERSET_FETCH_TIMEOUT_INTERVAL) || 15000;
+export type SUPERSET_FETCH_TIMEOUT_INTERVAL = typeof SUPERSET_FETCH_TIMEOUT_INTERVAL;
+
 export const ENABLE_NUTRITION_MODULE =
   process.env.REACT_APP_ENABLE_NUTRITION_MODULE === 'true' || false;
 export type ENABLE_NUTRITION_MODULE = typeof ENABLE_NUTRITION_MODULE;
@@ -145,3 +149,37 @@ export type OPENSRP_API_BASE_URL = typeof OPENSRP_API_BASE_URL;
 export const OPENSRP_CLIENT_ENDPOINT =
   process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/search';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+
+export const GET_FORM_DATA_ROW_LIMIT =
+  Number(process.env.REACT_APP_GET_FORM_DATA_ROW_LIMIT) || 2000;
+export type GET_FORM_DATA_ROW_LIMIT = typeof GET_FORM_DATA_ROW_LIMIT;
+
+// analysis page iframes
+
+export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
+  'https://discover.ona.io/superset/dashboard/53/?standalone=true';
+export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
+
+// csv export links
+export const SUPERSET_PREGNANCY_DATA_EXPORT =
+  'https://discover.ona.io/superset/explore_json/?form_data={"slice_id":2263}&csv=true';
+export type SUPERSET_PREGNANCY_DATA_EXPORT = typeof SUPERSET_PREGNANCY_DATA_EXPORT;
+
+// slice IDs
+export const PROVINCE_SLICE = process.env.REACT_APP_PROVINCE_SLICE || '0';
+export type PROVINCE_SLICE = typeof PROVINCE_SLICE;
+
+export const DISTRICT_SLICE = process.env.REACT_APP_DISTRICT_SLICE || '0';
+export type DISTRICT_SLICE = typeof DISTRICT_SLICE;
+
+export const COMMUNE_SLICE = process.env.REACT_APP_COMMUNE_SLICE || '0';
+export type COMMUNE_SLICE = typeof COMMUNE_SLICE;
+
+export const VILLAGE_SLICE = process.env.REACT_APP_VILLAGE_SLICE || '0';
+export type VILLAGE_SLICE = typeof VILLAGE_SLICE;
+
+export const LOCATION_SLICES = [PROVINCE_SLICE, DISTRICT_SLICE, COMMUNE_SLICE, VILLAGE_SLICE];
+export type LOCATION_SLICES = typeof LOCATION_SLICES;
+
+export const SUPERSET_SMS_DATA_SLICE = process.env.REACT_APP_SUPERSET_SMS_DATA_SLICE || '0';
+export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;

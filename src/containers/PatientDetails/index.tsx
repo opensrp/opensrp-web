@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import BasicInformation from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import { BACK, BACKPAGE_ICON, PATIENT_DETAILS, PREGNANCY_LOGFACE_URL } from '../../constants';
+import { BACK, BACKPAGE_ICON, PATIENT_DETAILS } from '../../constants';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
-interface Props {
+interface Props extends RouteComponentProps {
   patientId: string;
   testData: SmsData[];
 }
@@ -18,16 +19,16 @@ interface State {
   filteredData: SmsData[];
 }
 
-const defaultProps: Props = {
+const defaultProps: Partial<Props> = {
   patientId: 'none',
   testData: [],
 };
 
-export class PatientDetails extends Component<Props, State> {
-  public static defaultProps: Props = defaultProps;
+export class PatientInfo extends Component<Props, State> {
+  public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: PatientDetails.filterByPatientAndSort(props),
+      filteredData: PatientInfo.filterByPatientAndSort(props),
     };
   }
 
@@ -57,9 +58,11 @@ export class PatientDetails extends Component<Props, State> {
   public render() {
     return (
       <div className="patient-details">
-        <Link to={PREGNANCY_LOGFACE_URL} className="back-page">
-          <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
-          <span>{BACK}</span>
+        <Link to="#" className="back-page">
+          <span onClick={this.props.history.goBack}>
+            <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
+            <span>{BACK}</span>
+          </span>
         </Link>
         <div id="titleDiv">
           <h2 id="patients_title">{PATIENT_DETAILS}</h2>
@@ -146,6 +149,8 @@ const mapStateToprops = (state: any, ownProps: any) => {
   };
   return result;
 };
+
+const PatientDetails = withRouter(PatientInfo);
 
 const ConnectedPatientDetails = connect(
   mapStateToprops,
