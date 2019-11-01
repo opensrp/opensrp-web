@@ -15,7 +15,6 @@ import {
   BACK,
   BACKPAGE_ICON,
   COMMUNE,
-  COMPARTMENTS_URL,
   DISTRICT,
   HIERARCHICAL_DATA_URL,
   HIGH,
@@ -25,6 +24,8 @@ import {
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
   TOTAL,
   UP,
@@ -75,15 +76,19 @@ interface Props {
   villages: Location[];
   smsData: SmsData[];
   locationsFetched: boolean;
+  compartMentUrl: string;
+  module: string;
 }
 
 const defaultProps: Props = {
   communes: [],
+  compartMentUrl: '#',
   current_level: 0,
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   locationsFetched: false,
+  module: '',
   provinces: [],
   risk_highligter: '',
   smsData: [],
@@ -345,7 +350,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.locationsFetched) {
       return (
         <Container fluid={true} className="compartment-data-table">
-          <Link to={COMPARTMENTS_URL} className="back-page">
+          <Link to={this.urlToRedirect()} className="back-page">
             <span>
               <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
               <span>{BACK}</span>
@@ -376,9 +381,9 @@ class HierarchichalDataTable extends Component<Props, State> {
                                 element.location_name
                               ) : (
                                 <Link
-                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
-                                    this.props.title
-                                  }/${
+                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+                                    this.props.risk_highligter
+                                  }/${this.props.title}/${
                                     this.props.current_level ? this.props.current_level + 1 : 1
                                   }/down/${element.location_id}`}
                                 >
@@ -478,6 +483,15 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
   }
 
+  private urlToRedirect() {
+    switch (this.props.module) {
+      case PREGNANCY:
+        return PREGNANCY_COMPARTMENTS_URL;
+      default:
+        return '';
+    }
+  }
+
   private getLevelString = () => {
     if (this.props.current_level === 0) {
       return PROVINCE;
@@ -496,7 +510,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           {PROVINCE}
@@ -510,7 +524,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ {DISTRICT}
@@ -524,7 +538,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ {COMMUNE}
@@ -568,6 +582,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
     locationsFetched: locationsDataFetched(state),
+    module: ownProps.match.params.module,
     node_id: ownProps.match.params.node_id,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
