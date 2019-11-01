@@ -212,3 +212,8 @@ export function doComparison(
       return false;
   }
 }
+
+/** Returns the filterArgs currently in the store */
+export function getFilterArgs(state: Partial<Store>): FilterArgs | null {
+  return (state as any)[reducerName].filterArgs;
+}
