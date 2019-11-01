@@ -21,6 +21,7 @@ interface Props {
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
   filterArgs?: FilterArgs[];
+  module: string;
 }
 
 function DataCircleCard({
@@ -30,6 +31,7 @@ function DataCircleCard({
   title,
   addFilterArgsActionCreator = addFilterArgs,
   filterArgs,
+  module,
 }: Props) {
   return (
     <Card className="dataCircleCard">
@@ -38,7 +40,7 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${HIGH}/${title}`}
+              to={`${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -52,7 +54,7 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${LOW}/${title}`}
+              to={`${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -66,7 +68,7 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${NO}/${title}`}
+              to={`${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
