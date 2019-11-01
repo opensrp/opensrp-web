@@ -22,6 +22,7 @@ interface Props {
   addFilterArgsActionCreator?: typeof addFilterArgs;
   filterArgs?: FilterArgs[];
   module: string;
+  className?: string;
 }
 
 function DataCircleCard({
@@ -32,9 +33,10 @@ function DataCircleCard({
   addFilterArgsActionCreator = addFilterArgs,
   filterArgs,
   module,
+  className = '',
 }: Props) {
   return (
-    <Card className="dataCircleCard">
+    <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
