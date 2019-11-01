@@ -1,7 +1,6 @@
 // this is the home page component
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { COMPARTMENTS_URL } from '../../../constants';
 import './index.css';
 
 interface Props {
@@ -9,9 +8,13 @@ interface Props {
   description: string;
   deactivateLinks: boolean;
   logfaceUrl: string;
+  compartmentUrl: string;
+  analysisUrl: string;
 }
 
 const defaultProps: Props = {
+  analysisUrl: '#',
+  compartmentUrl: '#',
   deactivateLinks: false,
   description: '',
   logfaceUrl: '#',
@@ -57,7 +60,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>This is the aggregation and categorization of patients data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                  <Link to={this.props.compartmentUrl}>
                     <button
                       className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
                     >
@@ -79,7 +82,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>Important analysis and indicators generated from collected data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                  <Link to={this.props.analysisUrl}>
                     <button
                       className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
                     >
