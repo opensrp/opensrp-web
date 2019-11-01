@@ -6,6 +6,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
+import { PREGNANCY } from '../../../constants';
 import reducer, { fetchSms, reducerName } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
 import { smsDataFixtures } from './fixtures';
@@ -26,7 +27,16 @@ describe('Compartments', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <ConnectedCompartments />
+          <ConnectedCompartments
+            filterArgs={[
+              {
+                comparator: '===',
+                field: 'sms_type',
+                value: 'Pregnancy Registration',
+              },
+            ]}
+            module={PREGNANCY}
+          />
         </Router>
       </Provider>
     );
@@ -48,7 +58,16 @@ describe('Compartments', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <ConnectedCompartments />
+          <ConnectedCompartments
+            filterArgs={[
+              {
+                comparator: '===',
+                field: 'sms_type',
+                value: 'Pregnancy Registration',
+              },
+            ]}
+            module={PREGNANCY}
+          />
         </Router>
       </Provider>
     );
