@@ -16,6 +16,7 @@ import {
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
+  NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_URL,
   NUTRITION,
   NUTRITION_LOGFACE_URL,
@@ -125,6 +126,24 @@ export const Routes = (props: RoutesProps) => {
                   },
                 ]}
                 module={PREGNANCY}
+              />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NBC_AND_PNC_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Compartments
+                filterArgs={[
+                  {
+                    comparator: '===',
+                    field: 'sms_type',
+                    value: 'Newborn Report',
+                  },
+                ]}
+                module={NBC_AND_PNC}
               />
             )}
           />
