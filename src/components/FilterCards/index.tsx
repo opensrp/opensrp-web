@@ -13,6 +13,31 @@ export enum TimeUnits {
   YEARS = 'years',
 }
 
+/** interface for how filtered data will be passed back to the calling
+ * component or to a display component via render props
+ */
+interface GroupedFilters<T> {
+  /** chunk of original data that is now currently filtered subject to
+   * info in the meta
+   */
+  filteredData: T[];
+  /** meta information regarding the filter applied to above data */
+  meta: {
+    /** describes the numeric part of the period under which the filtered
+     * data was filtered
+     */
+    howLong: number;
+
+    /** The category value */
+
+    category: string;
+    /** describes the unit part of the period under which the filtered
+     * data was filtered
+     */
+    unit: string;
+  };
+}
+
 /** Type interface for duration */
 interface DurationType {
   /** amount in integers  */
@@ -48,6 +73,10 @@ export interface Props<T> {
    * have.
    */
   categories: Set<string>;
+  /** render prop accepts a function that is given data of type GroupedFilters
+   * then it can supply a custom interface to display the results
+   */
+  renderCard?: (groupedFilters: Array<GroupedFilters<T>>) => JSX.Element;
 }
 
 export const defaultProps: Props<{}> = {
@@ -58,39 +87,14 @@ export const defaultProps: Props<{}> = {
   timeField: '',
 };
 
-/** interface for how filtered data will be passed back to the calling
- * component or to a display component via render props
- */
-interface GroupedFilters<T> {
-  /** chunk of original data that is now currently filtered subject to
-   * info in the meta
-   */
-  filteredData: T[];
-  /** meta information regarding the filter applied to above data */
-  meta: {
-    /** describes the numeric part of the period under which the filtered
-     * data was filtered
-     */
-    howLong: number;
-
-    /** The category value */
-
-    category: string;
-    /** describes the unit part of the period under which the filtered
-     * data was filtered
-     */
-    unit: string;
-  };
-}
-
 /**  track category + period  in state so as to know what card to be active */
 
 function FilterCards<T>(props: Props<T>) {
-  const { periods, data, timeField, categoryField, categories } = props;
-  const [groupedFilters, setGroupedFilters] = useState<GroupedFilters<T>>({});
+  const { periods, data, timeField, categoryField, categories, renderCard } = props;
+  const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T>>>([]);
 
-  useEffect(() => {});
-  return <Row>{/* {({render(groupFilterData<T>())})} */}</Row>;
+  setGroupedFilters(groupFilterData<T>(periods, data, categories, categoryField, timeField));
+  return renderCard && renderCard(groupedFilters);
 }
 
 /** creates an object showing how the data was filtered
