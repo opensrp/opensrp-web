@@ -13,35 +13,47 @@ import reducer, {
 
 reducerRegistry.register(reducerName, reducer);
 
-describe('reducers/sms_events', () => {
-  it('should have initial state', () => {
+describe('reducers/sms_events/store', () => {
+  it('must have initial state', () => {
     expect(getSmsData(store.getState())).toEqual([]);
     expect(smsDataFetched(store.getState())).toEqual(false);
   });
-  it('fetchSms action creator works correctly', () => {
+});
+
+describe('reducers/sms_events/fetchSms action creator', () => {
+  it('must work correctly', () => {
     store.dispatch(fetchSms(smsDataFixtures));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures);
     expect(smsDataFetched(store.getState())).toEqual(true);
     store.dispatch(removeSms);
   });
-  it('removeSms action works correctly', () => {
-    store.dispatch(fetchSms(smsDataFixtures));
-    expect(getSmsData(store.getState())).toEqual(smsDataFixtures);
-    expect(smsDataFetched(store.getState())).toEqual(true);
-    store.dispatch(removeSms);
-    expect(getSmsData(store.getState())).toEqual([]);
-    expect(smsDataFetched(store.getState())).toEqual(false);
-  });
-  it('data in the store is not ovewritten', () => {
+
+  it('must not overwrite data in the store', () => {
     store.dispatch(fetchSms(smsDataFixtures.slice(0, 2)));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures.slice(0, 2));
     expect(smsDataFetched(store.getState())).toEqual(true);
     store.dispatch(fetchSms(smsDataFixtures.slice(2, 5)));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures.slice(0, 5));
   });
-  it('getFilteredSmsData selector works correctly', () => {
+});
+
+describe('reducers/sms_events/removeSms action', () => {
+  it('must work correctly', () => {
+    store.dispatch(fetchSms(smsDataFixtures));
+    expect(getSmsData(store.getState())).toEqual(smsDataFixtures);
+    expect(smsDataFetched(store.getState())).toEqual(true);
+    store.dispatch(removeSms);
+    expect(getSmsData(store.getState())).toEqual([]);
+    expect(smsDataFetched(store.getState())).toEqual(false);
+  });
+});
+
+describe('reducers/sms_events/getFilteredSmsData', () => {
+  beforeAll(() => {
     // put all the fixtures in the store
     store.dispatch(fetchSms(smsDataFixtures));
+  });
+  it("it must works correctly with '==='", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '===',
@@ -53,6 +65,8 @@ describe('reducers/sms_events', () => {
         return element.height === 48;
       })
     );
+  });
+  it("it must works correctly with '<='", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '<=',
@@ -64,6 +78,8 @@ describe('reducers/sms_events', () => {
         return element.height <= 48;
       })
     );
+  });
+  it("it must works correctly with '>='", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '>=',
@@ -75,6 +91,8 @@ describe('reducers/sms_events', () => {
         return element.height >= 48;
       })
     );
+  });
+  it("it must works correctly with '!=='", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '!==',
@@ -86,6 +104,8 @@ describe('reducers/sms_events', () => {
         return element.height !== 48;
       })
     );
+  });
+  it("it must works correctly with '>'", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '>',
@@ -97,7 +117,8 @@ describe('reducers/sms_events', () => {
         return element.height > 48;
       })
     );
-
+  });
+  it("it must works correctly with '<'", () => {
     expect(
       getFilteredSmsData(store.getState(), {
         comparator: '<',
