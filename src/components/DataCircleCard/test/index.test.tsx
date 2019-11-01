@@ -5,6 +5,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import DataCircleCard from '..';
+import { PREGNANCY } from '../../../constants';
 import store from '../../../store/index';
 
 const history = createBrowserHistory();
@@ -15,7 +16,7 @@ describe('DataCircleCard', () => {
     shallow(
       <Provider store={store}>
         <Router history={history}>
-          <DataCircleCard {...props} />
+          <DataCircleCard {...props} module={PREGNANCY} />
         </Router>
       </Provider>
     );
@@ -25,7 +26,7 @@ describe('DataCircleCard', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <DataCircleCard {...props} />
+          <DataCircleCard {...props} module={PREGNANCY} />
         </Router>
       </Provider>
     );
