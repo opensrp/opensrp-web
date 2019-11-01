@@ -101,6 +101,50 @@ class Compartments extends Component<Props, {}> {
       title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
     };
 
+    const dataCircleCardTestProps = {
+      filterArgs: [],
+      highRisk: 0,
+      lowRisk: 0,
+      noRisk: 0,
+      title: 'test title',
+    };
+
+    const newBorn: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
+      return smsData.client_type === 'ec_child';
+    });
+
+    const dataCircleCardChildData = {
+      filterArgs: [
+        {
+          comparator: '===',
+          field: 'client_type',
+          value: 'ec_child',
+        } as FilterArgs,
+      ],
+      highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
+      lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
+      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
+      title: newBorn.length + ' Total Newborn',
+    };
+
+    const woman: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
+      return smsData.client_type === 'ec_woman';
+    });
+
+    const dataCircleCardWomanData = {
+      filterArgs: [
+        {
+          comparator: '===',
+          field: 'client_type',
+          value: 'ec_woman',
+        } as FilterArgs,
+      ],
+      highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
+      lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
+      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
+      title: woman.length + ' Total mother in PNC',
+    };
+
     return (
       <div className="compartment-wrapper compartments">
         <Row>
@@ -112,9 +156,28 @@ class Compartments extends Component<Props, {}> {
         {this.props.dataFetched ? (
           <div className="cards-row">
             <CardGroup>
-              <ConnectedDataCircleCard {...dataCircleCard1Props} module={this.props.module} />
-              <ConnectedDataCircleCard {...dataCircleCard2Props} module={this.props.module} />
-              <ConnectedDataCircleCard {...dataCircleCard3Props} module={this.props.module} />
+              {this.props.module === PREGNANCY ? (
+                <ConnectedDataCircleCard {...dataCircleCard1Props} module={this.props.module} />
+              ) : null}
+              {this.props.module === PREGNANCY ? (
+                <ConnectedDataCircleCard {...dataCircleCard2Props} module={this.props.module} />
+              ) : null}
+              {this.props.module === PREGNANCY ? (
+                <ConnectedDataCircleCard {...dataCircleCard3Props} module={this.props.module} />
+              ) : null}
+              {this.props.module === NBC_AND_PNC ? (
+                <ConnectedDataCircleCard {...dataCircleCardChildData} module={this.props.module} />
+              ) : null}
+              {this.props.module === NBC_AND_PNC ? (
+                <ConnectedDataCircleCard {...dataCircleCardWomanData} module={this.props.module} />
+              ) : null}
+              {this.props.module === NBC_AND_PNC ? (
+                <ConnectedDataCircleCard
+                  {...dataCircleCardTestProps}
+                  module={this.props.module}
+                  className={'invisible-but-visible'}
+                />
+              ) : null}
             </CardGroup>
           </div>
         ) : (
