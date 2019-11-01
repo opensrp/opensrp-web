@@ -18,6 +18,7 @@ import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  EVENT_ID,
   LOGFACE_SEARCH_PLACEHOLDER,
   RISK_LEVEL,
   RISK_LEVELS,
@@ -36,7 +37,6 @@ import TestReducer, {
   smsDataFetched,
 } from '../../store/ducks/sms_events';
 import './index.css';
-// import { getFormData } from '@onaio/superset-connector/dist/types/utils';
 
 reducerRegistry.register(reducerName, TestReducer);
 
@@ -121,7 +121,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       if (smsDataInDescendingOrderByEventId.length) {
         const largestEventID: string = smsDataInDescendingOrderByEventId[0].event_id;
         const supersetParams = superset.getFormData(GET_FORM_DATA_ROW_LIMIT, [
-          { comparator: largestEventID, operator: '>', subject: 'event_id' },
+          { comparator: largestEventID, operator: '>', subject: EVENT_ID },
         ]);
         supersetFetch(this.props.sliceId, supersetParams)
           .then((result: SmsData[]) => {
