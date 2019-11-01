@@ -21,6 +21,8 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
+  NBC_AND_PNC,
+  NBC_AND_PNC_COMPARTMENTS_URL,
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
@@ -487,6 +489,8 @@ class HierarchichalDataTable extends Component<Props, State> {
     switch (this.props.module) {
       case PREGNANCY:
         return PREGNANCY_COMPARTMENTS_URL;
+      case NBC_AND_PNC:
+        return NBC_AND_PNC_COMPARTMENTS_URL;
       default:
         return '';
     }
