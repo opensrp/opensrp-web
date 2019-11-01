@@ -24,6 +24,7 @@ import {
   LOW_RISK,
   NO,
   NO_RISK,
+  NO_RISK_LOWERCASE,
   PROVINCE,
   TOTAL,
   UP,
@@ -37,7 +38,12 @@ import locationsReducer, {
   locationsDataFetched,
   reducerName,
 } from '../../store/ducks/locations';
-import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
+import smsReducer, {
+  FilterArgs,
+  getFilterArgs,
+  getFilteredSmsData,
+  reducerName as smsReducerName,
+} from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 
 reducerRegistry.register(reducerName, locationsReducer);
@@ -104,7 +110,7 @@ function getVillageRiskTotals(location: Location, smsData: SmsData[]): RiskTotal
           ...accumulator,
           low_risk: accumulator.low_risk + 1,
         };
-      case NO_RISK:
+      case NO_RISK_LOWERCASE:
         return {
           ...accumulator,
           no_risk: accumulator.no_risk + 1,
@@ -449,7 +455,6 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
-          {}
           <VillageData
             {...{
               current_level: this.props.current_level,
@@ -566,7 +571,9 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     node_id: ownProps.match.params.node_id,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
-    smsData: getSmsData(state),
+    smsData: getFilterArgs(state)
+      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
   };
