@@ -35,6 +35,7 @@ describe('HierarchichalDataTable', () => {
     let props = {
       match: {
         params: {
+          module: 'pregnancy',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
         },
@@ -55,6 +56,7 @@ describe('HierarchichalDataTable', () => {
         params: {
           current_level: 1,
           direction: 'down',
+          module: 'pregnancy',
           node_id: '1',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -78,6 +80,7 @@ describe('HierarchichalDataTable', () => {
         params: {
           current_level: 2,
           direction: 'down',
+          module: 'pregnancy',
           node_id: '6',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -98,6 +101,7 @@ describe('HierarchichalDataTable', () => {
         params: {
           current_level: 3,
           direction: 'down',
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -119,6 +123,7 @@ describe('HierarchichalDataTable', () => {
           current_level: 2,
           direction: 'up',
           from_level: 3,
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -140,6 +145,7 @@ describe('HierarchichalDataTable', () => {
           current_level: 1,
           direction: 'up',
           from_level: 3,
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -161,6 +167,7 @@ describe('HierarchichalDataTable', () => {
           current_level: 0,
           direction: 'up',
           from_level: 3,
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -182,6 +189,7 @@ describe('HierarchichalDataTable', () => {
           current_level: 1,
           direction: 'up',
           from_level: 2,
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
@@ -202,6 +210,7 @@ describe('HierarchichalDataTable', () => {
           current_level: 0,
           direction: 'up',
           from_level: 1,
+          module: 'pregnancy',
           node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
