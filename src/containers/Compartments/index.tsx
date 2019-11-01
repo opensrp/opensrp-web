@@ -7,17 +7,31 @@ import Ripple from '../../components/page/Loading';
 import { SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import { COMPARTMENTS, MICROSECONDS_IN_A_WEEK, PROVINCE } from '../../constants';
 import supersetFetch from '../../services/superset';
-import { fetchSms, getSmsData, SmsData, smsDataFetched } from '../../store/ducks/sms_events';
+import {
+  addFilterArgs,
+  fetchSms,
+  FilterArgs,
+  getFilterArgs,
+  getFilteredSmsData,
+  getSmsData,
+  removeFilterArgs,
+  SmsData,
+  smsDataFetched,
+} from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
+  addFilterArgs: any;
+  removeFilterArgs: any;
 }
 const defaultProps: Props = {
+  addFilterArgs,
   dataFetched: false,
   fetchSmsDataActionCreator: fetchSms,
+  removeFilterArgs,
   smsData: [],
 };
 class Compartments extends Component<Props, {}> {
@@ -29,6 +43,14 @@ class Compartments extends Component<Props, {}> {
         fetchSmsDataActionCreator(result);
       });
     }
+    this.props.removeFilterArgs();
+    this.props.addFilterArgs([
+      {
+        comparator: '===',
+        field: 'sms_type',
+        value: 'Pregnancy Registration',
+      },
+    ]);
   }
   public render() {
     const dataCircleCard1Props = {
@@ -38,16 +60,33 @@ class Compartments extends Component<Props, {}> {
       title: this.props.smsData.length + ' Total Pregnancies',
     };
 
+    // for(const i in this.props.smsData){
+    //   console.log(this.props.smsData[i]['sms_type'])
+    // }
     const last2WeeksSmsData = this.filterSms(false, true);
     const dataCircleCard2Props = {
+      filterArgs: [
+        {
+          comparator: '<',
+          field: 'EventDate',
+          value: 2 * MICROSECONDS_IN_A_WEEK,
+        },
+      ] as FilterArgs[],
       highRisk: this.getNumberOfSmsWithRisk('high', last2WeeksSmsData),
       lowRisk: this.getNumberOfSmsWithRisk('low', last2WeeksSmsData),
-      noRisk: this.getNumberOfSmsWithRisk('no risk', last2WeeksSmsData),
+      noRisk: this.getNumberOfSmsWithRisk('no', last2WeeksSmsData),
       title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
     };
 
     const last1WeekSmsData = this.filterSms(true);
     const dataCircleCard3Props = {
+      filterArgs: [
+        {
+          comparator: '<',
+          field: 'EventDate',
+          value: MICROSECONDS_IN_A_WEEK,
+        },
+      ] as FilterArgs[],
       highRisk: this.getNumberOfSmsWithRisk('high', last1WeekSmsData),
       lowRisk: this.getNumberOfSmsWithRisk('low', last1WeekSmsData),
       noRisk: this.getNumberOfSmsWithRisk('no risk', last1WeekSmsData),
@@ -79,13 +118,9 @@ class Compartments extends Component<Props, {}> {
   private filterSms = (last1Week?: boolean, last2Weeks?: boolean): SmsData[] => {
     let filteredData: SmsData[] = [];
     if (last2Weeks) {
-      filteredData = this.props.smsData.filter((dataItem: SmsData): boolean => {
-        return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
-      });
+      filteredData = this.props.smsData.filter(this.filterByDateInLast2Weeks);
     } else if (last1Week) {
-      filteredData = this.props.smsData.filter((dataItem: SmsData): boolean => {
-        return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
-      });
+      filteredData = this.props.smsData.filter(this.filterByDateInLast1Week);
     }
     return filteredData;
     /**  in the very near future we should be able to filter by an administrative unit
@@ -95,6 +130,14 @@ class Compartments extends Component<Props, {}> {
      * commune?: string,
      * village?: string
      */
+  };
+
+  private filterByDateInLast2Weeks = (dataItem: SmsData): boolean => {
+    return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+  };
+
+  private filterByDateInLast1Week = (dataItem: SmsData): boolean => {
+    return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
   };
 
   /**
@@ -117,16 +160,18 @@ class Compartments extends Component<Props, {}> {
 const mapStateToprops = (state: Partial<Store>) => {
   const result = {
     dataFetched: smsDataFetched(state),
-    smsData: getSmsData(state),
+    smsData: getFilterArgs(state)
+      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      : getSmsData(state),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
+const mapDispatchToProps = { fetchSmsDataActionCreator: fetchSms, addFilterArgs, removeFilterArgs };
 
 const ConnectedCompartments = connect(
   mapStateToprops,
-  mapPropsToActions
+  mapDispatchToProps
 )(Compartments);
 
 export default ConnectedCompartments;
