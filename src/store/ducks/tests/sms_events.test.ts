@@ -3,6 +3,7 @@ import { smsDataFixtures } from '../../../containers/Compartments/test/fixtures'
 import store from '../../index';
 import reducer, {
   fetchSms,
+  getFilteredSmsData,
   getSmsData,
   reducerName,
   removeSms,
@@ -36,5 +37,10 @@ describe('reducers/sms_events', () => {
     expect(smsDataFetched(store.getState())).toEqual(true);
     store.dispatch(fetchSms(smsDataFixtures.slice(2, 5)));
     expect(getSmsData(store.getState())).toEqual(smsDataFixtures.slice(0, 5));
+  });
+  it('getFilteredSmsData selector works correctly', () => {
+    // put all the fixtures in the store
+    store.dispatch(fetchSms(smsDataFixtures));
+    expect(getFilteredSmsData(store.getState(), 'height', 20)).toEqual([]);
   });
 });

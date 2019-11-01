@@ -111,3 +111,14 @@ export function getSmsData(state: Partial<Store>): SmsData[] {
 export function smsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].smsDataFetched;
 }
+
+/**
+ * Returns a list of SmsData that has been filtered based on the value
+ * of a field specified.
+ * @param {Partil<Store>} state - the state of the SmsReducer redux store
+ * @param {field} string - the name of the field to filter by
+ * @param {value} string | number - the string or number value of the field specified
+ */
+export function getFilteredSmsData(state: Partial<Store>, field: string, value: string | number) {
+  return [];
+}
