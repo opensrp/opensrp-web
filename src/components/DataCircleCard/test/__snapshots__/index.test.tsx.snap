@@ -2,11 +2,11 @@
 
 exports[`DataCircleCard must render correctly 1`] = `
 <Card
-  className="dataCircleCard"
+  className="dataCircleCard "
   tag="div"
 >
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"

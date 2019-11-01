@@ -3,7 +3,7 @@
 exports[`Compartments must display the correct data: compartments 1`] = `
 Array [
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -100,7 +100,7 @@ Array [
     </CardBody>
   </div>,
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -197,7 +197,7 @@ Array [
     </CardBody>
   </div>,
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
