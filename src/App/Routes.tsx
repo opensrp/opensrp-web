@@ -16,16 +16,18 @@ import {
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
+  NBC_AND_PNC_ANALYSIS_URL,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_DASHBOARD_WELCOME,
+  NBC_AND_PNC_LOGFACE_URL,
   NBC_AND_PNC_URL,
   NEWBORN_REPORT,
   NUTRITION,
   NUTRITION_DASHBOARD_WELCOME,
+  NUTRITION_ANALYSIS_URL,
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
-  PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
@@ -101,7 +103,7 @@ export const Routes = (props: RoutesProps) => {
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={PREGNANCY_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
-                analysisUrl={PREGNANCY_ANALYSIS_URL}
+                analysisUrl={NBC_AND_PNC_ANALYSIS_URL}
               />
             )}
           />
@@ -178,6 +180,20 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
+            path={NBC_AND_PNC_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NUTRITION_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
             path={'/patient_detail/:patient_id'}
             component={ConnectedPatientDetails}
           />
@@ -198,7 +214,7 @@ export const Routes = (props: RoutesProps) => {
           />
           <ConnectedPrivateRoute
             exact={false}
-            path={PNC_AND_NBC_LOGFACE_URL}
+            path={NBC_AND_PNC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ConnectedLogFace header={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
