@@ -65,7 +65,7 @@ class Compartments extends Component<Props, {}> {
     this.props.addFilterArgs(this.props.filterArgs);
   }
   public render() {
-    const dataCircleCard1Props = {
+    const pregnancyDataCircleCard1Props = {
       highRisk: this.getNumberOfSmsWithRisk(HIGH, this.props.smsData),
       lowRisk: this.getNumberOfSmsWithRisk(LOW, this.props.smsData),
       noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, this.props.smsData),
@@ -76,7 +76,7 @@ class Compartments extends Component<Props, {}> {
     //   console.log(this.props.smsData[i]['sms_type'])
     // }
     const last2WeeksSmsData = this.filterSms(false, true);
-    const dataCircleCard2Props = {
+    const pregnancyDataCircleCard2Props = {
       filterArgs: [
         {
           comparator: '<',
@@ -91,7 +91,7 @@ class Compartments extends Component<Props, {}> {
     };
 
     const last1WeekSmsData = this.filterSms(true);
-    const dataCircleCard3Props = {
+    const pregnancyDataCircleCard3Props = {
       filterArgs: [
         {
           comparator: '<',
@@ -161,13 +161,22 @@ class Compartments extends Component<Props, {}> {
           <div className="cards-row">
             <CardGroup>
               {this.props.module === PREGNANCY ? (
-                <ConnectedDataCircleCard {...dataCircleCard1Props} module={this.props.module} />
+                <ConnectedDataCircleCard
+                  {...pregnancyDataCircleCard1Props}
+                  module={this.props.module}
+                />
               ) : null}
               {this.props.module === PREGNANCY ? (
-                <ConnectedDataCircleCard {...dataCircleCard2Props} module={this.props.module} />
+                <ConnectedDataCircleCard
+                  {...pregnancyDataCircleCard2Props}
+                  module={this.props.module}
+                />
               ) : null}
               {this.props.module === PREGNANCY ? (
-                <ConnectedDataCircleCard {...dataCircleCard3Props} module={this.props.module} />
+                <ConnectedDataCircleCard
+                  {...pregnancyDataCircleCard3Props}
+                  module={this.props.module}
+                />
               ) : null}
               {this.props.module === NBC_AND_PNC ? (
                 <ConnectedDataCircleCard {...dataCircleCardChildData} module={this.props.module} />
