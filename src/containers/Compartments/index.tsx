@@ -72,10 +72,7 @@ class Compartments extends Component<Props, {}> {
       title: this.props.smsData.length + ' Total Pregnancies',
     };
 
-    // for(const i in this.props.smsData){
-    //   console.log(this.props.smsData[i]['sms_type'])
-    // }
-    const last2WeeksSmsData = this.filterSms(false, true);
+    const last2WeeksSmsData = this.filterSmsByPreviousWeekPeriod(false, true);
     const pregnancyDataCircleCard2Props = {
       filterArgs: [
         {
@@ -90,7 +87,7 @@ class Compartments extends Component<Props, {}> {
       title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
     };
 
-    const last1WeekSmsData = this.filterSms(true);
+    const last1WeekSmsData = this.filterSmsByPreviousWeekPeriod(true);
     const pregnancyDataCircleCard3Props = {
       filterArgs: [
         {
@@ -202,7 +199,10 @@ class Compartments extends Component<Props, {}> {
       </div>
     );
   }
-  private filterSms = (last1Week?: boolean, last2Weeks?: boolean): SmsData[] => {
+  private filterSmsByPreviousWeekPeriod = (
+    last1Week?: boolean,
+    last2Weeks?: boolean
+  ): SmsData[] => {
     let filteredData: SmsData[] = [];
     if (last2Weeks) {
       filteredData = this.props.smsData.filter(this.filterByDateInLast2Weeks);
