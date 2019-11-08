@@ -134,7 +134,7 @@ export const NUTRITION_LOGFACE_PAGE_NAVIGATION: PageLink = {
   url: NUTRITION_LOGFACE_URL,
 };
 
-export const ANALYSIS_PAGE_NAVIGATION: PageLink = {
+export const PREGNANCY_ANALYSIS_PAGE_NAVIGATION: PageLink = {
   label: ANALYSIS,
   url: PREGNANCY_ANALYSIS_URL,
 };
@@ -199,7 +199,7 @@ export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
     PREGNANCY_LOGFACE_PAGE_NAVIGATION,
     PREGNANCY_COMPARTMENTS_PAGE_NAVIGATION,
-    ANALYSIS_PAGE_NAVIGATION,
+    PREGNANCY_ANALYSIS_PAGE_NAVIGATION,
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: PREGNANCY_MODULE_PARENT_NAV,
 };
