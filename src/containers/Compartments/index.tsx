@@ -182,6 +182,9 @@ class Compartments extends Component<Props, {}> {
                   className={'invisible-but-visible'}
                 />
               ) : null}
+              {this.props.module === NUTRITION
+                ? 'nothing to show for the nutrition module right now'
+                : null}
             </CardGroup>
           </div>
         ) : (
