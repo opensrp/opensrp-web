@@ -322,17 +322,17 @@ class HierarchichalDataTable extends Component<Props, State> {
    * Given a village return it's commune's location ID
    * @param {Location} village - village Location to find commnue
    */
-  public getCommune = (village: Location & Partial<{ level: VILLAGE }>): string => {
+  public getCommune = (village: Location & { level: VILLAGE }): string => {
     return village.parent_id;
   };
 
-  public getDistrict = (village: Location & Partial<{ level: VILLAGE }>): string => {
+  public getDistrict = (village: Location & { level: VILLAGE }): string => {
     const communeId = this.getCommune(village);
     return this.props.communes.find((location: Location) => location.location_id === communeId)!
       .parent_id;
   };
 
-  public getProvince = (village: Location & Partial<{ level: VILLAGE }>): string => {
+  public getProvince = (village: Location & { level: VILLAGE }): string => {
     const districtId = this.getDistrict(village);
     return this.props.districts.find((location: Location) => location.location_id === districtId)!
       .parent_id;
