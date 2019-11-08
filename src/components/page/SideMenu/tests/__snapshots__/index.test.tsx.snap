@@ -151,9 +151,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
                                     vertical={false}
-@@ -648,11 +652,11 @@
-                              \\"label\\": \\"Compartments\\",
-                              \\"url\\": \\"/nbc_and_pnc_compartments\\",
+@@ -652,11 +656,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/nbc_and_pnc_analysis\\",
                             },
                           ]
                         }
@@ -164,9 +164,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNbcandpnc],
                           }
-@@ -681,11 +685,11 @@
-                                \\"label\\": \\"Compartments\\",
-                                \\"url\\": \\"/nbc_and_pnc_compartments\\",
+@@ -689,11 +693,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/nbc_and_pnc_analysis\\",
                               },
                             ]
                           }
@@ -177,9 +177,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgNbcandpnc],
                             }
-@@ -932,11 +936,11 @@
-                              \\"label\\": \\"Compartments\\",
-                              \\"url\\": \\"/nutrition_commpartments_url\\",
+@@ -987,11 +991,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/nutrition_analysis\\",
                             },
                           ]
                         }
@@ -190,9 +190,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNutrition],
                           }
-@@ -965,11 +969,11 @@
-                                \\"label\\": \\"Compartments\\",
-                                \\"url\\": \\"/nutrition_commpartments_url\\",
+@@ -1024,11 +1028,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/nutrition_analysis\\",
                               },
                             ]
                           }
