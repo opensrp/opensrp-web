@@ -55,21 +55,6 @@ import {
 } from '../../../configs/env';
 
 // Page links
-
-export const LOG_FACE: PageLink = {
-  label: 'logface',
-  url: '/logface',
-};
-
-export const CompartMents: PageLink = {
-  label: 'compartments',
-  url: '/compartments',
-};
-
-export const Analysis: PageLink = {
-  label: 'Analysis',
-  url: '/analysis',
-};
 export const CLIENT_PAGE_NAVIGATION: PageLink = {
   label: ALL_CLIENTS,
   url: CLIENT_URL,
