@@ -65,86 +65,109 @@ class Compartments extends Component<Props, {}> {
     this.props.addFilterArgs(this.props.filterArgs);
   }
   public render() {
-    const pregnancyDataCircleCard1Props = {
-      highRisk: this.getNumberOfSmsWithRisk(HIGH, this.props.smsData),
-      lowRisk: this.getNumberOfSmsWithRisk(LOW, this.props.smsData),
-      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, this.props.smsData),
-      title: this.props.smsData.length + ' Total Pregnancies',
-    };
+    const pregnancyDataCircleCard1Props =
+      this.props.module === PREGNANCY
+        ? {
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, this.props.smsData),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, this.props.smsData),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, this.props.smsData),
+            title: this.props.smsData.length + ' Total Pregnancies',
+          }
+        : null;
 
-    const last2WeeksSmsData = this.filterSmsByPreviousWeekPeriod(false, true);
-    const pregnancyDataCircleCard2Props = {
-      filterArgs: [
-        {
-          comparator: '<',
-          field: EVENT_DATE,
-          value: 2 * MICROSECONDS_IN_A_WEEK,
-        },
-      ] as FilterArgs[],
-      highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData),
-      lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData),
-      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData),
-      title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
-    };
+    const last2WeeksSmsData =
+      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(false, true) : [];
+    const pregnancyDataCircleCard2Props =
+      this.props.module === PREGNANCY
+        ? {
+            filterArgs: [
+              {
+                comparator: '<',
+                field: EVENT_DATE,
+                value: 2 * MICROSECONDS_IN_A_WEEK,
+              },
+            ] as FilterArgs[],
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
+            title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
+          }
+        : null;
 
-    const last1WeekSmsData = this.filterSmsByPreviousWeekPeriod(true);
-    const pregnancyDataCircleCard3Props = {
-      filterArgs: [
-        {
-          comparator: '<',
-          field: EVENT_DATE,
-          value: MICROSECONDS_IN_A_WEEK,
-        },
-      ] as FilterArgs[],
-      highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData),
-      lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData),
-      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData),
-      title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
-    };
+    const last1WeekSmsData =
+      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(true) : [];
+    const pregnancyDataCircleCard3Props =
+      this.props.module === PREGNANCY
+        ? {
+            filterArgs: [
+              {
+                comparator: '<',
+                field: EVENT_DATE,
+                value: MICROSECONDS_IN_A_WEEK,
+              },
+            ] as FilterArgs[],
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
+            title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
+          }
+        : null;
 
-    const dataCircleCardTestProps = {
-      filterArgs: [],
-      highRisk: 0,
-      lowRisk: 0,
-      noRisk: 0,
-      title: 'test title',
-    };
+    const newBorn: SmsData[] =
+      this.props.module === NBC_AND_PNC
+        ? this.props.smsData.filter((smsData: SmsData) => {
+            return smsData.client_type === 'ec_child';
+          })
+        : [];
 
-    const newBorn: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
-      return smsData.client_type === 'ec_child';
-    });
-
-    const dataCircleCardChildData = {
-      filterArgs: [
-        {
-          comparator: '===',
-          field: CLIENT_TYPE,
-          value: EC_CHILD,
-        } as FilterArgs,
-      ],
-      highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
-      lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
-      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
-      title: newBorn.length + ' Total Newborn',
-    };
+    const dataCircleCardChildData =
+      this.props.module === NBC_AND_PNC
+        ? {
+            filterArgs: [
+              {
+                comparator: '===',
+                field: CLIENT_TYPE,
+                value: EC_CHILD,
+              } as FilterArgs,
+            ],
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
+            title: newBorn.length + ' Total Newborn',
+          }
+        : null;
 
     const woman: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
       return smsData.client_type === EC_WOMAN;
     });
 
-    const dataCircleCardWomanData = {
-      filterArgs: [
-        {
-          comparator: '===',
-          field: CLIENT_TYPE,
-          value: EC_WOMAN,
-        } as FilterArgs,
-      ],
-      highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
-      lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
-      noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
-      title: woman.length + ' Total mother in PNC',
-    };
+    const dataCircleCardWomanData =
+      this.props.module === NBC_AND_PNC
+        ? {
+            filterArgs: [
+              {
+                comparator: '===',
+                field: CLIENT_TYPE,
+                value: EC_WOMAN,
+              } as FilterArgs,
+            ],
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
+            title: woman.length + ' Total mother in PNC',
+          }
+        : null;
+
+    const dataCircleCardTestProps =
+      this.props.module === NBC_AND_PNC
+        ? {
+            filterArgs: [],
+            highRisk: 0,
+            lowRisk: 0,
+            noRisk: 0,
+            title: 'test title',
+          }
+        : null;
 
     return (
       <div className="compartment-wrapper compartments">
@@ -157,31 +180,31 @@ class Compartments extends Component<Props, {}> {
         {this.props.dataFetched ? (
           <div className="cards-row">
             <CardGroup>
-              {this.props.module === PREGNANCY ? (
+              {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
                 <ConnectedDataCircleCard
                   {...pregnancyDataCircleCard1Props}
                   module={this.props.module}
                 />
               ) : null}
-              {this.props.module === PREGNANCY ? (
+              {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
                 <ConnectedDataCircleCard
                   {...pregnancyDataCircleCard2Props}
                   module={this.props.module}
                 />
               ) : null}
-              {this.props.module === PREGNANCY ? (
+              {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
                 <ConnectedDataCircleCard
                   {...pregnancyDataCircleCard3Props}
                   module={this.props.module}
                 />
               ) : null}
-              {this.props.module === NBC_AND_PNC ? (
+              {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
                 <ConnectedDataCircleCard {...dataCircleCardChildData} module={this.props.module} />
               ) : null}
-              {this.props.module === NBC_AND_PNC ? (
+              {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
                 <ConnectedDataCircleCard {...dataCircleCardWomanData} module={this.props.module} />
               ) : null}
-              {this.props.module === NBC_AND_PNC ? (
+              {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                 <ConnectedDataCircleCard
                   {...dataCircleCardTestProps}
                   module={this.props.module}
