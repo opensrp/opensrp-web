@@ -22,6 +22,7 @@ import {
   NEWBORN_REPORT,
   NUTRITION,
   NUTRITION_DASHBOARD_WELCOME,
+  NUTRITION_COMPARTMENTS_URL,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PNC_AND_NBC_LOGFACE_URL,
@@ -153,6 +154,13 @@ export const Routes = (props: RoutesProps) => {
                 module={NBC_AND_PNC}
               />
             )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NUTRITION_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Compartments module={NUTRITION} />}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
