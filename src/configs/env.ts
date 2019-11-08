@@ -83,32 +83,6 @@ export type OPENSRP_USER_URL = typeof OPENSRP_USER_URL;
 export const OPENSRP_OAUTH_STATE = process.env.REACT_APP_OPENSRP_OAUTH_STATE || 'opensrp';
 export type OPENSRP_OAUTH_STATE = typeof OPENSRP_OAUTH_STATE;
 
-/** Onadata oAuth2 settings */
-export const ENABLE_ONADATA_OAUTH = process.env.REACT_APP_ENABLE_ONADATA_OAUTH === 'true';
-export type ENABLE_ONADATA_OAUTH = typeof ENABLE_ONADATA_OAUTH;
-export const ONADATA_CLIENT_ID = process.env.REACT_APP_ONADATA_CLIENT_ID || '';
-export type ONADATA_CLIENT_ID = typeof ONADATA_CLIENT_ID;
-
-// notice the ending / here
-export const ONADATA_ACCESS_TOKEN_URL =
-  process.env.REACT_APP_ONADATA_ACCESS_TOKEN_URL || 'https://stage-api.ona.io/o/token/';
-export type ONADATA_ACCESS_TOKEN_URL = typeof ONADATA_ACCESS_TOKEN_URL;
-
-// notice the ending / here
-export const ONADATA_AUTHORIZATION_URL =
-  process.env.REACT_APP_ONADATA_AUTHORIZATION_URL || 'https://stage-api.ona.io/o/authorize/';
-export type ONADATA_AUTHORIZATION_URL = typeof ONADATA_AUTHORIZATION_URL;
-
-export const ONADATA_USER_URL =
-  process.env.REACT_APP_ONADATA_USER_URL || 'https://stage-api.ona.io/api/v1/user.json';
-export type ONADATA_USER_URL = typeof ONADATA_USER_URL;
-
-export const ONADATA_OAUTH_STATE = process.env.REACT_APP_ONADATA_OAUTH_STATE || 'onadata';
-export type ONADATA_OAUTH_STATE = typeof ONADATA_OAUTH_STATE;
-
-export const GISIDA_ONADATA_API_TOKEN = process.env.REACT_APP_GISIDA_ONADATA_API_TOKEN || '';
-export type GISIDA_ONADATA_API_TOKEN = typeof GISIDA_ONADATA_API_TOKEN;
-
 // notice the trailing /
 export const OPENSRP_API_BASE_URL =
   process.env.REACT_APP_OPENSRP_API_BASE_URL ||
