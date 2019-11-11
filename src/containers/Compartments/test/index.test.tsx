@@ -8,11 +8,20 @@ import { Router } from 'react-router';
 import ConnectedCompartments from '..';
 import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_TYPE } from '../../../constants';
 import reducer, { fetchSms, reducerName } from '../../../store/ducks/sms_events';
+import { PREGNANCY } from '../../../constants';
+import locationsReducer, {
+  reducerName as locationsReducerName,
+} from '../../../store/ducks/locations';
+import smsReducer, {
+  fetchSms,
+  reducerName as smsReducerName,
+} from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
 import { smsDataFixtures } from './fixtures';
 
 const history = createBrowserHistory();
-reducerRegistry.register(reducerName, reducer);
+reducerRegistry.register(smsReducerName, smsReducer);
+reducerRegistry.register(locationsReducerName, locationsReducer);
 
 describe('Compartments', () => {
   it('must render without crashing', () => {
