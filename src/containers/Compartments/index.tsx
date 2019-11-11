@@ -11,6 +11,9 @@ import {
   EC_CHILD,
   EC_WOMAN,
   EVENT_DATE,
+  COMMUNE,
+  COMPARTMENTS,
+  DISTRICT,
   HIGH,
   LOW,
   MICROSECONDS_IN_A_WEEK,
@@ -18,6 +21,8 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
+  PROVINCE,
+  VILLAGE,
 } from '../../constants';
 import supersetFetch from '../../services/superset';
 import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks/locations';
@@ -47,6 +52,13 @@ interface Props {
   districts: Location[];
   communes: Location[];
   villages: Location[];
+}
+
+interface HeaderBreadCrumb {
+  location: string;
+  path: string;
+  locationId: string;
+  level: string;
 }
 const defaultProps: Props = {
   addFilterArgs,
@@ -246,12 +258,23 @@ class Compartments extends Component<Props, {}> {
       </div>
     );
   }
-  private buildHeaderBreadCrumb(locationId: string): any {
+
+  /**
+   * returns an object that is used to create the header breadcrumb on the Compartments component
+   * @param locationId - location ID  of where the user is assigned;
+   * this could be a province, district, commune or village
+   * @return { HeaderBreadCrumb } an object representing information
+   * required to build the header breadcrumb and to filter out data
+   */
+  private buildHeaderBreadCrumb(locationId: string): HeaderBreadCrumb {
     if (this.props.provinces.find((province: Location) => province.location_id === locationId)) {
+      const userProvince = this.props.provinces.find(
+        (province: Location) => province.location_id === locationId
+      );
       return {
-        location: this.props.provinces.find(
-          (province: Location) => province.location_id === locationId
-        )!.location_name,
+        level: PROVINCE,
+        location: userProvince!.location_name,
+        locationId: userProvince!.location_id,
         path: '',
       };
     } else if (
@@ -263,7 +286,12 @@ class Compartments extends Component<Props, {}> {
       const userProvince = this.props.provinces.find(
         (province: Location) => province.location_id === userDistrict!.parent_id
       );
-      return { path: `${userProvince!.location_name} / `, location: userDistrict!.location_name };
+      return {
+        level: DISTRICT,
+        location: userDistrict!.location_name,
+        locationId: userDistrict!.location_id,
+        path: `${userProvince!.location_name} / `,
+      };
     } else if (
       this.props.communes.find((commune: Location) => commune.location_id === locationId)
     ) {
@@ -277,7 +305,9 @@ class Compartments extends Component<Props, {}> {
         (province: Location) => province.location_id === userDistrict!.parent_id
       );
       return {
+        level: COMMUNE,
         location: userCommune!.location_name,
+        locationId: userCommune!.location_id,
         path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
       };
     } else if (
@@ -298,13 +328,15 @@ class Compartments extends Component<Props, {}> {
         (province: Location) => province.location_id === userDistrict!.parent_id
       );
       return {
+        level: VILLAGE,
         location: userVillage!.location_name,
+        locationId: userVillage!.location_id,
         path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
           userCommune!.location_name
         } / `,
       };
     }
-    return { path: '', location: '' };
+    return { path: '', location: '', locationId: '', level: '' };
   }
   private filterSmsByPreviousWeekPeriod = (
     last1Week?: boolean,
