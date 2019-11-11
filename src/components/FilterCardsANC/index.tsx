@@ -2,7 +2,7 @@
  * filterCards. provides ANC specific implementation details for filter Cards layout
  */
 import React from 'react';
-import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, Col, Row } from 'reactstrap';
+import { Card, CardBody, CardText, CardTitle, Col, Row } from 'reactstrap';
 import './index.css';
 
 /** props for a single filter card */
@@ -21,7 +21,7 @@ interface SingleFilterCardProps {
   active: boolean;
 }
 
-// TODO - how do we specify different color templates for the cards general styling - using styled components
+// TODO - how do we specify different color templates for the cards general styling - using emotion?
 export const SingleFilterCard: React.FC<SingleFilterCardProps> = props => {
   const { filteredRecordsNum: numRecords, filterCategory, timeLength, timeUnit, active } = props;
   return (
@@ -69,11 +69,7 @@ const FilterCardsUI: React.FC<FilterCardsUIProps> = props => {
           timeLength: group.meta.howLong,
           timeUnit: group.meta.unit,
         };
-        return (
-          <Col key={index}>
-            <SingleFilterCard {...singleFilterProps} key={index} />;
-          </Col>
-        );
+        return <SingleFilterCard {...singleFilterProps} key={index} />;
       })}
     </Row>
   );

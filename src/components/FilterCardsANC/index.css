@@ -1,7 +1,7 @@
 div.card {
   max-width: 149px;
   max-height: 272px;
-  margin-left: 20px;
+  margin-left: 0 0 10px 20px;
 }
 
 div.card:first-child {
