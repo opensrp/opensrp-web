@@ -257,3 +257,19 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
+
+// monthnames
+export const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
