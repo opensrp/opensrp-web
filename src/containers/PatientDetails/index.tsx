@@ -12,7 +12,7 @@ import './index.css';
 
 interface Props extends RouteComponentProps {
   patientId: string;
-  testData: SmsData[];
+  smsData: SmsData[];
 }
 
 interface State {
@@ -21,7 +21,7 @@ interface State {
 
 const defaultProps: Partial<Props> = {
   patientId: 'none',
-  testData: [],
+  smsData: [],
 };
 
 export class PatientInfo extends Component<Props, State> {
@@ -33,7 +33,7 @@ export class PatientInfo extends Component<Props, State> {
   }
 
   private static filterByPatientAndSort = (props: Props): SmsData[] => {
-    return props.testData
+    return props.smsData
       .filter((dataItem: SmsData): boolean => {
         return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
       })
@@ -145,7 +145,7 @@ const mapStateToprops = (state: any, ownProps: any) => {
   const patient_id = ownProps.match.params.patient_id;
   const result = {
     patientId: patient_id,
-    testData: getSmsData(state),
+    smsData: getSmsData(state),
   };
   return result;
 };
