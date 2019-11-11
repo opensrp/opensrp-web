@@ -69,7 +69,7 @@ exports[`RiskColoring must show correct Risk level depending on the string passe
   risk="red"
 >
   <span
-    className="badge badge-primary"
+    className="badge badge-danger"
     id="default-width"
   >
     <div>
