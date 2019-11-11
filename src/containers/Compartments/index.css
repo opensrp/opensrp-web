@@ -11,3 +11,7 @@ h2#compartment_title {
 .compartment-wrapper .breadcrumb-row.row {
   padding-left: 1.5em;
 }
+
+.compartment-wrapper span#breadcrumb-span {
+  color: #637381;
+}
