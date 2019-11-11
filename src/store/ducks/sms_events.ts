@@ -85,11 +85,10 @@ export type SmsActionTypes =
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
-  const actionCreated = {
+  return {
     smsData: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
-  return actionCreated;
 };
 
 /** REMOVE SMS action */
@@ -100,11 +99,10 @@ export const removeSms: RemoveSmsAction = {
 
 /** Add filter args action creator */
 export const addFilterArgs = (filterArgs: FilterArgs[]): AddFilterArgsAction => {
-  const actionCreated = {
+  return {
     filterArgs,
     type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
   };
-  return actionCreated;
 };
 
 export const removeFilterArgs = (): RemoveFilterArgs => {
