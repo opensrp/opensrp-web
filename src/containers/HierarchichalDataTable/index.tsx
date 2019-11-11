@@ -8,6 +8,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
+import { getModuleLink } from '../../components/DataCircleCard';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -383,7 +384,9 @@ class HierarchichalDataTable extends Component<Props, State> {
                                 element.location_name
                               ) : (
                                 <Link
-                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+                                  to={`${getModuleLink(
+                                    this.props.module
+                                  )}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
                                     this.props.risk_highligter
                                   }/${this.props.title}/${
                                     this.props.current_level ? this.props.current_level + 1 : 1
@@ -514,7 +517,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           {PROVINCE}
@@ -528,7 +533,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ {DISTRICT}
@@ -542,7 +549,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ {COMMUNE}

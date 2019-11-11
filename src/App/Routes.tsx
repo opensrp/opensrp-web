@@ -168,7 +168,16 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={`${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(
+                url =>
+                  `${url}${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`
+              );
+            })()}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute

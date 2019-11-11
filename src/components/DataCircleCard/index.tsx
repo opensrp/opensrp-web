@@ -8,8 +8,14 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
+  NBC_AND_PNC,
+  NBC_AND_PNC_COMPARTMENTS_URL,
   NO,
   NO_RISK,
+  NUTRITION,
+  NUTRITION_COMPARTMENTS_URL,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
 } from '../../constants';
 import { addFilterArgs, FilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
@@ -23,6 +29,19 @@ interface Props {
   filterArgs?: FilterArgs[];
   module: string;
   className?: string;
+}
+
+export function getModuleLink(module: string) {
+  switch (module) {
+    case PREGNANCY:
+      return PREGNANCY_COMPARTMENTS_URL;
+    case NUTRITION:
+      return NUTRITION_COMPARTMENTS_URL;
+    case NBC_AND_PNC:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    default:
+      return '';
+  }
 }
 
 function DataCircleCard({
@@ -42,7 +61,7 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}`}
+              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -56,7 +75,7 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}`}
+              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -70,7 +89,7 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}`}
+              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
