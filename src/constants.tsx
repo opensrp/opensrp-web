@@ -241,6 +241,83 @@ export const CLIENT_TYPE = 'client_type';
 export type CLIENT_TYPE = typeof CLIENT_TYPE;
 export const PREGNANCY_REGISTRATION = 'Pregnancy Registration';
 export type PREGNANCY_REGISTRATION = typeof PREGNANCY_REGISTRATION;
+export const RESPONSE_REPORT = 'Response Report';
+export type RESPONSE_REPORT = typeof RESPONSE_REPORT;
+export const RED_ALERT_REPORT = 'Red Alert Report';
+export type RED_ALERT_REPORT = typeof RED_ALERT_REPORT;
+export const SOCIAL_DETERMINANTS = 'Social Determinants';
+export type SOCIAL_DETERMINANTS = typeof SOCIAL_DETERMINANTS;
+export const ANC_VISIT = 'ANC Visit';
+export type ANC_VISIT = typeof ANC_VISIT;
+export const DELIVERY_PLANNING = 'Delivery Planning';
+export type DELIVERY_PLANNING = typeof DELIVERY_PLANNING;
+export const PREGNANCY_DETECTION = 'Pregnancy Detection';
+export type PREGNANCY_DETECTION = typeof PREGNANCY_DETECTION;
+export const PREGNANCY_IDENTIFICATION = 'Pregnancy Identification';
+export type PREGNANCY_IDENTIFICATION = typeof PREGNANCY_IDENTIFICATION;
+export const ANC_REPORT = 'ANC Report';
+export type ANC_REPORT = typeof ANC_REPORT;
+export const HOME_VISIT_REPORT = 'Home Visit Report';
+export type HOME_VISIT_REPORT = typeof HOME_VISIT_REPORT;
+export const BIRTH_REPORT = 'Birth Report';
+export type BIRTH_REPORT = typeof BIRTH_REPORT;
+export const DEATH_REPORT = 'Death Report';
+export type DEATH_REPORT = typeof DEATH_REPORT;
+export const POSTNATAL_AND_NEWBORN_CARE = 'Postnatal and Newborn Care';
+export type POSTNATAL_AND_NEWBORN_CARE = typeof POSTNATAL_AND_NEWBORN_CARE;
+export const NUTRITION_REGISTRATION = 'Nutrition Registration';
+export type NUTRITION_REGISTRATION = typeof NUTRITION_REGISTRATION;
+export const NUTRITION_REPORT = 'Nutrition Report';
+export type NUTRITION_REPORT = typeof NUTRITION_REPORT;
+export const MONTHLY_NUTRITION_REPORT = 'Monthly Nutrition Report';
+export type MONTHLY_NUTRITION_REPORT = typeof MONTHLY_NUTRITION_REPORT;
+export const DEPARTURE_CODE = 'Departure Code';
+export type DEPARTURE_CODE = typeof DEPARTURE_CODE;
+export const REFUSAL_CODE = 'Refusal Code';
+export type REFUSAL_CODE = typeof REFUSAL_CODE;
+export const ACCOUNT_CHECK = 'Account Check';
+export type ACCOUNT_CHECK = typeof ACCOUNT_CHECK;
+export const PREGNANCY_LOGFACE_SMS_TYPES = [
+  PREGNANCY_IDENTIFICATION,
+  PREGNANCY_REGISTRATION,
+  SOCIAL_DETERMINANTS,
+  ANC_REPORT,
+  HOME_VISIT_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+  DELIVERY_PLANNING,
+  BIRTH_REPORT,
+];
+export const NBC_AND_PNC_LOGFACE_SMS_TYPES = [
+  HOME_VISIT_REPORT,
+  DELIVERY_PLANNING,
+  BIRTH_REPORT,
+  POSTNATAL_AND_NEWBORN_CARE,
+  DEATH_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+];
+
+export const NUTRITION_LOGFACE_SMS_TYPES = [
+  NUTRITION_REGISTRATION,
+  NUTRITION_REPORT,
+  MONTHLY_NUTRITION_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+];
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
