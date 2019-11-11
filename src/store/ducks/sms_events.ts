@@ -5,7 +5,6 @@ import { AnyAction, Store } from 'redux';
 export const reducerName = 'SmsReducer';
 
 /** Interface for SMS record object as received from discover */
-// tslint:disable-next-line: class-name
 export interface SmsData {
   age: string;
   EventDate: string;
@@ -45,7 +44,6 @@ export const ADD_FILTER_ARGS = 'opensrp/reducer/ADD_FILTER_ARGS';
 export const REMOVE_FILTER_ARGS = 'opensrp/reducer/REMOVE_FILTER_ARGS';
 
 /** interface for sms fetch */
-// tslint:disable-next-line: class-name
 export interface FetchSmsAction extends AnyAction {
   smsData: { [key: string]: SmsData };
   type: typeof FETCHED_SMS;
@@ -111,7 +109,6 @@ export const removeFilterArgs = (): RemoveFilterArgs => {
 // The reducer
 
 /** interface for sms state in redux store */
-// tslint:disable-next-line: class-name
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
