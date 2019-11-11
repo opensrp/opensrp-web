@@ -31,6 +31,7 @@ exports[`PregnancyHome must render correctly 1`] = `
 patients in your geographical location. The Module covers the whole pregnancy period
 from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
 reports/Death reports, Risk Reports, Risk alerts and ResponseReports."
+    logFaceUrl="#"
     logfaceUrl="/pregnancy_log_face"
     title="Welcome to the pregnancy dashboard"
   >
@@ -81,10 +82,10 @@ reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
                 id="cont-sized"
               >
                 <Link
-                  to="/pregnancy_log_face"
+                  to="#"
                 >
                   <a
-                    href="/pregnancy_log_face"
+                    href="/"
                     onClick={[Function]}
                   >
                     <button
