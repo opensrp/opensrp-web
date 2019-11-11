@@ -4,7 +4,7 @@ import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
-import { SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
+import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
   CLIENT_TYPE,
   COMPARTMENTS,
@@ -18,9 +18,9 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
-  PROVINCE,
 } from '../../constants';
 import supersetFetch from '../../services/superset';
+import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks/locations';
 import {
   addFilterArgs,
   fetchSms,
@@ -37,24 +37,42 @@ import './index.css';
 interface Props {
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
+  fetchLocationsActionCreator: typeof fetchLocations;
   dataFetched: boolean;
   addFilterArgs: any;
   removeFilterArgs: any;
   filterArgs: FilterArgs[];
   module: PREGNANCY | NBC_AND_PNC | NUTRITION | '';
+  provinces: Location[];
+  districts: Location[];
+  communes: Location[];
+  villages: Location[];
 }
 const defaultProps: Props = {
   addFilterArgs,
+  communes: [],
   dataFetched: false,
+  districts: [],
+  fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
   filterArgs: [],
   module: '',
+  provinces: [],
   removeFilterArgs,
   smsData: [],
+  villages: [],
 };
 class Compartments extends Component<Props, {}> {
   public static defaultProps = defaultProps;
   public componentDidMount() {
+    const { fetchLocationsActionCreator } = this.props;
+    for (const slice in LOCATION_SLICES) {
+      if (slice) {
+        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+          fetchLocationsActionCreator(result);
+        });
+      }
+    }
     const { fetchSmsDataActionCreator } = this.props;
     if (!this.props.dataFetched) {
       supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: any) => {
@@ -169,13 +187,19 @@ class Compartments extends Component<Props, {}> {
           }
         : null;
 
+    const locationAndPath = this.buildHeaderBreadCrumb('78a12165-3c12-471f-8755-c96bac123292');
+    const path = locationAndPath.path;
+    const location = locationAndPath.location;
     return (
       <div className="compartment-wrapper compartments">
         <Row>
           <h2 id="compartment_title">{COMPARTMENTS}</h2>
         </Row>
         <Row className="breadcrumb-row">
-          <p id="breadcrumb">{PROVINCE}</p>
+          <p id="breadcrumb">
+            {path}
+            <span id="breadcrumb-span">{location}</span>
+          </p>
         </Row>
         {this.props.dataFetched ? (
           <div className="cards-row">
@@ -221,6 +245,66 @@ class Compartments extends Component<Props, {}> {
         )}
       </div>
     );
+  }
+  private buildHeaderBreadCrumb(locationId: string): any {
+    if (this.props.provinces.find((province: Location) => province.location_id === locationId)) {
+      return {
+        location: this.props.provinces.find(
+          (province: Location) => province.location_id === locationId
+        )!.location_name,
+        path: '',
+      };
+    } else if (
+      this.props.districts.find((district: Location) => district.location_id === locationId)
+    ) {
+      const userDistrict = this.props.districts.find(
+        (district: Location) => district.location_id === locationId
+      );
+      const userProvince = this.props.provinces.find(
+        (province: Location) => province.location_id === userDistrict!.parent_id
+      );
+      return { path: `${userProvince!.location_name} / `, location: userDistrict!.location_name };
+    } else if (
+      this.props.communes.find((commune: Location) => commune.location_id === locationId)
+    ) {
+      const userCommune = this.props.communes.find(
+        (commune: Location) => commune.location_id === locationId
+      );
+      const userDistrict = this.props.districts.find(
+        (district: Location) => district.location_id === userCommune!.parent_id
+      );
+      const userProvince = this.props.provinces.find(
+        (province: Location) => province.location_id === userDistrict!.parent_id
+      );
+      return {
+        location: userCommune!.location_name,
+        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
+      };
+    } else if (
+      this.props.villages.find(
+        (village: Location) => village.location_id === locationId && this.props.communes.length
+      )
+    ) {
+      const userVillage = this.props.villages.find(
+        (village: Location) => village.location_id === locationId
+      );
+      const userCommune = this.props.communes.find(
+        (commune: Location) => commune.location_id === userVillage!.parent_id
+      );
+      const userDistrict = this.props.districts.find(
+        (district: Location) => district.location_id === userCommune!.parent_id
+      );
+      const userProvince = this.props.provinces.find(
+        (province: Location) => province.location_id === userDistrict!.parent_id
+      );
+      return {
+        location: userVillage!.location_name,
+        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
+          userCommune!.location_name
+        } / `,
+      };
+    }
+    return { path: '', location: '' };
   }
   private filterSmsByPreviousWeekPeriod = (
     last1Week?: boolean,
@@ -269,15 +353,24 @@ class Compartments extends Component<Props, {}> {
 
 const mapStateToprops = (state: Partial<Store>) => {
   const result = {
+    communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
+    districts: getLocationsOfLevel(state, 'District'),
+    provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilterArgs(state)
       ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
       : getSmsData(state),
+    villages: getLocationsOfLevel(state, 'Village'),
   };
   return result;
 };
 
-const mapDispatchToProps = { fetchSmsDataActionCreator: fetchSms, addFilterArgs, removeFilterArgs };
+const mapDispatchToProps = {
+  addFilterArgs,
+  fetchLocationsActionCreator: fetchLocations,
+  fetchSmsDataActionCreator: fetchSms,
+  removeFilterArgs,
+};
 
 const ConnectedCompartments = connect(
   mapStateToprops,
