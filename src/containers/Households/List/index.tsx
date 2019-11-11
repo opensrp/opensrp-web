@@ -71,15 +71,17 @@ class HouseholdList extends React.Component<HouseholdListProps> {
     }
     return (
       <div>
-        <h3> Household ({totalRecordsCount}) </h3>
+        <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
         <Row>
           <Col md={5}>
-            <SearchBox searchCallBack={this.search} />
+            <div className="household-search-bar">
+              <SearchBox searchCallBack={this.search} />
+            </div>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Table striped={true}>
+            <Table className="shadow-sm">
               <thead>
                 <tr>
                   <th>HH ID Number</th>
@@ -100,9 +102,9 @@ class HouseholdList extends React.Component<HouseholdListProps> {
                       <td>{household.attributes.HouseholdHead}</td>
                       <td>{household.attributes.phoneNumber}</td>
                       <td>{household.dateCreated}</td>
-                      <td>{household.attributes.memberCount}</td>
+                      <td className="members-table-field">{household.attributes.memberCount}</td>
                       <td>
-                        <Link to={`/household/profile/${household.baseEntityId}/`}>view</Link>
+                        <Link to={`/household/profile/${household.baseEntityId}/`}>View</Link>
                       </td>
                     </tr>
                   );
