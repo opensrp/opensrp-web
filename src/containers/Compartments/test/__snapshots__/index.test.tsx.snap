@@ -308,6 +308,8 @@ exports[`Compartments must render correctly: subtitle 1`] = `
 <p
   id="breadcrumb"
 >
-  Province
+  <span
+    id="breadcrumb-span"
+  />
 </p>
 `;

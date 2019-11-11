@@ -10,11 +10,11 @@ Object {
         to="/"
       >
         <img
-          alt="OpenSRP"
+          alt="unicef"
           src="logo.png"
         />
         <img
-          alt="OpenSRP"
+          alt="unicef"
           src="vietnam-moh.png"
         />
       </Link>
@@ -73,11 +73,11 @@ Object {
         to="/"
       >
         <img
-          alt="OpenSRP"
+          alt="unicef"
           src="logo.png"
         />
         <img
-          alt="OpenSRP"
+          alt="unicef"
           src="vietnam-moh.png"
         />
       </Link>
