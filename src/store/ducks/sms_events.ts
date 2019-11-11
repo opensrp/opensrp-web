@@ -185,16 +185,16 @@ export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs
   // i.e an array of these objects and then each one of them, one after another to do the filtering
 
   let results = values((state as any)[reducerName].smsData);
-  for (const filterArg in filterArgs) {
-    if (filterArg) {
+  for (const filterArgIndex in filterArgs) {
+    if (filterArgIndex) {
       results = results.filter((smsData: SmsData) => {
-        return filterArgs[filterArg].field in smsData
+        return filterArgs[filterArgIndex].field in smsData
           ? doComparison(
-              filterArgs[filterArg].field === 'EventDate'
-                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArg].field])
-                : (smsData as any)[filterArgs[filterArg].field],
-              filterArgs[filterArg].comparator,
-              filterArgs[filterArg].value
+              filterArgs[filterArgIndex].field === 'EventDate'
+                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArgIndex].field])
+                : (smsData as any)[filterArgs[filterArgIndex].field],
+              filterArgs[filterArgIndex].comparator,
+              filterArgs[filterArgIndex].value
             )
           : [];
       });
