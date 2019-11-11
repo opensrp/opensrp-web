@@ -28,10 +28,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -52,10 +52,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -76,10 +76,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
@@ -125,10 +125,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -149,10 +149,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -173,10 +173,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -222,10 +222,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -246,10 +246,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -270,10 +270,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
