@@ -77,7 +77,7 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title="Welcome to the pregnancy dashboard"
                 description={PREGNANCY_DESCRIPTION}
-                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                logFaceUrl={PREGNANCY_LOGFACE_URL}
                 compartmentUrl={PREGNANCY_COMPARTMENTS_URL}
                 analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
@@ -92,7 +92,7 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title="Welcome to Newborn and Postnatal Care"
                 description={PREGNANCY_DESCRIPTION}
-                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                logFaceUrl={PREGNANCY_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
                 analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
@@ -108,7 +108,7 @@ export const Routes = (props: RoutesProps) => {
                 title="Welcome to Nutrition Care"
                 description={PREGNANCY_DESCRIPTION}
                 deactivateLinks={true}
-                logfaceUrl={NUTRITION_LOGFACE_URL}
+                logFaceUrl={NUTRITION_LOGFACE_URL}
               />
             )}
           />
