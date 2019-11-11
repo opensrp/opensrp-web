@@ -20,6 +20,12 @@ import {
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   EVENT_ID,
   LOGFACE_SEARCH_PLACEHOLDER,
+  NBC_AND_PNC,
+  NBC_AND_PNC_LOGFACE_SMS_TYPES,
+  NUTRITION,
+  NUTRITION_LOGFACE_SMS_TYPES,
+  PREGNANCY,
+  PREGNANCY_LOGFACE_SMS_TYPES,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
@@ -414,10 +420,22 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 }
 
-const mapStateToprops = (state: any) => {
+const mapStateToprops = (state: any, ownProps: any): any => {
   const result = {
     dataFetched: smsDataFetched(state),
-    smsData: getSmsData(state),
+    smsData: getSmsData(state).filter((smsData: SmsData) => {
+      // here we filter based on the module we are in.
+      switch (ownProps.header) {
+        case PREGNANCY:
+          return PREGNANCY_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+        case NBC_AND_PNC:
+          return NBC_AND_PNC_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+        case NUTRITION:
+          return NUTRITION_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+        default:
+          return true;
+      }
+    }),
   };
   return result;
 };
