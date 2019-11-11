@@ -11,6 +11,7 @@ import {
   RISK_CATEGORY,
 } from '../../constants';
 import { SmsData } from '../../store/ducks/sms_events';
+import { getModuleLink } from '../DataCircleCard';
 import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
 import RiskColoring from '../RiskColoring';
 import './index.css';
@@ -18,6 +19,7 @@ import './index.css';
 interface Props {
   current_level: number;
   smsData: SmsData[];
+  module: string;
 }
 
 interface State {
@@ -26,6 +28,7 @@ interface State {
 
 const defaultProps: Props = {
   current_level: 0,
+  module: '',
   smsData: [],
 };
 
@@ -85,7 +88,11 @@ export default class VillageData extends React.Component<Props, State> {
                               return (
                                 <tr key={dataItem.event_id}>
                                   <td className="default-width">
-                                    <Link to={`/patient_detail/${dataItem.anc_id}`}>
+                                    <Link
+                                      to={`${getModuleLink(this.props.module)}/patient_detail/${
+                                        dataItem.anc_id
+                                      }`}
+                                    >
                                       {dataItem.anc_id}
                                     </Link>
                                   </td>
