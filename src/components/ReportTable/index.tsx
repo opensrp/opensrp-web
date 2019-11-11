@@ -10,6 +10,11 @@ import './index.css';
 interface Props {
   singlePatientEvents: SmsData[];
 }
+
+export interface WeightAndMonth {
+  weight: number;
+  month: number;
+}
 interface PregnancySmsData {
   EventDate: string;
   message: string | number;
@@ -132,13 +137,15 @@ class ReportTable extends Component<Props, State> {
     return pregnancySmsStrings;
   };
 
-  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): number[][] => {
-    let weights: number[][] = [];
+  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): WeightAndMonth[][] => {
+    let weights: WeightAndMonth[][] = [];
     for (const element in pregnancySmsData) {
       if (pregnancySmsData[element]) {
-        weights[element] = pregnancySmsData[element].map((sms: any): number => {
-          return sms.weight;
-        });
+        weights[element] = pregnancySmsData[element].map(
+          (sms: any): WeightAndMonth => {
+            return { weight: sms.weight, month: new Date(sms.EventDate).getMonth() };
+          }
+        );
       }
     }
 
@@ -203,13 +210,36 @@ class ReportTable extends Component<Props, State> {
         </Row>
         <Row id={'chart'}>
           <MotherWeightChart
-            weights={
+            weights={this.removeDuplicateWeights(
               this.getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
-            }
+            )}
           />
         </Row>
       </Fragment>
     );
+  }
+
+  private removeDuplicateWeights(weights: WeightAndMonth[]) {
+    function reducer(
+      accumulator: WeightAndMonth[],
+      currentValue: WeightAndMonth
+    ): WeightAndMonth[] {
+      const weightAndMonth = accumulator.find(element => {
+        return element.month === currentValue.month;
+      });
+      if (weightAndMonth) {
+        const index = accumulator.indexOf(weightAndMonth);
+        accumulator.splice(index, 1, {
+          month: weightAndMonth!.month,
+          weight: (weightAndMonth!.month + currentValue.month) / 2,
+        });
+        return accumulator;
+      } else {
+        accumulator.push(currentValue);
+        return accumulator;
+      }
+    }
+    return weights.reduce(reducer, []);
   }
 
   private togglePregnancyDropDown = () => {

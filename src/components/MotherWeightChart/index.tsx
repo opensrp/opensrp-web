@@ -2,12 +2,13 @@ import * as Highcharts from 'highcharts';
 import * as React from 'react';
 import { Card, CardTitle } from 'reactstrap';
 import { clearTimeout, setTimeout } from 'timers';
-import { MOTHER_WEIGHT_TRACKING } from '../../constants';
+import { monthNames, MOTHER_WEIGHT_TRACKING } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
+import { WeightAndMonth } from '../ReportTable';
 import './index.css';
 
 interface Props {
-  weights: number[];
+  weights: WeightAndMonth[];
 }
 
 interface State {
@@ -76,36 +77,15 @@ export default class MotherWeightChart extends React.Component<Props, State> {
           },
         },
 
-        subtitle: {
-          text: undefined,
-        },
-
-        yAxis: {
-          title: {
-            text: '',
-          },
-        },
-
         xAxis: {
-          categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-          ],
+          categories: this.props.weights
+            .map((weightAndMonth: WeightAndMonth) => weightAndMonth.month)
+            .map((month: number) => monthNames[month]),
         },
 
         series: [
           {
-            data: this.props.weights,
+            data: this.props.weights.map((weightAndMonth: WeightAndMonth) => weightAndMonth.weight),
             name: 'weight',
           },
         ] as any,
