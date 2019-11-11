@@ -1,6 +1,6 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
-import { OPENSRP_OAUTH_STATE } from '../configs/env';
+import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
@@ -18,6 +18,8 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
     switch (apiResponse.oAuth2Data.state) {
       case OPENSRP_OAUTH_STATE:
         return getOpenSRPUserInfo(apiResponse);
+      case ONADATA_OAUTH_STATE:
+        return getOnadataUserInfo(apiResponse);
     }
   }
 }
