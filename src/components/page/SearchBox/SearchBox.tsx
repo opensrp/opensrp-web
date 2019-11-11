@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import './SearchBox.css';
 
 /** props interface for SearchBox */
 interface SearchBoxProps {
@@ -23,14 +24,19 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
   }
   public render() {
     return (
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          <InputGroupText>
+      <div id="custom-search-input">
+        <InputGroup className="shadow-sm">
+          <span className="input-group-btn search-bar-icon">
             <FontAwesomeIcon icon={['fas', 'search']} />
-          </InputGroupText>
-        </InputGroupAddon>
-        <Input placeholder="search" onChange={this.handleChange} onKeyPress={this.search} />
-      </InputGroup>
+          </span>
+          <Input
+            placeholder="search"
+            className="search-bar-input"
+            onChange={this.handleChange}
+            onKeyPress={this.search}
+          />
+        </InputGroup>
+      </div>
     );
   }
 
