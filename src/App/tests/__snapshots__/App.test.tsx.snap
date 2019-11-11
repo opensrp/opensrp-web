@@ -342,7 +342,7 @@ exports[`App renders App correctly 1`] = `
                                     },
                                   ]
                                 }
-                                collapsedModuleLabel=""
+                                collapsedModuleLabel={null}
                                 key="0"
                                 parentNav={
                                   Object {
@@ -364,7 +364,7 @@ exports[`App renders App correctly 1`] = `
                                       },
                                     ]
                                   }
-                                  collapsedModuleLabel=""
+                                  collapsedModuleLabel={null}
                                   history={
                                     Object {
                                       "action": "POP",
@@ -428,10 +428,12 @@ exports[`App renders App correctly 1`] = `
                                         onClick={[Function]}
                                       >
                                         <NavItem
+                                          id="module-link"
                                           tag="li"
                                         >
                                           <li
                                             className="nav-item"
+                                            id="module-link"
                                           >
                                             <span
                                               className="nav nav-link side-nav-item"
