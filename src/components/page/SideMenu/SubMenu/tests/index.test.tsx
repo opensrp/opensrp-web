@@ -89,7 +89,7 @@ describe('components/page/SubMenu', () => {
     wrapper.unmount();
   });
 
-  it('stimulates click and calls mock function properly', () => {
+  it('simulates click and calls mock function properly', () => {
     const mockCallBack = jest.fn();
     const mock = jest.fn();
     const pathname = '/somePath';
@@ -112,7 +112,7 @@ describe('components/page/SubMenu', () => {
     wrapper.unmount();
   });
 
-  it('stimulates click and calls mock function with correct value', () => {
+  it('simulates click and calls mock function with correct value', () => {
     const mockCallBack = jest.fn();
     const mock = jest.fn();
     const pathname = '/somePath';
