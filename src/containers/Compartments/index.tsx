@@ -7,13 +7,12 @@ import Ripple from '../../components/page/Loading';
 import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
   CLIENT_TYPE,
-  COMPARTMENTS,
-  EC_CHILD,
-  EC_WOMAN,
-  EVENT_DATE,
   COMMUNE,
   COMPARTMENTS,
   DISTRICT,
+  EC_CHILD,
+  EC_WOMAN,
+  EVENT_DATE,
   HIGH,
   LOW,
   MICROSECONDS_IN_A_WEEK,

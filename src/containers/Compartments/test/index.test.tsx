@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
 import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_TYPE } from '../../../constants';
-import reducer, { fetchSms, reducerName } from '../../../store/ducks/sms_events';
-import { PREGNANCY } from '../../../constants';
 import locationsReducer, {
   reducerName as locationsReducerName,
 } from '../../../store/ducks/locations';
