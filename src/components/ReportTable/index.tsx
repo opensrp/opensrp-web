@@ -91,7 +91,7 @@ export function removeDuplicateWeights(weights: WeightAndMonth[]) {
       const index = accumulator.indexOf(weightAndMonth);
       accumulator.splice(index, 1, {
         month: weightAndMonth!.month,
-        weight: (weightAndMonth!.month + currentValue.month) / 2,
+        weight: (weightAndMonth!.weight + currentValue.weight) / 2,
       });
       return accumulator;
     } else {
