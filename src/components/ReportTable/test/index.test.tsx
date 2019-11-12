@@ -21,8 +21,6 @@ import {
   getEventsPregnancyArrayOutput2,
   getPregnancyStringsArrayInput,
   getPregnancyStringsArrayOutput,
-  getWeightArrayInput1,
-  getWeightArrayInput2,
   getWeightsArrayInput1,
   getWeightsArrayInput2,
   getWeightsArrayOutput1,
