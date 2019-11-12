@@ -2,6 +2,8 @@ import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
+import { VILLAGE } from '../constants';
+import { Location } from '../store/ducks/locations';
 import { SmsData } from '../store/ducks/sms_events';
 
 /** Interface for an object that is allowed to have any property */
@@ -56,4 +58,32 @@ export const sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
   } else {
     return 0;
   }
+};
+
+/**
+ * Given a village return it's commune's location ID
+ * @param {Location} village - village Location to find commnue
+ */
+export const getCommune = (village: Location & { level: VILLAGE }): string => {
+  return village.parent_id;
+};
+
+export const getDistrict = (
+  village: Location & { level: VILLAGE },
+  communes: Location[]
+): string | null => {
+  const communeId = getCommune(village);
+  const commune = communes.find((location: Location) => location.location_id === communeId);
+  return commune ? commune.parent_id : null;
+};
+
+export const getProvince = (
+  village: Location & { level: VILLAGE },
+  districts: Location[],
+  communes: Location[]
+): string | null => {
+  const districtId = getDistrict(village, communes);
+  return districtId
+    ? districts.find((location: Location) => location.location_id === districtId)!.parent_id
+    : null;
 };

@@ -189,6 +189,10 @@ export function getFilteredSmsData(
 }
 
 /** Returns the filterArgs currently in the store */
-export function getFilterArgs(state: Partial<Store>): Array<(smsData: SmsData) => boolean> | null {
-  return (state as any)[reducerName].filterArgs;
+export function getFilterArgs(state: Partial<Store>): Array<(smsData: SmsData) => boolean> {
+  if ((state as any)[reducerName].filterArgs) {
+    return (state as any)[reducerName].filterArgs;
+  } else {
+    return [];
+  }
 }
