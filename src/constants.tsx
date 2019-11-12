@@ -193,6 +193,10 @@ export const NBC_AND_PNC_DASHBOARD_WELCOME = 'Welcome to Newborn and Postnatal C
 export type NBC_AND_PNC_COMPARTMENTS_WELCOME = typeof NBC_AND_PNC_DASHBOARD_WELCOME;
 export const NUTRITION_DASHBOARD_WELCOME = 'Welcome to Nutrition Care';
 export type NUTRITION_DASHBOARD_WELCOME = typeof NUTRITION_DASHBOARD_WELCOME;
+export const EC_WOMAN = 'ec_woman';
+export type EC_WOMAN = typeof EC_WOMAN;
+export const EC_CHILD = 'ec_child';
+export type EC_CHILD = typeof EC_CHILD;
 
 // sms events fields
 export const AGE = 'age';

@@ -6,7 +6,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
-import { PREGNANCY } from '../../../constants';
+import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_TYPE } from '../../../constants';
 import reducer, { fetchSms, reducerName } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
 import { smsDataFixtures } from './fixtures';
@@ -31,8 +31,8 @@ describe('Compartments', () => {
             filterArgs={[
               {
                 comparator: '===',
-                field: 'sms_type',
-                value: 'Pregnancy Registration',
+                field: SMS_TYPE,
+                value: PREGNANCY_REGISTRATION,
               },
             ]}
             module={PREGNANCY}
@@ -62,8 +62,8 @@ describe('Compartments', () => {
             filterArgs={[
               {
                 comparator: '===',
-                field: 'sms_type',
-                value: 'Pregnancy Registration',
+                field: SMS_TYPE,
+                value: PREGNANCY_REGISTRATION,
               },
             ]}
             module={PREGNANCY}

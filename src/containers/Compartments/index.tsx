@@ -6,7 +6,11 @@ import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import { SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
+  CLIENT_TYPE,
   COMPARTMENTS,
+  EC_CHILD,
+  EC_WOMAN,
+  EVENT_DATE,
   HIGH,
   LOW,
   MICROSECONDS_IN_A_WEEK,
@@ -76,7 +80,7 @@ class Compartments extends Component<Props, {}> {
       filterArgs: [
         {
           comparator: '<',
-          field: 'EventDate',
+          field: EVENT_DATE,
           value: 2 * MICROSECONDS_IN_A_WEEK,
         },
       ] as FilterArgs[],
@@ -91,7 +95,7 @@ class Compartments extends Component<Props, {}> {
       filterArgs: [
         {
           comparator: '<',
-          field: 'EventDate',
+          field: EVENT_DATE,
           value: MICROSECONDS_IN_A_WEEK,
         },
       ] as FilterArgs[],
@@ -117,8 +121,8 @@ class Compartments extends Component<Props, {}> {
       filterArgs: [
         {
           comparator: '===',
-          field: 'client_type',
-          value: 'ec_child',
+          field: CLIENT_TYPE,
+          value: EC_CHILD,
         } as FilterArgs,
       ],
       highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
@@ -128,15 +132,15 @@ class Compartments extends Component<Props, {}> {
     };
 
     const woman: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
-      return smsData.client_type === 'ec_woman';
+      return smsData.client_type === EC_WOMAN;
     });
 
     const dataCircleCardWomanData = {
       filterArgs: [
         {
           comparator: '===',
-          field: 'client_type',
-          value: 'ec_woman',
+          field: CLIENT_TYPE,
+          value: EC_WOMAN,
         } as FilterArgs,
       ],
       highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
