@@ -49,8 +49,6 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
-export const EVENT_ID = 'event_id';
-export type EVENT_ID = typeof EVENT_ID;
 export const HIGH = 'high';
 export type HIGH = typeof HIGH;
 export const LOW = 'low';
@@ -187,6 +185,52 @@ patients in your geographical location. The Module covers the whole pregnancy pe
 from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
 reports/Death reports, Risk Reports, Risk alerts and ResponseReports.`;
 export type PREGNANCY_DESCRIPTION = typeof PREGNANCY_DESCRIPTION;
+export const NEWBORN_REPORT = 'Newborn Report';
+export type NEWBORN_REPORT = typeof NEWBORN_REPORT;
+export const PREGNANCY_DASHBOARD_WELCOME = 'Welcome to the pregnancy dashboard';
+export type PREGNANCY_DASHBOARD_WELCOME = typeof PREGNANCY_DASHBOARD_WELCOME;
+export const NBC_AND_PNC_DASHBOARD_WELCOME = 'Welcome to Newborn and Postnatal Care';
+export type NBC_AND_PNC_COMPARTMENTS_WELCOME = typeof NBC_AND_PNC_DASHBOARD_WELCOME;
+export const NUTRITION_DASHBOARD_WELCOME = 'Welcome to Nutrition Care';
+export type NUTRITION_DASHBOARD_WELCOME = typeof NUTRITION_DASHBOARD_WELCOME;
+
+// sms events fields
+export const AGE = 'age';
+export type AGE = typeof AGE;
+export const EVENT_DATE = 'EventDate';
+export type EVENT_DATE = typeof EVENT_DATE;
+export const EVENT_ID = 'event_id';
+export type EVENT_ID = typeof EVENT_ID;
+export const HEALTH_WORKER_LOCATION_NAME = 'health_worker_location_name';
+export type HEALTH_WORKER_LOCATION_NAME = typeof HEALTH_WORKER_LOCATION_NAME;
+export const MESSAGE = 'message';
+export type MESSAGE = typeof MESSAGE;
+export const ANC_ID = 'anc_id';
+export type ANC_ID = typeof ANC_ID;
+export const LOGFACE_RISK = 'logface_risk: string';
+export type LOGFACE_RISK = typeof LOGFACE_RISK;
+export const HEALTH_WORKER_NAME = 'health_worker_name: string';
+export type HEALTH_WORKER_NAME = typeof HEALTH_WORKER_NAME;
+export const SMS_TYPE = 'sms_type';
+export type SMS_TYPE = typeof SMS_TYPE;
+export const HEIGHT = 'height';
+export type HEIGHT = typeof HEIGHT;
+export const WEIGHT = 'weight';
+export type WEIGHT = typeof WEIGHT;
+export const RISK = 'risks';
+export type RISK = typeof RISK;
+export const LMP_EDD = 'lmp_edd';
+export type LMP_EDD = typeof LMP_EDD;
+export const PARITY_LOWERCASE = 'parity';
+export type PARITY_LOWERCASE = typeof PARITY_LOWERCASE;
+export const GRAVIDITY_LOWER = 'gravidity';
+export type GRAVIDITY_LOWER = typeof GRAVIDITY_LOWER;
+export const LOCATION_ID = 'location_id';
+export type LOCATION_ID = typeof LOCATION_ID;
+export const CLIENT_TYPE = 'client_type';
+export type CLIENT_TYPE = typeof CLIENT_TYPE;
+export const PREGNANCY_REGISTRATION = 'Pregnancy Registration';
+export type PREGNANCY_REGISTRATION = typeof PREGNANCY_REGISTRATION;
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;

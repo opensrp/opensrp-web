@@ -17,16 +17,22 @@ import {
   LOGOUT_URL,
   NBC_AND_PNC,
   NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_DASHBOARD_WELCOME,
   NBC_AND_PNC_URL,
+  NEWBORN_REPORT,
   NUTRITION,
+  NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
+  PREGNANCY_DASHBOARD_WELCOME,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
+  PREGNANCY_REGISTRATION,
+  SMS_TYPE,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
@@ -75,7 +81,7 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to the pregnancy dashboard"
+                title={PREGNANCY_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={PREGNANCY_LOGFACE_URL}
                 compartmentUrl={PREGNANCY_COMPARTMENTS_URL}
@@ -90,7 +96,7 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to Newborn and Postnatal Care"
+                title={NBC_AND_PNC_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={PREGNANCY_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
@@ -105,7 +111,7 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to Nutrition Care"
+                title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 deactivateLinks={true}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
@@ -122,8 +128,8 @@ export const Routes = (props: RoutesProps) => {
                 filterArgs={[
                   {
                     comparator: '===',
-                    field: 'sms_type',
-                    value: 'Pregnancy Registration',
+                    field: SMS_TYPE,
+                    value: PREGNANCY_REGISTRATION,
                   },
                 ]}
                 module={PREGNANCY}
@@ -140,8 +146,8 @@ export const Routes = (props: RoutesProps) => {
                 filterArgs={[
                   {
                     comparator: '===',
-                    field: 'sms_type',
-                    value: 'Newborn Report',
+                    field: SMS_TYPE,
+                    value: NEWBORN_REPORT,
                   },
                 ]}
                 module={NBC_AND_PNC}
