@@ -25,13 +25,6 @@ export interface SmsData {
   client_type: string;
 }
 
-/** Interface for arguments used to filter SmsData with the getFilterSmsData function */
-export interface FilterArgs {
-  field: string;
-  comparator: ComparatorOptions;
-  value: string | number;
-}
-
 // actions
 
 /** FETCH_SMS action type */
@@ -64,7 +57,7 @@ export interface RemoveFilterArgs extends AnyAction {
 
 /** Interface for AddFilterArgs */
 export interface AddFilterArgsAction extends AnyAction {
-  filterArgs: FilterArgs[];
+  filterArgs: Array<(smsData: SmsData) => boolean>;
   type: typeof ADD_FILTER_ARGS;
 }
 
@@ -96,7 +89,9 @@ export const removeSms: RemoveSmsAction = {
 };
 
 /** Add filter args action creator */
-export const addFilterArgs = (filterArgs: FilterArgs[]): AddFilterArgsAction => {
+export const addFilterArgs = (
+  filterArgs: Array<(smsData: SmsData) => boolean>
+): AddFilterArgsAction => {
   return {
     filterArgs,
     type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
@@ -112,7 +107,7 @@ export const removeFilterArgs = (): RemoveFilterArgs => {
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
-  filterArgs: FilterArgs[] | null;
+  filterArgs: Array<(smsData: SmsData) => boolean> | null;
 }
 
 /** initial sms-state state */
@@ -177,53 +172,25 @@ type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
  * @param {field} string - the name of the field to filter by
  * @param {value} string | number - the string or number value of the field specified
  */
-export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs[]): SmsData[] {
+export function getFilteredSmsData(
+  state: Partial<Store>,
+  filterArgs: Array<(smsData: SmsData) => boolean>
+): SmsData[] {
   // in the future we may have to modify this selector to receive more than one FilterArgs object
   // i.e an array of these objects and then each one of them, one after another to do the filtering
 
   let results = values((state as any)[reducerName].smsData);
-  for (const filterArgIndex in filterArgs) {
-    if (filterArgIndex) {
-      results = results.filter((smsData: SmsData) => {
-        return filterArgs[filterArgIndex].field in smsData
-          ? doComparison(
-              filterArgs[filterArgIndex].field === 'EventDate'
-                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArgIndex].field])
-                : (smsData as any)[filterArgs[filterArgIndex].field],
-              filterArgs[filterArgIndex].comparator,
-              filterArgs[filterArgIndex].value
-            )
-          : [];
-      });
+  for (const filterArgsIndex in filterArgs) {
+    if (filterArgsIndex) {
+      results = results.filter(filterArgs[filterArgsIndex]);
     }
   }
   return results;
 }
 
-export function doComparison(
-  actualValue: string | number,
-  comparator: ComparatorOptions,
-  targetValue: string | number
-) {
-  switch (comparator) {
-    case '===':
-      return actualValue === targetValue;
-    case '!==':
-      return actualValue !== targetValue;
-    case '>=':
-      return actualValue >= targetValue;
-    case '<=':
-      return actualValue <= targetValue;
-    case '>':
-      return actualValue > targetValue;
-    case '<':
-      return actualValue < targetValue;
-    default:
-      return false;
-  }
-}
-
 /** Returns the filterArgs currently in the store */
-export function getFilterArgs(state: Partial<Store>): FilterArgs[] | null {
+export function getFilterArgs(
+  state: Partial<Store>
+): Array<Array<(smsData: SmsData) => boolean>> | null {
   return (state as any)[reducerName].filterArgs;
 }
