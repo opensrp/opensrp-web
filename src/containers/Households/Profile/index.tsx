@@ -1,11 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_HOUSEHOLD_ENDPOINT } from '../../../configs/env';
+import { HOUSEHOLD_URL } from '../../../constants';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
   fetchClient,
@@ -74,6 +76,12 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     return (
       <Container>
         <div className="page-title">
+          <span className="back-btn-bg">
+            <Link to={`${HOUSEHOLD_URL}`}>
+              <FontAwesomeIcon icon="arrow-left" />
+              <span className="back-btn"> Back to Household </span>
+            </Link>
+          </span>
           <h3> {household.lastName} </h3>
         </div>
         <div id="basic-info-container">
