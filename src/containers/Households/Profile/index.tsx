@@ -19,6 +19,7 @@ import clientReducer, {
 import { Event } from '../../../store/ducks/client';
 import { Client } from '../../../store/ducks/clients';
 import { Household } from '../../../store/ducks/clients';
+import './householdProfile.css';
 
 /** register the client reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
@@ -71,81 +72,91 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
       return <Loading />;
     }
     return (
-      <div>
-        <h3> {household.lastName} </h3>
+      <Container>
+        <div className="page-title">
+          <h3> {household.lastName} </h3>
+        </div>
         <div id="basic-info-container">
-          <Row>
-            <Col>
-              <span> Basic Information</span>
-              <div className="float-right">Edit Profile</div>
+          <Row className="basic-info-header-bg">
+            <Col className="basic-info-header">
+              <span className="basic-info-title"> Basic Information</span>
+              <div className="float-right basic-info-edit">
+                <a href={`${'#'}`}>Edit Profile</a>
+              </div>
             </Col>
           </Row>
           <Row>
-            <Table borderless={true}>
-              <tbody>
-                <tr>
-                  <td>HHID Number</td>
-                  <td>{household.baseEntityId}</td>
-                  <td>Phone</td>
-                  <td>{household.attributes.phoneNumber || ''}</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td>Family Name</td>
-                  <td>{household.lastName}</td>
-                  <td>Provider</td>
-                  <td>{events[0] ? events[0].providerId : ''}</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td>Head of Household</td>
-                  <td>{household.firstName}</td>
-                  <td>Register date</td>
-                  <td>{household.dateCreated || ''}</td>
-                </tr>
-              </tbody>
-            </Table>
+            <Col className="basic-info-body">
+              <Table className="basic-info-table" borderless={true}>
+                <tbody>
+                  <tr>
+                    <td className="basic-info-label">HHID Number</td>
+                    <td>{household.baseEntityId}</td>
+                    <td className="basic-info-label">Phone</td>
+                    <td>{household.attributes.phoneNumber || ''}</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td className="basic-info-label">Family Name</td>
+                    <td>{household.lastName}</td>
+                    <td className="basic-info-label">Provider</td>
+                    <td>{events[0] ? events[0].providerId : ''}</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td className="basic-info-label">Head of Household</td>
+                    <td>{household.firstName}</td>
+                    <td className="basic-info-label">Register date</td>
+                    <td>{household.dateCreated || ''}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Col>
           </Row>
         </div>
         <div id="members-list-container">
           <Row>
-            <Col>
+            <Col className="members-list-header">
               <span> Members List</span>
             </Col>
           </Row>
           <Row>
-            <Table striped={true}>
-              <thead>
-                <tr>
-                  <td>First Name</td>
-                  <td>Last Name</td>
-                  <td>Age</td>
-                  <td>Register Status</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((member: Client) => {
-                  return (
-                    <tr key={member.baseEntityId}>
-                      <td>{member.firstName}</td>
-                      <td>{member.lastName}</td>
-                      <td>{member.attributes.age_year_part}</td>
-                      <td>{member.attributes.registration_status}</td>
-                      <td>
-                        <a href={`${'#'}`}> View </a>
-                        <a href={`${'#'}`}> Remove </a>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+            <Col className="members-list-body">
+              <Table striped={true}>
+                <thead>
+                  <tr>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Age</td>
+                    <td>Register Status</td>
+                    <td>Actions</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {members.map((member: Client) => {
+                    return (
+                      <tr key={member.baseEntityId}>
+                        <td>{member.firstName}</td>
+                        <td>{member.lastName}</td>
+                        <td>{member.attributes.age_year_part}</td>
+                        <td>{member.attributes.registration_status}</td>
+                        <td>
+                          <a href={`${'#'}`}> View </a>
+                          <a href={`${'#'}`} className="remove-btn">
+                            Remove
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Col>
           </Row>
         </div>
-      </div>
+      </Container>
     );
   }
 }
