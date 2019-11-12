@@ -6,13 +6,11 @@ import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
-  CLIENT_TYPE,
   COMMUNE,
   COMPARTMENTS,
   DISTRICT,
   EC_CHILD,
   EC_WOMAN,
-  EVENT_DATE,
   HIGH,
   LOW,
   MICROSECONDS_IN_A_WEEK,
@@ -28,7 +26,6 @@ import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks
 import {
   addFilterArgs,
   fetchSms,
-  FilterArgs,
   getFilterArgs,
   getFilteredSmsData,
   getSmsData,
@@ -45,7 +42,7 @@ interface Props {
   dataFetched: boolean;
   addFilterArgs: any;
   removeFilterArgs: any;
-  filterArgs: FilterArgs[];
+  filterArgs: Array<(smsData: SmsData) => boolean>;
   module: PREGNANCY | NBC_AND_PNC | NUTRITION | '';
   provinces: Location[];
   districts: Location[];
@@ -110,12 +107,10 @@ class Compartments extends Component<Props, {}> {
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
-              {
-                comparator: '<',
-                field: EVENT_DATE,
-                value: 2 * MICROSECONDS_IN_A_WEEK,
+              (smsData: SmsData) => {
+                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
               },
-            ] as FilterArgs[],
+            ] as Array<(smsData: SmsData) => boolean>,
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
@@ -129,12 +124,10 @@ class Compartments extends Component<Props, {}> {
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
-              {
-                comparator: '<',
-                field: EVENT_DATE,
-                value: MICROSECONDS_IN_A_WEEK,
+              (smsData: SmsData) => {
+                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
               },
-            ] as FilterArgs[],
+            ] as Array<(smsData: SmsData) => boolean>,
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
@@ -153,12 +146,10 @@ class Compartments extends Component<Props, {}> {
       this.props.module === NBC_AND_PNC
         ? {
             filterArgs: [
-              {
-                comparator: '===',
-                field: CLIENT_TYPE,
-                value: EC_CHILD,
-              } as FilterArgs,
-            ],
+              (smsData: SmsData) => {
+                return smsData.client_type === EC_CHILD;
+              },
+            ] as Array<(smsData: SmsData) => boolean>,
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
@@ -174,12 +165,10 @@ class Compartments extends Component<Props, {}> {
       this.props.module === NBC_AND_PNC
         ? {
             filterArgs: [
-              {
-                comparator: '===',
-                field: CLIENT_TYPE,
-                value: EC_WOMAN,
-              } as FilterArgs,
-            ],
+              (smsData: SmsData) => {
+                return smsData.client_type === EC_WOMAN;
+              },
+            ] as Array<(smsData: SmsData) => boolean>,
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
@@ -389,7 +378,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     districts: getLocationsOfLevel(state, 'District'),
     provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
       : getSmsData(state),
     villages: getLocationsOfLevel(state, 'Village'),
   };

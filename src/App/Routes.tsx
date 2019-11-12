@@ -35,7 +35,6 @@ import {
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
   PREGNANCY_REGISTRATION,
-  SMS_TYPE,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
@@ -46,6 +45,7 @@ import Home from '../containers/pages/Home';
 import ModuleHome from '../containers/pages/ModuleHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
+import { SmsData } from '../store/ducks/sms_events';
 import './App.css';
 
 library.add(faUser);
@@ -129,13 +129,13 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <Compartments
-                filterArgs={[
-                  {
-                    comparator: '===',
-                    field: SMS_TYPE,
-                    value: PREGNANCY_REGISTRATION,
-                  },
-                ]}
+                filterArgs={
+                  [
+                    (smsData: SmsData) => {
+                      return smsData.sms_type === PREGNANCY_REGISTRATION;
+                    },
+                  ] as Array<(smsData: SmsData) => boolean>
+                }
                 module={PREGNANCY}
               />
             )}
@@ -147,13 +147,13 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <Compartments
-                filterArgs={[
-                  {
-                    comparator: '===',
-                    field: SMS_TYPE,
-                    value: NEWBORN_REPORT,
-                  },
-                ]}
+                filterArgs={
+                  [
+                    (smsData: SmsData) => {
+                      return smsData.sms_type === NEWBORN_REPORT;
+                    },
+                  ] as Array<(smsData: SmsData) => boolean>
+                }
                 module={NBC_AND_PNC}
               />
             )}

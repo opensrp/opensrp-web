@@ -43,7 +43,6 @@ import locationsReducer, {
   reducerName,
 } from '../../store/ducks/locations';
 import smsReducer, {
-  FilterArgs,
   getFilterArgs,
   getFilteredSmsData,
   reducerName as smsReducerName,
@@ -601,7 +600,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
     smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
       : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),

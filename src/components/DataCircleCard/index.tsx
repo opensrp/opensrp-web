@@ -17,7 +17,7 @@ import {
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
 } from '../../constants';
-import { addFilterArgs, FilterArgs } from '../../store/ducks/sms_events';
+import { addFilterArgs, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
   noRisk: number;
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
-  filterArgs?: FilterArgs[];
+  filterArgs?: Array<(smsData: SmsData) => boolean>;
   module: string;
   className?: string;
 }
