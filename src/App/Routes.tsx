@@ -101,7 +101,7 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title={NBC_AND_PNC_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                logfaceUrl={NBC_AND_PNC_LOGFACE_URL}
+                logFaceUrl={NBC_AND_PNC_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
                 analysisUrl={NBC_AND_PNC_ANALYSIS_URL}
               />
@@ -116,7 +116,7 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                logfaceUrl={NUTRITION_LOGFACE_URL}
+                logFaceUrl={NUTRITION_LOGFACE_URL}
                 compartmentUrl={NUTRITION_COMPARTMENTS_URL}
                 analysisUrl={NUTRITION_ANALYSIS_URL}
               />
