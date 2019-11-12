@@ -4,7 +4,6 @@ import store from '../../index';
 import reducer, {
   addFilterArgs,
   fetchSms,
-  FilterArgs,
   getFilterArgs,
   getFilteredSmsData,
   getSmsData,
@@ -43,13 +42,11 @@ describe('reducers/sms_events/fetchSms action creator and selector', () => {
 
 describe('reducers/sms_events/addFilterArgs action creator and selector', () => {
   it('must work correctly', () => {
-    const filterArgs: FilterArgs[] = [
-      {
-        comparator: '!==',
-        field: 'height',
-        value: 48,
+    const filterArgs: Array<(smsData: SmsData) => boolean> = [
+      (smsData: SmsData) => {
+        return smsData.height !== 48;
       },
-    ];
+    ] as Array<(smsData: SmsData) => boolean>;
     store.dispatch(addFilterArgs(filterArgs));
     expect(getFilterArgs(store.getState())).toEqual(filterArgs);
     store.dispatch(removeFilterArgs());
@@ -76,12 +73,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '==='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '===',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height === 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height === 48;
@@ -91,12 +86,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '<='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '<=',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height <= 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height <= 48;
@@ -106,12 +99,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '>='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '>=',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height >= 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height >= 48;
@@ -121,12 +112,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '!=='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '!==',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height !== 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height !== 48;
@@ -136,12 +125,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '>'", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '>',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height > 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height > 48;
@@ -151,12 +138,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '<'", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '<',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height < 48;
         },
-      ])
+      ] as Array<(smsData: SmsData) => boolean>)
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height < 48;

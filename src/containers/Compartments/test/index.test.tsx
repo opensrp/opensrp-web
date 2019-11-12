@@ -13,6 +13,7 @@ import locationsReducer, {
 import smsReducer, {
   fetchSms,
   reducerName as smsReducerName,
+  SmsData,
 } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
 import { smsDataFixtures } from './fixtures';
@@ -35,13 +36,13 @@ describe('Compartments', () => {
       <Provider store={store}>
         <Router history={history}>
           <ConnectedCompartments
-            filterArgs={[
-              {
-                comparator: '===',
-                field: SMS_TYPE,
-                value: PREGNANCY_REGISTRATION,
-              },
-            ]}
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return smsData.sms_type === PREGNANCY_REGISTRATION;
+                },
+              ] as Array<(smsData: SmsData) => boolean>
+            }
             module={PREGNANCY}
           />
         </Router>
@@ -66,13 +67,13 @@ describe('Compartments', () => {
       <Provider store={store}>
         <Router history={history}>
           <ConnectedCompartments
-            filterArgs={[
-              {
-                comparator: '===',
-                field: SMS_TYPE,
-                value: PREGNANCY_REGISTRATION,
-              },
-            ]}
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return smsData.sms_type === PREGNANCY_REGISTRATION;
+                },
+              ] as Array<(smsData: SmsData) => boolean>
+            }
             module={PREGNANCY}
           />
         </Router>
