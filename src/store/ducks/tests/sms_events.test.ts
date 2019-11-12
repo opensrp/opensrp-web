@@ -50,7 +50,7 @@ describe('reducers/sms_events/addFilterArgs action creator and selector', () => 
     store.dispatch(addFilterArgs(filterArgs));
     expect(getFilterArgs(store.getState())).toEqual(filterArgs);
     store.dispatch(removeFilterArgs());
-    expect(getFilterArgs(store.getState())).toEqual(null);
+    expect(getFilterArgs(store.getState())).toEqual([]);
   });
 });
 
