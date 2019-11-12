@@ -3,7 +3,7 @@
 exports[`Compartments must display the correct data: compartments 1`] = `
 Array [
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -11,7 +11,7 @@ Array [
       <div
         className="card-title"
       >
-        22 Total Pregnancies
+        2 Total Pregnancies
       </div>
     </CardTitle>
     <CardBody
@@ -27,16 +27,17 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/high/22 Total Pregnancies"
+                href="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  4
+                  1
                 </span>
               </a>
             </Link>
@@ -50,16 +51,17 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/low/22 Total Pregnancies"
+                href="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  2
+                  0
                 </span>
               </a>
             </Link>
@@ -73,16 +75,17 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no/22 Total Pregnancies"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
             >
               <a
-                href="/hierarchicaldata/no/22 Total Pregnancies"
+                href="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  5
+                  0
                 </span>
               </a>
             </Link>
@@ -97,7 +100,7 @@ Array [
     </CardBody>
   </div>,
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -121,10 +124,11 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high/0 Total Pregnancies due in 2 weeks"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/high/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -144,10 +148,11 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low/0 Total Pregnancies due in 2 weeks"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/low/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -167,10 +172,11 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no/0 Total Pregnancies due in 2 weeks"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
             >
               <a
-                href="/hierarchicaldata/no/0 Total Pregnancies due in 2 weeks"
+                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
                 onClick={[Function]}
               >
                 <span
@@ -191,7 +197,7 @@ Array [
     </CardBody>
   </div>,
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -215,10 +221,11 @@ Array [
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high/0 Total Pregnancies due in 1 week"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/high/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -238,10 +245,11 @@ Array [
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low/0 Total Pregnancies due in 1 week"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/low/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span
@@ -261,10 +269,11 @@ Array [
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no/0 Total Pregnancies due in 1 week"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
             >
               <a
-                href="/hierarchicaldata/no/0 Total Pregnancies due in 1 week"
+                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
                 onClick={[Function]}
               >
                 <span

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Analysis must render correctly: Analysis snapshot 1`] = `
-<Analysis>
+<Analysis
+  endpoint="https://discover.ona.io/superset/dashboard/53/?standalone=true"
+>
   <div
     className="analysis-content"
   >

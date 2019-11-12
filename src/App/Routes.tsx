@@ -10,24 +10,31 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import { SUPERSET_SMS_DATA_SLICE } from '../configs/env';
+import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT, SUPERSET_SMS_DATA_SLICE } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
-  ANALYSIS_URL,
-  COMPARTMENTS_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
+  NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_DASHBOARD_WELCOME,
   NBC_AND_PNC_URL,
+  NEWBORN_REPORT,
   NUTRITION,
+  NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
+  PREGNANCY_ANALYSIS_URL,
+  PREGNANCY_COMPARTMENTS_URL,
+  PREGNANCY_DASHBOARD_WELCOME,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
+  PREGNANCY_REGISTRATION,
+  SMS_TYPE,
 } from '../constants';
-import { ANALYSIS, PREGNANCY_URL } from '../constants';
+import { PREGNANCY_URL } from '../constants';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
@@ -74,9 +81,11 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to the pregnancy dashboard"
+                title={PREGNANCY_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                logfaceUrl={PREGNANCY_LOGFACE_URL}
+                logFaceUrl={PREGNANCY_LOGFACE_URL}
+                compartmentUrl={PREGNANCY_COMPARTMENTS_URL}
+                analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
             )}
           />
@@ -87,10 +96,11 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to Newborn and Postnatal Care"
+                title={NBC_AND_PNC_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                deactivateLinks={true}
-                logfaceUrl={PNC_AND_NBC_LOGFACE_URL}
+                logFaceUrl={PREGNANCY_LOGFACE_URL}
+                compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
+                analysisUrl={PREGNANCY_ANALYSIS_URL}
               />
             )}
           />
@@ -101,36 +111,61 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                title="Welcome to Nutrition Care"
+                title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 deactivateLinks={true}
-                logfaceUrl={NUTRITION_LOGFACE_URL}
+                logFaceUrl={NUTRITION_LOGFACE_URL}
               />
             )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={COMPARTMENTS_URL}
-            component={Compartments}
+            path={PREGNANCY_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Compartments
+                filterArgs={[
+                  {
+                    comparator: '===',
+                    field: SMS_TYPE,
+                    value: PREGNANCY_REGISTRATION,
+                  },
+                ]}
+                module={PREGNANCY}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={`${HIERARCHICAL_DATA_URL}/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={NBC_AND_PNC_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Compartments
+                filterArgs={[
+                  {
+                    comparator: '===',
+                    field: SMS_TYPE,
+                    value: NEWBORN_REPORT,
+                  },
+                ]}
+                module={NBC_AND_PNC}
+              />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={`${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={ANALYSIS_URL}
-            component={Analysis}
-          />
-          <ConnectedPrivateRoute
-            disableLoginProtection={false}
-            exact={true}
-            path={ANALYSIS}
-            component={Analysis}
+            path={PREGNANCY_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}

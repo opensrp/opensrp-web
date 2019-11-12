@@ -99,3 +99,7 @@
 
 @media (max-width: 1365px) {
 }
+
+.dataCircleCard.invisible-but-visible.card {
+  visibility: hidden;
+}

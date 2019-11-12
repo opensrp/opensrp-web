@@ -82,7 +82,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             }
 @@ -317,11 +317,11 @@
                               \\"label\\": \\"Analysis\\",
-                              \\"url\\": \\"/analysis\\",
+                              \\"url\\": \\"/pregnancy_analysis\\",
                             },
                           ]
                         }
@@ -95,7 +95,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           }
 @@ -354,11 +354,11 @@
                                 \\"label\\": \\"Analysis\\",
-                                \\"url\\": \\"/analysis\\",
+                                \\"url\\": \\"/pregnancy_analysis\\",
                               },
                             ]
                           }
@@ -151,9 +151,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
                                     vertical={false}
-@@ -644,11 +648,11 @@
-                              \\"label\\": \\"Logface\\",
-                              \\"url\\": \\"/pnc_and_nbc_log_face\\",
+@@ -648,11 +652,11 @@
+                              \\"label\\": \\"Compartments\\",
+                              \\"url\\": \\"/nbc_and_pnc_compartments\\",
                             },
                           ]
                         }
@@ -164,9 +164,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNbcandpnc],
                           }
-@@ -673,11 +677,11 @@
-                                \\"label\\": \\"Logface\\",
-                                \\"url\\": \\"/pnc_and_nbc_log_face\\",
+@@ -681,11 +685,11 @@
+                                \\"label\\": \\"Compartments\\",
+                                \\"url\\": \\"/nbc_and_pnc_compartments\\",
                               },
                             ]
                           }
@@ -177,7 +177,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgNbcandpnc],
                             }
-@@ -877,11 +881,11 @@
+@@ -928,11 +932,11 @@
                               \\"label\\": \\"Logface\\",
                               \\"url\\": \\"/nutrition_logface_url\\",
                             },
@@ -190,7 +190,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNutrition],
                           }
-@@ -906,11 +910,11 @@
+@@ -957,11 +961,11 @@
                                 \\"label\\": \\"Logface\\",
                                 \\"url\\": \\"/nutrition_logface_url\\",
                               },

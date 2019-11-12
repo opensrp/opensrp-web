@@ -5,7 +5,6 @@ import { AnyAction, Store } from 'redux';
 export const reducerName = 'SmsReducer';
 
 /** Interface for SMS record object as received from discover */
-// tslint:disable-next-line: class-name
 export interface SmsData {
   age: string;
   EventDate: string;
@@ -23,24 +22,59 @@ export interface SmsData {
   parity: number;
   gravidity: number;
   location_id: string;
+  client_type: string;
+}
+
+/** Interface for arguments used to filter SmsData with the getFilterSmsData function */
+export interface FilterArgs {
+  field: string;
+  comparator: ComparatorOptions;
+  value: string | number;
 }
 
 // actions
 
-/** fETCH_SMS action type */
+/** FETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 /** REMOVE_SMS action type */
 export const REMOVE_SMS = 'opensrp/reducer/REMOVE_SMS';
+/** ADD_FILTER_ARGS type */
+export const ADD_FILTER_ARGS = 'opensrp/reducer/ADD_FILTER_ARGS';
+/** REMOVE_FILTER_ARGS type */
+export const REMOVE_FILTER_ARGS = 'opensrp/reducer/REMOVE_FILTER_ARGS';
 
 /** interface for sms fetch */
-// tslint:disable-next-line: class-name
 export interface FetchSmsAction extends AnyAction {
   smsData: { [key: string]: SmsData };
   type: typeof FETCHED_SMS;
 }
 
+/** interface for Remove Sms action */
+export interface RemoveSmsAction extends AnyAction {
+  // tslint:disable-next-line: no-empty
+  smsData: {};
+  type: typeof REMOVE_SMS;
+}
+
+/** Interface for Remove  filter args action */
+export interface RemoveFilterArgs extends AnyAction {
+  filterArgs: null;
+  type: typeof REMOVE_FILTER_ARGS;
+}
+
+/** Interface for AddFilterArgs */
+export interface AddFilterArgsAction extends AnyAction {
+  filterArgs: FilterArgs[];
+  type: typeof ADD_FILTER_ARGS;
+}
+
 /** Create type for SMS reducer actions */
-export type SmsActionTypes = FetchSmsAction | AnyAction;
+export type SmsActionTypes =
+  | FetchSmsAction
+  | AddFilterArgsAction
+  | RemoveSmsAction
+  | RemoveFilterArgs
+  | AnyAction;
 
 // action Creators
 
@@ -49,28 +83,41 @@ export type SmsActionTypes = FetchSmsAction | AnyAction;
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
-  const actionCreated = {
+  return {
     smsData: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
-  return actionCreated;
 };
 
-export const removeSms = {
-  smsDataById: {},
+/** REMOVE SMS action */
+export const removeSms: RemoveSmsAction = {
+  smsData: {},
   type: REMOVE_SMS,
+};
+
+/** Add filter args action creator */
+export const addFilterArgs = (filterArgs: FilterArgs[]): AddFilterArgsAction => {
+  return {
+    filterArgs,
+    type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
+  };
+};
+
+export const removeFilterArgs = (): RemoveFilterArgs => {
+  return { filterArgs: null, type: REMOVE_FILTER_ARGS };
 };
 // The reducer
 
 /** interface for sms state in redux store */
-// tslint:disable-next-line: class-name
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
+  filterArgs: FilterArgs[] | null;
 }
 
 /** initial sms-state state */
 const initialState: SmsState = {
+  filterArgs: null,
   smsData: {},
   smsDataFetched: false,
 };
@@ -89,6 +136,16 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
         ...state,
         smsData: action.smsData,
         smsDataFetched: false,
+      };
+    case ADD_FILTER_ARGS:
+      return {
+        ...state,
+        filterArgs: [...(state.filterArgs ? state.filterArgs : []), ...action.filterArgs],
+      };
+    case REMOVE_FILTER_ARGS:
+      return {
+        ...state,
+        filterArgs: action.filterArgs,
       };
     default:
       return state;
@@ -110,4 +167,63 @@ export function getSmsData(state: Partial<Store>): SmsData[] {
  */
 export function smsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].smsDataFetched;
+}
+
+type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
+/**
+ * Returns a list of SmsData that has been filtered based on the value
+ * of a field specified.
+ * @param {Partil<Store>} state - the state of the SmsReducer redux store
+ * @param {field} string - the name of the field to filter by
+ * @param {value} string | number - the string or number value of the field specified
+ */
+export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs[]): SmsData[] {
+  // in the future we may have to modify this selector to receive more than one FilterArgs object
+  // i.e an array of these objects and then each one of them, one after another to do the filtering
+
+  let results = values((state as any)[reducerName].smsData);
+  for (const filterArgIndex in filterArgs) {
+    if (filterArgIndex) {
+      results = results.filter((smsData: SmsData) => {
+        return filterArgs[filterArgIndex].field in smsData
+          ? doComparison(
+              filterArgs[filterArgIndex].field === 'EventDate'
+                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArgIndex].field])
+                : (smsData as any)[filterArgs[filterArgIndex].field],
+              filterArgs[filterArgIndex].comparator,
+              filterArgs[filterArgIndex].value
+            )
+          : [];
+      });
+    }
+  }
+  return results;
+}
+
+export function doComparison(
+  actualValue: string | number,
+  comparator: ComparatorOptions,
+  targetValue: string | number
+) {
+  switch (comparator) {
+    case '===':
+      return actualValue === targetValue;
+    case '!==':
+      return actualValue !== targetValue;
+    case '>=':
+      return actualValue >= targetValue;
+    case '<=':
+      return actualValue <= targetValue;
+    case '>':
+      return actualValue > targetValue;
+    case '<':
+      return actualValue < targetValue;
+    default:
+      return false;
+  }
+}
+
+/** Returns the filterArgs currently in the store */
+export function getFilterArgs(state: Partial<Store>): FilterArgs[] | null {
+  return (state as any)[reducerName].filterArgs;
 }

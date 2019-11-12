@@ -1,20 +1,23 @@
 // this is the home page component
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { COMPARTMENTS_URL } from '../../../constants';
 import './index.css';
 
 interface Props {
   title: string;
   description: string;
   deactivateLinks: boolean;
-  logfaceUrl: string;
+  logFaceUrl: string;
+  compartmentUrl: string;
+  analysisUrl: string;
 }
 
 const defaultProps: Props = {
+  analysisUrl: '#',
+  compartmentUrl: '#',
   deactivateLinks: false,
   description: '',
-  logfaceUrl: '#',
+  logFaceUrl: '#',
   title: '',
 };
 class ModuleHome extends React.Component<Props, {}> {
@@ -39,7 +42,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>Display of all messages receioved from MIECD in chronological order</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={this.props.logfaceUrl}>
+                  <Link to={this.props.logFaceUrl}>
                     <button className="button-style ">View</button>
                   </Link>
                 </div>
@@ -57,7 +60,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>This is the aggregation and categorization of patients data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                  <Link to={this.props.compartmentUrl}>
                     <button
                       className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
                     >
@@ -79,7 +82,7 @@ class ModuleHome extends React.Component<Props, {}> {
                   <p>Important analysis and indicators generated from collected data</p>
                 </div>
                 <div id="cont-sized">
-                  <Link to={this.props.deactivateLinks ? '#' : COMPARTMENTS_URL}>
+                  <Link to={this.props.analysisUrl}>
                     <button
                       className={`button-style ${this.props.deactivateLinks ? 'deactivated' : ''}`}
                     >

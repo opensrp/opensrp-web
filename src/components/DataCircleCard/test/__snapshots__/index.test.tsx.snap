@@ -2,11 +2,11 @@
 
 exports[`DataCircleCard must render correctly 1`] = `
 <Card
-  className="dataCircleCard"
+  className="dataCircleCard "
   tag="div"
 >
   <div
-    className="dataCircleCard card"
+    className="dataCircleCard  card"
   >
     <CardTitle
       tag="div"
@@ -30,10 +30,11 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="red"
           >
             <Link
-              to="/hierarchicaldata/high/test title"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/high/test title"
             >
               <a
-                href="/hierarchicaldata/high/test title"
+                href="/hierarchicaldata/Pregnancy/high/test title"
                 onClick={[Function]}
               >
                 <span
@@ -53,10 +54,11 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="orange"
           >
             <Link
-              to="/hierarchicaldata/low/test title"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/low/test title"
             >
               <a
-                href="/hierarchicaldata/low/test title"
+                href="/hierarchicaldata/Pregnancy/low/test title"
                 onClick={[Function]}
               >
                 <span
@@ -76,10 +78,11 @@ exports[`DataCircleCard must render correctly 1`] = `
             className="green"
           >
             <Link
-              to="/hierarchicaldata/no/test title"
+              onClick={[Function]}
+              to="/hierarchicaldata/Pregnancy/no/test title"
             >
               <a
-                href="/hierarchicaldata/no/test title"
+                href="/hierarchicaldata/Pregnancy/no/test title"
                 onClick={[Function]}
               >
                 <span

@@ -49,10 +49,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
           className="default-width"
         >
           <Link
-            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+            to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
           >
             <a
-              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+              href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
               onClick={[Function]}
             >
               Lang Son Province
@@ -87,10 +87,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
           className="default-width"
         >
           <Link
-            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+            to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
           >
             <a
-              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+              href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
               onClick={[Function]}
             >
               Dien Bien
@@ -125,10 +125,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
           className="default-width"
         >
           <Link
-            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+            to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
           >
             <a
-              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+              href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
               onClick={[Function]}
             >
               Hanoi
@@ -148,12 +148,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
         <td
           className="default-width "
         >
-          0
+          6
         </td>
         <td
           className="default-width"
         >
-          9
+          15
         </td>
       </tr>
       <tr
@@ -163,10 +163,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
           className="default-width"
         >
           <Link
-            to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+            to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
           >
             <a
-              href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+              href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
               onClick={[Function]}
             >
               Loc Binh
@@ -218,12 +218,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = 
         <td
           className="default-width "
         >
-          0
+          6
         </td>
         <td
           className="default-width"
         >
-          9
+          15
         </td>
       </tr>
     </tbody>
@@ -477,10 +477,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
           onClick={[Function]}
         >
           Lang Son Province
@@ -515,10 +515,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
           onClick={[Function]}
         >
           Dien Bien
@@ -553,10 +553,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
           onClick={[Function]}
         >
           Hanoi
@@ -576,12 +576,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
   <tr
@@ -591,10 +591,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
           onClick={[Function]}
         >
           Loc Binh
@@ -646,12 +646,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
 </tbody>
@@ -714,10 +714,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/d79168ed-ae95-43d1-8e45-9078212815f6"
           onClick={[Function]}
         >
           Lang Son Province
@@ -752,10 +752,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/c13b5c95-55c3-4848-9509-b82596274d96"
           onClick={[Function]}
         >
           Dien Bien
@@ -790,10 +790,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/78a12165-3c12-471f-8755-c96bac123292"
           onClick={[Function]}
         >
           Hanoi
@@ -813,12 +813,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
   <tr
@@ -828,10 +828,10 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
       className="default-width"
     >
       <Link
-        to="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+        to="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
       >
         <a
-          href="/hierarchicaldata/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+          href="/hierarchicaldata/pregnancy/high_risk/Total Pregnancies/1/down/f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
           onClick={[Function]}
         >
           Loc Binh
@@ -883,12 +883,12 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = 
     <td
       className="default-width "
     >
-      0
+      6
     </td>
     <td
       className="default-width"
     >
-      9
+      15
     </td>
   </tr>
 </tbody>

@@ -15,15 +15,19 @@ import {
   BACK,
   BACKPAGE_ICON,
   COMMUNE,
-  COMPARTMENTS_URL,
   DISTRICT,
   HIERARCHICAL_DATA_URL,
   HIGH,
   HIGH_RISK,
   LOW,
   LOW_RISK,
+  NBC_AND_PNC,
+  NBC_AND_PNC_COMPARTMENTS_URL,
   NO,
   NO_RISK,
+  NO_RISK_LOWERCASE,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
   TOTAL,
   UP,
@@ -37,7 +41,12 @@ import locationsReducer, {
   locationsDataFetched,
   reducerName,
 } from '../../store/ducks/locations';
-import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
+import smsReducer, {
+  FilterArgs,
+  getFilterArgs,
+  getFilteredSmsData,
+  reducerName as smsReducerName,
+} from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 
 reducerRegistry.register(reducerName, locationsReducer);
@@ -69,15 +78,19 @@ interface Props {
   villages: Location[];
   smsData: SmsData[];
   locationsFetched: boolean;
+  compartMentUrl: string;
+  module: string;
 }
 
 const defaultProps: Props = {
   communes: [],
+  compartMentUrl: '#',
   current_level: 0,
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   locationsFetched: false,
+  module: '',
   provinces: [],
   risk_highligter: '',
   smsData: [],
@@ -104,7 +117,7 @@ function getVillageRiskTotals(location: Location, smsData: SmsData[]): RiskTotal
           ...accumulator,
           low_risk: accumulator.low_risk + 1,
         };
-      case NO_RISK:
+      case NO_RISK_LOWERCASE:
         return {
           ...accumulator,
           no_risk: accumulator.no_risk + 1,
@@ -339,7 +352,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.locationsFetched) {
       return (
         <Container fluid={true} className="compartment-data-table">
-          <Link to={COMPARTMENTS_URL} className="back-page">
+          <Link to={this.urlToRedirect()} className="back-page">
             <span>
               <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
               <span>{BACK}</span>
@@ -370,9 +383,9 @@ class HierarchichalDataTable extends Component<Props, State> {
                                 element.location_name
                               ) : (
                                 <Link
-                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${
-                                    this.props.title
-                                  }/${
+                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+                                    this.props.risk_highligter
+                                  }/${this.props.title}/${
                                     this.props.current_level ? this.props.current_level + 1 : 1
                                   }/down/${element.location_id}`}
                                 >
@@ -449,7 +462,6 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
-          {}
           <VillageData
             {...{
               current_level: this.props.current_level,
@@ -473,6 +485,17 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
   }
 
+  private urlToRedirect() {
+    switch (this.props.module) {
+      case PREGNANCY:
+        return PREGNANCY_COMPARTMENTS_URL;
+      case NBC_AND_PNC:
+        return NBC_AND_PNC_COMPARTMENTS_URL;
+      default:
+        return '';
+    }
+  }
+
   private getLevelString = () => {
     if (this.props.current_level === 0) {
       return PROVINCE;
@@ -491,7 +514,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={0}
         >
           {PROVINCE}
@@ -505,7 +528,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={1}
         >
           &nbsp;/ {DISTRICT}
@@ -519,7 +542,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
           key={2}
         >
           &nbsp;/ {COMMUNE}
@@ -563,10 +586,13 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
     locationsFetched: locationsDataFetched(state),
+    module: ownProps.match.params.module,
     node_id: ownProps.match.params.node_id,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
-    smsData: getSmsData(state),
+    smsData: getFilterArgs(state)
+      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
   };
