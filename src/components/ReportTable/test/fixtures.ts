@@ -2684,3 +2684,34 @@ export const reportTableProps = [
     team: ' NULL',
   },
 ];
+export const removeDuplicateWeightsInput1 = [
+  {
+    weight: 78,
+    month: 8,
+  },
+  {
+    weight: 2,
+    month: 8,
+  },
+];
+
+export const removeDuplicateWeightsOutput1 = [
+  {
+    month: 8,
+    weight: 40,
+  },
+];
+
+export const removeDuplicateWeightsInput2 = [
+  {
+    weight: 78,
+    month: 8,
+  },
+];
+
+export const emoveDuplicateWeightsOutput2 = [
+  {
+    month: 8,
+    weight: 78,
+  },
+];

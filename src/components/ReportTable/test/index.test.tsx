@@ -3,17 +3,25 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
-import ReportTable, { convertToStringArray, getEventsPregnancyArray } from '..';
+import ReportTable, {
+  convertToStringArray,
+  getEventsPregnancyArray,
+  removeDuplicateWeights,
+} from '..';
 import { SmsData } from '../../../store/ducks/sms_events';
 import {
   convertToStringArrayInput,
   convertToStringArrayInput2,
   convertToStringArrayOutput,
   convertToStringArrayOutput2,
+  emoveDuplicateWeightsOutput2,
   getEventsPregnancyArrayInput1,
   getEventsPregnancyArrayInput2,
   getEventsPregnancyArrayOutput1,
   getEventsPregnancyArrayOutput2,
+  removeDuplicateWeightsInput1,
+  removeDuplicateWeightsInput2,
+  removeDuplicateWeightsOutput1,
   reportTableProps,
 } from './fixtures';
 
@@ -51,6 +59,17 @@ describe('getEventsPregnancyArray()', () => {
     );
     expect(getEventsPregnancyArray(getEventsPregnancyArrayInput2)).toEqual(
       getEventsPregnancyArrayOutput2
+    );
+  });
+});
+
+describe('removeDuplicateWeights()', () => {
+  it('must return the correct value for provided input', () => {
+    expect(removeDuplicateWeights(removeDuplicateWeightsInput1)).toEqual(
+      removeDuplicateWeightsOutput1
+    );
+    expect(removeDuplicateWeights(removeDuplicateWeightsInput2)).toEqual(
+      emoveDuplicateWeightsOutput2
     );
   });
 });
