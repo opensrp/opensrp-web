@@ -204,15 +204,13 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={[
-              (() => {
-                return [
-                  NUTRITION_COMPARTMENTS_URL,
-                  NBC_AND_PNC_COMPARTMENTS_URL,
-                  PREGNANCY_COMPARTMENTS_URL,
-                ].map(url => `${url}/patient_detail/:patient_id`);
-              })(),
-            ]}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(url => `${url}/patient_detail/:patient_id`);
+            })()}
             component={ConnectedPatientDetails}
           />
           <ConnectedPrivateRoute
