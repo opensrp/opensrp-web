@@ -566,25 +566,26 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     const village = <span key={3}>{VILLAGE}</span>;
-    const divider = (
+    const provinceDivider = this.dontDisplayProvince() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
       <span className={'divider'} key={Math.random()}>
         &nbsp; / &nbsp;
       </span>
     );
-    const provinceDivider = this.dontDisplayProvince() ? (
-      <span key={Math.random()}>{null}</span>
-    ) : (
-      divider
-    );
     const districtDivider = this.dontDisplayDistrict() ? (
       <span key={Math.random()}>{null}</span>
     ) : (
-      divider
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
     );
     const communeDivider = this.dontDisplayCommune() ? (
       <span key={Math.random()}>{null}</span>
     ) : (
-      divider
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
     );
     switch (this.props.current_level) {
       case 0:
