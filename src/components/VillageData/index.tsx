@@ -98,7 +98,9 @@ export default class VillageData extends React.Component<Props, State> {
                                   </td>
                                   <td className="default-width">{dataItem.gravidity}</td>
                                   <td className="default-width">{dataItem.parity}</td>
-                                  <td className="default-width">{dataItem.location_id}</td>
+                                  <td className="default-width">
+                                    {dataItem.health_worker_location_name}
+                                  </td>
                                   <td className="default-width">{dataItem.lmp_edd}</td>
                                   <td className="default-width">{dataItem.previous_risks}</td>
                                   <td className="default-width">
