@@ -203,6 +203,10 @@ export const EC_WOMAN = 'ec_woman';
 export type EC_WOMAN = typeof EC_WOMAN;
 export const EC_CHILD = 'ec_child';
 export type EC_CHILD = typeof EC_CHILD;
+export const PREGNANCY_ANALYSIS = 'Pregnancy - Analysis';
+export type PREGNANCY_ANALYSIS = typeof PREGNANCY_ANALYSIS;
+export const NUTRITION_ANALYSIS = 'Nutrition - Analysis';
+export type NUTRITION_ANALYSIS = typeof NUTRITION_ANALYSIS;
 
 // sms events fields
 export const AGE = 'age';
