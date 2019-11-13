@@ -179,10 +179,12 @@ export function getFilteredSmsData(
   // in the future we may have to modify this selector to receive more than one FilterArgs object
   // i.e an array of these objects and then each one of them, one after another to do the filtering
 
-  let results = values((state as any)[reducerName].smsData);
+  const allSmsData = values((state as any)[reducerName].smsData);
+  let results: SmsData[] = [];
   for (const filterArgsIndex in filterArgs) {
     if (filterArgsIndex) {
-      results = results.filter(filterArgs[filterArgsIndex]);
+      const filteredData: SmsData[] = allSmsData.filter(filterArgs[filterArgsIndex]);
+      results = results.concat(filteredData);
     }
   }
   return results;
