@@ -1,8 +1,8 @@
+import { getUser, User } from '@onaio/session-reducer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
-import { getUser, User } from '@onaio/session-reducer';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
@@ -71,10 +71,6 @@ const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
-  user: {
-    name: '',
-    username: ''
-  },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
@@ -84,6 +80,10 @@ const defaultCompartmentProps: Props = {
   provinces: [],
   removeFilterArgs,
   smsData: [],
+  user: {
+    name: '',
+    username: '',
+  },
   villages: [],
 };
 class Compartments extends React.Component<Props, State> {
@@ -527,7 +527,6 @@ class Compartments extends React.Component<Props, State> {
 
 const mapStateToprops = (state: Partial<Store>) => {
   return {
-    user: getUser(state),
     communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
@@ -536,6 +535,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     smsData: getFilterArgs(state)
       ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
       : getSmsData(state),
+    user: getUser(state),
     villages: getLocationsOfLevel(state, 'Village'),
   };
 };

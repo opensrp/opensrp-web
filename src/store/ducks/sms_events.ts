@@ -1,4 +1,5 @@
 import { AnyAction, Store } from 'redux';
+import { groupBy } from '../../helpers/utils';
 
 /** The reducer name */
 export const reducerName = 'SmsReducer';
@@ -81,16 +82,8 @@ export type SmsActionTypes =
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
-  const smsData: SmsDataByEventId = {};
-  smsDataList.forEach((d: SmsData) => {
-    if (!smsData[d.event_id]) {
-      smsData[d.event_id] = {
-        ...d,
-      };
-    }
-  });
   return {
-    smsData,
+    smsData: groupBy(smsDataList, 'event_id'),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
 };

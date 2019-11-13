@@ -32,6 +32,18 @@ export function headerShouldNotRender() {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
 
+export function groupBy(data: FlexObject[], field: string) {
+  const dataMap: FlexObject = {};
+  data.forEach((d: FlexObject) => {
+    if (!dataMap[d[field]]) {
+      dataMap[d[field]] = {
+        ...d,
+      };
+    }
+  });
+  return dataMap;
+}
+
 export function getNumberSuffix(num: number) {
   const divisionBy10Remaninder: number = num % 10;
   if (divisionBy10Remaninder === 1) {
