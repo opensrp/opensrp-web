@@ -80,11 +80,20 @@ const defaultProps: Props = {
 class Compartments extends React.Component<Props, State> {
   public static defaultProps: Props = defaultProps;
 
+  /**
+   * Here we determine the location id that the user is assiged to
+   * and use that to filter smsData in the store.
+   * @param props
+   * @param state
+   */
   public static getDerivedStateFromProps(props: Props, state: State): State {
     // add filter for this location here
     const userLocationId = '78a12165-3c12-471f-8755-c96bac123292';
     let filterFunction;
-    if (Compartments.isProvince(userLocationId, props.provinces) && props.villages.length) {
+    function locationDataIsAvailable() {
+      return props.villages.length && props.districts.length && props.communes.length;
+    }
+    if (Compartments.isProvince(userLocationId, props.provinces) && locationDataIsAvailable()) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
         const village = props.villages.find(village => {
@@ -98,7 +107,10 @@ class Compartments extends React.Component<Props, State> {
             ) === userLocationId
           : false;
       };
-    } else if (Compartments.isDistrict(userLocationId, props.districts)) {
+    } else if (
+      Compartments.isDistrict(userLocationId, props.districts) &&
+      locationDataIsAvailable()
+    ) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
         const village = props.villages.find(village => {
@@ -109,7 +121,10 @@ class Compartments extends React.Component<Props, State> {
               userLocationId
           : false;
       };
-    } else if (Compartments.isCommune(userLocationId, props.communes)) {
+    } else if (
+      Compartments.isCommune(userLocationId, props.communes) &&
+      locationDataIsAvailable()
+    ) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
         const village = props.villages.find(village => {
@@ -131,6 +146,8 @@ class Compartments extends React.Component<Props, State> {
           .indexOf(filterFunction.toString()) > -1
       )
     ) {
+      props.removeFilterArgs();
+      props.addFilterArgs(props.filterArgs);
       props.addFilterArgs([filterFunction as ((smsData: SmsData) => boolean)]);
     }
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
@@ -264,8 +281,6 @@ class Compartments extends React.Component<Props, State> {
         fetchSmsDataActionCreator(result);
       });
     }
-    this.props.removeFilterArgs();
-    this.props.addFilterArgs(this.props.filterArgs);
   }
 
   public render() {
@@ -424,6 +439,12 @@ class Compartments extends React.Component<Props, State> {
     );
   }
 
+  /**
+   * Filter smsData in order to get smsData in the previous 1 week
+   * or the smsData in the previous 2 weeks.
+   * @param {boolean} last1Week - filter smsData using filterByDataInLast1Week function
+   * @param {boolean} last2Weeks - filter smsData using filterByDataInLast2Weeks function
+   */
   private filterSmsByPreviousWeekPeriod = (
     last1Week?: boolean,
     last2Weeks?: boolean
@@ -444,10 +465,18 @@ class Compartments extends React.Component<Props, State> {
      */
   };
 
+  /**
+   * filter for smsData objects whose EventData fields are withing
+   * the period of the last 2 weeks
+   */
   private filterByDateInLast2Weeks = (dataItem: SmsData): boolean => {
     return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
   };
 
+  /**
+   * Filter for smsData objects whose EventDate fields are within
+   * the period of the last 1 week
+   */
   private filterByDateInLast1Week = (dataItem: SmsData): boolean => {
     return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
   };
