@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
+import { getUser, User } from '@onaio/session-reducer';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
@@ -45,6 +46,7 @@ interface Props {
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   dataFetched: boolean;
+  user: User;
   addFilterArgs: any;
   removeFilterArgs: any;
   filterArgs: Array<(smsData: SmsData) => boolean>;
@@ -65,10 +67,14 @@ interface HeaderBreadCrumb {
 interface State {
   locationAndPath: HeaderBreadCrumb;
 }
-const defaultProps: Props = {
+const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
+  user: {
+    name: '',
+    username: ''
+  },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
@@ -81,7 +87,7 @@ const defaultProps: Props = {
   villages: [],
 };
 class Compartments extends React.Component<Props, State> {
-  public static defaultProps: Props = defaultProps;
+  public static defaultProps: Props = defaultCompartmentProps;
 
   /**
    * Here we determine the location id that the user is assiged to
@@ -521,6 +527,7 @@ class Compartments extends React.Component<Props, State> {
 
 const mapStateToprops = (state: Partial<Store>) => {
   return {
+    user: getUser(state),
     communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
