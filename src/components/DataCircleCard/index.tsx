@@ -54,6 +54,11 @@ function DataCircleCard({
   module,
   className = '',
 }: Props) {
+  // this should be gotten dynamically based on the logged in user
+  // level is a integer ranging from 0 to 3, 0 for province, 1 for
+  // 1 for District, 2 for commune and 3 for village.
+  const level = 1;
+  const locationId = '78a12165-3c12-471f-8755-c96bac123292';
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
@@ -61,7 +66,9 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -75,7 +82,9 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -89,7 +98,9 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${getModuleLink(module)}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
