@@ -164,7 +164,6 @@ export function smsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].smsDataFetched;
 }
 
-type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
 /**
  * Returns a list of SmsData that has been filtered based on the value
  * of a field specified.
