@@ -3,6 +3,7 @@
 exports[`Analysis must render correctly: Analysis snapshot 1`] = `
 <Analysis
   endpoint="https://discover.ona.io/superset/dashboard/53/?standalone=true"
+  titleString=""
 >
   <div
     className="analysis-content"
@@ -10,9 +11,7 @@ exports[`Analysis must render correctly: Analysis snapshot 1`] = `
     <div>
       <h2
         id="analysis_title"
-      >
-        Pregnancy - Analysis
-      </h2>
+      />
     </div>
     <div
       className="analysis-wrapper"
