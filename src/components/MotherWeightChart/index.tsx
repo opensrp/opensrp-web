@@ -77,6 +77,16 @@ export default class MotherWeightChart extends React.Component<Props, State> {
           },
         },
 
+        subtitle: {
+          text: undefined,
+        },
+
+        yAxis: {
+          title: {
+            text: '',
+          },
+        },
+
         xAxis: {
           categories: this.props.weights
             .map((weightAndMonth: WeightAndMonth) => weightAndMonth.month)
