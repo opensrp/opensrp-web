@@ -1,4 +1,3 @@
-import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import { SMS_FILTER_FUNCTION } from '../../constants';
 
@@ -26,6 +25,10 @@ export interface SmsData {
   client_type: string;
   child_symptoms: string;
   mother_symptoms: string;
+}
+
+export interface SmsDataByEventId {
+  [key: string]: SmsData;
 }
 
 // actions
@@ -79,8 +82,16 @@ export type SmsActionTypes =
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
+  const smsData: SmsDataByEventId = {};
+  smsDataList.forEach((d: SmsData) => {
+    if (!smsData[d.event_id]) {
+      smsData[d.event_id] = {
+        ...d,
+      };
+    }
+  });
   return {
-    smsData: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
+    smsData,
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
 };
@@ -155,7 +166,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
  * @return { { [key: string] : SmsData}[] } - SmsData object[] as values, respective ids as keys
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
-  return values((state as any)[reducerName].smsData);
+  return Object.values((state as any)[reducerName].smsData);
 }
 
 /** returns true if sms data has been fetched from superset and false
