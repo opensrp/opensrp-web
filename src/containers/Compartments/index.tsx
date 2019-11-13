@@ -263,6 +263,7 @@ class Compartments extends React.Component<Props, State> {
     };
   }
   public componentDidMount() {
+    this.props.removeFilterArgs();
     const { fetchLocationsActionCreator } = this.props;
 
     // fetch all location slices
