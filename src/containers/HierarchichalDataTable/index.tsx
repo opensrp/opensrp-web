@@ -496,9 +496,19 @@ class HierarchichalDataTable extends Component<Props, State> {
       return PROVINCE;
     }
   };
+  private dontDisplayProvince() {
+    return this.props.permissionLevel > 0;
+  }
+  private dontDisplayDistrict() {
+    return this.props.permissionLevel > 1;
+  }
+
+  private dontDisplayCommune() {
+    return this.props.permissionLevel > 2;
+  }
   private header = () => {
     let province = <span>{PROVINCE}</span>;
-    if (this.props.permissionLevel > 0) {
+    if (this.dontDisplayProvince()) {
       province = <span>{null}</span>;
     } else if (this.props.current_level > 0) {
       province = (
@@ -516,10 +526,10 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     let district = <span>''</span>;
-    if (this.props.permissionLevel > 1) {
+    if (this.dontDisplayDistrict()) {
       district = <span>{null}</span>;
     } else if (this.props.current_level === 1) {
-      district = <span key={1}> / {DISTRICT}</span>;
+      district = <span key={1}>{DISTRICT}</span>;
     } else {
       district = (
         <Link
@@ -530,16 +540,16 @@ class HierarchichalDataTable extends Component<Props, State> {
           }`}
           key={1}
         >
-          &nbsp;/ {DISTRICT}
+          {DISTRICT}
         </Link>
       );
     }
 
-    let commune = <span> / {COMMUNE}</span>;
-    if (this.props.permissionLevel > 2) {
+    let commune = <span>{COMMUNE}</span>;
+    if (this.dontDisplayCommune()) {
       commune = <span>{null}</span>;
     } else if (this.props.current_level === 2) {
-      commune = <span key={2}> / {COMMUNE}</span>;
+      commune = <span key={2}>{COMMUNE}</span>;
     } else {
       commune = (
         <Link
@@ -550,21 +560,33 @@ class HierarchichalDataTable extends Component<Props, State> {
           }`}
           key={2}
         >
-          &nbsp;/ {COMMUNE}
+          {COMMUNE}
         </Link>
       );
     }
 
-    const village = <span key={3}> / {VILLAGE}</span>;
+    const village = <span key={3}>{VILLAGE}</span>;
+    const divider = <span>&nbsp; / &nbsp;</span>;
+    const provinceDivider = this.dontDisplayProvince() ? <span>{null}</span> : divider;
+    const districtDivider = this.dontDisplayDistrict() ? <span>{null}</span> : divider;
+    const communeDivider = this.dontDisplayCommune() ? <span>{null}</span> : divider;
     switch (this.props.current_level) {
       case 0:
         return province;
       case 1:
-        return [province, district];
+        return [province, provinceDivider, district];
       case 2:
-        return [province, district, commune];
+        return [province, provinceDivider, district, districtDivider, commune];
       case 3:
-        return [province, district, commune, village];
+        return [
+          province,
+          provinceDivider,
+          district,
+          districtDivider,
+          commune,
+          communeDivider,
+          village,
+        ];
       default:
         return province;
     }
