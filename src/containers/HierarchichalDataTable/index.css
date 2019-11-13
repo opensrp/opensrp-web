@@ -20,10 +20,10 @@
   border: 1px solid #dadce0;
   color: #3a484f;
   font-family: Roboto;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: -0.018em;
-  line-height: 1em;
+  letter-spacing: -0.018rem;
+  line-height: 1rem;
   text-align: left;
   padding: 15px 20px;
 }
@@ -117,9 +117,9 @@
 .compartment-data-table #header {
   color: #3a484f;
   font-family: Roboto;
-  font-size: 0.875em;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.063em;
+  line-height: 1.063rem;
 }
 
 .compartment-data-table table.table.table-borderless.table-striped,
