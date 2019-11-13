@@ -68,6 +68,11 @@ export const getCommune = (village: Location & { level: VILLAGE }): string => {
   return village.parent_id;
 };
 
+/**
+ * Given a village and a list of all communes, find it's District
+ * @param {Location} village - village Location for which we want to find a District.
+ * @param communes
+ */
 export const getDistrict = (
   village: Location & { level: VILLAGE },
   communes: Location[]
@@ -77,6 +82,12 @@ export const getDistrict = (
   return commune ? commune.parent_id : null;
 };
 
+/**
+ * Given a village, a list of all districts and a list of all communes, find it's province
+ * @param village - village Location for which we want to find a Province.
+ * @param districts
+ * @param communes
+ */
 export const getProvince = (
   village: Location & { level: VILLAGE },
   districts: Location[],
