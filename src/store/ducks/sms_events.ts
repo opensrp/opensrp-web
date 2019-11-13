@@ -36,7 +36,6 @@ export interface SmsData {
 export interface SmsDataByEventId {
   [key: string]: SmsData;
 }
-
 // actions
 
 /** FETCH_SMS action type */
@@ -88,6 +87,14 @@ export type SmsActionTypes =
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
+  const smsData: SmsDataByEventId = {};
+  smsDataList.forEach((d: SmsData) => {
+    if (!smsData[d.event_id]) {
+      smsData[d.event_id] = {
+        ...d,
+      };
+    }
+  });
   return {
     smsData: groupBy(smsDataList, 'event_id'),
     type: FETCHED_SMS as typeof FETCHED_SMS,
