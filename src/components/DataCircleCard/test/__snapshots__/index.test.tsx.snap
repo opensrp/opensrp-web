@@ -31,10 +31,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
                 onClick={[Function]}
               >
                 <span
@@ -55,10 +55,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
                 onClick={[Function]}
               >
                 <span
@@ -79,10 +79,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/78a12165-3c12-471f-8755-c96bac123292/1"
                 onClick={[Function]}
               >
                 <span
