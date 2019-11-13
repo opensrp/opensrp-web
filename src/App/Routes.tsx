@@ -10,7 +10,11 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT, SUPERSET_SMS_DATA_SLICE } from '../configs/env';
+import {
+  NBC_AND_PNC_ANALYSIS_ENDPOINT,
+  SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
+  SUPERSET_SMS_DATA_SLICE,
+} from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   HIERARCHICAL_DATA_URL,
@@ -23,12 +27,14 @@ import {
   NBC_AND_PNC_URL,
   NEWBORN_REPORT,
   NUTRITION,
+  NUTRITION_ANALYSIS,
   NUTRITION_ANALYSIS_URL,
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PREGNANCY,
+  PREGNANCY_ANALYSIS,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
   PREGNANCY_DASHBOARD_WELCOME,
@@ -185,21 +191,33 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={PREGNANCY_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+            component={() => (
+              <Analysis
+                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+                titleString={PREGNANCY_ANALYSIS}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
             path={NBC_AND_PNC_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+            component={() => (
+              <Analysis endpoint={NBC_AND_PNC_ANALYSIS_ENDPOINT} titleString={NUTRITION_ANALYSIS} />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
             path={NUTRITION_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+            component={() => (
+              <Analysis
+                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+                titleString={PREGNANCY_ANALYSIS}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
