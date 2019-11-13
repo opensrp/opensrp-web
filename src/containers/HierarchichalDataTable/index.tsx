@@ -566,7 +566,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     const village = <span key={3}>{VILLAGE}</span>;
-    const divider = <span>&nbsp; / &nbsp;</span>;
+    const divider = <span className={'divider'}>&nbsp; / &nbsp;</span>;
     const provinceDivider = this.dontDisplayProvince() ? <span>{null}</span> : divider;
     const districtDivider = this.dontDisplayDistrict() ? <span>{null}</span> : divider;
     const communeDivider = this.dontDisplayCommune() ? <span>{null}</span> : divider;
