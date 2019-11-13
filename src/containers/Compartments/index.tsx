@@ -98,6 +98,10 @@ const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
+  user: {
+    name: '',
+    username: ''
+  },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
@@ -112,10 +116,6 @@ const defaultCompartmentProps: Props = {
   provinces: [],
   removeFilterArgs,
   smsData: [],
-  user: {
-    name: '',
-    username: '',
-  },
   userIdFetched: false,
   userLocationData: [],
   userUUID: '',
@@ -562,6 +562,7 @@ class Compartments extends React.Component<Props, State> {
 
 const mapStateToprops = (state: Partial<Store>) => {
   return {
+    user: getUser(state),
     communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
@@ -570,7 +571,6 @@ const mapStateToprops = (state: Partial<Store>) => {
     isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[]),
-    user: getUser(state),
     userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
