@@ -155,10 +155,12 @@ export const GET_FORM_DATA_ROW_LIMIT =
 export type GET_FORM_DATA_ROW_LIMIT = typeof GET_FORM_DATA_ROW_LIMIT;
 
 // analysis page iframes
-
 export const SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT =
   'https://discover.ona.io/superset/dashboard/53/?standalone=true';
 export type SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT = typeof SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT;
+export const NBC_AND_PNC_ANALYSIS_ENDPOINT =
+  'https://discover.ona.io/superset/dashboard/66/?standalone=true';
+export type NBC_AND_PNC_ANALYSIS_ENDPOINT = typeof NBC_AND_PNC_ANALYSIS_ENDPOINT;
 
 // csv export links
 export const SUPERSET_PREGNANCY_DATA_EXPORT =
