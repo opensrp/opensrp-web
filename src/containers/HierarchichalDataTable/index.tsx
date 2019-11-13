@@ -507,9 +507,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     return this.props.permissionLevel > 2;
   }
   private header = () => {
-    let province = <span>{PROVINCE}</span>;
+    let province = <span key={0}>{PROVINCE}</span>;
     if (this.dontDisplayProvince()) {
-      province = <span>{null}</span>;
+      province = <span key={0}>{null}</span>;
     } else if (this.props.current_level > 0) {
       province = (
         <Link
@@ -525,9 +525,9 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     }
 
-    let district = <span>''</span>;
+    let district = <span key={1}>''</span>;
     if (this.dontDisplayDistrict()) {
-      district = <span>{null}</span>;
+      district = <span key={1}>{null}</span>;
     } else if (this.props.current_level === 1) {
       district = <span key={1}>{DISTRICT}</span>;
     } else {
@@ -545,9 +545,9 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     }
 
-    let commune = <span>{COMMUNE}</span>;
+    let commune = <span key={2}>{COMMUNE}</span>;
     if (this.dontDisplayCommune()) {
-      commune = <span>{null}</span>;
+      commune = <span key={2}>{null}</span>;
     } else if (this.props.current_level === 2) {
       commune = <span key={2}>{COMMUNE}</span>;
     } else {
@@ -566,10 +566,26 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     const village = <span key={3}>{VILLAGE}</span>;
-    const divider = <span className={'divider'}>&nbsp; / &nbsp;</span>;
-    const provinceDivider = this.dontDisplayProvince() ? <span>{null}</span> : divider;
-    const districtDivider = this.dontDisplayDistrict() ? <span>{null}</span> : divider;
-    const communeDivider = this.dontDisplayCommune() ? <span>{null}</span> : divider;
+    const divider = (
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
+    );
+    const provinceDivider = this.dontDisplayProvince() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      divider
+    );
+    const districtDivider = this.dontDisplayDistrict() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      divider
+    );
+    const communeDivider = this.dontDisplayCommune() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      divider
+    );
     switch (this.props.current_level) {
       case 0:
         return province;
