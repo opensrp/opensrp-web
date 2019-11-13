@@ -181,7 +181,7 @@ export const Routes = (props: RoutesProps) => {
                 PREGNANCY_COMPARTMENTS_URL,
               ].map(
                 url =>
-                  `${url}${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`
+                  `${url}${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:permission_level?/:from_level?`
               );
             })()}
             component={ConnectedHierarchichalDataTable}

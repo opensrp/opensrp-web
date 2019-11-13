@@ -80,6 +80,7 @@ interface Props {
   locationsFetched: boolean;
   compartMentUrl: string;
   module: string;
+  permissionLevel: number;
 }
 
 const defaultProps: Props = {
@@ -91,6 +92,7 @@ const defaultProps: Props = {
   fetchLocationsActionCreator: fetchLocations,
   locationsFetched: false,
   module: '',
+  permissionLevel: 3,
   provinces: [],
   risk_highligter: '',
   smsData: [],
@@ -371,7 +373,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                                     this.props.risk_highligter
                                   }/${this.props.title}/${
                                     this.props.current_level ? this.props.current_level + 1 : 1
-                                  }/down/${element.location_id}`}
+                                  }/down/${element.location_id}/${this.props.permissionLevel}`}
                                 >
                                   {element.location_name}
                                 </Link>
@@ -496,12 +498,16 @@ class HierarchichalDataTable extends Component<Props, State> {
   };
   private header = () => {
     let province = <span>{PROVINCE}</span>;
-    if (this.props.current_level > 0) {
+    if (this.props.permissionLevel > 0) {
+      province = <span>{null}</span>;
+    } else if (this.props.current_level > 0) {
       province = (
         <Link
           to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
             this.props.risk_highligter
-          }/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          }/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={0}
         >
           {PROVINCE}
@@ -510,14 +516,18 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     let district = <span>''</span>;
-    if (this.props.current_level === 1) {
+    if (this.props.permissionLevel > 1) {
+      district = <span>{null}</span>;
+    } else if (this.props.current_level === 1) {
       district = <span key={1}> / {DISTRICT}</span>;
     } else {
       district = (
         <Link
           to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
             this.props.risk_highligter
-          }/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          }/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={1}
         >
           &nbsp;/ {DISTRICT}
@@ -526,14 +536,18 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     let commune = <span> / {COMMUNE}</span>;
-    if (this.props.current_level === 2) {
+    if (this.props.permissionLevel > 2) {
+      commune = <span>{null}</span>;
+    } else if (this.props.current_level === 2) {
       commune = <span key={2}> / {COMMUNE}</span>;
     } else {
       commune = (
         <Link
           to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
             this.props.risk_highligter
-          }/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          }/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={2}
         >
           &nbsp;/ {COMMUNE}
@@ -579,6 +593,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     locationsFetched: locationsDataFetched(state),
     module: ownProps.match.params.module,
     node_id: ownProps.match.params.node_id,
+    permissionLevel: ownProps.match.params.permission_level,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
     smsData: getFilterArgs(state)

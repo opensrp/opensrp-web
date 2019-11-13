@@ -59,6 +59,7 @@ function DataCircleCard({
   // 1 for District, 2 for commune and 3 for village.
   const level = 1;
   const locationId = '78a12165-3c12-471f-8755-c96bac123292';
+  const permissionLevel = 1;
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
@@ -68,7 +69,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -84,7 +85,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -100,7 +101,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
