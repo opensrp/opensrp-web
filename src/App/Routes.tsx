@@ -43,6 +43,7 @@ import {
   PREGNANCY_REGISTRATION,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
+import ConnectedChildPatientDetails from '../containers/ChildPatientDetails';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
@@ -230,6 +231,18 @@ export const Routes = (props: RoutesProps) => {
               ].map(url => `${url}/patient_detail/:patient_id`);
             })()}
             component={ConnectedPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(url => `${url}/child_patient_detail/:patient_id`);
+            })()}
+            component={ConnectedChildPatientDetails}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}

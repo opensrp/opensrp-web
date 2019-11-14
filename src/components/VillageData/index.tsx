@@ -143,7 +143,7 @@ export default class VillageData extends React.Component<Props, State> {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
-          <Link to={`${getModuleLink(this.props.module)}/patient_detail/${dataItem.anc_id}`}>
+          <Link to={`${getModuleLink(this.props.module)}/child_patient_detail/${dataItem.anc_id}`}>
             {dataItem.anc_id}
           </Link>
         </td>
