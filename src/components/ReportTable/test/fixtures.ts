@@ -3985,10 +3985,12 @@ export const getWeightsArrayOutput1 = [
     {
       weight: 78,
       month: 8,
+      year: 2019,
     },
     {
       weight: 2,
       month: 8,
+      year: 2019,
     },
   ],
 ];
@@ -3998,6 +4000,7 @@ export const getWeightsArrayOutput2 = [
     {
       weight: 78,
       month: 8,
+      year: 2019,
     },
   ],
 ];
