@@ -9,6 +9,7 @@ import './index.css';
 
 interface Props {
   weights: WeightMonthYear[];
+  chartWrapperId: string;
 }
 
 interface State {
@@ -16,6 +17,7 @@ interface State {
 }
 
 const defaultProps: Props = {
+  chartWrapperId: '',
   weights: [],
 };
 export default class MotherWeightChart extends React.Component<Props, State> {
@@ -51,7 +53,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
       self.state.chart.destroy();
     }
     self.timeout = setTimeout(() => {
-      chart = Highcharts.chart('chart-wrapper', {
+      chart = Highcharts.chart(`${this.props.chartWrapperId}`, {
         chart: {
           type: 'line',
           width: 0.8 * window.innerWidth,
@@ -146,7 +148,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     return (
       <Card>
         <CardTitle>{MOTHER_WEIGHT_TRACKING}</CardTitle>
-        <div id="chart-wrapper" />
+        <div id={`${this.props.chartWrapperId}`} />
       </Card>
     );
   }
