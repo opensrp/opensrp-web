@@ -8,6 +8,11 @@ import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
+  LOCATION_SLICES,
+  SUPERSET_SMS_DATA_SLICE,
+  USER_LOCATION_DATA_SLICE,
+} from '../../configs/env';
+import {
   COMMUNE,
   COMPARTMENTS,
   DISTRICT,
@@ -28,7 +33,15 @@ import {
 } from '../../constants';
 import { getCommune, getDistrict, getProvince, locationDataIsAvailable } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
-import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks/locations';
+import {
+  fetchLocations,
+  fetchUserLocations,
+  getLocationsOfLevel,
+  getUserLocations,
+  Location,
+  UserLocation,
+  userLocationDataFetched,
+} from '../../store/ducks/locations';
 import {
   addFilterArgs,
   fetchSms,
@@ -44,9 +57,12 @@ import './index.css';
 interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
+  userLocationData: UserLocation[];
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
+  fetchUserLocationsActionCreator: typeof fetchUserLocations;
   dataFetched: boolean;
+  isUserLocationDataFetched: boolean;
   user: User;
   addFilterArgs: any;
   removeFilterArgs: any;
@@ -75,8 +91,10 @@ const defaultCompartmentProps: Props = {
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserLocationsActionCreator: fetchUserLocations,
   filterArgs: [],
   filterArgsInStore: [],
+  isUserLocationDataFetched: false,
   module: '',
   provinces: [],
   removeFilterArgs,
@@ -85,6 +103,7 @@ const defaultCompartmentProps: Props = {
     name: '',
     username: '',
   },
+  userLocationData: [],
   villages: [],
 };
 class Compartments extends React.Component<Props, State> {
@@ -98,7 +117,6 @@ class Compartments extends React.Component<Props, State> {
    */
   public static getDerivedStateFromProps(props: Props, state: State): State {
     // add filter for this location here
-    const userLocationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
     let filterFunction;
     if (
       Compartments.isProvince(userLocationId, props.provinces) &&
@@ -271,7 +289,15 @@ class Compartments extends React.Component<Props, State> {
   }
   public componentDidMount() {
     this.props.removeFilterArgs();
-    const { fetchLocationsActionCreator } = this.props;
+    const { fetchLocationsActionCreator, fetchUserLocationsActionCreator } = this.props;
+
+    // fetch user location details
+
+    if (!this.props.isUserLocationDataFetched) {
+      supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+        fetchUserLocationsActionCreator(result);
+      });
+    }
 
     // fetch all location slices
     for (const slice in LOCATION_SLICES) {
@@ -529,11 +555,13 @@ const mapStateToprops = (state: Partial<Store>) => {
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
     filterArgsInStore: getFilterArgs(state),
+    isUserLocationDataFetched: userLocationDataFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilterArgs(state)
       ? getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[])
       : getSmsData(state),
     user: getUser(state),
+    userLocationData: getUserLocations(state),
     villages: getLocationsOfLevel(state, 'Village'),
   };
 };
@@ -542,7 +570,8 @@ const mapDispatchToProps = {
   addFilterArgs,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
-  removeFilterArgs,
+  fetchUserLocationsActionCreator: fetchUserLocations,
+removeFilterArgs,
 };
 
 const ConnectedCompartments = connect(
