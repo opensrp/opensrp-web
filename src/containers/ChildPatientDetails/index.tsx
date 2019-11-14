@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ListView from '@onaio/list-view';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
@@ -11,12 +12,14 @@ import {
   BACKPAGE_ICON,
   ID,
   LOCATION_OF_RESIDENCE,
+  MONTHLY_NUTRITION_REPORT,
+  NUTRITION_REGISTRATION,
+  NUTRITION_REPORT,
   PATIENT_DETAILS,
   RISK_CARTEGORIZATION,
 } from '../../constants';
 import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
-
 interface Props extends RouteComponentProps {
   patientId: string;
   smsData: SmsData[];
@@ -35,7 +38,13 @@ class ChildPatientDetails extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: filterByPatientAndSort(props),
+      filteredData: filterByPatientAndSort(props).filter((smsData: SmsData) => {
+        return (
+          smsData.sms_type === NUTRITION_REGISTRATION ||
+          smsData.sms_type === NUTRITION_REPORT ||
+          smsData.sms_type === MONTHLY_NUTRITION_REPORT
+        );
+      }),
     };
   }
   constructor(props: Props) {
@@ -46,6 +55,13 @@ class ChildPatientDetails extends Component<Props, State> {
     };
   }
   public render() {
+    const listViewProps = {
+      data: this.buildDataArray(),
+      headerItems: ['Report', 'Date', 'Reporter', 'Message'],
+      tableClass: 'table-container',
+      tbodyClass: 'body',
+      tdClass: 'default-width',
+    };
     return (
       <div className={'patient-details'}>
         <Link to="#" className="back-page">
@@ -59,6 +75,9 @@ class ChildPatientDetails extends Component<Props, State> {
         </div>
         <Row>
           <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
+        </Row>
+        <Row>
+          <ListView {...listViewProps} />
         </Row>
       </div>
     );
@@ -93,6 +112,15 @@ class ChildPatientDetails extends Component<Props, State> {
       { label: RISK_CARTEGORIZATION, value: this.getRiskCartegorization() },
     ] as LabelValuePair[];
   };
+
+  private buildDataArray() {
+    return this.state.filteredData.map((smsData: SmsData) => [
+      smsData.sms_type,
+      smsData.EventDate,
+      smsData.health_worker_name,
+      smsData.message,
+    ]);
+  }
 }
 
 const mapStateToprops = (state: any, ownProps: any) => {
