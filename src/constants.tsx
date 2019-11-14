@@ -55,6 +55,10 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const LOCATION_OF_RESIDENCE = 'Location of Residence';
+export type LOCATION_OF_RESIDENCE = typeof LOCATION_OF_RESIDENCE;
+export const RISK_CARTEGORIZATION = 'Risk Cartegorization';
+export type RISK_CARTEGORIZATION = typeof RISK_CARTEGORIZATION;
 export const HIGH = 'high';
 export type HIGH = typeof HIGH;
 export const LOW = 'low';
