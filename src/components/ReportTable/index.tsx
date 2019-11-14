@@ -1,7 +1,7 @@
 import ListView from '@onaio/list-view';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
-import { GESTATION_PERIOD } from '../../constants';
+import { GESTATION_PERIOD, PREGNANCY } from '../../constants';
 import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
 import MotherWeightChart from '../MotherWeightChart';
@@ -219,6 +219,7 @@ class ReportTable extends Component<Props, State> {
             weights={
               this.getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
             }
+            chartWrapperId={PREGNANCY}
           />
         </Row>
       </Fragment>

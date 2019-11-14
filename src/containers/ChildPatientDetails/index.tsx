@@ -6,6 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
+import MotherWeightChart from '../../components/MotherWeightChart';
 import {
   AGE,
   BACK,
@@ -79,8 +80,34 @@ class ChildPatientDetails extends Component<Props, State> {
         <Row>
           <ListView {...listViewProps} />
         </Row>
+        <Row>
+          <MotherWeightChart weights={this.getWeightsArray()} chartWrapperId={'child-weights'} />
+        </Row>
+        <Row>
+          <MotherWeightChart weights={this.getHeightsArray()} chartWrapperId={'child-heights'} />
+        </Row>
       </div>
     );
+  }
+
+  private getWeightsArray() {
+    return this.state.filteredData.map((smsData: SmsData) => {
+      return {
+        month: new Date(smsData.EventDate).getMonth(),
+        weight: smsData.weight,
+        year: new Date(smsData.EventDate).getFullYear(),
+      };
+    });
+  }
+
+  private getHeightsArray() {
+    return this.state.filteredData.map((smsData: SmsData) => {
+      return {
+        month: new Date(smsData.EventDate).getMonth(),
+        weight: smsData.height,
+        year: new Date(smsData.EventDate).getFullYear(),
+      };
+    });
   }
 
   private getRiskCartegorization = () => {
