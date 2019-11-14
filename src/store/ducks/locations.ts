@@ -14,7 +14,23 @@ export interface Location {
   parent_id: string;
 }
 
+export interface UserLocation {
+  provider_name: string;
+  provider_contact: string;
+  provider_id: string;
+  location_id: string | any;
+  phone_number?: string;
+  location_name: string;
+}
+
+export interface Locations {
+  [key: string]: Location | UserLocation;
+}
+
 // actions
+
+/** FETCH_USER_LOCATION action type */
+export const FETCHED_USER_LOCATION = 'opensrp/reducer/FETCH_USER_LOCATION';
 
 /** FETCH_LOCATION action type */
 export const FETCHED_LOCATION = 'opensrp/reducer/FETCH_LOCATION';
@@ -28,13 +44,19 @@ export interface FetchLocationsAction extends AnyAction {
   type: typeof FETCHED_LOCATION;
 }
 
+/** Interface for FetchUserLocationAction */
+export interface FetchUserLocationsAction extends AnyAction {
+  userLocations: { [key: string]: UserLocation };
+  type: typeof FETCHED_USER_LOCATION;
+}
+
 export const removeLocations = {
   locations: [],
   type: REMOVE_LOCATIONS,
 };
 
 /** Location action types */
-export type LocationActionTypes = FetchLocationsAction | AnyAction;
+export type LocationActionTypes = FetchLocationsAction | FetchUserLocationsAction | AnyAction;
 
 // action creators
 
@@ -50,16 +72,30 @@ export const fetchLocations = (locations: Location[] = []): FetchLocationsAction
   };
 };
 
+export const fetchUserLocations = (
+  userLocations: UserLocation[] = []
+): FetchUserLocationsAction => {
+  const fetchUserLocationsAction = {
+    type: FETCHED_USER_LOCATION as typeof FETCHED_USER_LOCATION,
+    userLocations: keyBy(userLocations, (userLocation: UserLocation) => userLocation.provider_id),
+  };
+  return fetchUserLocationsAction;
+};
+
 /** interface for locations state in redux store */
 interface LocationsState {
   locations: { [key: string]: Location };
   locationsFetched: boolean;
+  userLocations: { [key: string]: UserLocation };
+  userLocationsFetched: boolean;
 }
 
 /** Initial location-state state */
 const initialState: LocationsState = {
   locations: {},
   locationsFetched: false,
+  userLocations: {},
+  userLocationsFetched: false,
 };
 
 export default function locationsReducer(
@@ -72,6 +108,12 @@ export default function locationsReducer(
         ...state,
         locations: { ...state.locations, ...action.locations },
         locationsFetched: true,
+      };
+    case FETCHED_USER_LOCATION:
+      return {
+        ...state,
+        userLocations: { ...state.userLocations, ...action.userLocations },
+        userLocationsFetched: true,
       };
     case REMOVE_LOCATIONS:
       return {
@@ -95,6 +137,15 @@ export function getLocations(state: Partial<Store>): Location[] {
   return values((state as any)[reducerName].locations);
 }
 
+/** Return all User Location data in the store as values whose
+ * keys are their respective provider ids
+ * @param {Partial<store>} state - the redux store
+ * @return {UserLocation[]}} - an array of User Location objects
+ */
+export function getUserLocations(state: Partial<Store>): UserLocation[] {
+  return values((state as any)[reducerName].userLocations);
+}
+
 /**
  * Return locations of a certain level/administrative unit
  * @param {Partial<store>} state - the redux store
@@ -112,4 +163,12 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
  */
 export function locationsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].locationsFetched;
+}
+
+/** Returns true if user location details has been fetched from superset
+ * and false otherwise
+ */
+
+export function userLocationDataFetched(state: Partial<Store>): boolean {
+  return (state as any)[reducerName].userLocationsFetched;
 }
