@@ -118,18 +118,16 @@ class Compartments extends React.Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State): State {
     // add filter for this location here
     let filterFunction;
-    function getLocId() {
-      const locId =
-        (props as any).userLocationData.length &&
-        (props as any).userLocationData.find(
-          (d: FlexObject) => d.provider_name === (props as any).user.username
-        );
-      return (locId as any).location_id;
+    function getLocationId() {
+      const userDetailObj = (props as any).userLocationData.find(
+        (d: FlexObject) => d.provider_name === props.user.username
+      );
+      return userDetailObj.location_id;
     }
     function locationDataIsAvailable() {
       return props.villages.length && props.districts.length && props.communes.length;
     }
-    const userLocationId = getLocId();
+    const userLocationId = getLocationId();
     if (Compartments.isProvince(userLocationId, props.provinces) && locationDataIsAvailable()) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
