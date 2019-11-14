@@ -103,7 +103,7 @@ export default class VillageData extends React.Component<Props, State> {
                                 ? this.pregnancyMapFunction
                                 : this.props.module === NBC_AND_PNC_CHILD
                                 ? this.nbcAndPncChildMapFunction
-                                : () => null
+                                : this.nbcAndPncMotherMapFunction
                             )
                         : null}
                     </tbody>
@@ -119,6 +119,25 @@ export default class VillageData extends React.Component<Props, State> {
       </React.Fragment>
     );
   }
+
+  private nbcAndPncMotherMapFunction = (dataItem: SmsData) => {
+    return (
+      <tr key={dataItem.event_id}>
+        <td className="default-width">
+          <Link to={`${getModuleLink(this.props.module)}/patient_detail/${dataItem.anc_id}`}>
+            {dataItem.anc_id}
+          </Link>
+        </td>
+        <td className="default-width">{this.getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">{dataItem.mother_symptoms}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">
+          <RiskColoring {...{ risk: dataItem.logface_risk }} />
+        </td>
+      </tr>
+    );
+  };
 
   private nbcAndPncChildMapFunction = (dataItem: SmsData) => {
     return (
