@@ -17,6 +17,7 @@ import {
   PATIENT_DETAILS,
   PREVIOUS_PREGNANCY_RISK,
 } from '../../constants';
+import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -38,25 +39,10 @@ export class PatientInfo extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: PatientInfo.filterByPatientAndSort(props),
+      filteredData: filterByPatientAndSort(props),
     };
   }
 
-  private static filterByPatientAndSort = (props: Props): SmsData[] => {
-    return props.smsData
-      .filter((dataItem: SmsData): boolean => {
-        return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
-      })
-      .sort((event1: SmsData, event2: SmsData): number => {
-        if (event1.EventDate < event2.EventDate) {
-          return -1;
-        }
-        if (event1.EventDate > event2.EventDate) {
-          return 1;
-        }
-        return 0;
-      });
-  };
   constructor(props: Props) {
     super(props);
 

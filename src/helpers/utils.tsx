@@ -98,3 +98,22 @@ export const getProvince = (
     ? districts.find((location: Location) => location.location_id === districtId)!.parent_id
     : null;
 };
+
+export const filterByPatientAndSort = (props: {
+  patientId: string;
+  smsData: SmsData[];
+}): SmsData[] => {
+  return props.smsData
+    .filter((dataItem: SmsData): boolean => {
+      return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
+    })
+    .sort((event1: SmsData, event2: SmsData): number => {
+      if (event1.EventDate < event2.EventDate) {
+        return -1;
+      }
+      if (event1.EventDate > event2.EventDate) {
+        return 1;
+      }
+      return 0;
+    });
+};

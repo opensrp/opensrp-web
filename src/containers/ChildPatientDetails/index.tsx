@@ -14,8 +14,8 @@ import {
   PATIENT_DETAILS,
   RISK_CARTEGORIZATION,
 } from '../../constants';
+import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
-import { PatientInfo } from '../PatientDetails';
 
 interface Props extends RouteComponentProps {
   patientId: string;
@@ -35,7 +35,7 @@ class ChildPatientDetails extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: PatientInfo.filterByPatientAndSort(props),
+      filteredData: filterByPatientAndSort(props),
     };
   }
   public render() {
