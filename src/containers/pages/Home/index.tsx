@@ -1,9 +1,9 @@
 // this is the home page component
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import womanchild1 from '../../../assets/images/womanchild1.png';
-import womanchild2 from '../../../assets/images/womanchild2.png';
-import womanchild3 from '../../../assets/images/womanchild3.png';
+import womanchild3 from '../../../assets/images/baby-feeding.svg';
+import womanchild2 from '../../../assets/images/carrying-baby.svg';
+import womanchild1 from '../../../assets/images/pregnant-woman.svg';
 import { NBC_AND_PNC_URL, NUTRITION_URL, PREGNANCY_URL } from '../../../constants';
 import './index.css';
 
