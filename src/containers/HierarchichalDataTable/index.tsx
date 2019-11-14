@@ -22,11 +22,13 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
-  NBC_AND_PNC,
+  NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
+  NUTRITION,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
@@ -79,7 +81,7 @@ interface Props {
   smsData: SmsData[];
   locationsFetched: boolean;
   compartMentUrl: string;
-  module: string;
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   permissionLevel: number;
 }
 
@@ -476,7 +478,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     switch (this.props.module) {
       case PREGNANCY:
         return PREGNANCY_COMPARTMENTS_URL;
-      case NBC_AND_PNC:
+      case NBC_AND_PNC_WOMAN:
+        return NBC_AND_PNC_COMPARTMENTS_URL;
+      case NBC_AND_PNC_CHILD:
         return NBC_AND_PNC_COMPARTMENTS_URL;
       default:
         return '';
