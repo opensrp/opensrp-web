@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
-import { BACK, BACKPAGE_ICON } from '../../constants';
+import { Row } from 'reactstrap';
+import BasicInformation from '../../components/BasicInformation';
+import { BACK, BACKPAGE_ICON, PATIENT_DETAILS } from '../../constants';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
-import { PatientInfo } from '../PatientDetails';
 
 interface Props extends RouteComponentProps {
   patientId: string;
@@ -22,6 +23,7 @@ const defaultProps: Partial<Props> = {
 };
 
 class ChildPatientDetails extends Component<Props, State> {
+  public static defaultProps: Partial<Props> = defaultProps;
   public render() {
     return (
       <div className={'patient-details'}>
@@ -31,8 +33,18 @@ class ChildPatientDetails extends Component<Props, State> {
             <span>{BACK}</span>
           </span>
         </Link>
+        <div id="titleDiv">
+          <h2 id="patients_title">{PATIENT_DETAILS}</h2>
+        </div>
+        <Row>
+          <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
+        </Row>
       </div>
     );
+  }
+
+  private getBasicInformationProps() {
+    return [];
   }
 }
 
