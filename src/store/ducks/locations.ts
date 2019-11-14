@@ -19,7 +19,7 @@ export interface UserLocation {
   provider_contact: string;
   provider_id: string;
   location_id: string | any;
-  phone_number?: string;
+  openmrs_identifier?: string;
   location_name: string;
 }
 
