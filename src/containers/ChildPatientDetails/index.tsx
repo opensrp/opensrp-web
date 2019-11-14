@@ -38,6 +38,13 @@ class ChildPatientDetails extends Component<Props, State> {
       filteredData: filterByPatientAndSort(props),
     };
   }
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      filteredData: [],
+    };
+  }
   public render() {
     return (
       <div className={'patient-details'}>
