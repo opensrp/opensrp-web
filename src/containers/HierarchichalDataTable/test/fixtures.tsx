@@ -1,4 +1,4 @@
-import { Location } from '../../../store/ducks/locations';
+import { Location, UserLocation } from '../../../store/ducks/locations';
 
 export const districts: Location[] = [
   {
@@ -63,5 +63,24 @@ export const villages: Location[] = [
     location_id: 'bb37165f-2ee9-4cad-a3b5-020c0cc75ccf',
     location_name: 'Yen Phu Village',
     parent_id: '46d98781-7cc4-4c28-8379-a3552a57acfe',
+  },
+];
+
+export const userLocationDetails: UserLocation[] = [
+  {
+    location_id: '9c654085-92b3-49e1-bc3b-0201f86c3',
+    location_name: 'Hanoi',
+    openmrs_identifier: '099229',
+    provider_contact: 'telegram:975142852',
+    provider_id: 'hdhdgdhs',
+    provider_name: 'Test user 1',
+  },
+  {
+    location_id: '9c654085-92b3-49e1-bc3b-0201f86c3',
+    location_name: 'Nai',
+    openmrs_identifier: '8877875',
+    provider_contact: 'telegram:646474',
+    provider_id: 'dgsurrhwbsb',
+    provider_name: 'Test user 2',
   },
 ];
