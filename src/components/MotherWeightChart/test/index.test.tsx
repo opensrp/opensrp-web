@@ -6,23 +6,44 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import MotherWeightChart from '..';
 import store from '../../../store/index';
+import { WeightMonthYear } from '../../ReportTable';
 
 jest.genMockFromModule('highcharts');
 jest.mock('highcharts');
 
 const history = createBrowserHistory();
+// export interface WeightMonthYear {
+//   weight: number;
+//   month: number;
+//   year: number;
+// }
 
+const weights = [
+  {
+    month: 20,
+    weight: 10,
+    year: 2019,
+  },
+  {
+    month: 8,
+    weight: 10,
+    year: 2019,
+  },
+  {
+    month: 28,
+    weight: 9,
+    year: 2019,
+  },
+] as WeightMonthYear[];
 describe('MotherWeightChart', () => {
   it('must render without crashing', () => {
-    const props = { weights: [10, 20, 18, 28, 5] };
-    shallow(<MotherWeightChart {...props} />);
+    shallow(<MotherWeightChart weights={weights} />);
   });
   it('must render correctly', () => {
-    const props = { weights: [10, 20, 18, 28, 5] };
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <MotherWeightChart {...props} />
+          <MotherWeightChart weights={weights} />
         </Router>
       </Provider>
     );
