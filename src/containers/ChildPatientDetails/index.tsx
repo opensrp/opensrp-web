@@ -4,9 +4,18 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
-import BasicInformation from '../../components/BasicInformation';
-import { BACK, BACKPAGE_ICON, PATIENT_DETAILS } from '../../constants';
+import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
+import {
+  AGE,
+  BACK,
+  BACKPAGE_ICON,
+  ID,
+  LOCATION_OF_RESIDENCE,
+  PATIENT_DETAILS,
+  RISK_CARTEGORIZATION,
+} from '../../constants';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
+import { PatientInfo } from '../PatientDetails';
 
 interface Props extends RouteComponentProps {
   patientId: string;
@@ -24,6 +33,11 @@ const defaultProps: Partial<Props> = {
 
 class ChildPatientDetails extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
+  public static getDerivedStateFromProps(props: Props, state: State) {
+    return {
+      filteredData: PatientInfo.filterByPatientAndSort(props),
+    };
+  }
   public render() {
     return (
       <div className={'patient-details'}>
@@ -43,9 +57,35 @@ class ChildPatientDetails extends Component<Props, State> {
     );
   }
 
-  private getBasicInformationProps() {
-    return [];
-  }
+  private getRiskCartegorization = () => {
+    const reversedFilteredData: SmsData[] = [...this.state.filteredData];
+    reversedFilteredData.reverse();
+    for (const data in reversedFilteredData) {
+      if (reversedFilteredData[data].logface_risk) {
+        return reversedFilteredData[data].logface_risk;
+      }
+    }
+    return 'could not find any location';
+  };
+  private getCurrentLocation = (): string => {
+    const reversedFilteredData: SmsData[] = [...this.state.filteredData];
+    reversedFilteredData.reverse();
+    for (const data in reversedFilteredData) {
+      if (reversedFilteredData[data].health_worker_location_name) {
+        return reversedFilteredData[data].health_worker_location_name;
+      }
+    }
+    return 'could not find any location';
+  };
+
+  private getBasicInformationProps = () => {
+    return [
+      { label: ID, value: this.props.patientId },
+      { label: AGE, value: '' },
+      { label: LOCATION_OF_RESIDENCE, value: this.getCurrentLocation() },
+      { label: RISK_CARTEGORIZATION, value: this.getRiskCartegorization() },
+    ] as LabelValuePair[];
+  };
 }
 
 const mapStateToprops = (state: any, ownProps: any) => {
