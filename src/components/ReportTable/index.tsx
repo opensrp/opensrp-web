@@ -11,7 +11,7 @@ interface Props {
   singlePatientEvents: SmsData[];
 }
 
-export interface WeightAndMonth {
+export interface WeightMonthYear {
   weight: number;
   month: number;
   year: number;
@@ -139,12 +139,12 @@ class ReportTable extends Component<Props, State> {
     return pregnancySmsStrings;
   };
 
-  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): WeightAndMonth[][] => {
-    let weights: WeightAndMonth[][] = [];
+  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][]): WeightMonthYear[][] => {
+    let weights: WeightMonthYear[][] = [];
     for (const element in pregnancySmsData) {
       if (pregnancySmsData[element]) {
         weights[element] = pregnancySmsData[element].map(
-          (sms: any): WeightAndMonth => {
+          (sms: any): WeightMonthYear => {
             return {
               month: new Date(sms.EventDate).getMonth(),
               weight: sms.weight,
