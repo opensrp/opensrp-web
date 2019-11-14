@@ -4,11 +4,11 @@ import { Card, CardTitle } from 'reactstrap';
 import { clearTimeout, setTimeout } from 'timers';
 import { monthNames, MOTHER_WEIGHT_TRACKING } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
-import { WeightAndMonth } from '../ReportTable';
+import { WeightMonthYear } from '../ReportTable';
 import './index.css';
 
 interface Props {
-  weights: WeightAndMonth[];
+  weights: WeightMonthYear[];
 }
 
 interface State {
@@ -89,13 +89,18 @@ export default class MotherWeightChart extends React.Component<Props, State> {
 
         xAxis: {
           categories: this.props.weights
-            .map((weightAndMonth: WeightAndMonth) => weightAndMonth.month)
-            .map((month: number) => monthNames[month]),
+            .map((weightMonthYear: WeightMonthYear) => weightMonthYear.month)
+            .map((month: number) => monthNames[month])
+            .map(
+              (mothName: string, index: number) => `${mothName} ${this.props.weights[index].year}`
+            ),
         },
 
         series: [
           {
-            data: this.props.weights.map((weightAndMonth: WeightAndMonth) => weightAndMonth.weight),
+            data: this.props.weights.map(
+              (weightMonthYear: WeightMonthYear) => weightMonthYear.weight
+            ),
             name: 'weight',
           },
         ] as any,
