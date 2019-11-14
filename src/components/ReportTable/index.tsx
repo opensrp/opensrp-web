@@ -82,26 +82,6 @@ export const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): Pregnan
   return data;
 };
 
-export function removeDuplicateWeights(weights: WeightAndMonth[]) {
-  function reducer(accumulator: WeightAndMonth[], currentValue: WeightAndMonth): WeightAndMonth[] {
-    const weightAndMonth = accumulator.find(element => {
-      return element.month === currentValue.month;
-    });
-    if (weightAndMonth) {
-      const index = accumulator.indexOf(weightAndMonth);
-      accumulator.splice(index, 1, {
-        month: weightAndMonth!.month,
-        weight: (weightAndMonth!.weight + currentValue.weight) / 2,
-      });
-      return accumulator;
-    } else {
-      accumulator.push(currentValue);
-      return accumulator;
-    }
-  }
-  return weights ? weights.reduce(reducer, []) : [];
-}
-
 class ReportTable extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
@@ -231,9 +211,9 @@ class ReportTable extends Component<Props, State> {
         </Row>
         <Row id={'chart'}>
           <MotherWeightChart
-            weights={removeDuplicateWeights(
+            weights={
               this.getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
-            )}
+            }
           />
         </Row>
       </Fragment>
