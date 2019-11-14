@@ -15,6 +15,8 @@ import {
   LOW,
   MICROSECONDS_IN_A_WEEK,
   NBC_AND_PNC,
+  NBC_AND_PNC_CHILD,
+  NBC_AND_PNC_WOMAN,
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
@@ -332,7 +334,7 @@ class Compartments extends React.Component<Props, State> {
     const newBorn: SmsData[] =
       this.props.module === NBC_AND_PNC
         ? this.props.smsData.filter((smsData: SmsData) => {
-            return smsData.client_type === 'ec_child';
+            return smsData.client_type === EC_CHILD;
           })
         : [];
 
@@ -416,15 +418,15 @@ class Compartments extends React.Component<Props, State> {
                 />
               ) : null}
               {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
-                <ConnectedDataCircleCard {...dataCircleCardChildData} module={this.props.module} />
+                <ConnectedDataCircleCard {...dataCircleCardChildData} module={NBC_AND_PNC_CHILD} />
               ) : null}
               {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
-                <ConnectedDataCircleCard {...dataCircleCardWomanData} module={this.props.module} />
+                <ConnectedDataCircleCard {...dataCircleCardWomanData} module={NBC_AND_PNC_WOMAN} />
               ) : null}
               {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                 <ConnectedDataCircleCard
                   {...dataCircleCardTestProps}
-                  module={this.props.module}
+                  module={NBC_AND_PNC_WOMAN}
                   className={'invisible-but-visible'}
                 />
               ) : null}

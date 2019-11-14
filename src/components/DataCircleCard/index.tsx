@@ -8,8 +8,9 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
-  NBC_AND_PNC,
+  NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NUTRITION,
@@ -27,7 +28,7 @@ interface Props {
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
   filterArgs?: Array<(smsData: SmsData) => boolean>;
-  module: string;
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   className?: string;
 }
 
@@ -37,7 +38,9 @@ export function getModuleLink(module: string) {
       return PREGNANCY_COMPARTMENTS_URL;
     case NUTRITION:
       return NUTRITION_COMPARTMENTS_URL;
-    case NBC_AND_PNC:
+    case NBC_AND_PNC_WOMAN:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    case NBC_AND_PNC_CHILD:
       return NBC_AND_PNC_COMPARTMENTS_URL;
     default:
       return '';
