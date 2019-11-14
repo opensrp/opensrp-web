@@ -23,6 +23,8 @@ export interface SmsData {
   gravidity: number;
   location_id: string;
   client_type: string;
+  child_symptoms: string;
+  mother_symptoms: string;
 }
 
 // actions
