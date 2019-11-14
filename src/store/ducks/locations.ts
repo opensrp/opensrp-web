@@ -23,10 +23,6 @@ export interface UserLocation {
   location_name: string;
 }
 
-export interface Locations {
-  [key: string]: Location | UserLocation;
-}
-
 // actions
 
 /** FETCH_USER_LOCATION action type */
