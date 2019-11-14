@@ -14,6 +14,7 @@ interface Props {
 export interface WeightAndMonth {
   weight: number;
   month: number;
+  year: number;
 }
 interface PregnancySmsData {
   EventDate: string;
@@ -144,7 +145,11 @@ class ReportTable extends Component<Props, State> {
       if (pregnancySmsData[element]) {
         weights[element] = pregnancySmsData[element].map(
           (sms: any): WeightAndMonth => {
-            return { weight: sms.weight, month: new Date(sms.EventDate).getMonth() };
+            return {
+              month: new Date(sms.EventDate).getMonth(),
+              weight: sms.weight,
+              year: new Date(sms.EventDate).getFullYear(),
+            };
           }
         );
       }
