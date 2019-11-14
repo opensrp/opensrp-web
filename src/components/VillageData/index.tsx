@@ -7,6 +7,7 @@ import {
   LOCATION,
   PARITY,
   PATIENT_ID,
+  PREGNANCY,
   PREVIOUS_PREGNANCY_RISK,
   RISK_CATEGORY,
 } from '../../constants';
@@ -41,6 +42,7 @@ export default class VillageData extends React.Component<Props, State> {
       currentPage: 1,
     };
   }
+
   public render() {
     const routePaginatorProps: PaginatorProps = {
       endLabel: 'last',
@@ -66,15 +68,26 @@ export default class VillageData extends React.Component<Props, State> {
                 <CardBody>
                   <Table striped={true} borderless={true}>
                     <thead id="header">
-                      <tr>
-                        <th className="default-width">{PATIENT_ID}</th>
-                        <th className="default-width">{GRAVIDITY}</th>
-                        <th className="default-width">{PARITY}</th>
-                        <th className="default-width">{LOCATION}</th>
-                        <th className="default-width">{EDD}</th>
-                        <th className="default-width">{PREVIOUS_PREGNANCY_RISK}</th>
-                        <th className="default-width">{RISK_CATEGORY}</th>
-                      </tr>
+                      {this.props.module === PREGNANCY ? (
+                        <tr>
+                          <th className="default-width">{PATIENT_ID}</th>
+                          <th className="default-width">{GRAVIDITY}</th>
+                          <th className="default-width">{PARITY}</th>
+                          <th className="default-width">{LOCATION}</th>
+                          <th className="default-width">{EDD}</th>
+                          <th className="default-width">{PREVIOUS_PREGNANCY_RISK}</th>
+                          <th className="default-width">{RISK_CATEGORY}</th>
+                        </tr>
+                      ) : (
+                        <tr>
+                          <th className="default-width">{PATIENT_ID}</th>
+                          <th className="default-width">{'Days since birth'}</th>
+                          <th className="default-width">{'Location of residence'}</th>
+                          <th className="default-width">{'current symptoms'}</th>
+                          <th className="default-width">{'Location of birth'}</th>
+                          <th className="default-width">{RISK_CATEGORY}</th>
+                        </tr>
+                      )}
                     </thead>
                     <tbody id="body">
                       {this.props.smsData.length
@@ -84,31 +97,11 @@ export default class VillageData extends React.Component<Props, State> {
                               (this.state.currentPage - 1) * routePaginatorProps.pageLimit +
                                 routePaginatorProps.pageLimit
                             )
-                            .map((dataItem: SmsData) => {
-                              return (
-                                <tr key={dataItem.event_id}>
-                                  <td className="default-width">
-                                    <Link
-                                      to={`${getModuleLink(this.props.module)}/patient_detail/${
-                                        dataItem.anc_id
-                                      }`}
-                                    >
-                                      {dataItem.anc_id}
-                                    </Link>
-                                  </td>
-                                  <td className="default-width">{dataItem.gravidity}</td>
-                                  <td className="default-width">{dataItem.parity}</td>
-                                  <td className="default-width">
-                                    {dataItem.health_worker_location_name}
-                                  </td>
-                                  <td className="default-width">{dataItem.lmp_edd}</td>
-                                  <td className="default-width">{dataItem.previous_risks}</td>
-                                  <td className="default-width">
-                                    <RiskColoring {...{ risk: dataItem.logface_risk }} />
-                                  </td>
-                                </tr>
-                              );
-                            })
+                            .map(
+                              this.props.module === PREGNANCY
+                                ? this.pregnancyMapFunction
+                                : () => null
+                            )
                         : null}
                     </tbody>
                   </Table>
@@ -123,4 +116,24 @@ export default class VillageData extends React.Component<Props, State> {
       </React.Fragment>
     );
   }
+
+  private pregnancyMapFunction = (dataItem: SmsData) => {
+    return (
+      <tr key={dataItem.event_id}>
+        <td className="default-width">
+          <Link to={`${getModuleLink(this.props.module)}/patient_detail/${dataItem.anc_id}`}>
+            {dataItem.anc_id}
+          </Link>
+        </td>
+        <td className="default-width">{dataItem.gravidity}</td>
+        <td className="default-width">{dataItem.parity}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">{dataItem.lmp_edd}</td>
+        <td className="default-width">{dataItem.previous_risks}</td>
+        <td className="default-width">
+          <RiskColoring {...{ risk: dataItem.logface_risk }} />
+        </td>
+      </tr>
+    );
+  };
 }
