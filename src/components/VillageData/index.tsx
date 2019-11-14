@@ -5,6 +5,7 @@ import {
   EDD,
   GRAVIDITY,
   LOCATION,
+  NBC_AND_PNC_CHILD,
   PARITY,
   PATIENT_ID,
   PREGNANCY,
@@ -100,6 +101,8 @@ export default class VillageData extends React.Component<Props, State> {
                             .map(
                               this.props.module === PREGNANCY
                                 ? this.pregnancyMapFunction
+                                : this.props.module === NBC_AND_PNC_CHILD
+                                ? this.nbcAndPncChildMapFunction
                                 : () => null
                             )
                         : null}
@@ -115,6 +118,29 @@ export default class VillageData extends React.Component<Props, State> {
         ) : null}
       </React.Fragment>
     );
+  }
+
+  private nbcAndPncChildMapFunction = (dataItem: SmsData) => {
+    return (
+      <tr key={dataItem.event_id}>
+        <td className="default-width">
+          <Link to={`${getModuleLink(this.props.module)}/patient_detail/${dataItem.anc_id}`}>
+            {dataItem.anc_id}
+          </Link>
+        </td>
+        <td className="default-width">{this.getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">{dataItem.child_symptoms}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">
+          <RiskColoring {...{ risk: dataItem.logface_risk }} />
+        </td>
+      </tr>
+    );
+  };
+
+  private getNumberOfDaysSinceDate(date: string): number {
+    return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
   }
 
   private pregnancyMapFunction = (dataItem: SmsData) => {
