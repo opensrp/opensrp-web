@@ -8,9 +8,9 @@ import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
 import {
   LOCATION_SLICES,
+  OPENSRP_API_BASE_URL,
   SUPERSET_SMS_DATA_SLICE,
   USER_LOCATION_DATA_SLICE,
-  OPENSRP_API_BASE_URL,
 } from '../../configs/env';
 import {
   COMMUNE,
@@ -58,7 +58,7 @@ interface Props {
   filterArgsInStore: Array<(smsData: SmsData) => boolean>;
   smsData: SmsData[];
   userLocationData: UserLocation[];
-  session: { [key: string]: any }
+  session: { [key: string]: any };
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
@@ -126,8 +126,7 @@ class Compartments extends React.Component<Props, State> {
       const userDetailObj =
         (props as any).userLocationData.length &&
         (props as any).userLocationData.find(
-          (d: FlexObject) =>
-            d.provider_id === (state as any).personUUID
+          (d: FlexObject) => d.provider_id === (state as any).personUUID
         );
       if (userDetailObj) {
         return (userDetailObj as any).location_id;
@@ -197,15 +196,15 @@ class Compartments extends React.Component<Props, State> {
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
     if (locationPath) {
       return {
+        locationAndPath: locationPath,
         personUUID: state.personUUID,
         userLocationId,
-        locationAndPath: locationPath,
       } as State;
     } else {
       return {
+        locationAndPath: state.locationAndPath,
         personUUID: state.personUUID,
         userLocationId,
-        locationAndPath: state.locationAndPath,
       };
     }
   }
@@ -302,36 +301,40 @@ class Compartments extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      userLocationId: '',
-      personUUID: '',
       locationAndPath: {
         level: '',
         location: '',
         locationId: '',
         path: '',
       },
+      personUUID: '',
+      userLocationId: '',
     };
   }
-  public componentDidMount() {
+  public async componentDidMount() {
     this.props.removeFilterArgs();
     const { fetchLocationsActionCreator, fetchUserLocationsActionCreator } = this.props;
 
     const { session } = this.props;
 
-
-    if ((session as any).extraData
-      && (session as any).extraData.oAuth2Data
-      && (session as any).extraData.oAuth2Data.state === 'opensrp') {
+    if (
+      (session as any).extraData &&
+      (session as any).extraData.oAuth2Data &&
+      (session as any).extraData.oAuth2Data.state === 'opensrp'
+    ) {
       const headers: any = new Headers();
       const self: any = this;
-      headers.append('Authorization', `Bearer ${(session as any).extraData.oAuth2Data.access_token}`)
-      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers })
-      .then((user: any) => user.json()
-      .then((res: FlexObject) => {
-        self.setState({
-          personUUID: (res as any).user.attributes._PERSON_UUID
-        });
-      }));
+      headers.append(
+        'Authorization',
+        `Bearer ${(session as any).extraData.oAuth2Data.access_token}`
+      );
+      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
+        user.json().then((res: FlexObject) => {
+          self.setState({
+            personUUID: (res as any).user.attributes._PERSON_UUID,
+          });
+        })
+      );
     }
 
     // fetch user location details
@@ -345,7 +348,7 @@ class Compartments extends React.Component<Props, State> {
     // fetch all location slices
     for (const slice in LOCATION_SLICES) {
       if (slice) {
-        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+        await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
           fetchLocationsActionCreator(result);
         });
       }
@@ -607,13 +610,13 @@ const mapStateToprops = (state: Partial<Store>) => {
     filterArgsInStore: getFilterArgs(state),
     isUserLocationDataFetched: userLocationDataFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
+    session: (state as any).session,
     smsData: getFilterArgs(state)
       ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
       : getSmsData(state),
     user: getUser(state),
     userLocationData: getUserLocations(state),
     villages: getLocationsOfLevel(state, 'Village'),
-    session: (state as any).session,
   };
 };
 
@@ -622,7 +625,7 @@ const mapDispatchToProps = {
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserLocationsActionCreator: fetchUserLocations,
-removeFilterArgs,
+  removeFilterArgs,
 };
 
 const ConnectedCompartments = connect(
