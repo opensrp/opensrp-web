@@ -324,54 +324,49 @@ exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 3`] = 
 `;
 
 exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 4`] = `
-Array [
-  <tbody
-    id="body"
+<tbody
+  id="body"
+>
+  <tr
+    id="no-rows"
   >
-    <tr
-      id="no-rows"
+    <td>
+      There seems to be no rows here :-(
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
     >
-      <td>
-        There seems to be no rows here :-(
-      </td>
-    </tr>
-    <tr
-      key="total"
+      Total(
+      Village
+      )
+    </td>
+    <td
+      className="default-width "
     >
-      <td
-        className="default-width"
-        id="total"
-      >
-        Total(
-        Village
-        )
-      </td>
-      <td
-        className="default-width "
-      >
-        0
-      </td>
-      <td
-        className="default-width "
-      >
-        0
-      </td>
-      <td
-        className="default-width "
-      >
-        0
-      </td>
-      <td
-        className="default-width"
-      >
-        0
-      </td>
-    </tr>
-  </tbody>,
-  <tbody
-    id="body"
-  />,
-]
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+</tbody>
 `;
 
 exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 5`] = `
