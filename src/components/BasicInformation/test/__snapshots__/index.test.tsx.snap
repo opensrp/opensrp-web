@@ -2,12 +2,34 @@
 
 exports[`BasicInformation must render correctly 1`] = `
 <BasicInformation
-  currentEdd="test edd"
-  currentGravidity={20}
-  currentParity={20}
-  id="test"
-  location="Test Location"
-  previousPregnancyRisk="no risk"
+  labelValuePairs={
+    Array [
+      Object {
+        "label": "currentEdd",
+        "value": "test edd",
+      },
+      Object {
+        "label": "currentGravidity",
+        "value": 20,
+      },
+      Object {
+        "label": "currentParity",
+        "value": 20,
+      },
+      Object {
+        "label": "id",
+        "value": "test",
+      },
+      Object {
+        "label": "location",
+        "value": "Test Location",
+      },
+      Object {
+        "label": "previousPregnancyRisk",
+        "value": "no risk",
+      },
+    ]
+  }
 >
   <Row
     id="detailsRow"
@@ -67,28 +89,34 @@ exports[`BasicInformation must render correctly 1`] = `
                       className="table table-borderless"
                     >
                       <tbody>
-                        <tr>
+                        <tr
+                          key="1"
+                        >
                           <td>
-                            ID
+                            currentGravidity
+                          </td>
+                          <td>
+                            20
+                          </td>
+                        </tr>
+                        <tr
+                          key="3"
+                        >
+                          <td>
+                            id
                           </td>
                           <td>
                             test
                           </td>
                         </tr>
-                        <tr>
+                        <tr
+                          key="5"
+                        >
                           <td>
-                            Current Gravidity
+                            previousPregnancyRisk
                           </td>
                           <td>
-                            20
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Current Parity
-                          </td>
-                          <td>
-                            20
+                            no risk
                           </td>
                         </tr>
                       </tbody>
@@ -123,28 +151,34 @@ exports[`BasicInformation must render correctly 1`] = `
                       className="table table-borderless"
                     >
                       <tbody>
-                        <tr>
+                        <tr
+                          key="0"
+                        >
                           <td>
-                            Location
-                          </td>
-                          <td>
-                            Test Location
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Current EDD
+                            currentEdd
                           </td>
                           <td>
                             test edd
                           </td>
                         </tr>
-                        <tr>
+                        <tr
+                          key="2"
+                        >
                           <td>
-                            Previous Pregnancy Risk
+                            currentParity
                           </td>
                           <td>
-                            no risk
+                            20
+                          </td>
+                        </tr>
+                        <tr
+                          key="4"
+                        >
+                          <td>
+                            location
+                          </td>
+                          <td>
+                            Test Location
                           </td>
                         </tr>
                       </tbody>
