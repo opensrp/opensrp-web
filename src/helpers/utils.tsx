@@ -117,3 +117,7 @@ export const filterByPatientAndSort = (props: {
       return 0;
     });
 };
+
+export const getNumberOfDaysSinceDate = (date: string): number => {
+  return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
+};

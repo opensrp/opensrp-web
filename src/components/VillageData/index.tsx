@@ -12,6 +12,7 @@ import {
   PREVIOUS_PREGNANCY_RISK,
   RISK_CATEGORY,
 } from '../../constants';
+import { getNumberOfDaysSinceDate } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
 import { getModuleLink } from '../DataCircleCard';
 import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
@@ -128,7 +129,7 @@ export default class VillageData extends React.Component<Props, State> {
             {dataItem.anc_id}
           </Link>
         </td>
-        <td className="default-width">{this.getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
+        <td className="default-width">{getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
         <td className="default-width">{dataItem.mother_symptoms}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
@@ -147,7 +148,7 @@ export default class VillageData extends React.Component<Props, State> {
             {dataItem.anc_id}
           </Link>
         </td>
-        <td className="default-width">{this.getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
+        <td className="default-width">{getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
         <td className="default-width">{dataItem.child_symptoms}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
@@ -157,10 +158,6 @@ export default class VillageData extends React.Component<Props, State> {
       </tr>
     );
   };
-
-  private getNumberOfDaysSinceDate(date: string): number {
-    return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
-  }
 
   private pregnancyMapFunction = (dataItem: SmsData) => {
     return (
