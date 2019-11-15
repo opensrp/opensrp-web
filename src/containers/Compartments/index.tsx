@@ -443,13 +443,15 @@ class Compartments extends React.Component<Props, State> {
                   : null}
               </CardGroup>
             </div>
-            <VillageData
-              {...{
-                current_level: 0,
-                module: this.props.module,
-                smsData: [],
-              }}
-            />
+            {this.props.module === PREGNANCY ? (
+              <VillageData
+                {...{
+                  current_level: 3,
+                  module: this.props.module,
+                  smsData: this.props.smsData,
+                }}
+              />
+            ) : null}
           </React.Fragment>
         ) : (
           <Ripple />
