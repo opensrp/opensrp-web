@@ -61,7 +61,7 @@ function DataCircleCard({
   // level is a integer ranging from 0 to 3, 0 for province, 1 for
   // 1 for District, 2 for commune and 3 for village.
   const level = 1;
-  const locationId = '78a12165-3c12-471f-8755-c96bac123292';
+  const locationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
   const permissionLevel = 1;
   return (
     <Card className={`dataCircleCard ${className}`}>

@@ -91,7 +91,7 @@ class Compartments extends React.Component<Props, State> {
    */
   public static getDerivedStateFromProps(props: Props, state: State): State {
     // add filter for this location here
-    const userLocationId = '78a12165-3c12-471f-8755-c96bac123292';
+    const userLocationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
     let filterFunction;
     function locationDataIsAvailable() {
       return props.villages.length && props.districts.length && props.communes.length;
@@ -387,7 +387,7 @@ class Compartments extends React.Component<Props, State> {
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
     return (
-      <div className="compartment-wrapper compartments">
+      <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
           <h2 id="compartment_title">{COMPARTMENTS}</h2>
         </Row>
