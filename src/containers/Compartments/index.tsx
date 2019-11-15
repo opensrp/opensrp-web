@@ -323,7 +323,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_CHILD;
+                return smsData.client_type === EC_CHILD && smsData.location_id === userLocationId;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
@@ -355,7 +355,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_WOMAN;
+                return smsData.client_type === EC_WOMAN && smsData.location_id === userLocationId;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman, 'logface_risk'),
