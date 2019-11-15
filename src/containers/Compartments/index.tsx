@@ -443,7 +443,7 @@ class Compartments extends React.Component<Props, State> {
                   : null}
               </CardGroup>
             </div>
-            {this.props.module === PREGNANCY ? (
+            {this.props.module === PREGNANCY && this.props.smsData.length ? (
               <VillageData
                 {...{
                   current_level: 3,
