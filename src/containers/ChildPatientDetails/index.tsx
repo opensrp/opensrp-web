@@ -22,7 +22,7 @@ import {
   PATIENT_DETAILS,
   RISK_CARTEGORIZATION,
 } from '../../constants';
-import { filterByPatientAndSort } from '../../helpers/utils';
+import { filterByPatientAndSort, getNumberOfDaysSinceDate } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 interface Props extends RouteComponentProps {
@@ -145,7 +145,7 @@ class ChildPatientDetails extends Component<Props, State> {
     });
   }
 
-  private getRiskCartegorization = () => {
+  private getRiskCartegorization = (): string => {
     const reversedFilteredData: SmsData[] = [...this.state.filteredData];
     reversedFilteredData.reverse();
     for (const data in reversedFilteredData) {
@@ -154,6 +154,15 @@ class ChildPatientDetails extends Component<Props, State> {
       }
     }
     return 'could not find any location';
+  };
+
+  private getAgeInDays = (): string => {
+    let date = '';
+
+    if (this.state.filteredData[0]) {
+      date = this.state.filteredData[0].EventDate;
+    }
+    return getNumberOfDaysSinceDate(date) + ' days';
   };
   private getCurrentLocation = (): string => {
     const reversedFilteredData: SmsData[] = [...this.state.filteredData];
@@ -169,7 +178,7 @@ class ChildPatientDetails extends Component<Props, State> {
   private getBasicInformationProps = () => {
     return [
       { label: ID, value: this.props.patientId },
-      { label: AGE, value: '' },
+      { label: AGE, value: this.getAgeInDays() },
       { label: LOCATION_OF_RESIDENCE, value: this.getCurrentLocation() },
       { label: RISK_CARTEGORIZATION, value: this.getRiskCartegorization() },
     ] as LabelValuePair[];
