@@ -28,6 +28,7 @@
 .main-container .content {
   height: 100%;
   position: relative;
+  background: #f8fafe;
 }
 
 .home-main {
@@ -88,7 +89,6 @@
 .sub-container-heading {
   border: none;
   font-size: 22px;
-  margin: 5px 5px 5px 20px;
   text-align: left;
 }
 

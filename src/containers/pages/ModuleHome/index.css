@@ -5,7 +5,7 @@
 .module-home-main .components-list {
   display: flex;
   height: 40vh;
-  padding-left: 25px;
+  margin-top: 72px;
 }
 
 .nav {
@@ -24,9 +24,22 @@
   padding: 50px 50px;
 }
 
-.module-home-main .welcome-text {
+.module-home-main .welcome-text h1 {
   text-align: left;
-  padding: 50px;
+  color: #1b314b;
+  font-family: Roboto;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.module-home-main .welcome-text p {
+  color: #637381;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  max-width: 855px;
+  text-align: left;
 }
 
 .module-home-main .welcome-text h1 {
@@ -34,38 +47,46 @@
 }
 
 .button-style {
-  border: 1px solid rgb(55, 175, 255);
-  width: 100%;
   color: #ffffff;
   background: #0093db;
+  background-color: #0093db;
+  border-radius: 3px;
+  height: 48px;
+  border: none;
 }
 
 .home-sub-containers {
-  background-color: rgb(255, 255, 255);
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 10px;
-  height: 100%;
-  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d7d7e0;
+  width: 320px;
+  height: 284px;
 }
 
 .sub-container-heading {
-  border: none;
-  font-size: 22px;
-  margin: 5px 5px 5px 20px;
+  color: #001429;
+  font-family: Roboto;
+  line-height: 26px;
   text-align: left;
+  padding-left: 14px;
+}
+
+.sub-container-heading p {
+  margin-bottom: 10px;
+  margin-top: 8px;
 }
 
 .sub-container-message {
   font-size: 1rem;
-  margin: 5%;
-  height: 84%;
+  padding: 14px;
+  font-family: Roboto;
 }
 
 .spacer {
   height: 300px;
   width: 33.3%;
-  margin: 25px;
 }
 
 h4 p {
@@ -83,10 +104,11 @@ h4 p {
 }
 
 #cont-sized {
-  top: 15px;
+  top: 56px;
   background: #0093db;
   position: relative;
   text-align: center;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 1100px) {

@@ -44,7 +44,8 @@
   flex: 1 1;
   border: 1px;
   border-right-style: solid;
-  border-right-color: rgba(0, 0, 0, 0.2);
+  border-right-color: #dfe3e8;
+  background: #f8fafe;
 }
 
 .sidebar .side-menu-container .row {
