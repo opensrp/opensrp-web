@@ -11,6 +11,7 @@ import {
   LOCATION_SLICES,
   SUPERSET_SMS_DATA_SLICE,
   USER_LOCATION_DATA_SLICE,
+  OPENSRP_API_BASE_URL,
 } from '../../configs/env';
 import {
   COMPARTMENTS,
@@ -66,6 +67,7 @@ interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
   userLocationData: UserLocation[];
+  session: { [key: string]: any }
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
@@ -115,6 +117,7 @@ const defaultCompartmentProps: Props = {
   module: '',
   provinces: [],
   removeFilterArgs,
+  session: {},
   smsData: [],
   userIdFetched: false,
   userLocationData: [],
@@ -575,6 +578,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
+    session: (state as any).session,
   };
 };
 

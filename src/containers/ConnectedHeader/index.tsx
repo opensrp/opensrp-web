@@ -11,6 +11,7 @@ const mapStateToProps = (state: Partial<Store>) => {
     authenticated: isAuthenticated(state),
     extraData: getExtraData(state),
     user: getUser(state),
+    extraData: getExtraData(state),
   };
   return result;
 };

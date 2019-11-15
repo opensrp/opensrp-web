@@ -39,7 +39,7 @@ const defaultHeaderProps: Partial<HeaderProps> = {
   user: {
     email: '',
     name: '',
-    username: '',
+    username: ''
   },
 };
 
