@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import MotherWeightChart from '..';
+import WeightAndHeightChart from '..';
 import store from '../../../store/index';
 import { WeightMonthYear } from '../../ReportTable';
 
@@ -12,11 +12,6 @@ jest.genMockFromModule('highcharts');
 jest.mock('highcharts');
 
 const history = createBrowserHistory();
-// export interface WeightMonthYear {
-//   weight: number;
-//   month: number;
-//   year: number;
-// }
 
 const weights = [
   {
@@ -35,18 +30,26 @@ const weights = [
     year: 2019,
   },
 ] as WeightMonthYear[];
-describe('MotherWeightChart', () => {
+
+const defaultProps = {
+  chartWrapperId: 'wrapper-id',
+  legendString: 'legend string',
+  title: 'the title',
+  units: 'kgs',
+  xAxisLabel: 'x axis label',
+};
+describe('WeightAndHeightChart', () => {
   it('must render without crashing', () => {
-    shallow(<MotherWeightChart weights={weights} />);
+    shallow(<WeightAndHeightChart weights={weights} {...defaultProps} />);
   });
   it('must render correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <MotherWeightChart weights={weights} />
+          <WeightAndHeightChart weights={weights} {...defaultProps} />
         </Router>
       </Provider>
     );
-    expect(toJson(wrapper.find('#chart-wrapper'))).toMatchSnapshot();
+    expect(toJson(wrapper.find('#wrapper-id'))).toMatchSnapshot();
   });
 });
