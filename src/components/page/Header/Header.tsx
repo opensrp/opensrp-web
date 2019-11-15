@@ -29,15 +29,17 @@ interface State {
 export interface HeaderProps extends RouteComponentProps {
   authenticated: boolean;
   user: User;
+  extraData: { [key: string]: any }
 }
 
 /** default props for Header */
 const defaultHeaderProps: Partial<HeaderProps> = {
   authenticated: false,
+  extraData: {},
   user: {
     email: '',
     name: '',
-    username: '',
+    username: ''
   },
 };
 
