@@ -4,13 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Dropdown, DropdownToggle, Row } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
 import MotherWeightChart from '../../components/MotherWeightChart';
 import {
   AGE,
   BACK,
   BACKPAGE_ICON,
+  CURRENT_NUTRTION,
   ID,
   LOCATION_OF_RESIDENCE,
   MONTHLY_NUTRITION_REPORT,
@@ -21,6 +22,7 @@ import {
 } from '../../constants';
 import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
+import './index.css';
 interface Props extends RouteComponentProps {
   patientId: string;
   smsData: SmsData[];
@@ -80,10 +82,13 @@ class ChildPatientDetails extends Component<Props, State> {
         <Row id="filter-panel">
           <p>Showing reports for:&emsp;</p>
           <div className="filters">
-            <Dropdown>
+            <Dropdown isOpen={false} toggle={this.toggleDropdown}>
               <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
-                current nutrition
+                {CURRENT_NUTRTION}
               </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>{CURRENT_NUTRTION}</DropdownItem>
+              </DropdownMenu>
             </Dropdown>
           </div>
         </Row>
@@ -98,6 +103,10 @@ class ChildPatientDetails extends Component<Props, State> {
         </Row>
       </div>
     );
+  }
+
+  private toggleDropdown() {
+    return false;
   }
 
   private getWeightsArray() {
