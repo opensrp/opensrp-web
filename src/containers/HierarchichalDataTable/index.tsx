@@ -325,11 +325,13 @@ class HierarchichalDataTable extends Component<Props, State> {
 
   public componentDidMount() {
     const { fetchLocationsActionCreator } = this.props;
-    for (const slice in LOCATION_SLICES) {
-      if (slice) {
-        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
-          fetchLocationsActionCreator(result);
-        });
+    if (!this.props.locationsFetched) {
+      for (const slice in LOCATION_SLICES) {
+        if (slice) {
+          supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+            fetchLocationsActionCreator(result);
+          });
+        }
       }
     }
   }
