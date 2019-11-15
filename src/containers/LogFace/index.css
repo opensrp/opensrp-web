@@ -147,21 +147,31 @@ td {
   background: #0093db;
   color: #fff;
   border-radius: 3px;
-  border: 1px solid #0093db;
-  width: auto;
-  height: auto;
   text-decoration: none;
   padding: 5px 15px;
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+#export-button:hover {
+  background: #0189cb;
 }
 
 .filters .location-type-filter .dropdown button {
   background-color: #ffffff;
+  border: 0.5px solid #bababa;
   border-radius: 2px;
+  box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
   height: 40px;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: left;
 }
 
 .filters .location-type-filter .dropdown button {
-  color: inherit;
+  color: #676767;
 }
 
 .filters .location-type-filter .dropdown button:focus {
@@ -177,20 +187,31 @@ td {
 
 .filters .location-type-filter span {
   color: #212121;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  opacity: 0.8;
 }
 
 .filter-panel input.logface-search {
   border-radius: 0;
   margin-top: 35px;
   width: 25%;
-  background: url('../../assets/images/search-icon.svg') no-repeat;
-  background-position: 3% 50%;
-  padding-left: 35px;
+  background: url(/static/media/search-icon.51c97554.svg) no-repeat;
+  background-position: 16px 50%;
+  padding-left: 40px;
+  background-color: white;
+}
+
+.filter-panel input.logface-search:focus {
   box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
 }
 
 .filter-panel input.logface-search::placeholder {
   color: #c2c2c2;
+  font-family: Roboto;
+  font-size: 14px;
 }
 
 .btn-secondary {
