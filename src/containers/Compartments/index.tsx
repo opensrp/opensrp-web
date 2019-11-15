@@ -350,24 +350,33 @@ class Compartments extends React.Component<Props, State> {
   }
 
   public render() {
+    const { userLocationId } = this.state;
+    const filteredData = this.props.smsData.filter(
+      (d: FlexObject) => d.location_id === userLocationId
+    );
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, this.props.smsData),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, this.props.smsData),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, this.props.smsData),
-            title: this.props.smsData.length + ' Total Pregnancies',
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData),
+            title: filteredData.length + ' Total Pregnancies',
           }
         : null;
 
     const last2WeeksSmsData =
-      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(false, true) : [];
+      this.props.module === PREGNANCY
+        ? this.filterSmsByPreviousWeekPeriod(userLocationId, false, true)
+        : [];
     const pregnancyDataCircleCard2Props =
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+                return (
+                  Date.parse(smsData.lmp_edd) - Date.now() &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                );
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
@@ -378,13 +387,18 @@ class Compartments extends React.Component<Props, State> {
         : null;
 
     const last1WeekSmsData =
-      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(true) : [];
+      this.props.module === PREGNANCY
+        ? this.filterSmsByPreviousWeekPeriod(userLocationId, true, false)
+        : [];
     const pregnancyDataCircleCard3Props =
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+                return (
+                  Date.parse(smsData.lmp_edd) - Date.now() &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                );
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
@@ -406,7 +420,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_CHILD;
+                return smsData.client_type === EC_CHILD && smsData.location_id === userLocationId;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
@@ -416,7 +430,7 @@ class Compartments extends React.Component<Props, State> {
           }
         : null;
 
-    const woman: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
+    const woman: SmsData[] = filteredData.filter((smsData: SmsData) => {
       return smsData.client_type === EC_WOMAN;
     });
 
@@ -425,7 +439,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_WOMAN;
+                return smsData.client_type === EC_WOMAN && smsData.location_id === userLocationId;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
@@ -448,7 +462,6 @@ class Compartments extends React.Component<Props, State> {
 
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
-    const { userLocationId } = this.state;
     return (
       <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
@@ -517,9 +530,7 @@ class Compartments extends React.Component<Props, State> {
                 {...{
                   current_level: 3,
                   module: this.props.module,
-                  smsData: this.props.smsData.filter(
-                    (d: FlexObject) => d.location_id === userLocationId
-                  ),
+                  smsData: filteredData,
                 }}
               />
             ) : null}
@@ -538,14 +549,19 @@ class Compartments extends React.Component<Props, State> {
    * @param {boolean} last2Weeks - filter smsData using filterByDataInLast2Weeks function
    */
   private filterSmsByPreviousWeekPeriod = (
+    locId: string,
     last1Week?: boolean,
     last2Weeks?: boolean
   ): SmsData[] => {
     let filteredData: SmsData[] = [];
     if (last2Weeks) {
-      filteredData = this.props.smsData.filter(this.filterByDateInLast2Weeks);
+      filteredData = this.props.smsData
+        .filter((d: FlexObject) => d.location_id === locId)
+        .filter(this.filterByDateInLast2Weeks);
     } else if (last1Week) {
-      filteredData = this.props.smsData.filter(this.filterByDateInLast1Week);
+      filteredData = this.props.smsData
+        .filter((d: FlexObject) => d.location_id === locId)
+        .filter(this.filterByDateInLast1Week);
     }
     return filteredData;
     /**  in the very near future we should be able to filter by an administrative unit
@@ -562,15 +578,23 @@ class Compartments extends React.Component<Props, State> {
    * the period of the last 2 weeks
    */
   private filterByDateInLast2Weeks = (dataItem: SmsData): boolean => {
-    return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() <
+        2 * MICROSECONDS_IN_A_WEEK <
+        (Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK)
+    );
   };
 
   /**
-   * Filter for smsData objects whose EventDate fields are within
+   * Filter for smsData objects whose EventDate fields are withinthis.filterByDateInLast1Week(dataItem)
    * the period of the last 1 week
    */
   private filterByDateInLast1Week = (dataItem: SmsData): boolean => {
-    return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
+    );
   };
 
   /**
