@@ -177,9 +177,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgNbcandpnc],
                             }
-@@ -987,11 +991,11 @@
-                              \\"label\\": \\"Analysis\\",
-                              \\"url\\": \\"/nutrition_analysis\\",
+@@ -979,11 +983,11 @@
+                              \\"label\\": \\"Logface\\",
+                              \\"url\\": \\"/nutrition_logface_url\\",
                             },
                           ]
                         }
@@ -190,9 +190,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNutrition],
                           }
-@@ -1024,11 +1028,11 @@
-                                \\"label\\": \\"Analysis\\",
-                                \\"url\\": \\"/nutrition_analysis\\",
+@@ -1008,11 +1012,11 @@
+                                \\"label\\": \\"Logface\\",
+                                \\"url\\": \\"/nutrition_logface_url\\",
                               },
                             ]
                           }
