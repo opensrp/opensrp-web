@@ -121,11 +121,12 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
+                deactivateLinks={true}
                 title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
-                compartmentUrl={NUTRITION_COMPARTMENTS_URL}
-                analysisUrl={NUTRITION_ANALYSIS_URL}
+                compartmentUrl={'#'}
+                analysisUrl={'#'}
               />
             )}
           />
