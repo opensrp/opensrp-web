@@ -297,12 +297,11 @@ class HierarchichalDataTable extends Component<Props, State> {
         (dataItem: LocationWithData) => dataItem.parent_id === parentId
       );
     } else {
-      dataToShow =
-        nextProps.current_level === 1
-          ? locationsWithData.districts
-          : nextProps.current_level === 2
-          ? locationsWithData.communes
-          : locationsWithData.villages;
+      dataToShow = locationsWithData.villages;
+      // nextProps.current_level === 1
+      //   ? locationsWithData.districts
+      //   : nextProps.current_level === 2
+      //   ? locationsWithData.communes;
       dataToShow = nextProps.node_id
         ? dataToShow.filter(
             (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
