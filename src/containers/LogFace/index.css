@@ -42,6 +42,20 @@ td {
   height: 100%;
 }
 
+.table-container table th {
+  color: #3a484f;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.table-container table td {
+  color: #7c7c7c;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .filter-panel {
   display: flex;
   flex-direction: row;
