@@ -122,7 +122,10 @@ class Compartments extends React.Component<Props, State> {
       const userDetailObj =
         (props as any).userLocationData.length &&
         (props as any).userLocationData.find(
-          (d: FlexObject) => d.provider_name === props.user.username
+          (d: FlexObject) =>
+            d.provider_name === props.user.username ||
+            d.provider_name === props.user.name ||
+            d.provider_name.includes(props.user.username)
         );
       return (userDetailObj as any).location_id;
     }
