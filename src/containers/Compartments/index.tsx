@@ -6,11 +6,11 @@ import { Store } from 'redux';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
-import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
   LOCATION_SLICES,
   SUPERSET_SMS_DATA_SLICE,
   USER_LOCATION_DATA_SLICE,
+  OPENSRP_API_BASE_URL,
 } from '../../configs/env';
 import {
   COMMUNE,
@@ -58,6 +58,7 @@ interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
   userLocationData: UserLocation[];
+  session: { [key: string]: any }
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
@@ -82,6 +83,8 @@ interface HeaderBreadCrumb {
 }
 
 interface State {
+  personUUID: string;
+  userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
 }
 const defaultCompartmentProps: Props = {
@@ -98,6 +101,7 @@ const defaultCompartmentProps: Props = {
   module: '',
   provinces: [],
   removeFilterArgs,
+  session: {},
   smsData: [],
   user: {
     name: '',
@@ -178,10 +182,14 @@ class Compartments extends React.Component<Props, State> {
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
     if (locationPath) {
       return {
+        personUUID: state.personUUID,
+        userLocationId,
         locationAndPath: locationPath,
       } as State;
     } else {
       return {
+        personUUID: state.personUUID,
+        userLocationId,
         locationAndPath: state.locationAndPath,
       };
     }
@@ -279,6 +287,8 @@ class Compartments extends React.Component<Props, State> {
     super(props);
 
     this.state = {
+      userLocationId: '',
+      personUUID: '',
       locationAndPath: {
         level: '',
         location: '',
@@ -290,6 +300,24 @@ class Compartments extends React.Component<Props, State> {
   public componentDidMount() {
     this.props.removeFilterArgs();
     const { fetchLocationsActionCreator, fetchUserLocationsActionCreator } = this.props;
+
+    const { session } = this.props;
+
+
+    if ((session as any).extraData
+      && (session as any).extraData.oAuth2Data
+      && (session as any).extraData.oAuth2Data.state === 'opensrp') {
+      const headers: any = new Headers();
+      const self: any = this;
+      headers.append('Authorization', `Bearer ${(session as any).extraData.oAuth2Data.access_token}`)
+      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers })
+      .then((user: any) => user.json()
+      .then((res: FlexObject) => {
+        self.setState({
+          personUUID: (res as any).user.attributes._PERSON_UUID
+        });
+      }));
+    }
 
     // fetch user location details
 
@@ -416,6 +444,7 @@ class Compartments extends React.Component<Props, State> {
 
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
+    const { userLocationId } = this.state;
     return (
       <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
@@ -434,36 +463,42 @@ class Compartments extends React.Component<Props, State> {
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard1Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard2Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard3Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardChildData}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_CHILD}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardWomanData}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_WOMAN}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardTestProps}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_WOMAN}
                     className={'invisible-but-visible'}
                   />
@@ -563,6 +598,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     user: getUser(state),
     userLocationData: getUserLocations(state),
     villages: getLocationsOfLevel(state, 'Village'),
+    session: (state as any).session,
   };
 };
 
