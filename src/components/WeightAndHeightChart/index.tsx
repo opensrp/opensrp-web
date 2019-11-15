@@ -20,7 +20,7 @@ const defaultProps: Props = {
   chartWrapperId: '',
   weights: [],
 };
-export default class MotherWeightChart extends React.Component<Props, State> {
+export default class WeightAndHeightChart extends React.Component<Props, State> {
   public static defaultProps = defaultProps;
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (prevState.chart && prevState.chart.series) {
@@ -130,7 +130,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         },
       });
     }, 300);
-    window.addEventListener('resize', () => MotherWeightChart.calcChartWidth(chart));
+    window.addEventListener('resize', () => WeightAndHeightChart.calcChartWidth(chart));
     this.setState({ chart });
   }
 
@@ -138,7 +138,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     const self: FlexObject = this;
     if (self.state.chart) {
       window.removeEventListener('resize', () =>
-        MotherWeightChart.calcChartWidth(this.state.chart)
+        WeightAndHeightChart.calcChartWidth(this.state.chart)
       );
       clearTimeout(self.timeout);
     }

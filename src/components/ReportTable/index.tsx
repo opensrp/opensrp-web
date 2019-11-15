@@ -4,7 +4,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'react
 import { GESTATION_PERIOD, PREGNANCY } from '../../constants';
 import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
-import MotherWeightChart from '../MotherWeightChart';
+import MotherWeightChart from '../WeightAndHeightChart';
 import './index.css';
 
 interface Props {

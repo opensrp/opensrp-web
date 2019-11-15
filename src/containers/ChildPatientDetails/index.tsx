@@ -6,7 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
-import MotherWeightChart from '../../components/MotherWeightChart';
+import MotherWeightChart from '../../components/WeightAndHeightChart';
 import {
   AGE,
   BACK,
