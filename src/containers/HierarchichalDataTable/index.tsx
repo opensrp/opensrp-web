@@ -337,6 +337,15 @@ class HierarchichalDataTable extends Component<Props, State> {
   }
 
   public render() {
+    const villageData = this.props.smsData.filter((dataItem: SmsData) => {
+      const locationIds = this.state.data.map((location: LocationWithData) => location.location_id);
+      return (
+        locationIds.includes(dataItem.location_id) &&
+        (this.props.risk_highligter
+          ? dataItem.logface_risk.includes(this.props.risk_highligter)
+          : true)
+      );
+    });
     if (this.props.locationsFetched) {
       return (
         <Container fluid={true} className="compartment-data-table">
@@ -452,23 +461,15 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
-          <VillageData
-            {...{
-              current_level: this.props.current_level,
-              module: this.props.module,
-              smsData: this.props.smsData.filter((dataItem: SmsData) => {
-                const locationIds = this.state.data.map(
-                  (location: LocationWithData) => location.location_id
-                );
-                return (
-                  locationIds.includes(dataItem.location_id) &&
-                  (this.props.risk_highligter
-                    ? dataItem.logface_risk.includes(this.props.risk_highligter)
-                    : true)
-                );
-              }),
-            }}
-          />
+          {villageData.length ? (
+            <VillageData
+              {...{
+                current_level: this.props.current_level,
+                module: this.props.module,
+                smsData: villageData,
+              }}
+            />
+          ) : null}
         </Container>
       );
     } else {
