@@ -18,7 +18,7 @@ export interface SmsData {
   height: number;
   weight: number;
   previous_risks: string;
-  lmp_edd: number;
+  lmp_edd: any;
   parity: number;
   gravidity: number;
   location_id: string;
@@ -183,7 +183,6 @@ export function getFilteredSmsData(
 ): SmsData[] {
   // in the future we may have to modify this selector to receive more than one FilterArgs object
   // i.e an array of these objects and then each one of them, one after another to do the filtering
-
   let results = Object.keys((state as any)[reducerName].smsData).map(
     (key: string) => (state as any)[reducerName].smsData[key]
   );
