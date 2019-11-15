@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Row } from 'reactstrap';
+import { Dropdown, DropdownToggle, Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
 import MotherWeightChart from '../../components/MotherWeightChart';
 import {
@@ -76,6 +76,16 @@ class ChildPatientDetails extends Component<Props, State> {
         </div>
         <Row>
           <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
+        </Row>
+        <Row id="filter-panel">
+          <p>Showing reports for:&emsp;</p>
+          <div className="filters">
+            <Dropdown>
+              <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                current nutrition
+              </DropdownToggle>
+            </Dropdown>
+          </div>
         </Row>
         <Row>
           <ListView {...listViewProps} />
