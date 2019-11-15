@@ -55,6 +55,8 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const CURRENT_NUTRTION = 'current nutrition';
+export type CURRENT_NUTRTION = typeof CURRENT_NUTRTION;
 export const LOCATION_OF_RESIDENCE = 'Location of Residence';
 export type LOCATION_OF_RESIDENCE = typeof LOCATION_OF_RESIDENCE;
 export const RISK_CARTEGORIZATION = 'Risk Cartegorization';
