@@ -79,11 +79,22 @@ td {
 
 #logface_title {
   padding: 0px 15px;
-  border-left: 5px solid rgb(23, 181, 255);
+  border-left: 5px solid #0093db;
+  color: #001429;
+  font-family: Roboto;
+  font-size: 28px;
+  letter-spacing: -0.18px;
+  line-height: 34px;
+  margin-top: 24px;
 }
 
 .logface-content .table-container table .badge-warning {
   color: #fff;
+}
+
+.logface-content {
+  padding-left: 24px;
+  padding-right: 48px;
 }
 
 #header {
