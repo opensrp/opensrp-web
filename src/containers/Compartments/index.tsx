@@ -517,7 +517,9 @@ class Compartments extends React.Component<Props, State> {
                 {...{
                   current_level: 3,
                   module: this.props.module,
-                  smsData: this.props.smsData.filter((d: FlexObject) => d.location_id === userLocationId),
+                  smsData: this.props.smsData.filter(
+                    (d: FlexObject) => d.location_id === userLocationId
+                  ),
                 }}
               />
             ) : null}
