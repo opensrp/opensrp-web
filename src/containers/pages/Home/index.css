@@ -43,7 +43,6 @@
 
 .home-main .welcome-text h1 {
   color: #1b314b;
-  font-family: Roboto;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -0.33px;
@@ -117,7 +116,6 @@ h4 p {
 
 .home-main #cont-size h1 {
   color: #001429;
-  font-family: Roboto;
   font-size: 24px;
   font-weight: 500;
   letter-spacing: -0.27px;
@@ -131,7 +129,6 @@ h4 p {
 
 .home-main #cont-size h4 {
   color: #637381;
-  font-family: Roboto;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 0.1px;
@@ -149,7 +146,6 @@ h4 p {
   .home-main {
     height: auto;
   }
-
   .home-main .components-list {
     flex-direction: column;
     height: auto;

@@ -33,7 +33,6 @@
 #detailsRow #detailsCard table td {
   border: none;
   background: #ffffff;
-  font-family: Roboto;
   font-size: 18px;
 }
 
@@ -50,7 +49,6 @@
   background-color: #ffffff;
   border: 1px solid #dadce0;
   color: #3a484f;
-  font-family: Roboto;
   font-size: 1.636rem;
   font-weight: 500;
   letter-spacing: -0.018rem;
