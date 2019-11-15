@@ -306,6 +306,8 @@ export type HOME_VISIT_REPORT = typeof HOME_VISIT_REPORT;
 export const BIRTH_REPORT = 'Birth Report';
 export type BIRTH_REPORT = typeof BIRTH_REPORT;
 export const DEATH_REPORT = 'Death Report';
+export const FAMILY_REGISTRATION = 'Family Member Registration';
+export type FAMILY_REGISTRATION = typeof FAMILY_REGISTRATION;
 export type DEATH_REPORT = typeof DEATH_REPORT;
 export const POSTNATAL_AND_NEWBORN_CARE = 'Postnatal and Newborn Care';
 export type POSTNATAL_AND_NEWBORN_CARE = typeof POSTNATAL_AND_NEWBORN_CARE;
@@ -335,6 +337,8 @@ export const PREGNANCY_LOGFACE_SMS_TYPES = [
   ACCOUNT_CHECK,
   DELIVERY_PLANNING,
   BIRTH_REPORT,
+  FAMILY_REGISTRATION,
+  DEATH_REPORT,
 ];
 export const NBC_AND_PNC_LOGFACE_SMS_TYPES = [
   HOME_VISIT_REPORT,
