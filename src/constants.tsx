@@ -55,6 +55,10 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const CHILD_WEIGHT_MONITORING = 'Child Weight Monitoring';
+export type CHILD_WEIGHT_MONITORING = typeof CHILD_WEIGHT_MONITORING;
+export const LENGTH_HEIGHT_MONITORING = 'Length/Height Monitoring';
+export type LENGTH_HEIGHT_MONITORING = typeof LENGTH_HEIGHT_MONITORING;
 export const CURRENT_NUTRTION = 'current nutrition';
 export type CURRENT_NUTRTION = typeof CURRENT_NUTRTION;
 export const LOCATION_OF_RESIDENCE = 'Location of Residence';

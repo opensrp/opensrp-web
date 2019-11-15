@@ -10,6 +10,10 @@ import './index.css';
 interface Props {
   weights: WeightMonthYear[];
   chartWrapperId: string;
+  title: string;
+  units: string;
+  legendString: string;
+  xAxisLabel: string;
 }
 
 interface State {
@@ -18,10 +22,17 @@ interface State {
 
 const defaultProps: Props = {
   chartWrapperId: '',
+  legendString: '',
+  title: '',
+  units: '',
   weights: [],
+  xAxisLabel: '',
 };
 export default class WeightAndHeightChart extends React.Component<Props, State> {
   public static defaultProps = defaultProps;
+  public static legendString = defaultProps.legendString;
+  public static units = defaultProps.units;
+  public static xAxisLabel = defaultProps.xAxisLabel;
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (prevState.chart && prevState.chart.series) {
       return {
@@ -47,6 +58,9 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
   }
 
   public componentDidMount(): void {
+    WeightAndHeightChart.legendString = this.props.legendString;
+    WeightAndHeightChart.units = this.props.units;
+    WeightAndHeightChart.xAxisLabel = this.props.xAxisLabel;
     let chart: any;
     const self: FlexObject = this;
     if (self.state.chart) {
@@ -80,12 +94,17 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
             width: 8,
           },
           formatter() {
-            return `Mother's weight - ${this.x}<br> weight <b>${this.y}</b>`;
+            return `${WeightAndHeightChart.legendString} - ${(this.x + '').slice(
+              0,
+              (this.x + '').lastIndexOf(' ')
+            )}<br>${WeightAndHeightChart.xAxisLabel}  <b>${this.y}</b> ${
+              WeightAndHeightChart.units
+            }`;
           },
         },
 
         subtitle: {
-          text: undefined,
+          text: '',
         },
 
         yAxis: {
@@ -108,7 +127,7 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
             data: this.props.weights.map(
               (weightMonthYear: WeightMonthYear) => weightMonthYear.weight
             ),
-            name: 'weight',
+            name: this.props.xAxisLabel,
           },
         ] as any,
 
@@ -147,7 +166,7 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
   public render() {
     return (
       <Card>
-        <CardTitle>{MOTHER_WEIGHT_TRACKING}</CardTitle>
+        <CardTitle>{this.props.title}</CardTitle>
         <div id={`${this.props.chartWrapperId}`} />
       </Card>
     );

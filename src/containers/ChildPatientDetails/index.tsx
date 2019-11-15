@@ -6,13 +6,15 @@ import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
-import MotherWeightChart from '../../components/WeightAndHeightChart';
+import WeightAndHeightChart from '../../components/WeightAndHeightChart';
 import {
   AGE,
   BACK,
   BACKPAGE_ICON,
+  CHILD_WEIGHT_MONITORING,
   CURRENT_NUTRTION,
   ID,
+  LENGTH_HEIGHT_MONITORING,
   LOCATION_OF_RESIDENCE,
   MONTHLY_NUTRITION_REPORT,
   NUTRITION_REGISTRATION,
@@ -96,10 +98,24 @@ class ChildPatientDetails extends Component<Props, State> {
           <ListView {...listViewProps} />
         </Row>
         <Row>
-          <MotherWeightChart weights={this.getWeightsArray()} chartWrapperId={'child-weights'} />
+          <WeightAndHeightChart
+            weights={this.getWeightsArray()}
+            chartWrapperId={'child-weights'}
+            title={CHILD_WEIGHT_MONITORING}
+            legendString={'Child weight vs month'}
+            units={'kg'}
+            xAxisLabel={'Weight'}
+          />
         </Row>
         <Row>
-          <MotherWeightChart weights={this.getHeightsArray()} chartWrapperId={'child-heights'} />
+          <WeightAndHeightChart
+            weights={this.getHeightsArray()}
+            chartWrapperId={'child-heights'}
+            title={LENGTH_HEIGHT_MONITORING}
+            legendString={'Child height vs month'}
+            units={'cm'}
+            xAxisLabel={'height'}
+          />
         </Row>
       </div>
     );
