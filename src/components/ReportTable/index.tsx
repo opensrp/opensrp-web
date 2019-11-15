@@ -219,7 +219,7 @@ class ReportTable extends Component<Props, State> {
             weights={
               this.getWeightsArray(this.state.pregnancyEventsArray)[this.state.currentPregnancy]
             }
-            chartWrapperId={PREGNANCY}
+            chartWrapperId={'pregnancy-chart'}
           />
         </Row>
       </Fragment>
