@@ -4,6 +4,7 @@ import { CardGroup, Row } from 'reactstrap';
 import { Store } from 'redux';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
+import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
   COMMUNE,
@@ -397,44 +398,59 @@ class Compartments extends React.Component<Props, State> {
           </p>
         </Row>
         {this.props.dataFetched ? (
-          <div className="cards-row">
-            <CardGroup>
-              {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
-                <ConnectedDataCircleCard
-                  {...pregnancyDataCircleCard1Props}
-                  module={this.props.module}
-                />
-              ) : null}
-              {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
-                <ConnectedDataCircleCard
-                  {...pregnancyDataCircleCard2Props}
-                  module={this.props.module}
-                />
-              ) : null}
-              {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
-                <ConnectedDataCircleCard
-                  {...pregnancyDataCircleCard3Props}
-                  module={this.props.module}
-                />
-              ) : null}
-              {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
-                <ConnectedDataCircleCard {...dataCircleCardChildData} module={NBC_AND_PNC_CHILD} />
-              ) : null}
-              {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
-                <ConnectedDataCircleCard {...dataCircleCardWomanData} module={NBC_AND_PNC_WOMAN} />
-              ) : null}
-              {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
-                <ConnectedDataCircleCard
-                  {...dataCircleCardTestProps}
-                  module={NBC_AND_PNC_WOMAN}
-                  className={'invisible-but-visible'}
-                />
-              ) : null}
-              {this.props.module === NUTRITION
-                ? 'nothing to show for the nutrition module right now'
-                : null}
-            </CardGroup>
-          </div>
+          <React.Fragment>
+            <div className="cards-row">
+              <CardGroup>
+                {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
+                  <ConnectedDataCircleCard
+                    {...pregnancyDataCircleCard1Props}
+                    module={this.props.module}
+                  />
+                ) : null}
+                {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
+                  <ConnectedDataCircleCard
+                    {...pregnancyDataCircleCard2Props}
+                    module={this.props.module}
+                  />
+                ) : null}
+                {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
+                  <ConnectedDataCircleCard
+                    {...pregnancyDataCircleCard3Props}
+                    module={this.props.module}
+                  />
+                ) : null}
+                {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
+                  <ConnectedDataCircleCard
+                    {...dataCircleCardChildData}
+                    module={NBC_AND_PNC_CHILD}
+                  />
+                ) : null}
+                {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
+                  <ConnectedDataCircleCard
+                    {...dataCircleCardWomanData}
+                    module={NBC_AND_PNC_WOMAN}
+                  />
+                ) : null}
+                {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
+                  <ConnectedDataCircleCard
+                    {...dataCircleCardTestProps}
+                    module={NBC_AND_PNC_WOMAN}
+                    className={'invisible-but-visible'}
+                  />
+                ) : null}
+                {this.props.module === NUTRITION
+                  ? 'nothing to show for the nutrition module right now'
+                  : null}
+              </CardGroup>
+            </div>
+            <VillageData
+              {...{
+                current_level: 0,
+                module: this.props.module,
+                smsData: [],
+              }}
+            />
+          </React.Fragment>
         ) : (
           <Ripple />
         )}
