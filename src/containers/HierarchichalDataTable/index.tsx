@@ -297,12 +297,11 @@ class HierarchichalDataTable extends Component<Props, State> {
         (dataItem: LocationWithData) => dataItem.parent_id === parentId
       );
     } else {
-      dataToShow =
-        nextProps.current_level === 1
-          ? locationsWithData.districts
-          : nextProps.current_level === 2
-          ? locationsWithData.communes
-          : locationsWithData.villages;
+      dataToShow = locationsWithData.villages;
+      // nextProps.current_level === 1
+      //   ? locationsWithData.districts
+      //   : nextProps.current_level === 2
+      //   ? locationsWithData.communes;
       dataToShow = nextProps.node_id
         ? dataToShow.filter(
             (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
@@ -311,7 +310,7 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
 
     return {
-      data: dataToShow,
+      data: locationsWithData.communes,
     };
   }
 
@@ -642,9 +641,10 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     permissionLevel: ownProps.match.params.permission_level,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
-    smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
-      : getSmsData(state),
+    smsData: getSmsData(state),
+    // getFilterArgs(state)
+    //   ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
+    //   : ,
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
   };
