@@ -2,7 +2,7 @@ import * as Highcharts from 'highcharts';
 import * as React from 'react';
 import { Card, CardTitle } from 'reactstrap';
 import { clearTimeout, setTimeout } from 'timers';
-import { monthNames, MOTHER_WEIGHT_TRACKING } from '../../constants';
+import { monthNames } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
 import { WeightMonthYear } from '../ReportTable';
 import './index.css';
