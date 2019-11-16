@@ -35,11 +35,13 @@ import {
   TOTAL,
   UP,
   VILLAGE,
+  PREGNANCY_REGISTRATION,
 } from '../../constants';
 import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,
   getLocationsOfLevel,
+  getUserLocationId,
   Location,
   locationsDataFetched,
   reducerName,
@@ -50,6 +52,7 @@ import smsReducer, {
   reducerName as smsReducerName,
 } from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
+import { FlexObject } from '../../helpers/utils';
 
 reducerRegistry.register(reducerName, locationsReducer);
 reducerRegistry.register(smsReducerName, smsReducer);
@@ -79,6 +82,7 @@ interface Props {
   communes: Location[];
   villages: Location[];
   smsData: SmsData[];
+  userLocationId: string;
   locationsFetched: boolean;
   compartMentUrl: string;
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
@@ -98,6 +102,7 @@ const defaultProps: Props = {
   provinces: [],
   risk_highligter: '',
   smsData: [],
+  userLocationId: '',
   title: '',
   villages: [],
 };
@@ -297,22 +302,65 @@ class HierarchichalDataTable extends Component<Props, State> {
         (dataItem: LocationWithData) => dataItem.parent_id === parentId
       );
     } else {
-      dataToShow = locationsWithData.villages;
-      // nextProps.current_level === 1
-      //   ? locationsWithData.districts
-      //   : nextProps.current_level === 2
-      //   ? locationsWithData.communes;
+      let filteredCommuneData: any;
+      let filteredVillageData: any;
+      let filteredAdminData: any;
+      let currentLevel;
+      const isProv = HierarchichalDataTable.isProvince(nextProps.node_id, locationsWithData.province);
+      const isDist = HierarchichalDataTable.isDistrict(nextProps.node_id, locationsWithData.districts);
+      const isCommune = HierarchichalDataTable.isCommune(nextProps.node_id, locationsWithData.communes);
+      const isVillage = HierarchichalDataTable.isVillage(nextProps.node_id, locationsWithData.village);
+      if (isDist) {
+        currentLevel = 1;
+        filteredCommuneData = locationsWithData.communes.filter((d: FlexObject) => d.parent_id === nextProps.node_id)
+      }
+      else if (isCommune) {
+        currentLevel = 2;
+        filteredVillageData = locationsWithData.villages.filter((d: FlexObject) => d.parent_id === nextProps.node_id)
+      } else {
+        filteredAdminData = locationsWithData.villages.filter((d: FlexObject) => d.location_id === nextProps.node_id);
+      }
+      dataToShow = currentLevel === 1
+        ? locationsWithData.districts
+        : currentLevel === 2
+        ? filteredVillageData
+        : filteredAdminData;
+
       dataToShow = nextProps.node_id
         ? dataToShow.filter(
-            (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
-          )
+          (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
+            || dataItem.location_id === nextProps.node_id
+        )
         : dataToShow;
     }
-
     return {
-      data: locationsWithData.communes,
+      data: dataToShow,
     };
   }
+
+  private static isProvince = (locationId: string, provinces: Location[]) => {
+    if (provinces && provinces.length) {
+      return provinces.find((province: Location) => province.location_id === locationId);
+    }
+  };
+
+  private static isDistrict = (locationId: string, districts: Location[]) => {
+    if (districts && districts.length) {
+      return districts.find((district: Location) => district.location_id === locationId);
+    }
+  };
+
+  private static isCommune = (locationId: string, communes: Location[]) => {
+    if (communes && communes.length) {
+      return communes.find((commune: Location) => commune.location_id === locationId);
+    }
+  };
+
+  private static isVillage = (locationId: string, villages: Location[]) => {
+    if (villages && villages.length) {
+      return villages.find((village: Location) => village.location_id === locationId);
+    }
+  };
 
   constructor(props: Props) {
     super(props);
@@ -641,12 +689,12 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     permissionLevel: ownProps.match.params.permission_level,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
-    smsData: getSmsData(state),
-    // getFilterArgs(state)
-    //   ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
-    //   : ,
+    smsData: getFilterArgs(state)
+      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
+      : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
+    userLocationId: getUserLocationId(state),
   };
 };
 
