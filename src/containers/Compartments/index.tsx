@@ -36,8 +36,12 @@ import supersetFetch from '../../services/superset';
 import {
   fetchLocations,
   fetchUserLocations,
+  fetchUserId,
+  fetchUserLocationId,
   getLocationsOfLevel,
   getUserLocations,
+  getUserId,
+  userLocationIdFetched,
   Location,
   UserLocation,
   userLocationDataFetched,
@@ -62,9 +66,13 @@ interface Props {
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
+  fetchUserIdActionCreator: typeof fetchUserId;
+  fetchUserLocationIdActionCreator: typeof fetchUserLocationId;
   dataFetched: boolean;
+  isUserLocationIdFetched: boolean;
   isUserLocationDataFetched: boolean;
   user: User;
+  userUUID: string;
   addFilterArgs: any;
   removeFilterArgs: any;
   filterArgs: SMS_FILTER_FUNCTION[];
@@ -83,7 +91,6 @@ interface HeaderBreadCrumb {
 }
 
 interface State {
-  personUUID: string;
   userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
 }
@@ -91,8 +98,11 @@ const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
+  isUserLocationIdFetched: false,
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserLocationsActionCreator: fetchUserLocations,
   filterArgs: [],
@@ -108,6 +118,7 @@ const defaultCompartmentProps: Props = {
     username: '',
   },
   userLocationData: [],
+  userUUID: '',
   villages: [],
 };
 class Compartments extends React.Component<Props, State> {
@@ -183,13 +194,11 @@ class Compartments extends React.Component<Props, State> {
     if (locationPath) {
       return {
         locationAndPath: locationPath,
-        personUUID: state.personUUID,
         userLocationId,
       } as State;
     } else {
       return {
         locationAndPath: state.locationAndPath,
-        personUUID: state.personUUID,
         userLocationId,
       };
     }
@@ -293,7 +302,6 @@ class Compartments extends React.Component<Props, State> {
         locationId: '',
         path: '',
       },
-      personUUID: '',
       userLocationId: '',
     };
   }
@@ -316,9 +324,7 @@ class Compartments extends React.Component<Props, State> {
       );
       fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
         user.json().then((res: FlexObject) => {
-          self.setState({
-            personUUID: (res as any).user.attributes._PERSON_UUID,
-          });
+          this.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
         })
       );
     }
@@ -374,8 +380,8 @@ class Compartments extends React.Component<Props, State> {
             filterArgs: [
               (smsData: SmsData) => {
                 return (
-                  Date.parse(smsData.lmp_edd) - Date.now() &&
-                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                  (Date.parse(smsData.lmp_edd) - Date.now()) > 0 &&
+                  (Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK)
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
@@ -396,8 +402,8 @@ class Compartments extends React.Component<Props, State> {
             filterArgs: [
               (smsData: SmsData) => {
                 return (
-                  Date.parse(smsData.lmp_edd) - Date.now() &&
-                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                  (Date.parse(smsData.lmp_edd) - Date.now()) > 0 &&
+                  (Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK)
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
@@ -420,7 +426,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_CHILD && smsData.location_id === userLocationId;
+                return smsData.client_type === EC_CHILD;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
@@ -439,7 +445,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_WOMAN && smsData.location_id === userLocationId;
+                return smsData.client_type === EC_WOMAN;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
@@ -629,11 +635,15 @@ const mapStateToprops = (state: Partial<Store>) => {
     user: getUser(state),
     userLocationData: getUserLocations(state),
     villages: getLocationsOfLevel(state, 'Village'),
+    userUUID: getUserId(state),
+    isUserLocationIdFetched: userLocationIdFetched(state),
   };
 };
 
 const mapDispatchToProps = {
   addFilterArgs,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserLocationsActionCreator: fetchUserLocations,
