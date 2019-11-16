@@ -193,7 +193,7 @@ export function getFilteredSmsData(
 
   for (const filterArgsIndex in filterArgs) {
     if (filterArgsIndex) {
-      results = results.filter(filterArgs[filterArgsIndex]);
+      results = results.filter(filterArgs[0]);
     }
   }
   return results;
