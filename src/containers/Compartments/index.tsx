@@ -93,6 +93,7 @@ interface HeaderBreadCrumb {
 interface State {
   userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
+  locationsHierachy: { [key: string]: any };
 }
 const defaultCompartmentProps: Props = {
   addFilterArgs,
@@ -193,11 +194,13 @@ class Compartments extends React.Component<Props, State> {
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
     if (locationPath) {
       return {
+        locationsHierachy: (state as any).locationsHierachy,
         locationAndPath: locationPath,
         userLocationId,
       } as State;
     } else {
       return {
+        locationsHierachy: (state as any).locationsHierachy,
         locationAndPath: state.locationAndPath,
         userLocationId,
       };
@@ -302,6 +305,7 @@ class Compartments extends React.Component<Props, State> {
         locationId: '',
         path: '',
       },
+      locationsHierachy: {},
       userLocationId: '',
     };
   }
@@ -324,7 +328,10 @@ class Compartments extends React.Component<Props, State> {
       );
       fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
         user.json().then((res: FlexObject) => {
-          this.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
+          self.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
+          self.setState({
+            locationsHierachy: (res as any).locations.locationsHierarchy,
+          });
         })
       );
     }
@@ -357,9 +364,20 @@ class Compartments extends React.Component<Props, State> {
 
   public render() {
     const { userLocationId } = this.state;
-    const filteredData = this.props.smsData.filter(
+    let filteredData: SmsData[];
+    filteredData = this.props.smsData.filter(
       (d: FlexObject) => d.location_id === userLocationId
     );
+
+    if (this.state.locationsHierachy.parentChildren) {
+      const isParent = Object.keys(this.state.locationsHierachy.parentChildren).includes(userLocationId);
+      if (isParent) {
+        const childLocations = this.state.locationsHierachy.parentChildren[userLocationId];
+        filteredData = this.props.smsData.filter((d: FlexObject) => {
+          return childLocations.includes(d.location_id);
+        });
+      }
+    }
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
