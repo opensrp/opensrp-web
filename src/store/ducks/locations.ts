@@ -28,6 +28,12 @@ export interface UserLocation {
 /** FETCH_USER_LOCATION action type */
 export const FETCHED_USER_LOCATION = 'opensrp/reducer/FETCH_USER_LOCATION';
 
+/** FETCH_USER_LOCATION_ID action type */
+export const FETCHED_USER_ID = 'opensrp/reducer/FETCH_USER_ID';
+
+/** FETCH_USER_LOCATION_ID action type */
+export const FETCHED_USER_LOCATION_ID = 'opensrp/reducer/FETCH_USER_LOCATION_ID';
+
 /** FETCH_LOCATION action type */
 export const FETCHED_LOCATION = 'opensrp/reducer/FETCH_LOCATION';
 
@@ -40,6 +46,15 @@ export interface FetchLocationsAction extends AnyAction {
   type: typeof FETCHED_LOCATION;
 }
 
+export interface FetchUserIdAction extends AnyAction {
+  userId: string;
+  type: typeof FETCHED_USER_ID;
+}
+
+export interface FetchUserLocationIdAction extends AnyAction {
+  userLocationId: string;
+  type: typeof FETCHED_USER_LOCATION_ID;
+}
 /** Interface for FetchUserLocationAction */
 export interface FetchUserLocationsAction extends AnyAction {
   userLocations: { [key: string]: UserLocation };
@@ -52,7 +67,7 @@ export const removeLocations = {
 };
 
 /** Location action types */
-export type LocationActionTypes = FetchLocationsAction | FetchUserLocationsAction | AnyAction;
+export type LocationActionTypes = FetchLocationsAction | FetchUserLocationsAction | FetchUserIdAction | FetchUserLocationIdAction | AnyAction;
 
 // action creators
 
@@ -78,12 +93,35 @@ export const fetchUserLocations = (
   return fetchUserLocationsAction;
 };
 
+export const fetchUserId = (
+  userId: string
+): FetchUserIdAction => {
+  const fetchUserIdAction = {
+    type: FETCHED_USER_ID as typeof FETCHED_USER_ID,
+    userId,
+  };
+  return fetchUserIdAction;
+}
+
+export const fetchUserLocationId = (
+  userLocationId: string
+): FetchUserLocationIdAction => {
+  const fetchUserLocationIdAction = {
+    type: FETCHED_USER_LOCATION_ID as typeof FETCHED_USER_LOCATION_ID,
+    userLocationId,
+  };
+  return fetchUserLocationIdAction;
+}
+
 /** interface for locations state in redux store */
 interface LocationsState {
   locations: { [key: string]: Location };
   locationsFetched: boolean;
   userLocations: { [key: string]: UserLocation };
   userLocationsFetched: boolean;
+  userId: string;
+  userLocationId: string;
+  userLocationIdFetched: boolean;
 }
 
 /** Initial location-state state */
@@ -92,6 +130,9 @@ const initialState: LocationsState = {
   locationsFetched: false,
   userLocations: {},
   userLocationsFetched: false,
+  userId: '',
+  userLocationId: '',
+  userLocationIdFetched: false,
 };
 
 export default function locationsReducer(
@@ -111,6 +152,19 @@ export default function locationsReducer(
         userLocations: { ...state.userLocations, ...action.userLocations },
         userLocationsFetched: true,
       };
+    case FETCHED_USER_ID: {
+      return {
+        ...state,
+        userId: action.userId,
+      }
+    }
+    case FETCHED_USER_LOCATION_ID: {
+      return {
+        ...state,
+        userLocationId: action.userLocationId,
+        userLocationIdFetched: true,
+      }
+    }
     case REMOVE_LOCATIONS:
       return {
         ...state,
@@ -142,6 +196,14 @@ export function getUserLocations(state: Partial<Store>): UserLocation[] {
   return values((state as any)[reducerName].userLocations);
 }
 
+export function getUserId(state: Partial<Store>): string {
+  return (state as any)[reducerName].userId;
+}
+
+export function getUserLocationId(state: Partial<Store>): string {
+  return (state as any)[reducerName].userLocationId;
+}
+
 /**
  * Return locations of a certain level/administrative unit
  * @param {Partial<store>} state - the redux store
@@ -159,6 +221,10 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
  */
 export function locationsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].locationsFetched;
+}
+
+export function userLocationIdFetched(state: Partial<Store>): boolean {
+  return (state as any)[reducerName].userLocationIdFetched;
 }
 
 /** Returns true if user location details has been fetched from superset

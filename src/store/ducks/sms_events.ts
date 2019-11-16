@@ -183,7 +183,7 @@ export function getFilteredSmsData(
   let results = values((state as any)[reducerName].smsData);
   for (const filterArgsIndex in filterArgs) {
     if (filterArgsIndex) {
-      results = results.filter(filterArgs[filterArgsIndex]);
+      results = results.filter(filterArgs[0]);
     }
   }
   return results;
