@@ -43,9 +43,13 @@ import {
   fetchUserId,
   fetchUserLocationId,
   fetchUserLocations,
+  fetchUserId,
+  fetchUserLocationId,
   getLocationsOfLevel,
   getUserId,
   getUserLocations,
+  getUserId,
+  userLocationIdFetched,
   Location,
   userIdFetched,
   UserLocation,
@@ -106,6 +110,8 @@ const defaultCompartmentProps: Props = {
   },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserIdActionCreator: fetchUserId,
   fetchUserLocationIdActionCreator: fetchUserLocationId,
@@ -323,7 +329,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_CHILD && smsData.location_id === userLocationId;
+                return smsData.client_type === EC_CHILD;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
@@ -355,7 +361,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_WOMAN && smsData.location_id === userLocationId;
+                return smsData.client_type === EC_WOMAN;
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman, 'logface_risk'),
@@ -578,11 +584,15 @@ const mapStateToprops = (state: Partial<Store>) => {
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
+    userUUID: getUserId(state),
+    isUserLocationIdFetched: userLocationIdFetched(state),
   };
 };
 
 const mapDispatchToProps = {
   addFilterArgs,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserIdActionCreator: fetchUserId,
