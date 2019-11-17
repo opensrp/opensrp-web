@@ -17,6 +17,7 @@ import clientsReducer, {
   reducerName as clientsReducerName,
   removeHouseholds,
   setTotalRecords,
+  clientType,
 } from '../../../store/ducks/clients';
 import './householdList.css';
 
@@ -56,7 +57,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
       setTotalRecordsActionCreator,
       opensrpService,
     } = this.props;
-    const params = { clientType: 'ec_household', pageNumber: '0', pageSize: PAGINATION_SIZE };
+    const params = { clientType, pageNumber: '0', pageSize: PAGINATION_SIZE };
     const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await clientService.list(params);
     fetchHouseholdsActionCreator(response.clients);
