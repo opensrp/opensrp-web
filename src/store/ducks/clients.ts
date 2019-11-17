@@ -8,7 +8,7 @@ export const reducerName = 'clients';
 
 export const clientType = 'ec_household';
 
-export const placeholder = 'Search Household';
+export const searchPlaceholder = 'Search Household';
 
 /** Interface for client object as received from clientServices */
 export interface Client {
