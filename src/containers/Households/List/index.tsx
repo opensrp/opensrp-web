@@ -18,6 +18,7 @@ import clientsReducer, {
   removeHouseholds,
   setTotalRecords,
   clientType,
+  placeholder,
 } from '../../../store/ducks/clients';
 import './householdList.css';
 
@@ -76,7 +77,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
         <Row>
           <Col md={5}>
             <div className="household-search-bar">
-              <SearchBox searchCallBack={this.search} />
+              <SearchBox searchCallBack={this.search} placeholder={placeholder} />
             </div>
           </Col>
         </Row>

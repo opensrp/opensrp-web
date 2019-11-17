@@ -6,6 +6,7 @@ import './SearchBox.css';
 /** props interface for SearchBox */
 interface SearchBoxProps {
   searchCallBack(searchString: string): void;
+  placeholder: string;
 }
 
 /** state interface for SearchBox  */
@@ -30,7 +31,7 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
             <FontAwesomeIcon icon={['fas', 'search']} />
           </span>
           <Input
-            placeholder="search"
+            placeholder={this.props.placeholder}
             className="search-bar-input"
             onChange={this.handleChange}
             onKeyPress={this.search}
