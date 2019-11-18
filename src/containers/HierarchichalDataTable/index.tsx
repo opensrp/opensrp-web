@@ -47,7 +47,6 @@ import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,
   getLocationsOfLevel,
-  getUserLocationId,
   Location,
   reducerName,
 } from '../../store/ducks/locations';
@@ -110,7 +109,6 @@ const defaultProps: Props = {
   provinces: [],
   risk_highligter: '',
   smsData: [],
-  userLocationId: '',
   title: '',
   villages: [],
 };
@@ -445,9 +443,8 @@ class HierarchichalDataTable extends Component<Props, State> {
           : locationsWithData.villages;
       dataToShow = nextProps.node_id
         ? dataToShow.filter(
-          (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
-            || dataItem.location_id === nextProps.node_id
-        )
+            (dataItem: LocationWithData) => dataItem.parent_id === nextProps.node_id
+          )
         : dataToShow;
     }
 
@@ -482,30 +479,6 @@ class HierarchichalDataTable extends Component<Props, State> {
       villageData,
     };
   }
-
-  private static isProvince = (locationId: string, provinces: Location[]) => {
-    if (provinces && provinces.length) {
-      return provinces.find((province: Location) => province.location_id === locationId);
-    }
-  };
-
-  private static isDistrict = (locationId: string, districts: Location[]) => {
-    if (districts && districts.length) {
-      return districts.find((district: Location) => district.location_id === locationId);
-    }
-  };
-
-  private static isCommune = (locationId: string, communes: Location[]) => {
-    if (communes && communes.length) {
-      return communes.find((commune: Location) => commune.location_id === locationId);
-    }
-  };
-
-  private static isVillage = (locationId: string, villages: Location[]) => {
-    if (villages && villages.length) {
-      return villages.find((village: Location) => village.location_id === locationId);
-    }
-  };
 
   constructor(props: Props) {
     super(props);
@@ -965,7 +938,6 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
       : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
-    userLocationId: getUserLocationId(state),
   };
 };
 
