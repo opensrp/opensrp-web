@@ -55,6 +55,8 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const VIETNAM_COUNTRY_LOCATION_ID = 'd1865325-11e6-4e39-817b-e676c1affecf';
+export type VIETNAM_COUNTRY_LOCATION_ID = typeof VIETNAM_COUNTRY_LOCATION_ID;
 export const CHILD_WEIGHT_MONITORING = 'Child Weight Monitoring';
 export type CHILD_WEIGHT_MONITORING = typeof CHILD_WEIGHT_MONITORING;
 export const LENGTH_HEIGHT_MONITORING = 'Length/Height Monitoring';
