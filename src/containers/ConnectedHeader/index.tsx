@@ -9,8 +9,8 @@ import Header from '../../components/page/Header/Header';
 const mapStateToProps = (state: Partial<Store>) => {
   const result = {
     authenticated: isAuthenticated(state),
-    user: getUser(state),
     extraData: getExtraData(state),
+    user: getUser(state),
   };
   return result;
 };

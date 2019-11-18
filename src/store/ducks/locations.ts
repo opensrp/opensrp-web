@@ -67,7 +67,12 @@ export const removeLocations = {
 };
 
 /** Location action types */
-export type LocationActionTypes = FetchLocationsAction | FetchUserLocationsAction | FetchUserIdAction | FetchUserLocationIdAction | AnyAction;
+export type LocationActionTypes =
+  | FetchLocationsAction
+  | FetchUserLocationsAction
+  | FetchUserIdAction
+  | FetchUserLocationIdAction
+  | AnyAction;
 
 // action creators
 
@@ -93,25 +98,21 @@ export const fetchUserLocations = (
   return fetchUserLocationsAction;
 };
 
-export const fetchUserId = (
-  userId: string
-): FetchUserIdAction => {
+export const fetchUserId = (userId: string): FetchUserIdAction => {
   const fetchUserIdAction = {
     type: FETCHED_USER_ID as typeof FETCHED_USER_ID,
     userId,
   };
   return fetchUserIdAction;
-}
+};
 
-export const fetchUserLocationId = (
-  userLocationId: string
-): FetchUserLocationIdAction => {
+export const fetchUserLocationId = (userLocationId: string): FetchUserLocationIdAction => {
   const fetchUserLocationIdAction = {
     type: FETCHED_USER_LOCATION_ID as typeof FETCHED_USER_LOCATION_ID,
     userLocationId,
   };
   return fetchUserLocationIdAction;
-}
+};
 
 /** interface for locations state in redux store */
 interface LocationsState {
@@ -128,11 +129,11 @@ interface LocationsState {
 const initialState: LocationsState = {
   locations: {},
   locationsFetched: false,
-  userLocations: {},
-  userLocationsFetched: false,
   userId: '',
   userLocationId: '',
   userLocationIdFetched: false,
+  userLocations: {},
+  userLocationsFetched: false,
 };
 
 export default function locationsReducer(
@@ -156,14 +157,14 @@ export default function locationsReducer(
       return {
         ...state,
         userId: action.userId,
-      }
+      };
     }
     case FETCHED_USER_LOCATION_ID: {
       return {
         ...state,
         userLocationId: action.userLocationId,
         userLocationIdFetched: true,
-      }
+      };
     }
     case REMOVE_LOCATIONS:
       return {
