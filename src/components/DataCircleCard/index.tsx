@@ -61,9 +61,15 @@ function DataCircleCard({
   userLocationId,
   permissionLevel,
 }: Props) {
-  // this should be gotten dynamically based on the logged in user
-  // level is a integer ranging from 0 to 3, 0 for province, 1 for
-  // 1 for District, 2 for commune and 3 for village.
+  function getLinkToHierarchichalDataTable(riskLevel: HIGH | LOW | NO) {
+    if (permissionLevel === 4) {
+      return '#';
+    } else {
+      return `${getModuleLink(
+        module
+      )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
+    }
+  }
   const locationId = userLocationId;
   return (
     <Card className={`dataCircleCard ${className}`}>
@@ -72,9 +78,7 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(HIGH)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -88,9 +92,7 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(LOW)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -104,9 +106,7 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(NO)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
