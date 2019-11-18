@@ -11,6 +11,10 @@
   margin: 0 !important;
 }
 
+.villageDataRow.row {
+  margin-bottom: 2rem;
+}
+
 .compartment-data-table .table-card thead > tr {
   border: 1px solid #dadce0;
 }
