@@ -423,7 +423,7 @@ class Compartments extends React.Component<Props, State> {
         }
       };
     } else if (Compartments.locationIdIn(userLocationId, this.props.villages)) {
-      userLocationLevel = 4;
+      userLocationLevel = 3;
       locationFilterFunction = (smsData: SmsData): boolean => {
         return userLocationId === smsData.location_id;
       };
