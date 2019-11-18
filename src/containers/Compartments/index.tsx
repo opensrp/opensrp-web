@@ -347,16 +347,16 @@ class Compartments extends React.Component<Props, State> {
   public render() {
     const { userLocationId } = this.state;
     let filteredData: SmsData[];
-
     let userLocationLevel = 4; // set to 3 by default.
+
     let locationFilterFunction: (smsData: SmsData) => boolean = () => {
       return false;
     };
+
     if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
       userLocationLevel = 0;
       locationFilterFunction = () => true;
-    }
-    if (Compartments.locationIdIn(userLocationId, this.props.provinces)) {
+    } else if (Compartments.locationIdIn(userLocationId, this.props.provinces)) {
       userLocationLevel = 1;
       locationFilterFunction = (smsData: SmsData): boolean => {
         // tslint:disable-next-line: no-shadowed-variable
@@ -406,7 +406,7 @@ class Compartments extends React.Component<Props, State> {
         }
       };
     } else if (Compartments.locationIdIn(userLocationId, this.props.villages)) {
-      userLocationLevel = 3;
+      userLocationLevel = 4;
       locationFilterFunction = (smsData: SmsData): boolean => {
         return userLocationId === smsData.location_id;
       };
