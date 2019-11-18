@@ -74,6 +74,22 @@ fieldset[disabled] .gatekeeper-btn.active {
   padding: 20px 20px
 } */
 
+.top_title {
+  padding: 0px 15px;
+  border-left: 5px solid #0093db;
+  color: #001429;
+  font-family: Roboto;
+  font-size: 28px;
+  letter-spacing: -0.18px;
+  line-height: 34px;
+  margin-top: 24px;
+}
+
+.compartment-wrapper.compartments {
+  padding-left: 24px;
+  padding-right: 48px;
+}
+
 .sidebar {
   width: 18.5vw;
 }

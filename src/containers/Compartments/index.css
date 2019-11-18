@@ -1,9 +1,3 @@
-h2#compartment_title {
-  border-left: 0.2em solid #0093db;
-  padding-left: 15px;
-  margin-bottom: 20px;
-}
-
 .compartment-wrapper #breadcrumb {
   color: #0292d3;
 }
