@@ -43,13 +43,9 @@ import {
   fetchUserId,
   fetchUserLocationId,
   fetchUserLocations,
-  fetchUserId,
-  fetchUserLocationId,
   getLocationsOfLevel,
   getUserId,
   getUserLocations,
-  getUserId,
-  userLocationIdFetched,
   Location,
   userIdFetched,
   UserLocation,
@@ -110,8 +106,6 @@ const defaultCompartmentProps: Props = {
   },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
-  fetchUserIdActionCreator: fetchUserId,
-  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserIdActionCreator: fetchUserId,
   fetchUserLocationIdActionCreator: fetchUserLocationId,
@@ -584,15 +578,11 @@ const mapStateToprops = (state: Partial<Store>) => {
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
-    userUUID: getUserId(state),
-    isUserLocationIdFetched: userLocationIdFetched(state),
   };
 };
 
 const mapDispatchToProps = {
   addFilterArgs,
-  fetchUserIdActionCreator: fetchUserId,
-  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
   fetchUserIdActionCreator: fetchUserId,
