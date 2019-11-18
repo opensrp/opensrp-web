@@ -35,16 +35,16 @@ import { getCommune, getDistrict, getProvince, locationDataIsAvailable } from '.
 import supersetFetch from '../../services/superset';
 import {
   fetchLocations,
-  fetchUserLocations,
   fetchUserId,
   fetchUserLocationId,
+  fetchUserLocations,
   getLocationsOfLevel,
-  getUserLocations,
   getUserId,
-  userLocationIdFetched,
+  getUserLocations,
   Location,
   UserLocation,
   userLocationDataFetched,
+  userLocationIdFetched,
 } from '../../store/ducks/locations';
 import {
   addFilterArgs,
@@ -99,16 +99,16 @@ const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
-  isUserLocationIdFetched: false,
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  fetchSmsDataActionCreator: fetchSms,
   fetchUserIdActionCreator: fetchUserId,
   fetchUserLocationIdActionCreator: fetchUserLocationId,
-  fetchSmsDataActionCreator: fetchSms,
   fetchUserLocationsActionCreator: fetchUserLocations,
   filterArgs: [],
   filterArgsInStore: [],
   isUserLocationDataFetched: false,
+  isUserLocationIdFetched: false,
   module: '',
   provinces: [],
   removeFilterArgs,
@@ -194,14 +194,14 @@ class Compartments extends React.Component<Props, State> {
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
     if (locationPath) {
       return {
-        locationsHierachy: (state as any).locationsHierachy,
         locationAndPath: locationPath,
+        locationsHierachy: (state as any).locationsHierachy,
         userLocationId,
       } as State;
     } else {
       return {
-        locationsHierachy: (state as any).locationsHierachy,
         locationAndPath: state.locationAndPath,
+        locationsHierachy: (state as any).locationsHierachy,
         userLocationId,
       };
     }
@@ -215,7 +215,7 @@ class Compartments extends React.Component<Props, State> {
    * required to build the header breadcrumb and to filter out data
    */
   private static buildHeaderBreadCrumb(locationId: string, props: Props): HeaderBreadCrumb {
-    if (Compartments.isProvince(locationId, props.provinces)) {
+    if (Compartments.locationIdIn(locationId, props.provinces)) {
       const userProvince = props.provinces.find(
         (province: Location) => province.location_id === locationId
       );
@@ -225,7 +225,7 @@ class Compartments extends React.Component<Props, State> {
         locationId: userProvince!.location_id,
         path: '',
       };
-    } else if (Compartments.isDistrict(locationId, props.districts)) {
+    } else if (Compartments.locationIdIn(locationId, props.districts)) {
       const userDistrict = props.districts.find(
         (district: Location) => district.location_id === locationId
       );
@@ -238,7 +238,7 @@ class Compartments extends React.Component<Props, State> {
         locationId: userDistrict!.location_id,
         path: `${userProvince!.location_name} / `,
       };
-    } else if (Compartments.isCommune(locationId, props.communes)) {
+    } else if (Compartments.locationIdIn(locationId, props.communes)) {
       const userCommune = props.communes.find(
         (commune: Location) => commune.location_id === locationId
       );
@@ -254,7 +254,7 @@ class Compartments extends React.Component<Props, State> {
         locationId: userCommune!.location_id,
         path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
       };
-    } else if (Compartments.isVillage(locationId, props.villages)) {
+    } else if (Compartments.locationIdIn(locationId, props.villages)) {
       const userVillage = props.villages.find(
         (village: Location) => village.location_id === locationId
       );
@@ -279,20 +279,8 @@ class Compartments extends React.Component<Props, State> {
     return { path: '', location: '', locationId: '', level: '' };
   }
 
-  private static isProvince = (locationId: string, provinces: Location[]) => {
-    return provinces.find((province: Location) => province.location_id === locationId);
-  };
-
-  private static isDistrict = (locationId: string, districts: Location[]) => {
-    return districts.find((district: Location) => district.location_id === locationId);
-  };
-
-  private static isCommune = (locationId: string, communes: Location[]) => {
-    return communes.find((commune: Location) => commune.location_id === locationId);
-  };
-
-  private static isVillage = (locationId: string, villages: Location[]) => {
-    return villages.find((village: Location) => village.location_id === locationId);
+  private static locationIdIn = (locationId: string, locations: Location[]) => {
+    return locations.find((location: Location) => location.location_id === locationId);
   };
 
   constructor(props: Props) {
@@ -365,12 +353,12 @@ class Compartments extends React.Component<Props, State> {
   public render() {
     const { userLocationId } = this.state;
     let filteredData: SmsData[];
-    filteredData = this.props.smsData.filter(
-      (d: FlexObject) => d.location_id === userLocationId
-    );
+    filteredData = this.props.smsData.filter((d: FlexObject) => d.location_id === userLocationId);
 
     if (this.state.locationsHierachy.parentChildren) {
-      const isParent = Object.keys(this.state.locationsHierachy.parentChildren).includes(userLocationId);
+      const isParent = Object.keys(this.state.locationsHierachy.parentChildren).includes(
+        userLocationId
+      );
       if (isParent) {
         const childLocations = this.state.locationsHierachy.parentChildren[userLocationId];
         filteredData = this.props.smsData.filter((d: FlexObject) => {
@@ -398,8 +386,8 @@ class Compartments extends React.Component<Props, State> {
             filterArgs: [
               (smsData: SmsData) => {
                 return (
-                  (Date.parse(smsData.lmp_edd) - Date.now()) > 0 &&
-                  (Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK)
+                  Date.parse(smsData.lmp_edd) - Date.now() > 0 &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
@@ -420,8 +408,8 @@ class Compartments extends React.Component<Props, State> {
             filterArgs: [
               (smsData: SmsData) => {
                 return (
-                  (Date.parse(smsData.lmp_edd) - Date.now()) > 0 &&
-                  (Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK)
+                  Date.parse(smsData.lmp_edd) - Date.now() > 0 &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
@@ -645,6 +633,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     districts: getLocationsOfLevel(state, 'District'),
     filterArgsInStore: getFilterArgs(state),
     isUserLocationDataFetched: userLocationDataFetched(state),
+    isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     session: (state as any).session,
     smsData: getFilterArgs(state)
@@ -652,18 +641,17 @@ const mapStateToprops = (state: Partial<Store>) => {
       : getSmsData(state),
     user: getUser(state),
     userLocationData: getUserLocations(state),
-    villages: getLocationsOfLevel(state, 'Village'),
     userUUID: getUserId(state),
-    isUserLocationIdFetched: userLocationIdFetched(state),
+    villages: getLocationsOfLevel(state, 'Village'),
   };
 };
 
 const mapDispatchToProps = {
   addFilterArgs,
-  fetchUserIdActionCreator: fetchUserId,
-  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
   fetchUserLocationsActionCreator: fetchUserLocations,
   removeFilterArgs,
 };
