@@ -129,11 +129,11 @@ interface LocationsState {
 const initialState: LocationsState = {
   locations: {},
   locationsFetched: false,
-  userLocations: {},
-  userLocationsFetched: false,
   userId: '',
   userLocationId: '',
   userLocationIdFetched: false,
+  userLocations: {},
+  userLocationsFetched: false,
 };
 
 export default function locationsReducer(
