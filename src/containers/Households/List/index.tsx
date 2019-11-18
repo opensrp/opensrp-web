@@ -9,21 +9,21 @@ import Loading from '../../../components/page/Loading';
 import SearchBox from '../../../components/page/SearchBox/SearchBox';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
-import clientsReducer, {
+import householdsReducer, {
   fetchHouseholds,
   getHouseholdsArray,
   getTotalRecords,
   Household,
-  reducerName as clientsReducerName,
+  reducerName as householdsReducerName,
   removeHouseholds,
   setTotalRecords,
   clientType,
   searchPlaceholder,
-} from '../../../store/ducks/clients';
+} from '../../../store/ducks/households';
 import './householdList.css';
 
-/** register the clients reducer */
-reducerRegistry.register(clientsReducerName, clientsReducer);
+/** register the households reducer */
+reducerRegistry.register(householdsReducerName, householdsReducer);
 
 /** props Interface for the householdList component */
 export interface HouseholdListProps {
@@ -59,8 +59,8 @@ class HouseholdList extends React.Component<HouseholdListProps> {
       opensrpService,
     } = this.props;
     const params = { clientType, pageNumber: '0', pageSize: PAGINATION_SIZE };
-    const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
-    const response = await clientService.list(params);
+    const householdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
+    const response = await householdService.list(params);
     fetchHouseholdsActionCreator(response.clients);
     setTotalRecordsActionCreator(response.total);
   }
@@ -136,8 +136,8 @@ class HouseholdList extends React.Component<HouseholdListProps> {
       pageSize: PAGINATION_SIZE,
       searchText,
     };
-    const clientService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
-    const response = await clientService.list(params);
+    const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
+    const response = await hosueholdService.list(params);
     removeHouseholdsActionCreator();
     fetchHouseholdsActionCreator(response.clients);
     setTotalRecordsActionCreator(response.total);

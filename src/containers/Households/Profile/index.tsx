@@ -20,7 +20,7 @@ import clientReducer, {
 } from '../../../store/ducks/client';
 import { Event } from '../../../store/ducks/client';
 import { Client } from '../../../store/ducks/clients';
-import { Household } from '../../../store/ducks/clients';
+import { Household } from '../../../store/ducks/households';
 import './householdProfile.css';
 
 /** register the client reducer */
