@@ -29,6 +29,7 @@ import {
   PREGNANCY,
   PROVINCE,
   SMS_FILTER_FUNCTION,
+  VIETNAM_COUNTRY_LOCATION_ID,
   VILLAGE,
 } from '../../constants';
 import { getCommune, getDistrict, getProvince, locationDataIsAvailable } from '../../helpers/utils';
@@ -93,7 +94,6 @@ interface HeaderBreadCrumb {
 interface State {
   userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
-  locationsHierachy: { [key: string]: any };
 }
 const defaultCompartmentProps: Props = {
   addFilterArgs,
@@ -195,13 +195,11 @@ class Compartments extends React.Component<Props, State> {
     if (locationPath) {
       return {
         locationAndPath: locationPath,
-        locationsHierachy: (state as any).locationsHierachy,
         userLocationId,
       } as State;
     } else {
       return {
         locationAndPath: state.locationAndPath,
-        locationsHierachy: (state as any).locationsHierachy,
         userLocationId,
       };
     }
@@ -293,7 +291,6 @@ class Compartments extends React.Component<Props, State> {
         locationId: '',
         path: '',
       },
-      locationsHierachy: {},
       userLocationId: '',
     };
   }
@@ -317,9 +314,6 @@ class Compartments extends React.Component<Props, State> {
       fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
         user.json().then((res: FlexObject) => {
           self.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
-          self.setState({
-            locationsHierachy: (res as any).locations.locationsHierarchy,
-          });
         })
       );
     }
@@ -353,25 +347,80 @@ class Compartments extends React.Component<Props, State> {
   public render() {
     const { userLocationId } = this.state;
     let filteredData: SmsData[];
-    filteredData = this.props.smsData.filter((d: FlexObject) => d.location_id === userLocationId);
 
-    if (this.state.locationsHierachy.parentChildren) {
-      const isParent = Object.keys(this.state.locationsHierachy.parentChildren).includes(
-        userLocationId
-      );
-      if (isParent) {
-        const childLocations = this.state.locationsHierachy.parentChildren[userLocationId];
-        filteredData = this.props.smsData.filter((d: FlexObject) => {
-          return childLocations.includes(d.location_id);
-        });
-      }
+    let userLocationLevel = 4; // set to 3 by default.
+    let locationFilterFunction: (smsData: SmsData) => boolean = () => {
+      return false;
+    };
+    if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
+      userLocationLevel = 0;
+      locationFilterFunction = () => true;
     }
+    if (Compartments.locationIdIn(userLocationId, this.props.provinces)) {
+      userLocationLevel = 1;
+      locationFilterFunction = (smsData: SmsData): boolean => {
+        // tslint:disable-next-line: no-shadowed-variable
+        const village = this.props.villages.find((location: Location) => {
+          return location.location_id === smsData.location_id;
+        });
+        if (village) {
+          return (
+            userLocationId ===
+            getProvince(
+              village as (Location & { level: VILLAGE }),
+              this.props.districts,
+              this.props.communes
+            )
+          );
+        } else {
+          return false;
+        }
+      };
+    } else if (Compartments.locationIdIn(userLocationId, this.props.districts)) {
+      userLocationLevel = 2;
+      locationFilterFunction = (smsData: SmsData): boolean => {
+        // tslint:disable-next-line: no-shadowed-variable
+        const village = this.props.villages.find((location: Location) => {
+          return location.location_id === smsData.location_id;
+        });
+        if (village) {
+          return (
+            userLocationId ===
+            getDistrict(village as (Location & { level: VILLAGE }), this.props.communes)
+          );
+        } else {
+          return false;
+        }
+      };
+    } else if (Compartments.locationIdIn(userLocationId, this.props.communes)) {
+      userLocationLevel = 3;
+      locationFilterFunction = (smsData: SmsData): boolean => {
+        // tslint:disable-next-line: no-shadowed-variable
+        const village = this.props.villages.find((location: Location) => {
+          return location.location_id === smsData.location_id;
+        });
+        if (village) {
+          return userLocationId === getCommune(village as (Location & { level: VILLAGE }));
+        } else {
+          return false;
+        }
+      };
+    } else if (Compartments.locationIdIn(userLocationId, this.props.villages)) {
+      userLocationLevel = 4;
+      locationFilterFunction = (smsData: SmsData): boolean => {
+        return userLocationId === smsData.location_id;
+      };
+    }
+
+    filteredData = this.props.smsData.filter(locationFilterFunction);
+
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData),
+            permissionLevel: userLocationLevel,
             title: filteredData.length + ' Total Pregnancies',
           }
         : null;
@@ -394,6 +443,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
+            permissionLevel: userLocationLevel,
             title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
           }
         : null;
@@ -416,6 +466,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
+            permissionLevel: userLocationLevel,
             title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
           }
         : null;
@@ -438,6 +489,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
+            permissionLevel: userLocationLevel,
             title: newBorn.length + ' Total Newborn',
           }
         : null;
@@ -457,6 +509,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
+            permissionLevel: userLocationLevel,
             title: woman.length + ' Total mother in PNC',
           }
         : null;
@@ -468,6 +521,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: 0,
             lowRisk: 0,
             noRisk: 0,
+            permissionLevel: 0,
             title: 'test title',
           }
         : null;
@@ -540,7 +594,7 @@ class Compartments extends React.Component<Props, State> {
             {this.props.module === PREGNANCY && this.props.smsData.length ? (
               <VillageData
                 {...{
-                  current_level: 3,
+                  current_level: userLocationLevel,
                   module: this.props.module,
                   smsData: filteredData,
                 }}

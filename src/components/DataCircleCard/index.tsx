@@ -32,6 +32,7 @@ interface Props {
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   className?: string;
   userLocationId: string;
+  permissionLevel: number;
 }
 
 /**
@@ -66,13 +67,12 @@ function DataCircleCard({
   module,
   className = '',
   userLocationId,
+  permissionLevel,
 }: Props) {
   // this should be gotten dynamically based on the logged in user
   // level is a integer ranging from 0 to 3, 0 for province, 1 for
   // 1 for District, 2 for commune and 3 for village.
-  const level = 1;
   const locationId = userLocationId;
-  const permissionLevel = 1;
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
@@ -82,7 +82,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -98,7 +98,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -114,7 +114,7 @@ function DataCircleCard({
             <Link
               to={`${getModuleLink(
                 module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
