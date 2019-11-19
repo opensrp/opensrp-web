@@ -171,7 +171,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       };
     } else {
       return {
-        filteredData: prevState.filteredData,
+        filteredData: prevState.filteredData.filter(locationFilterFunction),
       };
     }
   }
