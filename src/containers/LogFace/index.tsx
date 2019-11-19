@@ -11,8 +11,11 @@ import { PaginationData, Paginator, PaginatorProps } from '../../components/Pagi
 import RiskColoring from '../../components/RiskColoring';
 import {
   GET_FORM_DATA_ROW_LIMIT,
+  LOCATION_SLICES,
+  OPENSRP_API_BASE_URL,
   SUPERSET_FETCH_TIMEOUT_INTERVAL,
   SUPERSET_PREGNANCY_DATA_EXPORT,
+  USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
@@ -33,17 +36,36 @@ import {
   SELECT_TYPE,
   TYPE,
 } from '../../constants';
-import { FlexObject, sortFunction } from '../../helpers/utils';
+import {
+  FlexObject,
+  getFilterFunctionAndLocationLevel,
+  getLocationId,
+  sortFunction,
+} from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
+import {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocations,
+  getLocationsOfLevel,
+  getUserId,
+  getUserLocations,
+  Location,
+  userIdFetched,
+  UserLocation,
+  userLocationDataFetched,
+} from '../../store/ducks/locations';
 import TestReducer, {
   fetchSms,
+  getFilterArgs,
+  getFilteredSmsData,
   getSmsData,
   reducerName,
   SmsData,
   smsDataFetched,
 } from '../../store/ducks/sms_events';
+import { addFilterArgs, removeFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
-
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
@@ -53,6 +75,21 @@ interface PropsInterface {
   dataFetched: boolean;
   numberOfRows: number;
   sliceId: string;
+  userUUID: string;
+  userLocationData: UserLocation[];
+  provinces: Location[];
+  districts: Location[];
+  communes: Location[];
+  villages: Location[];
+  addFilterArgs: any;
+  removeFilterArgs: any;
+  fetchLocations: any;
+  fetchUserLocations: any;
+  session: FlexObject;
+  userIdFetched: boolean;
+  isUserLocationDataFetched: boolean;
+  fetchUserIdActionCreator: any;
+  filterArgsInStore: Array<(smsData: SmsData) => boolean>;
 }
 
 interface State {
@@ -68,18 +105,58 @@ interface State {
 }
 
 const defaultprops: PropsInterface = {
+  addFilterArgs,
+  communes: [],
   dataFetched: false,
+  districts: [],
+  fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocations,
+  filterArgsInStore: [],
   header: '',
+  isUserLocationDataFetched: false,
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  provinces: [],
+  removeFilterArgs,
+  session: {},
   sliceId: '0',
   smsData: [],
+  userIdFetched: false,
+  userLocationData: [],
+  userUUID: '',
+  villages: [],
 };
 
 export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
   public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
+    const userLocationId = getLocationId(nextProps.userLocationData, nextProps.userUUID);
+
+    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(
+      userLocationId,
+      nextProps.provinces,
+      nextProps.districts,
+      nextProps.communes,
+      nextProps.villages
+    );
+
+    // need a way to check if the right filter args are already in store
+    if (
+      locationFilterFunction &&
+      !(
+        nextProps.filterArgsInStore
+          .map((element: any) => {
+            return element.toString();
+          })
+          .indexOf(locationFilterFunction.toString()) > -1
+      )
+    ) {
+      nextProps.removeFilterArgs();
+      nextProps.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
+    }
+
     if (
       !prevState.filteredData.length &&
       !(
@@ -113,8 +190,56 @@ export class LogFace extends React.Component<PropsInterface, State> {
     };
   }
 
-  public componentDidMount() {
+  public async componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
+
+    this.props.removeFilterArgs();
+    const {
+      // tslint:disable-next-line: no-shadowed-variable
+      fetchLocations,
+      // tslint:disable-next-line: no-shadowed-variable
+      fetchUserLocations,
+      isUserLocationDataFetched,
+      session,
+      // tslint:disable-next-line: no-shadowed-variable
+      userIdFetched,
+    } = this.props;
+    if (
+      (session as any).extraData &&
+      (session as any).extraData.oAuth2Data &&
+      (session as any).extraData.oAuth2Data.state === 'opensrp' &&
+      !userIdFetched
+    ) {
+      const headers: any = new Headers();
+      headers.append(
+        'Authorization',
+        `Bearer ${(session as any).extraData.oAuth2Data.access_token}`
+      );
+      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
+        user.json().then((res: FlexObject) => {
+          this.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
+        })
+      );
+    }
+
+    // fetch user location details
+    if (!isUserLocationDataFetched) {
+      supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+        fetchUserLocations(result);
+      });
+    }
+
+    // fetch all location slices
+    for (const slice in LOCATION_SLICES) {
+      if (slice) {
+        await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+          fetchLocations(result);
+        });
+      }
+    }
+
+    // check if sms data is fetched and then fetch if not fetched already
+
     if (!this.props.dataFetched) {
       supersetFetch(this.props.sliceId).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
@@ -422,25 +547,47 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any, ownProps: any): any => {
   const result = {
+    communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
-    smsData: getSmsData(state).filter((smsData: SmsData) => {
+    districts: getLocationsOfLevel(state, 'District'),
+    filterArgsInStore: getFilterArgs(state),
+    isUserLocationDataFetched: userLocationDataFetched(state),
+    provinces: getLocationsOfLevel(state, 'Province'),
+    session: (state as any).session,
+    smsData: getFilteredSmsData(state, getFilterArgs(state) as Array<
+      (smsData: SmsData) => boolean
+    >).filter((smsData: SmsData) => {
       // here we filter based on the module we are in.
       switch (ownProps.header) {
         case PREGNANCY:
           return PREGNANCY_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         case NBC_AND_PNC:
           return NBC_AND_PNC_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         case NUTRITION:
           return NUTRITION_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         default:
           return true;
       }
     }),
+    userIdFetched: userIdFetched(state),
+    userLocationData: getUserLocations(state),
+    userUUID: getUserId(state),
+    villages: getLocationsOfLevel(state, 'Village'),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
+const mapPropsToActions = {
+  addFilterArgs,
+  fetchLocations,
+  fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocations,
+  removeFilterArgs,
+};
 
 const ConnectedLogFace = connect(
   mapStateToprops,

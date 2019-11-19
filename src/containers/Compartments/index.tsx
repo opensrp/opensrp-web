@@ -528,9 +528,9 @@ const mapStateToprops = (state: Partial<Store>) => {
     isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     session: (state as any).session,
-    smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
-      : getSmsData(state),
+    smsData: getFilteredSmsData(state, getFilterArgs(state) as Array<
+      (smsData: SmsData) => boolean
+    >),
     user: getUser(state),
     userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
