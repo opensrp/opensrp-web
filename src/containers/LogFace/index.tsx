@@ -142,8 +142,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
       nextProps.communes,
       nextProps.villages
     );
-
-    // need a way to check if the right filter args are already in store
     if (
       locationFilterFunction &&
       !(
@@ -290,6 +288,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   public render() {
+    const data = this.state.filteredData.sort(sortFunction);
     const routePaginatorProps: PaginatorProps = {
       endLabel: 'last',
       nextLabel: 'next',
@@ -302,9 +301,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
       pageNeighbours: 3,
       previousLabel: 'previous',
       startLabel: 'first',
-      totalRecords: this.props.smsData.length,
+      totalRecords: data.length,
     };
-    const data = this.state.filteredData.sort(sortFunction);
+
     return (
       <div className="logface-content">
         <div>
