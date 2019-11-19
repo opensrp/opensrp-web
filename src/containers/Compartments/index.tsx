@@ -13,9 +13,7 @@ import {
   USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
 import {
-  COMMUNE,
   COMPARTMENTS,
-  DISTRICT,
   EC_CHILD,
   EC_WOMAN,
   HIGH,
@@ -27,11 +25,13 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
-  PROVINCE,
-  VIETNAM_COUNTRY_LOCATION_ID,
-  VILLAGE,
 } from '../../constants';
-import { getCommune, getDistrict, getProvince } from '../../helpers/utils';
+import {
+  buildHeaderBreadCrumb,
+  getFilterFunctionAndLocationLevel,
+  getLocationId,
+  HeaderBreadCrumb,
+} from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import {
@@ -43,6 +43,7 @@ import {
   getUserId,
   getUserLocations,
   Location,
+  userIdFetched,
   UserLocation,
   userLocationDataFetched,
   userLocationIdFetched,
@@ -73,6 +74,7 @@ interface Props {
   isUserLocationIdFetched: boolean;
   isUserLocationDataFetched: boolean;
   user: User;
+  userIdFetched: boolean;
   userUUID: string;
   addFilterArgs: any;
   removeFilterArgs: any;
@@ -84,16 +86,12 @@ interface Props {
   villages: Location[];
 }
 
-interface HeaderBreadCrumb {
-  location: string;
-  path: string;
-  locationId: string;
-  level: string;
-}
-
 interface State {
   userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
+  locationFilterFunction: (smsData: SmsData) => boolean;
+  userLocationLevel: 0 | 1 | 2 | 3 | 4;
+  filteredData: SmsData[];
 }
 const defaultCompartmentProps: Props = {
   addFilterArgs,
@@ -118,6 +116,7 @@ const defaultCompartmentProps: Props = {
     name: '',
     username: '',
   },
+  userIdFetched: false,
   userLocationData: [],
   userUUID: '',
   villages: [],
@@ -132,183 +131,71 @@ class Compartments extends React.Component<Props, State> {
    * @param state
    */
   public static getDerivedStateFromProps(props: Props, state: State): State {
-    // add filter for this location here
-    let filterFunction;
-    function getLocationId() {
-      const userDetailObj =
-        (props as any).userLocationData.length &&
-        (props as any).userLocationData.find(
-          (d: FlexObject) => d.provider_id === (props as any).userUUID
-        );
-      if (userDetailObj) {
-        return (userDetailObj as any).location_id;
-      }
-    }
-    function locationDataIsAvailable() {
-      return props.villages.length && props.districts.length && props.communes.length;
-    }
-    const userLocationId = getLocationId();
-    if (!props.isUserLocationIdFetched && userLocationId) {
-      props.fetchUserLocationIdActionCreator(userLocationId);
-    }
-    if (Compartments.locationIdIn(userLocationId, props.provinces) && locationDataIsAvailable()) {
-      filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return village
-          ? getProvince(
-              village as (Location & { level: VILLAGE }),
-              props.districts,
-              props.communes
-            ) === userLocationId
-          : false;
-      };
-    } else if (
-      Compartments.locationIdIn(userLocationId, props.districts) &&
-      locationDataIsAvailable()
-    ) {
-      filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return village
-          ? getDistrict(village as (Location & { level: VILLAGE }), props.communes) ===
-              userLocationId
-          : false;
-      };
-    } else if (
-      Compartments.locationIdIn(userLocationId, props.communes) &&
-      locationDataIsAvailable()
-    ) {
-      filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return village
-          ? getCommune(village as (Location & { level: VILLAGE })) === userLocationId
-          : false;
-      };
-    }
+    const userLocationId = getLocationId(props.userLocationData, props.userUUID);
+
+    const { locationLevel, locationFilterFunction } = getFilterFunctionAndLocationLevel(
+      userLocationId,
+      props.provinces,
+      props.districts,
+      props.communes,
+      props.villages
+    );
 
     if (
-      filterFunction &&
+      locationFilterFunction &&
       !(
         props.filterArgsInStore
           .map(element => {
             return element.toString();
           })
-          .indexOf(filterFunction.toString()) > -1
+          .indexOf(locationFilterFunction.toString()) > -1
       )
     ) {
       props.removeFilterArgs();
       props.addFilterArgs(props.filterArgs);
-      props.addFilterArgs([filterFunction as ((smsData: SmsData) => boolean)]);
+      props.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
     }
-    const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
+    const locationPath = buildHeaderBreadCrumb(
+      userLocationId,
+      props.provinces,
+      props.districts,
+      props.communes,
+      props.villages
+    );
+
     if (locationPath) {
       return {
+        filteredData: props.smsData.filter(locationFilterFunction),
         locationAndPath: locationPath,
+        locationFilterFunction,
         userLocationId,
+        userLocationLevel: locationLevel,
       } as State;
     } else {
       return {
+        filteredData: props.smsData.filter(locationFilterFunction),
         locationAndPath: state.locationAndPath,
+        locationFilterFunction,
         userLocationId,
-      };
+        userLocationLevel: locationLevel,
+      } as State;
     }
   }
-
-  /**
-   * returns an object that is used to create the header breadcrumb on the Compartments component
-   * @param locationId - location ID  of where the user is assigned;
-   * this could be a province, district, commune or village
-   * @return { HeaderBreadCrumb } an object representing information
-   * required to build the header breadcrumb and to filter out data
-   */
-  private static buildHeaderBreadCrumb(locationId: string, props: Props): HeaderBreadCrumb {
-    if (Compartments.locationIdIn(locationId, props.provinces)) {
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === locationId
-      );
-      return {
-        level: PROVINCE,
-        location: userProvince!.location_name,
-        locationId: userProvince!.location_id,
-        path: '',
-      };
-    } else if (Compartments.locationIdIn(locationId, props.districts)) {
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === locationId
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: DISTRICT,
-        location: userDistrict!.location_name,
-        locationId: userDistrict!.location_id,
-        path: `${userProvince!.location_name} / `,
-      };
-    } else if (Compartments.locationIdIn(locationId, props.communes)) {
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === locationId
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: COMMUNE,
-        location: userCommune!.location_name,
-        locationId: userCommune!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
-      };
-    } else if (Compartments.locationIdIn(locationId, props.villages)) {
-      const userVillage = props.villages.find(
-        (village: Location) => village.location_id === locationId
-      );
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === userVillage!.parent_id
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: VILLAGE,
-        location: userVillage!.location_name,
-        locationId: userVillage!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
-          userCommune!.location_name
-        } / `,
-      };
-    }
-    return { path: '', location: '', locationId: '', level: '' };
-  }
-
-  private static locationIdIn = (locationId: string, locations: Location[]) => {
-    return locations.find((location: Location) => location.location_id === locationId);
-  };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
+      filteredData: [],
       locationAndPath: {
         level: '',
         location: '',
         locationId: '',
         path: '',
       },
+      locationFilterFunction: () => false,
       userLocationId: '',
+      userLocationLevel: 4,
     };
   }
   public async componentDidMount() {
@@ -320,7 +207,8 @@ class Compartments extends React.Component<Props, State> {
     if (
       (session as any).extraData &&
       (session as any).extraData.oAuth2Data &&
-      (session as any).extraData.oAuth2Data.state === 'opensrp'
+      (session as any).extraData.oAuth2Data.state === 'opensrp' &&
+      !this.props.userIdFetched
     ) {
       const headers: any = new Headers();
       const self: any = this;
@@ -362,74 +250,7 @@ class Compartments extends React.Component<Props, State> {
   }
 
   public render() {
-    const { userLocationId } = this.state;
-    let filteredData: SmsData[];
-    let userLocationLevel = 4; // set to 3 by default.
-
-    let locationFilterFunction: (smsData: SmsData) => boolean = () => {
-      return false;
-    };
-
-    if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
-      userLocationLevel = 0;
-      locationFilterFunction = () => true;
-    } else if (Compartments.locationIdIn(userLocationId, this.props.provinces)) {
-      userLocationLevel = 1;
-      locationFilterFunction = (smsData: SmsData): boolean => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = this.props.villages.find((location: Location) => {
-          return location.location_id === smsData.location_id;
-        });
-        if (village) {
-          return (
-            userLocationId ===
-            getProvince(
-              village as (Location & { level: VILLAGE }),
-              this.props.districts,
-              this.props.communes
-            )
-          );
-        } else {
-          return false;
-        }
-      };
-    } else if (Compartments.locationIdIn(userLocationId, this.props.districts)) {
-      userLocationLevel = 2;
-      locationFilterFunction = (smsData: SmsData): boolean => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = this.props.villages.find((location: Location) => {
-          return location.location_id === smsData.location_id;
-        });
-        if (village) {
-          return (
-            userLocationId ===
-            getDistrict(village as (Location & { level: VILLAGE }), this.props.communes)
-          );
-        } else {
-          return false;
-        }
-      };
-    } else if (Compartments.locationIdIn(userLocationId, this.props.communes)) {
-      userLocationLevel = 3;
-      locationFilterFunction = (smsData: SmsData): boolean => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = this.props.villages.find((location: Location) => {
-          return location.location_id === smsData.location_id;
-        });
-        if (village) {
-          return userLocationId === getCommune(village as (Location & { level: VILLAGE }));
-        } else {
-          return false;
-        }
-      };
-    } else if (Compartments.locationIdIn(userLocationId, this.props.villages)) {
-      userLocationLevel = 4;
-      locationFilterFunction = (smsData: SmsData): boolean => {
-        return userLocationId === smsData.location_id;
-      };
-    }
-
-    filteredData = this.props.smsData.filter(locationFilterFunction);
+    const { userLocationId, filteredData, userLocationLevel } = this.state;
 
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
@@ -711,6 +532,7 @@ const mapStateToprops = (state: Partial<Store>) => {
       ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
       : getSmsData(state),
     user: getUser(state),
+    userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
