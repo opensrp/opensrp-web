@@ -4,13 +4,13 @@ import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import './SearchBox.css';
 
 /** props interface for SearchBox */
-interface SearchBoxProps {
+export interface SearchBoxProps {
   searchCallBack(searchString: string): void;
   placeholder?: string;
 }
 
 /** state interface for SearchBox  */
-interface SearchBoxState {
+export interface SearchBoxState {
   searchText: string;
 }
 
