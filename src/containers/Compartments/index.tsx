@@ -64,7 +64,7 @@ interface Props {
   filterArgsInStore: Array<(smsData: SmsData) => boolean>;
   smsData: SmsData[];
   userLocationData: UserLocation[];
-  session: { [key: string]: any };
+  session: FlexObject;
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
@@ -202,13 +202,14 @@ class Compartments extends React.Component<Props, State> {
     this.props.removeFilterArgs();
     const { fetchLocationsActionCreator, fetchUserLocationsActionCreator } = this.props;
 
-    const { session } = this.props;
-
+    // fetch user UUID from OpenSRP
+    // tslint:disable-next-line: no-shadowed-variable
+    const { session, userIdFetched } = this.props;
     if (
       (session as any).extraData &&
       (session as any).extraData.oAuth2Data &&
       (session as any).extraData.oAuth2Data.state === 'opensrp' &&
-      !this.props.userIdFetched
+      !userIdFetched
     ) {
       const headers: any = new Headers();
       const self: any = this;
@@ -224,7 +225,6 @@ class Compartments extends React.Component<Props, State> {
     }
 
     // fetch user location details
-
     if (!this.props.isUserLocationDataFetched) {
       supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
         fetchUserLocationsActionCreator(result);
