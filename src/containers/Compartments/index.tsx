@@ -532,9 +532,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     session: (state as any).session,
-    smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[])
-      : getSmsData(state),
+    smsData: getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[]),
     user: getUser(state),
     userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
