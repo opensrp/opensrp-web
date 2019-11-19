@@ -79,7 +79,18 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                 </DropdownToggle>
                 <DropdownMenu right={true}>
                   <DropdownItem>
-                    <NavLink to={LOGOUT_URL} className="nav-link" activeClassName="active">
+                    <NavLink
+                      // tslint:disable-next-line: jsx-no-lambda
+                      onClick={() => {
+                        setTimeout(() => {
+                          window.location.href =
+                            'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
+                        }, 700);
+                      }}
+                      to={LOGOUT_URL}
+                      className="nav-link"
+                      activeClassName="active"
+                    >
                       Sign Out
                     </NavLink>
                   </DropdownItem>
