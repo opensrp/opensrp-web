@@ -46,11 +46,13 @@ export interface FetchLocationsAction extends AnyAction {
   type: typeof FETCHED_LOCATION;
 }
 
+/** Interface for FetchUserIdAction */
 export interface FetchUserIdAction extends AnyAction {
   userId: string;
   type: typeof FETCHED_USER_ID;
 }
 
+/** Inteface for FetchuserLocationIdAction */
 export interface FetchUserLocationIdAction extends AnyAction {
   userLocationId: string;
   type: typeof FETCHED_USER_LOCATION_ID;
@@ -61,6 +63,7 @@ export interface FetchUserLocationsAction extends AnyAction {
   type: typeof FETCHED_USER_LOCATION;
 }
 
+/** action of type REMOVE_LOCATIONS */
 export const removeLocations = {
   locations: [],
   type: REMOVE_LOCATIONS,
@@ -77,7 +80,7 @@ export type LocationActionTypes =
 // action creators
 
 /**
- * Fetch Location action creator
+ * FETCH_LOCATION_ACTION creator
  * @param {Location[]} - Location array to add to store
  * @return {FetchLocationAction} - an action to add Location array to store
  */
@@ -88,6 +91,7 @@ export const fetchLocations = (locations: Location[] = []): FetchLocationsAction
   };
 };
 
+/** FETCH_USER_LOCATION action creator */
 export const fetchUserLocations = (
   userLocations: UserLocation[] = []
 ): FetchUserLocationsAction => {
@@ -98,6 +102,7 @@ export const fetchUserLocations = (
   return fetchUserLocationsAction;
 };
 
+/** FETCH_USER_ID action creator */
 export const fetchUserId = (userId: string): FetchUserIdAction => {
   const fetchUserIdAction = {
     type: FETCHED_USER_ID as typeof FETCHED_USER_ID,
@@ -106,6 +111,7 @@ export const fetchUserId = (userId: string): FetchUserIdAction => {
   return fetchUserIdAction;
 };
 
+/** FETCH_USER_LOCATION_ID action creator */
 export const fetchUserLocationId = (userLocationId: string): FetchUserLocationIdAction => {
   const fetchUserLocationIdAction = {
     type: FETCHED_USER_LOCATION_ID as typeof FETCHED_USER_LOCATION_ID,
@@ -121,6 +127,7 @@ interface LocationsState {
   userLocations: { [key: string]: UserLocation };
   userLocationsFetched: boolean;
   userId: string;
+  userIdFetched: boolean;
   userLocationId: string;
   userLocationIdFetched: boolean;
 }
@@ -130,6 +137,7 @@ const initialState: LocationsState = {
   locations: {},
   locationsFetched: false,
   userId: '',
+  userIdFetched: false,
   userLocationId: '',
   userLocationIdFetched: false,
   userLocations: {},
@@ -157,6 +165,7 @@ export default function locationsReducer(
       return {
         ...state,
         userId: action.userId,
+        userIdFetched: true,
       };
     }
     case FETCHED_USER_LOCATION_ID: {
@@ -197,10 +206,14 @@ export function getUserLocations(state: Partial<Store>): UserLocation[] {
   return values((state as any)[reducerName].userLocations);
 }
 
+/**Returns the user UUID that was obtained from OpenSRP
+ */
 export function getUserId(state: Partial<Store>): string {
   return (state as any)[reducerName].userId;
 }
 
+/**Returns the locationId of user
+ */
 export function getUserLocationId(state: Partial<Store>): string {
   return (state as any)[reducerName].userLocationId;
 }
@@ -217,13 +230,15 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
   });
 }
 
-/** Returns true if location data has been fetched from superset
+/**Returns true if location data has been fetched from superset
  * and false otherwise
  */
 export function locationsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].locationsFetched;
 }
 
+/**Returns true if user locationId has been fetched.
+ */
 export function userLocationIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationIdFetched;
 }
@@ -231,7 +246,10 @@ export function userLocationIdFetched(state: Partial<Store>): boolean {
 /** Returns true if user location details has been fetched from superset
  * and false otherwise
  */
-
 export function userLocationDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationsFetched;
+}
+
+export function userIdFetched(state: Partial<Store>): boolean {
+  return (state as any)[reducerName].userIdFetched;
 }
