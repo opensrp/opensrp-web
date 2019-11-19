@@ -67,7 +67,7 @@ interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
   userLocationData: UserLocation[];
-  session: { [key: string]: any };
+  session: FlexObject;
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
