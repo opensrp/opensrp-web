@@ -242,6 +242,8 @@ export function userLocationIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationIdFetched;
 }
 
+/**Returns true if user locationId has been fetched.
+ */
 export function userLocationIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationIdFetched;
 }
