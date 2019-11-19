@@ -2,8 +2,8 @@ import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
-import { VILLAGE } from '../constants';
-import { Location } from '../store/ducks/locations';
+import { VIETNAM_COUNTRY_LOCATION_ID, VILLAGE } from '../constants';
+import { Location, UserLocation } from '../store/ducks/locations';
 import { SmsData } from '../store/ducks/sms_events';
 
 /** Interface for an object that is allowed to have any property */
@@ -71,6 +71,106 @@ export const sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
     return 0;
   }
 };
+
+/**
+ *
+ * @param userLocationData - an array of UserLocation data fetched from a supserset slice
+ * @param userUUID - the UUID of the user logged in obtained from an openSRP endpoitnt.
+ */
+export function getLocationId(userLocationData: UserLocation[], userUUID: string) {
+  const userDetailObj =
+    userLocationData.length &&
+    userLocationData.find(
+      (userLocationDataItem: UserLocation) => userLocationDataItem.provider_id === userUUID
+    );
+  if (userDetailObj) {
+    return userDetailObj.location_id;
+  }
+}
+
+/**
+ *
+ * @param locationId location ID that we want to find in locations
+ * @param locations a list of Location objects from which we want to find a location ID
+ */
+export const locationIdIn = (locationId: string, locations: Location[]) => {
+  return locations.find((location: Location) => location.location_id === locationId);
+};
+
+export interface FilterFunctionAndLocationLevel {
+  locationFilterFunction: (smsData: SmsData) => boolean;
+  locationLevel: number;
+}
+export function getFilterFunctionAndLocationLevel(
+  userLocationId: string,
+  provinces: Location[],
+  districts: Location[],
+  communes: Location[],
+  villages: Location[]
+): FilterFunctionAndLocationLevel {
+  let locationFilterFunction: (smsData: SmsData) => boolean = () => {
+    return false;
+  };
+
+  let userLocationLevel = 4;
+
+  if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
+    userLocationLevel = 0;
+    locationFilterFunction = () => true;
+  } else if (locationIdIn(userLocationId, provinces)) {
+    userLocationLevel = 1;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return (
+          userLocationId ===
+          getProvince(village as (Location & { level: VILLAGE }), districts, communes)
+        );
+      } else {
+        return false;
+      }
+    };
+  } else if (locationIdIn(userLocationId, districts)) {
+    userLocationLevel = 2;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return userLocationId === getDistrict(village as (Location & { level: VILLAGE }), communes);
+      } else {
+        return false;
+      }
+    };
+  } else if (locationIdIn(userLocationId, communes)) {
+    userLocationLevel = 3;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return userLocationId === getCommune(village as (Location & { level: VILLAGE }));
+      } else {
+        return false;
+      }
+    };
+  } else if (locationIdIn(userLocationId, villages)) {
+    userLocationLevel = 4;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      return userLocationId === smsData.location_id;
+    };
+  }
+
+  return {
+    locationFilterFunction,
+    locationLevel: userLocationLevel,
+  } as FilterFunctionAndLocationLevel;
+}
 
 /**
  * Given a village return it's commune's location ID
