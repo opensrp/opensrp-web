@@ -1,8 +1,9 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
+import { Props } from 'react';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
-import { VIETNAM_COUNTRY_LOCATION_ID, VILLAGE } from '../constants';
+import { COMMUNE, DISTRICT, PROVINCE, VIETNAM_COUNTRY_LOCATION_ID, VILLAGE } from '../constants';
 import { Location, UserLocation } from '../store/ducks/locations';
 import { SmsData } from '../store/ducks/sms_events';
 
@@ -28,7 +29,10 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
   }
 }
 
-export function headerShouldNotRender() {
+/**
+ * determines weather the header should be rendered.
+ */
+export function headerShouldNotRender(): boolean {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
 
@@ -44,7 +48,11 @@ export function groupBy(data: FlexObject[], field: string) {
   return dataMap;
 }
 
-export function getNumberSuffix(num: number) {
+/**
+ * Append a number suffix such as 'st' for 1 and 'nd' for 2 and so on.
+ * @param num
+ */
+export function getNumberSuffix(num: number): string {
   const divisionBy10Remaninder: number = num % 10;
   if (divisionBy10Remaninder === 1) {
     return 'st';
@@ -97,10 +105,22 @@ export const locationIdIn = (locationId: string, locations: Location[]) => {
   return locations.find((location: Location) => location.location_id === locationId);
 };
 
+/**
+ * An object representing the filter function and location level for a logged in user.
+ */
 export interface FilterFunctionAndLocationLevel {
   locationFilterFunction: (smsData: SmsData) => boolean;
   locationLevel: number;
 }
+
+/**
+ * calculate the filter function and location level for a logged in user
+ * @param userLocationId - the location ID of the logged in user.
+ * @param provinces - a list of locations of level province
+ * @param districts - a list of locations of level district
+ * @param communes - a list of locations of level commune
+ * @param villages - a list of locations of level village
+ */
 export function getFilterFunctionAndLocationLevel(
   userLocationId: string,
   provinces: Location[],
@@ -211,6 +231,10 @@ export const getProvince = (
     : null;
 };
 
+/**
+ * Filter smsData by patientID and then sort.
+ * @param props
+ */
 export const filterByPatientAndSort = (props: {
   patientId: string;
   smsData: SmsData[];
@@ -230,6 +254,93 @@ export const filterByPatientAndSort = (props: {
     });
 };
 
+/**
+ * get number of days since a certain day specified by a date string.
+ * @param date
+ */
 export const getNumberOfDaysSinceDate = (date: string): number => {
   return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
 };
+
+/**
+ * an object representing information required to build the header breadcrumb and to filter out data
+ */
+export interface HeaderBreadCrumb {
+  location: string;
+  path: string;
+  locationId: string;
+  level: string;
+}
+
+/**
+ * returns an object that is used to create the header breadcrumb on the Compartments component
+ * @param locationId - location ID  of where the user is assigned;
+ * this could be a province, district, commune or village
+ * @return { HeaderBreadCrumb }
+ */
+export function buildHeaderBreadCrumb(
+  locationId: string,
+  provinces: Location[],
+  districts: Location[],
+  communes: Location[],
+  villages: Location[]
+): HeaderBreadCrumb {
+  if (locationIdIn(locationId, provinces)) {
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === locationId
+    );
+    return {
+      level: PROVINCE,
+      location: userProvince!.location_name,
+      locationId: userProvince!.location_id,
+      path: '',
+    };
+  } else if (locationIdIn(locationId, districts)) {
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === locationId
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: DISTRICT,
+      location: userDistrict!.location_name,
+      locationId: userDistrict!.location_id,
+      path: `${userProvince!.location_name} / `,
+    };
+  } else if (locationIdIn(locationId, communes)) {
+    const userCommune = communes.find((commune: Location) => commune.location_id === locationId);
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === userCommune!.parent_id
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: COMMUNE,
+      location: userCommune!.location_name,
+      locationId: userCommune!.location_id,
+      path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
+    };
+  } else if (locationIdIn(locationId, villages)) {
+    const userVillage = villages.find((village: Location) => village.location_id === locationId);
+    const userCommune = communes.find(
+      (commune: Location) => commune.location_id === userVillage!.parent_id
+    );
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === userCommune!.parent_id
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: VILLAGE,
+      location: userVillage!.location_name,
+      locationId: userVillage!.location_id,
+      path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
+        userCommune!.location_name
+      } / `,
+    };
+  }
+  return { path: '', location: '', locationId: '', level: '' };
+}

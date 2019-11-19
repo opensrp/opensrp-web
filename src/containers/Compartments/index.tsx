@@ -13,9 +13,7 @@ import {
   USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
 import {
-  COMMUNE,
   COMPARTMENTS,
-  DISTRICT,
   EC_CHILD,
   EC_WOMAN,
   HIGH,
@@ -27,13 +25,12 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
-  PROVINCE,
-  VILLAGE,
 } from '../../constants';
 import {
+  buildHeaderBreadCrumb,
   getFilterFunctionAndLocationLevel,
   getLocationId,
-  locationIdIn,
+  HeaderBreadCrumb,
 } from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
@@ -87,13 +84,6 @@ interface Props {
   districts: Location[];
   communes: Location[];
   villages: Location[];
-}
-
-interface HeaderBreadCrumb {
-  location: string;
-  path: string;
-  locationId: string;
-  level: string;
 }
 
 interface State {
@@ -165,7 +155,14 @@ class Compartments extends React.Component<Props, State> {
       props.addFilterArgs(props.filterArgs);
       props.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
     }
-    const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
+    const locationPath = buildHeaderBreadCrumb(
+      userLocationId,
+      props.provinces,
+      props.districts,
+      props.communes,
+      props.villages
+    );
+
     if (locationPath) {
       return {
         filteredData: props.smsData.filter(locationFilterFunction),
@@ -183,78 +180,6 @@ class Compartments extends React.Component<Props, State> {
         userLocationLevel: locationLevel,
       } as State;
     }
-  }
-
-  /**
-   * returns an object that is used to create the header breadcrumb on the Compartments component
-   * @param locationId - location ID  of where the user is assigned;
-   * this could be a province, district, commune or village
-   * @return { HeaderBreadCrumb } an object representing information
-   * required to build the header breadcrumb and to filter out data
-   */
-  private static buildHeaderBreadCrumb(locationId: string, props: Props): HeaderBreadCrumb {
-    if (locationIdIn(locationId, props.provinces)) {
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === locationId
-      );
-      return {
-        level: PROVINCE,
-        location: userProvince!.location_name,
-        locationId: userProvince!.location_id,
-        path: '',
-      };
-    } else if (locationIdIn(locationId, props.districts)) {
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === locationId
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: DISTRICT,
-        location: userDistrict!.location_name,
-        locationId: userDistrict!.location_id,
-        path: `${userProvince!.location_name} / `,
-      };
-    } else if (locationIdIn(locationId, props.communes)) {
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === locationId
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: COMMUNE,
-        location: userCommune!.location_name,
-        locationId: userCommune!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
-      };
-    } else if (locationIdIn(locationId, props.villages)) {
-      const userVillage = props.villages.find(
-        (village: Location) => village.location_id === locationId
-      );
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === userVillage!.parent_id
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: VILLAGE,
-        location: userVillage!.location_name,
-        locationId: userVillage!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
-          userCommune!.location_name
-        } / `,
-      };
-    }
-    return { path: '', location: '', locationId: '', level: '' };
   }
 
   constructor(props: Props) {
