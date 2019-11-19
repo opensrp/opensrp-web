@@ -7,9 +7,9 @@
   width: 100%;
 }
 
-.villageDataRow {
+/* .villageDataRow {
   margin-top: 3% !important;
-}
+} */
 
 .village td:nth-of-type(2),
 .village th:nth-of-type(2),

@@ -2,6 +2,12 @@
   padding: 0;
 }
 
+.compartment-data-table {
+  margin-top: 32px;
+  padding-left: 24px;
+  padding-right: 48px;
+}
+
 .compartment-data-table .table-card {
   background-color: #ffffff;
   border: 1px solid #dadce0;
@@ -36,7 +42,7 @@
 }
 
 .back-page > span > span {
-  padding-left: 15px;
+  padding-left: 12px;
 }
 
 .compartment-data-table .ReactTable .rt-thead.-header {
@@ -84,6 +90,11 @@
 
 .compartment-data-table > h1 {
   padding: 15px 0;
+  color: #001429;
+  font-family: Roboto;
+  font-size: 28px;
+  letter-spacing: -0.18px;
+  line-height: 34px;
 }
 
 .compartment-data-table #header {
