@@ -48,6 +48,7 @@ import {
   getUserId,
   getUserLocations,
   Location,
+  userIdFetched,
   UserLocation,
   userLocationDataFetched,
   userLocationIdFetched,
@@ -78,6 +79,7 @@ interface Props {
   isUserLocationIdFetched: boolean;
   isUserLocationDataFetched: boolean;
   user: User;
+  userIdFetched: boolean;
   userUUID: string;
   addFilterArgs: any;
   removeFilterArgs: any;
@@ -126,6 +128,7 @@ const defaultCompartmentProps: Props = {
     name: '',
     username: '',
   },
+  userIdFetched: false,
   userLocationData: [],
   userUUID: '',
   villages: [],
@@ -281,7 +284,8 @@ class Compartments extends React.Component<Props, State> {
     if (
       (session as any).extraData &&
       (session as any).extraData.oAuth2Data &&
-      (session as any).extraData.oAuth2Data.state === 'opensrp'
+      (session as any).extraData.oAuth2Data.state === 'opensrp' &&
+      !this.props.userIdFetched
     ) {
       const headers: any = new Headers();
       const self: any = this;
@@ -605,6 +609,7 @@ const mapStateToprops = (state: Partial<Store>) => {
       ? getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[])
       : getSmsData(state),
     user: getUser(state),
+    userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
