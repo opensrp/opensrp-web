@@ -157,8 +157,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
       nextProps.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
     }
 
+    const { riskLabel, locationLabel, typeLabel } = prevState;
     if (
       !prevState.filteredData.length &&
+      !riskLabel.length &&
+      !locationLabel.length &&
+      !typeLabel.length &&
       !(
         document.getElementById('input') &&
         (document.getElementById('input') as HTMLInputElement)!.value
@@ -471,29 +475,56 @@ export class LogFace extends React.Component<PropsInterface, State> {
     e: React.MouseEvent,
     data: SmsData[],
     field: string,
-    lowerCase: boolean
+    lowerCase: boolean,
+    type?: string
   ) => {
-    return data.filter((dataItem: FlexObject) => {
-      const val = lowerCase ? dataItem[field].toLowerCase() : dataItem[field];
-      return val.includes((e.target as HTMLInputElement).innerText);
+    const allLabels = [this.state.riskLabel, this.state.locationLabel, this.state.typeLabel];
+    switch (type) {
+      case 'risk':
+        allLabels.splice(0, 1, (e.target as HTMLInputElement).innerText);
+        break;
+      case 'location':
+        allLabels.splice(1, 1, (e.target as HTMLInputElement).innerText);
+        break;
+      case 'type':
+        allLabels.splice(2, 1, (e.target as HTMLInputElement).innerText);
+        break;
+      default:
+      // handle this
+    }
+    const dataFiltered = data.filter((dataItem: FlexObject) => {
+      return (
+        (allLabels[0].length && allLabels[0] !== ALL
+          ? dataItem.logface_risk.toLowerCase().includes(allLabels[0])
+          : allLabels[0] === ALL || !allLabels[0].length) &&
+        (allLabels[1].length && allLabels[1] !== ALL
+          ? dataItem.health_worker_location_name.includes(allLabels[1])
+          : allLabels[1] === ALL || !allLabels[1].length) &&
+        (allLabels[2].length && allLabels[2] !== ALL
+          ? dataItem.sms_type.includes(allLabels[2])
+          : allLabels[2] === ALL || !allLabels[2].length)
+      );
     });
+    return dataFiltered;
   };
 
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
+      filteredData: this.getFilteredData(e, this.props.smsData, 'logface_risk', true, 'risk'),
       riskLabel: (e.target as HTMLInputElement).innerText,
     });
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
+      filteredData: this.getFilteredData(
+        e,
+        this.props.smsData,
+        'health_worker_location_name',
+        false,
+        'location'
+      ),
       locationLabel: (e.target as HTMLInputElement).innerText,
     });
   };
@@ -512,9 +543,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'sms_type', false),
+      filteredData: this.getFilteredData(e, this.props.smsData, 'sms_type', false, 'type'),
       typeLabel: (e.target as HTMLInputElement).innerText,
     });
   };
