@@ -80,7 +80,6 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                 <DropdownMenu right={true}>
                   <DropdownItem>
                     <NavLink
-                      // tslint:disable-next-line: jsx-no-lambda
                       onClick={this.handleLogout}
                       to={LOGOUT_URL}
                       className="nav-link"
