@@ -132,16 +132,16 @@ class Compartments extends React.Component<Props, State> {
    * @param state
    */
   public static getDerivedStateFromProps(props: Props, state: State): State {
-    // add filter for this location here
-    let filterFunction;
+    let filterFunction = (smsData: SmsData) => false;
     function getLocationId() {
       const userDetailObj =
-        (props as any).userLocationData.length &&
-        (props as any).userLocationData.find(
-          (d: FlexObject) => d.provider_id === (props as any).userUUID
+        props.userLocationData.length &&
+        props.userLocationData.find(
+          (userLocationDataItem: UserLocation) =>
+            userLocationDataItem.provider_id === props.userUUID
         );
       if (userDetailObj) {
-        return (userDetailObj as any).location_id;
+        return userDetailObj.location_id;
       }
     }
     function locationDataIsAvailable() {
