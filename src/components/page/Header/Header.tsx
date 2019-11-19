@@ -81,12 +81,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
                   <DropdownItem>
                     <NavLink
                       // tslint:disable-next-line: jsx-no-lambda
-                      onClick={() => {
-                        setTimeout(() => {
-                          window.location.href =
-                            'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
-                        }, 700);
-                      }}
+                      onClick={this.handleLogout}
                       to={LOGOUT_URL}
                       className="nav-link"
                       activeClassName="active"
@@ -105,6 +100,17 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
         </Collapse>
       </Navbar>
     );
+  }
+
+  private handleLogout() {
+    const logoutURL: string = 'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
+    const logoutWindow = (window as any).open(logoutURL);
+    const timer: NodeJS.Timeout = setInterval(() => {
+      (logoutWindow as any).close();
+      if ((logoutWindow as any).closed) {
+        clearInterval(timer);
+      }
+    }, 20);
   }
 
   private toggle() {
