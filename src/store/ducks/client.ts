@@ -58,7 +58,6 @@ export type ClientActionTypes =
 /** interface for client state in redux store */
 interface ClientState {
   clientById: { [key: string]: Client };
-  eventsById: { [key: string]: Event };
   membersById: { [key: string]: Client };
 }
 
@@ -68,7 +67,6 @@ export type ImmutableClientState = ClientState & SeamlessImmutable.ImmutableObje
 /** initial clients-state state */
 const initialState: ImmutableClientState = SeamlessImmutable({
   clientById: {},
-  eventsById: {},
   membersById: {},
 });
 
@@ -110,22 +108,6 @@ export function getClientById(state: Partial<Store>): { [key: string]: Client } 
 export function getClient(state: Partial<Store>): Client {
   const client = getClientById(state);
   return values(client)[0];
-}
-
-/** returns the events of the client in the store by their ids
- * @param {Partial<Store>} state - the redux store
- * @return { Event } - event objects as values, respective ids as keys
- */
-export function getEventsById(state: Partial<Store>): { [key: string]: Event } {
-  return (state as any)[reducerName].eventsById;
-}
-
-/** returns the events of the client in the store as array
- * @param {Partial<Store>} state - the redux store
- * @return { Event } - events array
- */
-export function getEventsArray(state: Partial<Store>): Event[] {
-  return values((state as any)[reducerName].eventsById);
 }
 
 /** returns the members of the client in the store by their ids
