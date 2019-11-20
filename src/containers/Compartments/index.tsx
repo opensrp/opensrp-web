@@ -22,6 +22,7 @@ import {
   NUTRITION,
   PREGNANCY,
   PROVINCE,
+  TYPE_SMS_FILTER_FUNCTION,
   VILLAGE,
 } from '../../constants';
 import { getCommune, getDistrict, getProvince } from '../../helpers/utils';
@@ -40,14 +41,14 @@ import {
 import './index.css';
 
 interface Props {
-  filterArgsInStore: Array<(smsData: SmsData) => boolean>;
+  filterArgsInStore: TYPE_SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   dataFetched: boolean;
   addFilterArgs: any;
   removeFilterArgs: any;
-  filterArgs: Array<(smsData: SmsData) => boolean>;
+  filterArgs: TYPE_SMS_FILTER_FUNCTION[];
   module: PREGNANCY | NBC_AND_PNC | NUTRITION | '';
   provinces: Location[];
   districts: Location[];
@@ -151,7 +152,7 @@ class Compartments extends React.Component<Props, State> {
     ) {
       props.removeFilterArgs();
       props.addFilterArgs(props.filterArgs);
-      props.addFilterArgs([filterFunction as ((smsData: SmsData) => boolean)]);
+      props.addFilterArgs([filterFunction as TYPE_SMS_FILTER_FUNCTION]);
     }
     const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
     if (locationPath) {
@@ -307,7 +308,7 @@ class Compartments extends React.Component<Props, State> {
               (smsData: SmsData) => {
                 return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
               },
-            ] as Array<(smsData: SmsData) => boolean>,
+            ] as TYPE_SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
@@ -324,7 +325,7 @@ class Compartments extends React.Component<Props, State> {
               (smsData: SmsData) => {
                 return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
               },
-            ] as Array<(smsData: SmsData) => boolean>,
+            ] as TYPE_SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
@@ -346,7 +347,7 @@ class Compartments extends React.Component<Props, State> {
               (smsData: SmsData) => {
                 return smsData.client_type === EC_CHILD;
               },
-            ] as Array<(smsData: SmsData) => boolean>,
+            ] as TYPE_SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
@@ -365,7 +366,7 @@ class Compartments extends React.Component<Props, State> {
               (smsData: SmsData) => {
                 return smsData.client_type === EC_WOMAN;
               },
-            ] as Array<(smsData: SmsData) => boolean>,
+            ] as TYPE_SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
@@ -527,7 +528,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     filterArgsInStore: getFilterArgs(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
+      ? getFilteredSmsData(state, getFilterArgs(state) as TYPE_SMS_FILTER_FUNCTION[])
       : getSmsData(state),
     villages: getLocationsOfLevel(state, 'Village'),
   };

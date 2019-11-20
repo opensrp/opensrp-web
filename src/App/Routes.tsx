@@ -41,6 +41,7 @@ import {
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
   PREGNANCY_REGISTRATION,
+  TYPE_SMS_FILTER_FUNCTION,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
 import ConnectedChildPatientDetails from '../containers/ChildPatientDetails';
@@ -141,7 +142,7 @@ export const Routes = (props: RoutesProps) => {
                     (smsData: SmsData) => {
                       return smsData.sms_type === PREGNANCY_REGISTRATION;
                     },
-                  ] as Array<(smsData: SmsData) => boolean>
+                  ] as TYPE_SMS_FILTER_FUNCTION[]
                 }
                 module={PREGNANCY}
               />
@@ -159,7 +160,7 @@ export const Routes = (props: RoutesProps) => {
                     (smsData: SmsData) => {
                       return smsData.sms_type === NEWBORN_REPORT;
                     },
-                  ] as Array<(smsData: SmsData) => boolean>
+                  ] as TYPE_SMS_FILTER_FUNCTION[]
                 }
                 module={NBC_AND_PNC}
               />

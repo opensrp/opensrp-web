@@ -6,7 +6,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
-import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_TYPE } from '../../../constants';
+import { PREGNANCY, PREGNANCY_REGISTRATION, TYPE_SMS_FILTER_FUNCTION } from '../../../constants';
 import locationsReducer, {
   reducerName as locationsReducerName,
 } from '../../../store/ducks/locations';
@@ -41,7 +41,7 @@ describe('Compartments', () => {
                 (smsData: SmsData) => {
                   return smsData.sms_type === PREGNANCY_REGISTRATION;
                 },
-              ] as Array<(smsData: SmsData) => boolean>
+              ] as TYPE_SMS_FILTER_FUNCTION[]
             }
             module={PREGNANCY}
           />
@@ -72,7 +72,7 @@ describe('Compartments', () => {
                 (smsData: SmsData) => {
                   return smsData.sms_type === PREGNANCY_REGISTRATION;
                 },
-              ] as Array<(smsData: SmsData) => boolean>
+              ] as TYPE_SMS_FILTER_FUNCTION[]
             }
             module={PREGNANCY}
           />

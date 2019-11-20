@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { TYPE_SMS_FILTER_FUNCTION } from '../../../constants';
 import { smsDataFixtures } from '../../../containers/Compartments/test/fixtures';
 import store from '../../index';
 import reducer, {
@@ -42,11 +43,11 @@ describe('reducers/sms_events/fetchSms action creator and selector', () => {
 
 describe('reducers/sms_events/addFilterArgs action creator and selector', () => {
   it('must work correctly', () => {
-    const filterArgs: Array<(smsData: SmsData) => boolean> = [
+    const filterArgs: TYPE_SMS_FILTER_FUNCTION[] = [
       (smsData: SmsData) => {
         return smsData.height !== 48;
       },
-    ] as Array<(smsData: SmsData) => boolean>;
+    ] as TYPE_SMS_FILTER_FUNCTION[];
     store.dispatch(addFilterArgs(filterArgs));
     expect(getFilterArgs(store.getState())).toEqual(filterArgs);
     store.dispatch(removeFilterArgs());
@@ -76,7 +77,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height === 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height === 48;
@@ -89,7 +90,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height <= 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height <= 48;
@@ -102,7 +103,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height >= 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height >= 48;
@@ -115,7 +116,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height !== 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height !== 48;
@@ -128,7 +129,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height > 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height > 48;
@@ -141,7 +142,7 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height < 48;
         },
-      ] as Array<(smsData: SmsData) => boolean>)
+      ] as TYPE_SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height < 48;

@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { SmsData } from './store/ducks/sms_events';
 
 // internal urls
 export const NBC_AND_PNC_URL = '/nbc_and_pnc';
@@ -221,6 +222,9 @@ export const PREGNANCY_ANALYSIS = 'Pregnancy - Analysis';
 export type PREGNANCY_ANALYSIS = typeof PREGNANCY_ANALYSIS;
 export const NUTRITION_ANALYSIS = 'Nutrition - Analysis';
 export type NUTRITION_ANALYSIS = typeof NUTRITION_ANALYSIS;
+
+// typings
+export type TYPE_SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
 
 // sms events fields
 export const AGE = 'age';

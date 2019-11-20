@@ -33,6 +33,7 @@ import {
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
   TOTAL,
+  TYPE_SMS_FILTER_FUNCTION,
   UP,
   VILLAGE,
 } from '../../constants';
@@ -643,7 +644,7 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
     smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as Array<(smsData: SmsData) => boolean>)
+      ? getFilteredSmsData(state, getFilterArgs(state) as TYPE_SMS_FILTER_FUNCTION[])
       : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),
