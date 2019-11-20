@@ -89,7 +89,7 @@ describe('components/page/SubMenu', () => {
     wrapper.unmount();
   });
 
-  it('stimulates click and calls mock function properly', () => {
+  it('simulates click and calls mock function properly', () => {
     const mockCallBack = jest.fn();
     const mock = jest.fn();
     const pathname = '/somePath';
@@ -110,5 +110,49 @@ describe('components/page/SubMenu', () => {
     wrapper.find('Nav .side-collapse-nav').simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(1);
     wrapper.unmount();
+  });
+
+  it('simulates click and calls mock function with correct value', () => {
+    const mockCallBack = jest.fn();
+    const mock = jest.fn();
+    const pathname = '/somePath';
+    const props = {
+      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
+      collapsedModuleLabel: 'Admin',
+      history,
+      location: { pathname },
+      match: mock,
+      parentNav: { icon: ['fas', 'cog'] as IconProp, label: 'Admin' },
+      setCollapsedModuleLabel: mockCallBack,
+    };
+    const wrapper = mount(
+      <Router history={history}>
+        <SubMenu {...props} />
+      </Router>
+    );
+    wrapper.find('Nav .side-collapse-nav').simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
+    expect(mockCallBack.mock.calls).toEqual([['']]);
+    wrapper.unmount();
+  });
+
+  it('module link is rendered correctly when it has url', () => {
+    const mock: any = jest.fn();
+    const props = {
+      childNavs: [],
+      collapsedModuleLabel: 'Reports',
+      history,
+      location: mock,
+      match: mock,
+      parentNav: { url: '/reports', icon: ['far', 'user'] as IconProp, label: 'Reports' },
+    };
+    const wrapper = mount(
+      <Router history={history}>
+        <SubMenu {...props} />
+      </Router>
+    );
+    // the parent Nav should be rendered as a navigational link
+    const parentNav = wrapper.find('#module-link NavLink');
+    expect(parentNav.length).toEqual(1);
   });
 });

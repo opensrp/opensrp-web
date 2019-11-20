@@ -40,7 +40,7 @@ export interface SubMenuProps {
   /** array of the pageNavigation links grouped under this navigation module */
   childNavs: PageLink[];
   /** string literal with the label value of currently collapsed module navigation link */
-  collapsedModuleLabel: string;
+  collapsedModuleLabel: string | null;
   /** callback to parent component changes the collapsedModuleLabel
    *  entry in the parent component
    */
@@ -105,7 +105,7 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
           className="side-collapse-nav"
           onClick={this.setModuleLabel}
         >
-          <NavItem>
+          <NavItem id="module-link">
             {parentNav.url ? (
               <NavLink to={parentNav.url} className={moduleLinkClassName}>
                 {moduleLinkJsx}
@@ -139,10 +139,13 @@ export class SubMenu extends React.Component<subMenuPropsTypes, SubMenuState> {
 
   /** updates parent component with the label of the currently collapsed navigation module */
   private setModuleLabel = () => {
-    const labelAlreadySet = this.props.collapsedModuleLabel === this.props.parentNav.label;
-    labelAlreadySet && this.props.setCollapsedModuleLabel !== undefined
-      ? this.props.setCollapsedModuleLabel('')
-      : this.props.setCollapsedModuleLabel!(this.props.parentNav.label);
+    const { setCollapsedModuleLabel, collapsedModuleLabel, parentNav } = this.props;
+
+    const isLabelSet = collapsedModuleLabel === parentNav.label;
+    // if label is already set then this will behave as a toggle
+    isLabelSet && setCollapsedModuleLabel !== undefined
+      ? setCollapsedModuleLabel('')
+      : setCollapsedModuleLabel!(this.props.parentNav.label);
   };
 }
 
