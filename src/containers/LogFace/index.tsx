@@ -59,7 +59,6 @@ import TestReducer, {
   fetchSms,
   getFilterArgs,
   getFilteredSmsData,
-  getSmsData,
   reducerName,
   SmsData,
   smsDataFetched,
