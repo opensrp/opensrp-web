@@ -57,7 +57,6 @@ import {
   fetchSms,
   getFilterArgs,
   getFilteredSmsData,
-  getSmsData,
   removeFilterArgs,
   SmsData,
   smsDataFetched,
