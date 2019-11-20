@@ -9,16 +9,14 @@ import {
   LOW,
   LOW_RISK,
   NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NUTRITION,
-  NUTRITION_COMPARTMENTS_URL,
   PREGNANCY,
-  PREGNANCY_COMPARTMENTS_URL,
   SMS_FILTER_FUNCTION,
 } from '../../constants';
+import { getModuleLink } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -33,28 +31,6 @@ interface Props {
   className?: string;
   userLocationId: string;
   permissionLevel: number;
-}
-
-/**
- * Get a link to any of the modules compartments.
- * @param module string representing the module whose link you would like to get
- * @return link to module compartment
- */
-export function getModuleLink(
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
-): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
-  switch (module) {
-    case PREGNANCY:
-      return PREGNANCY_COMPARTMENTS_URL;
-    case NUTRITION:
-      return NUTRITION_COMPARTMENTS_URL;
-    case NBC_AND_PNC_WOMAN:
-      return NBC_AND_PNC_COMPARTMENTS_URL;
-    case NBC_AND_PNC_CHILD:
-      return NBC_AND_PNC_COMPARTMENTS_URL;
-    default:
-      return '';
-  }
 }
 
 function DataCircleCard({

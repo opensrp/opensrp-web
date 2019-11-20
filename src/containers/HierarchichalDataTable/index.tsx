@@ -8,7 +8,6 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
-import { getModuleLink } from '../../components/DataCircleCard';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -38,6 +37,7 @@ import {
   VILLAGE,
 } from '../../constants';
 import { locationDataIsAvailable } from '../../helpers/utils';
+import { getModuleLink } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,

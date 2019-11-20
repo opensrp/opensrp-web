@@ -2,7 +2,20 @@ import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
-import { COMMUNE, DISTRICT, PROVINCE, VIETNAM_COUNTRY_LOCATION_ID, VILLAGE } from '../constants';
+import {
+  COMMUNE,
+  DISTRICT,
+  NBC_AND_PNC_CHILD,
+  NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
+  NUTRITION,
+  NUTRITION_COMPARTMENTS_URL,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
+  PROVINCE,
+  VIETNAM_COUNTRY_LOCATION_ID,
+  VILLAGE,
+} from '../constants';
 import { Location, UserLocation } from '../store/ducks/locations';
 import { SmsData } from '../store/ducks/sms_events';
 
@@ -362,4 +375,26 @@ export function buildHeaderBreadCrumb(
     };
   }
   return { path: '', location: '', locationId: '', level: '' };
+}
+
+/**
+ * Get a link to any of the modules compartments.
+ * @param module string representing the module whose link you would like to get
+ * @return link to module compartment
+ */
+export function getModuleLink(
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
+): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
+  switch (module) {
+    case PREGNANCY:
+      return PREGNANCY_COMPARTMENTS_URL;
+    case NUTRITION:
+      return NUTRITION_COMPARTMENTS_URL;
+    case NBC_AND_PNC_WOMAN:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    case NBC_AND_PNC_CHILD:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    default:
+      return '';
+  }
 }
