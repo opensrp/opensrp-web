@@ -103,12 +103,12 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
 
   private handleLogout() {
     const logoutURL: string = 'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
-    const logoutWindow = (window as any).open(logoutURL);
+    const logoutWindow: Window | null = window.open(logoutURL);
     const timer: NodeJS.Timeout = setInterval(() => {
-      (logoutWindow as any).close();
-      if ((logoutWindow as any).closed) {
-        clearInterval(timer);
+      if (logoutWindow) {
+        logoutWindow.close();
       }
+      clearInterval(timer);
     }, 20);
   }
 
