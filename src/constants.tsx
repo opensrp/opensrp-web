@@ -224,7 +224,7 @@ export const NUTRITION_ANALYSIS = 'Nutrition - Analysis';
 export type NUTRITION_ANALYSIS = typeof NUTRITION_ANALYSIS;
 
 // typings
-export type TYPE_SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
+export type SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
 
 // sms events fields
 export const AGE = 'age';

@@ -17,7 +17,7 @@ import {
   NUTRITION_COMPARTMENTS_URL,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
-  TYPE_SMS_FILTER_FUNCTION,
+  SMS_FILTER_FUNCTION,
 } from '../../constants';
 import { addFilterArgs, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
@@ -28,7 +28,7 @@ interface Props {
   noRisk: number;
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
-  filterArgs?: TYPE_SMS_FILTER_FUNCTION[];
+  filterArgs?: SMS_FILTER_FUNCTION[];
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   className?: string;
 }

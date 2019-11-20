@@ -1,6 +1,6 @@
 import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
-import { TYPE_SMS_FILTER_FUNCTION } from '../../constants';
+import { SMS_FILTER_FUNCTION } from '../../constants';
 
 /** The reducer name */
 export const reducerName = 'SmsReducer';
@@ -60,7 +60,7 @@ export interface RemoveFilterArgs extends AnyAction {
 
 /** Interface for AddFilterArgs */
 export interface AddFilterArgsAction extends AnyAction {
-  filterArgs: TYPE_SMS_FILTER_FUNCTION[];
+  filterArgs: SMS_FILTER_FUNCTION[];
   type: typeof ADD_FILTER_ARGS;
 }
 
@@ -92,7 +92,7 @@ export const removeSms: RemoveSmsAction = {
 };
 
 /** Add filter args action creator */
-export const addFilterArgs = (filterArgs: TYPE_SMS_FILTER_FUNCTION[]): AddFilterArgsAction => {
+export const addFilterArgs = (filterArgs: SMS_FILTER_FUNCTION[]): AddFilterArgsAction => {
   return {
     filterArgs,
     type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
@@ -108,7 +108,7 @@ export const removeFilterArgs = (): RemoveFilterArgs => {
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
-  filterArgs: TYPE_SMS_FILTER_FUNCTION[] | null;
+  filterArgs: SMS_FILTER_FUNCTION[] | null;
 }
 
 /** initial sms-state state */
@@ -174,7 +174,7 @@ export function smsDataFetched(state: Partial<Store>): boolean {
  */
 export function getFilteredSmsData(
   state: Partial<Store>,
-  filterArgs: TYPE_SMS_FILTER_FUNCTION[]
+  filterArgs: SMS_FILTER_FUNCTION[]
 ): SmsData[] {
   // in the future we may have to modify this selector to receive more than one FilterArgs object
   // i.e an array of these objects and then each one of them, one after another to do the filtering
@@ -189,7 +189,7 @@ export function getFilteredSmsData(
 }
 
 /** Returns the filterArgs currently in the store */
-export function getFilterArgs(state: Partial<Store>): TYPE_SMS_FILTER_FUNCTION[] {
+export function getFilterArgs(state: Partial<Store>): SMS_FILTER_FUNCTION[] {
   if ((state as any)[reducerName].filterArgs) {
     return (state as any)[reducerName].filterArgs;
   } else {
