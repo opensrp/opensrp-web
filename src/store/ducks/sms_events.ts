@@ -168,17 +168,14 @@ export function smsDataFetched(state: Partial<Store>): boolean {
 /**
  * Returns a list of SmsData that has been filtered based on the value
  * of a field specified.
- * @param {Partil<Store>} state - the state of the SmsReducer redux store
- * @param {field} string - the name of the field to filter by
- * @param {value} string | number - the string or number value of the field specified
+ * @param {Partil<Store>} state - the state of the SmsReducer redux store.
+ * @param {SMS_FILTER_FUNCTION[]}  filterArgs - an array of SMS_FILTER_FUNCTIONs.
+ * @return {SmsData[]} - an array of SmsData objects that have passed the filtration criteria of all the filterArgs.
  */
 export function getFilteredSmsData(
   state: Partial<Store>,
   filterArgs: SMS_FILTER_FUNCTION[]
 ): SmsData[] {
-  // in the future we may have to modify this selector to receive more than one FilterArgs object
-  // i.e an array of these objects and then each one of them, one after another to do the filtering
-
   let results = values((state as any)[reducerName].smsData);
   for (const filterArgsIndex in filterArgs) {
     if (filterArgsIndex) {
