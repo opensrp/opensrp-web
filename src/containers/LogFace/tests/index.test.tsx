@@ -8,9 +8,21 @@ import { Provider } from 'react-redux';
 import ConnectedLogFace from '..';
 import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../../constants';
 import store from '../../../store';
-import reducer, { reducerName } from '../../../store/ducks/locations';
+import reducer, {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocations,
+  reducerName,
+} from '../../../store/ducks/locations';
 import { fetchSms } from '../../../store/ducks/sms_events';
+import {
+  communes,
+  districts,
+  provinces,
+  villages,
+} from '../../HierarchichalDataTable/test/fixtures';
 import { smsSlice } from './fixtures';
+import { userLocations } from './userLocationFixtures';
 
 reducerRegistry.register(reducerName, reducer);
 
@@ -18,6 +30,12 @@ describe('components/ConnectedHeader', () => {
   const props = { header: 'Pregnancy' };
   beforeEach(() => {
     jest.resetAllMocks();
+    store.dispatch(fetchLocations(provinces));
+    store.dispatch(fetchLocations(districts));
+    store.dispatch(fetchLocations(communes));
+    store.dispatch(fetchLocations(villages));
+    store.dispatch(fetchUserLocations(userLocations));
+    store.dispatch(fetchUserId('515ad0e9-fccd-4cab-8861-0ef3ecb831e0'));
   });
 
   it('renders without crashing', () => {
