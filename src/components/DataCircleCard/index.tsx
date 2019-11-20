@@ -33,7 +33,14 @@ interface Props {
   className?: string;
 }
 
-export function getModuleLink(module: string) {
+/**
+ * Get a link to any of the modules compartments.
+ * @param module string representing the module whose link you would like to get
+ * @return link to module compartment
+ */
+export function getModuleLink(
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
+): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
   switch (module) {
     case PREGNANCY:
       return PREGNANCY_COMPARTMENTS_URL;
