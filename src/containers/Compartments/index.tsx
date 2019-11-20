@@ -25,10 +25,7 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
-  PROVINCE,
   SMS_FILTER_FUNCTION,
-  VIETNAM_COUNTRY_LOCATION_ID,
-  VILLAGE,
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
