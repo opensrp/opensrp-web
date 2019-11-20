@@ -14,9 +14,8 @@ import {
   PREVIOUS_PREGNANCY_RISK,
   RISK_CATEGORY,
 } from '../../constants';
-import { getNumberOfDaysSinceDate } from '../../helpers/utils';
+import { getModuleLink, getNumberOfDaysSinceDate } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
-import { getModuleLink } from '../DataCircleCard';
 import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
 import RiskColoring from '../RiskColoring';
 import './index.css';
