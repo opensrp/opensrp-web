@@ -466,10 +466,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
     }
   }
 
-  private isAllSelected = (e: React.MouseEvent) => {
-    return (e.target as HTMLInputElement).innerText === ALL;
-  };
-
   private getFilteredData = (
     e: React.MouseEvent,
     data: SmsData[],
