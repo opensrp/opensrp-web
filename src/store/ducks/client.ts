@@ -3,38 +3,11 @@ import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
 
-/** Interface for event object as received from event search */
-export interface Event {
-  type: 'Event';
-  dateCreated: number;
-  serverVersion: number;
-  clientApplicationVersion: number;
-  clientDatabaseVersion: number;
-  identifiers: { [key: string]: string | null };
-  baseEntityId: string;
-  locationId: string;
-  eventDate: number;
-  eventType: string;
-  formSubmissionId: string;
-  providerId: string;
-  duration: number;
-  obs: { [key: string]: string[] | string | null };
-  entityType: string;
-  version: number;
-  teamId: string;
-  team: string;
-  _id: string;
-  _rev: string;
-}
-
 /** The reducer name */
 export const reducerName = 'client';
 
 /** CLIENT_FETCHED action type */
 export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
-
-/** EVENTS_FETCHED action type */
-export const EVENTS_FETCHED = 'opensrp/reducer/client/EVENTS_FETCHED';
 
 /** MEMBERS_FETCHED action type */
 export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
@@ -43,12 +16,6 @@ export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
 export interface FetchClientAction extends AnyAction {
   clientById: { [key: string]: Client };
   type: typeof CLIENT_FETCHED;
-}
-
-/** interface for fetch events */
-export interface FetchEventsAction extends AnyAction {
-  eventsById: { [key: string]: Event };
-  type: typeof EVENTS_FETCHED;
 }
 
 /** interface for fetch members */
@@ -70,15 +37,6 @@ export const fetchClient = (client: Client): FetchClientAction => ({
   type: CLIENT_FETCHED,
 });
 
-/** Fetch events action creator
- * @param {Event} events - events to add to store
- * @return {FetchEventsAction} - an action to add events to redux store
- */
-export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
-  eventsById: keyBy(eventsList, (event: Event) => event.baseEntityId),
-  type: EVENTS_FETCHED,
-});
-
 /** Fetch members action creator
  * @param {Event} members - members to add to store
  * @return {FetchMembersAction} - an action to add members to redux store
@@ -91,7 +49,7 @@ export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
 /** Create type for client reducer actions */
 export type ClientActionTypes =
   | FetchClientAction
-  | FetchEventsAction
+
   | FetchMembersAction
   | AnyAction;
 
@@ -124,11 +82,6 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         clientById: action.clientById,
-      });
-    case EVENTS_FETCHED:
-      return SeamlessImmutable({
-        ...state,
-        eventsById: action.eventsById,
       });
     case MEMBERS_FETCHED:
       return SeamlessImmutable({
