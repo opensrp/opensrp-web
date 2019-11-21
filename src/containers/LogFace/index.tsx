@@ -132,6 +132,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
   public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
     const { riskLabel, locationLabel, typeLabel } = prevState;
+    const allLabels: string[] = [riskLabel, locationLabel, typeLabel];
     const userLocationId = getLocationId(nextProps.userLocationData, nextProps.userUUID);
 
     const { locationFilterFunction } = getFilterFunctionAndLocationLevel(
@@ -157,9 +158,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
     if (
       !prevState.filteredData.length &&
-      !riskLabel.length &&
-      !locationLabel.length &&
-      !typeLabel.length &&
+      allLabels.every((d: string) => !d.length || d === ALL) &&
       !(
         document.getElementById('input') &&
         (document.getElementById('input') as HTMLInputElement)!.value
@@ -465,26 +464,22 @@ export class LogFace extends React.Component<PropsInterface, State> {
     }
   }
 
-  private getFilteredData = (
-    e: React.MouseEvent,
-    data: SmsData[],
-    field: string,
-    lowerCase: boolean,
-    type?: string
-  ) => {
+  private getFilteredData = (data: SmsData[], e?: React.MouseEvent, type?: string) => {
     const allLabels = [this.state.riskLabel, this.state.locationLabel, this.state.typeLabel];
-    switch (type) {
-      case 'risk':
-        allLabels.splice(0, 1, (e.target as HTMLInputElement).innerText);
-        break;
-      case 'location':
-        allLabels.splice(1, 1, (e.target as HTMLInputElement).innerText);
-        break;
-      case 'type':
-        allLabels.splice(2, 1, (e.target as HTMLInputElement).innerText);
-        break;
-      default:
-      // handle this
+    if (e && e.target) {
+      switch (type) {
+        case 'risk':
+          allLabels.splice(0, 1, (e.target as HTMLInputElement).innerText);
+          break;
+        case 'location':
+          allLabels.splice(1, 1, (e.target as HTMLInputElement).innerText);
+          break;
+        case 'type':
+          allLabels.splice(2, 1, (e.target as HTMLInputElement).innerText);
+          break;
+        default:
+        // handle this
+      }
     }
     const dataFiltered = data.filter((dataItem: FlexObject) => {
       return (
@@ -505,20 +500,14 @@ export class LogFace extends React.Component<PropsInterface, State> {
   private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(e, this.props.smsData, 'logface_risk', true, 'risk'),
+      filteredData: this.getFilteredData(this.props.smsData, e, 'risk'),
       riskLabel: (e.target as HTMLInputElement).innerText,
     });
   };
   private handleLocationDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(
-        e,
-        this.props.smsData,
-        'health_worker_location_name',
-        false,
-        'location'
-      ),
+      filteredData: this.getFilteredData(this.props.smsData, e, 'location'),
       locationLabel: (e.target as HTMLInputElement).innerText,
     });
   };
@@ -537,13 +526,29 @@ export class LogFace extends React.Component<PropsInterface, State> {
   private handleTypeDropdownClick = (e: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(e, this.props.smsData, 'sms_type', false, 'type'),
+      filteredData: this.getFilteredData(this.props.smsData, e, 'type'),
       typeLabel: (e.target as HTMLInputElement).innerText,
     });
   };
 
   private filterData(filterString: string): SmsData[] {
-    return this.props.smsData.filter(
+    const { riskLabel, locationLabel, typeLabel } = this.state;
+    const isFiltered: boolean = [riskLabel, locationLabel, typeLabel].some(
+      (d: string) => d.length || d !== ALL
+    );
+    let activeData;
+    if (isFiltered) {
+      if (!filterString.length) {
+        activeData = this.getFilteredData(this.props.smsData);
+      } else {
+        activeData = this.state.filteredData.length
+          ? this.state.filteredData
+          : this.getFilteredData(this.props.smsData);
+      }
+    } else {
+      activeData = this.props.smsData;
+    }
+    return activeData.filter(
       dataItem =>
         dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
         dataItem.health_worker_name
