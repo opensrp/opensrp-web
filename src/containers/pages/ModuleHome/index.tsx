@@ -1,5 +1,6 @@
 // this is the home page component
 import * as React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import './index.css';
 
@@ -28,7 +29,7 @@ class ModuleHome extends React.Component<Props, {}> {
       <div className="module-home-main">
         <div className="welcome-text">
           <h1>{this.props.title}</h1>
-          <p>{this.props.description}</p>
+          <p>{ReactHtmlParser(this.props.description)}</p>
         </div>
         <div className="components-list">
           <div className="spacer">
