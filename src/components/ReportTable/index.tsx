@@ -1,7 +1,17 @@
 import ListView from '@onaio/list-view';
 import React, { Component, Fragment } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
-import { GESTATION_PERIOD, MOTHER_WEIGHT_TRACKING } from '../../constants';
+import {
+  ANC_REPORT,
+  BIRTH_REPORT,
+  CURRENT_PREGNANCY,
+  GESTATION_PERIOD,
+  KG,
+  MOTHER_WEIGHT_TRACKING,
+  MOTHERS_WEIGHT,
+  PREGNANCY_REGISTRATION,
+  WEIGHT,
+} from '../../constants';
 import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
 import WeightAndHeightChart from '../WeightAndHeightChart';
@@ -11,11 +21,28 @@ interface Props {
   singlePatientEvents: SmsData[];
 }
 
+/**
+ * An object that represents the weight of a child
+ * or mother for a given month and year.
+ * @member {number} weight  the weight
+ * @member {number} month a number between 0 and 11 representing the month
+ * @member {number} year the year the month is in.
+ */
 export interface WeightMonthYear {
   weight: number;
   month: number;
   year: number;
 }
+
+/**
+ * An object representing Pregnancy data contained in an SmsEvent
+ * object but has been adapted specifically for the pregnancy module
+ * @member {string} EventDate - the date the SmsEvent was created. this is
+ * when the sms was sent.
+ * @member {string | number} message - the string/number representation of the message
+ * @member {string} health_workder_name - name of health worker who sent the message
+ * @member {string}  sms_type - the sms type.
+ */
 interface PregnancySmsData {
   EventDate: string;
   message: string | number;
@@ -44,9 +71,9 @@ export const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): Pregnan
   // only pregnancy registration, ANC and birth reports
   singlePatientEvents = singlePatientEvents.filter((event: SmsData) => {
     return (
-      event.sms_type.toLowerCase() === 'birth report' ||
-      event.sms_type.toLowerCase() === 'anc report' ||
-      event.sms_type.toLowerCase() === 'pregnancy registration'
+      event.sms_type.toLowerCase() === BIRTH_REPORT.toLowerCase() ||
+      event.sms_type.toLowerCase() === ANC_REPORT.toLowerCase() ||
+      event.sms_type.toLowerCase() === PREGNANCY_REGISTRATION.toLowerCase()
     );
   });
 
@@ -57,7 +84,7 @@ export const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): Pregnan
     if (singlePatientEvents) {
       if (data[pregnancyIndex]) {
         if (
-          singlePatientEvents[dataItem].sms_type === 'Pregnancy Registration' ||
+          singlePatientEvents[dataItem].sms_type === PREGNANCY_REGISTRATION ||
           (data[pregnancyIndex][parseInt(dataItem, 10) - 1] &&
             GESTATION_PERIOD <
               Date.parse(singlePatientEvents[dataItem].EventDate) -
@@ -68,7 +95,7 @@ export const getEventsPregnancyArray = (singlePatientEvents: SmsData[]): Pregnan
             data[pregnancyIndex] = [];
           }
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
-        } else if (singlePatientEvents[dataItem].sms_type === 'Birth Report') {
+        } else if (singlePatientEvents[dataItem].sms_type === BIRTH_REPORT) {
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
         } else {
           data[pregnancyIndex].push(singlePatientEvents[dataItem]);
@@ -125,8 +152,8 @@ class ReportTable extends Component<Props, State> {
           gestation >
             Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10)][0][1]) -
               Date.parse(pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][1]) &&
-          pregnancySmsStrings[parseInt(pregnancy, 10)][0][0] === 'Pregnancy Registration' &&
-          pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][0] === 'Pregnancy Registration'
+          pregnancySmsStrings[parseInt(pregnancy, 10)][0][0] === PREGNANCY_REGISTRATION &&
+          pregnancySmsStrings[parseInt(pregnancy, 10) + 1][0][0] === PREGNANCY_REGISTRATION
         ) {
           this.state.indicesToRemove.push(parseInt(pregnancy, 10));
         }
@@ -195,7 +222,7 @@ class ReportTable extends Component<Props, State> {
                       <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
                         {(() => {
                           if (i === 0) {
-                            return 'current pregnancy';
+                            return CURRENT_PREGNANCY;
                           } else {
                             const pregnancyIndex =
                               this.getPregnancyStringArray(this.state.pregnancyEventsArray).length -
@@ -221,9 +248,9 @@ class ReportTable extends Component<Props, State> {
             }
             chartWrapperId={'pregnancy-chart'}
             title={MOTHER_WEIGHT_TRACKING}
-            legendString={"Mother's Weight"}
-            units={'kg'}
-            xAxisLabel={'Weight'}
+            legendString={MOTHERS_WEIGHT}
+            units={KG}
+            xAxisLabel={WEIGHT}
           />
         </Row>
       </Fragment>
@@ -238,10 +265,10 @@ class ReportTable extends Component<Props, State> {
 
   private handlePregnancyDropDownClick = (e: React.MouseEvent) => {
     // here we will take the new index and change the state using that index
-    if ((e.target as HTMLInputElement).innerText === 'current pregnancy') {
+    if ((e.target as HTMLInputElement).innerText === CURRENT_PREGNANCY) {
       this.setState({
         currentPregnancy: 0,
-        pregnancyDropdownLabel: 'current pregnancy',
+        pregnancyDropdownLabel: CURRENT_PREGNANCY,
       });
     } else {
       this.setState({
