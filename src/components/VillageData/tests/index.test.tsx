@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import VillageData, { Props } from '..';
 import store from '../../../store/index';
-import VillageDataProps from './villageDataPropsfixtures';
+import villageDataProps from './villageDataPropsfixtures';
 
 const history = createBrowserHistory();
 
@@ -28,10 +28,58 @@ describe('components/VillageData', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
-          <VillageData {...(VillageDataProps as Props)} />
+          <VillageData {...(villageDataProps as Props)} />
         </Router>
       </Provider>
     );
     expect(toJson(wrapper.find('tr'))).toMatchSnapshot('VillageData with data');
+  });
+});
+
+describe('components/VillageData/nbcAndPncMotherMapFunction', () => {
+  it('must return the correct value given specific input', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <VillageData {...(villageDataProps as Props)} />
+        </Router>
+      </Provider>
+    );
+    const instance = wrapper.find('VillageData').instance() as VillageData;
+    expect(instance.nbcAndPncMotherMapFunction(villageDataProps.smsData[0])).toMatchSnapshot(
+      'nbcAndPncMotherMapFuctionOutput'
+    );
+  });
+});
+
+describe('components/VillageData/nbcAndPncChildMapFunction', () => {
+  it('must return the correct value given specific input', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <VillageData {...(villageDataProps as Props)} />
+        </Router>
+      </Provider>
+    );
+    const instance = wrapper.find('VillageData').instance() as VillageData;
+    expect(instance.nbcAndPncChildMapFunction(villageDataProps.smsData[1])).toMatchSnapshot(
+      'nbcAndPncChildMapFunctionOutput'
+    );
+  });
+});
+
+describe('components/VillageData/pregnancyMapFunction', () => {
+  it('must return the correct value given specific input', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <VillageData {...(villageDataProps as Props)} />
+        </Router>
+      </Provider>
+    );
+    const instance = wrapper.find('VillageData').instance() as VillageData;
+    expect(instance.pregnancyMapFunction(villageDataProps.smsData[2])).toMatchSnapshot(
+      'pregnancyMapFunctionOutput'
+    );
   });
 });

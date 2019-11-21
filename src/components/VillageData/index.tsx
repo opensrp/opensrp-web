@@ -130,7 +130,7 @@ export default class VillageData extends React.Component<Props, State> {
    * @param {SmsData} dataItem - an SmsData object used to generate a table row
    * @return {JSX.Element} table row
    */
-  private nbcAndPncMotherMapFunction = (dataItem: SmsData): JSX.Element => {
+  public nbcAndPncMotherMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
@@ -156,7 +156,7 @@ export default class VillageData extends React.Component<Props, State> {
    * @param {SmsData} dataItem - an SmsData object used to generate a table row
    * @return {JSX.Element} table row
    */
-  private nbcAndPncChildMapFunction = (dataItem: SmsData): JSX.Element => {
+  public nbcAndPncChildMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
@@ -182,7 +182,7 @@ export default class VillageData extends React.Component<Props, State> {
    * @param {SmsData} dataItem - an SmsData object used to generate a table row
    * @return {JSX.Element} table row
    */
-  private pregnancyMapFunction = (dataItem: SmsData): JSX.Element => {
+  public pregnancyMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
