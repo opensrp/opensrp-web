@@ -37,12 +37,12 @@ import {
   UP,
   VILLAGE,
 } from '../../constants';
+import { locationDataIsAvailable } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,
   getLocationsOfLevel,
   Location,
-  locationsDataFetched,
   reducerName,
 } from '../../store/ducks/locations';
 import smsReducer, {
@@ -65,6 +65,7 @@ export interface LocationWithData extends Location {
 interface State {
   data: LocationWithData[];
   district: string;
+  villageData: SmsData[];
 }
 
 interface Props {
@@ -80,7 +81,6 @@ interface Props {
   communes: Location[];
   villages: Location[];
   smsData: SmsData[];
-  locationsFetched: boolean;
   compartMentUrl: string;
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   permissionLevel: number;
@@ -93,7 +93,6 @@ const defaultProps: Props = {
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
-  locationsFetched: false,
   module: '',
   permissionLevel: 3,
   provinces: [],
@@ -311,8 +310,22 @@ class HierarchichalDataTable extends Component<Props, State> {
         : dataToShow;
     }
 
+    // get data to show on the VillageData component.
+    const locationIds = dataToShow.map((location: LocationWithData) => location.location_id);
+    const villageData = nextProps.smsData.filter((dataItem: SmsData) => {
+      return (
+        locationIds.includes(dataItem.location_id) &&
+        (nextProps.risk_highligter
+          ? dataItem.logface_risk.includes(
+              nextProps.risk_highligter ? nextProps.risk_highligter : ''
+            )
+          : true)
+      );
+    });
+
     return {
       data: dataToShow,
+      villageData,
     };
   }
 
@@ -321,12 +334,20 @@ class HierarchichalDataTable extends Component<Props, State> {
     this.state = {
       data: [],
       district: '',
+      villageData: [],
     };
   }
 
   public componentDidMount() {
     const { fetchLocationsActionCreator } = this.props;
-    if (!this.props.locationsFetched) {
+    if (
+      locationDataIsAvailable(
+        this.props.villages,
+        this.props.communes,
+        this.props.districts,
+        this.props.provinces
+      )
+    ) {
       for (const slice in LOCATION_SLICES) {
         if (slice) {
           supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
@@ -338,16 +359,14 @@ class HierarchichalDataTable extends Component<Props, State> {
   }
 
   public render() {
-    const villageData = this.props.smsData.filter((dataItem: SmsData) => {
-      const locationIds = this.state.data.map((location: LocationWithData) => location.location_id);
-      return (
-        locationIds.includes(dataItem.location_id) &&
-        (this.props.risk_highligter
-          ? dataItem.logface_risk.includes(this.props.risk_highligter)
-          : true)
-      );
-    });
-    if (this.props.locationsFetched) {
+    if (
+      locationDataIsAvailable(
+        this.props.villages,
+        this.props.communes,
+        this.props.districts,
+        this.props.provinces
+      )
+    ) {
       return (
         <Container fluid={true} className="compartment-data-table">
           <Link to={this.urlToRedirect()} className="back-page">
@@ -462,12 +481,12 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
-          {villageData.length ? (
+          {this.state.villageData.length ? (
             <VillageData
               {...{
                 current_level: this.props.current_level,
                 module: this.props.module,
-                smsData: villageData,
+                smsData: this.state.villageData,
               }}
             />
           ) : null}
@@ -637,7 +656,6 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     direction: ownProps.match.params.direction,
     districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
-    locationsFetched: locationsDataFetched(state),
     module: ownProps.match.params.module,
     node_id: ownProps.match.params.node_id,
     permissionLevel: ownProps.match.params.permission_level,
