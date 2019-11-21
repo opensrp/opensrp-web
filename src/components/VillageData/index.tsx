@@ -6,6 +6,8 @@ import {
   GRAVIDITY,
   LOCATION,
   NBC_AND_PNC_CHILD,
+  NBC_AND_PNC_WOMAN,
+  NUTRITION,
   PARITY,
   PATIENT_ID,
   PREGNANCY,
@@ -22,7 +24,7 @@ import './index.css';
 interface Props {
   current_level: number;
   smsData: SmsData[];
-  module: string;
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
 }
 
 interface State {
@@ -121,7 +123,14 @@ export default class VillageData extends React.Component<Props, State> {
     );
   }
 
-  private nbcAndPncMotherMapFunction = (dataItem: SmsData) => {
+  /**
+   * Returns a <tr></tr> for an SmsData object passed to it
+   * which is used to build the table above.
+   * for the NBC & PNC_MOTHER module
+   * @param {SmsData} dataItem - an SmsData object used to generate a table row
+   * @return {JSX.Element} table row
+   */
+  private nbcAndPncMotherMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
@@ -140,7 +149,14 @@ export default class VillageData extends React.Component<Props, State> {
     );
   };
 
-  private nbcAndPncChildMapFunction = (dataItem: SmsData) => {
+  /**
+   * Returns a <tr></tr> for an SmsData object passed to it
+   * which is used to build the table above.
+   * for the NBC & PNC_CHILD module
+   * @param {SmsData} dataItem - an SmsData object used to generate a table row
+   * @return {JSX.Element} table row
+   */
+  private nbcAndPncChildMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
@@ -159,7 +175,14 @@ export default class VillageData extends React.Component<Props, State> {
     );
   };
 
-  private pregnancyMapFunction = (dataItem: SmsData) => {
+  /**
+   * Returns a <tr></tr> for an SmsData object passed to it
+   * which is used to build the table above.
+   * for the PREGNANCY module
+   * @param {SmsData} dataItem - an SmsData object used to generate a table row
+   * @return {JSX.Element} table row
+   */
+  private pregnancyMapFunction = (dataItem: SmsData): JSX.Element => {
     return (
       <tr key={dataItem.event_id}>
         <td className="default-width">
