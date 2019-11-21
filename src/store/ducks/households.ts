@@ -40,10 +40,10 @@ interface FetchHouseholdsAction extends AnyAction {
 
   /** Create type for household reducer actions */
 export type HouseholdActionTypes =
-| FetchHouseholdsAction
-| RemoveHouseholdsAction
-| SetTotalRecordsAction
-| AnyAction;
+  FetchHouseholdsAction
+  | RemoveHouseholdsAction
+  | SetTotalRecordsAction
+  | AnyAction;
 
 // action creators
 /** Fetch households action creator

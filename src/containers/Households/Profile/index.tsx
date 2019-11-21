@@ -20,7 +20,12 @@ import memberReducer, {
   getMembersArray,
   reducerName as memberReducerName,
 } from '../../../store/ducks/members';
-import { Event, getEventsArray, fetchEvents} from '../../../store/ducks/events';
+import EventReducer, { 
+  Event, 
+  getEventsArray, 
+  fetchEvents,
+  reducerName as eventReducerName
+} from '../../../store/ducks/events';
 import { Client } from '../../../store/ducks/clients';
 import { Household } from '../../../store/ducks/households';
 import './householdProfile.css';
@@ -30,6 +35,9 @@ reducerRegistry.register(clientReducerName, clientReducer);
 
 /** register the client reducer */
 reducerRegistry.register(memberReducerName, memberReducer);
+
+/** register the client reducer */
+reducerRegistry.register(eventReducerName, EventReducer);
 
 /** interface for HouseholdProfile URL params */
 interface HouseholdProfileURLParams {

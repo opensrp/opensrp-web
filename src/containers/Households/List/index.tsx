@@ -58,7 +58,7 @@ class HouseholdList extends React.Component<HouseholdListProps> {
       setTotalRecordsActionCreator,
       opensrpService,
     } = this.props;
-    const params = { clientType, pageNumber: '0', pageSize: PAGINATION_SIZE };
+    const params = { clientType, pageNumber: '1', pageSize: PAGINATION_SIZE };
     const householdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await householdService.list(params);
     fetchHouseholdsActionCreator(response.clients);
