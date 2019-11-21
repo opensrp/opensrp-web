@@ -59,7 +59,6 @@ import TestReducer, {
   fetchSms,
   getFilterArgs,
   getFilteredSmsData,
-  getSmsData,
   reducerName,
   SmsData,
   smsDataFetched,
@@ -132,6 +131,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
   public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
+    const { riskLabel, locationLabel, typeLabel } = prevState;
     const userLocationId = getLocationId(nextProps.userLocationData, nextProps.userUUID);
 
     const { locationFilterFunction } = getFilterFunctionAndLocationLevel(
@@ -155,7 +155,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
       nextProps.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
     }
 
-    const { riskLabel, locationLabel, typeLabel } = prevState;
     if (
       !prevState.filteredData.length &&
       !riskLabel.length &&
@@ -171,7 +170,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       };
     } else {
       return {
-        filteredData: prevState.filteredData,
+        filteredData: prevState.filteredData.filter(locationFilterFunction),
       };
     }
   }
@@ -465,10 +464,6 @@ export class LogFace extends React.Component<PropsInterface, State> {
       clearInterval(this.state.intervalId);
     }
   }
-
-  private isAllSelected = (e: React.MouseEvent) => {
-    return (e.target as HTMLInputElement).innerText === ALL;
-  };
 
   private getFilteredData = (
     e: React.MouseEvent,
