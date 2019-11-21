@@ -5,7 +5,7 @@ import React from 'react';
 import { Router } from 'react-router';
 import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { CLIENT_RECORDS, PREGNANCY } from '../../../../constants';
+import { PREGNANCY } from '../../../../constants';
 
 const history = createBrowserHistory();
 
