@@ -209,11 +209,18 @@ export const MOTHERS_WEIGHT = "Mother's Weight";
 export type MOTHERS_WEIGHT = typeof MOTHERS_WEIGHT;
 export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
 export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
-export const PREGNANCY_DESCRIPTION = `This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
+export const PREGNANCY_DESCRIPTION = `This dashboard displays information collected from MIECD Vietnam Pregnancy Module for
 patients in your geographical location. The Module covers the whole pregnancy period
 from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
 reports/Death reports, Risk Reports, Risk alerts and ResponseReports.`;
 export type PREGNANCY_DESCRIPTION = typeof PREGNANCY_DESCRIPTION;
+export const NBC_AND_PNC_DESCRIPTION = `Pregnancy is a natural phenomenon that should not leand to death. With the exclusion of
+deaths caused by co-existing medical conditions, other deaths are preventable with appropriate approaches. the MIECD Vietnam
+program aims to tackle dealys taht may lead to maternal mortality. working towards the objective of <b>No women should die in
+pregnancy due to preventable causes</b>`;
+export type NBC_AND_PNC_DESCRIPTION = typeof NBC_AND_PNC_DESCRIPTION;
+export const NUTRITION_DESCRIPTION = NBC_AND_PNC_DESCRIPTION;
+export type NUTRITION_DESCRIPTION = typeof NUTRITION_DESCRIPTION;
 export const NEWBORN_REPORT = 'Newborn Report';
 export type NEWBORN_REPORT = typeof NEWBORN_REPORT;
 export const PREGNANCY_DASHBOARD_WELCOME = 'Welcome to the pregnancy dashboard';
