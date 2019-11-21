@@ -58,9 +58,6 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
   }
 
   public componentDidMount(): void {
-    WeightAndHeightChart.legendString = this.props.legendString;
-    WeightAndHeightChart.units = this.props.units;
-    WeightAndHeightChart.xAxisLabel = this.props.xAxisLabel;
     let chart: any;
     const self: FlexObject = this;
     if (self.state.chart) {
@@ -94,12 +91,10 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
             width: 8,
           },
           formatter() {
-            return `${WeightAndHeightChart.legendString} - ${(this.x + '').slice(
+            return `${self.props.legendString} - ${(this.x + '').slice(
               0,
               (this.x + '').lastIndexOf(' ')
-            )}<br>${WeightAndHeightChart.xAxisLabel}  <b>${this.y}</b> ${
-              WeightAndHeightChart.units
-            }`;
+            )}<br>${self.props.xAxisLabel}  <b>${this.y}</b> ${self.props.units}`;
           },
         },
 
