@@ -2,18 +2,37 @@ import * as Highcharts from 'highcharts';
 import * as React from 'react';
 import { Card, CardTitle } from 'reactstrap';
 import { clearTimeout, setTimeout } from 'timers';
-import { MOTHER_WEIGHT_TRACKING } from '../../constants';
+import { monthNames } from '../../constants';
 import { FlexObject } from '../../helpers/utils';
+import { WeightMonthYear } from '../ReportTable';
 import './index.css';
 
 interface Props {
-  weights: number[];
+  weights: WeightMonthYear[];
+  chartWrapperId: string;
+  title: string;
+  units: string;
+  legendString: string;
+  xAxisLabel: string;
 }
 
 interface State {
   chart: any;
 }
-export default class MotherWeightChart extends React.Component<Props, State> {
+
+const defaultProps: Props = {
+  chartWrapperId: '',
+  legendString: '',
+  title: '',
+  units: '',
+  weights: [],
+  xAxisLabel: '',
+};
+export default class WeightAndHeightChart extends React.Component<Props, State> {
+  public static defaultProps = defaultProps;
+  public static legendString = defaultProps.legendString;
+  public static units = defaultProps.units;
+  public static xAxisLabel = defaultProps.xAxisLabel;
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (prevState.chart && prevState.chart.series) {
       return {
@@ -45,7 +64,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
       self.state.chart.destroy();
     }
     self.timeout = setTimeout(() => {
-      chart = Highcharts.chart('chart-wrapper', {
+      chart = Highcharts.chart(`${this.props.chartWrapperId}`, {
         chart: {
           type: 'line',
           width: 0.8 * window.innerWidth,
@@ -72,12 +91,15 @@ export default class MotherWeightChart extends React.Component<Props, State> {
             width: 8,
           },
           formatter() {
-            return `Mother's weight - ${this.x}<br> weight <b>${this.y}</b>`;
+            return `${self.props.legendString} - ${(this.x + '').slice(
+              0,
+              (this.x + '').lastIndexOf(' ')
+            )}<br>${self.props.xAxisLabel}  <b>${this.y}</b> ${self.props.units}`;
           },
         },
 
         subtitle: {
-          text: undefined,
+          text: '',
         },
 
         yAxis: {
@@ -87,26 +109,20 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         },
 
         xAxis: {
-          categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-          ],
+          categories: this.props.weights
+            .map((weightMonthYear: WeightMonthYear) => weightMonthYear.month)
+            .map((month: number) => monthNames[month])
+            .map(
+              (mothName: string, index: number) => `${mothName} ${this.props.weights[index].year}`
+            ),
         },
 
         series: [
           {
-            data: this.props.weights,
-            name: 'weight',
+            data: this.props.weights.map(
+              (weightMonthYear: WeightMonthYear) => weightMonthYear.weight
+            ),
+            name: this.props.xAxisLabel,
           },
         ] as any,
 
@@ -128,7 +144,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
         },
       });
     }, 300);
-    window.addEventListener('resize', () => MotherWeightChart.calcChartWidth(chart));
+    window.addEventListener('resize', () => WeightAndHeightChart.calcChartWidth(chart));
     this.setState({ chart });
   }
 
@@ -136,7 +152,7 @@ export default class MotherWeightChart extends React.Component<Props, State> {
     const self: FlexObject = this;
     if (self.state.chart) {
       window.removeEventListener('resize', () =>
-        MotherWeightChart.calcChartWidth(this.state.chart)
+        WeightAndHeightChart.calcChartWidth(this.state.chart)
       );
       clearTimeout(self.timeout);
     }
@@ -145,8 +161,8 @@ export default class MotherWeightChart extends React.Component<Props, State> {
   public render() {
     return (
       <Card>
-        <CardTitle>{MOTHER_WEIGHT_TRACKING}</CardTitle>
-        <div id="chart-wrapper" />
+        <CardTitle>{this.props.title}</CardTitle>
+        <div id={this.props.chartWrapperId} />
       </Card>
     );
   }

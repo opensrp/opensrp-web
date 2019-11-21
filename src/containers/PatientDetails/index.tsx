@@ -4,15 +4,26 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Row } from 'reactstrap';
-import BasicInformation from '../../components/BasicInformation';
+import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
 import ReportTable from '../../components/ReportTable';
-import { BACK, BACKPAGE_ICON, PATIENT_DETAILS } from '../../constants';
+import {
+  BACK,
+  BACKPAGE_ICON,
+  CURRENT_EDD,
+  CURRENT_GRAVIDITY,
+  CURRENT_PARITY,
+  ID,
+  LOCATION,
+  PATIENT_DETAILS,
+  PREVIOUS_PREGNANCY_RISK,
+} from '../../constants';
+import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props extends RouteComponentProps {
   patientId: string;
-  testData: SmsData[];
+  smsData: SmsData[];
 }
 
 interface State {
@@ -21,32 +32,17 @@ interface State {
 
 const defaultProps: Partial<Props> = {
   patientId: 'none',
-  testData: [],
+  smsData: [],
 };
 
 export class PatientInfo extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: PatientInfo.filterByPatientAndSort(props),
+      filteredData: filterByPatientAndSort(props),
     };
   }
 
-  private static filterByPatientAndSort = (props: Props): SmsData[] => {
-    return props.testData
-      .filter((dataItem: SmsData): boolean => {
-        return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
-      })
-      .sort((event1: SmsData, event2: SmsData): number => {
-        if (event1.EventDate < event2.EventDate) {
-          return -1;
-        }
-        if (event1.EventDate > event2.EventDate) {
-          return 1;
-        }
-        return 0;
-      });
-  };
   constructor(props: Props) {
     super(props);
 
@@ -68,7 +64,7 @@ export class PatientInfo extends Component<Props, State> {
           <h2 id="patients_title">{PATIENT_DETAILS}</h2>
         </div>
         <Row>
-          <BasicInformation {...this.getBasicInformationProps()} />
+          <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
         </Row>
         <ReportTable singlePatientEvents={this.state.filteredData} />
       </div>
@@ -128,15 +124,15 @@ export class PatientInfo extends Component<Props, State> {
       return 'no risk';
     }
   }
-  private getBasicInformationProps() {
-    const basicInformationProps = {
-      currentEdd: this.getCurrentEdd(),
-      currentGravidity: this.getCurrentGravidity(),
-      currentParity: this.getCurrenParity(),
-      id: this.props.patientId,
-      location: this.getCurrentLocation(),
-      previousPregnancyRisk: this.getPreviousPregnancyRisk(),
-    };
+  private getBasicInformationProps(): LabelValuePair[] {
+    const basicInformationProps = [
+      { label: ID, value: this.props.patientId },
+      { label: LOCATION, value: this.getCurrentLocation() },
+      { label: CURRENT_GRAVIDITY, value: this.getCurrentGravidity() },
+      { label: CURRENT_EDD, value: this.getCurrentEdd() },
+      { label: CURRENT_PARITY, value: this.getCurrenParity() },
+      { label: PREVIOUS_PREGNANCY_RISK, value: this.getPreviousPregnancyRisk() },
+    ] as LabelValuePair[];
     return basicInformationProps;
   }
 }
@@ -145,7 +141,7 @@ const mapStateToprops = (state: any, ownProps: any) => {
   const patient_id = ownProps.match.params.patient_id;
   const result = {
     patientId: patient_id,
-    testData: getSmsData(state),
+    smsData: getSmsData(state),
   };
   return result;
 };

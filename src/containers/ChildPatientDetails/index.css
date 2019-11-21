@@ -45,3 +45,11 @@ div#titleDiv {
 .patient-details {
   padding-top: 1%;
 }
+
+.patient-details .row {
+  margin-bottom: 2rem;
+}
+
+.padding-left {
+  padding-left: 0.5rem;
+}

@@ -8,10 +8,18 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
+  NBC_AND_PNC_CHILD,
+  NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
+  NUTRITION,
+  NUTRITION_COMPARTMENTS_URL,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
+  SMS_FILTER_FUNCTION,
 } from '../../constants';
-import { addFilterArgs, FilterArgs } from '../../store/ducks/sms_events';
+import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
@@ -20,9 +28,31 @@ interface Props {
   noRisk: number;
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
-  filterArgs?: FilterArgs[];
-  module: string;
+  filterArgs?: SMS_FILTER_FUNCTION[];
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   className?: string;
+}
+
+/**
+ * Get a link to any of the modules compartments.
+ * @param module string representing the module whose link you would like to get
+ * @return link to module compartment
+ */
+export function getModuleLink(
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
+): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
+  switch (module) {
+    case PREGNANCY:
+      return PREGNANCY_COMPARTMENTS_URL;
+    case NUTRITION:
+      return NUTRITION_COMPARTMENTS_URL;
+    case NBC_AND_PNC_WOMAN:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    case NBC_AND_PNC_CHILD:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    default:
+      return '';
+  }
 }
 
 function DataCircleCard({
@@ -35,6 +65,12 @@ function DataCircleCard({
   module,
   className = '',
 }: Props) {
+  // this should be gotten dynamically based on the logged in user
+  // level is a integer ranging from 0 to 3, 0 for province, 1 for
+  // 1 for District, 2 for commune and 3 for village.
+  const level = 1;
+  const locationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
+  const permissionLevel = 1;
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
@@ -42,7 +78,9 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -56,7 +94,9 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -70,7 +110,9 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}`}
+              to={`${getModuleLink(
+                module
+              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}/${permissionLevel}`}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {

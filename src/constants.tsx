@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { SmsData } from './store/ducks/sms_events';
 
 // internal urls
 export const NBC_AND_PNC_URL = '/nbc_and_pnc';
@@ -23,12 +24,18 @@ export const LOGFACE_URL = '/log-face';
 export type LOGFACE_URL = typeof LOGFACE_URL;
 export const PREGNANCY_LOGFACE_URL = '/pregnancy_log_face';
 export type PREGNANCY_LOGFACE_URL = typeof PREGNANCY_LOGFACE_URL;
-export const PNC_AND_NBC_LOGFACE_URL = '/pnc_and_nbc_log_face';
-export type PNC_AND_NBC_LOGFACE_URL = typeof PNC_AND_NBC_LOGFACE_URL;
+export const NBC_AND_PNC_LOGFACE_URL = '/nbc_and_pnc_logface_url';
+export type NBC_AND_PNC_LOGFACE_URL = typeof NBC_AND_PNC_LOGFACE_URL;
 export const NUTRITION_LOGFACE_URL = '/nutrition_logface_url';
 export type NUTRITION_LOGFACE_URL = typeof NUTRITION_LOGFACE_URL;
+export const NUTRITION_COMPARTMENTS_URL = '/nutrition_commpartments_url';
+export type NUTRITION_COMPARTMENTS_URL = typeof NUTRITION_COMPARTMENTS_URL;
 export const PREGNANCY_ANALYSIS_URL = '/pregnancy_analysis';
 export type PREGNANCY_ANALYSIS_URL = typeof PREGNANCY_ANALYSIS_URL;
+export const NBC_AND_PNC_ANALYSIS_URL = '/nbc_and_pnc_analysis';
+export type NBC_AND_PNC_ANALYSIS_URL = typeof NBC_AND_PNC_ANALYSIS_URL;
+export const NUTRITION_ANALYSIS_URL = '/nutrition_analysis';
+export type NUTRITION_ANALYSIS_URL = typeof NUTRITION_ANALYSIS_URL;
 export const NUTRITION_URL = '/nutrition';
 export type NUTRITION_URL = typeof NUTRITION_URL;
 export const HOUSEHOLD_URL = '/404';
@@ -49,6 +56,18 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const CHILD_WEIGHT_MONITORING = 'Child Weight Monitoring';
+export type CHILD_WEIGHT_MONITORING = typeof CHILD_WEIGHT_MONITORING;
+export const LENGTH_HEIGHT_MONITORING = 'Length/Height Monitoring';
+export type LENGTH_HEIGHT_MONITORING = typeof LENGTH_HEIGHT_MONITORING;
+export const CURRENT_NUTRTION = 'current nutrition';
+export type CURRENT_NUTRTION = typeof CURRENT_NUTRTION;
+export const CURRENT_PREGNANCY = 'current pregnancy';
+export type CURRENT_PREGNANCY = typeof CURRENT_PREGNANCY;
+export const LOCATION_OF_RESIDENCE = 'Location of Residence';
+export type LOCATION_OF_RESIDENCE = typeof LOCATION_OF_RESIDENCE;
+export const RISK_CARTEGORIZATION = 'Risk Cartegorization';
+export type RISK_CARTEGORIZATION = typeof RISK_CARTEGORIZATION;
 export const HIGH = 'high';
 export type HIGH = typeof HIGH;
 export const LOW = 'low';
@@ -66,6 +85,10 @@ export const PREGNANCY = 'Pregnancy';
 export type PREGNANCY = typeof PREGNANCY;
 export const NBC_AND_PNC = 'NBC & PNC';
 export type NBC_AND_PNC = typeof NBC_AND_PNC;
+export const NBC_AND_PNC_CHILD = 'NBC & PNC_CHILD';
+export type NBC_AND_PNC_CHILD = typeof NBC_AND_PNC_CHILD;
+export const NBC_AND_PNC_WOMAN = 'NBC & PNC_WOMAN';
+export type NBC_AND_PNC_WOMAN = typeof NBC_AND_PNC_WOMAN;
 export const NUTRITION = 'Nutrition';
 export type NUTRITION = typeof NUTRITION;
 export const LOGFACE = 'Logface';
@@ -78,6 +101,10 @@ export const CLIENT = 'Client';
 export type CLIENT = typeof CLIENT;
 export const REPORT = 'Report';
 export type REPORT = typeof REPORT;
+export const DATE = 'Date';
+export type DATE = typeof DATE;
+export const REPORTER = 'Reporter';
+export type REPORTER = typeof REPORTER;
 export const ADMIN = 'Admin';
 export type ADMIN = typeof ADMIN;
 export const CLIENT_RECORDS = 'Client Records';
@@ -178,6 +205,8 @@ export const MIECD_VIETNAM = 'MIECD VIETNAM';
 export type MIECD_VIETNAM = typeof MIECD_VIETNAM;
 export const NO_PROVIDERS = 'No providers';
 export type NO_PROVIDERS = typeof NO_PROVIDERS;
+export const MOTHERS_WEIGHT = "Mother's Weight";
+export type MOTHERS_WEIGHT = typeof MOTHERS_WEIGHT;
 export const MOTHER_WEIGHT_TRACKING = "Mother's Weight Tracking";
 export type MOTHER_WEIGHT_TRACKING = typeof MOTHER_WEIGHT_TRACKING;
 export const PREGNANCY_DESCRIPTION = `This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
@@ -197,6 +226,25 @@ export const EC_WOMAN = 'ec_woman';
 export type EC_WOMAN = typeof EC_WOMAN;
 export const EC_CHILD = 'ec_child';
 export type EC_CHILD = typeof EC_CHILD;
+export const PREGNANCY_ANALYSIS = 'Pregnancy - Analysis';
+export type PREGNANCY_ANALYSIS = typeof PREGNANCY_ANALYSIS;
+export const NUTRITION_ANALYSIS = 'Nutrition - Analysis';
+export type NUTRITION_ANALYSIS = typeof NUTRITION_ANALYSIS;
+export const COULD_NOT_FIND_ANY_LOCATION = 'could not find any location';
+export type COULD_NOT_FIND_ANY_LOCATION = typeof COULD_NOT_FIND_ANY_LOCATION;
+export const COULD_NOT_FIND_RISK_CARTEGORIZATION = 'could not find any risk cartegorization';
+export type COULD_NOT_FIND_RISK_CARTEGORIZATION = typeof COULD_NOT_FIND_RISK_CARTEGORIZATION;
+export const CM = 'cm';
+export type CM = typeof CM;
+export const KG = 'kg';
+export type KG = typeof KG;
+export const CHILD_HEIGHT_VS_MONTHS = 'Child height vs month';
+export type CHILD_HEIGHT_VS_MONTHS = typeof CHILD_HEIGHT_VS_MONTHS;
+export const CHILD_WEIGHT_VS_MONTHS = 'Child weight vs month';
+export type CHILD_WEIGHT_VS_MONTHS = typeof CHILD_WEIGHT_VS_MONTHS;
+
+// typings
+export type SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
 
 // sms events fields
 export const AGE = 'age';
@@ -209,6 +257,8 @@ export const HEALTH_WORKER_LOCATION_NAME = 'health_worker_location_name';
 export type HEALTH_WORKER_LOCATION_NAME = typeof HEALTH_WORKER_LOCATION_NAME;
 export const MESSAGE = 'message';
 export type MESSAGE = typeof MESSAGE;
+export const CAPITALIZED_MESSAGE = 'Message';
+export type CAPITALIZED_MESSAGE = typeof CAPITALIZED_MESSAGE;
 export const ANC_ID = 'anc_id';
 export type ANC_ID = typeof ANC_ID;
 export const LOGFACE_RISK = 'logface_risk: string';
@@ -235,6 +285,83 @@ export const CLIENT_TYPE = 'client_type';
 export type CLIENT_TYPE = typeof CLIENT_TYPE;
 export const PREGNANCY_REGISTRATION = 'Pregnancy Registration';
 export type PREGNANCY_REGISTRATION = typeof PREGNANCY_REGISTRATION;
+export const RESPONSE_REPORT = 'Response Report';
+export type RESPONSE_REPORT = typeof RESPONSE_REPORT;
+export const RED_ALERT_REPORT = 'Red Alert Report';
+export type RED_ALERT_REPORT = typeof RED_ALERT_REPORT;
+export const SOCIAL_DETERMINANTS = 'Social Determinants';
+export type SOCIAL_DETERMINANTS = typeof SOCIAL_DETERMINANTS;
+export const ANC_VISIT = 'ANC Visit';
+export type ANC_VISIT = typeof ANC_VISIT;
+export const DELIVERY_PLANNING = 'Delivery Planning';
+export type DELIVERY_PLANNING = typeof DELIVERY_PLANNING;
+export const PREGNANCY_DETECTION = 'Pregnancy Detection';
+export type PREGNANCY_DETECTION = typeof PREGNANCY_DETECTION;
+export const PREGNANCY_IDENTIFICATION = 'Pregnancy Identification';
+export type PREGNANCY_IDENTIFICATION = typeof PREGNANCY_IDENTIFICATION;
+export const ANC_REPORT = 'ANC Report';
+export type ANC_REPORT = typeof ANC_REPORT;
+export const HOME_VISIT_REPORT = 'Home Visit Report';
+export type HOME_VISIT_REPORT = typeof HOME_VISIT_REPORT;
+export const BIRTH_REPORT = 'Birth Report';
+export type BIRTH_REPORT = typeof BIRTH_REPORT;
+export const DEATH_REPORT = 'Death Report';
+export type DEATH_REPORT = typeof DEATH_REPORT;
+export const POSTNATAL_AND_NEWBORN_CARE = 'Postnatal and Newborn Care';
+export type POSTNATAL_AND_NEWBORN_CARE = typeof POSTNATAL_AND_NEWBORN_CARE;
+export const NUTRITION_REGISTRATION = 'Nutrition Registration';
+export type NUTRITION_REGISTRATION = typeof NUTRITION_REGISTRATION;
+export const NUTRITION_REPORT = 'Nutrition Report';
+export type NUTRITION_REPORT = typeof NUTRITION_REPORT;
+export const MONTHLY_NUTRITION_REPORT = 'Monthly Nutrition Report';
+export type MONTHLY_NUTRITION_REPORT = typeof MONTHLY_NUTRITION_REPORT;
+export const DEPARTURE_CODE = 'Departure Code';
+export type DEPARTURE_CODE = typeof DEPARTURE_CODE;
+export const REFUSAL_CODE = 'Refusal Code';
+export type REFUSAL_CODE = typeof REFUSAL_CODE;
+export const ACCOUNT_CHECK = 'Account Check';
+export type ACCOUNT_CHECK = typeof ACCOUNT_CHECK;
+export const PREGNANCY_LOGFACE_SMS_TYPES = [
+  PREGNANCY_IDENTIFICATION,
+  PREGNANCY_REGISTRATION,
+  SOCIAL_DETERMINANTS,
+  ANC_REPORT,
+  HOME_VISIT_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+  DELIVERY_PLANNING,
+  BIRTH_REPORT,
+];
+export const NBC_AND_PNC_LOGFACE_SMS_TYPES = [
+  HOME_VISIT_REPORT,
+  DELIVERY_PLANNING,
+  BIRTH_REPORT,
+  POSTNATAL_AND_NEWBORN_CARE,
+  DEATH_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+];
+
+export const NUTRITION_LOGFACE_SMS_TYPES = [
+  NUTRITION_REGISTRATION,
+  NUTRITION_REPORT,
+  MONTHLY_NUTRITION_REPORT,
+  RED_ALERT,
+  RED_ALERT_REPORT,
+  RESPONSE_REPORT,
+  RESPONSE_REPORT,
+  DEPARTURE_CODE,
+  REFUSAL_CODE,
+  ACCOUNT_CHECK,
+];
 
 export const DEFAULT_NUMBER_OF_LOGFACE_ROWS = 3;
 export type DEFAULT_NUMBER_OF_LOGFACE_ROWS = typeof DEFAULT_NUMBER_OF_LOGFACE_ROWS;
@@ -251,3 +378,19 @@ export const BACKPAGE_ICON: IconProp = ['fas', 'arrow-left'];
 // Risk cartegories in the logface component
 export const RISK_LEVELS = ['red', 'high', 'low', 'no risk', 'all'];
 export type RISK_LEVELS = typeof RISK_LEVELS;
+
+// monthnames
+export const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];

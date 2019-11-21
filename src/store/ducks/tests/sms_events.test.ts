@@ -1,10 +1,10 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { SMS_FILTER_FUNCTION } from '../../../constants';
 import { smsDataFixtures } from '../../../containers/Compartments/test/fixtures';
 import store from '../../index';
 import reducer, {
   addFilterArgs,
   fetchSms,
-  FilterArgs,
   getFilterArgs,
   getFilteredSmsData,
   getSmsData,
@@ -43,17 +43,15 @@ describe('reducers/sms_events/fetchSms action creator and selector', () => {
 
 describe('reducers/sms_events/addFilterArgs action creator and selector', () => {
   it('must work correctly', () => {
-    const filterArgs: FilterArgs[] = [
-      {
-        comparator: '!==',
-        field: 'height',
-        value: 48,
+    const filterArgs: SMS_FILTER_FUNCTION[] = [
+      (smsData: SmsData) => {
+        return smsData.height !== 48;
       },
-    ];
+    ] as SMS_FILTER_FUNCTION[];
     store.dispatch(addFilterArgs(filterArgs));
     expect(getFilterArgs(store.getState())).toEqual(filterArgs);
     store.dispatch(removeFilterArgs());
-    expect(getFilterArgs(store.getState())).toEqual(null);
+    expect(getFilterArgs(store.getState())).toEqual([]);
   });
 });
 
@@ -76,12 +74,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '==='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '===',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height === 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height === 48;
@@ -91,12 +87,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '<='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '<=',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height <= 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height <= 48;
@@ -106,12 +100,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '>='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '>=',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height >= 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height >= 48;
@@ -121,12 +113,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '!=='", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '!==',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height !== 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height !== 48;
@@ -136,12 +126,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '>'", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '>',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height > 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height > 48;
@@ -151,12 +139,10 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
   it("it must works correctly with '<'", () => {
     expect(
       getFilteredSmsData(store.getState(), [
-        {
-          comparator: '<',
-          field: 'height',
-          value: 48,
+        (smsData: SmsData) => {
+          return smsData.height < 48;
         },
-      ])
+      ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
         return element.height < 48;

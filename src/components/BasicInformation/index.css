@@ -1,10 +1,6 @@
 .dataItem {
   border: 1px solid black;
-  width: 20em;
-}
-
-.detailsColumn {
-  padding: 60px;
+  width: 20rem;
 }
 
 .right {
@@ -23,7 +19,6 @@
 
 #detailsRow {
   width: 100%;
-  padding: 30px 0;
 }
 
 #detailsCard {
@@ -38,7 +33,6 @@
 #detailsRow #detailsCard table td {
   border: none;
   background: #ffffff;
-  font-family: Roboto;
   font-size: 18px;
 }
 
@@ -55,11 +49,10 @@
   background-color: #ffffff;
   border: 1px solid #dadce0;
   color: #3a484f;
-  font-family: Roboto;
-  font-size: 1.636em;
+  font-size: 1.636rem;
   font-weight: 500;
-  letter-spacing: -0.018em;
-  line-height: 2em;
+  letter-spacing: -0.018rem;
+  line-height: 2rem;
   text-align: left;
-  padding: 0.5em 1em;
+  padding: 0.5em 1rem;
 }

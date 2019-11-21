@@ -11,7 +11,7 @@ Array [
       <div
         className="card-title"
       >
-        2 Total Pregnancies
+        22 Total Pregnancies
       </div>
     </CardTitle>
     <CardBody
@@ -28,16 +28,16 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  1
+                  4
                 </span>
               </a>
             </Link>
@@ -52,16 +52,16 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  0
+                  2
                 </span>
               </a>
             </Link>
@@ -76,16 +76,16 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/2 Total Pregnancies"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/22 Total Pregnancies/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
                   className="number"
                 >
-                  0
+                  5
                 </span>
               </a>
             </Link>
@@ -125,10 +125,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -149,10 +149,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -173,10 +173,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 2 weeks/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -222,10 +222,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -246,10 +246,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -270,10 +270,10 @@ Array [
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -308,6 +308,8 @@ exports[`Compartments must render correctly: subtitle 1`] = `
 <p
   id="breadcrumb"
 >
-  Province
+  <span
+    id="breadcrumb-span"
+  />
 </p>
 `;

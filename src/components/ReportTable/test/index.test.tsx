@@ -14,7 +14,14 @@ import {
   getEventsPregnancyArrayInput2,
   getEventsPregnancyArrayOutput1,
   getEventsPregnancyArrayOutput2,
+  getPregnancyStringsArrayInput,
+  getPregnancyStringsArrayOutput,
+  getWeightsArrayInput1,
+  getWeightsArrayInput2,
+  getWeightsArrayOutput1,
+  getWeightsArrayOutput2,
   reportTableProps,
+  singlePatientEvents,
 } from './fixtures';
 
 const history = createBrowserHistory();
@@ -34,6 +41,25 @@ describe('ReportTable', () => {
   it('must render correctly', () => {
     const wrapper = mount(<ReportTable singlePatientEvents={reportTableProps as SmsData[]} />);
     expect(toJson(wrapper.find('tbody'))).toMatchSnapshot();
+  });
+});
+
+describe('ReportTable.getPregnancyStringArray() ', () => {
+  it('Must return the correct value given certain input and ReportTable having certain props', () => {
+    const wrapper = mount(<ReportTable singlePatientEvents={singlePatientEvents as SmsData[]} />);
+    const instance: ReportTable = wrapper.instance() as ReportTable;
+    expect(instance.getPregnancyStringArray(getPregnancyStringsArrayInput)).toEqual(
+      getPregnancyStringsArrayOutput
+    );
+  });
+});
+
+describe('ReportTable.getWeightsArray() ', () => {
+  it('Must return the correct value given certain input and ReportTable having certain props', () => {
+    const wrapper = mount(<ReportTable singlePatientEvents={singlePatientEvents as SmsData[]} />);
+    const instance: ReportTable = wrapper.instance() as ReportTable;
+    expect(instance.getWeightsArray(getWeightsArrayInput1)).toEqual(getWeightsArrayOutput1);
+    expect(instance.getWeightsArray(getWeightsArrayInput2)).toEqual(getWeightsArrayOutput2);
   });
 });
 

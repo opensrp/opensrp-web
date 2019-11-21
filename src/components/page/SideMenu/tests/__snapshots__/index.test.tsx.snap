@@ -54,7 +54,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -125,11 +125,11 @@
+@@ -129,11 +129,11 @@
                     <div
                       className=\\"side-menu-extend col\\"
                     >
@@ -67,7 +67,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgHome],
                           }
-@@ -147,11 +147,11 @@
+@@ -151,11 +151,11 @@
                         }
                         setCollapsedModuleLabel={[Function anonymous]}
                       >
@@ -80,7 +80,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgHome],
                             }
-@@ -317,11 +317,11 @@
+@@ -321,11 +321,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/pregnancy_analysis\\",
                             },
@@ -93,7 +93,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgPregnancy],
                           }
-@@ -354,11 +354,11 @@
+@@ -358,11 +358,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/pregnancy_analysis\\",
                               },
@@ -106,7 +106,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgPregnancy],
                             }
-@@ -469,11 +469,11 @@
+@@ -473,11 +473,11 @@
                             <Collapse
                               appear={false}
                               enter={true}
@@ -119,7 +119,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               onEntered={[Function noop]}
                               onEntering={[Function noop]}
                               onExit={[Function noop]}
-@@ -485,11 +485,11 @@
+@@ -489,11 +489,11 @@
                             >
                               <Transition
                                 appear={false}
@@ -132,7 +132,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                 onEntered={[Function bound onEntered]}
                                 onEntering={[Function bound onEntering]}
                                 onExit={[Function bound onExit]}
-@@ -497,12 +497,16 @@
+@@ -501,12 +501,16 @@
                                 onExiting={[Function bound onExiting]}
                                 timeout={350}
                                 unmountOnExit={false}
@@ -151,9 +151,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
                                     vertical={false}
-@@ -648,11 +652,11 @@
-                              \\"label\\": \\"Compartments\\",
-                              \\"url\\": \\"/nbc_and_pnc_compartments\\",
+@@ -656,11 +660,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/nbc_and_pnc_analysis\\",
                             },
                           ]
                         }
@@ -164,9 +164,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNbcandpnc],
                           }
-@@ -681,11 +685,11 @@
-                                \\"label\\": \\"Compartments\\",
-                                \\"url\\": \\"/nbc_and_pnc_compartments\\",
+@@ -693,11 +697,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/nbc_and_pnc_analysis\\",
                               },
                             ]
                           }
@@ -177,7 +177,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgNbcandpnc],
                             }
-@@ -928,11 +932,11 @@
+@@ -983,11 +987,11 @@
                               \\"label\\": \\"Logface\\",
                               \\"url\\": \\"/nutrition_logface_url\\",
                             },
@@ -190,7 +190,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNutrition],
                           }
-@@ -957,11 +961,11 @@
+@@ -1012,11 +1016,11 @@
                                 \\"label\\": \\"Logface\\",
                                 \\"url\\": \\"/nutrition_logface_url\\",
                               },

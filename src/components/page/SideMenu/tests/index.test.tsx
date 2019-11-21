@@ -5,7 +5,7 @@ import React from 'react';
 import { Router } from 'react-router';
 import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { CLIENT_RECORDS, PREGNANCY } from '../../../../constants';
+import { PREGNANCY } from '../../../../constants';
 
 const history = createBrowserHistory();
 
@@ -17,7 +17,7 @@ describe('components/page/SideMenu', () => {
   it('renders without crashing', () => {
     shallow(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu authenticated={true} />
       </Router>
     );
   });
@@ -25,7 +25,7 @@ describe('components/page/SideMenu', () => {
   it('renders side menu correctly', () => {
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu authenticated={true} />
       </Router>
     );
     /** client Collapse SubMenu renders correctly */
@@ -36,7 +36,7 @@ describe('components/page/SideMenu', () => {
   it('manages state correctly', () => {
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />
+        <SideMenu authenticated={true} />
       </Router>
     );
 
@@ -53,7 +53,7 @@ describe('components/page/SideMenu', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <SideMenu />)
+        <SideMenu authenticated={true} />)
       </Router>
     );
 

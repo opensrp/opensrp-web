@@ -31,10 +31,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/high/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/high/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -55,10 +55,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/low/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/low/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span
@@ -79,10 +79,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/Pregnancy/no/test title"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
             >
               <a
-                href="/hierarchicaldata/Pregnancy/no/test title"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
                 onClick={[Function]}
               >
                 <span

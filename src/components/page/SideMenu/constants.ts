@@ -19,12 +19,15 @@ import {
   LOCATIONS_URL,
   LOGFACE,
   NBC_AND_PNC,
+  NBC_AND_PNC_ANALYSIS_URL,
   NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_LOGFACE_URL,
   NBC_AND_PNC_URL,
   NUTRITION,
+  NUTRITION_ANALYSIS_URL,
+  NUTRITION_COMPARTMENTS_URL,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
-  PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
@@ -54,21 +57,6 @@ import {
 } from '../../../configs/env';
 
 // Page links
-
-export const LOG_FACE: PageLink = {
-  label: 'logface',
-  url: '/logface',
-};
-
-export const CompartMents: PageLink = {
-  label: 'compartments',
-  url: '/compartments',
-};
-
-export const Analysis: PageLink = {
-  label: 'Analysis',
-  url: '/analysis',
-};
 export const CLIENT_PAGE_NAVIGATION: PageLink = {
   label: ALL_CLIENTS,
   url: CLIENT_URL,
@@ -128,9 +116,14 @@ export const NBC_AND_PNC_COMPARTMENTS_PAGE_NAVIGATION: PageLink = {
   url: NBC_AND_PNC_COMPARTMENTS_URL,
 };
 
+export const NUTRITION_COMPARTMENTS_PAGE_NAVIGATION: PageLink = {
+  label: COMPARTMENTS,
+  url: NUTRITION_COMPARTMENTS_URL,
+};
+
 export const NBC_AND_PNC_LOGFACE_PAGE_NAVIGATION: PageLink = {
   label: LOGFACE,
-  url: PNC_AND_NBC_LOGFACE_URL,
+  url: NBC_AND_PNC_LOGFACE_URL,
 };
 
 export const PREGNANCY_LOGFACE_PAGE_NAVIGATION: PageLink = {
@@ -143,9 +136,19 @@ export const NUTRITION_LOGFACE_PAGE_NAVIGATION: PageLink = {
   url: NUTRITION_LOGFACE_URL,
 };
 
-export const ANALYSIS_PAGE_NAVIGATION: PageLink = {
+export const PREGNANCY_ANALYSIS_PAGE_NAVIGATION: PageLink = {
   label: ANALYSIS,
   url: PREGNANCY_ANALYSIS_URL,
+};
+
+export const NBC_AND_PNC_ANALYSIS_PAGE_NAVIGATION: PageLink = {
+  label: ANALYSIS,
+  url: NBC_AND_PNC_ANALYSIS_URL,
+};
+
+export const NUTRITION_ANALYSIS_PAGE_NAVIGATION: PageLink = {
+  label: ANALYSIS,
+  url: NUTRITION_ANALYSIS_URL,
 };
 
 // icons
@@ -208,13 +211,17 @@ export const PREGNANCY_NAVIGATION_MODULE: NavigationModule = {
   childNavs: [
     PREGNANCY_LOGFACE_PAGE_NAVIGATION,
     PREGNANCY_COMPARTMENTS_PAGE_NAVIGATION,
-    ANALYSIS_PAGE_NAVIGATION,
+    PREGNANCY_ANALYSIS_PAGE_NAVIGATION,
   ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
   parentNav: PREGNANCY_MODULE_PARENT_NAV,
 };
 
 export const NBC_AND_PNC_NAVIGATION_MODULE: NavigationModule = {
-  childNavs: [NBC_AND_PNC_LOGFACE_PAGE_NAVIGATION, NBC_AND_PNC_COMPARTMENTS_PAGE_NAVIGATION],
+  childNavs: [
+    NBC_AND_PNC_LOGFACE_PAGE_NAVIGATION,
+    NBC_AND_PNC_COMPARTMENTS_PAGE_NAVIGATION,
+    NBC_AND_PNC_ANALYSIS_PAGE_NAVIGATION,
+  ],
   parentNav: NBC_AND_PNC_PARENT_NAV,
 };
 

@@ -1,5 +1,6 @@
 import { keyBy, values } from 'lodash';
 import { AnyAction, Store } from 'redux';
+import { SMS_FILTER_FUNCTION } from '../../constants';
 
 /** The reducer name */
 export const reducerName = 'SmsReducer';
@@ -23,13 +24,8 @@ export interface SmsData {
   gravidity: number;
   location_id: string;
   client_type: string;
-}
-
-/** Interface for arguments used to filter SmsData with the getFilterSmsData function */
-export interface FilterArgs {
-  field: string;
-  comparator: ComparatorOptions;
-  value: string | number;
+  child_symptoms: string;
+  mother_symptoms: string;
 }
 
 // actions
@@ -64,7 +60,7 @@ export interface RemoveFilterArgs extends AnyAction {
 
 /** Interface for AddFilterArgs */
 export interface AddFilterArgsAction extends AnyAction {
-  filterArgs: FilterArgs[];
+  filterArgs: SMS_FILTER_FUNCTION[];
   type: typeof ADD_FILTER_ARGS;
 }
 
@@ -96,7 +92,7 @@ export const removeSms: RemoveSmsAction = {
 };
 
 /** Add filter args action creator */
-export const addFilterArgs = (filterArgs: FilterArgs[]): AddFilterArgsAction => {
+export const addFilterArgs = (filterArgs: SMS_FILTER_FUNCTION[]): AddFilterArgsAction => {
   return {
     filterArgs,
     type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
@@ -112,7 +108,7 @@ export const removeFilterArgs = (): RemoveFilterArgs => {
 interface SmsState {
   smsData: { [key: string]: SmsData };
   smsDataFetched: boolean;
-  filterArgs: FilterArgs[] | null;
+  filterArgs: SMS_FILTER_FUNCTION[] | null;
 }
 
 /** initial sms-state state */
@@ -169,61 +165,31 @@ export function smsDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].smsDataFetched;
 }
 
-type ComparatorOptions = '===' | '!==' | '>=' | '<=' | '<' | '>';
 /**
  * Returns a list of SmsData that has been filtered based on the value
  * of a field specified.
- * @param {Partil<Store>} state - the state of the SmsReducer redux store
- * @param {field} string - the name of the field to filter by
- * @param {value} string | number - the string or number value of the field specified
+ * @param {Partil<Store>} state - the state of the SmsReducer redux store.
+ * @param {SMS_FILTER_FUNCTION[]}  filterArgs - an array of SMS_FILTER_FUNCTIONs.
+ * @return {SmsData[]} - an array of SmsData objects that have passed the filtration criteria of all the filterArgs.
  */
-export function getFilteredSmsData(state: Partial<Store>, filterArgs: FilterArgs[]): SmsData[] {
-  // in the future we may have to modify this selector to receive more than one FilterArgs object
-  // i.e an array of these objects and then each one of them, one after another to do the filtering
-
+export function getFilteredSmsData(
+  state: Partial<Store>,
+  filterArgs: SMS_FILTER_FUNCTION[]
+): SmsData[] {
   let results = values((state as any)[reducerName].smsData);
-  for (const filterArgIndex in filterArgs) {
-    if (filterArgIndex) {
-      results = results.filter((smsData: SmsData) => {
-        return filterArgs[filterArgIndex].field in smsData
-          ? doComparison(
-              filterArgs[filterArgIndex].field === 'EventDate'
-                ? Date.now() - Date.parse((smsData as any)[filterArgs[filterArgIndex].field])
-                : (smsData as any)[filterArgs[filterArgIndex].field],
-              filterArgs[filterArgIndex].comparator,
-              filterArgs[filterArgIndex].value
-            )
-          : [];
-      });
+  for (const filterArgsIndex in filterArgs) {
+    if (filterArgsIndex) {
+      results = results.filter(filterArgs[filterArgsIndex]);
     }
   }
   return results;
 }
 
-export function doComparison(
-  actualValue: string | number,
-  comparator: ComparatorOptions,
-  targetValue: string | number
-) {
-  switch (comparator) {
-    case '===':
-      return actualValue === targetValue;
-    case '!==':
-      return actualValue !== targetValue;
-    case '>=':
-      return actualValue >= targetValue;
-    case '<=':
-      return actualValue <= targetValue;
-    case '>':
-      return actualValue > targetValue;
-    case '<':
-      return actualValue < targetValue;
-    default:
-      return false;
-  }
-}
-
 /** Returns the filterArgs currently in the store */
-export function getFilterArgs(state: Partial<Store>): FilterArgs[] | null {
-  return (state as any)[reducerName].filterArgs;
+export function getFilterArgs(state: Partial<Store>): SMS_FILTER_FUNCTION[] {
+  if ((state as any)[reducerName].filterArgs) {
+    return (state as any)[reducerName].filterArgs;
+  } else {
+    return [];
+  }
 }

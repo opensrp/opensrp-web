@@ -8,6 +8,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
+import { getModuleLink } from '../../components/DataCircleCard';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -21,28 +22,30 @@ import {
   HIGH_RISK,
   LOW,
   LOW_RISK,
-  NBC_AND_PNC,
+  NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
+  NUTRITION,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
+  SMS_FILTER_FUNCTION,
   TOTAL,
   UP,
   VILLAGE,
 } from '../../constants';
+import { locationDataIsAvailable } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,
   getLocationsOfLevel,
   Location,
-  locationsDataFetched,
   reducerName,
 } from '../../store/ducks/locations';
 import smsReducer, {
-  FilterArgs,
   getFilterArgs,
   getFilteredSmsData,
   reducerName as smsReducerName,
@@ -62,6 +65,7 @@ export interface LocationWithData extends Location {
 interface State {
   data: LocationWithData[];
   district: string;
+  villageData: SmsData[];
 }
 
 interface Props {
@@ -77,9 +81,9 @@ interface Props {
   communes: Location[];
   villages: Location[];
   smsData: SmsData[];
-  locationsFetched: boolean;
   compartMentUrl: string;
-  module: string;
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
+  permissionLevel: number;
 }
 
 const defaultProps: Props = {
@@ -89,8 +93,8 @@ const defaultProps: Props = {
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
-  locationsFetched: false,
   module: '',
+  permissionLevel: 3,
   provinces: [],
   risk_highligter: '',
   smsData: [],
@@ -306,8 +310,22 @@ class HierarchichalDataTable extends Component<Props, State> {
         : dataToShow;
     }
 
+    // get data to show on the VillageData component.
+    const locationIds = dataToShow.map((location: LocationWithData) => location.location_id);
+    const villageData = nextProps.smsData.filter((dataItem: SmsData) => {
+      return (
+        locationIds.includes(dataItem.location_id) &&
+        (nextProps.risk_highligter
+          ? dataItem.logface_risk.includes(
+              nextProps.risk_highligter ? nextProps.risk_highligter : ''
+            )
+          : true)
+      );
+    });
+
     return {
       data: dataToShow,
+      villageData,
     };
   }
 
@@ -316,40 +334,39 @@ class HierarchichalDataTable extends Component<Props, State> {
     this.state = {
       data: [],
       district: '',
+      villageData: [],
     };
   }
-  /**
-   * Given a village return it's commune's location ID
-   * @param {Location} village - village Location to find commnue
-   */
-  public getCommune = (village: Location & Partial<{ level: VILLAGE }>): string => {
-    return village.parent_id;
-  };
 
-  public getDistrict = (village: Location & Partial<{ level: VILLAGE }>): string => {
-    const communeId = this.getCommune(village);
-    return this.props.communes.find((location: Location) => location.location_id === communeId)!
-      .parent_id;
-  };
-
-  public getProvince = (village: Location & Partial<{ level: VILLAGE }>): string => {
-    const districtId = this.getDistrict(village);
-    return this.props.districts.find((location: Location) => location.location_id === districtId)!
-      .parent_id;
-  };
   public componentDidMount() {
     const { fetchLocationsActionCreator } = this.props;
-    for (const slice in LOCATION_SLICES) {
-      if (slice) {
-        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
-          fetchLocationsActionCreator(result);
-        });
+    if (
+      locationDataIsAvailable(
+        this.props.villages,
+        this.props.communes,
+        this.props.districts,
+        this.props.provinces
+      )
+    ) {
+      for (const slice in LOCATION_SLICES) {
+        if (slice) {
+          supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+            fetchLocationsActionCreator(result);
+          });
+        }
       }
     }
   }
 
   public render() {
-    if (this.props.locationsFetched) {
+    if (
+      locationDataIsAvailable(
+        this.props.villages,
+        this.props.communes,
+        this.props.districts,
+        this.props.provinces
+      )
+    ) {
       return (
         <Container fluid={true} className="compartment-data-table">
           <Link to={this.urlToRedirect()} className="back-page">
@@ -383,11 +400,13 @@ class HierarchichalDataTable extends Component<Props, State> {
                                 element.location_name
                               ) : (
                                 <Link
-                                  to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+                                  to={`${getModuleLink(
+                                    this.props.module
+                                  )}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
                                     this.props.risk_highligter
                                   }/${this.props.title}/${
                                     this.props.current_level ? this.props.current_level + 1 : 1
-                                  }/down/${element.location_id}`}
+                                  }/down/${element.location_id}/${this.props.permissionLevel}`}
                                 >
                                   {element.location_name}
                                 </Link>
@@ -462,22 +481,15 @@ class HierarchichalDataTable extends Component<Props, State> {
               </CardBody>
             </Card>
           </Row>
-          <VillageData
-            {...{
-              current_level: this.props.current_level,
-              smsData: this.props.smsData.filter((dataItem: SmsData) => {
-                const locationIds = this.state.data.map(
-                  (location: LocationWithData) => location.location_id
-                );
-                return (
-                  locationIds.includes(dataItem.location_id) &&
-                  (this.props.risk_highligter
-                    ? dataItem.logface_risk.includes(this.props.risk_highligter)
-                    : true)
-                );
-              }),
-            }}
-          />
+          {this.state.villageData.length ? (
+            <VillageData
+              {...{
+                current_level: this.props.current_level,
+                module: this.props.module,
+                smsData: this.state.villageData,
+              }}
+            />
+          ) : null}
         </Container>
       );
     } else {
@@ -489,7 +501,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     switch (this.props.module) {
       case PREGNANCY:
         return PREGNANCY_COMPARTMENTS_URL;
-      case NBC_AND_PNC:
+      case NBC_AND_PNC_WOMAN:
+        return NBC_AND_PNC_COMPARTMENTS_URL;
+      case NBC_AND_PNC_CHILD:
         return NBC_AND_PNC_COMPARTMENTS_URL;
       default:
         return '';
@@ -509,12 +523,28 @@ class HierarchichalDataTable extends Component<Props, State> {
       return PROVINCE;
     }
   };
+  private dontDisplayProvince() {
+    return this.props.permissionLevel > 0;
+  }
+  private dontDisplayDistrict() {
+    return this.props.permissionLevel > 1;
+  }
+
+  private dontDisplayCommune() {
+    return this.props.permissionLevel > 2;
+  }
   private header = () => {
-    let province = <span>{PROVINCE}</span>;
-    if (this.props.current_level > 0) {
+    let province = <span key={0}>{PROVINCE}</span>;
+    if (this.dontDisplayProvince()) {
+      province = <span key={0}>{null}</span>;
+    } else if (this.props.current_level > 0) {
       province = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/0/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={0}
         >
           {PROVINCE}
@@ -522,44 +552,85 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     }
 
-    let district = <span>''</span>;
-    if (this.props.current_level === 1) {
-      district = <span key={1}> / {DISTRICT}</span>;
+    let district = <span key={1}>''</span>;
+    if (this.dontDisplayDistrict()) {
+      district = <span key={1}>{null}</span>;
+    } else if (this.props.current_level === 1) {
+      district = <span key={1}>{DISTRICT}</span>;
     } else {
       district = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/1/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={1}
         >
-          &nbsp;/ {DISTRICT}
+          {DISTRICT}
         </Link>
       );
     }
 
-    let commune = <span> / {COMMUNE}</span>;
-    if (this.props.current_level === 2) {
-      commune = <span key={2}> / {COMMUNE}</span>;
+    let commune = <span key={2}>{COMMUNE}</span>;
+    if (this.dontDisplayCommune()) {
+      commune = <span key={2}>{null}</span>;
+    } else if (this.props.current_level === 2) {
+      commune = <span key={2}>{COMMUNE}</span>;
     } else {
       commune = (
         <Link
-          to={`${HIERARCHICAL_DATA_URL}/${this.props.module}/${this.props.risk_highligter}/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.current_level}`}
+          to={`${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
+            this.props.risk_highligter
+          }/${this.props.title}/2/${UP}/${this.props.node_id}/${this.props.permissionLevel}/${
+            this.props.current_level
+          }`}
           key={2}
         >
-          &nbsp;/ {COMMUNE}
+          {COMMUNE}
         </Link>
       );
     }
 
-    const village = <span key={3}> / {VILLAGE}</span>;
+    const village = <span key={3}>{VILLAGE}</span>;
+    const provinceDivider = this.dontDisplayProvince() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
+    );
+    const districtDivider = this.dontDisplayDistrict() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
+    );
+    const communeDivider = this.dontDisplayCommune() ? (
+      <span key={Math.random()}>{null}</span>
+    ) : (
+      <span className={'divider'} key={Math.random()}>
+        &nbsp; / &nbsp;
+      </span>
+    );
     switch (this.props.current_level) {
       case 0:
         return province;
       case 1:
-        return [province, district];
+        return [province, provinceDivider, district];
       case 2:
-        return [province, district, commune];
+        return [province, provinceDivider, district, districtDivider, commune];
       case 3:
-        return [province, district, commune, village];
+        return [
+          province,
+          provinceDivider,
+          district,
+          districtDivider,
+          commune,
+          communeDivider,
+          village,
+        ];
       default:
         return province;
     }
@@ -585,13 +656,13 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
     direction: ownProps.match.params.direction,
     districts: getLocationsOfLevel(state, 'District'),
     from_level: ownProps.match.params.from_level,
-    locationsFetched: locationsDataFetched(state),
     module: ownProps.match.params.module,
     node_id: ownProps.match.params.node_id,
+    permissionLevel: ownProps.match.params.permission_level,
     provinces: getLocationsOfLevel(state, 'Province'),
     risk_highligter: ownProps.match.params.risk_highlighter,
     smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as FilterArgs[])
+      ? getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[])
       : getSmsData(state),
     title: ownProps.match.params.title,
     villages: getLocationsOfLevel(state, 'Village'),

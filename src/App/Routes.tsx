@@ -10,31 +10,41 @@ import { Store } from 'redux';
 import { Route, Switch } from 'react-router';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
-import { SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT, SUPERSET_SMS_DATA_SLICE } from '../configs/env';
+import {
+  NBC_AND_PNC_ANALYSIS_ENDPOINT,
+  SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
+  SUPERSET_SMS_DATA_SLICE,
+} from '../configs/env';
 import { providers } from '../configs/settings';
 import {
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
+  NBC_AND_PNC_ANALYSIS_URL,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_DASHBOARD_WELCOME,
+  NBC_AND_PNC_LOGFACE_URL,
   NBC_AND_PNC_URL,
   NEWBORN_REPORT,
   NUTRITION,
+  NUTRITION_ANALYSIS,
+  NUTRITION_ANALYSIS_URL,
+  NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
-  PNC_AND_NBC_LOGFACE_URL,
   PREGNANCY,
+  PREGNANCY_ANALYSIS,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
   PREGNANCY_DASHBOARD_WELCOME,
   PREGNANCY_DESCRIPTION,
   PREGNANCY_LOGFACE_URL,
   PREGNANCY_REGISTRATION,
-  SMS_TYPE,
+  SMS_FILTER_FUNCTION,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
+import ConnectedChildPatientDetails from '../containers/ChildPatientDetails';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
@@ -43,6 +53,7 @@ import Home from '../containers/pages/Home';
 import ModuleHome from '../containers/pages/ModuleHome';
 import ConnectedPatientDetails from '../containers/PatientDetails';
 import { headerShouldNotRender, oAuthUserInfoGetter } from '../helpers/utils';
+import { SmsData } from '../store/ducks/sms_events';
 import './App.css';
 
 library.add(faUser);
@@ -98,9 +109,9 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title={NBC_AND_PNC_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                logFaceUrl={PREGNANCY_LOGFACE_URL}
+                logFaceUrl={NBC_AND_PNC_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
-                analysisUrl={PREGNANCY_ANALYSIS_URL}
+                analysisUrl={NBC_AND_PNC_ANALYSIS_URL}
               />
             )}
           />
@@ -113,8 +124,9 @@ export const Routes = (props: RoutesProps) => {
               <ModuleHome
                 title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
-                deactivateLinks={true}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
+                compartmentUrl={NUTRITION_COMPARTMENTS_URL}
+                analysisUrl={NUTRITION_ANALYSIS_URL}
               />
             )}
           />
@@ -125,13 +137,13 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <Compartments
-                filterArgs={[
-                  {
-                    comparator: '===',
-                    field: SMS_TYPE,
-                    value: PREGNANCY_REGISTRATION,
-                  },
-                ]}
+                filterArgs={
+                  [
+                    (smsData: SmsData) => {
+                      return smsData.sms_type === PREGNANCY_REGISTRATION;
+                    },
+                  ] as SMS_FILTER_FUNCTION[]
+                }
                 module={PREGNANCY}
               />
             )}
@@ -143,13 +155,13 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <Compartments
-                filterArgs={[
-                  {
-                    comparator: '===',
-                    field: SMS_TYPE,
-                    value: NEWBORN_REPORT,
-                  },
-                ]}
+                filterArgs={
+                  [
+                    (smsData: SmsData) => {
+                      return smsData.sms_type === NEWBORN_REPORT;
+                    },
+                  ] as SMS_FILTER_FUNCTION[]
+                }
                 module={NBC_AND_PNC}
               />
             )}
@@ -157,7 +169,23 @@ export const Routes = (props: RoutesProps) => {
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={`${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:from_level?`}
+            path={NUTRITION_COMPARTMENTS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <Compartments module={NUTRITION} />}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(
+                url =>
+                  `${url}${HIERARCHICAL_DATA_URL}/:module?/:risk_highlighter?/:title?/:current_level?/:direction?/:node_id?/:permission_level?/:from_level?`
+              );
+            })()}
             component={ConnectedHierarchichalDataTable}
           />
           <ConnectedPrivateRoute
@@ -165,13 +193,57 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={PREGNANCY_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} />}
+            component={() => (
+              <Analysis
+                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+                titleString={PREGNANCY_ANALYSIS}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
             exact={true}
-            path={'/patient_detail/:patient_id'}
+            path={NBC_AND_PNC_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Analysis endpoint={NBC_AND_PNC_ANALYSIS_ENDPOINT} titleString={NUTRITION_ANALYSIS} />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={NUTRITION_ANALYSIS_URL}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <Analysis
+                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
+                titleString={PREGNANCY_ANALYSIS}
+              />
+            )}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(url => `${url}/patient_detail/:patient_id`);
+            })()}
             component={ConnectedPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [
+                NUTRITION_COMPARTMENTS_URL,
+                NBC_AND_PNC_COMPARTMENTS_URL,
+                PREGNANCY_COMPARTMENTS_URL,
+              ].map(url => `${url}/child_patient_detail/:patient_id`);
+            })()}
+            component={ConnectedChildPatientDetails}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
@@ -190,7 +262,7 @@ export const Routes = (props: RoutesProps) => {
           />
           <ConnectedPrivateRoute
             exact={false}
-            path={PNC_AND_NBC_LOGFACE_URL}
+            path={NBC_AND_PNC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ConnectedLogFace header={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />

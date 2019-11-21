@@ -52,7 +52,7 @@ const riskColoring = (props: RiskColoringProps) => {
       );
     case RED:
       return (
-        <span className="badge badge-primary" id="default-width">
+        <span className="badge badge-danger" id="default-width">
           <div>
             <p>{RED_ALERT}</p>
           </div>

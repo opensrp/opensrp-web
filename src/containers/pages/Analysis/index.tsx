@@ -8,10 +8,12 @@ interface State {
 
 interface Props {
   endpoint: string;
+  titleString: string;
 }
 
 const defaultProps: Props = {
   endpoint: '',
+  titleString: '',
 };
 
 export class Analysis extends React.Component<Props, State> {
@@ -27,7 +29,7 @@ export class Analysis extends React.Component<Props, State> {
     return (
       <div className="analysis-content">
         <div>
-          <h2 id="analysis_title">Pregnancy - Analysis</h2>
+          <h2 id="analysis_title">{this.props.titleString}</h2>
         </div>
         <div className="analysis-wrapper">
           {this.state.loading ? <Ripple /> : null}

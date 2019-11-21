@@ -79,16 +79,15 @@
 .account-text:hover {
   color: #d7d7e0;
 }
+
 .bg-dropdown-text {
   justify-content: center;
   text-align: center;
-  font-family: roboto;
   color: #233f56;
 }
 
 .center-account-text {
   justify-content: center;
-  font-family: roboto;
 }
 
 @media screen and (min-width: 480px) {

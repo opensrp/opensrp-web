@@ -6,13 +6,21 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
-import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_TYPE } from '../../../constants';
-import reducer, { fetchSms, reducerName } from '../../../store/ducks/sms_events';
+import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_FILTER_FUNCTION } from '../../../constants';
+import locationsReducer, {
+  reducerName as locationsReducerName,
+} from '../../../store/ducks/locations';
+import smsReducer, {
+  fetchSms,
+  reducerName as smsReducerName,
+  SmsData,
+} from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
 import { smsDataFixtures } from './fixtures';
 
 const history = createBrowserHistory();
-reducerRegistry.register(reducerName, reducer);
+reducerRegistry.register(smsReducerName, smsReducer);
+reducerRegistry.register(locationsReducerName, locationsReducer);
 
 describe('Compartments', () => {
   it('must render without crashing', () => {
@@ -28,13 +36,13 @@ describe('Compartments', () => {
       <Provider store={store}>
         <Router history={history}>
           <ConnectedCompartments
-            filterArgs={[
-              {
-                comparator: '===',
-                field: SMS_TYPE,
-                value: PREGNANCY_REGISTRATION,
-              },
-            ]}
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return smsData.sms_type === PREGNANCY_REGISTRATION;
+                },
+              ] as SMS_FILTER_FUNCTION[]
+            }
             module={PREGNANCY}
           />
         </Router>
@@ -59,13 +67,13 @@ describe('Compartments', () => {
       <Provider store={store}>
         <Router history={history}>
           <ConnectedCompartments
-            filterArgs={[
-              {
-                comparator: '===',
-                field: SMS_TYPE,
-                value: PREGNANCY_REGISTRATION,
-              },
-            ]}
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return smsData.sms_type === PREGNANCY_REGISTRATION;
+                },
+              ] as SMS_FILTER_FUNCTION[]
+            }
             module={PREGNANCY}
           />
         </Router>

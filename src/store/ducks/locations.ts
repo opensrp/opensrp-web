@@ -44,11 +44,10 @@ export type LocationActionTypes = FetchLocationsAction | AnyAction;
  * @return {FetchLocationAction} - an action to add Location array to store
  */
 export const fetchLocations = (locations: Location[] = []): FetchLocationsAction => {
-  const fetchLocationsAction = {
+  return {
     locations: keyBy(locations, (location: Location) => location.location_id),
     type: FETCHED_LOCATION as typeof FETCHED_LOCATION,
   };
-  return fetchLocationsAction;
 };
 
 /** interface for locations state in redux store */
