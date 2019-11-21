@@ -21,7 +21,7 @@ import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
 import RiskColoring from '../RiskColoring';
 import './index.css';
 
-interface Props {
+export interface Props {
   current_level: number;
   smsData: SmsData[];
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
