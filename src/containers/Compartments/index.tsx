@@ -99,13 +99,12 @@ class Compartments extends React.Component<Props, State> {
       locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
     ) {
       filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
+        const smsDataVillage = props.villages.find(village => {
           return village.location_id === smsData.location_id;
         });
-        return village
+        return smsDataVillage
           ? getProvince(
-              village as (Location & { level: VILLAGE }),
+              smsDataVillage as (Location & { level: VILLAGE }),
               props.districts,
               props.communes
             ) === userLocationId
@@ -116,12 +115,11 @@ class Compartments extends React.Component<Props, State> {
       locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
     ) {
       filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
+        const smsDataVillage = props.villages.find(village => {
           return village.location_id === smsData.location_id;
         });
-        return village
-          ? getDistrict(village as (Location & { level: VILLAGE }), props.communes) ===
+        return smsDataVillage
+          ? getDistrict(smsDataVillage as (Location & { level: VILLAGE }), props.communes) ===
               userLocationId
           : false;
       };
@@ -130,12 +128,11 @@ class Compartments extends React.Component<Props, State> {
       locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
     ) {
       filterFunction = (smsData: SmsData) => {
-        // tslint:disable-next-line: no-shadowed-variable
-        const village = props.villages.find(village => {
+        const smsDataVillage = props.villages.find(village => {
           return village.location_id === smsData.location_id;
         });
-        return village
-          ? getCommune(village as (Location & { level: VILLAGE })) === userLocationId
+        return smsDataVillage
+          ? getCommune(smsDataVillage as (Location & { level: VILLAGE })) === userLocationId
           : false;
       };
     }
