@@ -11,9 +11,15 @@ import {
   AGE,
   BACK,
   BACKPAGE_ICON,
+  CHILD_HEIGHT_VS_MONTHS,
   CHILD_WEIGHT_MONITORING,
+  CHILD_WEIGHT_VS_MONTHS,
+  CM,
+  COULD_NOT_FIND_ANY_LOCATION,
   CURRENT_NUTRTION,
+  HEIGHT,
   ID,
+  KG,
   LENGTH_HEIGHT_MONITORING,
   LOCATION_OF_RESIDENCE,
   MONTHLY_NUTRITION_REPORT,
@@ -21,6 +27,7 @@ import {
   NUTRITION_REPORT,
   PATIENT_DETAILS,
   RISK_CARTEGORIZATION,
+  WEIGHT,
 } from '../../constants';
 import { filterByPatientAndSort, getNumberOfDaysSinceDate } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
@@ -102,9 +109,9 @@ class ChildPatientDetails extends Component<Props, State> {
             weights={this.getWeightsArray()}
             chartWrapperId={'child-weights'}
             title={CHILD_WEIGHT_MONITORING}
-            legendString={'Child weight vs month'}
-            units={'kg'}
-            xAxisLabel={'Weight'}
+            legendString={CHILD_WEIGHT_VS_MONTHS}
+            units={KG}
+            xAxisLabel={WEIGHT}
           />
         </Row>
         <Row>
@@ -112,9 +119,9 @@ class ChildPatientDetails extends Component<Props, State> {
             weights={this.getHeightsArray()}
             chartWrapperId={'child-heights'}
             title={LENGTH_HEIGHT_MONITORING}
-            legendString={'Child height vs month'}
-            units={'cm'}
-            xAxisLabel={'height'}
+            legendString={CHILD_HEIGHT_VS_MONTHS}
+            units={CM}
+            xAxisLabel={HEIGHT}
           />
         </Row>
       </div>
@@ -153,7 +160,7 @@ class ChildPatientDetails extends Component<Props, State> {
         return reversedFilteredData[data].logface_risk;
       }
     }
-    return 'could not find any location';
+    return COULD_NOT_FIND_ANY_LOCATION;
   };
 
   private getAgeInDays = (): string => {
@@ -172,7 +179,7 @@ class ChildPatientDetails extends Component<Props, State> {
         return reversedFilteredData[data].health_worker_location_name;
       }
     }
-    return 'could not find any location';
+    return COULD_NOT_FIND_ANY_LOCATION;
   };
 
   private getBasicInformationProps = () => {

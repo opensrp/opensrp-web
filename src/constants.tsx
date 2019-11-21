@@ -222,6 +222,16 @@ export const PREGNANCY_ANALYSIS = 'Pregnancy - Analysis';
 export type PREGNANCY_ANALYSIS = typeof PREGNANCY_ANALYSIS;
 export const NUTRITION_ANALYSIS = 'Nutrition - Analysis';
 export type NUTRITION_ANALYSIS = typeof NUTRITION_ANALYSIS;
+export const COULD_NOT_FIND_ANY_LOCATION = 'could not find any location';
+export type COULD_NOT_FIND_ANY_LOCATION = typeof COULD_NOT_FIND_ANY_LOCATION;
+export const CM = 'cm';
+export type CM = typeof CM;
+export const KG = 'kg';
+export type KG = typeof KG;
+export const CHILD_HEIGHT_VS_MONTHS = 'Child height vs month';
+export type CHILD_HEIGHT_VS_MONTHS = typeof CHILD_HEIGHT_VS_MONTHS;
+export const CHILD_WEIGHT_VS_MONTHS = 'Child weight vs month';
+export type CHILD_WEIGHT_VS_MONTHS = typeof CHILD_WEIGHT_VS_MONTHS;
 
 // typings
 export type SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
