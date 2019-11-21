@@ -167,7 +167,7 @@ export default class WeightAndHeightChart extends React.Component<Props, State> 
     return (
       <Card>
         <CardTitle>{this.props.title}</CardTitle>
-        <div id={`${this.props.chartWrapperId}`} />
+        <div id={this.props.chartWrapperId} />
       </Card>
     );
   }
