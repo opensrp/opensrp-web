@@ -121,3 +121,23 @@ export const filterByPatientAndSort = (props: {
 export const getNumberOfDaysSinceDate = (date: string): number => {
   return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
 };
+
+/**
+ * The typical use of this util function is by a props that would like to check if its
+ * location props(distticts, villages, communes and provices that are attached to the store)
+ * all have Location data.
+ *
+ * returns true if villages, districts, communes and provices all have a length greater than 0.
+ * @param {Location[]} villages an array of village locations
+ * @param {Location[]} communes an array of communes locations
+ * @param {Location[]} districts an array of district locations
+ * @param {Location[]} provices an array of province locations
+ */
+export function locationDataIsAvailable(
+  villages: Location[],
+  communes: Location[],
+  districts: Location[],
+  provinces: Location[]
+) {
+  return villages.length && districts.length && communes.length && provinces.length;
+}

@@ -25,7 +25,7 @@ import {
   SMS_FILTER_FUNCTION,
   VILLAGE,
 } from '../../constants';
-import { getCommune, getDistrict, getProvince } from '../../helpers/utils';
+import { getCommune, getDistrict, getProvince, locationDataIsAvailable } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks/locations';
 import {
@@ -94,10 +94,10 @@ class Compartments extends React.Component<Props, State> {
     // add filter for this location here
     const userLocationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
     let filterFunction;
-    function locationDataIsAvailable() {
-      return props.villages.length && props.districts.length && props.communes.length;
-    }
-    if (Compartments.isProvince(userLocationId, props.provinces) && locationDataIsAvailable()) {
+    if (
+      Compartments.isProvince(userLocationId, props.provinces) &&
+      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
+    ) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
         const village = props.villages.find(village => {
@@ -113,7 +113,7 @@ class Compartments extends React.Component<Props, State> {
       };
     } else if (
       Compartments.isDistrict(userLocationId, props.districts) &&
-      locationDataIsAvailable()
+      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
     ) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
@@ -127,7 +127,7 @@ class Compartments extends React.Component<Props, State> {
       };
     } else if (
       Compartments.isCommune(userLocationId, props.communes) &&
-      locationDataIsAvailable()
+      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
     ) {
       filterFunction = (smsData: SmsData) => {
         // tslint:disable-next-line: no-shadowed-variable
