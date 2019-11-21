@@ -11,11 +11,15 @@ import { HOUSEHOLD_URL } from '../../../constants';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
   fetchClient,
-  fetchMembers,
   getClient,
-  getMembersArray,
   reducerName as clientReducerName,
 } from '../../../store/ducks/client';
+
+import memberReducer, {
+  fetchMembers,
+  getMembersArray,
+  reducerName as memberReducerName,
+} from '../../../store/ducks/members';
 import { Event, getEventsArray, fetchEvents} from '../../../store/ducks/events';
 import { Client } from '../../../store/ducks/clients';
 import { Household } from '../../../store/ducks/households';
@@ -23,6 +27,9 @@ import './householdProfile.css';
 
 /** register the client reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
+
+/** register the client reducer */
+reducerRegistry.register(memberReducerName, memberReducer);
 
 /** interface for HouseholdProfile URL params */
 interface HouseholdProfileURLParams {

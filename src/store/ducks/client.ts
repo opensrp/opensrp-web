@@ -9,19 +9,12 @@ export const reducerName = 'client';
 /** CLIENT_FETCHED action type */
 export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
 
-/** MEMBERS_FETCHED action type */
-export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
+
 
 /** interface for fetch client */
 export interface FetchClientAction extends AnyAction {
   clientById: { [key: string]: Client };
   type: typeof CLIENT_FETCHED;
-}
-
-/** interface for fetch members */
-export interface FetchMembersAction extends AnyAction {
-  membersById: { [key: string]: Client };
-  type: typeof MEMBERS_FETCHED;
 }
 
 // actions
@@ -37,21 +30,8 @@ export const fetchClient = (client: Client): FetchClientAction => ({
   type: CLIENT_FETCHED,
 });
 
-/** Fetch members action creator
- * @param {Event} members - members to add to store
- * @return {FetchMembersAction} - an action to add members to redux store
- */
-export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
-  membersById: keyBy(membersList, (member: Client) => member.baseEntityId),
-  type: MEMBERS_FETCHED,
-});
-
 /** Create type for client reducer actions */
-export type ClientActionTypes =
-  | FetchClientAction
-
-  | FetchMembersAction
-  | AnyAction;
+export type ClientActionTypes = FetchClientAction | AnyAction;
 
 // The reducer
 
@@ -81,11 +61,6 @@ export default function reducer(
         ...state,
         clientById: action.clientById,
       });
-    case MEMBERS_FETCHED:
-      return SeamlessImmutable({
-        ...state,
-        membersById: action.membersById,
-      });
     default:
       return state;
   }
@@ -110,18 +85,4 @@ export function getClient(state: Partial<Store>): Client {
   return values(client)[0];
 }
 
-/** returns the members of the client in the store by their ids
- * @param {Partial<Store>} state - the redux store
- * @return { Client } - client objects as values, respective ids as keys
- */
-export function getMembersById(state: Partial<Store>): { [key: string]: Client } {
-  return (state as any)[reducerName].membersById;
-}
 
-/** returns the members of the client as array
- * @param {Partial<Store>} state - the redux store
- * @return { Client } - members array
- */
-export function getMembersArray(state: Partial<Store>): Client[] {
-  return values((state as any)[reducerName].membersById);
-}
