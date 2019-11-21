@@ -4,7 +4,7 @@ import SeamlessImmutable from 'seamless-immutable';
 import { Client } from './clients';
 
 /** The reducer name */
-export const reducerName = 'clients';
+export const reducerName = 'client';
 
 /** CLIENT_FETCHED action type */
 export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
