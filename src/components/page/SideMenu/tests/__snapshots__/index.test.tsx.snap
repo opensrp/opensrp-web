@@ -74,9 +74,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -103,11 +103,11 @@
-                        \\"label\\": \\"All clients\\",
-                        \\"url\\": \\"/clients\\",
+@@ -144,11 +144,11 @@
+                        \\"label\\": \\"Child\\",
+                        \\"url\\": \\"/404\\",
                       },
                     ]
                   }
@@ -87,9 +87,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
-@@ -125,11 +125,11 @@
-                          \\"label\\": \\"All clients\\",
-                          \\"url\\": \\"/clients\\",
+@@ -178,11 +178,11 @@
+                          \\"label\\": \\"Child\\",
+                          \\"url\\": \\"/404\\",
                         },
                       ]
                     }
@@ -100,7 +100,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -255,11 +255,11 @@
+@@ -308,11 +308,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -113,7 +113,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -271,11 +271,11 @@
+@@ -324,11 +324,11 @@
                       >
                         <Transition
                           appear={false}
@@ -126,7 +126,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -283,12 +283,16 @@
+@@ -336,12 +336,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
@@ -144,5 +144,57 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             <Nav
                               key=\\"child-nav-0\\"
                               tag=\\"ul\\"
-                              vertical={false}"
+                              vertical={false}
+@@ -519,11 +523,11 @@
+                    </div>
+                  </SubMenu>
+                </withRouter(SubMenu)>
+                <withRouter(SubMenu)
+                  childNavs={Array []}
+-                 collapsedModuleLabel=\\"\\"
++                 collapsedModuleLabel=\\"Client Records\\"
+                  key=\\"1\\"
+                  parentNav={
+                    Object {
+                      \\"icon\\": Array [
+                        \\"fas\\",
+@@ -535,11 +539,11 @@
+                  }
+                  setCollapsedModuleLabel={[Function anonymous]}
+                >
+                  <SubMenu
+                    childNavs={Array []}
+-                   collapsedModuleLabel=\\"\\"
++                   collapsedModuleLabel=\\"Client Records\\"
+                    history={
+                      Object {
+                        \\"action\\": \\"POP\\",
+                        \\"block\\": [Function block],
+                        \\"createHref\\": [Function createHref],
+@@ -737,11 +741,11 @@
+                        \\"label\\": \\"Locations\\",
+                        \\"url\\": \\"/404\\",
+                      },
+                    ]
+                  }
+-                 collapsedModuleLabel=\\"\\"
++                 collapsedModuleLabel=\\"Client Records\\"
+                  key=\\"2\\"
+                  parentNav={
+                    Object {
+                      \\"icon\\": Array [
+                        \\"fas\\",
+@@ -771,11 +775,11 @@
+                          \\"label\\": \\"Locations\\",
+                          \\"url\\": \\"/404\\",
+                        },
+                      ]
+                    }
+-                   collapsedModuleLabel=\\"\\"
++                   collapsedModuleLabel=\\"Client Records\\"
+                    history={
+                      Object {
+                        \\"action\\": \\"POP\\",
+                        \\"block\\": [Function block],
+                        \\"createHref\\": [Function createHref],"
 `;

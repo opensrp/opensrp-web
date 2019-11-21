@@ -131,8 +131,8 @@ class HouseholdList extends React.Component<HouseholdListProps> {
       opensrpService,
     } = this.props;
     const params = {
-      clientType: 'ec_household',
-      pageNumber: '0',
+      clientType,
+      pageNumber: '1',
       pageSize: PAGINATION_SIZE,
       searchText,
     };

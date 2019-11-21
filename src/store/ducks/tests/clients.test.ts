@@ -2,27 +2,33 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
 import { FlushThunks } from 'redux-testkit';
 import store from '../../index';
-import reducer, {
+import clientReducer, {
   fetchClients,
-  fetchHouseholds,
   getClientById,
   getClientsArray,
   getClientsById,
   getClientsIdArray,
+  getNavigationPage,
+  reducerName as clientReducerName,
+  removeClientsAction,
+  setNavigationPage,
+} from '../clients';
+
+import householdReducer, {
+  removeHouseholdsAction,
+  fetchHouseholds,
   getHouseholdById,
   getHouseholdsArray,
   getHouseholdsById,
-  getNavigationPage,
   getTotalRecords,
-  reducerName,
-  removeClientsAction,
-  removeHouseholdsAction,
-  setNavigationPage,
   setTotalRecords,
-} from '../clients';
+  reducerName as houseHoldReducerName,
+} from '../households';
+
 import * as fixtures from '../tests/fixtures';
 
-reducerRegistry.register(reducerName, reducer);
+reducerRegistry.register(clientReducerName, clientReducer);
+reducerRegistry.register(houseHoldReducerName, householdReducer);
 
 describe('reducers/clients', () => {
   let flushThunks;
