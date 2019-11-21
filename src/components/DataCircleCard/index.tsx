@@ -19,7 +19,7 @@ import {
   PREGNANCY_COMPARTMENTS_URL,
   SMS_FILTER_FUNCTION,
 } from '../../constants';
-import { addFilterArgs, SmsData } from '../../store/ducks/sms_events';
+import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
 interface Props {
