@@ -1,5 +1,5 @@
 import { AnyAction, Store } from 'redux';
-import { get, keyBy, keys, values } from 'lodash';
+import { get, keyBy, values } from 'lodash';
 import {Client} from './clients';
 import SeamlessImmutable from 'seamless-immutable';
 

@@ -3,7 +3,7 @@ import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Col, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Table } from 'reactstrap';
+import { Col, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import SearchBox from '../../../components/page/SearchBox/SearchBox';
@@ -48,10 +48,7 @@ export const defaultHouseholdListProps: HouseholdListProps = {
 /** Display the Household list  */
 class HouseholdList extends React.Component<HouseholdListProps> {
   public static defaultProps: HouseholdListProps = defaultHouseholdListProps;
-  constructor(props: HouseholdListProps) {
-    super(props);
-  }
-
+  
   public async componentDidMount() {
     const {
       fetchHouseholdsActionCreator,
