@@ -23,6 +23,7 @@ import {
   NBC_AND_PNC_ANALYSIS_URL,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_DASHBOARD_WELCOME,
+  NBC_AND_PNC_DESCRIPTION,
   NBC_AND_PNC_LOGFACE_URL,
   NBC_AND_PNC_URL,
   NEWBORN_REPORT,
@@ -31,6 +32,7 @@ import {
   NUTRITION_ANALYSIS_URL,
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
+  NUTRITION_DESCRIPTION,
   NUTRITION_LOGFACE_URL,
   NUTRITION_URL,
   PREGNANCY,
@@ -108,7 +110,7 @@ export const Routes = (props: RoutesProps) => {
             component={() => (
               <ModuleHome
                 title={NBC_AND_PNC_DASHBOARD_WELCOME}
-                description={PREGNANCY_DESCRIPTION}
+                description={NBC_AND_PNC_DESCRIPTION}
                 logFaceUrl={NBC_AND_PNC_LOGFACE_URL}
                 compartmentUrl={NBC_AND_PNC_COMPARTMENTS_URL}
                 analysisUrl={NBC_AND_PNC_ANALYSIS_URL}
@@ -123,7 +125,7 @@ export const Routes = (props: RoutesProps) => {
             component={() => (
               <ModuleHome
                 title={NUTRITION_DASHBOARD_WELCOME}
-                description={PREGNANCY_DESCRIPTION}
+                description={NUTRITION_DESCRIPTION}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
                 compartmentUrl={NUTRITION_COMPARTMENTS_URL}
                 analysisUrl={NUTRITION_ANALYSIS_URL}
