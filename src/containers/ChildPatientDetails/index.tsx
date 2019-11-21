@@ -6,17 +6,21 @@ import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
 import BasicInformation, { LabelValuePair } from '../../components/BasicInformation';
+import { WeightMonthYear } from '../../components/ReportTable';
 import WeightAndHeightChart from '../../components/WeightAndHeightChart';
 import {
   AGE,
   BACK,
   BACKPAGE_ICON,
+  CAPITALIZED_MESSAGE,
   CHILD_HEIGHT_VS_MONTHS,
   CHILD_WEIGHT_MONITORING,
   CHILD_WEIGHT_VS_MONTHS,
   CM,
   COULD_NOT_FIND_ANY_LOCATION,
+  COULD_NOT_FIND_RISK_CARTEGORIZATION,
   CURRENT_NUTRTION,
+  DATE,
   HEIGHT,
   ID,
   KG,
@@ -26,6 +30,8 @@ import {
   NUTRITION_REGISTRATION,
   NUTRITION_REPORT,
   PATIENT_DETAILS,
+  REPORT,
+  REPORTER,
   RISK_CARTEGORIZATION,
   WEIGHT,
 } from '../../constants';
@@ -69,7 +75,7 @@ class ChildPatientDetails extends Component<Props, State> {
   public render() {
     const listViewProps = {
       data: this.buildDataArray(),
-      headerItems: ['Report', 'Date', 'Reporter', 'Message'],
+      headerItems: [REPORT, DATE, REPORTER, CAPITALIZED_MESSAGE],
       tableClass: 'table-container',
       tbodyClass: 'body',
       tdClass: 'default-width',
@@ -128,11 +134,20 @@ class ChildPatientDetails extends Component<Props, State> {
     );
   }
 
+  /**
+   * dropdown toggle event handler
+   * @return {boolean} false for now. so that the dropdown is always closed
+   */
   private toggleDropdown() {
     return false;
   }
 
-  private getWeightsArray() {
+  /**
+   * get an array of WeightMonthYear objects to be displayed on the
+   * chart from filteredData.
+   * @return {WeightMonthYear[]} an array of WeightMonthYear objects
+   */
+  private getWeightsArray(): WeightMonthYear[] {
     return this.state.filteredData.map((smsData: SmsData) => {
       return {
         month: new Date(smsData.EventDate).getMonth(),
@@ -142,6 +157,11 @@ class ChildPatientDetails extends Component<Props, State> {
     });
   }
 
+  /**
+   * get an array of WeightMonthYear objects to be displayed on the
+   * chart from filteredData.
+   * @return {WeightMonthYear[]} an array of WeightMonthYear objects
+   */
   private getHeightsArray() {
     return this.state.filteredData.map((smsData: SmsData) => {
       return {
@@ -152,6 +172,12 @@ class ChildPatientDetails extends Component<Props, State> {
     });
   }
 
+  /**
+   * Find the last SmsData object with a logface_risk field that is not falsy
+   * and then return the value of the logface_risk field for that object.
+   * return the constant COULD_NOT_FIND_RISK_CARTEGORIZATION otherwiser.
+   * @return {string} representing a logface risk.
+   */
   private getRiskCartegorization = (): string => {
     const reversedFilteredData: SmsData[] = [...this.state.filteredData];
     reversedFilteredData.reverse();
@@ -160,9 +186,14 @@ class ChildPatientDetails extends Component<Props, State> {
         return reversedFilteredData[data].logface_risk;
       }
     }
-    return COULD_NOT_FIND_ANY_LOCATION;
+    return COULD_NOT_FIND_RISK_CARTEGORIZATION;
   };
 
+  /**
+   * return the number of days since the EVENT_DATE of the first
+   * SmsData object in filteredData.
+   * @return {string}
+   */
   private getAgeInDays = (): string => {
     let date = '';
 
@@ -171,6 +202,14 @@ class ChildPatientDetails extends Component<Props, State> {
     }
     return getNumberOfDaysSinceDate(date) + ' days';
   };
+
+  /**
+   * Find the last SmsData object with a health_worker_location_name field
+   * that is not falsy and then return the value of the health_worker_location_name
+   * field for that object.
+   * return the constant COULD_NOT_FIND_LOCATION otherwiser.
+   * @return {string} representing a logface risk.
+   */
   private getCurrentLocation = (): string => {
     const reversedFilteredData: SmsData[] = [...this.state.filteredData];
     reversedFilteredData.reverse();
@@ -182,6 +221,9 @@ class ChildPatientDetails extends Component<Props, State> {
     return COULD_NOT_FIND_ANY_LOCATION;
   };
 
+  /**
+   * get the data to be passed as props to the BasicInformation component.
+   */
   private getBasicInformationProps = () => {
     return [
       { label: ID, value: this.props.patientId },
@@ -191,6 +233,9 @@ class ChildPatientDetails extends Component<Props, State> {
     ] as LabelValuePair[];
   };
 
+  /**
+   * Get data in a format that can be passed as a prop to the listview
+   */
   private buildDataArray() {
     return this.state.filteredData.map((smsData: SmsData) => [
       smsData.sms_type,
