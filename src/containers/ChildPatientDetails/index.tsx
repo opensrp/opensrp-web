@@ -89,7 +89,7 @@ class ChildPatientDetails extends Component<Props, State> {
           <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
         </Row>
         <Row id="filter-panel">
-          <p>Showing reports for:&emsp;</p>
+          <p className={'padding-left'}>Showing reports for:</p>
           <div className="filters">
             <Dropdown isOpen={false} toggle={this.toggleDropdown}>
               <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
