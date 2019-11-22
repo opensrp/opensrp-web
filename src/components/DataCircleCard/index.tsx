@@ -16,6 +16,7 @@ import {
   SMS_FILTER_FUNCTION,
 } from '../../constants';
 import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
+import { FlexObject, getModuleLink } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -51,53 +52,47 @@ function DataCircleCard({
   permissionLevel,
 }: Props) {
   const locationId = userLocationId;
+  const pregnancyAndPncCircleSpec: FlexObject[] = [
+    {
+      color: 'red',
+      riskLabel: HIGH_RISK,
+      riskType: HIGH,
+      riskValue: highRisk,
+    },
+    {
+      color: 'orange',
+      riskLabel: LOW_RISK,
+      riskType: LOW,
+      riskValue: lowRisk,
+    },
+    {
+      color: 'green',
+      riskLabel: NO_RISK,
+      riskType: NO,
+      riskValue: noRisk,
+    },
+  ];
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
-          <li className="red">
-            <Link
-              to={getLinkToHierarchichalDataTable(HIGH, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{highRisk}</span>
-            </Link>
-            <span className="risk-level">{HIGH_RISK}</span>
-          </li>
-          <li className="orange">
-            <Link
-              to={getLinkToHierarchichalDataTable(LOW, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{lowRisk}</span>
-            </Link>
-            <span className="risk-level">{LOW_RISK}</span>
-          </li>
-          <li className="green">
-            <Link
-              to={getLinkToHierarchichalDataTable(NO, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{noRisk}</span>
-            </Link>
-            <span className="risk-level">{NO_RISK}</span>
-          </li>
+          {pregnancyAndPncCircleSpec.map((spec: FlexObject) => (
+            <li className={spec.color} key={Math.random()}>
+              <Link
+                to={getLinkToHierarchichalDataTable(spec.riskType)}
+                // tslint:disable-next-line: jsx-no-lambda
+                onClick={() => {
+                  if (filterArgs) {
+                    addFilterArgsActionCreator(filterArgs);
+                  }
+                }}
+              >
+                <span className="number">{spec.riskValue}</span>
+              </Link>
+              <span className="risk-level">{spec.riskLabel}</span>
+            </li>
+          ))}
         </ul>
       </CardBody>
     </Card>
