@@ -34,6 +34,7 @@ import {
   HeaderBreadCrumb,
 } from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
+import { OpenSRPService } from '../../services/opensrp';
 import supersetFetch from '../../services/superset';
 import {
   fetchLocations,
@@ -205,23 +206,13 @@ class Compartments extends React.Component<Props, State> {
     // fetch user UUID from OpenSRP
     // tslint:disable-next-line: no-shadowed-variable
     const { session, userIdFetched } = this.props;
-    if (
-      (session as any).extraData &&
-      (session as any).extraData.oAuth2Data &&
-      (session as any).extraData.oAuth2Data.state === 'opensrp' &&
-      !userIdFetched
-    ) {
-      const headers: any = new Headers();
-      const self: any = this;
-      headers.append(
-        'Authorization',
-        `Bearer ${(session as any).extraData.oAuth2Data.access_token}`
-      );
-      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
-        user.json().then((res: FlexObject) => {
-          self.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
-        })
-      );
+
+    if (!userIdFetched) {
+      const opensrpService = new OpenSRPService('/security/authenticate');
+
+      opensrpService.read('').then((response: any) => {
+        this.props.fetchUserIdActionCreator((response as any).user.attributes._PERSON_UUID);
+      });
     }
 
     // fetch user location details
