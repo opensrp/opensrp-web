@@ -348,3 +348,131 @@ exports[`components/VillageData must render correctly with no data: Village data
   smsData={Array []}
 />
 `;
+
+exports[`components/VillageData/nbcAndPncChildMapFunction must return the correct value given specific input: nbcAndPncChildMapFunctionOutput 1`] = `
+<tr>
+  <td
+    className="default-width"
+  >
+    <Link
+      to="/pregnancy_compartments/child_patient_detail/100RJ0"
+    >
+      100RJ0
+    </Link>
+  </td>
+  <td
+    className="default-width"
+  >
+    8
+  </td>
+  <td
+    className="default-width"
+  >
+    Thôn 1
+  </td>
+  <td
+    className="default-width"
+  >
+     NULL
+  </td>
+  <td
+    className="default-width"
+  >
+    Thôn 1
+  </td>
+  <td
+    className="default-width"
+  >
+    <riskColoring
+      risk="no risk"
+    />
+  </td>
+</tr>
+`;
+
+exports[`components/VillageData/nbcAndPncMotherMapFunction must return the correct value given specific input: nbcAndPncMotherMapFuctionOutput 1`] = `
+<tr>
+  <td
+    className="default-width"
+  >
+    <Link
+      to="/pregnancy_compartments/patient_detail/100RH2"
+    >
+      100RH2
+    </Link>
+  </td>
+  <td
+    className="default-width"
+  >
+    8
+  </td>
+  <td
+    className="default-width"
+  >
+    Thôn 1
+  </td>
+  <td
+    className="default-width"
+  >
+     NULL
+  </td>
+  <td
+    className="default-width"
+  >
+    Thôn 1
+  </td>
+  <td
+    className="default-width"
+  >
+    <riskColoring
+      risk=""
+    />
+  </td>
+</tr>
+`;
+
+exports[`components/VillageData/pregnancyMapFunction must return the correct value given specific input: pregnancyMapFunctionOutput 1`] = `
+<tr>
+  <td
+    className="default-width"
+  >
+    <Link
+      to="/pregnancy_compartments/patient_detail/100RKX"
+    >
+      100RKX
+    </Link>
+  </td>
+  <td
+    className="default-width"
+  >
+    0
+  </td>
+  <td
+    className="default-width"
+  >
+    0
+  </td>
+  <td
+    className="default-width"
+  >
+    Thôn 1
+  </td>
+  <td
+    className="default-width"
+  >
+    0
+  </td>
+  <td
+    className="default-width"
+  >
+     NULL
+  </td>
+  <td
+    className="default-width"
+  >
+    <riskColoring
+      risk="low"
+    />
+  </td>
+</tr>
+`;
