@@ -123,7 +123,6 @@ export const fetchUserLocationId = (userLocationId: string): FetchUserLocationId
 /** interface for locations state in redux store */
 interface LocationsState {
   locations: { [key: string]: Location };
-  locationsFetched: boolean;
   userLocations: { [key: string]: UserLocation };
   userLocationsFetched: boolean;
   userId: string;
@@ -135,7 +134,6 @@ interface LocationsState {
 /** Initial location-state state */
 const initialState: LocationsState = {
   locations: {},
-  locationsFetched: false,
   userId: '',
   userIdFetched: false,
   userLocationId: '',
@@ -153,7 +151,6 @@ export default function locationsReducer(
       return {
         ...state,
         locations: { ...state.locations, ...action.locations },
-        locationsFetched: true,
       };
     case FETCHED_USER_LOCATION:
       return {
@@ -179,7 +176,6 @@ export default function locationsReducer(
       return {
         ...state,
         locations: action.locations,
-        locationsFetched: false,
       };
     default:
       return state;
@@ -228,13 +224,6 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
   return values((state as any)[reducerName].locations).filter((location: Location) => {
     return location.level === level;
   });
-}
-
-/**Returns true if location data has been fetched from superset
- * and false otherwise
- */
-export function locationsDataFetched(state: Partial<Store>): boolean {
-  return (state as any)[reducerName].locationsFetched;
 }
 
 /**Returns true if user locationId has been fetched.
