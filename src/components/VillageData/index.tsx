@@ -63,7 +63,7 @@ export default class VillageData extends React.Component<Props, State> {
     };
     return (
       <React.Fragment>
-        {this.props.current_level === 3 || this.props.current_level === 4 ? (
+        {this.props.current_level >= 3 ? (
           <React.Fragment>
             <Row className="village villageDataRow">
               <Card className="table-card">
