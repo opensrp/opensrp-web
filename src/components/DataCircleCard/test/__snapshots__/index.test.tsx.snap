@@ -28,6 +28,7 @@ exports[`DataCircleCard must render correctly 1`] = `
         >
           <li
             className="red"
+            key="0"
           >
             <Link
               onClick={[Function]}
@@ -52,6 +53,7 @@ exports[`DataCircleCard must render correctly 1`] = `
           </li>
           <li
             className="orange"
+            key="1"
           >
             <Link
               onClick={[Function]}
@@ -76,6 +78,7 @@ exports[`DataCircleCard must render correctly 1`] = `
           </li>
           <li
             className="green"
+            key="2"
           >
             <Link
               onClick={[Function]}
