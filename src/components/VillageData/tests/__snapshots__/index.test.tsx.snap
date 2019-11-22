@@ -363,7 +363,7 @@ exports[`components/VillageData/nbcAndPncChildMapFunction must return the correc
   <td
     className="default-width"
   >
-    7
+    8
   </td>
   <td
     className="default-width"
@@ -404,7 +404,7 @@ exports[`components/VillageData/nbcAndPncMotherMapFunction must return the corre
   <td
     className="default-width"
   >
-    7
+    8
   </td>
   <td
     className="default-width"
