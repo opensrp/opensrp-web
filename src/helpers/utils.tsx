@@ -48,6 +48,11 @@ export function headerShouldNotRender(): boolean {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
 
+/**
+ * Group objects in a list by some field as their key.
+ * @param list a list of objects to be grouped into a single object with keys for each.
+ * @param field a field to as the key by which the objects in the list will be attached.
+ */
 export function groupBy(list: FlexObject[], field: string) {
   const dataMap: FlexObject = {};
   list.forEach((listElement: FlexObject) => {
