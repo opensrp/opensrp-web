@@ -58,6 +58,26 @@
   background-color: #37ae12;
 }
 
+.compartment-wrapper .circlesRow > .total-children {
+  background-color: #637381;
+}
+
+.compartment-wrapper .circlesRow > .stunting {
+  background-color: #ff6361;
+}
+
+.compartment-wrapper .circlesRow > .wasting {
+  background-color: #003f5c;
+}
+
+.compartment-wrapper .circlesRow > .overweight {
+  background-color: #58508d;
+}
+
+.compartment-wrapper .circlesRow > .inappropriate-feeding {
+  background-color: #003f5c;
+}
+
 .compartment-wrapper .circlesRow > .green,
 .compartment-wrapper .circlesRow > .red,
 .compartment-wrapper .circlesRow > .orange {
