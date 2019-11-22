@@ -25,6 +25,7 @@ Array [
         >
           <li
             className="red"
+            key="0"
           >
             <Link
               onClick={[Function]}
@@ -49,6 +50,7 @@ Array [
           </li>
           <li
             className="orange"
+            key="1"
           >
             <Link
               onClick={[Function]}
@@ -73,6 +75,7 @@ Array [
           </li>
           <li
             className="green"
+            key="2"
           >
             <Link
               onClick={[Function]}
@@ -122,6 +125,7 @@ Array [
         >
           <li
             className="red"
+            key="0"
           >
             <Link
               onClick={[Function]}
@@ -146,6 +150,7 @@ Array [
           </li>
           <li
             className="orange"
+            key="1"
           >
             <Link
               onClick={[Function]}
@@ -170,6 +175,7 @@ Array [
           </li>
           <li
             className="green"
+            key="2"
           >
             <Link
               onClick={[Function]}
@@ -219,6 +225,7 @@ Array [
         >
           <li
             className="red"
+            key="0"
           >
             <Link
               onClick={[Function]}
@@ -243,6 +250,7 @@ Array [
           </li>
           <li
             className="orange"
+            key="1"
           >
             <Link
               onClick={[Function]}
@@ -267,6 +275,7 @@ Array [
           </li>
           <li
             className="green"
+            key="2"
           >
             <Link
               onClick={[Function]}

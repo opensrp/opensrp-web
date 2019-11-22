@@ -77,8 +77,8 @@ function DataCircleCard({
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
-          {pregnancyAndPncCircleSpec.map((spec: FlexObject) => (
-            <li className={spec.color} key={Math.random()}>
+          {pregnancyAndPncCircleSpec.map((spec: FlexObject, i: number) => (
+            <li className={spec.color} key={i}>
               <Link
                 to={getLinkToHierarchichalDataTable(spec.riskType)}
                 // tslint:disable-next-line: jsx-no-lambda
