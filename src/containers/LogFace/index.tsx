@@ -42,6 +42,7 @@ import {
   getLocationId,
   sortFunction,
 } from '../../helpers/utils';
+import { OpenSRPService } from '../../services/opensrp';
 import supersetFetch from '../../services/superset';
 import {
   fetchLocations,
@@ -84,7 +85,6 @@ interface PropsInterface {
   removeFilterArgs: any;
   fetchLocations: any;
   fetchUserLocations: any;
-  session: FlexObject;
   userIdFetched: boolean;
   isUserLocationDataFetched: boolean;
   fetchUserIdActionCreator: any;
@@ -118,7 +118,6 @@ const defaultprops: PropsInterface = {
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   provinces: [],
   removeFilterArgs,
-  session: {},
   sliceId: '0',
   smsData: [],
   userIdFetched: false,
@@ -200,26 +199,16 @@ export class LogFace extends React.Component<PropsInterface, State> {
       // tslint:disable-next-line: no-shadowed-variable
       fetchUserLocations,
       isUserLocationDataFetched,
-      session,
       // tslint:disable-next-line: no-shadowed-variable
       userIdFetched,
     } = this.props;
-    if (
-      (session as any).extraData &&
-      (session as any).extraData.oAuth2Data &&
-      (session as any).extraData.oAuth2Data.state === 'opensrp' &&
-      !userIdFetched
-    ) {
-      const headers: any = new Headers();
-      headers.append(
-        'Authorization',
-        `Bearer ${(session as any).extraData.oAuth2Data.access_token}`
-      );
-      fetch(`${OPENSRP_API_BASE_URL}/security/authenticate`, { headers }).then((user: any) =>
-        user.json().then((res: FlexObject) => {
-          this.props.fetchUserIdActionCreator((res as any).user.attributes._PERSON_UUID);
-        })
-      );
+
+    if (!userIdFetched) {
+      const opensrpService = new OpenSRPService('/security/authenticate');
+
+      opensrpService.read('').then((response: any) => {
+        this.props.fetchUserIdActionCreator((response as any).user.attributes._PERSON_UUID);
+      });
     }
 
     // fetch user location details
@@ -581,7 +570,6 @@ const mapStateToprops = (state: any, ownProps: any): any => {
     filterArgsInStore: getFilterArgs(state),
     isUserLocationDataFetched: userLocationDataFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
-    session: (state as any).session,
     smsData: getFilteredSmsData(state, getFilterArgs(state) as Array<
       (smsData: SmsData) => boolean
     >).filter((smsData: SmsData) => {
