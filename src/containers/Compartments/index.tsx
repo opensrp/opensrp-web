@@ -1,4 +1,5 @@
 import { getUser, User } from '@onaio/session-reducer';
+import { ReactNodeArray } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { CardGroup, Row } from 'reactstrap';
@@ -311,6 +312,7 @@ class Compartments extends React.Component<Props, State> {
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
+            module: NBC_AND_PNC_CHILD,
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
             permissionLevel: userLocationLevel,
             title: newBorn.length + ' Total Newborn',
@@ -331,6 +333,7 @@ class Compartments extends React.Component<Props, State> {
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
+            module: NBC_AND_PNC_WOMAN,
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
             permissionLevel: userLocationLevel,
             title: woman.length + ' Total mother in PNC',
@@ -351,6 +354,30 @@ class Compartments extends React.Component<Props, State> {
 
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
+    const circleCardProps: FlexObject = {
+      [PREGNANCY]: [
+        pregnancyDataCircleCard1Props,
+        pregnancyDataCircleCard2Props,
+        pregnancyDataCircleCard3Props,
+      ],
+      [NBC_AND_PNC]: [dataCircleCardChildData, dataCircleCardWomanData],
+    };
+    const circleCardComponent: ReactNodeArray = [];
+    Object.keys(circleCardProps).forEach((m: string) => {
+      circleCardProps[m].forEach((p: any) => {
+        if (this.props.module === m) {
+          circleCardComponent.push(
+            <ConnectedDataCircleCard
+              key={Math.random()}
+              userLocationId={userLocationId}
+              module={m}
+              {...p}
+            />
+          );
+        }
+      });
+    });
+
     return (
       <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
@@ -366,41 +393,7 @@ class Compartments extends React.Component<Props, State> {
           <React.Fragment>
             <div className="cards-row">
               <CardGroup>
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard1Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard2Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard3Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
-                  <ConnectedDataCircleCard
-                    {...dataCircleCardChildData}
-                    userLocationId={userLocationId}
-                    module={NBC_AND_PNC_CHILD}
-                  />
-                ) : null}
-                {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
-                  <ConnectedDataCircleCard
-                    {...dataCircleCardWomanData}
-                    userLocationId={userLocationId}
-                    module={NBC_AND_PNC_WOMAN}
-                  />
-                ) : null}
+                {circleCardComponent}
                 {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardTestProps}
