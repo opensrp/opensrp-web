@@ -142,6 +142,13 @@ const initialState: LocationsState = {
   userLocationsFetched: false,
 };
 
+/**
+ * This is the reducer. takes in the current state, an an action as arguments.
+ * an action contains instructions on how to modify the store state.
+ * Returns the new store state based on the action an the stores former state.
+ * @param state the store state
+ * @param action an action object
+ */
 export default function locationsReducer(
   state: LocationsState = initialState,
   action: LocationActionTypes
@@ -239,6 +246,10 @@ export function userLocationDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationsFetched;
 }
 
+/**
+ * returns true if userIdFetched is set to true in the store and false otherwise.
+ * @param state the store state
+ */
 export function userIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userIdFetched;
 }

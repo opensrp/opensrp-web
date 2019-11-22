@@ -11,14 +11,19 @@ import reducer, {
   fetchUserLocations,
   getLocations,
   getLocationsOfLevel,
+  getUserId,
+  getUserLocationId,
   getUserLocations,
   reducerName,
   removeLocations,
+  userIdFetched,
+  userLocationDataFetched,
+  userLocationIdFetched,
 } from '../locations';
 
 reducerRegistry.register(reducerName, reducer);
 
-describe('reducers/location', () => {
+describe('reducers/location/reduer', () => {
   it('should have initial state', () => {
     expect(getLocations(store.getState())).toHaveLength(0);
     expect(getUserLocations(store.getState())).toHaveLength(0);
@@ -26,6 +31,12 @@ describe('reducers/location', () => {
     expect(getLocationsOfLevel(store.getState(), DISTRICT)).toEqual([]);
     expect(getLocationsOfLevel(store.getState(), COMMUNE)).toEqual([]);
     expect(getLocationsOfLevel(store.getState(), VILLAGE)).toEqual([]);
+    expect(userIdFetched(store.getState())).toEqual(false);
+    expect(userLocationDataFetched(store.getState())).toEqual(false);
+    expect(userLocationIdFetched(store.getState())).toEqual(false);
+    expect(getUserLocationId(store.getState())).toEqual('');
+    expect(getUserId(store.getState())).toEqual('');
+    expect(getUserLocations(store.getState())).toEqual([]);
   });
 
   it('Fetch locations action creator works correctly', () => {
