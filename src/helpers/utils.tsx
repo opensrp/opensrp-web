@@ -48,12 +48,12 @@ export function headerShouldNotRender(): boolean {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
 
-export function groupBy(data: FlexObject[], field: string) {
+export function groupBy(list: FlexObject[], field: string) {
   const dataMap: FlexObject = {};
-  data.forEach((d: FlexObject) => {
-    if (!dataMap[d[field]]) {
-      dataMap[d[field]] = {
-        ...d,
+  list.forEach((listElement: FlexObject) => {
+    if (!dataMap[listElement[field]]) {
+      dataMap[listElement[field]] = {
+        ...listElement,
       };
     }
   });
