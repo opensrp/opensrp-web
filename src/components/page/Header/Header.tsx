@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
 import logo2 from '../../../assets/images/vietnam-moh.png';
-import { WEBSITE_NAME } from '../../../configs/env';
+import { OPENSRP_LOGOUT_URL, WEBSITE_NAME } from '../../../configs/env';
 import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import { headerShouldNotRender } from '../../../helpers/utils';
 import './Header.css';
@@ -102,7 +102,7 @@ export class HeaderComponent extends React.Component<HeaderProps, State> {
   }
 
   private handleLogout() {
-    const logoutURL: string = 'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
+    const logoutURL: string = OPENSRP_LOGOUT_URL;
     const logoutWindow: Window | null = window.open(logoutURL);
     const timer: NodeJS.Timeout = setInterval(() => {
       if (logoutWindow) {
