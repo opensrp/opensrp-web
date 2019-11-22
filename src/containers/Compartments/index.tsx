@@ -358,6 +358,20 @@ class Compartments extends React.Component<Props, State> {
           }
         : null;
 
+    const dataCircleCardNutrition =
+      this.props.module === NUTRITION
+        ? {
+            filterArgs: [],
+            inappropriateFeeding: 0,
+            overweight: 0,
+            permissionLevel: 0,
+            stunting: 0,
+            title: 'test title',
+            totalChildren: 0,
+            wasting: 0,
+          }
+        : null;
+
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
     const circleCardProps: FlexObject = {
@@ -408,9 +422,13 @@ class Compartments extends React.Component<Props, State> {
                     className={'invisible-but-visible'}
                   />
                 ) : null}
-                {this.props.module === NUTRITION
-                  ? 'nothing to show for the nutrition module right now'
-                  : null}
+                {this.props.module === NUTRITION && dataCircleCardNutrition ? (
+                  <ConnectedDataCircleCard
+                    {...dataCircleCardNutrition}
+                    userLocationId={userLocationId}
+                    module={NUTRITION}
+                  />
+                ) : null}
               </CardGroup>
             </div>
             {this.props.module === PREGNANCY && this.props.smsData.length ? (

@@ -32,6 +32,7 @@ import {
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
+  NUTRITION_REPORT,
   NUTRITION_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS,
@@ -172,7 +173,18 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={NUTRITION_COMPARTMENTS_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <Compartments module={NUTRITION} />}
+            component={() => (
+              <Compartments
+                filterArgs={
+                  [
+                    (smsData: SmsData) => {
+                      return smsData.sms_type === NUTRITION_REPORT;
+                    },
+                  ] as SMS_FILTER_FUNCTION[]
+                }
+                module={NUTRITION}
+              />
+            )}
           />
           <ConnectedPrivateRoute
             disableLoginProtection={false}
