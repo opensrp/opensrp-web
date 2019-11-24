@@ -245,8 +245,8 @@ class Compartments extends React.Component<Props, State> {
       this.props.module === PREGNANCY
         ? {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData, 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData,'logface_risk'),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData,'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData, 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData, 'logface_risk'),
             permissionLevel: userLocationLevel,
             title: filteredData.length + ' Total Pregnancies',
           }
@@ -269,7 +269,11 @@ class Compartments extends React.Component<Props, State> {
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || [], 'logface_risk'),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || [], 'logface_risk'),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || [], 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(
+              NO_RISK_LOWERCASE,
+              last2WeeksSmsData || [],
+              'logface_risk'
+            ),
             permissionLevel: userLocationLevel,
             title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
           }
@@ -292,7 +296,11 @@ class Compartments extends React.Component<Props, State> {
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || [], 'logface_risk'),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || [], 'logface_risk'),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || [], 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(
+              NO_RISK_LOWERCASE,
+              last1WeekSmsData || [],
+              'logface_risk'
+            ),
             permissionLevel: userLocationLevel,
             title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
           }
@@ -314,7 +322,7 @@ class Compartments extends React.Component<Props, State> {
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn,'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn, 'logface_risk'),
             module: NBC_AND_PNC_CHILD,
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn, 'logface_risk'),
             permissionLevel: userLocationLevel,
@@ -327,12 +335,14 @@ class Compartments extends React.Component<Props, State> {
     });
 
     const childrenUnder2 = filteredData.filter((smsData: SmsData) => {
-      return ((new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear()) < 2)
+      return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 2;
     });
 
     const childrenUnder5 = filteredData.filter((smsData: SmsData) => {
-      return ((new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear()) < 5)
-      && ((new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear()) > 2)
+      return (
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 5 &&
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() > 2
+      );
     });
 
     const dataCircleCardWomanData =
@@ -367,34 +377,55 @@ class Compartments extends React.Component<Props, State> {
     const dataCircleCardNutrition1 =
       this.props.module === NUTRITION
         ? {
-          filterArgs: [
-            
-          ],
-          inappropriateFeeding: this.getNumberOfSmsWithRisk('inappropriately fed', filteredData, 'feeding_category'),
-          module: NUTRITION,
-          overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
-          permissionLevel: userLocationLevel,
-          stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
-          title: 'Children Under 5',
-          totalChildren: 0,
-          wasting: this.getNumberOfSmsWithRisk('severe wasting', filteredData, 'nutrition_status'),
-        }
+            filterArgs: [
+              (smsData: SmsData) => {
+                return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 5;
+              },
+            ] as SMS_FILTER_FUNCTION[],
+            inappropriateFeeding: this.getNumberOfSmsWithRisk(
+              'inappropriately fed',
+              filteredData,
+              'feeding_category'
+            ),
+            module: NUTRITION,
+            overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
+            permissionLevel: userLocationLevel,
+            stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
+            title: 'Children Under 5',
+            totalChildren: 0,
+            wasting: this.getNumberOfSmsWithRisk(
+              'severe wasting',
+              filteredData,
+              'nutrition_status'
+            ),
+          }
         : null;
-    
+
     const dataCircleCardNutrition2 =
       this.props.module === NUTRITION
         ? {
-          filterArgs: [
-          ],
-          inappropriateFeeding: this.getNumberOfSmsWithRisk('inappropriately fed', filteredData, 'feeding_category'),
-          module: NUTRITION,
-          overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
-          permissionLevel: userLocationLevel,
-          stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
-          title: 'Children Under 2',
-          totalChildren: 0,
-          wasting: this.getNumberOfSmsWithRisk('severe wasting', filteredData, 'nutrition_status'),
-        }
+            filterArgs: [
+              (smsData: SmsData) => {
+                return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 2;
+              },
+            ] as SMS_FILTER_FUNCTION[],
+            inappropriateFeeding: this.getNumberOfSmsWithRisk(
+              'inappropriately fed',
+              filteredData,
+              'feeding_category'
+            ),
+            module: NUTRITION,
+            overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
+            permissionLevel: userLocationLevel,
+            stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
+            title: 'Children Under 2',
+            totalChildren: 0,
+            wasting: this.getNumberOfSmsWithRisk(
+              'severe wasting',
+              filteredData,
+              'nutrition_status'
+            ),
+          }
         : null;
 
     const path = this.state.locationAndPath.path;
@@ -406,19 +437,14 @@ class Compartments extends React.Component<Props, State> {
         pregnancyDataCircleCard3Props,
       ],
       [NBC_AND_PNC]: [dataCircleCardChildData, dataCircleCardWomanData],
-      [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2]
+      [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2],
     };
     const circleCardComponent: ReactNodeArray = [];
     Object.keys(circleCardProps).forEach((m: string) => {
       circleCardProps[m].forEach((p: any, i: number) => {
         if (this.props.module === m) {
           circleCardComponent.push(
-            <ConnectedDataCircleCard
-              key={i}
-              userLocationId={userLocationId}
-              module={m}
-              {...p}
-            />
+            <ConnectedDataCircleCard key={i} userLocationId={userLocationId} module={m} {...p} />
           );
         }
       });
@@ -450,7 +476,8 @@ class Compartments extends React.Component<Props, State> {
                 ) : null}
               </CardGroup>
             </div>
-            {(this.props.module === PREGNANCY || this.props.module === NUTRITION) && this.props.smsData.length ? (
+            {(this.props.module === PREGNANCY || this.props.module === NUTRITION) &&
+            this.props.smsData.length ? (
               <VillageData
                 {...{
                   current_level: userLocationLevel,
