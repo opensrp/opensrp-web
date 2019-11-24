@@ -14,6 +14,10 @@ import {
   NO_RISK,
   NUTRITION,
   PREGNANCY,
+  INAPPROPRIATELY_FED,
+  STUNTED,
+  OVERWEIGHT,
+  SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
 } from '../../constants';
 import { FlexObject, getModuleLink } from '../../helpers/utils';
@@ -89,32 +93,33 @@ function DataCircleCard({
   const nutritionCircleSpec: FlexObject[] = [
     {
       class: 'total-children',
-      riskLabel: HIGH_RISK,
+      riskLabel: 'Total Children',
       riskType: HIGH,
-      riskValue: totalChildren,
+      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any)
+      .reduce((a: number, b: number) => Number(a) + b, 0),
     },
     {
       class: 'stunting',
-      riskLabel: LOW_RISK,
-      riskType: LOW,
+      riskLabel: 'Stunting',
+      riskType: STUNTED,
       riskValue: stunting,
     },
     {
       class: 'wasting',
-      riskLabel: NO_RISK,
-      riskType: NO,
+      riskLabel: 'Wasting',
+      riskType: SEVERE_WASTING,
       riskValue: wasting,
     },
     {
       class: 'overweight',
-      riskLabel: NO_RISK,
-      riskType: NO,
+      riskLabel: 'Overweight',
+      riskType: OVERWEIGHT,
       riskValue: overweight,
     },
     {
       class: 'inappropriate-feeding',
-      riskLabel: NO_RISK,
-      riskType: NO,
+      riskLabel: 'Inappropriate Feeding',
+      riskType: INAPPROPRIATELY_FED,
       riskValue: inappropriateFeeding,
     },
   ];
@@ -124,39 +129,24 @@ function DataCircleCard({
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
-          {module !== NUTRITION
-            ? pregnancyAndPncCircleSpec.map((spec: FlexObject, i: number) => (
-                <li className={spec.class} key={i}>
-                  <Link
-                    to={getLinkToHierarchichalDataTable(spec.riskType)}
-                    // tslint:disable-next-line: jsx-no-lambda
-                    onClick={() => {
-                      if (filterArgs) {
-                        addFilterArgsActionCreator(filterArgs);
-                      }
-                    }}
-                  >
-                    <span className="number">{spec.riskValue}</span>
-                  </Link>
-                  <span className="risk-level">{spec.riskLabel}</span>
-                </li>
-              ))
-            : nutritionCircleSpec.map((spec: FlexObject, i: number) => (
-                <li className={spec.class} key={i}>
-                  <Link
-                    to={getLinkToHierarchichalDataTable(spec.riskType)}
-                    // tslint:disable-next-line: jsx-no-lambda
-                    onClick={() => {
-                      if (filterArgs) {
-                        addFilterArgsActionCreator(filterArgs);
-                      }
-                    }}
-                  >
-                    <span className="number">{spec.riskValue}</span>
-                  </Link>
-                  <span className="risk-level">{spec.riskLabel}</span>
-                </li>
-              ))}
+          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map((spec: FlexObject, i: number) => (
+            <li className={spec.class} key={i}>
+              <Link
+                to={getLinkToHierarchichalDataTable(spec.riskType)}
+                // tslint:disable-next-line: jsx-no-lambda
+                onClick={() => {
+                  if (filterArgs) {
+                    addFilterArgsActionCreator(filterArgs);
+                  }
+                }}
+              >
+
+                <span className="number">{spec.riskValue}</span>
+              </Link>
+              <span className="risk-level">{spec.riskLabel}</span>
+            </li>
+          ))
+          }
         </ul>
       </CardBody>
     </Card>
