@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNodeArray } from 'react';
 import 'react-table/react-table.css';
 import { Card, CardBody, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
@@ -44,6 +44,11 @@ import {
   TOTAL,
   UP,
   VILLAGE,
+  OVERWEIGHT,
+  SEVERE_WASTING,
+  STUNTED,
+  INAPPROPRIATELY_FED,
+  NUTRITION_COMPARTMENTS_URL,
 } from '../../constants';
 import { locationDataIsAvailable } from '../../helpers/utils';
 import { getModuleLink } from '../../helpers/utils';
@@ -60,6 +65,8 @@ import smsReducer, {
   reducerName as smsReducerName,
 } from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
+import { mount } from 'enzyme';
+import { Field } from 'formik';
 
 reducerRegistry.register(reducerName, locationsReducer);
 reducerRegistry.register(smsReducerName, smsReducer);
@@ -182,15 +189,15 @@ function getVillageRiskTotals(
       case STUNTED:
         return {
           ...accumulator,
-          stunting: (accumulator as any).stunting + 1,
+          stunting: (accumulator as any).stunting + 1
         };
       case INAPPROPRIATELY_FED:
         return {
           ...accumulator,
-          inappropriateFeeding: (accumulator as any).inappropriateFeeding + 1,
+          inappropriateFeeding: (accumulator as any).inappropriateFeeding + 1
         };
       default:
-        return accumulator as any;
+        return (accumulator as any);
     }
   };
   let totalsMap: Totals;
