@@ -33,6 +33,7 @@ import {
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
   NUTRITION_LOGFACE_URL,
+  NUTRITION_REGISTRATION,
   NUTRITION_REPORT,
   NUTRITION_URL,
   PREGNANCY,
@@ -124,12 +125,11 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
-                deactivateLinks={true}
                 title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
-                compartmentUrl={'#'}
-                analysisUrl={'#'}
+                compartmentUrl={NUTRITION_COMPARTMENTS_URL}
+                analysisUrl={NUTRITION_ANALYSIS_URL}
               />
             )}
           />
@@ -179,7 +179,7 @@ export const Routes = (props: RoutesProps) => {
                 filterArgs={
                   [
                     (smsData: SmsData) => {
-                      return smsData.sms_type === NUTRITION_REPORT;
+                      return smsData.sms_type === NUTRITION_REPORT || smsData.sms_type === NUTRITION_REGISTRATION;
                     },
                   ] as SMS_FILTER_FUNCTION[]
                 }
