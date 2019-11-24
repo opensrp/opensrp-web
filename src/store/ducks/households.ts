@@ -6,10 +6,6 @@ import { Client } from './clients';
 /** The reducer name */
 export const reducerName = 'households';
 
-export const clientType = 'ec_household';
-
-export const searchPlaceholder = 'Search Household';
-
 /** Interface for household object same as client */
 export type Household = Client;
 

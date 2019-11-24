@@ -8,16 +8,18 @@ import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import SearchBox from '../../../components/page/SearchBox/SearchBox';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
+import {
+  householdClientType as clientType,
+  householdSearchPlaceholder as searchPlaceholder,
+} from '../../../constants';
 import { OpenSRPService } from '../../../services/opensrp';
 import householdsReducer, {
-  clientType,
   fetchHouseholds,
   getHouseholdsArray,
   getTotalRecords,
   Household,
   reducerName as householdsReducerName,
   removeHouseholds,
-  searchPlaceholder,
   setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
