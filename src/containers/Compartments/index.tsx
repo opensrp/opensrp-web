@@ -9,7 +9,6 @@ import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
 import {
   LOCATION_SLICES,
-  OPENSRP_API_BASE_URL,
   SUPERSET_SMS_DATA_SLICE,
   USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
@@ -66,7 +65,6 @@ interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
   userLocationData: UserLocation[];
-  session: FlexObject;
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
   fetchUserLocationsActionCreator: typeof fetchUserLocations;
@@ -112,7 +110,6 @@ const defaultCompartmentProps: Props = {
   module: '',
   provinces: [],
   removeFilterArgs,
-  session: {},
   smsData: [],
   user: {
     name: '',
@@ -206,7 +203,7 @@ class Compartments extends React.Component<Props, State> {
 
     // fetch user UUID from OpenSRP
     // tslint:disable-next-line: no-shadowed-variable
-    const { session, userIdFetched } = this.props;
+    const { userIdFetched } = this.props;
 
     if (!userIdFetched) {
       const opensrpService = new OpenSRPService('/security/authenticate');
@@ -551,7 +548,6 @@ const mapStateToprops = (state: Partial<Store>) => {
     isUserLocationDataFetched: userLocationDataFetched(state),
     isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
-    session: (state as any).session,
     smsData: getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[]),
     user: getUser(state),
     userIdFetched: userIdFetched(state),
