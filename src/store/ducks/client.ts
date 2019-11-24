@@ -9,8 +9,6 @@ export const reducerName = 'client';
 /** CLIENT_FETCHED action type */
 export const CLIENT_FETCHED = 'opensrp/reducer/client/CLIENT_FETCHED';
 
-
-
 /** interface for fetch client */
 export interface FetchClientAction extends AnyAction {
   clientById: { [key: string]: Client };
@@ -84,5 +82,3 @@ export function getClient(state: Partial<Store>): Client {
   const client = getClientById(state);
   return values(client)[0];
 }
-
-

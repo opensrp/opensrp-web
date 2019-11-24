@@ -10,15 +10,15 @@ import SearchBox from '../../../components/page/SearchBox/SearchBox';
 import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import householdsReducer, {
+  clientType,
   fetchHouseholds,
   getHouseholdsArray,
   getTotalRecords,
   Household,
   reducerName as householdsReducerName,
   removeHouseholds,
-  setTotalRecords,
-  clientType,
   searchPlaceholder,
+  setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
 
@@ -48,7 +48,6 @@ export const defaultHouseholdListProps: HouseholdListProps = {
 /** Display the Household list  */
 class HouseholdList extends React.Component<HouseholdListProps> {
   public static defaultProps: HouseholdListProps = defaultHouseholdListProps;
-  
   public async componentDidMount() {
     const {
       fetchHouseholdsActionCreator,

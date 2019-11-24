@@ -35,7 +35,7 @@ export const defaultClientListProps: ClientListProps = {
 /** Display the client list  */
 class ClientList extends React.Component<ClientListProps, {}> {
   public static defaultProps: ClientListProps = defaultClientListProps;
-  
+
   public async componentDidMount() {
     const { fetchClientsActionCreator, opensrpService } = this.props;
     const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);

@@ -1,5 +1,5 @@
-import { AnyAction, Store } from 'redux';
 import { keyBy, values } from 'lodash';
+import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 
 /** The reducer name */
@@ -7,35 +7,35 @@ export const reducerName = 'events';
 
 /** Interface for event object as received from event search */
 export interface Event {
-    type: 'Event';
-    dateCreated: number;
-    serverVersion: number;
-    clientApplicationVersion: number;
-    clientDatabaseVersion: number;
-    identifiers: { [key: string]: string | null };
-    baseEntityId: string;
-    locationId: string;
-    eventDate: number;
-    eventType: string;
-    formSubmissionId: string;
-    providerId: string;
-    duration: number;
-    obs: { [key: string]: string[] | string | null };
-    entityType: string;
-    version: number;
-    teamId: string;
-    team: string;
-    _id: string;
-    _rev: string;
-  }
+  type: 'Event';
+  dateCreated: number;
+  serverVersion: number;
+  clientApplicationVersion: number;
+  clientDatabaseVersion: number;
+  identifiers: { [key: string]: string | null };
+  baseEntityId: string;
+  locationId: string;
+  eventDate: number;
+  eventType: string;
+  formSubmissionId: string;
+  providerId: string;
+  duration: number;
+  obs: { [key: string]: string[] | string | null };
+  entityType: string;
+  version: number;
+  teamId: string;
+  team: string;
+  id: string;
+  _rev: string;
+}
 
-  /** EVENTS_FETCHED action type */
+/** EVENTS_FETCHED action type */
 export const EVENTS_FETCHED = 'opensrp/reducer/event/EVENTS_FETCHED';
 
 /** interface for fetch events */
 export interface FetchEventsAction extends AnyAction {
-    eventsById: { [key: string]: Event };
-    type: typeof EVENTS_FETCHED;
+  eventsById: { [key: string]: Event };
+  type: typeof EVENTS_FETCHED;
 }
 
 /** Fetch events action creator
@@ -43,16 +43,16 @@ export interface FetchEventsAction extends AnyAction {
  * @return {FetchEventsAction} - an action to add events to redux store
  */
 export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
-    eventsById: keyBy(eventsList, (event: Event) => event.baseEntityId),
-    type: EVENTS_FETCHED,
+  eventsById: keyBy(eventsList, (event: Event) => event.baseEntityId),
+  type: EVENTS_FETCHED,
 });
 
 /** Create type for event reducer actions */
 export type EventActionTypes = FetchEventsAction | AnyAction;
-  
+
 /** interface for event state in redux store */
 interface EventState {
-    eventsById: { [key: string]: Event };
+  eventsById: { [key: string]: Event };
 }
 
 /** Create an immutable event state */
@@ -60,40 +60,40 @@ export type ImmutableEventState = EventState & SeamlessImmutable.ImmutableObject
 
 /** initial events-state state */
 const initialState: ImmutableEventState = SeamlessImmutable({
-    eventsById: {},
+  eventsById: {},
 });
 
 /** the event reducer function */
 export default function reducer(
-    state: ImmutableEventState = initialState,
-    action: EventActionTypes
-  ): ImmutableEventState {
-    switch (action.type) {
-      case EVENTS_FETCHED:
-        return SeamlessImmutable({
-          ...state,
-          eventsById: action.eventsById,
-        });
-      
-      default:
-        return state;
-    }
-  }
+  state: ImmutableEventState = initialState,
+  action: EventActionTypes
+): ImmutableEventState {
+  switch (action.type) {
+    case EVENTS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        eventsById: action.eventsById,
+      });
 
-// Selectors  
+    default:
+      return state;
+  }
+}
+
+// Selectors
 
 /** returns the events of the event in the store as array
  * @param {Partial<Store>} state - the redux store
  * @return { Event } - events array
  */
 export function getEventsArray(state: Partial<Store>): Event[] {
-    return values((state as any)[reducerName].eventsById);
+  return values((state as any)[reducerName].eventsById);
 }
 
-  /** returns the events of the event in the store by their ids
+/** returns the events of the event in the store by their ids
  * @param {Partial<Store>} state - the redux store
  * @return { Event } - event objects as values, respective ids as keys
  */
 export function getEventsById(state: Partial<Store>): { [key: string]: Event } {
-    return (state as any)[reducerName].eventsById;
+  return (state as any)[reducerName].eventsById;
 }

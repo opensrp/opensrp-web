@@ -5,8 +5,8 @@ import './SearchBox.css';
 
 /** props interface for SearchBox */
 export interface SearchBoxProps {
-  searchCallBack(searchString: string): void;
   placeholder?: string;
+  searchCallBack(searchString: string): void;
 }
 
 /** state interface for SearchBox  */

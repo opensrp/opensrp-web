@@ -64,7 +64,7 @@ interface SetNavigationPageAction extends AnyAction {
 
 /** Create type for clients reducer actions */
 export type ClientsActionTypes =
-  FetchClientsAction
+  | FetchClientsAction
   | RemoveClientsAction
   | SetNavigationPageAction
   | AnyAction;
@@ -93,7 +93,6 @@ export const removeClientsAction = {
   clientsById: {},
   type: REMOVE_CLIENTS,
 };
-
 
 // The reducer
 

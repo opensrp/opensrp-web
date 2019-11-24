@@ -1,7 +1,7 @@
-import { AnyAction, Store } from 'redux';
 import { get, keyBy, values } from 'lodash';
-import {Client} from './clients';
+import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
+import { Client } from './clients';
 
 /** The reducer name */
 export const reducerName = 'households';
@@ -22,25 +22,25 @@ export const SET_TOTAL_RECORDS = 'opensrp/reducer/households/SET_TOTAL_RECORDS';
 
 /** interface for fetchHouseholdsAction */
 interface FetchHouseholdsAction extends AnyAction {
-    householdsById: { [key: string]: Household };
-    type: typeof HOUSEHOLDS_FETCHED;
-  }
-  
-  /** Interface for removeHouseholdsAction */
-  interface RemoveHouseholdsAction extends AnyAction {
-    householdsById: {};
-    type: typeof REMOVE_HOUSEHOLDS;
-  }
-  
-  /** Interface for setTotalRecordsAction */
-  interface SetTotalRecordsAction extends AnyAction {
-    totalRecords: number;
-    type: typeof SET_TOTAL_RECORDS;
-  }
+  householdsById: { [key: string]: Household };
+  type: typeof HOUSEHOLDS_FETCHED;
+}
 
-  /** Create type for household reducer actions */
+/** Interface for removeHouseholdsAction */
+interface RemoveHouseholdsAction extends AnyAction {
+  householdsById: {};
+  type: typeof REMOVE_HOUSEHOLDS;
+}
+
+/** Interface for setTotalRecordsAction */
+interface SetTotalRecordsAction extends AnyAction {
+  totalRecords: number;
+  type: typeof SET_TOTAL_RECORDS;
+}
+
+/** Create type for household reducer actions */
 export type HouseholdActionTypes =
-  FetchHouseholdsAction
+  | FetchHouseholdsAction
   | RemoveHouseholdsAction
   | SetTotalRecordsAction
   | AnyAction;
@@ -51,64 +51,65 @@ export type HouseholdActionTypes =
  * @return {FetchHouseholdsAction} - an action to add households to redux store
  */
 export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
-    householdsById: keyBy(householdsList, (household: Household) => household.baseEntityId),
-    type: HOUSEHOLDS_FETCHED,
+  householdsById: keyBy(householdsList, (household: Household) => household.baseEntityId),
+  type: HOUSEHOLDS_FETCHED,
 });
 
 /** setTotalRecords action */
 export const setTotalRecords = (totalCount: number): SetTotalRecordsAction => ({
-    totalRecords: totalCount,
-    type: SET_TOTAL_RECORDS,
+  totalRecords: totalCount,
+  type: SET_TOTAL_RECORDS,
 });
 
-//actions
+// actions
 export const removeHouseholds = (): RemoveHouseholdsAction => removeHouseholdsAction;
 
 /** removeHouseholds action */
 export const removeHouseholdsAction: RemoveHouseholdsAction = {
-    householdsById: {},
-    type: REMOVE_HOUSEHOLDS,
+  householdsById: {},
+  type: REMOVE_HOUSEHOLDS,
 };
 
 /** interface for household state in redux store */
 interface HouseholdState {
-    householdsById: { [key: string]: Household };
-    totalRecords: number;
+  householdsById: { [key: string]: Household };
+  totalRecords: number;
 }
 
 /** Create an immutable household state */
-export type ImmutableHouseholdsState = HouseholdState & SeamlessImmutable.ImmutableObject<HouseholdState>;
+export type ImmutableHouseholdsState = HouseholdState &
+  SeamlessImmutable.ImmutableObject<HouseholdState>;
 
 /** initial households-state */
 const initialState: ImmutableHouseholdsState = SeamlessImmutable({
-    householdsById: {},
-    totalRecords: 0,
+  householdsById: {},
+  totalRecords: 0,
 });
 
 /** the households reducer function */
 export default function reducer(
-    state: ImmutableHouseholdsState = initialState,
-    action: HouseholdActionTypes
-  ): ImmutableHouseholdsState {
-    switch (action.type) {
-      case HOUSEHOLDS_FETCHED:
-        return SeamlessImmutable({
-          ...state,
-          householdsById: { ...state.householdsById, ...action.householdsById },
-        });
-      case REMOVE_HOUSEHOLDS:
-        return SeamlessImmutable({
-          ...state,
-          householdsById: action.householdsById,
-        });
-      case SET_TOTAL_RECORDS:
-        return SeamlessImmutable({
-          ...state,
-          totalRecords: action.totalRecords,
-        });
-      default:
-        return state;
-    }
+  state: ImmutableHouseholdsState = initialState,
+  action: HouseholdActionTypes
+): ImmutableHouseholdsState {
+  switch (action.type) {
+    case HOUSEHOLDS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: { ...state.householdsById, ...action.householdsById },
+      });
+    case REMOVE_HOUSEHOLDS:
+      return SeamlessImmutable({
+        ...state,
+        householdsById: action.householdsById,
+      });
+    case SET_TOTAL_RECORDS:
+      return SeamlessImmutable({
+        ...state,
+        totalRecords: action.totalRecords,
+      });
+    default:
+      return state;
+  }
 }
 
 /** returns all households in the store as values whose keys are their respective ids
@@ -116,7 +117,7 @@ export default function reducer(
  * @return { { [key: string] : Household} } - households object as values, respective ids as keys
  */
 export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
-    return (state as any)[reducerName].householdsById;
+  return (state as any)[reducerName].householdsById;
 }
 
 /** gets households as an array of households objects
@@ -124,15 +125,15 @@ export function getHouseholdsById(state: Partial<Store>): { [key: string]: House
  * @return {Household[]} - an array of households objs
  */
 export function getHouseholdsArray(state: Partial<Store>): Household[] {
-    return values(getHouseholdsById(state));
+  return values(getHouseholdsById(state));
 }
-  
+
 /** get a specific household by their id
  * @param {Partial<Store>} state - the redux store
  * @return {Household | null} a household obj if the id is found else null
  */
 export function getHouseholdById(state: Partial<Store>, id: string): Household | null {
-    return get(getHouseholdsById(state), id) || null;
+  return get(getHouseholdsById(state), id) || null;
 }
 
 /** returns the count of all records present in server
@@ -140,6 +141,5 @@ export function getHouseholdById(state: Partial<Store>, id: string): Household |
  * @return { number } - total records value from the store
  */
 export function getTotalRecords(state: Partial<Store>): number {
-    return (state as any)[reducerName].totalRecords;
+  return (state as any)[reducerName].totalRecords;
 }
-  

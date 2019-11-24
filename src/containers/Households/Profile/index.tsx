@@ -14,20 +14,19 @@ import clientReducer, {
   getClient,
   reducerName as clientReducerName,
 } from '../../../store/ducks/client';
-
+import { Client } from '../../../store/ducks/clients';
+import EventReducer, {
+  Event,
+  fetchEvents,
+  getEventsArray,
+  reducerName as eventReducerName,
+} from '../../../store/ducks/events';
+import { Household } from '../../../store/ducks/households';
 import memberReducer, {
   fetchMembers,
   getMembersArray,
   reducerName as memberReducerName,
 } from '../../../store/ducks/members';
-import EventReducer, { 
-  Event, 
-  getEventsArray, 
-  fetchEvents,
-  reducerName as eventReducerName
-} from '../../../store/ducks/events';
-import { Client } from '../../../store/ducks/clients';
-import { Household } from '../../../store/ducks/households';
 import './householdProfile.css';
 
 /** register the client reducer */

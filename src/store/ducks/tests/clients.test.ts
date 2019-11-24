@@ -15,14 +15,14 @@ import clientReducer, {
 } from '../clients';
 
 import householdReducer, {
-  removeHouseholdsAction,
   fetchHouseholds,
   getHouseholdById,
   getHouseholdsArray,
   getHouseholdsById,
   getTotalRecords,
-  setTotalRecords,
   reducerName as houseHoldReducerName,
+  removeHouseholdsAction,
+  setTotalRecords,
 } from '../households';
 
 import * as fixtures from '../tests/fixtures';

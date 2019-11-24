@@ -1,7 +1,7 @@
-import { AnyAction, Store } from 'redux';
 import { keyBy, values } from 'lodash';
-import { Client } from './clients';
+import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
+import { Client } from './clients';
 
 /** The reducer name */
 export const reducerName = 'members';
@@ -11,8 +11,8 @@ export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
 
 /** interface for fetch members */
 export interface FetchMembersAction extends AnyAction {
-    membersById: { [key: string]: Client };
-    type: typeof MEMBERS_FETCHED;
+  membersById: { [key: string]: Client };
+  type: typeof MEMBERS_FETCHED;
 }
 
 /** Fetch members action creator
@@ -20,16 +20,15 @@ export interface FetchMembersAction extends AnyAction {
  * @return {FetchMembersAction} - an action to add members to redux store
  */
 export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
-    membersById: keyBy(membersList, (member: Client) => member.baseEntityId),
-    type: MEMBERS_FETCHED,
+  membersById: keyBy(membersList, (member: Client) => member.baseEntityId),
+  type: MEMBERS_FETCHED,
 });
 
 /** Create type for client reducer actions */
 export type MemberActionTypes = FetchMembersAction | AnyAction;
 
-
 interface ClientState {
-    membersById: { [key: string]: Client };
+  membersById: { [key: string]: Client };
 }
 
 /** Create an immutable client state */
@@ -42,19 +41,19 @@ const initialState: ImmutableMemberState = SeamlessImmutable({
 
 /** the client reducer function */
 export default function reducer(
-    state: ImmutableMemberState = initialState,
-    action: MemberActionTypes
-  ): ImmutableMemberState {
-    switch (action.type) {
-      case MEMBERS_FETCHED:
-        return SeamlessImmutable({
-          ...state,
-          membersById: action.membersById,
-        });
-      default:
-        return state;
-    }
+  state: ImmutableMemberState = initialState,
+  action: MemberActionTypes
+): ImmutableMemberState {
+  switch (action.type) {
+    case MEMBERS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        membersById: action.membersById,
+      });
+    default:
+      return state;
   }
+}
 
 // Selectors
 
@@ -63,7 +62,7 @@ export default function reducer(
  * @return { Client } - client objects as values, respective ids as keys
  */
 export function getMembersById(state: Partial<Store>): { [key: string]: Client } {
-    return (state as any)[reducerName].membersById;
+  return (state as any)[reducerName].membersById;
 }
 
 /** returns the members of the client as array
@@ -71,6 +70,5 @@ export function getMembersById(state: Partial<Store>): { [key: string]: Client }
  * @return { Client } - members array
  */
 export function getMembersArray(state: Partial<Store>): Client[] {
-    return values((state as any)[reducerName].membersById);
+  return values((state as any)[reducerName].membersById);
 }
-  
