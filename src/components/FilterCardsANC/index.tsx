@@ -1,12 +1,14 @@
 /** consumes props from the filterCardsLogic and creates ANC custom
  * filterCards. provides ANC specific implementation details for filter Cards layout
  */
+import { filter } from 'minimatch';
 import React from 'react';
 import { Card, CardBody, CardText, CardTitle, Col, Row } from 'reactstrap';
 import './index.css';
 
 /** props for a single filter card */
 interface SingleFilterCardProps {
+  id: string;
   /** handles clicking filter on card */
   filterClickHandler: () => void;
   /** number of records filtered based on category and time */
@@ -38,7 +40,7 @@ export const SingleFilterCard: React.FC<SingleFilterCardProps> = props => {
 };
 
 /** we shall be getting this from the filterCards logic */
-interface GroupFilter {
+interface GroupedFilter {
   meta: {
     category: string;
     howLong: number;
@@ -46,13 +48,18 @@ interface GroupFilter {
     active: boolean;
   };
   filteredData: any[];
+  parentFilterState: any;
+  filterId: string;
+  filterFunction: any;
 }
 /** Props FilterCardsUI component */
 interface FilterCardsUIProps {
-  /** click handler for on filter */
-  filterClickHandler: () => void;
+  /** click handler for on filter : really just a dispatch function that
+   * gets called with an action object.
+   */
+  filterClickHandler: (data: GroupedFilter) => void;
   /** the data chunked by the respective filters */
-  groupedFilters: GroupFilter[];
+  groupedFilters: GroupedFilter[];
 }
 
 /** takes in the categorized filtered data and provides the ui */
@@ -61,8 +68,14 @@ const FilterCardsUI: React.FC<FilterCardsUIProps> = props => {
   return (
     <Row>
       {groupedFilters.map((group, index) => {
+        const id = `${group.filterId}-card-${index}`;
+
+        const isActive =
+          group.parentFilterState[group.filterId] &&
+          group.parentFilterState[group.filterId].activeCard === id;
         const singleFilterProps = {
-          active: group.meta.active,
+          active: isActive,
+          id,
           filterCategory: group.meta.category,
           filterClickHandler,
           filteredRecordsNum: group.filteredData.length,
@@ -74,3 +87,19 @@ const FilterCardsUI: React.FC<FilterCardsUIProps> = props => {
     </Row>
   );
 };
+
+export function customReducer(state: any, action: any) {
+  switch (action.type) {
+    case 'ADD': {
+      return {
+        ...state,
+        filter: {
+          [action.filterId]: {
+            activeCard: action.activeCard,
+            filterFunction: action.filterFunction,
+          },
+        },
+      };
+    }
+  }
+}
