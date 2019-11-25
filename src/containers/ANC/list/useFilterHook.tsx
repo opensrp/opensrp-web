@@ -1,27 +1,42 @@
+/** Provides a way to manage filter state for any component in a logic-customizable way */
 import React from 'react';
+import { statement } from '@babel/template';
 
+/** Action types for filters */
 export const filterAction = {
   types: {
     ADD: 'ADD',
   },
 };
 
+/** types for a function used as to filter */
 type FilterFunction = <T>(dataObj: T) => boolean;
 
+/** describes the base filter state */
 interface FilterState {
   filter: { [filterId: string]: FilterFunction };
 }
 
-// TODO - filterDefinition needs to be an object with a single dynamic property
+/** interface for add filter action */
 export interface AddFilterAction {
   filter: { [filterId: string]: FilterFunction };
   overwrite: boolean;
   type: typeof filterAction.types.ADD;
 }
 
+/** single union type for all filterReducer actions */
 export type actionTypes = AddFilterAction;
 
-function filterReducer(state: FilterState, action: actionTypes) {
+/** initial filterState */
+const initialFilterState = {
+  filter: {},
+};
+
+/** reducer for filter state
+ * @param {FilterState} state -  the filter state
+ * @param {actionTypes} action - the action
+ */
+function filterReducer(state: FilterState = initialFilterState, action: actionTypes) {
   switch (action.type) {
     case 'ADD': {
       const filtersToAdd = action.overwrite
@@ -37,11 +52,8 @@ function filterReducer(state: FilterState, action: actionTypes) {
   }
 }
 
-// {reducer = (s,a) => a.changes} = {}
-
-const initialState = { filter: {} };
-
-export function useFilters(reducer = (s: any, a: any) => a.changes) {
+/** custom hook exposes the filter state and dispatch */
+export function useFilters(reducer = <StateT, ActionT>(s: StateT, a: ActionT) => a.changes) {
   const { filterState, dispatch } = React.useReducer((state: any, action: any) => {
     const changes = filterReducer(state, action);
     return reducer(state, { ...action, changes });
