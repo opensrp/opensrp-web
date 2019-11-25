@@ -15,7 +15,9 @@ export enum TimeUnit {
 /** interface for how filtered data will be passed back to the calling
  * component or to a display component via render props
  */
-interface GroupedFilters<T> {
+interface GroupedFilters<T, FilterState> {
+  /** the parent state, will include current filters and data */
+  parentFilterState: FilterState;
   /** chunk of original data that is now currently filtered subject to
    * info in the meta
    */
@@ -29,16 +31,18 @@ interface GroupedFilters<T> {
     timeLength: number;
 
     /** The category value */
-
     category: string;
+
     /** describes the unit part of the period under which the filtered
      * data was filtered
      */
     timeUnit: string;
-
-    /** whether this the data is subject fully to only this filter */
-    active: boolean;
   };
+  /** an id to uniquely identify this filter if added to the parentFilterState */
+  filterId: string;
+
+  /** a dynamically generated filter function to be used */
+  filterFunction: (data: T) => boolean;
 }
 
 /** Type interface for duration */
@@ -50,7 +54,10 @@ interface DurationType {
 }
 
 /** props for FilterCardsCategorizer component */
-export interface Props<T> {
+export interface Props<T, FilterState> {
+  /** the whole filter state passed from the rendering parent component */
+  parentFilterState: FilterState;
+
   /** an array of the records that are getting filtered, the filtration
    * will be done on one of the properties of each object in the data array
    */
@@ -79,19 +86,21 @@ export interface Props<T> {
   /** render prop accepts a function that is given data of type GroupedFilters
    * then it can supply a custom interface to display the results
    */
-  renderCard?: (groupedFilters: Array<GroupedFilters<T>>) => JSX.Element;
+  renderCard?: (groupedFilters: Array<GroupedFilters<T, FilterState>>) => JSX.Element;
 }
 
-export const defaultProps: Props<{}> = {
+/** default props for the categorizer component */
+export const defaultProps: Props<{}, {}> = {
   accessor: '',
   categories: new Set(['']),
   data: [],
+  parentFilterState: {},
   periods: [{ timeLength: 1, timeUnit: TimeUnit.WEEK }, { timeLength: 2, timeUnit: TimeUnit.WEEK }],
   timeAccessor: '',
 };
 
 /** the FilterCardsCategorizer component */
-function FilterCardsCategorizer<T>(props: Props<T>) {
+function FilterCardsCategorizer<T, FilterState>(props: Props<T, FilterState>) {
   const {
     periods,
     data,
@@ -100,9 +109,18 @@ function FilterCardsCategorizer<T>(props: Props<T>) {
     categories,
     renderCard,
   } = props;
-  const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T>>>([]);
+  const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T, FilterState>>>([]);
 
-  setGroupedFilters(groupFilterData<T>(periods, data, categories, categoryField, timeField));
+  setGroupedFilters(
+    groupFilterData<T, FilterState>(
+      periods,
+      data,
+      categories,
+      categoryField,
+      timeField,
+      props.parentFilterState
+    )
+  );
   return renderCard && renderCard(groupedFilters);
 }
 
@@ -114,31 +132,31 @@ function FilterCardsCategorizer<T>(props: Props<T>) {
  * @param {string} categoryField - Filter data with respect to above categories for this property name
  * @param {string} timeField - property name for field that holds the eta data for each data obj.
  */
-export function groupFilterData<T>(
+export function groupFilterData<T, FilterState>(
   periods: DurationType[],
   data: T[],
   categories: Set<string>,
   categoryField: string,
-  timeField: string
-): Array<GroupedFilters<T>> {
-  const filteredData: Array<GroupedFilters<T>> = [];
+  timeField: string,
+  parentFilterState: any
+): Array<GroupedFilters<T, FilterState>> {
+  const filteredData: Array<GroupedFilters<T, FilterState>> = [];
   // TODO - the period is in the form given by the server, need to parse that in an identifible format.
   periods.forEach(period => {
     categories.forEach(category => {
-      const processedData = data.filter(
-        entry =>
-          (entry as any)[categoryField] === category && isInPeriod<T>(entry, period, timeField)
-      );
-      /** active filter => filteredData === originalData, this is regardless of whether the filter is
-       * set in the parent's state or not.
-       */
+      const filterFunction = (entry: any) =>
+        entry[categoryField] === category && isInPeriod<T>(entry, period, timeField);
+
+      const processedData = data.filter(dataObj => filterFunction(dataObj));
       filteredData.push({
+        filterFunction,
+        filterId: 'FILTER_CARDS',
         filteredData: processedData,
         meta: {
           category,
           ...period,
-          active: false,
         },
+        parentFilterState,
       });
     });
   });
