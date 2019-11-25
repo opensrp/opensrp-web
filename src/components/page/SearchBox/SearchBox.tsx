@@ -20,8 +20,9 @@ const defaultSearchBoxState = {
 };
 
 class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
-  public componentDidMount() {
-    this.setState(defaultSearchBoxState);
+  constructor(props: SearchBoxProps) {
+    super(props);
+    this.state = defaultSearchBoxState;
   }
   public render() {
     return (
