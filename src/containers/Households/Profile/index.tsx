@@ -18,7 +18,13 @@ import clientReducer, {
   getClient,
   reducerName as clientReducerName,
 } from '../../../store/ducks/client';
-import { Client } from '../../../store/ducks/clients';
+import {
+  Client,
+  fetchMembers,
+  getClientsArray,
+  getMembersArray,
+  reducerName as clientsReducer,
+} from '../../../store/ducks/clients';
 import EventReducer, {
   Event,
   fetchEvents,
@@ -26,21 +32,16 @@ import EventReducer, {
   reducerName as eventReducerName,
 } from '../../../store/ducks/events';
 import { Household } from '../../../store/ducks/households';
-import memberReducer, {
-  fetchMembers,
-  getMembersArray,
-  reducerName as memberReducerName,
-} from '../../../store/ducks/members';
 import './householdProfile.css';
 
 /** register the client reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
 
 /** register the client reducer */
-reducerRegistry.register(memberReducerName, memberReducer);
+reducerRegistry.register(eventReducerName, EventReducer);
 
 /** register the client reducer */
-reducerRegistry.register(eventReducerName, EventReducer);
+reducerRegistry.register(clientsReducer, EventReducer);
 
 /** interface for HouseholdProfile URL params */
 interface HouseholdProfileURLParams {
@@ -51,7 +52,7 @@ interface HouseholdProfileURLParams {
 export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
   household: Household;
   events: Event[];
-  members: Household[];
+  members: Client[];
   fetchClientActionCreator: typeof fetchClient;
   fetchMembersActionCreator: typeof fetchMembers;
   fetchEventsActionCreator: typeof fetchEvents;

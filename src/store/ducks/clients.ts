@@ -41,6 +41,8 @@ export interface Client {
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
+/** MEMBERS_FETCHED action type */
+export const MEMBERS_FETCHED = 'opensrp/reducer/client/MEMBERS_FETCHED';
 /** SET NAVIGATION PAGE */
 export const SET_NAVIGATION_PAGE = 'opensrp/reducer/clients/SET_NAVIGATION_PAGE';
 
@@ -54,6 +56,12 @@ export interface FetchClientsAction extends AnyAction {
 interface RemoveClientsAction extends AnyAction {
   clientsById: {};
   type: typeof REMOVE_CLIENTS;
+}
+
+/** interface for fetch members */
+export interface FetchMembersAction extends AnyAction {
+  membersById: { [key: string]: Client };
+  type: typeof MEMBERS_FETCHED;
 }
 
 /** interface for setNavigationPageAction */
@@ -78,6 +86,15 @@ export type ClientsActionTypes =
 export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => ({
   clientsById: keyBy(clientsList, (client: Client) => client.baseEntityId),
   type: CLIENTS_FETCHED,
+});
+
+/** Fetch members action creator
+ * @param {Event} members - members to add to store
+ * @return {FetchMembersAction} - an action to add members to redux store
+ */
+export const fetchMembers = (membersList: Client[]): FetchMembersAction => ({
+  membersById: keyBy(membersList, (member: Client) => member.baseEntityId),
+  type: MEMBERS_FETCHED,
 });
 
 /** setNavigationPage action */
@@ -108,6 +125,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** initial clients-state state */
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
+  membersById: {},
   navigationPage: 0,
 });
 
@@ -126,6 +144,11 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         clientsById: action.clientsById,
+      });
+    case MEMBERS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        membersById: action.membersById,
       });
     case SET_NAVIGATION_PAGE:
       return SeamlessImmutable({
@@ -177,4 +200,12 @@ export function getClientById(state: Partial<Store>, id: string): Client | null 
  */
 export function getNavigationPage(state: Partial<Store>): number {
   return (state as any)[reducerName].navigationPage;
+}
+
+/** returns the members of the client as array
+ * @param {Partial<Store>} state - the redux store
+ * @return { Client } - members array
+ */
+export function getMembersArray(state: Partial<Store>): Client[] {
+  return values((state as any)[reducerName].membersById);
 }
