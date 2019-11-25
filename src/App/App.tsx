@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
+import { HOUSEHOLD_PROFILE_URL, HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -57,7 +57,7 @@ class App extends Component {
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                 exact={true}
-                path="/household/profile/:id"
+                path={`${HOUSEHOLD_PROFILE_URL}/:id`}
                 component={ConnectedHouseholdProfile}
               />
               {/* tslint:disable jsx-no-lambda */}
