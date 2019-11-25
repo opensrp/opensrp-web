@@ -143,8 +143,6 @@ class HouseholdList extends React.Component<HouseholdListProps> {
 }
 
 export { HouseholdList };
-/** Maybe define default props */
-/** connect the component to the store */
 
 /** Interface to describe props from mapStateToProps */
 interface DispatchedStateProps {

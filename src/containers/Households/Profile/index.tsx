@@ -6,7 +6,11 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_HOUSEHOLD_ENDPOINT } from '../../../configs/env';
+import {
+  OPENSRP_CLIENT_ENDPOINT,
+  OPENSRP_EVENT_ENDPOINT,
+  OPENSRP_HOUSEHOLD_ENDPOINT,
+} from '../../../configs/env';
 import { HOUSEHOLD_URL } from '../../../constants';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
@@ -68,7 +72,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     const clientResponse = await clientService.list(params);
     if (clientResponse[0]) {
       fetchClientActionCreator(clientResponse[0]);
-      const eventService = new OpenSRPService('event/search');
+      const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
       const eventsResponse = await eventService.list(params);
       fetchEventsActionCreator(eventsResponse);
       const memberParams = {

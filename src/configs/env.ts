@@ -124,6 +124,9 @@ export const OPENSRP_CLIENT_ENDPOINT =
   process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/search';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
+export const OPENSRP_EVENT_ENDPOINT = 'event/search';
+export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_EVENT_ENDPOINT;
+
 /** the households endpoint NOTE: does not end with / */
 export const OPENSRP_HOUSEHOLD_ENDPOINT =
   process.env.REACT_APP_OPENSRP_HOUSEHOLD_ENDPOINT || 'client/searchByCriteria';
