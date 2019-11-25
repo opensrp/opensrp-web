@@ -10,11 +10,12 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL } from '../constants';
+import { ANC_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
+import ConnectedANCListView from '../containers/ANC/list';
 import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
@@ -45,6 +46,12 @@ class App extends Component {
                 exact={true}
                 path={CLIENT_URL}
                 component={ConnectedClientList}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={ANC_URL}
+                component={ConnectedANCListView}
               />
 
               {/* tslint:disable jsx-no-lambda */}
