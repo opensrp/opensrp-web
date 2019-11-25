@@ -11,3 +11,7 @@ div#chart-wrapper {
   stroke: #0093db;
   stroke-width: 2px;
 }
+
+#chart > .card {
+  margin-bottom: 30px;
+}
