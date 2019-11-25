@@ -41,7 +41,7 @@ describe('components/page/SideMenu', () => {
       </Router>
     );
 
-    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual('');
+    expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(null);
 
     wrapper.find(`ul#${CLIENT_RECORDS.replace(' ', '-')}`).simulate('click');
     expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(CLIENT_RECORDS);

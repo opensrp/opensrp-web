@@ -33,12 +33,12 @@ const defaultSideMenuProps: SideMenuProps = {
  */
 interface SideMenuState {
   /** label pointing to active navigation module */
-  collapsedModuleLabel: string;
+  collapsedModuleLabel: string | null;
 }
 
 /** default state for SideMenu */
 const defaultSideMenuState: SideMenuState = {
-  collapsedModuleLabel: '',
+  collapsedModuleLabel: null,
 };
 
 /** SideMenu component */

@@ -7,10 +7,12 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
   onClick={[Function]}
 >
   <NavItem
+    id="module-link"
     tag="li"
   >
     <li
       className="nav-item"
+      id="module-link"
     >
       <span
         className="nav nav-link side-nav-item"
@@ -80,7 +82,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                       },
                     ]
                   }
--                 collapsedModuleLabel=\\"\\"
+-                 collapsedModuleLabel={null}
 +                 collapsedModuleLabel=\\"Client Records\\"
                   key=\\"0\\"
                   parentNav={
@@ -93,14 +95,14 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         },
                       ]
                     }
--                   collapsedModuleLabel=\\"\\"
+-                   collapsedModuleLabel={null}
 +                   collapsedModuleLabel=\\"Client Records\\"
                     history={
                       Object {
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -308,11 +308,11 @@
+@@ -310,11 +310,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -113,7 +115,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -324,11 +324,11 @@
+@@ -326,11 +326,11 @@
                       >
                         <Transition
                           appear={false}
@@ -126,7 +128,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -336,12 +336,16 @@
+@@ -338,12 +338,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
@@ -145,52 +147,52 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               key=\\"child-nav-0\\"
                               tag=\\"ul\\"
                               vertical={false}
-@@ -519,11 +523,11 @@
+@@ -521,11 +525,11 @@
                     </div>
                   </SubMenu>
                 </withRouter(SubMenu)>
                 <withRouter(SubMenu)
                   childNavs={Array []}
--                 collapsedModuleLabel=\\"\\"
+-                 collapsedModuleLabel={null}
 +                 collapsedModuleLabel=\\"Client Records\\"
                   key=\\"1\\"
                   parentNav={
                     Object {
                       \\"icon\\": Array [
                         \\"fas\\",
-@@ -535,11 +539,11 @@
+@@ -537,11 +541,11 @@
                   }
                   setCollapsedModuleLabel={[Function anonymous]}
                 >
                   <SubMenu
                     childNavs={Array []}
--                   collapsedModuleLabel=\\"\\"
+-                   collapsedModuleLabel={null}
 +                   collapsedModuleLabel=\\"Client Records\\"
                     history={
                       Object {
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -737,11 +741,11 @@
+@@ -741,11 +745,11 @@
                         \\"label\\": \\"Locations\\",
                         \\"url\\": \\"/404\\",
                       },
                     ]
                   }
--                 collapsedModuleLabel=\\"\\"
+-                 collapsedModuleLabel={null}
 +                 collapsedModuleLabel=\\"Client Records\\"
                   key=\\"2\\"
                   parentNav={
                     Object {
                       \\"icon\\": Array [
                         \\"fas\\",
-@@ -771,11 +775,11 @@
+@@ -775,11 +779,11 @@
                           \\"label\\": \\"Locations\\",
                           \\"url\\": \\"/404\\",
                         },
                       ]
                     }
--                   collapsedModuleLabel=\\"\\"
+-                   collapsedModuleLabel={null}
 +                   collapsedModuleLabel=\\"Client Records\\"
                     history={
                       Object {
