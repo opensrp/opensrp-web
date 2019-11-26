@@ -4,20 +4,20 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row } from 'react
 import {
   ANC_REPORT,
   BIRTH_REPORT,
+  CHILD_HEIGHT,
+  CHILD_HEIGHT_MONITORING,
+  CHILD_WEIGHT,
+  CHILD_WEIGHT_MONITORING,
   CURRENT_PREGNANCY,
   GESTATION_PERIOD,
+  HEIGHT,
   KG,
   MOTHER_WEIGHT_TRACKING,
   MOTHERS_WEIGHT,
+  NUTRITION_REGISTRATION,
+  NUTRITION_REPORT,
   PREGNANCY_REGISTRATION,
   WEIGHT,
-  NUTRITION_REPORT,
-  NUTRITION_REGISTRATION,
-  CHILD_WEIGHT_MONITORING,
-  CHILD_WEIGHT,
-  HEIGHT,
-  CHILD_HEIGHT,
-  CHILD_HEIGHT_MONITORING,
 } from '../../constants';
 import { getNumberSuffix } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
@@ -74,21 +74,26 @@ export const convertToStringArray = (smsData: PregnancySmsData): string[] => {
   return arr;
 };
 
-export const getEventsPregnancyArray = (singlePatientEvents: SmsData[], isNutrition: boolean): PregnancySmsData[][] => {
+export const getEventsPregnancyArray = (
+  singlePatientEvents: SmsData[],
+  isNutrition: boolean
+): PregnancySmsData[][] => {
   // remove event types that we are not interested in and retain
   // only pregnancy registration, ANC and birth reports
-  singlePatientEvents = !isNutrition ? singlePatientEvents.filter((event: SmsData) => {
-    return (
-      event.sms_type.toLowerCase() === BIRTH_REPORT.toLowerCase() ||
-      event.sms_type.toLowerCase() === ANC_REPORT.toLowerCase() ||
-      event.sms_type.toLowerCase() === PREGNANCY_REGISTRATION.toLowerCase()
-    );
-  }) : singlePatientEvents.filter((event: SmsData) => {
-    return (
-      event.sms_type.toLowerCase() === NUTRITION_REPORT.toLowerCase() ||
-      event.sms_type.toLowerCase() === NUTRITION_REGISTRATION.toLowerCase()
-    );
-  });
+  singlePatientEvents = !isNutrition
+    ? singlePatientEvents.filter((event: SmsData) => {
+        return (
+          event.sms_type.toLowerCase() === BIRTH_REPORT.toLowerCase() ||
+          event.sms_type.toLowerCase() === ANC_REPORT.toLowerCase() ||
+          event.sms_type.toLowerCase() === PREGNANCY_REGISTRATION.toLowerCase()
+        );
+      })
+    : singlePatientEvents.filter((event: SmsData) => {
+        return (
+          event.sms_type.toLowerCase() === NUTRITION_REPORT.toLowerCase() ||
+          event.sms_type.toLowerCase() === NUTRITION_REGISTRATION.toLowerCase()
+        );
+      });
   const data: PregnancySmsData[][] = [];
 
   let pregnancyIndex: number = 0;
@@ -178,7 +183,10 @@ class ReportTable extends Component<Props, State> {
     return pregnancySmsStrings;
   };
 
-  public getWeightsArray = (pregnancySmsData: PregnancySmsData[][], field: string): WeightMonthYear[][] => {
+  public getWeightsArray = (
+    pregnancySmsData: PregnancySmsData[][],
+    field: string
+  ): WeightMonthYear[][] => {
     let weights: WeightMonthYear[][] = [];
     for (const element in pregnancySmsData) {
       if (pregnancySmsData[element]) {
@@ -256,7 +264,9 @@ class ReportTable extends Component<Props, State> {
         <Row id={'chart'}>
           <WeightAndHeightChart
             weights={
-              this.getWeightsArray(this.state.pregnancyEventsArray, 'weight')[this.state.currentPregnancy]
+              this.getWeightsArray(this.state.pregnancyEventsArray, 'weight')[
+                this.state.currentPregnancy
+              ]
             }
             chartWrapperId={this.props.isNutrition ? 'nutrition-chart' : 'pregnancy-chart'}
             title={this.props.isNutrition ? CHILD_WEIGHT_MONITORING : MOTHER_WEIGHT_TRACKING}
@@ -264,19 +274,20 @@ class ReportTable extends Component<Props, State> {
             units={KG}
             xAxisLabel={WEIGHT}
           />
-          {
-            this.props.isNutrition ?
-              <WeightAndHeightChart
-                weights={
-                  this.getWeightsArray(this.state.pregnancyEventsArray, 'height')[this.state.currentPregnancy]
-                }
-                chartWrapperId={'nutrition-chart-1'}
-                title={CHILD_HEIGHT_MONITORING}
-                legendString={CHILD_HEIGHT}
-                units={'cm'}
-                xAxisLabel={HEIGHT}
-              /> : null
-          }
+          {this.props.isNutrition ? (
+            <WeightAndHeightChart
+              weights={
+                this.getWeightsArray(this.state.pregnancyEventsArray, 'height')[
+                  this.state.currentPregnancy
+                ]
+              }
+              chartWrapperId={'nutrition-chart-1'}
+              title={CHILD_HEIGHT_MONITORING}
+              legendString={CHILD_HEIGHT}
+              units={'cm'}
+              xAxisLabel={HEIGHT}
+            />
+          ) : null}
         </Row>
       </Fragment>
     );
