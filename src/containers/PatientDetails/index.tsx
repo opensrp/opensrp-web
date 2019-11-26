@@ -9,17 +9,17 @@ import ReportTable from '../../components/ReportTable';
 import {
   BACK,
   BACKPAGE_ICON,
+  CHILD_AGE,
   CURRENT_EDD,
   CURRENT_GRAVIDITY,
   CURRENT_PARITY,
   ID,
   LOCATION,
+  NUTRITION,
   PATIENT_DETAILS,
   PREVIOUS_PREGNANCY_RISK,
-  NUTRITION,
-  CHILD_AGE,
-  RISK_CARTEGORIZATION,
   RESIDENCE,
+  RISK_CARTEGORIZATION,
 } from '../../constants';
 import { filterByPatientAndSort } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
@@ -36,9 +36,9 @@ interface State {
 }
 
 const defaultProps: Partial<Props> = {
+  isNutrition: false,
   patientId: 'none',
   smsData: [],
-  isNutrition: false,
 };
 
 export class PatientInfo extends Component<Props, State> {
@@ -72,7 +72,10 @@ export class PatientInfo extends Component<Props, State> {
         <Row>
           <BasicInformation labelValuePairs={this.getBasicInformationProps()} />
         </Row>
-        <ReportTable isNutrition={this.props.isNutrition} singlePatientEvents={this.state.filteredData} />
+        <ReportTable
+          isNutrition={this.props.isNutrition}
+          singlePatientEvents={this.state.filteredData}
+        />
       </div>
     );
   }
@@ -93,7 +96,7 @@ export class PatientInfo extends Component<Props, State> {
     reversedFilteredData.reverse();
     for (const data in reversedFilteredData) {
       if (reversedFilteredData[data].age) {
-        return reversedFilteredData[data].age
+        return reversedFilteredData[data].age;
       }
     }
     return '0';
@@ -102,15 +105,17 @@ export class PatientInfo extends Component<Props, State> {
   private getNutritionStatus(): string {
     const reversedFilteredData: SmsData[] = [...this.state.filteredData];
     reversedFilteredData.reverse();
-    const status_fields: string[] = ['nutrition_status', 'growth_status', 'feeding_category'];
+    const statusFields: string[] = ['nutrition_status', 'growth_status', 'feeding_category'];
     for (const data in reversedFilteredData) {
-      for (const field in status_fields) {
-        if ((reversedFilteredData[data] as any)[status_fields[field]]) {
-          return (reversedFilteredData[data] as any)[status_fields[field]];
+      if (reversedFilteredData[data]) {
+        for (const field in statusFields) {
+          if ((reversedFilteredData[data] as any)[statusFields[field]]) {
+            return (reversedFilteredData[data] as any)[statusFields[field]];
+          }
         }
       }
     }
-    return 'no risk category'
+    return 'no risk category';
   }
 
   private getCurrentGravidity(): number {
@@ -156,19 +161,21 @@ export class PatientInfo extends Component<Props, State> {
     }
   }
   private getBasicInformationProps(): LabelValuePair[] {
-    const basicInformationProps = !this.props.isNutrition ? [
-      { label: ID, value: this.props.patientId },
-      { label: LOCATION, value: this.getCurrentLocation() },
-      { label: CURRENT_GRAVIDITY, value: this.getCurrentGravidity() },
-      { label: CURRENT_EDD, value: this.getCurrentEdd() },
-      { label: CURRENT_PARITY, value: this.getCurrenParity() },
-      { label: PREVIOUS_PREGNANCY_RISK, value: this.getPreviousPregnancyRisk() },
-    ] as LabelValuePair[] : [
-      { label: CHILD_AGE, value: this.getAge() },
-      { label: ID, value: this.props.patientId },
-      { label: RISK_CARTEGORIZATION, value: this.getNutritionStatus() },
-      { label: RESIDENCE, value: this.getCurrentLocation() },
-    ] as LabelValuePair[];
+    const basicInformationProps = !this.props.isNutrition
+      ? ([
+          { label: ID, value: this.props.patientId },
+          { label: LOCATION, value: this.getCurrentLocation() },
+          { label: CURRENT_GRAVIDITY, value: this.getCurrentGravidity() },
+          { label: CURRENT_EDD, value: this.getCurrentEdd() },
+          { label: CURRENT_PARITY, value: this.getCurrenParity() },
+          { label: PREVIOUS_PREGNANCY_RISK, value: this.getPreviousPregnancyRisk() },
+        ] as LabelValuePair[])
+      : ([
+          { label: CHILD_AGE, value: this.getAge() },
+          { label: ID, value: this.props.patientId },
+          { label: RISK_CARTEGORIZATION, value: this.getNutritionStatus() },
+          { label: RESIDENCE, value: this.getCurrentLocation() },
+        ] as LabelValuePair[]);
     return basicInformationProps;
   }
 }
@@ -176,10 +183,9 @@ export class PatientInfo extends Component<Props, State> {
 const mapStateToprops = (state: any, ownProps: any) => {
   const patient_id = ownProps.match.params.patient_id;
   const result = {
+    isNutrition: ownProps.match.url.includes(NUTRITION.toLowerCase()),
     patientId: patient_id,
     smsData: getSmsData(state),
-    isNutrition: ownProps.match.url.includes(NUTRITION.toLowerCase()),
-
   };
   return result;
 };

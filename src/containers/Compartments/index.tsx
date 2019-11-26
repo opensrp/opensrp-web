@@ -366,8 +366,7 @@ class Compartments extends React.Component<Props, State> {
     const dataCircleCardNutrition1 =
       this.props.module === NUTRITION
         ? {
-            filterArgs: [
-            ],
+            filterArgs: [],
             inappropriateFeeding: this.getNumberOfSmsWithRisk(
               'inappropriately fed',
               filteredData,
@@ -390,8 +389,7 @@ class Compartments extends React.Component<Props, State> {
     const dataCircleCardNutrition2 =
       this.props.module === NUTRITION
         ? {
-            filterArgs: [
-            ],
+            filterArgs: [],
             inappropriateFeeding: this.getNumberOfSmsWithRisk(
               'inappropriately fed',
               filteredData,
