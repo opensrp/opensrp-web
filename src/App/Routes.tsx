@@ -178,7 +178,10 @@ export const Routes = (props: RoutesProps) => {
                 filterArgs={
                   [
                     (smsData: SmsData) => {
-                      return smsData.sms_type === NUTRITION_REPORT || smsData.sms_type === NUTRITION_REGISTRATION;
+                      return (
+                        smsData.sms_type === NUTRITION_REPORT ||
+                        smsData.sms_type === NUTRITION_REGISTRATION
+                      );
                     },
                   ] as SMS_FILTER_FUNCTION[]
                 }
