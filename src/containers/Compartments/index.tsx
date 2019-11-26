@@ -434,11 +434,16 @@ class Compartments extends React.Component<Props, State> {
       [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2],
     };
     const circleCardComponent: ReactNodeArray = [];
-    Object.keys(circleCardProps).forEach((m: string) => {
-      circleCardProps[m].forEach((p: any, i: number) => {
-        if (this.props.module === m) {
+    Object.keys(circleCardProps).forEach((module: string) => {
+      circleCardProps[module].forEach((prop: any, index: number) => {
+        if (this.props.module === module) {
           circleCardComponent.push(
-            <ConnectedDataCircleCard key={i} userLocationId={userLocationId} module={m} {...p} />
+            <ConnectedDataCircleCard
+              key={index}
+              userLocationId={userLocationId}
+              module={module}
+              {...prop}
+            />
           );
         }
       });
