@@ -5,6 +5,7 @@ import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
   HIGH,
   HIGH_RISK,
+  INAPPROPRIATELY_FED,
   LOW,
   LOW_RISK,
   NBC_AND_PNC_CHILD,
@@ -12,12 +13,11 @@ import {
   NO,
   NO_RISK,
   NUTRITION,
-  PREGNANCY,
-  INAPPROPRIATELY_FED,
-  STUNTED,
   OVERWEIGHT,
+  PREGNANCY,
   SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
+  STUNTED,
 } from '../../constants';
 import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
 import { FlexObject, getModuleLink } from '../../helpers/utils';
@@ -48,6 +48,13 @@ interface Props {
 /**
  * functional component that takes in props
  */
+interface CircleSpecProps {
+  class: string;
+  riskLabel: string;
+  riskType: string;
+  riskValue: any;
+}
+
 function DataCircleCard({
   highRisk,
   lowRisk,
@@ -66,7 +73,7 @@ function DataCircleCard({
   permissionLevel,
 }: Props) {
   const locationId = userLocationId;
-  const pregnancyAndPncCircleSpec: FlexObject[] = [
+  const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
     {
       class: 'red',
       riskLabel: HIGH_RISK,
@@ -87,13 +94,15 @@ function DataCircleCard({
     },
   ];
 
-  const nutritionCircleSpec: FlexObject[] = [
+  const nutritionCircleSpec: CircleSpecProps[] = [
     {
       class: 'total-children',
       riskLabel: 'Total Children',
       riskType: HIGH,
-      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any)
-      .reduce((a: number, b: number) => Number(a) + b, 0),
+      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any).reduce(
+        (a: number, b: number) => Number(a) + b,
+        0
+      ),
     },
     {
       class: 'stunting',
@@ -126,24 +135,24 @@ function DataCircleCard({
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
-          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map((spec: FlexObject, i: number) => (
-            <li className={spec.class} key={i}>
-              <Link
-                to={getLinkToHierarchichalDataTable(spec.riskType)}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={() => {
-                  if (filterArgs) {
-                    addFilterArgsActionCreator(filterArgs);
-                  }
-                }}
-              >
-
-                <span className="number">{spec.riskValue}</span>
-              </Link>
-              <span className="risk-level">{spec.riskLabel}</span>
-            </li>
-          ))
-          }
+          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
+            (spec: FlexObject, i: number) => (
+              <li className={spec.class} key={i}>
+                <Link
+                  to={getLinkToHierarchichalDataTable(spec.riskType)}
+                  // tslint:disable-next-line: jsx-no-lambda
+                  onClick={() => {
+                    if (filterArgs) {
+                      addFilterArgsActionCreator(filterArgs);
+                    }
+                  }}
+                >
+                  <span className="number">{spec.riskValue}</span>
+                </Link>
+                <span className="risk-level">{spec.riskLabel}</span>
+              </li>
+            )
+          )}
         </ul>
       </CardBody>
     </Card>
