@@ -4,6 +4,7 @@ import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
   COMMUNE,
+  COUNTRY,
   DISTRICT,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
@@ -13,6 +14,7 @@ import {
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
+  VIETNAM,
   VIETNAM_COUNTRY_LOCATION_ID,
   VILLAGE,
 } from '../constants';
@@ -320,7 +322,8 @@ export function buildHeaderBreadCrumb(
   provinces: Location[],
   districts: Location[],
   communes: Location[],
-  villages: Location[]
+  villages: Location[],
+  countryLocationId: string
 ): HeaderBreadCrumb {
   if (locationIdIn(locationId, provinces)) {
     const userProvince = provinces.find(
@@ -377,6 +380,13 @@ export function buildHeaderBreadCrumb(
       path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
         userCommune!.location_name
       } / `,
+    };
+  } else if (countryLocationId === locationId) {
+    return {
+      level: COUNTRY,
+      location: VIETNAM,
+      locationId: countryLocationId,
+      path: '',
     };
   }
   return { path: '', location: '', locationId: '', level: '' };
