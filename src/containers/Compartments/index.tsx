@@ -334,6 +334,17 @@ class Compartments extends React.Component<Props, State> {
       return smsData.client_type === EC_WOMAN;
     });
 
+    const childrenUnder2 = filteredData.filter((smsData: SmsData) => {
+      return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 2;
+    });
+
+    const childrenUnder5 = filteredData.filter((smsData: SmsData) => {
+      return (
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 5 &&
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() > 2
+      );
+    });
+
     const dataCircleCardWomanData =
       this.props.module === NBC_AND_PNC
         ? {
