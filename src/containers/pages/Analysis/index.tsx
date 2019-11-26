@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Ripple from '../../../components/page/Loading';
+import { ANALYSIS } from '../../../constants';
 import './index.css';
 
 interface State {
@@ -8,12 +9,12 @@ interface State {
 
 interface Props {
   endpoint: string;
-  titleString: string;
+  module: string;
 }
 
 const defaultProps: Props = {
   endpoint: '',
-  titleString: '',
+  module: '',
 };
 
 export class Analysis extends React.Component<Props, State> {
@@ -29,7 +30,7 @@ export class Analysis extends React.Component<Props, State> {
     return (
       <div className="analysis-content">
         <div>
-          <h2 id="analysis_title">{this.props.titleString}</h2>
+          <h2 id="analysis_title">{`${this.props.module} - ${ANALYSIS}`}</h2>
         </div>
         <div className="analysis-wrapper">
           {this.state.loading ? <Ripple /> : null}
