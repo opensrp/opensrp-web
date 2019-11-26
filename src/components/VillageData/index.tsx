@@ -61,6 +61,7 @@ export default class VillageData extends React.Component<Props, State> {
       startLabel: 'first',
       totalRecords: this.props.smsData.length,
     };
+
     return (
       <React.Fragment>
         {this.props.current_level >= 3 ? (
@@ -105,6 +106,8 @@ export default class VillageData extends React.Component<Props, State> {
                                 ? this.pregnancyMapFunction
                                 : this.props.module === NBC_AND_PNC_CHILD
                                 ? this.nbcAndPncChildMapFunction
+                                : this.props.module === NUTRITION
+                                ? this.nutritionMapFunction
                                 : this.nbcAndPncMotherMapFunction
                             )
                         : null}
@@ -194,6 +197,32 @@ export default class VillageData extends React.Component<Props, State> {
         <td className="default-width">{dataItem.health_worker_location_name}</td>
         <td className="default-width">{dataItem.lmp_edd}</td>
         <td className="default-width">{dataItem.previous_risks}</td>
+        <td className="default-width">
+          <RiskColoring {...{ risk: dataItem.logface_risk }} />
+        </td>
+      </tr>
+    );
+  };
+
+  /**
+   * Returns a <tr></tr> for an SmsData object passed to it
+   * which is used to build the table above.
+   * for the NUTRITION module
+   * @param {SmsData} dataItem - an SmsData object used to generate a table row
+   * @return {JSX.Element} table row
+   */
+  public nutritionMapFunction = (dataItem: SmsData): JSX.Element => {
+    return (
+      <tr key={dataItem.event_id}>
+        <td className="default-width">
+          <Link to={`${getModuleLink(this.props.module)}/child_patient_detail/${dataItem.anc_id}`}>
+            {dataItem.anc_id}
+          </Link>
+        </td>
+        <td className="default-width">{getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
+        <td className="default-width">{dataItem.mother_symptoms}</td>
+        <td className="default-width">{dataItem.health_worker_location_name}</td>
         <td className="default-width">
           <RiskColoring {...{ risk: dataItem.logface_risk }} />
         </td>
