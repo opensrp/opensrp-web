@@ -26,6 +26,7 @@ import {
   NUTRITION,
   PREGNANCY,
   SMS_FILTER_FUNCTION,
+  VIETNAM_COUNTRY_LOCATION_ID,
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
@@ -156,7 +157,8 @@ class Compartments extends React.Component<Props, State> {
       props.provinces,
       props.districts,
       props.communes,
-      props.villages
+      props.villages,
+      VIETNAM_COUNTRY_LOCATION_ID
     );
 
     if (locationPath) {
