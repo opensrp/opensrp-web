@@ -27,7 +27,6 @@ import {
   NBC_AND_PNC_URL,
   NEWBORN_REPORT,
   NUTRITION,
-  NUTRITION_ANALYSIS,
   NUTRITION_ANALYSIS_URL,
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_DASHBOARD_WELCOME,
@@ -36,7 +35,6 @@ import {
   NUTRITION_REPORT,
   NUTRITION_URL,
   PREGNANCY,
-  PREGNANCY_ANALYSIS,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
   PREGNANCY_DASHBOARD_WELCOME,
@@ -210,10 +208,7 @@ export const Routes = (props: RoutesProps) => {
             path={PREGNANCY_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <Analysis
-                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
-                titleString={PREGNANCY_ANALYSIS}
-              />
+              <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} module={PREGNANCY} />
             )}
           />
           <ConnectedPrivateRoute
@@ -222,7 +217,7 @@ export const Routes = (props: RoutesProps) => {
             path={NBC_AND_PNC_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <Analysis endpoint={NBC_AND_PNC_ANALYSIS_ENDPOINT} titleString={NUTRITION_ANALYSIS} />
+              <Analysis endpoint={NBC_AND_PNC_ANALYSIS_ENDPOINT} module={NBC_AND_PNC} />
             )}
           />
           <ConnectedPrivateRoute
@@ -231,10 +226,7 @@ export const Routes = (props: RoutesProps) => {
             path={NUTRITION_ANALYSIS_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <Analysis
-                endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT}
-                titleString={PREGNANCY_ANALYSIS}
-              />
+              <Analysis endpoint={SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT} module={NUTRITION} />
             )}
           />
           <ConnectedPrivateRoute
@@ -273,7 +265,7 @@ export const Routes = (props: RoutesProps) => {
             path={PREGNANCY_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <ConnectedLogFace header={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
+              <ConnectedLogFace module={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
             )}
           />
           <ConnectedPrivateRoute
@@ -281,7 +273,7 @@ export const Routes = (props: RoutesProps) => {
             path={NBC_AND_PNC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <ConnectedLogFace header={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
+              <ConnectedLogFace module={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
             )}
           />
           <ConnectedPrivateRoute
@@ -289,7 +281,7 @@ export const Routes = (props: RoutesProps) => {
             path={NUTRITION_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
-              <ConnectedLogFace header={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
+              <ConnectedLogFace module={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
             )}
           />
           {/* tslint:disable jsx-no-lambda */}
