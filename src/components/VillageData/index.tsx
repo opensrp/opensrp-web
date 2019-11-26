@@ -221,7 +221,7 @@ export default class VillageData extends React.Component<Props, State> {
         </td>
         <td className="default-width">{getNumberOfDaysSinceDate(dataItem.EventDate)}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
-        <td className="default-width">{dataItem.mother_symptoms}</td>
+        <td className="default-width">{dataItem.child_symptoms}</td>
         <td className="default-width">{dataItem.health_worker_location_name}</td>
         <td className="default-width">
           <RiskColoring {...{ risk: dataItem.logface_risk }} />
