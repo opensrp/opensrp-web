@@ -21,6 +21,7 @@ import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   EVENT_ID,
+  LOG_FACE,
   LOGFACE_SEARCH_PLACEHOLDER,
   NBC_AND_PNC,
   NBC_AND_PNC_LOGFACE_SMS_TYPES,
@@ -68,7 +69,7 @@ import './index.css';
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
-  header: string;
+  module: string;
   smsData: SmsData[];
   fetchSmsDataActionCreator: typeof fetchSms;
   dataFetched: boolean;
@@ -112,8 +113,8 @@ const defaultprops: PropsInterface = {
   fetchUserIdActionCreator: fetchUserId,
   fetchUserLocations,
   filterArgsInStore: [],
-  header: '',
   isUserLocationDataFetched: false,
+  module: '',
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   provinces: [],
   removeFilterArgs,
@@ -293,7 +294,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return (
       <div className="logface-content">
         <div>
-          <h2 id="logface_title">{`Log Face - ${this.props.header}`}</h2>
+          <h2 id="logface_title">{`${LOG_FACE} - ${this.props.module}`}</h2>
         </div>
         <div className="filter-panel">
           <div className="filters">
@@ -573,7 +574,7 @@ const mapStateToprops = (state: any, ownProps: any): any => {
       (smsData: SmsData) => boolean
     >).filter((smsData: SmsData) => {
       // here we filter based on the module we are in.
-      switch (ownProps.header) {
+      switch (ownProps.module) {
         case PREGNANCY:
           return PREGNANCY_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
 
