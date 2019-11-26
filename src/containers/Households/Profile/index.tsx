@@ -14,34 +14,33 @@ import {
 import { HOUSEHOLD_URL } from '../../../constants';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
-  fetchClient,
-  getClient,
-  reducerName as clientReducerName,
-} from '../../../store/ducks/client';
-import {
   Client,
-  fetchMembers,
+  fetchClients,
   getClientsArray,
-  getMembersArray,
   reducerName as clientsReducer,
 } from '../../../store/ducks/clients';
-import EventReducer, {
+import eventReducer, {
   Event,
   fetchEvents,
   getEventsArray,
   reducerName as eventReducerName,
 } from '../../../store/ducks/events';
-import { Household } from '../../../store/ducks/households';
+import householdsReducer, {
+  fetchHouseholds,
+  getHouseholdsArray,
+  Household,
+  reducerName as householdReducerName,
+} from '../../../store/ducks/households';
 import './householdProfile.css';
 
-/** register the client reducer */
-reducerRegistry.register(clientReducerName, clientReducer);
+/** register the event reducer */
+reducerRegistry.register(eventReducerName, eventReducer);
 
 /** register the client reducer */
-reducerRegistry.register(eventReducerName, EventReducer);
+reducerRegistry.register(clientsReducer, clientReducer);
 
-/** register the client reducer */
-reducerRegistry.register(clientsReducer, EventReducer);
+/** register the household reducer */
+reducerRegistry.register(householdReducerName, householdsReducer);
 
 /** interface for HouseholdProfile URL params */
 interface HouseholdProfileURLParams {
@@ -50,11 +49,11 @@ interface HouseholdProfileURLParams {
 
 /** interface for HouseholdProfileProps */
 export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
-  household: Household;
+  household: Household | null;
   events: Event[];
   members: Client[];
-  fetchClientActionCreator: typeof fetchClient;
-  fetchMembersActionCreator: typeof fetchMembers;
+  fetchClientActionCreator: typeof fetchHouseholds;
+  fetchMembersActionCreator: typeof fetchClients;
   fetchEventsActionCreator: typeof fetchEvents;
   opensrpService: typeof OpenSRPService;
 }
@@ -72,7 +71,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     const clientService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
     const clientResponse = await clientService.list(params);
     if (clientResponse[0]) {
-      fetchClientActionCreator(clientResponse[0]);
+      fetchClientActionCreator(clientResponse);
       const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
       const eventsResponse = await eventService.list(params);
       fetchEventsActionCreator(eventsResponse);
@@ -188,7 +187,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
 
 /** Interface to describe props from mapStateToProps */
 interface DispatchedStateProps {
-  household: Household;
+  household: Household | null;
   events: Event[];
   members: Household[];
 }
@@ -197,17 +196,17 @@ interface DispatchedStateProps {
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
   const result = {
     events: getEventsArray(state),
-    household: getClient(state),
-    members: getMembersArray(state),
+    household: getHouseholdsArray(state).length > 0 ? getHouseholdsArray(state)[0] : null,
+    members: getClientsArray(state),
   };
   return result;
 };
 
 /** map props to actions */
 const mapDispatchToProps = {
-  fetchClientActionCreator: fetchClient,
+  fetchClientActionCreator: fetchHouseholds,
   fetchEventsActionCreator: fetchEvents,
-  fetchMembersActionCreator: fetchMembers,
+  fetchMembersActionCreator: fetchClients,
 };
 
 const ConnectedHouseholdProfile = withRouter(

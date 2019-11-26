@@ -6,10 +6,6 @@ import { FlexObject } from '../../helpers/utils';
 /** The reducer name */
 export const reducerName = 'clients';
 
-export const clientType = 'ec_household';
-
-export const searchPlaceholder = 'Search Household';
-
 /** Interface for client object as received from clientServices */
 export interface Client {
   type: 'Client';
