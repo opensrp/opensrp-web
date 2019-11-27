@@ -9791,6 +9791,11 @@ react-scripts@^3.0.1:
   optionalDependencies:
     fsevents "2.0.6"
 
+react-table@7.0.0-beta.15:
+  version "7.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-beta.15.tgz#66dc4c71f9e77f5c92ac65a307341d6d3e045d33"
+  integrity sha512-Qr0HjVkYIPLi7BJiHm6ZfRIH00Ziu/bdonwouwKY10hsaqQi9AyH9kF4cXJChBQuspfjsnqnP9kQAjsEIoAeUQ==
+
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.6.tgz#188d8029b8c39c786f998aa3efd3ffe7642d5ba1"
