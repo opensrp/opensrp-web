@@ -144,7 +144,6 @@ Object {
               <NavLink
                 activeClassName="active"
                 className="nav-link"
-                onClick={[Function]}
                 to="/logout"
               >
                 Sign Out

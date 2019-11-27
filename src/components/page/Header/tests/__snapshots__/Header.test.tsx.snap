@@ -4,13 +4,11 @@ exports[`components/page/Header renders header correctly when authenticated: Sig
 <NavLink
   activeClassName="active"
   className="nav-link"
-  onClick={[Function]}
   to="/logout"
 >
   <Link
     aria-current={null}
     className="nav-link"
-    onClick={[Function]}
     to="/logout"
   >
     <a
