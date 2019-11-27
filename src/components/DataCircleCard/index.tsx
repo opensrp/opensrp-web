@@ -33,6 +33,22 @@ interface Props {
   permissionLevel: number;
 }
 
+function getLinkToHierarchichalDataTable(
+  riskLevel: HIGH | LOW | NO,
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '',
+  title: string,
+  permissionLevel: number,
+  locationId: string
+) {
+  if (permissionLevel === 4) {
+    return '#';
+  } else {
+    return `${getModuleLink(
+      module
+    )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
+  }
+}
+
 function DataCircleCard({
   highRisk,
   lowRisk,
@@ -45,15 +61,6 @@ function DataCircleCard({
   userLocationId,
   permissionLevel,
 }: Props) {
-  function getLinkToHierarchichalDataTable(riskLevel: HIGH | LOW | NO) {
-    if (permissionLevel === 4) {
-      return '#';
-    } else {
-      return `${getModuleLink(
-        module
-      )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
-    }
-  }
   const locationId = userLocationId;
   return (
     <Card className={`dataCircleCard ${className}`}>
@@ -62,7 +69,7 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={getLinkToHierarchichalDataTable(HIGH)}
+              to={getLinkToHierarchichalDataTable(HIGH, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -76,7 +83,7 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={getLinkToHierarchichalDataTable(LOW)}
+              to={getLinkToHierarchichalDataTable(LOW, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -90,7 +97,7 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={getLinkToHierarchichalDataTable(NO)}
+              to={getLinkToHierarchichalDataTable(NO, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
