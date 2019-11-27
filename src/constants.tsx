@@ -58,5 +58,5 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
-export const householdClientType = 'ec_household';
+export const householdClientType = 'ec_family';
 export const householdSearchPlaceholder = 'Search Household';

@@ -37,6 +37,16 @@ export interface HouseholdListProps {
   removeHouseholdsActionCreator: typeof removeHouseholds;
 }
 
+export interface HouseholdListState {
+  loading: boolean;
+  pageNumber: string;
+}
+
+export const defaultHouseholdListState: HouseholdListState = {
+  loading: true,
+  pageNumber: '1',
+};
+
 /** default props for the householdList component */
 export const defaultHouseholdListProps: HouseholdListProps = {
   fetchHouseholdsActionCreator: fetchHouseholds,
@@ -48,73 +58,87 @@ export const defaultHouseholdListProps: HouseholdListProps = {
 };
 
 /** Display the Household list  */
-class HouseholdList extends React.Component<HouseholdListProps> {
+class HouseholdList extends React.Component<HouseholdListProps, HouseholdListState> {
   public static defaultProps: HouseholdListProps = defaultHouseholdListProps;
+
+  public constructor(props: HouseholdListProps) {
+    super(props);
+    this.state = defaultHouseholdListState;
+  }
   public async componentDidMount() {
     const {
       fetchHouseholdsActionCreator,
       setTotalRecordsActionCreator,
       opensrpService,
     } = this.props;
-    const params = { clientType, pageNumber: '1', pageSize: PAGINATION_SIZE };
+    const params = { clientType, pageNumber: this.state.pageNumber, pageSize: PAGINATION_SIZE };
     const householdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await householdService.list(params);
-    fetchHouseholdsActionCreator(response.clients);
-    setTotalRecordsActionCreator(response.total);
+    this.setState(
+      {
+        ...this.state,
+        loading: false,
+      },
+      () => {
+        fetchHouseholdsActionCreator(response.clients);
+        setTotalRecordsActionCreator(response.total);
+      }
+    );
   }
 
   public render() {
     /** render loader if there are no households in state */
     const { householdsArray, totalRecordsCount } = this.props;
-    if (!some(householdsArray)) {
+    if (this.state.loading) {
       return <Loading />;
+    } else {
+      return (
+        <div>
+          <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
+          <Row>
+            <Col md={5}>
+              <div className="household-search-bar">
+                <SearchBox searchCallBack={this.search} placeholder={searchPlaceholder} />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Table className="shadow-sm">
+                <thead>
+                  <tr>
+                    <th>HH ID Number</th>
+                    <th>Family Name</th>
+                    <th>Head of Household</th>
+                    <th>Phone</th>
+                    <th>Registered Date</th>
+                    <th>Members</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {householdsArray.map((household: Household) => {
+                    return (
+                      <tr key={household.baseEntityId}>
+                        <td>{household.baseEntityId}</td>
+                        <td>{household.lastName}</td>
+                        <td>{household.attributes.HouseholdHead}</td>
+                        <td>{household.attributes.phoneNumber}</td>
+                        <td>{household.dateCreated}</td>
+                        <td className="members-table-field">{household.attributes.memberCount}</td>
+                        <td>
+                          <Link to={`/household/profile/${household.baseEntityId}/`}>View</Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </div>
+      );
     }
-    return (
-      <div>
-        <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
-        <Row>
-          <Col md={5}>
-            <div className="household-search-bar">
-              <SearchBox searchCallBack={this.search} placeholder={searchPlaceholder} />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Table className="shadow-sm">
-              <thead>
-                <tr>
-                  <th>HH ID Number</th>
-                  <th>Family Name</th>
-                  <th>Head of Household</th>
-                  <th>Phone</th>
-                  <th>Registered Date</th>
-                  <th>Members</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {householdsArray.map((household: Household) => {
-                  return (
-                    <tr key={household.baseEntityId}>
-                      <td>{household.baseEntityId}</td>
-                      <td>{household.lastName}</td>
-                      <td>{household.attributes.HouseholdHead}</td>
-                      <td>{household.attributes.phoneNumber}</td>
-                      <td>{household.dateCreated}</td>
-                      <td className="members-table-field">{household.attributes.memberCount}</td>
-                      <td>
-                        <Link to={`/household/profile/${household.baseEntityId}/`}>View</Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-      </div>
-    );
   }
 
   private search = (searchString: string) => {
@@ -130,15 +154,23 @@ class HouseholdList extends React.Component<HouseholdListProps> {
     } = this.props;
     const params = {
       clientType,
-      pageNumber: '1',
+      pageNumber: this.state.pageNumber,
       pageSize: PAGINATION_SIZE,
       searchText,
     };
     const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await hosueholdService.list(params);
     removeHouseholdsActionCreator();
-    fetchHouseholdsActionCreator(response.clients);
-    setTotalRecordsActionCreator(response.total);
+    this.setState(
+      {
+        ...this.state,
+        loading: false,
+      },
+      () => {
+        fetchHouseholdsActionCreator(response.clients);
+        setTotalRecordsActionCreator(response.total);
+      }
+    );
   }
 }
 
