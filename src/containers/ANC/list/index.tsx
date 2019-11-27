@@ -6,6 +6,8 @@ import { OpenSRPService } from '../../../services/opensrp';
 import { Client, fetchClients } from '../../../store/ducks/clients';
 import { loadANCList } from './dataLoading';
 import { useFilters } from './hooks';
+import { ANCTable, useColumns } from './tableDefinition';
+import * as fixtures from './tests/fixtures';
 
 interface ANCListProps {
   ANCList: Client[];
@@ -14,7 +16,7 @@ interface ANCListProps {
 }
 
 const defaultANCListProps: ANCListProps = {
-  ANCList: [],
+  ANCList: fixtures.allANC,
   fetchClientsCreator: (f: any) => f,
   service: OpenSRPService,
 };
@@ -29,11 +31,21 @@ const ANCListView: React.FC<ANCListProps> = props => {
     loadANCList(service, fetchClientsCreator);
   });
 
+  const ANCTableProps = {
+    data: ANCList,
+    tableColumns: useColumns(),
+  };
+
   if (ANCList.length < 1) {
     return <Loading />;
   }
 
-  return <div />;
+  // create table instance
+  return (
+    <div>
+      <ANCTable {...ANCTableProps} />
+    </div>
+  );
 };
 
 ANCListView.defaultProps = defaultANCListProps;
@@ -44,7 +56,7 @@ interface DispatchedStateToProps {
 }
 const mapStateToProps = (): DispatchedStateToProps => {
   return {
-    ANCList: [], // getANCArray;
+    ANCList: fixtures.allANC, // getANCArray;
   };
 };
 
