@@ -12,6 +12,7 @@ import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
 import {
   NBC_AND_PNC_ANALYSIS_ENDPOINT,
+  OPENSRP_LOGOUT_URL,
   SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
   SUPERSET_SMS_DATA_SLICE,
 } from '../configs/env';
@@ -250,7 +251,8 @@ export const Routes = (props: RoutesProps) => {
             disableLoginProtection={false}
             exact={true}
             path={LOGOUT_URL}
-            component={ConnectedLogout}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => <ConnectedLogout {...{ logoutURL: OPENSRP_LOGOUT_URL }} />}
           />
 
           <ConnectedPrivateRoute
