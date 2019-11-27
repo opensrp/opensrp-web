@@ -12,6 +12,7 @@ import {
   householdClientType as clientType,
   householdSearchPlaceholder as searchPlaceholder,
 } from '../../../constants';
+import { FlexObject } from '../../../helpers/utils';
 import { OpenSRPService } from '../../../services/opensrp';
 import householdsReducer, {
   fetchHouseholds,
@@ -66,24 +67,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     this.state = defaultHouseholdListState;
   }
   public async componentDidMount() {
-    const {
-      fetchHouseholdsActionCreator,
-      setTotalRecordsActionCreator,
-      opensrpService,
-    } = this.props;
-    const params = { clientType, pageNumber: this.state.pageNumber, pageSize: PAGINATION_SIZE };
-    const householdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
-    const response = await householdService.list(params);
-    this.setState(
-      {
-        ...this.state,
-        loading: false,
-      },
-      () => {
-        fetchHouseholdsActionCreator(response.clients);
-        setTotalRecordsActionCreator(response.total);
-      }
-    );
+    this.getHouseholdList();
   }
 
   public render() {
@@ -141,23 +125,23 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     }
   }
 
-  private search = (searchString: string) => {
-    this.getHouseholdList(searchString);
+  private search = (searchText: string) => {
+    this.getHouseholdList({ searchText });
   };
 
-  private async getHouseholdList(searchText: string) {
+  private async getHouseholdList(extraParams: FlexObject = {}) {
+    const params = {
+      clientType,
+      pageNumber: this.state.pageNumber,
+      pageSize: PAGINATION_SIZE,
+      ...extraParams,
+    };
     const {
       fetchHouseholdsActionCreator,
       setTotalRecordsActionCreator,
       removeHouseholdsActionCreator,
       opensrpService,
     } = this.props;
-    const params = {
-      clientType,
-      pageNumber: this.state.pageNumber,
-      pageSize: PAGINATION_SIZE,
-      searchText,
-    };
     const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await hosueholdService.list(params);
     removeHouseholdsActionCreator();
