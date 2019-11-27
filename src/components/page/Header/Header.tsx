@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import logo from '../../../assets/images/logo.png';
 import logo2 from '../../../assets/images/vietnam-moh.png';
-import { OPENSRP_LOGOUT_URL, WEBSITE_NAME } from '../../../configs/env';
+import { WEBSITE_NAME } from '../../../configs/env';
 import { LOGIN_URL, LOGOUT_URL } from '../../../constants';
 import { headerShouldNotRender } from '../../../helpers/utils';
 import './Header.css';
