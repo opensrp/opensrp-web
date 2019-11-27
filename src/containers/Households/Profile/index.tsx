@@ -18,6 +18,7 @@ import clientReducer, {
   fetchClients,
   getClientsArray,
   reducerName as clientsReducer,
+  removeClients,
 } from '../../../store/ducks/clients';
 import eventReducer, {
   Event,
@@ -55,6 +56,7 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
   fetchClientActionCreator: typeof fetchHouseholds;
   fetchMembersActionCreator: typeof fetchClients;
   fetchEventsActionCreator: typeof fetchEvents;
+  removeMembersActionCreator: typeof removeClients;
   opensrpService: typeof OpenSRPService;
 }
 
@@ -65,6 +67,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
       fetchMembersActionCreator,
       fetchEventsActionCreator,
       match,
+      removeMembersActionCreator,
     } = this.props;
     const householdId = match.params.id || '';
     const params = { identifier: householdId };
@@ -81,6 +84,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
       };
       const memberService = new OpenSRPService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
       const membersResponse = await memberService.list(memberParams);
+      removeMembersActionCreator();
       fetchMembersActionCreator(membersResponse.clients);
     }
   }
@@ -207,6 +211,7 @@ const mapDispatchToProps = {
   fetchClientActionCreator: fetchHouseholds,
   fetchEventsActionCreator: fetchEvents,
   fetchMembersActionCreator: fetchClients,
+  removeMembersActionCreator: removeClients,
 };
 
 const ConnectedHouseholdProfile = withRouter(
