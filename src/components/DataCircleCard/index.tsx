@@ -35,6 +35,9 @@ interface Props {
   permissionLevel: number;
 }
 
+/**
+ * functional component that takes in props
+ */
 function DataCircleCard({
   highRisk,
   lowRisk,
