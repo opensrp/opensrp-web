@@ -21,6 +21,7 @@ import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   EVENT_ID,
+  LOCATION,
   LOGFACE_SEARCH_PLACEHOLDER,
   NBC_AND_PNC,
   NBC_AND_PNC_LOGFACE_SMS_TYPES,
@@ -28,6 +29,7 @@ import {
   NUTRITION_LOGFACE_SMS_TYPES,
   PREGNANCY,
   PREGNANCY_LOGFACE_SMS_TYPES,
+  RISK,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
@@ -36,7 +38,6 @@ import {
   TYPE,
 } from '../../constants';
 import {
-  FlexObject,
   getFilterFunctionAndLocationLevel,
   getLocationId,
   sortFunction,
@@ -156,7 +157,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
     if (
       !prevState.filteredData.length &&
-      allLabels.every((d: string) => !d.length || d === ALL) &&
+      allLabels.every((label: string) => !label.length || label === ALL) &&
       !(
         document.getElementById('input') &&
         (document.getElementById('input') as HTMLInputElement)!.value
@@ -256,13 +257,13 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   }
 
-  public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  public handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     // we need to prevent a reaload of the page
-    e.preventDefault();
+    event.preventDefault();
   }
 
-  public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
+  public handleTermChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const filteredData: SmsData[] = this.filterData((event.target as HTMLInputElement).value);
     if (this.state.currentPage > 1) {
       this.setState({
         currentPage: 1,
@@ -452,24 +453,29 @@ export class LogFace extends React.Component<PropsInterface, State> {
     }
   }
 
-  private getFilteredData = (data: SmsData[], e?: React.MouseEvent, type?: string) => {
+  /**
+   * filter sms data based on an event a user event based on the logface_risk, health_worker_location_name,
+   * sms_type fields
+   * @param {SmsData[]} smsData a list of SmsData objects
+   * @param {React.MouseEvent} event the event we are filtering data based on.
+   * @param {string} filterBy the category by which we are filtering the smsData.
+   */
+  private getFilteredData = (smsData: SmsData[], event?: React.MouseEvent, filterBy?: string) => {
     const allLabels = [this.state.riskLabel, this.state.locationLabel, this.state.typeLabel];
-    if (e && e.target) {
-      switch (type) {
-        case 'risk':
-          allLabels.splice(0, 1, (e.target as HTMLInputElement).innerText);
+    if (event && event.target) {
+      switch (filterBy) {
+        case RISK:
+          allLabels.splice(0, 1, (event.target as HTMLInputElement).innerText);
           break;
-        case 'location':
-          allLabels.splice(1, 1, (e.target as HTMLInputElement).innerText);
+        case LOCATION.toLowerCase():
+          allLabels.splice(1, 1, (event.target as HTMLInputElement).innerText);
           break;
-        case 'type':
-          allLabels.splice(2, 1, (e.target as HTMLInputElement).innerText);
+        case TYPE.toLowerCase():
+          allLabels.splice(2, 1, (event.target as HTMLInputElement).innerText);
           break;
-        default:
-        // handle this
       }
     }
-    const dataFiltered = data.filter((dataItem: FlexObject) => {
+    const dataFiltered = smsData.filter((dataItem: SmsData) => {
       return (
         (allLabels[0].length && allLabels[0] !== ALL
           ? dataItem.logface_risk.toLowerCase().includes(allLabels[0])
@@ -485,18 +491,18 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return dataFiltered;
   };
 
-  private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
+  private handleRiskLevelDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(this.props.smsData, e, 'risk'),
-      riskLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'risk'),
+      riskLabel: (event.target as HTMLInputElement).innerText,
     });
   };
-  private handleLocationDropdownClick = (e: React.MouseEvent) => {
+  private handleLocationDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(this.props.smsData, e, 'location'),
-      locationLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'location'),
+      locationLabel: (event.target as HTMLInputElement).innerText,
     });
   };
 
@@ -511,18 +517,18 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return Array.from(new Set(locations));
   };
 
-  private handleTypeDropdownClick = (e: React.MouseEvent) => {
+  private handleTypeDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.getFilteredData(this.props.smsData, e, 'type'),
-      typeLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'type'),
+      typeLabel: (event.target as HTMLInputElement).innerText,
     });
   };
 
   private filterData(filterString: string): SmsData[] {
     const { riskLabel, locationLabel, typeLabel } = this.state;
     const isFiltered: boolean = [riskLabel, locationLabel, typeLabel].some(
-      (d: string) => d.length || d !== ALL
+      (label: string) => label.length || label !== ALL
     );
     let activeData;
     if (isFiltered) {

@@ -195,6 +195,7 @@ export const PARITY = 'Parity';
 export type PARITY = typeof PARITY;
 export const LOCATION = 'Location';
 export type LOCATION = typeof LOCATION;
+
 export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
 export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
 export const CURRENT_EDD = 'Current EDD';
@@ -273,7 +274,7 @@ export const HEIGHT = 'height';
 export type HEIGHT = typeof HEIGHT;
 export const WEIGHT = 'weight';
 export type WEIGHT = typeof WEIGHT;
-export const RISK = 'risks';
+export const RISK = 'risk';
 export type RISK = typeof RISK;
 export const LMP_EDD = 'lmp_edd';
 export type LMP_EDD = typeof LMP_EDD;
