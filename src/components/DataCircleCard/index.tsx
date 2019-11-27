@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
-  HIERARCHICAL_DATA_URL,
   HIGH,
   HIGH_RISK,
   LOW,
@@ -16,10 +15,13 @@ import {
   PREGNANCY,
   SMS_FILTER_FUNCTION,
 } from '../../constants';
-import { getModuleLink } from '../../helpers/utils';
+import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
+/**
+ * interface for props to be passed to DataCircleCard component.
+ */
 interface Props {
   highRisk: number;
   lowRisk: number;
@@ -31,22 +33,6 @@ interface Props {
   className?: string;
   userLocationId: string;
   permissionLevel: number;
-}
-
-function getLinkToHierarchichalDataTable(
-  riskLevel: HIGH | LOW | NO,
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '',
-  title: string,
-  permissionLevel: number,
-  locationId: string
-) {
-  if (permissionLevel === 4) {
-    return '#';
-  } else {
-    return `${getModuleLink(
-      module
-    )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
-  }
 }
 
 function DataCircleCard({

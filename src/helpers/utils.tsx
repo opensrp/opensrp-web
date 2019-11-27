@@ -5,9 +5,13 @@ import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
   COMMUNE,
   DISTRICT,
+  HIERARCHICAL_DATA_URL,
+  HIGH,
+  LOW,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_WOMAN,
+  NO,
   NUTRITION,
   NUTRITION_COMPARTMENTS_URL,
   PREGNANCY,
@@ -401,5 +405,30 @@ export function getModuleLink(
       return NBC_AND_PNC_COMPARTMENTS_URL;
     default:
       return '';
+  }
+}
+
+/**
+ * Get a link to the HierrarchichalDataTable component
+ * @param {HIGH | LOW | NO} riskLevel string value that will be passed to hierarchichalDataTable
+ * as prop. representing that column should be coloured.
+ * @param {PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''} module string representing the module
+ * @param {string} title title to be passed to hierarchichal data table as a prop
+ * @param {number} permissionLevel - number ranging from 0 - 4 that represents the permission level of the user.
+ * @param {string} locationId - the users location id.
+ */
+export function getLinkToHierarchichalDataTable(
+  riskLevel: HIGH | LOW | NO,
+  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '',
+  title: string,
+  permissionLevel: number,
+  locationId: string
+) {
+  if (permissionLevel === 4) {
+    return '#';
+  } else {
+    return `${getModuleLink(
+      module
+    )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
   }
 }
