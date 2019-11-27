@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 import { Row } from 'reactstrap';
 import { Client } from '../../../store/ducks/clients';
 
@@ -31,15 +31,18 @@ export const useColumns = () => {
           {
             Header: 'First Name',
             accessor: 'firstName',
+            disableSortBy: true,
           },
           {
             Header: 'Last Name',
             accessor: 'lastName',
+            disableSortBy: true,
           },
 
           {
             Header: 'Location',
             accessor: '',
+            disableSortBy: true,
           },
           {
             Header: 'Age',
@@ -57,14 +60,17 @@ export const useColumns = () => {
             Header: 'Last Contact Date',
             accessor: 'attributes.last_contact_record_date',
           },
+
           {
             Header: 'Risk Category',
             accessor: '',
+            disableSortBy: true,
           },
           {
             Cell: ({ row: { index } }: any) => <Link to="#">View</Link>,
             Header: 'Actions',
             accessor: '',
+            disableSortBy: true,
           },
         ],
         id: 'tableCrumb',
@@ -82,50 +88,62 @@ interface ANCTableProps {
 const ANCTable: React.FC<ANCTableProps> = props => {
   const { tableColumns, data } = props;
   // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
-    columns: tableColumns,
-    data,
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    {
+      columns: tableColumns,
+      data,
+    },
+    useSortBy
+  );
 
   return (
     <div>
-      <Row>
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup, idx) => (
-              <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column, index) => (
-                  // Add the sorting props to control sorting. For this example
-                  // we can add them into the header props
-                  <th key={`thead-th-${index}`} {...column.getHeaderProps()}>
-                    {column.render('Header')}
-                    {/* Add a sort direction indicator */}
-                    {/* <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span> */}
-                  </th>
-                ))}
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup, idx) => (
+            <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column: any, index) => (
+                // Add the sorting props to control sorting. For this example
+                // we can add them into the header props
+                <th
+                  key={`thead-th-${index}`}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
+                  {column.render('Header')}
+                  {/* Add a sort direction indicator */}
+                  <span>
+                    {column.canSort
+                      ? column.isSorted
+                        ? column.isSortedDesc
+                          ? ' ↓'
+                          : ' ↑'
+                        : '↕'
+                      : ''}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr key={`tbody-tr-${i}`} {...row.getRowProps()}>
+                {row.cells.map((cell: any, index: number) => {
+                  return (
+                    <td key={'tbody-td-${index}'} {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
               </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr key={`tbody-tr-${i}`} {...row.getRowProps()}>
-                  {row.cells.map((cell: any, index: number) => {
-                    return (
-                      <td key={'tbody-td-${index}'} {...cell.getCellProps()}>
-                        {cell.render('Cell')}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <br />
-        <div>Showing all rows</div>
-      </Row>
+            );
+          })}
+        </tbody>
+      </table>
+      <br />
+      <div>Showing all rows</div>
     </div>
   );
 };
