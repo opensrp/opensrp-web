@@ -94,7 +94,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
       return <Loading />;
     }
     return (
-      <Container>
+      <Container id="householdProfile">
         <div className="page-title">
           <span className="back-btn-bg">
             <Link to={`${HOUSEHOLD_URL}`}>
@@ -188,6 +188,8 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     );
   }
 }
+
+export { HouseholdProfile };
 
 /** Interface to describe props from mapStateToProps */
 interface DispatchedStateProps {

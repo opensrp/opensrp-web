@@ -7,7 +7,6 @@ import store from '../../../../store';
 import householdsReducer, {
   reducerName as householdsReducerName,
 } from '../../../../store/ducks/households';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
 import { HouseholdList, HouseholdListProps } from '../../List/index';
 
 reducerRegistry.register(householdsReducerName, householdsReducer);
