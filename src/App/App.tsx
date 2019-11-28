@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faChartLine, faCog, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -10,17 +10,19 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL } from '../constants';
+import { HOUSEHOLD_PROFILE_URL, HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/Clients/List';
+import ConnectedHouseholdList from '../containers/Households/List';
+import ConnectedHouseholdProfile from '../containers/Households/Profile';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 
-library.add(faUser, faChartLine, faCog);
+library.add(faUser, faChartLine, faCog, faSearch, faArrowLeft);
 
 /** Main App component */
 class App extends Component {
@@ -46,7 +48,18 @@ class App extends Component {
                 path={CLIENT_URL}
                 component={ConnectedClientList}
               />
-
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={HOUSEHOLD_URL}
+                component={ConnectedHouseholdList}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={`${HOUSEHOLD_PROFILE_URL}/:id`}
+                component={ConnectedHouseholdProfile}
+              />
               {/* tslint:disable jsx-no-lambda */}
               <Route
                 exact={true}

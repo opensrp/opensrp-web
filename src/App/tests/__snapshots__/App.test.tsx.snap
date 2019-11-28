@@ -268,6 +268,10 @@ exports[`App renders App correctly 1`] = `
                                 "label": "All clients",
                                 "url": "/clients",
                               },
+                              Object {
+                                "label": "Household",
+                                "url": "/households",
+                              },
                             ],
                             "parentNav": Object {
                               "icon": Array [
@@ -340,6 +344,10 @@ exports[`App renders App correctly 1`] = `
                                       "label": "All clients",
                                       "url": "/clients",
                                     },
+                                    Object {
+                                      "label": "Household",
+                                      "url": "/households",
+                                    },
                                   ]
                                 }
                                 collapsedModuleLabel={null}
@@ -361,6 +369,10 @@ exports[`App renders App correctly 1`] = `
                                       Object {
                                         "label": "All clients",
                                         "url": "/clients",
+                                      },
+                                      Object {
+                                        "label": "Household",
+                                        "url": "/households",
                                       },
                                     ]
                                   }
@@ -561,6 +573,49 @@ exports[`App renders App correctly 1`] = `
                                                         <span>
                                                            
                                                           All clients
+                                                           
+                                                        </span>
+                                                      </a>
+                                                    </Link>
+                                                  </NavLink>
+                                                </li>
+                                              </NavItem>
+                                            </ul>
+                                          </Nav>
+                                          <Nav
+                                            key="child-nav-1"
+                                            tag="ul"
+                                            vertical={false}
+                                          >
+                                            <ul
+                                              className="nav"
+                                            >
+                                              <NavItem
+                                                className="nav-item-extend"
+                                                tag="li"
+                                              >
+                                                <li
+                                                  className="nav-item-extend nav-item"
+                                                >
+                                                  <NavLink
+                                                    activeClassName="side-nav-active"
+                                                    className="nav-link side-nav-item"
+                                                    to="/households"
+                                                  >
+                                                    <Link
+                                                      aria-current={null}
+                                                      className="nav-link side-nav-item"
+                                                      to="/households"
+                                                    >
+                                                      <a
+                                                        aria-current={null}
+                                                        className="nav-link side-nav-item"
+                                                        href="/households"
+                                                        onClick={[Function]}
+                                                      >
+                                                        <span>
+                                                           
+                                                          Household
                                                            
                                                         </span>
                                                       </a>

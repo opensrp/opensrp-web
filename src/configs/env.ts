@@ -49,6 +49,10 @@ export type ENABLE_LOCATION_PAGE = typeof ENABLE_LOCATION_PAGE;
 export const DISABLE_LOGIN_PROTECTION = process.env.REACT_APP_DISABLE_LOGIN_PROTECTION === 'true';
 export type DISABLE_LOGIN_PROTECTION = typeof DISABLE_LOGIN_PROTECTION;
 
+/** The pagination size. Default size is 50 */
+export const PAGINATION_SIZE = process.env.REACT_APP_PAGINATION_SIZE || '50';
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+
 /** The Superset API base */
 export const SUPERSET_API_BASE = process.env.REACT_APP_SUPERSET_API_BASE || 'http://localhost';
 export type SUPERSET_API_BASE = typeof SUPERSET_API_BASE;
@@ -119,3 +123,11 @@ export type OPENSRP_API_BASE_URL = typeof OPENSRP_API_BASE_URL;
 export const OPENSRP_CLIENT_ENDPOINT =
   process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/search';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+
+export const OPENSRP_EVENT_ENDPOINT = 'event/search';
+export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_EVENT_ENDPOINT;
+
+/** the households endpoint NOTE: does not end with / */
+export const OPENSRP_HOUSEHOLD_ENDPOINT =
+  process.env.REACT_APP_OPENSRP_HOUSEHOLD_ENDPOINT || 'client/searchByCriteria';
+export type OPENSRP_HOUSEHOLD_ENDPOINT = typeof OPENSRP_HOUSEHOLD_ENDPOINT;

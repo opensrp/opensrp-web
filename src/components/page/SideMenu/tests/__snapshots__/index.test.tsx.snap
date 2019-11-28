@@ -76,9 +76,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -103,11 +103,11 @@
-                        \\"label\\": \\"All clients\\",
-                        \\"url\\": \\"/clients\\",
+@@ -111,11 +111,11 @@
+                        \\"label\\": \\"Household\\",
+                        \\"url\\": \\"/households\\",
                       },
                     ]
                   }
@@ -89,9 +89,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
-@@ -125,11 +125,11 @@
-                          \\"label\\": \\"All clients\\",
-                          \\"url\\": \\"/clients\\",
+@@ -137,11 +137,11 @@
+                          \\"label\\": \\"Household\\",
+                          \\"url\\": \\"/households\\",
                         },
                       ]
                     }
@@ -102,7 +102,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -257,11 +257,11 @@
+@@ -269,11 +269,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -115,7 +115,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -273,11 +273,11 @@
+@@ -285,11 +285,11 @@
                       >
                         <Transition
                           appear={false}
@@ -128,7 +128,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -285,12 +285,16 @@
+@@ -297,12 +297,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}

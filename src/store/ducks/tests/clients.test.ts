@@ -2,23 +2,33 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
 import { FlushThunks } from 'redux-testkit';
 import store from '../../index';
-import reducer, {
+import clientReducer, {
   fetchClients,
-  fetchHouseholds,
   getClientById,
   getClientsArray,
   getClientsById,
   getClientsIdArray,
+  getNavigationPage,
+  reducerName as clientReducerName,
+  removeClientsAction,
+  setNavigationPage,
+} from '../clients';
+
+import householdReducer, {
+  fetchHouseholds,
   getHouseholdById,
   getHouseholdsArray,
   getHouseholdsById,
-  reducerName,
-  removeClientsAction,
+  getTotalRecords,
+  reducerName as houseHoldReducerName,
   removeHouseholdsAction,
-} from '../clients';
+  setTotalRecords,
+} from '../households';
+
 import * as fixtures from '../tests/fixtures';
 
-reducerRegistry.register(reducerName, reducer);
+reducerRegistry.register(clientReducerName, clientReducer);
+reducerRegistry.register(houseHoldReducerName, householdReducer);
 
 describe('reducers/clients', () => {
   let flushThunks;
@@ -108,5 +118,25 @@ describe('reducers/clients', () => {
     store.dispatch(removeHouseholdsAction);
     numberOfHouseholds = getHouseholdsArray(store.getState()).length;
     expect(numberOfHouseholds).toEqual(0);
+  });
+
+  it('sets total records', () => {
+    store.dispatch(setTotalRecords(3));
+    let numberOfRecords = getTotalRecords(store.getState());
+    expect(numberOfRecords).toEqual(3);
+
+    store.dispatch(setTotalRecords(0));
+    numberOfRecords = getTotalRecords(store.getState());
+    expect(numberOfRecords).toEqual(0);
+  });
+
+  it('sets navigation page', () => {
+    store.dispatch(setNavigationPage(4));
+    let currentPageNumber = getNavigationPage(store.getState());
+    expect(currentPageNumber).toEqual(4);
+
+    store.dispatch(setNavigationPage(2));
+    currentPageNumber = getNavigationPage(store.getState());
+    expect(currentPageNumber).toEqual(2);
   });
 });

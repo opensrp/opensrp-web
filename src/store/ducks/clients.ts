@@ -31,19 +31,14 @@ export interface Client {
   _rev: string;
 }
 
-/** Interface for household object same as client */
-export type Household = Client;
-
 // actions
 
 /** CLIENTS_FETCHED action type */
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
-/** HOUSEHOLDS_FETCHED action type */
-export const HOUSEHOLDS_FETCHED = 'opensrp/reducer/clients/HOUSEHOLDS_FETCHED';
-/** REMOVE_HOUSEHOLDS action type */
-export const REMOVE_HOUSEHOLDS = 'opensrp/reducer/clients/REMOVE_HOUSEHOLDS';
+/** SET NAVIGATION PAGE */
+export const SET_NAVIGATION_PAGE = 'opensrp/reducer/clients/SET_NAVIGATION_PAGE';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -57,24 +52,17 @@ interface RemoveClientsAction extends AnyAction {
   type: typeof REMOVE_CLIENTS;
 }
 
-/** interface for fetchHouseholdsAction */
-interface FetchHouseholdsAction extends AnyAction {
-  householdsById: { [key: string]: Household };
-  type: typeof HOUSEHOLDS_FETCHED;
-}
-
-/** Interface for removeHouseholdsAction */
-interface RemoveHouseholdsAction extends AnyAction {
-  householdsById: {};
-  type: typeof REMOVE_HOUSEHOLDS;
+/** interface for setNavigationPageAction */
+interface SetNavigationPageAction extends AnyAction {
+  navigationPage: number;
+  type: typeof SET_NAVIGATION_PAGE;
 }
 
 /** Create type for clients reducer actions */
 export type ClientsActionTypes =
   | FetchClientsAction
-  | FetchHouseholdsAction
   | RemoveClientsAction
-  | RemoveHouseholdsAction
+  | SetNavigationPageAction
   | AnyAction;
 
 // action Creators
@@ -88,13 +76,19 @@ export const fetchClients = (clientsList: Client[] = []): FetchClientsAction => 
   type: CLIENTS_FETCHED,
 });
 
-/** Fetch households action creator
- * @param {Household []} householdList - households array to add to store
- * @return {FetchHouseholdsAction} - an action to add households to redux store
+/** Fetch clients action creator
+ * @param {Client []} clientsList - clients array to add to store
+ * @return {FetchClientsAction} - an action to add clients to redux store
  */
-export const fetchHouseholds = (householdsList: Household[] = []): FetchHouseholdsAction => ({
-  householdsById: keyBy(householdsList, (household: Household) => household.baseEntityId),
-  type: HOUSEHOLDS_FETCHED,
+export const removeClients = (clientsList: Client[] = []): RemoveClientsAction => ({
+  clientsById: keyBy(clientsList, (client: Client) => client.baseEntityId),
+  type: REMOVE_CLIENTS,
+});
+
+/** setNavigationPage action */
+export const setNavigationPage = (requestedPage: number): SetNavigationPageAction => ({
+  navigationPage: requestedPage,
+  type: SET_NAVIGATION_PAGE,
 });
 
 // actions
@@ -105,18 +99,12 @@ export const removeClientsAction = {
   type: REMOVE_CLIENTS,
 };
 
-/** removeHouseholds action */
-export const removeHouseholdsAction: RemoveHouseholdsAction = {
-  householdsById: {},
-  type: REMOVE_HOUSEHOLDS,
-};
-
 // The reducer
 
 /** interface for clients state in redux store */
 interface ClientState {
   clientsById: { [key: string]: Client };
-  householdsById: { [key: string]: Household };
+  navigationPage: number;
 }
 
 /** Create an immutable clients state */
@@ -125,7 +113,7 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** initial clients-state state */
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
-  householdsById: {},
+  navigationPage: 0,
 });
 
 /** the clients reducer function */
@@ -144,15 +132,10 @@ export default function reducer(
         ...state,
         clientsById: action.clientsById,
       });
-    case HOUSEHOLDS_FETCHED:
+    case SET_NAVIGATION_PAGE:
       return SeamlessImmutable({
         ...state,
-        householdsById: { ...state.householdsById, ...action.householdsById },
-      });
-    case REMOVE_HOUSEHOLDS:
-      return SeamlessImmutable({
-        ...state,
-        householdsById: action.householdsById,
+        navigationPage: action.navigationPage,
       });
     default:
       return state;
@@ -193,26 +176,10 @@ export function getClientById(state: Partial<Store>, id: string): Client | null 
   return get(getClientsById(state), id) || null;
 }
 
-/** returns all households in the store as values whose keys are their respective ids
+/** returns the current navigation page
  * @param {Partial<Store>} state - the redux store
- * @return { { [key: string] : Household} } - households object as values, respective ids as keys
+ * @return { number } - navigation page value from the store
  */
-export function getHouseholdsById(state: Partial<Store>): { [key: string]: Household } {
-  return (state as any)[reducerName].householdsById;
-}
-
-/** gets households as an array of households objects
- * @param {Partial<Store>} state - the redux store
- * @return {Household[]} - an array of households objs
- */
-export function getHouseholdsArray(state: Partial<Store>): Household[] {
-  return values(getHouseholdsById(state));
-}
-
-/** get a specific household by their id
- * @param {Partial<Store>} state - the redux store
- * @return {Household | null} a household obj if the id is found else null
- */
-export function getHouseholdById(state: Partial<Store>, id: string): Household | null {
-  return get(getHouseholdsById(state), id) || null;
+export function getNavigationPage(state: Partial<Store>): number {
+  return (state as any)[reducerName].navigationPage;
 }
