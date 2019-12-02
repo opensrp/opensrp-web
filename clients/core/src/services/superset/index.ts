@@ -64,20 +64,19 @@ const supersetFetch = async (
 
   if (isSupersetAuthorized === true) {
     return superset.api.doFetch(config, middleware).then(callback);
-  } else {
-    return superset.authZ(config, (result: { [key: string]: any }) => {
-      return completeAuthZ(result)
-        .then(() => {
-          const isSupersetAuthorizedYet = isAuthorized(store.getState());
-          if (isSupersetAuthorizedYet === true) {
-            return superset.api.doFetch(config, middleware).then(callback);
-          }
-        })
-        .catch(() => {
-          return false;
-        });
-    });
   }
+  return superset.authZ(config, (result: { [key: string]: any }) => {
+    return completeAuthZ(result)
+      .then(() => {
+        const isSupersetAuthorizedYet = isAuthorized(store.getState());
+        if (isSupersetAuthorizedYet === true) {
+          return superset.api.doFetch(config, middleware).then(callback);
+        }
+      })
+      .catch(() => {
+        return false;
+      });
+  });
 };
 
 export default supersetFetch;
