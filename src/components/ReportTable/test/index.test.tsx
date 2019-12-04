@@ -4,6 +4,7 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReportTable, { convertToStringArray, getEventsPregnancyArray } from '..';
+import { MOTHERS_WEIGHT, WEIGHT } from '../../../constants';
 import { SmsData } from '../../../store/ducks/sms_events';
 import {
   convertToStringArrayInput,
@@ -58,8 +59,8 @@ describe('ReportTable.getWeightsArray() ', () => {
   it('Must return the correct value given certain input and ReportTable having certain props', () => {
     const wrapper = mount(<ReportTable singlePatientEvents={singlePatientEvents as SmsData[]} />);
     const instance: ReportTable = wrapper.instance() as ReportTable;
-    expect(instance.getWeightsArray(getWeightsArrayInput1)).toEqual(getWeightsArrayOutput1);
-    expect(instance.getWeightsArray(getWeightsArrayInput2)).toEqual(getWeightsArrayOutput2);
+    expect(instance.getWeightsArray(getWeightsArrayInput1, WEIGHT)).toEqual(getWeightsArrayOutput1);
+    expect(instance.getWeightsArray(getWeightsArrayInput2, WEIGHT)).toEqual(getWeightsArrayOutput2);
   });
 });
 
@@ -72,10 +73,10 @@ describe('convertToStringArray() ', () => {
 
 describe('getEventsPregnancyArray()', () => {
   it('must return the correct value for the provided input', () => {
-    expect(getEventsPregnancyArray(getEventsPregnancyArrayInput1 as SmsData[])).toEqual(
+    expect(getEventsPregnancyArray(getEventsPregnancyArrayInput1 as SmsData[], false)).toEqual(
       getEventsPregnancyArrayOutput1
     );
-    expect(getEventsPregnancyArray(getEventsPregnancyArrayInput2)).toEqual(
+    expect(getEventsPregnancyArray(getEventsPregnancyArrayInput2 as SmsData[], false)).toEqual(
       getEventsPregnancyArrayOutput2
     );
   });

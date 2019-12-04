@@ -210,7 +210,10 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+    nutrition_status: '',
+    growth_status: '',
+    feeding_category: '',
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Pregnancy Registration',
@@ -275,7 +278,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -340,7 +343,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -405,7 +408,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Delivery Planning',
@@ -469,7 +472,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Social Determinants',
@@ -534,7 +537,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -599,7 +602,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -664,7 +667,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Birth Report',
@@ -729,7 +732,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Birth Report',
@@ -794,7 +797,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -858,7 +861,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -922,7 +925,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -986,7 +989,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -1051,7 +1054,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -1116,7 +1119,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -1181,7 +1184,7 @@ export const getEventsPregnancyArrayInput1 = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
 ];
 
 export const getEventsPregnancyArrayOutput1 = [
@@ -1250,7 +1253,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: ' NULL',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-25',
       sms_type: 'Birth Report',
@@ -1315,7 +1318,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-25',
       sms_type: 'Birth Report',
@@ -1380,7 +1383,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-27',
       sms_type: 'Birth Report',
@@ -1445,7 +1448,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-27',
       sms_type: 'Birth Report',
@@ -1510,7 +1513,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-27',
       sms_type: 'Birth Report',
@@ -1575,7 +1578,7 @@ export const getEventsPregnancyArrayOutput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
   ],
 ];
 
@@ -1643,7 +1646,7 @@ export const getEventsPregnancyArrayInput2 = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
 ];
 export const getEventsPregnancyArrayOutput2 = [];
 
@@ -1711,7 +1714,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Pregnancy Registration',
@@ -1776,7 +1779,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -1841,7 +1844,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -1906,7 +1909,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Delivery Planning',
@@ -1970,7 +1973,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Social Determinants',
@@ -2035,7 +2038,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -2100,7 +2103,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'ANC Visit',
@@ -2165,7 +2168,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Birth Report',
@@ -2230,7 +2233,7 @@ export const reportTableProps = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-25',
     sms_type: 'Birth Report',
@@ -2295,7 +2298,7 @@ export const reportTableProps = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -2359,7 +2362,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -2423,7 +2426,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-26',
     sms_type: 'Red Alert Report',
@@ -2487,7 +2490,7 @@ export const reportTableProps = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -2552,7 +2555,7 @@ export const reportTableProps = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -2617,7 +2620,7 @@ export const reportTableProps = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -2682,38 +2685,38 @@ export const reportTableProps = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
 ];
 export const removeDuplicateWeightsInput1 = [
   {
     weight: 78,
     month: 8,
-  },
+  } as unknown,
   {
     weight: 2,
     month: 8,
-  },
+  } as unknown,
 ];
 
 export const removeDuplicateWeightsOutput1 = [
   {
     month: 8,
     weight: 40,
-  },
+  } as unknown,
 ];
 
 export const removeDuplicateWeightsInput2 = [
   {
     weight: 78,
     month: 8,
-  },
+  } as unknown,
 ];
 
 export const emoveDuplicateWeightsOutput2 = [
   {
     month: 8,
     weight: 78,
-  },
+  } as unknown,
 ];
 
 export const singlePatientEvents = [
@@ -2780,7 +2783,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Pregnancy Registration',
@@ -2845,7 +2848,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Social Determinants',
@@ -2910,7 +2913,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'ANC Visit',
@@ -2975,7 +2978,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Home ANC Visit',
@@ -3040,7 +3043,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Delivery Planning',
@@ -3104,7 +3107,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Birth Report',
@@ -3169,7 +3172,7 @@ export const singlePatientEvents = [
     child_risk_level: 'red_alert',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Red Alert Report',
@@ -3233,7 +3236,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Response Report',
@@ -3297,7 +3300,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Nutrition Registration',
@@ -3362,7 +3365,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Newborn Report',
@@ -3427,7 +3430,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Newborn Report',
@@ -3492,7 +3495,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Death Report',
@@ -3556,7 +3559,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
   {
     EventDate: '2019-09-27',
     sms_type: 'Death Report',
@@ -3620,7 +3623,7 @@ export const singlePatientEvents = [
     child_risk_level: ' NULL',
     health_worker_contact: 'telegram:782996367',
     team: ' NULL',
-  },
+  } as unknown,
 ];
 
 export const getPregnancyStringsArrayInput = [
@@ -3689,7 +3692,7 @@ export const getPregnancyStringsArrayInput = [
       child_risk_level: ' NULL',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-27',
       sms_type: 'Birth Report',
@@ -3754,7 +3757,7 @@ export const getPregnancyStringsArrayInput = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
   ],
 ];
 
@@ -3841,7 +3844,7 @@ export const getWeightsArrayInput1 = [
       child_risk_level: ' NULL',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
     {
       EventDate: '2019-09-27',
       sms_type: 'Birth Report',
@@ -3906,7 +3909,7 @@ export const getWeightsArrayInput1 = [
       child_risk_level: 'red_alert',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
   ],
 ];
 
@@ -3976,7 +3979,7 @@ export const getWeightsArrayInput2 = [
       child_risk_level: ' NULL',
       health_worker_contact: 'telegram:782996367',
       team: ' NULL',
-    },
+    } as unknown,
   ],
 ];
 
@@ -3986,12 +3989,12 @@ export const getWeightsArrayOutput1 = [
       weight: 78,
       month: 8,
       year: 2019,
-    },
+    } as unknown,
     {
       weight: 2,
       month: 8,
       year: 2019,
-    },
+    } as unknown,
   ],
 ];
 
@@ -4001,6 +4004,6 @@ export const getWeightsArrayOutput2 = [
       weight: 78,
       month: 8,
       year: 2019,
-    },
+    } as unknown,
   ],
 ];
