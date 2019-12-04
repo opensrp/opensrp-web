@@ -129,14 +129,4 @@ describe('reducers/clients', () => {
     numberOfRecords = getTotalRecords(store.getState());
     expect(numberOfRecords).toEqual(0);
   });
-
-  it('sets navigation page', () => {
-    store.dispatch(setNavigationPage(4));
-    let currentPageNumber = getNavigationPage(store.getState());
-    expect(currentPageNumber).toEqual(4);
-
-    store.dispatch(setNavigationPage(2));
-    currentPageNumber = getNavigationPage(store.getState());
-    expect(currentPageNumber).toEqual(2);
-  });
 });

@@ -37,8 +37,6 @@ export interface Client {
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
-/** SET NAVIGATION PAGE */
-export const SET_NAVIGATION_PAGE = 'opensrp/reducer/clients/SET_NAVIGATION_PAGE';
 
 /** interface for authorize action */
 export interface FetchClientsAction extends AnyAction {
@@ -52,18 +50,8 @@ interface RemoveClientsAction extends AnyAction {
   type: typeof REMOVE_CLIENTS;
 }
 
-/** interface for setNavigationPageAction */
-interface SetNavigationPageAction extends AnyAction {
-  navigationPage: number;
-  type: typeof SET_NAVIGATION_PAGE;
-}
-
 /** Create type for clients reducer actions */
-export type ClientsActionTypes =
-  | FetchClientsAction
-  | RemoveClientsAction
-  | SetNavigationPageAction
-  | AnyAction;
+export type ClientsActionTypes = FetchClientsAction | RemoveClientsAction | AnyAction;
 
 // action Creators
 
@@ -85,12 +73,6 @@ export const removeClients = (clientsList: Client[] = []): RemoveClientsAction =
   type: REMOVE_CLIENTS,
 });
 
-/** setNavigationPage action */
-export const setNavigationPage = (requestedPage: number): SetNavigationPageAction => ({
-  navigationPage: requestedPage,
-  type: SET_NAVIGATION_PAGE,
-});
-
 // actions
 
 /** removeClientsAction action */
@@ -104,7 +86,6 @@ export const removeClientsAction = {
 /** interface for clients state in redux store */
 interface ClientState {
   clientsById: { [key: string]: Client };
-  navigationPage: number;
 }
 
 /** Create an immutable clients state */
@@ -113,7 +94,6 @@ export type ImmutableClientsState = ClientState & SeamlessImmutable.ImmutableObj
 /** initial clients-state state */
 const initialState: ImmutableClientsState = SeamlessImmutable({
   clientsById: {},
-  navigationPage: 0,
 });
 
 /** the clients reducer function */
@@ -131,11 +111,6 @@ export default function reducer(
       return SeamlessImmutable({
         ...state,
         clientsById: action.clientsById,
-      });
-    case SET_NAVIGATION_PAGE:
-      return SeamlessImmutable({
-        ...state,
-        navigationPage: action.navigationPage,
       });
     default:
       return state;
@@ -174,12 +149,4 @@ export function getClientsArray(state: Partial<Store>): Client[] {
  */
 export function getClientById(state: Partial<Store>, id: string): Client | null {
   return get(getClientsById(state), id) || null;
-}
-
-/** returns the current navigation page
- * @param {Partial<Store>} state - the redux store
- * @return { number } - navigation page value from the store
- */
-export function getNavigationPage(state: Partial<Store>): number {
-  return (state as any)[reducerName].navigationPage;
 }
