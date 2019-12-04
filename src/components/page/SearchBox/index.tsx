@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { Input, InputGroup } from 'reactstrap';
-import './SearchBox.css';
+import './index.css';
 
 /** props interface for SearchBox */
 export interface SearchBoxProps {

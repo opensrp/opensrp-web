@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
-import SearchBox, { SearchBoxProps } from '../SearchBox';
+import SearchBox, { SearchBoxProps } from '..';
 
 const callBackMock = jest.fn();
 const props: SearchBoxProps = {
