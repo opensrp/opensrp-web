@@ -14,6 +14,10 @@ export interface Location {
   parent_id: string;
 }
 
+/**
+ * Object representing the user location returned from
+ * the OpenSRP authentication endpoint
+ */
 export interface UserLocation {
   provider_name: string;
   provider_contact: string;
@@ -210,12 +214,16 @@ export function getUserLocations(state: Partial<Store>): UserLocation[] {
 }
 
 /**Returns the user UUID that was obtained from OpenSRP
+ * @param {Partial<store>} state - the redux store
+ * @return {string} the user's UUID obtained from opensrp
  */
 export function getUserId(state: Partial<Store>): string {
   return (state as any)[reducerName].userId;
 }
 
 /**Returns the locationId of user
+ * @param {Partial<store>} state - the redux store
+ * @return {string} the user location id
  */
 export function getUserLocationId(state: Partial<Store>): string {
   return (state as any)[reducerName].userLocationId;
@@ -234,6 +242,9 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
 }
 
 /**Returns true if user locationId has been fetched.
+ * @param {Partial<store>} state - the redux store
+ * @return {boolean} - indicates if
+ * userLocationId has been fectched or not.
  */
 export function userLocationIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationIdFetched;
@@ -241,6 +252,9 @@ export function userLocationIdFetched(state: Partial<Store>): boolean {
 
 /** Returns true if user location details has been fetched from superset
  * and false otherwise
+ * @param {Partial<store>} state - the redux store
+ * @return {boolean} indicates if user locations have been fetched
+ * or not
  */
 export function userLocationDataFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userLocationsFetched;
@@ -249,6 +263,7 @@ export function userLocationDataFetched(state: Partial<Store>): boolean {
 /**
  * returns true if userIdFetched is set to true in the store and false otherwise.
  * @param state the store state
+ * @return {boolean} indicates if the user UUID obtained from OpenSRP has been fetched.
  */
 export function userIdFetched(state: Partial<Store>): boolean {
   return (state as any)[reducerName].userIdFetched;

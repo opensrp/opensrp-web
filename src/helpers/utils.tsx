@@ -141,6 +141,8 @@ export interface FilterFunctionAndLocationLevel {
  * @param districts - a list of locations of level district
  * @param communes - a list of locations of level commune
  * @param villages - a list of locations of level village
+ * @return {FilterFunctionAndLocationLevel} an object that contains the users
+ * location level and a filter function based on that location level.
  */
 export function getFilterFunctionAndLocationLevel(
   userLocationId: string,

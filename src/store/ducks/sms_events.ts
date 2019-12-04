@@ -1,6 +1,6 @@
 import { values } from 'lodash';
 import { AnyAction, Store } from 'redux';
-import { SMS_FILTER_FUNCTION } from '../../constants';
+import { EVENT_ID, SMS_FILTER_FUNCTION } from '../../constants';
 import { groupBy } from '../../helpers/utils';
 
 /** The reducer name */
@@ -85,7 +85,7 @@ export type SmsActionTypes =
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
   return {
-    smsData: groupBy(smsDataList, 'event_id'),
+    smsData: groupBy(smsDataList, EVENT_ID),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
 };
