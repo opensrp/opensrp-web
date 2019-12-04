@@ -75,7 +75,7 @@ describe('WeightAndHeightChart', () => {
     const argument1 = (Highcharts.chart as jest.MockedFunction<any>).mock.calls[0][0];
     const argument2 = (Highcharts.chart as jest.MockedFunction<any>).mock.calls[0][1];
     expect(argument1).toEqual('wrapper-id');
-    delete argument2.tooltip.formatter;
+    (chartArgument.tooltip as any).formatter = argument2.tooltip.formatter;
     expect(argument2).toEqual(chartArgument);
     wrapper.unmount();
   });
