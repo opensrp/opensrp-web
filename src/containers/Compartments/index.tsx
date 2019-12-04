@@ -9,7 +9,6 @@ import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
 import {
   LOCATION_SLICES,
-  OPENSRP_API_BASE_URL,
   SUPERSET_SMS_DATA_SLICE,
   USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
@@ -100,10 +99,6 @@ const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
-  user: {
-    name: '',
-    username: ''
-  },
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
@@ -119,6 +114,10 @@ const defaultCompartmentProps: Props = {
   removeFilterArgs,
   session: {},
   smsData: [],
+  user: {
+    name: '',
+    username: '',
+  },
   userIdFetched: false,
   userLocationData: [],
   userUUID: '',
@@ -339,17 +338,6 @@ class Compartments extends React.Component<Props, State> {
       return smsData.client_type === EC_WOMAN;
     });
 
-    const childrenUnder2 = filteredData.filter((smsData: SmsData) => {
-      return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 2;
-    });
-
-    const childrenUnder5 = filteredData.filter((smsData: SmsData) => {
-      return (
-        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 5 &&
-        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() > 2
-      );
-    });
-
     const dataCircleCardWomanData =
       this.props.module === NBC_AND_PNC
         ? {
@@ -565,7 +553,6 @@ class Compartments extends React.Component<Props, State> {
 
 const mapStateToprops = (state: Partial<Store>) => {
   return {
-    user: getUser(state),
     communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
@@ -574,6 +561,7 @@ const mapStateToprops = (state: Partial<Store>) => {
     isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
     smsData: getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[]),
+    user: getUser(state),
     userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),

@@ -1,4 +1,4 @@
-import React, { Component, ReactNodeArray } from 'react';
+import React, { Component } from 'react';
 import 'react-table/react-table.css';
 import { Card, CardBody, CardTitle, Container, Row, Table } from 'reactstrap';
 import './index.css';
@@ -19,6 +19,7 @@ import {
   HIERARCHICAL_DATA_URL,
   HIGH,
   HIGH_RISK,
+  INAPPROPRIATELY_FED,
   LOW,
   LOW_RISK,
   NBC_AND_PNC_CHILD,
@@ -28,18 +29,17 @@ import {
   NO_RISK,
   NO_RISK_LOWERCASE,
   NUTRITION,
+  NUTRITION_COMPARTMENTS_URL,
+  OVERWEIGHT,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
+  SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
+  STUNTED,
   TOTAL,
   UP,
   VILLAGE,
-  OVERWEIGHT,
-  SEVERE_WASTING,
-  STUNTED,
-  INAPPROPRIATELY_FED,
-  NUTRITION_COMPARTMENTS_URL,
 } from '../../constants';
 import { locationDataIsAvailable } from '../../helpers/utils';
 import { getModuleLink } from '../../helpers/utils';
@@ -56,8 +56,6 @@ import smsReducer, {
   reducerName as smsReducerName,
 } from '../../store/ducks/sms_events';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
-import { mount } from 'enzyme';
-import { Field } from 'formik';
 
 reducerRegistry.register(reducerName, locationsReducer);
 reducerRegistry.register(smsReducerName, smsReducer);
@@ -84,7 +82,15 @@ interface Props {
   node_id?: string;
   direction: string; // this can be down or up
   from_level?: string;
-  risk_highligter?: HIGH | LOW | NO | STUNTED | INAPPROPRIATELY_FED | OVERWEIGHT | SEVERE_WASTING | '';
+  risk_highligter?:
+    | HIGH
+    | LOW
+    | NO
+    | STUNTED
+    | INAPPROPRIATELY_FED
+    | OVERWEIGHT
+    | SEVERE_WASTING
+    | '';
   title: string;
   fetchLocationsActionCreator: typeof fetchLocations;
   provinces: Location[];
@@ -123,7 +129,12 @@ interface Totals {
   wasting?: number;
 }
 
-function getVillageRiskTotals(location: Location, smsData: SmsData[], module: string, risk_highlighter: any): Totals {
+function getVillageRiskTotals(
+  location: Location,
+  smsData: SmsData[],
+  module: string,
+  risk_highlighter: any
+): Totals {
   const nutrition_status_constants = ['severe wasting', 'overweight'];
   const growth_status_constants = ['stunted'];
   const feeding_category_constants = ['inappropriately fed'];
@@ -167,20 +178,20 @@ function getVillageRiskTotals(location: Location, smsData: SmsData[], module: st
       case STUNTED:
         return {
           ...accumulator,
-          stunting: (accumulator as any).stunting + 1
+          stunting: (accumulator as any).stunting + 1,
         };
       case INAPPROPRIATELY_FED:
         return {
           ...accumulator,
-          inappropriateFeeding: (accumulator as any).inappropriateFeeding + 1
+          inappropriateFeeding: (accumulator as any).inappropriateFeeding + 1,
         };
       default:
-        return (accumulator as any);
+        return accumulator as any;
     }
   };
   let totalsMap: Totals;
   if (module !== NUTRITION) {
-    totalsMap = { 
+    totalsMap = {
       high_risk: 0,
       low_risk: 0,
       no_risk: 0,
@@ -191,7 +202,7 @@ function getVillageRiskTotals(location: Location, smsData: SmsData[], module: st
       wasting: 0,
       stunting: 0,
       inappropriateFeeding: 0,
-    }
+    };
   }
   return smsData
     .filter((dataItem: SmsData) => dataItem.location_id === location.location_id)
@@ -209,7 +220,8 @@ function getRiskTotals(locations: LocationWithData[], module: string) {
       return {
         overweight: (accumulator as any).overweight + location.overweight,
         stunting: (accumulator as any).stunting + location.stunting,
-        inappropriateFeeding: (accumulator as any).inappropriateFeeding + location.inappropriateFeeding,
+        inappropriateFeeding:
+          (accumulator as any).inappropriateFeeding + location.inappropriateFeeding,
         wasting: (accumulator as any).wasting + location.wasting,
       };
     }
@@ -220,14 +232,14 @@ function getRiskTotals(locations: LocationWithData[], module: string) {
       high_risk: 0,
       low_risk: 0,
       no_risk: 0,
-    }
+    };
   } else {
     totalsMap = {
       overweight: 0,
       wasting: 0,
       stunting: 0,
       inappropriateFeeding: 0,
-    }
+    };
   }
   return locations.reduce(reducer, totalsMap);
 }
@@ -235,10 +247,12 @@ function getTotal(riskTotals: Totals, module: string) {
   if (module !== NUTRITION) {
     return (riskTotals as any).high_risk + riskTotals.low_risk + riskTotals.no_risk;
   } else {
-    return (riskTotals as any).overweight
-      + (riskTotals as any).stunting
-      + (riskTotals as any).inappropriateFeeding
-      + (riskTotals as any).wasting
+    return (
+      (riskTotals as any).overweight +
+      (riskTotals as any).stunting +
+      (riskTotals as any).inappropriateFeeding +
+      (riskTotals as any).wasting
+    );
   }
 }
 function addDataToLocations(
@@ -247,7 +261,7 @@ function addDataToLocations(
   },
   smsData: SmsData[],
   module: string,
-  risk_highlighter: any,
+  risk_highlighter: any
 ): { [key: string]: LocationWithData[] } {
   const villagesWithData: LocationWithData[] = [];
   for (const village in locations.villages) {
@@ -256,7 +270,7 @@ function addDataToLocations(
         locations.villages[village],
         smsData,
         module,
-        risk_highlighter,
+        risk_highlighter
       );
       const totalRisk = getTotal(villageRiskTotals, module);
       if (module !== NUTRITION) {
@@ -389,7 +403,7 @@ class HierarchichalDataTable extends Component<Props, State> {
       },
       nextProps.smsData,
       nextProps.module,
-      nextProps.risk_highligter,
+      nextProps.risk_highligter
     );
     let dataToShow: LocationWithData[] = [];
     if ((nextProps.direction === UP && nextProps.current_level === 0) || !nextProps.node_id) {
@@ -533,21 +547,24 @@ class HierarchichalDataTable extends Component<Props, State> {
               <CardBody>
                 <Table striped={true} borderless={true}>
                   <thead id="header">
-                    {this.props.module !== NUTRITION
-                      ? (<tr>
+                    {this.props.module !== NUTRITION ? (
+                      <tr>
                         <th className="default-width" />
                         <th className="default-width">{HIGH_RISK}</th>
                         <th className="default-width">{LOW_RISK}</th>
                         <th className="default-width">{NO_RISK}</th>
                         <th className="default-width">{TOTAL}</th>
-                      </tr>) : (<tr>
+                      </tr>
+                    ) : (
+                      <tr>
                         <th className="default-width" />
                         <th className="default-width">{STUNTED}</th>
                         <th className="default-width">{SEVERE_WASTING}</th>
                         <th className="default-width">{OVERWEIGHT}</th>
                         <th className="default-width">{INAPPROPRIATELY_FED}</th>
                         <th className="default-width">{TOTAL}</th>
-                      </tr>)}
+                      </tr>
+                    )}
                   </thead>
                   <tbody id="body">
                     {this.state.data.length ? (
@@ -617,28 +634,36 @@ class HierarchichalDataTable extends Component<Props, State> {
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === STUNTED ? this.props.risk_highligter.split(' ').join('-') : ''
+                                this.props.risk_highligter === STUNTED
+                                  ? this.props.risk_highligter.split(' ').join('-')
+                                  : ''
                               }`}
                             >
                               {element.stunting}
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === SEVERE_WASTING ? this.props.risk_highligter.split(' ').join('-') : ''
+                                this.props.risk_highligter === SEVERE_WASTING
+                                  ? this.props.risk_highligter.split(' ').join('-')
+                                  : ''
                               }`}
                             >
                               {element.wasting}
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === OVERWEIGHT ? this.props.risk_highligter.split(' ').join('-') : ''
+                                this.props.risk_highligter === OVERWEIGHT
+                                  ? this.props.risk_highligter.split(' ').join('-')
+                                  : ''
                               }`}
                             >
                               {element.overweight}
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === INAPPROPRIATELY_FED ? this.props.risk_highligter.split(' ').join('-') : ''
+                                this.props.risk_highligter === INAPPROPRIATELY_FED
+                                  ? this.props.risk_highligter.split(' ').join('-')
+                                  : ''
                               }`}
                             >
                               {element.inappropriateFeeding}
@@ -683,41 +708,49 @@ class HierarchichalDataTable extends Component<Props, State> {
                           <td className="default-width">{element.total}</td>
                         </tr>
                       ) : (
-                          <tr key={'total'}>
-                            <td className="default-width" id="total">
-                              Total({this.getLevelString()})
+                        <tr key={'total'}>
+                          <td className="default-width" id="total">
+                            Total({this.getLevelString()})
                           </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === STUNTED ? this.props.risk_highligter.split(' ').join('-') : ''
-                                }`}
-                            >
-                              {element.stunting}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === SEVERE_WASTING ? this.props.risk_highligter.split(' ').join('-') : ''
-                                }`}
-                            >
-                              {element.wasting}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === OVERWEIGHT ? this.props.risk_highligter.split(' ').join('-') : ''
-                                }`}
-                            >
-                              {element.overweight}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === INAPPROPRIATELY_FED ? this.props.risk_highligter.split(' ').join('-') : ''
-                                }`}
-                            >
-                              {element.inappropriateFeeding}
-                            </td>
-                            <td className="default-width">{element.total}</td>
-                          </tr>
-                      )
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === STUNTED
+                                ? this.props.risk_highligter.split(' ').join('-')
+                                : ''
+                            }`}
+                          >
+                            {element.stunting}
+                          </td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === SEVERE_WASTING
+                                ? this.props.risk_highligter.split(' ').join('-')
+                                : ''
+                            }`}
+                          >
+                            {element.wasting}
+                          </td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === OVERWEIGHT
+                                ? this.props.risk_highligter.split(' ').join('-')
+                                : ''
+                            }`}
+                          >
+                            {element.overweight}
+                          </td>
+                          <td
+                            className={`default-width ${
+                              this.props.risk_highligter === INAPPROPRIATELY_FED
+                                ? this.props.risk_highligter.split(' ').join('-')
+                                : ''
+                            }`}
+                          >
+                            {element.inappropriateFeeding}
+                          </td>
+                          <td className="default-width">{element.total}</td>
+                        </tr>
+                      );
                     })()}
                   </tbody>
                 </Table>
@@ -907,8 +940,8 @@ const getTotals = (dataToShow: LocationWithData[], module: string) => {
       high_risk: 0,
       low_risk: 0,
       no_risk: 0,
-      total: 0
-    }
+      total: 0,
+    };
   } else {
     totalsMap = {
       overweight: 0,
@@ -916,7 +949,7 @@ const getTotals = (dataToShow: LocationWithData[], module: string) => {
       stunting: 0,
       inappropriateFeeding: 0,
       total: 0,
-    }
+    };
   }
   return dataToShow.reduce(reducer, totalsMap);
 };
