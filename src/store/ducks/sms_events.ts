@@ -1,9 +1,6 @@
 import { values } from 'lodash';
 import { AnyAction, Store } from 'redux';
-<<<<<<< HEAD
 import { SMS_FILTER_FUNCTION } from '../../constants';
-=======
->>>>>>> add groupBy util function to group data by particular field value
 import { groupBy } from '../../helpers/utils';
 
 /** The reducer name */

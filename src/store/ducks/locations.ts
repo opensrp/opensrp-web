@@ -140,9 +140,6 @@ const initialState: LocationsState = {
   userLocationIdFetched: false,
   userLocations: {},
   userLocationsFetched: false,
-  userId: '',
-  userLocationId: '',
-  userLocationIdFetched: false,
 };
 
 /**
@@ -234,12 +231,6 @@ export function getLocationsOfLevel(state: Partial<Store>, level: string): Locat
   return values((state as any)[reducerName].locations).filter((location: Location) => {
     return location.level === level;
   });
-}
-
-/**Returns true if user locationId has been fetched.
- */
-export function userLocationIdFetched(state: Partial<Store>): boolean {
-  return (state as any)[reducerName].userLocationIdFetched;
 }
 
 /**Returns true if user locationId has been fetched.
