@@ -335,6 +335,7 @@ Object {
 
 exports[`Compartments must render correctly for pregnancy module: compartment title 1`] = `
 <h2
+  className="top_title"
   id="compartment_title"
 >
   Compartments
