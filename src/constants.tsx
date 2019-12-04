@@ -268,6 +268,14 @@ export type CHILD_WEIGHT_VS_MONTHS = typeof CHILD_WEIGHT_VS_MONTHS;
 export type SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
 
 // sms events fields
+export const DATE_OF_BIRTH = 'date_of_birth';
+export type DATE_OF_BIRTH = typeof DATE_OF_BIRTH;
+export const NUTRITION_STATUS = 'nutrition_status';
+export type NUTRITION_STATUS = typeof NUTRITION_STATUS;
+export const GROWTH_STATUS = 'growth_status';
+export type GROWTH_STATUS = typeof GROWTH_STATUS;
+export const FEEDING_CATEGORY = 'feeding_category';
+export type FEEDING_CATEGORY = typeof FEEDING_CATEGORY;
 export const AGE = 'age';
 export type AGE = typeof AGE;
 export const EVENT_DATE = 'EventDate';
