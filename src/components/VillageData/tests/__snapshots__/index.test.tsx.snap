@@ -364,6 +364,7 @@ exports[`components/VillageData/nbcAndPncChildMapFunction must return the correc
     className="default-width"
   >
     8
+    20
   </td>
   <td
     className="default-width"
@@ -404,7 +405,11 @@ exports[`components/VillageData/nbcAndPncMotherMapFunction must return the corre
   <td
     className="default-width"
   >
+<<<<<<< HEAD
     8
+=======
+    20
+>>>>>>> Update snapshot
   </td>
   <td
     className="default-width"
