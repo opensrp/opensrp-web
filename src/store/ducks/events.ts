@@ -83,7 +83,7 @@ export default function reducer(
 
 // Selectors
 
-/** returns the events of the event in the store as array
+/** returns an array of events
  * @param {Partial<Store>} state - the redux store
  * @return { Event } - events array
  */
@@ -91,7 +91,7 @@ export function getEventsArray(state: Partial<Store>): Event[] {
   return values((state as any)[reducerName].eventsById);
 }
 
-/** returns the events of the event in the store by their ids
+/** returns the events with their ids
  * @param {Partial<Store>} state - the redux store
  * @return { Event } - event objects as values, respective ids as keys
  */
