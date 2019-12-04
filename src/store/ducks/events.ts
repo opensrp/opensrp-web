@@ -20,13 +20,14 @@ export interface Event {
   formSubmissionId: string;
   providerId: string;
   duration: number;
-  obs: { [key: string]: string[] | string | null };
+  obs: [{ [key: string]: string[] | string | null }];
   entityType: string;
   version: number;
   teamId: string;
   team: string;
-  id: string;
+  _id: string;
   _rev: string;
+  isSendToOpenMRS: string;
 }
 
 /** EVENTS_FETCHED action type */
