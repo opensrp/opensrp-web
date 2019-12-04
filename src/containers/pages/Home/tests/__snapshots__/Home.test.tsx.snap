@@ -43,7 +43,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild1"
-            src="womanchild1.png"
+            src="pregnant-woman.svg"
           />
           <div
             className="home-sub-containers"
@@ -92,7 +92,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild2"
-            src="womanchild2.png"
+            src="carrying-baby.svg"
           />
           <div
             className="home-sub-containers"
@@ -141,7 +141,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild3"
-            src="womanchild3.png"
+            src="baby-feeding.svg"
           />
           <div
             className="home-sub-containers"

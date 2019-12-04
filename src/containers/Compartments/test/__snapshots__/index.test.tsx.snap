@@ -298,6 +298,7 @@ Array [
 
 exports[`Compartments must render correctly: compartment title 1`] = `
 <h2
+  className="top_title"
   id="compartment_title"
 >
   Compartments

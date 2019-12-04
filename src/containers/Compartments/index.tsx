@@ -387,7 +387,9 @@ class Compartments extends React.Component<Props, State> {
     return (
       <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
-          <h2 className="top_title">{COMPARTMENTS}</h2>
+          <h2 className="top_title" id="compartment_title">
+            {COMPARTMENTS}
+          </h2>
         </Row>
         <Row className="breadcrumb-row">
           <p id="breadcrumb">
