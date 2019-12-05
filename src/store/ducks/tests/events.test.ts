@@ -1,5 +1,4 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { values } from 'lodash';
 import store from '../../index';
 import eventReducer, {
   fetchEvents,
