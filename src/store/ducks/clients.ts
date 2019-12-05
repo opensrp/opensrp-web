@@ -127,14 +127,6 @@ export function getClientsById(state: Partial<Store>): { [key: string]: Client }
   return (state as any)[reducerName].clientsById;
 }
 
-/** get clients ids in an array
- * @param {Partial<Store>} state - the redux store
- * @return {string[]} - clients ids as an array of strings
- */
-export function getClientsIdArray(state: Partial<Store>): string[] {
-  return keys(getClientsById(state));
-}
-
 /** gets clients as an array of clients objects
  * @param {Partial<Store>} state - the redux store
  * @return {Client[]} - an array of clients objs
