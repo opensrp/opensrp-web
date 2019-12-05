@@ -88,7 +88,7 @@ export default function reducer(
  * @return { Event } - events array
  */
 export function getEventsArray(state: Partial<Store>): Event[] {
-  return values((state as any)[reducerName].eventsById);
+  return values(getEventsById(state));
 }
 
 /** returns the events with their ids

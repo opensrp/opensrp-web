@@ -349,7 +349,7 @@ export const household3: Household = {
 export const event1: Event = {
   _id: '28d5cf94-15ee-4462-ab56-a83eb4c42f73',
   _rev: 'v1',
-  baseEntityId: '5e8b72c5-0b36-4e46-829f-279d1482c96a',
+  baseEntityId: '6e8b72c5-0b36-4e46-829f-8ujd1482c96a',
   clientApplicationVersion: 2,
   clientDatabaseVersion: 2,
   dateCreated: 358560000000,
@@ -380,6 +380,74 @@ export const event1: Event = {
   version: 1552287303606,
 };
 
+export const event2: Event = {
+  _id: '89asdfk-15ee-4462-ab56-a83eb4c42f73',
+  _rev: 'v1',
+  baseEntityId: '5e8b72c5-0b36-9d7d-829f-279d1482c96a',
+  clientApplicationVersion: 2,
+  clientDatabaseVersion: 3,
+  dateCreated: 358560003645,
+  duration: 12,
+  entityType: 'ec_household',
+  eventDate: 358560009256,
+  eventType: 'Household Registration',
+  formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+  identifiers: {
+    id: '1d-1d1a-4667',
+  },
+  isSendToOpenMRS: 'yes',
+  locationId: '56b112d2-21ce-4818-b603-277bb57f5528',
+  obs: [
+    {
+      fieldCode: '3a49jg-dc8b-8eba-8b1f-998d3905ca',
+      fieldDataType: 'text',
+      fieldType: 'concept',
+      formSubmissionField: 'wind_source',
+      parentCode: '',
+    },
+  ],
+  providerId: '',
+  serverVersion: 1552287303783,
+  team: '',
+  teamId: '',
+  type: 'Event',
+  version: 1552287303606,
+};
+
+export const event3: Event = {
+  _id: '67b2jdfk-15ee-4462-ab56-a83eb4c42f73',
+  _rev: 'v1',
+  baseEntityId: '5e8b72c5-0b36-9d7d-829f-09adfj2c96a',
+  clientApplicationVersion: 2,
+  clientDatabaseVersion: 3,
+  dateCreated: 358560003645,
+  duration: 12,
+  entityType: 'ec_household',
+  eventDate: 358560009256,
+  eventType: 'Household Registration',
+  formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+  identifiers: {
+    id: '2d-9d1a-4667',
+  },
+  isSendToOpenMRS: 'yes',
+  locationId: '56b112d2-21ce-4818-b603-277bb57f5528',
+  obs: [
+    {
+      fieldCode: '3a49jg-dc8b-8eba-8b1f-998d3905ca',
+      fieldDataType: 'dropdown',
+      fieldType: 'concept',
+      formSubmissionField: 'food_source',
+      parentCode: '',
+    },
+  ],
+  providerId: '',
+  serverVersion: 1784287303783,
+  team: '',
+  teamId: '',
+  type: 'Event',
+  version: 29787303842,
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
-export const events: Event[] = [event1];
+export const events: Event[] = [event1, event2, event3];
