@@ -43,7 +43,6 @@ describe('reducers/clients', () => {
   it('selectors work for empty initialState', () => {
     expect(getClientsById(store.getState())).toEqual({});
     expect(getClientsArray(store.getState())).toEqual([]);
-    expect(getClientsIdArray(store.getState())).toEqual([]);
     expect(getClientById(store.getState(), 'some-id')).toBeNull();
     expect(getHouseholdsById(store.getState())).toEqual({});
     expect(getHouseholdsArray(store.getState())).toEqual([]);
@@ -57,9 +56,6 @@ describe('reducers/clients', () => {
       '7d97182f-d623-4553-8651-5a29d2fe3f0b': fixtures.client2,
     });
     expect(getClientsArray(store.getState())).toEqual(values([fixtures.client1, fixtures.client2]));
-    expect(getClientsIdArray(store.getState())).toEqual(
-      [fixtures.client1, fixtures.client2].map(client => client.baseEntityId)
-    );
     expect(getClientById(store.getState(), '71ad460c-bf76-414e-9be1-0d1b2cb1bce8')).toEqual(
       fixtures.client1
     );
