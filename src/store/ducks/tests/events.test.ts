@@ -16,7 +16,7 @@ reducerRegistry.register(eventReducerName, eventReducer);
 describe('reducers/clients', () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    store.dispatch(removeEventsAction);
+    store.dispatch(removeEventsAction());
   });
 
   it('events selectors work for empty initialState', () => {
@@ -46,7 +46,7 @@ describe('reducers/clients', () => {
 
   it('fetch events works correctly on non-empty state', () => {
     store.dispatch(fetchEvents([fixtures.event1]));
-    expect(getEventsArray(store.getState().length)).toEqual(1);
+    expect(getEventsArray(store.getState()).length).toEqual(1);
     store.dispatch(fetchEvents([fixtures.event2]));
     expect(getEventsArray(store.getState()).length).toEqual(2);
   });
@@ -57,7 +57,7 @@ describe('reducers/clients', () => {
       '5e8b72c5-0b36-9d7d-829f-279d1482c96a': fixtures.event2,
       '6e8b72c5-0b36-4e46-829f-8ujd1482c96a': fixtures.event1,
     });
-    store.dispatch(removeEventsAction);
+    store.dispatch(removeEventsAction());
     expect(getEventsArray(store.getState())).toEqual([]);
   });
 });

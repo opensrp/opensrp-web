@@ -32,11 +32,19 @@ export interface Event {
 
 /** EVENTS_FETCHED action type */
 export const EVENTS_FETCHED = 'opensrp/reducer/event/EVENTS_FETCHED';
+/** REMOVE_EVENTS action type */
+export const REMOVE_EVENTS = 'opensrp/reducer/event/REMOVE_EVENTS';
 
 /** interface for fetch events */
 export interface FetchEventsAction extends AnyAction {
   eventsById: { [key: string]: Event };
   type: typeof EVENTS_FETCHED;
+}
+
+/** interface for remove events */
+export interface RemoveEventsAction extends AnyAction {
+  eventsById: { [key: string]: Event };
+  type: typeof REMOVE_EVENTS;
 }
 
 /** Fetch events action creator
@@ -48,8 +56,17 @@ export const fetchEvents = (eventsList: Event[]): FetchEventsAction => ({
   type: EVENTS_FETCHED,
 });
 
+/** Fetch events action creator
+ * @param {Event} events - events to add to store
+ * @return {FetchEventsAction} - an action to add events to redux store
+ */
+export const removeEventsAction = (): RemoveEventsAction => ({
+  eventsById: {},
+  type: REMOVE_EVENTS,
+});
+
 /** Create type for event reducer actions */
-export type EventActionTypes = FetchEventsAction | AnyAction;
+export type EventActionTypes = FetchEventsAction | RemoveEventsAction | AnyAction;
 
 /** interface for event state in redux store */
 interface EventState {
@@ -71,6 +88,11 @@ export default function reducer(
 ): ImmutableEventState {
   switch (action.type) {
     case EVENTS_FETCHED:
+      return SeamlessImmutable({
+        ...state,
+        eventsById: { ...state.eventsById, ...action.eventsById },
+      });
+    case REMOVE_EVENTS:
       return SeamlessImmutable({
         ...state,
         eventsById: action.eventsById,
