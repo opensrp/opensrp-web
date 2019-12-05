@@ -14,12 +14,18 @@ export interface SearchBoxState {
   searchText: string;
 }
 
+const searchBoxdefaultProps: SearchBoxProps = {
+  placeholder: 'Search',
+  searchCallBack: searchText => searchText,
+};
+
 /** default state for searchBox */
 const defaultSearchBoxState = {
   searchText: '',
 };
 
 class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
+  public static defaultProps: SearchBoxProps = searchBoxdefaultProps;
   constructor(props: SearchBoxProps) {
     super(props);
     this.state = defaultSearchBoxState;
@@ -32,7 +38,7 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
             <FontAwesomeIcon icon={['fas', 'search']} />
           </span>
           <Input
-            placeholder={this.props.placeholder || 'Search'}
+            placeholder={this.props.placeholder}
             className="search-bar-input"
             onChange={this.handleChange}
             onKeyPress={this.search}
@@ -41,11 +47,12 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
       </div>
     );
   }
-
+  /** change the searchText on change */
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    return this.setState({ searchText: event.target.value });
+    this.setState({ searchText: event.target.value });
   };
 
+  /** invoke the callback function to lifting up the state */
   private search = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { searchCallBack } = this.props;
     const { searchText } = this.state;
