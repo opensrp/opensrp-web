@@ -20,7 +20,7 @@ export interface Event {
   formSubmissionId: string;
   providerId: string;
   duration: number;
-  obs: [{ [key: string]: string[] | string | null }];
+  obs: Array<{ [key: string]: string[] | string | null }>;
   entityType: string;
   version: number;
   teamId: string;
