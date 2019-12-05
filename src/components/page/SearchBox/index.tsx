@@ -24,6 +24,7 @@ const defaultSearchBoxState = {
   searchText: '',
 };
 
+/** SearchBox component */
 class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
   public static defaultProps: SearchBoxProps = searchBoxdefaultProps;
   constructor(props: SearchBoxProps) {
