@@ -4,6 +4,7 @@ import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -13,7 +14,7 @@ export interface FlexObject {
  * user info getter function
  * @param {{[key: string]: any }} apiResponse - the API response object
  */
-export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): SessionState | void {
+export function oAuthUserInfoGetter(apiResponse: FlexObject): SessionState | void {
   if (Object.keys(apiResponse).includes('oAuth2Data')) {
     switch (apiResponse.oAuth2Data.state) {
       case OPENSRP_OAUTH_STATE:

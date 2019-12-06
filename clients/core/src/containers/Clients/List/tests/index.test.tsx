@@ -17,8 +17,8 @@ describe('containers/clients/list/ClientList', () => {
   });
 
   it('renders without crashing', () => {
-    const mock: any = jest.fn();
-    const opensrpServiceMock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
+    const opensrpServiceMock: jest.Mock = jest.fn();
     const props = {
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
@@ -30,8 +30,8 @@ describe('containers/clients/list/ClientList', () => {
   });
 
   it('renders correctly', () => {
-    const mock: any = jest.fn();
-    const opensrpServiceMock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
+    const opensrpServiceMock: jest.Mock = jest.fn();
     const props = {
       clientsArray: fixtures.clients,
       fetchClientsActionCreator: mock,
@@ -45,8 +45,8 @@ describe('containers/clients/list/ClientList', () => {
   });
 
   it('renders correctly when clientsArray is an empty array', () => {
-    const mock: any = jest.fn();
-    const opensrpServiceMock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
+    const opensrpServiceMock: jest.Mock = jest.fn();
     const props = {
       clientsArray: [],
       fetchClientsActionCreator: mock,
@@ -61,8 +61,8 @@ describe('containers/clients/list/ClientList', () => {
 
   it('works correctly with the redux store', () => {
     store.dispatch(fetchClients(fixtures.clients));
-    const mock: any = jest.fn();
-    const opensrpServiceMock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
+    const opensrpServiceMock: jest.Mock = jest.fn();
     const props = {
       fetchClientsActionCreator: mock,
       location: mock,
@@ -80,8 +80,8 @@ describe('containers/clients/list/ClientList', () => {
   });
 
   it('calls openSRPService with the correct params', () => {
-    const mock: any = jest.fn();
-    const opensrpServiceMock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
+    const opensrpServiceMock: jest.Mock = jest.fn();
     const props = {
       fetchClientsActionCreator: mock,
       location: mock,

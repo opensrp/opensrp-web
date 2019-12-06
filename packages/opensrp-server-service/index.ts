@@ -150,6 +150,7 @@ export class OpenSRPService {
      * @param {HTTPMethod} method - the HTTP method
      * @returns the object returned by API
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async read(id: string | number, params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
         const url = this.getURL(`${this.generalURL}/${id}`, params);
         const response = await fetch(url, this.getPayload(method));
@@ -192,6 +193,7 @@ export class OpenSRPService {
      * @param {HTTPMethod} method - the HTTP method
      * @returns list of objects returned by API
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async list(params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
         const url = this.getURL(this.generalURL, params);
         const response = await fetch(url, this.getPayload(method));

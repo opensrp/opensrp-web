@@ -14,18 +14,18 @@ import { getAccessToken, getOauthProviderState } from '../../store/selectors';
 reducerRegistry.register(supersetReducerName, supersetReducer);
 
 /** middleware for fetching from Superset */
-export const fetchMiddleware = (res: { [key: string]: any }) => {
+export const fetchMiddleware = (res: FlexObject) => {
   return res;
 };
 
 /** callback for fetching from Superset */
-export const fetchCallback = (parsedResponse: Array<{ [key: string]: any }>) => {
+export const fetchCallback = (parsedResponse: FlexObject[]) => {
   const sliceData = superset.processData(parsedResponse);
   return sliceData;
 };
 
 /** this function completes the authZ process */
-export const completeAuthZ = async (result: { [key: string]: any }) => {
+export const completeAuthZ = async (result: FlexObject) => {
   if (result.status === 200) {
     store.dispatch(authorizeSuperset(true));
   } else {
@@ -66,7 +66,7 @@ const supersetFetch = async (
   if (isSupersetAuthorized === true) {
     return superset.api.doFetch(config, middleware).then(callback);
   }
-  return superset.authZ(config, (result: { [key: string]: any }) => {
+  return superset.authZ(config, (result: FlexObject) => {
     return completeAuthZ(result)
       .then(() => {
         const isSupersetAuthorizedYet = isAuthorized(store.getState());

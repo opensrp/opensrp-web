@@ -61,7 +61,7 @@ function registerValidSW(swUrl: string, config?: Config) {
           }
         };
       };
-    })
+    }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .catch(error => {
       // console.error('Error during service worker registration:', error);
     });
