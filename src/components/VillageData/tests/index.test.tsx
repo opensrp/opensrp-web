@@ -46,9 +46,8 @@ describe('components/VillageData/nbcAndPncMotherMapFunction', () => {
       </Provider>
     );
     const instance = wrapper.find('VillageData').instance() as VillageData;
-    expect(instance.nbcAndPncMotherMapFunction(villageDataProps.smsData[0])).toMatchSnapshot(
-      'nbcAndPncMotherMapFuctionOutput'
-    );
+    const tableRows = shallow(instance.pregnancyMapFunction(villageDataProps.smsData[2]));
+    expect(tableRows.find('td[className="default-width"]').length).toEqual(7);
   });
 });
 
@@ -62,9 +61,8 @@ describe('components/VillageData/nbcAndPncChildMapFunction', () => {
       </Provider>
     );
     const instance = wrapper.find('VillageData').instance() as VillageData;
-    expect(instance.nbcAndPncChildMapFunction(villageDataProps.smsData[1])).toMatchSnapshot(
-      'nbcAndPncChildMapFunctionOutput'
-    );
+    const tableRows = shallow(instance.pregnancyMapFunction(villageDataProps.smsData[2]));
+    expect(tableRows.find('td[className="default-width"]').length).toEqual(7);
   });
 });
 
@@ -78,8 +76,7 @@ describe('components/VillageData/pregnancyMapFunction', () => {
       </Provider>
     );
     const instance = wrapper.find('VillageData').instance() as VillageData;
-    expect(instance.pregnancyMapFunction(villageDataProps.smsData[2])).toMatchSnapshot(
-      'pregnancyMapFunctionOutput'
-    );
+    const tableRows = shallow(instance.pregnancyMapFunction(villageDataProps.smsData[2]));
+    expect(tableRows.find('td[className="default-width"]').length).toEqual(7);
   });
 });
