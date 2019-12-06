@@ -1,13 +1,9 @@
 import { authenticateUser, logOutUser } from '@onaio/session-reducer';
-import { FlushThunks } from 'redux-testkit';
 import store from '..';
 import { getAccessToken, getApiToken, getOauthProviderState } from '../selectors';
 
 describe('store/selectors', () => {
-  let flushThunks;
-
   beforeEach(() => {
-    flushThunks = FlushThunks.createMiddleware();
     jest.resetAllMocks();
     store.dispatch(logOutUser());
   });

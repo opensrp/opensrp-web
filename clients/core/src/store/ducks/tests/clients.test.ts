@@ -1,6 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
-import { FlushThunks } from 'redux-testkit';
 import store from '../../index';
 import clientReducer, {
   fetchClients,
@@ -15,10 +14,7 @@ import * as fixtures from '../tests/fixtures';
 reducerRegistry.register(clientReducerName, clientReducer);
 
 describe('reducers/clients', () => {
-  let flushThunks;
-
   beforeEach(() => {
-    flushThunks = FlushThunks.createMiddleware();
     jest.resetAllMocks();
     store.dispatch(removeClientsAction);
   });
