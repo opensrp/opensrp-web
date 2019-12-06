@@ -52,7 +52,7 @@ jobs:
       # run linter
       - run: 
           name: lint Ts
-          command: yarn lint-ts
+          command: yarn lint
       # run tests!
       - run: 
           name: Run test with coverage
