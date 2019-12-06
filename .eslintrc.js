@@ -14,8 +14,8 @@ module.exports =  {
     },
   },
   rules:  {
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/no-inferrable-types': 'warn',
   },
   settings:  {
     react:  {
