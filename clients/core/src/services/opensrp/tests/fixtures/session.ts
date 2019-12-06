@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 export const OpenSRPAPIResponse = {
   oAuth2Data: {
     access_token: 'hunter2',

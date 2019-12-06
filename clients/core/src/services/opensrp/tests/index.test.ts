@@ -4,7 +4,8 @@ import store from '../../../store';
 import { getDefaultHeaders, getFilterParams, getURLParams, OpenSRPService } from '../index';
 import { createPlan, plansListResponse } from './fixtures/plans';
 import { OpenSRPAPIResponse } from './fixtures/session';
-/* tslint:disable-next-line no-var-requires */
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fetch = require('jest-fetch-mock');
 
 jest.mock('../../../configs/env');
@@ -69,6 +70,7 @@ describe('services/OpenSRP', () => {
   it('OpenSRPService list method params work', async () => {
     fetch.mockResponseOnce(JSON.stringify({}));
     const service = new OpenSRPService('location');
+    // eslint-disable-next-line @typescript-eslint/camelcase
     await service.list({ is_jurisdiction: true });
     expect(fetch.mock.calls[0][0]).toEqual(
       'https://test.smartregister.org/opensrp/rest/location?is_jurisdiction=true'
@@ -117,6 +119,7 @@ describe('services/OpenSRP', () => {
   it('OpenSRPService read method params work', async () => {
     fetch.mockResponseOnce(JSON.stringify({}));
     const service = new OpenSRPService('location');
+    // eslint-disable-next-line @typescript-eslint/camelcase
     await service.read('62b2f313', { is_jurisdiction: true });
     expect(fetch.mock.calls[0][0]).toEqual(
       'https://test.smartregister.org/opensrp/rest/location/62b2f313?is_jurisdiction=true'
@@ -161,6 +164,7 @@ describe('services/OpenSRP', () => {
   it('OpenSRPService create method params work', async () => {
     fetch.mockResponseOnce(JSON.stringify({}), { status: 201 });
     const service = new OpenSRPService('location');
+    // eslint-disable-next-line @typescript-eslint/camelcase
     await service.create({ foo: 'bar' }, { is_jurisdiction: true });
     expect(fetch.mock.calls[0][0]).toEqual(
       'https://test.smartregister.org/opensrp/rest/location?is_jurisdiction=true'
@@ -209,6 +213,7 @@ describe('services/OpenSRP', () => {
   it('OpenSRPService update method params work', async () => {
     fetch.mockResponseOnce(JSON.stringify({}));
     const service = new OpenSRPService('location');
+    // eslint-disable-next-line @typescript-eslint/camelcase
     await service.update({ foo: 'bar' }, { is_jurisdiction: true });
     expect(fetch.mock.calls[0][0]).toEqual(
       'https://test.smartregister.org/opensrp/rest/location?is_jurisdiction=true'

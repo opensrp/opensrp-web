@@ -22,6 +22,7 @@ describe('store/selectors', () => {
           name: 'Bobbie',
           username: 'RobertBaratheon',
         },
+        // eslint-disable-next-line @typescript-eslint/camelcase
         { api_token: 'hunter2', oAuth2Data: { access_token: 'iLoveOov', state: 'abcde' } }
       )
     );
@@ -38,6 +39,7 @@ describe('store/selectors', () => {
           name: 'Bobbie',
           username: 'RobertBaratheon',
         },
+        // eslint-disable-next-line @typescript-eslint/camelcase
         { api_token: 'hunter2', oAuth2Data: { access_token: 'iLoveOov', state: 'abcde' } }
       )
     );
@@ -54,6 +56,7 @@ describe('store/selectors', () => {
           name: 'Bobbie',
           username: 'RobertBaratheon',
         },
+        // eslint-disable-next-line @typescript-eslint/camelcase
         { api_token: 'hunter2', oAuth2Data: { access_token: 'iLoveOov', state: 'abcde' } }
       )
     );

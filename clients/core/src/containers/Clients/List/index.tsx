@@ -108,9 +108,6 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 const mapDispatchToProps = { fetchClientsActionCreator: fetchClients };
 
 /** connect clientsList to the redux store */
-const ConnectedClientList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClientList);
+const ConnectedClientList = connect(mapStateToProps, mapDispatchToProps)(ClientList);
 
 export default ConnectedClientList;

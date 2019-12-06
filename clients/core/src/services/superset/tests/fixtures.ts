@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 export const sliceResponse = {
   cache_key: null,
   cache_timeout: 86400,

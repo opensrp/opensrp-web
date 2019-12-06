@@ -13,7 +13,7 @@ describe('components/page/SubMenu', () => {
   });
 
   it('renders without crashing', () => {
-    const mock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
     const props = {
       childNavs: [],
       collapsedModuleLabel: 'All client Records',
@@ -30,9 +30,12 @@ describe('components/page/SubMenu', () => {
   });
 
   it('renders subMenu correctly when in collapsed state', () => {
-    const mock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
     const props = {
-      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
+      childNavs: [
+        { label: 'Users', url: '/users' },
+        { label: 'Roles', url: '/roles' },
+      ],
       collapsedModuleLabel: 'Admin',
       history,
       location: { pathname: '/users' },
@@ -60,9 +63,12 @@ describe('components/page/SubMenu', () => {
   });
 
   it('renders subMenu correctly when in closed state', () => {
-    const mock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
     const props = {
-      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
+      childNavs: [
+        { label: 'Users', url: '/users' },
+        { label: 'Roles', url: '/roles' },
+      ],
       collapsedModuleLabel: '',
       history,
       location: { pathname: '/users' },
@@ -94,7 +100,10 @@ describe('components/page/SubMenu', () => {
     const mock = jest.fn();
     const pathname = '/somePath';
     const props = {
-      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
+      childNavs: [
+        { label: 'Users', url: '/users' },
+        { label: 'Roles', url: '/roles' },
+      ],
       collapsedModuleLabel: '',
       history,
       location: { pathname },
@@ -117,7 +126,10 @@ describe('components/page/SubMenu', () => {
     const mock = jest.fn();
     const pathname = '/somePath';
     const props = {
-      childNavs: [{ label: 'Users', url: '/users' }, { label: 'Roles', url: '/roles' }],
+      childNavs: [
+        { label: 'Users', url: '/users' },
+        { label: 'Roles', url: '/roles' },
+      ],
       collapsedModuleLabel: 'Admin',
       history,
       location: { pathname },
@@ -137,7 +149,7 @@ describe('components/page/SubMenu', () => {
   });
 
   it('module link is rendered correctly when it has url', () => {
-    const mock: any = jest.fn();
+    const mock: jest.Mock = jest.fn();
     const props = {
       childNavs: [],
       collapsedModuleLabel: 'Reports',
