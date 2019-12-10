@@ -2,6 +2,8 @@ module.exports = {
     collectCoverage: true,
     coverageReporters: ['json'],
     collectCoverageFrom: [
+        'clients/core/src/**/*.{js,jsx,ts,tsx}',
+        'packages/**/*.{js,jsx,ts,tsx}',
         '!clients/*/src/index.tsx',
         '!clients/*/src/serviceWorker.ts',
         '!clients/*/src/colors.tsx',
