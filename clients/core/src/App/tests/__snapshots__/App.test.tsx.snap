@@ -143,16 +143,22 @@ exports[`App renders App correctly 1`] = `
                                 className="navbar-brand"
                                 to="/"
                               >
-                                <a
+                                <LinkAnchor
                                   className="navbar-brand"
                                   href="/"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  <img
-                                    alt="OpenSRP"
-                                    src="logo.png"
-                                  />
-                                </a>
+                                  <a
+                                    className="navbar-brand"
+                                    href="/"
+                                    onClick={[Function]}
+                                  >
+                                    <img
+                                      alt="OpenSRP"
+                                      src="test-file-stub"
+                                    />
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </nav>
                           </div>
@@ -209,16 +215,30 @@ exports[`App renders App correctly 1`] = `
                                   <Link
                                     aria-current={null}
                                     className="nav-link account-text"
-                                    to="/login"
+                                    to={
+                                      Object {
+                                        "hash": "",
+                                        "pathname": "/login",
+                                        "search": "",
+                                        "state": null,
+                                      }
+                                    }
                                   >
-                                    <a
+                                    <LinkAnchor
                                       aria-current={null}
                                       className="nav-link account-text"
                                       href="/login"
-                                      onClick={[Function]}
+                                      navigate={[Function]}
                                     >
-                                      Login
-                                    </a>
+                                      <a
+                                        aria-current={null}
+                                        className="nav-link account-text"
+                                        href="/login"
+                                        onClick={[Function]}
+                                      >
+                                        Login
+                                      </a>
+                                    </LinkAnchor>
                                   </Link>
                                 </NavLink>
                               </ul>
@@ -457,6 +477,7 @@ exports[`App renders App correctly 1`] = `
                                                 rotation={null}
                                                 size="lg"
                                                 spin={false}
+                                                swapOpacity={false}
                                                 symbol={false}
                                                 title=""
                                                 transform={null}
@@ -524,6 +545,7 @@ exports[`App renders App correctly 1`] = `
                                         unmountOnExit={false}
                                       >
                                         <div
+                                          aria-expanded="false"
                                           className="collapse"
                                           style={Object {}}
                                         >
@@ -550,20 +572,34 @@ exports[`App renders App correctly 1`] = `
                                                     <Link
                                                       aria-current={null}
                                                       className="nav-link side-nav-item"
-                                                      to="/clients"
+                                                      to={
+                                                        Object {
+                                                          "hash": "",
+                                                          "pathname": "/clients",
+                                                          "search": "",
+                                                          "state": null,
+                                                        }
+                                                      }
                                                     >
-                                                      <a
+                                                      <LinkAnchor
                                                         aria-current={null}
                                                         className="nav-link side-nav-item"
                                                         href="/clients"
-                                                        onClick={[Function]}
+                                                        navigate={[Function]}
                                                       >
-                                                        <span>
-                                                           
-                                                          All clients
-                                                           
-                                                        </span>
-                                                      </a>
+                                                        <a
+                                                          aria-current={null}
+                                                          className="nav-link side-nav-item"
+                                                          href="/clients"
+                                                          onClick={[Function]}
+                                                        >
+                                                          <span>
+                                                             
+                                                            All clients
+                                                             
+                                                          </span>
+                                                        </a>
+                                                      </LinkAnchor>
                                                     </Link>
                                                   </NavLink>
                                                 </li>

@@ -21,15 +21,15 @@ Object {
       <nav
         className="navbar navbar-expand-md navbar-light"
       >
-        <Link
+        <ForwardRef
           className="navbar-brand"
           to="/"
         >
           <img
             alt="OpenSRP"
-            src="logo.png"
+            src="test-file-stub"
           />
-        </Link>
+        </ForwardRef>
       </nav>
     </Col>,
     <Col
@@ -66,13 +66,13 @@ Object {
         tag="ul"
         vertical={false}
       >
-        <NavLink
+        <ForwardRef
           activeClassName="active"
           className="nav-link account-text"
           to="/login"
         >
           Login
-        </NavLink>
+        </ForwardRef>
       </Nav>
     </Col>,
   ],
@@ -104,15 +104,15 @@ Object {
       <nav
         className="navbar navbar-expand-md navbar-light"
       >
-        <Link
+        <ForwardRef
           className="navbar-brand"
           to="/"
         >
           <img
             alt="OpenSRP"
-            src="logo.png"
+            src="test-file-stub"
           />
-        </Link>
+        </ForwardRef>
       </nav>
     </Col>,
     <Col
@@ -179,6 +179,7 @@ Object {
               rotation={null}
               size={null}
               spin={false}
+              swapOpacity={false}
               symbol={false}
               title=""
               transform={null}
@@ -195,13 +196,13 @@ Object {
               tag="button"
               toggle={true}
             >
-              <NavLink
+              <ForwardRef
                 activeClassName="active"
                 className="nav-link bg-dropdown-text"
                 to="/logout"
               >
                 Sign Out
-              </NavLink>
+              </ForwardRef>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>

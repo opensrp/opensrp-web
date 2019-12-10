@@ -9,16 +9,30 @@ exports[`components/page/Header renders header correctly when authenticated: Sig
   <Link
     aria-current={null}
     className="nav-link bg-dropdown-text"
-    to="/logout"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/logout",
+        "search": "",
+        "state": null,
+      }
+    }
   >
-    <a
+    <LinkAnchor
       aria-current={null}
       className="nav-link bg-dropdown-text"
       href="/logout"
-      onClick={[Function]}
+      navigate={[Function]}
     >
-      Sign Out
-    </a>
+      <a
+        aria-current={null}
+        className="nav-link bg-dropdown-text"
+        href="/logout"
+        onClick={[Function]}
+      >
+        Sign Out
+      </a>
+    </LinkAnchor>
   </Link>
 </NavLink>
 `;
@@ -31,7 +45,7 @@ exports[`components/page/Header renders header correctly: Brand-image 1`] = `
 >
   <img
     alt="OpenSRP"
-    src="logo.png"
+    src="test-file-stub"
   />
 </a>
 `;
@@ -45,16 +59,30 @@ exports[`components/page/Header renders header correctly: Login 1`] = `
   <Link
     aria-current={null}
     className="nav-link account-text"
-    to="/login"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/login",
+        "search": "",
+        "state": null,
+      }
+    }
   >
-    <a
+    <LinkAnchor
       aria-current={null}
       className="nav-link account-text"
       href="/login"
-      onClick={[Function]}
+      navigate={[Function]}
     >
-      Login
-    </a>
+      <a
+        aria-current={null}
+        className="nav-link account-text"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </LinkAnchor>
   </Link>
 </NavLink>
 `;
