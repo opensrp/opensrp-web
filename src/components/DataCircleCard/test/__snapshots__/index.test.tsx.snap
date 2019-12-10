@@ -32,10 +32,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/undefined/high/undefined/undefined/down/undefined/undefined"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/hierarchicaldata/undefined/high/undefined/undefined/down/undefined/undefined"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
@@ -57,10 +57,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/undefined/low/undefined/undefined/down/undefined/undefined"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/hierarchicaldata/undefined/low/undefined/undefined/down/undefined/undefined"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
@@ -82,10 +82,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/hierarchicaldata/undefined/no/undefined/undefined/down/undefined/undefined"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/hierarchicaldata/undefined/no/undefined/undefined/down/undefined/undefined"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
