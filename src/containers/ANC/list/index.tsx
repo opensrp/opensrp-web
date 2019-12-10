@@ -1,67 +1,70 @@
 /** Presentational component and container for the ANC listing page */
-
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import React from 'react';
-import { useAsync } from 'react-async';
+import { IfFulfilled, IfPending, IfRejected, useAsync } from 'react-async';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 import { Store } from 'redux';
+import Loading from '../../../components/page/Loading';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
   Client,
   fetchClients,
-  getClientsArray,
   reducerName as clientReducerName,
 } from '../../../store/ducks/clients';
+// TODO - remove fixtures.
 import { allANC } from '../../ANC/list/tests/fixtures';
 import { loadANCList } from './dataLoading';
 import { useFilters } from './hooks';
-import { ANCTable, useColumns } from './tableDefinition';
+import { ReactTable, useColumns } from './tableDefinition';
+
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
 
+/** types for ANCList page component props */
 interface ANCListProps {
-  fetchClientsCreator: any;
+  /** creates action that dispatched , adds clients to store */
+  fetchClientsCreator: typeof fetchClients;
+  /** the opensrpService */
   service: typeof OpenSRPService;
+  /** all anc records in store */
   ANCArray: Client[];
 }
 
+/** default props */
 const defaultANCListProps: ANCListProps = {
   ANCArray: [],
-  fetchClientsCreator: (f: any) => f,
+  fetchClientsCreator: fetchClients,
   service: OpenSRPService,
 };
 
 /** dumb component responsible for showing ANC listings */
 const ANCListView: React.FC<ANCListProps> = props => {
-  const { service, fetchClientsCreator } = props;
+  const { service, fetchClientsCreator, ANCArray } = props;
+
+  /** these filters are applied to the data as its being retrieved from the store */
   const [filterState, addFilter, setFilterState] = useFilters();
-  const { data, error, isPending } = useAsync({ promiseFn: loadANCList, service });
-  const columns = useColumns(); // Pretty sure this is an anti-pattern
 
-  // this will be used when making an api call that requires filtering,
-  // this is specific to the anc
-  // const deferredFunction = useAsync({deferFn: loadFilteredANCList});
+  const state = useAsync({ promiseFn: loadANCList, service });
 
-  if (isPending) {
-    return <h1>Loading</h1>;
-  }
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (data) {
-    // will aggregate the search params and make a combined filter api request.
-    // deferredFunction.run(filterState);
+  const columns = useColumns();
 
-    return (
-      <div>
-        <Col>
-          <ANCTable {...{ tableColumns: columns, data: props.ANCArray }} />
-        </Col>
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div>
+      {/* Filter section will go here. */}
+      <IfPending state={state}>
+        <Loading />
+      </IfPending>
+      <IfRejected state={state}>{error => alert(error.message)}</IfRejected>
+      <IfFulfilled state={state}>
+        {data => (
+          <Col>
+            <ReactTable {...{ tableColumns: columns, data: props.ANCArray }} />
+          </Col>
+        )}
+      </IfFulfilled>
+    </div>
+  );
 };
 
 ANCListView.defaultProps = defaultANCListProps;
