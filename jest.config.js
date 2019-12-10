@@ -16,3 +16,8 @@ module.exports = {
         '\\.(css|less)$': 'identity-obj-proxy',
     },
 };
+
+// import dotenv from 'dotenv';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
