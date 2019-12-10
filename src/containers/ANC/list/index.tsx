@@ -13,6 +13,7 @@ import clientReducer, {
   getClientsArray,
   reducerName as clientReducerName,
 } from '../../../store/ducks/clients';
+import { allANC } from '../../ANC/list/tests/fixtures';
 import { loadANCList } from './dataLoading';
 import { useFilters } from './hooks';
 import { ANCTable, useColumns } from './tableDefinition';
@@ -37,6 +38,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator } = props;
   const [filterState, addFilter, setFilterState] = useFilters();
   const { data, error, isPending } = useAsync({ promiseFn: loadANCList, service });
+  const columns = useColumns(); // Pretty sure this is an anti-pattern
 
   // this will be used when making an api call that requires filtering,
   // this is specific to the anc
@@ -55,7 +57,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
     return (
       <div>
         <Col>
-          <ANCTable {...{ tableColumns: useColumns(), data: props.ANCArray }} />
+          <ANCTable {...{ tableColumns: columns, data: props.ANCArray }} />
         </Col>
       </div>
     );
@@ -71,7 +73,7 @@ type DispatchActions = Pick<ANCListProps, 'fetchClientsCreator'>;
 
 const mapStateToProps = (state: Partial<Store>): DispatchedProps => {
   return {
-    ANCArray: getClientsArray(state),
+    ANCArray: allANC, // getClientsArray(state),
   };
 };
 
