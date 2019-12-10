@@ -30,12 +30,15 @@ jobs:
 
       # run linter
       - run:
-          name: lint Ts
+          name: Run linter
           command: yarn lint
-      # run tests!
+      # run tests for client/score!
       - run:
           name: Run test with coverage
-          command: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+          command: cp clients/core/.env.sample ./.env && yarn test clients/core --verbose --coverage=true --forceExit --detectOpenHandles rm ./.env
+      - run:
+          name: Run test with coverage
+          command: yarn test packages --verbose --coverage=true --forceExit --detectOpenHandles
       - run:
           name: upload coverage to coveralls
           command: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
