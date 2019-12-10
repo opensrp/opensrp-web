@@ -17,7 +17,6 @@ import { allANC } from '../../ANC/list/tests/fixtures';
 import { loadANCList } from './dataLoading';
 import { useFilters } from './hooks';
 import { ANCTable, useColumns } from './tableDefinition';
-
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
 
