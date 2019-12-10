@@ -1,5 +1,6 @@
 module.exports = {
     collectCoverage: true,
+    coverageReporters: ['json'],
     collectCoverageFrom: [
         '!clients/*/src/index.tsx',
         '!clients/*/src/serviceWorker.ts',
