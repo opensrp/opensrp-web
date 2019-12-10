@@ -4,8 +4,6 @@ module.exports = {
         '!clients/*/src/index.tsx',
         '!clients/*/src/serviceWorker.ts',
         '!clients/*/src/colors.tsx',
-        'packages/**/*.{js,jsx,ts,tsx}',
-        'clients/**/*.{js,jsx,ts,tsx}',
         '!**/node_modules/**',
         '!**/coverage/**',
         '!**/dist/**',
