@@ -19,8 +19,8 @@ import {
   SMS_FILTER_FUNCTION,
   STUNTED,
 } from '../../constants';
-import { getLinkToHierarchichalDataTable, locationIdIn } from '../../helpers/utils';
-import { FlexObject, getModuleLink } from '../../helpers/utils';
+import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
+import { FlexObject } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -59,7 +59,6 @@ function DataCircleCard({
   highRisk,
   lowRisk,
   noRisk,
-  totalChildren,
   stunting,
   wasting,
   overweight,
@@ -72,7 +71,6 @@ function DataCircleCard({
   userLocationId,
   permissionLevel,
 }: Props) {
-  const locationId = userLocationId;
   const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
     {
       class: 'red',
