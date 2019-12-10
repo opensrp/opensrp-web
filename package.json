@@ -91,6 +91,7 @@
         "packages/*"
     ],
     "dependencies": {
+        "istanbul-api": "^2.1.6",
         "opensrp-server-service": "file:packages/opensrp-server-service",
         "opensrp-web": "file:clients/core"
     }
