@@ -1,72 +1,87 @@
 /** Presentational component and container for the ANC listing page */
+
+import reducerRegistry from '@onaio/redux-reducer-registry';
 import React from 'react';
+import { useAsync } from 'react-async';
 import { connect } from 'react-redux';
-import Loading from '../../../components/page/Loading';
+import { Col } from 'reactstrap';
+import { Store } from 'redux';
 import { OpenSRPService } from '../../../services/opensrp';
-import { Client, fetchClients } from '../../../store/ducks/clients';
+import clientReducer, {
+  Client,
+  fetchClients,
+  getClientsArray,
+  reducerName as clientReducerName,
+} from '../../../store/ducks/clients';
 import { loadANCList } from './dataLoading';
 import { useFilters } from './hooks';
 import { ANCTable, useColumns } from './tableDefinition';
-import * as fixtures from './tests/fixtures';
+
+/**  register clients reducer */
+reducerRegistry.register(clientReducerName, clientReducer);
 
 interface ANCListProps {
-  ANCList: Client[];
   fetchClientsCreator: any;
   service: typeof OpenSRPService;
+  ANCArray: Client[];
 }
 
 const defaultANCListProps: ANCListProps = {
-  ANCList: fixtures.allANC,
+  ANCArray: [],
   fetchClientsCreator: (f: any) => f,
   service: OpenSRPService,
 };
 
 /** dumb component responsible for showing ANC listings */
 const ANCListView: React.FC<ANCListProps> = props => {
-  const { service, fetchClientsCreator, ANCList } = props;
+  const { service, fetchClientsCreator } = props;
   const [filterState, addFilter, setFilterState] = useFilters();
+  const { data, error, isPending } = useAsync({ promiseFn: loadANCList, service });
 
-  React.useEffect(() => {
-    // make api call to get all anc list data on component mount
-    loadANCList(service, fetchClientsCreator);
-  });
+  // this will be used when making an api call that requires filtering,
+  // this is specific to the anc
+  // const deferredFunction = useAsync({deferFn: loadFilteredANCList});
 
-  const ANCTableProps = {
-    data: ANCList,
-    tableColumns: useColumns(),
-  };
-
-  if (ANCList.length < 1) {
-    return <Loading />;
+  if (isPending) {
+    return <h1>Loading</h1>;
   }
+  if (error) {
+    return <h1>{error.message}</h1>;
+  }
+  if (data) {
+    // will aggregate the search params and make a combined filter api request.
+    // deferredFunction.run(filterState);
 
-  // create table instance
-  return (
-    <div>
-      <ANCTable {...ANCTableProps} />
-    </div>
-  );
+    return (
+      <div>
+        <Col>
+          <ANCTable {...{ tableColumns: useColumns(), data: props.ANCArray }} />
+        </Col>
+      </div>
+    );
+  }
+  return null;
 };
 
 ANCListView.defaultProps = defaultANCListProps;
 
 // create container
-interface DispatchedStateToProps {
-  ANCList: Client[];
-}
-const mapStateToProps = (): DispatchedStateToProps => {
+type DispatchedProps = Pick<ANCListProps, 'ANCArray'>;
+type DispatchActions = Pick<ANCListProps, 'fetchClientsCreator'>;
+
+const mapStateToProps = (state: Partial<Store>): DispatchedProps => {
   return {
-    ANCList: fixtures.allANC, // getANCArray;
+    ANCArray: getClientsArray(state),
   };
 };
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchActions = {
   fetchClientsCreator: fetchClients,
 };
 
 const ConnectedANCListView = connect(
   mapStateToProps,
-  mapStateToProps
+  mapDispatchToProps
 )(ANCListView);
 
 export default ConnectedANCListView;
