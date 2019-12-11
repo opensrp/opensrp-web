@@ -1,0 +1,34 @@
+.react-table {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 #d7d7e0;
+}
+
+.react-table tbody td {
+  vertical-align: middle;
+}
+
+.react-table thead tr {
+  background-color: #ffffff;
+}
+.react-table thead th {
+  border-bottom: 1px solid #e1e8f7;
+}
+.react-table thead th:first-child {
+  border-bottom: 1px solid #dadce0;
+}
+.react-table thead tr:first-child {
+  border-bottom: 1px solid #dadce0;
+}
+
+.react-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.react-table tbody tr:nth-child(0) {
+  background-color: #ffffff;
+}
+
+.react-table tr {
+  border-bottom: 1px solid #e1e8f7;
+}

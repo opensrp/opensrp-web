@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { Column, useSortBy, useTable } from 'react-table';
+import './index.css';
 
 /** props for the ReactTable component */
 interface ReactTableProps<T extends object> {
@@ -27,7 +28,7 @@ function ReactTable<T extends object>(props: ReactTableProps<T>) {
 
   return (
     <div>
-      <table {...getTableProps()}>
+      <table {...getTableProps()} className="table react-table">
         <thead>
           {headerGroups.map((headerGroup, idx) => (
             <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
@@ -39,13 +40,19 @@ function ReactTable<T extends object>(props: ReactTableProps<T>) {
                   {column.render('Header')}
                   {/* Add a sort direction indicator */}
                   <span>
-                    {column.canSort
-                      ? column.isSorted
-                        ? column.isSortedDesc
-                          ? ' ↓'
-                          : ' ↑'
-                        : '↕'
-                      : ''}
+                    {column.canSort ? (
+                      column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <>&nbsp;&nbsp;&nbsp;↓</>
+                        ) : (
+                          <>&nbsp;&nbsp;&nbsp;↑</>
+                        )
+                      ) : (
+                        <>&nbsp;&nbsp;&nbsp;↕</>
+                      )
+                    ) : (
+                      ''
+                    )}
                   </span>
                 </th>
               ))}
