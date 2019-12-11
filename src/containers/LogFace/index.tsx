@@ -4,6 +4,7 @@ import { Field, Formik } from 'formik';
 import { map } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Table } from 'reactstrap';
 import Ripple from '../../components/page/Loading';
@@ -26,10 +27,13 @@ import {
   LOGFACE_SEARCH_PLACEHOLDER,
   NBC_AND_PNC,
   NBC_AND_PNC_LOGFACE_SMS_TYPES,
+  NBC_AND_PNC_LOGFACE_URL,
   NUTRITION,
   NUTRITION_LOGFACE_SMS_TYPES,
+  NUTRITION_LOGFACE_URL,
   PREGNANCY,
   PREGNANCY_LOGFACE_SMS_TYPES,
+  PREGNANCY_LOGFACE_URL,
   RISK,
   RISK_LEVEL,
   RISK_LEVELS,
@@ -40,6 +44,7 @@ import {
 } from '../../constants';
 import {
   getFilterFunctionAndLocationLevel,
+  getLinkToPatientDetail,
   getLocationId,
   sortFunction,
 } from '../../helpers/utils';
@@ -424,7 +429,16 @@ export class LogFace extends React.Component<PropsInterface, State> {
                         <td className="default-width">{dataObj.health_worker_location_name}</td>
                         <td className="default-width">{dataObj.sms_type}</td>
                         <td className="default-width">{dataObj.health_worker_name}</td>
-                        <td className="default-width">{dataObj.anc_id}</td>
+                        <td className="default-width">
+                          <Link
+                            to={getLinkToPatientDetail(
+                              dataObj,
+                              this.getModuleLogFaceUrlLink(this.props.module)
+                            )}
+                          >
+                            {dataObj.anc_id}
+                          </Link>
+                        </td>
                         <td className="small-width">{dataObj.age}</td>
                         <td className="large-width">{dataObj.message}</td>
                         <td className="default-width">
@@ -450,6 +464,19 @@ export class LogFace extends React.Component<PropsInterface, State> {
   public componentWillUnmount() {
     if (this.state.intervalId) {
       clearInterval(this.state.intervalId);
+    }
+  }
+
+  public getModuleLogFaceUrlLink(module: string) {
+    switch (module) {
+      case PREGNANCY:
+        return PREGNANCY_LOGFACE_URL;
+      case NUTRITION:
+        return NUTRITION_LOGFACE_URL;
+      case NBC_AND_PNC:
+        return NBC_AND_PNC_LOGFACE_URL;
+      default:
+        return '';
     }
   }
 

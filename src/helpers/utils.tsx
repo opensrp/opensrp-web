@@ -4,15 +4,19 @@ import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
   ALL,
+  CHILD_PATIENT_DETAIL,
   COMMUNE,
   COUNTRY,
   DISTRICT,
+  EC_CHILD,
+  EC_WOMAN,
   HIERARCHICAL_DATA_URL,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_WOMAN,
   NUTRITION,
   NUTRITION_COMPARTMENTS_URL,
+  PATIENT_DETAIL,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
@@ -450,5 +454,20 @@ export function getLinkToHierarchichalDataTable(
     return `${getModuleLink(
       module
     )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
+  }
+}
+
+/**
+ * get a link to patient details depending on the patient type
+ * @param {SmsData} smsData - an object representing a single smsEvent
+ * @param {string} prependWith- the url we want to prepend this link/string with.
+ */
+export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
+  if (smsData.client_type === EC_CHILD) {
+    return `${prependWith}/${CHILD_PATIENT_DETAIL}/${smsData.anc_id}`;
+  } else if (smsData.client_type === EC_WOMAN) {
+    return `${prependWith}/${PATIENT_DETAIL}/${smsData.anc_id}`;
+  } else {
+    return `#`;
   }
 }

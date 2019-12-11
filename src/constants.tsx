@@ -2,6 +2,10 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { SmsData } from './store/ducks/sms_events';
 
 // internal urls
+export const CHILD_PATIENT_DETAIL = 'child_patient_detail';
+export type CHILD_PATIENT_DETAIL = typeof CHILD_PATIENT_DETAIL;
+export const PATIENT_DETAIL = 'patient_detail';
+export type PATIENT_DETAIL = typeof PATIENT_DETAIL;
 export const NBC_AND_PNC_URL = '/nbc_and_pnc';
 export type NBC_AND_PNC_URL = typeof NBC_AND_PNC_URL;
 export const HIERARCHICAL_DATA_URL = '/hierarchicaldata';

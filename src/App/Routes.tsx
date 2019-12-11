@@ -18,6 +18,7 @@ import {
 } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
+  CHILD_PATIENT_DETAIL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
@@ -35,6 +36,7 @@ import {
   NUTRITION_REGISTRATION,
   NUTRITION_REPORT,
   NUTRITION_URL,
+  PATIENT_DETAIL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
@@ -238,7 +240,7 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/patient_detail/:patient_id`);
+              ].map(url => `${url}/${PATIENT_DETAIL}/:patient_id`);
             })()}
             component={ConnectedPatientDetails}
           />
@@ -250,7 +252,27 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/child_patient_detail/:patient_id`);
+              ].map(url => `${url}/${CHILD_PATIENT_DETAIL}/:patient_id`);
+            })()}
+            component={ConnectedChildPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
+                url => `${url}/${PATIENT_DETAIL}/:patient_id`
+              );
+            })()}
+            component={ConnectedPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
+                url => `${url}/${CHILD_PATIENT_DETAIL}/:patient_id`
+              );
             })()}
             component={ConnectedChildPatientDetails}
           />
