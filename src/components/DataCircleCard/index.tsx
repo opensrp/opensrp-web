@@ -5,10 +5,8 @@ import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
   ALL,
   HIGH,
-  HIGH_RISK,
   INAPPROPRIATELY_FED,
   LOW,
-  LOW_RISK,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_WOMAN,
   NO,
@@ -16,6 +14,8 @@ import {
   NUTRITION,
   OVERWEIGHT,
   PREGNANCY,
+  RED_ALERT,
+  RISK,
   SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
   STUNTED,
@@ -29,8 +29,8 @@ import './index.css';
  * interface for props to be passed to DataCircleCard component.
  */
 interface Props {
-  highRisk?: number;
-  lowRisk?: number;
+  redAlert?: number;
+  risk?: number;
   noRisk?: number;
   totalChildren?: number;
   stunting?: number;
@@ -57,8 +57,8 @@ interface CircleSpecProps {
 }
 
 function DataCircleCard({
-  highRisk,
-  lowRisk,
+  redAlert,
+  risk,
   noRisk,
   stunting,
   wasting,
@@ -75,15 +75,15 @@ function DataCircleCard({
   const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
     {
       class: 'red',
-      riskLabel: HIGH_RISK,
+      riskLabel: RED_ALERT,
       riskType: HIGH,
-      riskValue: highRisk,
+      riskValue: redAlert,
     },
     {
       class: 'orange',
-      riskLabel: LOW_RISK,
+      riskLabel: RISK,
       riskType: LOW,
-      riskValue: lowRisk,
+      riskValue: risk,
     },
     {
       class: 'green',

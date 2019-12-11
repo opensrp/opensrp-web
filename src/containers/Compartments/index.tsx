@@ -25,6 +25,7 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
+  RED,
   SMS_FILTER_FUNCTION,
   VIETNAM_COUNTRY_LOCATION_ID,
 } from '../../constants';
@@ -243,10 +244,12 @@ class Compartments extends React.Component<Props, State> {
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData, 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData, 'logface_risk'),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData, 'logface_risk'),
             permissionLevel: userLocationLevel,
+            redAlert: this.getNumberOfSmsWithRisk(RED, filteredData, 'logface_risk'),
+            risk:
+              this.getNumberOfSmsWithRisk(LOW, filteredData, 'logface_risk') +
+              this.getNumberOfSmsWithRisk(HIGH, filteredData, 'logface_risk'),
             title: filteredData.length + ' Total Pregnancies',
           }
         : null;
@@ -266,14 +269,16 @@ class Compartments extends React.Component<Props, State> {
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || [], 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || [], 'logface_risk'),
             noRisk: this.getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
               last2WeeksSmsData || [],
               'logface_risk'
             ),
             permissionLevel: userLocationLevel,
+            redAlert: this.getNumberOfSmsWithRisk(RED, last2WeeksSmsData || [], 'logface_risk'),
+            risk:
+              this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || [], 'logface_risk') +
+              this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || [], 'logface_risk'),
             title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
           }
         : null;
@@ -293,14 +298,14 @@ class Compartments extends React.Component<Props, State> {
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || [], 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || [], 'logface_risk'),
             noRisk: this.getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
               last1WeekSmsData || [],
               'logface_risk'
             ),
             permissionLevel: userLocationLevel,
+            redAlert: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || [], 'logface_risk'),
+            risk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || [], 'logface_risk'),
             title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
           }
         : null;
@@ -320,11 +325,13 @@ class Compartments extends React.Component<Props, State> {
                 return smsData.client_type === EC_CHILD;
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn, 'logface_risk'),
             module: NBC_AND_PNC_CHILD,
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn, 'logface_risk'),
             permissionLevel: userLocationLevel,
+            redAlert: this.getNumberOfSmsWithRisk(RED, newBorn, 'logface_risk'),
+            risk:
+              this.getNumberOfSmsWithRisk(LOW, newBorn, 'logface_risk') +
+              this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
             title: newBorn.length + ' Total Newborn',
           }
         : null;
@@ -352,11 +359,13 @@ class Compartments extends React.Component<Props, State> {
                 return smsData.client_type === EC_WOMAN;
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, woman, 'logface_risk'),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, woman, 'logface_risk'),
             module: NBC_AND_PNC_WOMAN,
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman, 'logface_risk'),
             permissionLevel: userLocationLevel,
+            redAlert: this.getNumberOfSmsWithRisk(RED, woman, 'logface_risk'),
+            risk:
+              this.getNumberOfSmsWithRisk(LOW, woman, 'logface_risk') +
+              this.getNumberOfSmsWithRisk(HIGH, woman, 'logface_risk'),
             title: woman.length + ' Total mother in PNC',
           }
         : null;
