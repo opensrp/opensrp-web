@@ -494,7 +494,9 @@ class HierarchichalDataTable extends Component<Props, State> {
     const villageData = nextProps.smsData.filter((dataItem: SmsData) => {
       return (
         locationIds.includes(dataItem.location_id) &&
-        (nextProps.risk_highligter
+        (nextProps.risk_highligter === ALL
+          ? true
+          : nextProps.risk_highligter
           ? (dataItem as any)[field].includes(
               nextProps.risk_highligter ? nextProps.risk_highligter : ''
             )
