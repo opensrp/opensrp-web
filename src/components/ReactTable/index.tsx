@@ -14,7 +14,7 @@ interface ReactTableProps<T extends object> {
 }
 
 /** the component definition */
-function ReactTable<T extends object>(props: ReactTableProps<T>) {
+function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTableProps) {
   const { tableColumns, data } = props;
 
   // Use the state and functions returned from useTable to build your UI
@@ -82,7 +82,7 @@ function ReactTable<T extends object>(props: ReactTableProps<T>) {
   );
 }
 
-const defaultANCTableProps: ReactTableProps<{}> = {
+const defaultANCTableProps = {
   data: [],
   tableColumns: [
     {
@@ -91,7 +91,5 @@ const defaultANCTableProps: ReactTableProps<{}> = {
     },
   ],
 };
-
-ReactTable.defaultProps = defaultANCTableProps;
 
 export { ReactTable };
