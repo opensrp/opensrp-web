@@ -467,7 +467,7 @@ class Compartments extends React.Component<Props, State> {
             <span id="breadcrumb-span">{location}</span>
           </p>
         </Row>
-        {this.props.dataFetched ? (
+        {this.props.dataFetched && filteredData.length ? (
           <React.Fragment>
             <div className="cards-row">
               <CardGroup>
