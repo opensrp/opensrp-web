@@ -9,6 +9,7 @@ import {
   COUNTRY,
   DISTRICT,
   EC_CHILD,
+  EC_FAMILY_MEMBER,
   EC_WOMAN,
   HIERARCHICAL_DATA_URL,
   NBC_AND_PNC_CHILD,
@@ -465,7 +466,7 @@ export function getLinkToHierarchichalDataTable(
 export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
   if (smsData.client_type === EC_CHILD) {
     return `${prependWith}/${CHILD_PATIENT_DETAIL}/${smsData.anc_id}`;
-  } else if (smsData.client_type === EC_WOMAN) {
+  } else if (smsData.client_type === EC_WOMAN || smsData.client_type === EC_FAMILY_MEMBER) {
     return `${prependWith}/${PATIENT_DETAIL}/${smsData.anc_id}`;
   } else {
     return `#`;

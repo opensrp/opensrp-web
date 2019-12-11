@@ -15,6 +15,7 @@ import {
 import {
   COMPARTMENTS,
   EC_CHILD,
+  EC_FAMILY_MEMBER,
   EC_WOMAN,
   HIGH,
   LOW,
@@ -337,7 +338,7 @@ class Compartments extends React.Component<Props, State> {
         : null;
 
     const woman: SmsData[] = filteredData.filter((smsData: SmsData) => {
-      return smsData.client_type === EC_WOMAN;
+      return smsData.client_type === EC_WOMAN || smsData.client_type === EC_FAMILY_MEMBER;
     });
 
     const childrenUnder2 = filteredData.filter((smsData: SmsData) => {
@@ -356,7 +357,7 @@ class Compartments extends React.Component<Props, State> {
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return smsData.client_type === EC_WOMAN;
+                return smsData.client_type === EC_WOMAN || smsData.client_type === EC_FAMILY_MEMBER;
               },
             ] as SMS_FILTER_FUNCTION[],
             module: NBC_AND_PNC_WOMAN,
@@ -466,7 +467,7 @@ class Compartments extends React.Component<Props, State> {
             <span id="breadcrumb-span">{location}</span>
           </p>
         </Row>
-        {this.props.dataFetched && filteredData.length ? (
+        {this.props.dataFetched ? (
           <React.Fragment>
             <div className="cards-row">
               <CardGroup>
