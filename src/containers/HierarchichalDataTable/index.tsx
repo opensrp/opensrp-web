@@ -12,6 +12,7 @@ import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
 import {
+  ALL,
   BACK,
   BACKPAGE_ICON,
   COMMUNE,
@@ -81,20 +82,22 @@ interface State {
   villageData: SmsData[];
 }
 
+type RISK_HIGHLIGHTER_TYPE =
+  | HIGH
+  | LOW
+  | NO
+  | STUNTED
+  | INAPPROPRIATELY_FED
+  | OVERWEIGHT
+  | SEVERE_WASTING
+  | ALL
+  | '';
 interface Props {
   current_level: number;
   node_id?: string;
   direction: string; // this can be down or up
   from_level?: string;
-  risk_highligter?:
-    | HIGH
-    | LOW
-    | NO
-    | STUNTED
-    | INAPPROPRIATELY_FED
-    | OVERWEIGHT
-    | SEVERE_WASTING
-    | '';
+  risk_highligter?: RISK_HIGHLIGHTER_TYPE;
   title: string;
   fetchLocationsActionCreator: typeof fetchLocations;
   provinces: Location[];

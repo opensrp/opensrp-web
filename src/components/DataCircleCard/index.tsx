@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
+  ALL,
   HIGH,
   HIGH_RISK,
   INAPPROPRIATELY_FED,
@@ -130,7 +131,19 @@ function DataCircleCard({
 
   return (
     <Card className={`dataCircleCard ${className}`}>
-      <CardTitle>{title}</CardTitle>
+      <CardTitle>
+        <Link
+          to={getLinkToHierarchichalDataTable(ALL, module, title, permissionLevel, userLocationId)}
+          // tslint:disable-next-line: jsx-no-lambda
+          onClick={() => {
+            if (filterArgs) {
+              addFilterArgsActionCreator(filterArgs);
+            }
+          }}
+        >
+          {title}
+        </Link>
+      </CardTitle>
       <CardBody>
         <ul className="circlesRow">
           {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
