@@ -1,14 +1,21 @@
+/** bootstrap tabled component abstracting the jsx part when using
+ * the react-table component
+ */
 import React from 'react';
-import { useSortBy, useTable } from 'react-table';
-import { Client } from '../../store/ducks/clients';
+import { Column, useSortBy, useTable } from 'react-table';
 
-interface ANCTableProps {
-  tableColumns: any;
-  data: Client[];
+/** props for the ReactTable component */
+interface ReactTableProps<T extends object> {
+  /** a memorized list of columns  */
+  tableColumns: Column[];
+  /** the data to be rendered in table */
+  data: T[];
 }
 
-const ReactTable: React.FC<ANCTableProps> = props => {
+/** the component definition */
+function ReactTable<T extends object>(props: ReactTableProps<T>) {
   const { tableColumns, data } = props;
+
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
@@ -25,8 +32,6 @@ const ReactTable: React.FC<ANCTableProps> = props => {
           {headerGroups.map((headerGroup, idx) => (
             <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any, index) => (
-                // Add the sorting props to control sorting. For this example
-                // we can add them into the header props
                 <th
                   key={`thead-th-${index}`}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -68,14 +73,16 @@ const ReactTable: React.FC<ANCTableProps> = props => {
       <div>Showing all rows</div>
     </div>
   );
-};
+}
 
-const defaultANCTableProps: ANCTableProps = {
+const defaultANCTableProps: ReactTableProps<{}> = {
   data: [],
-  tableColumns: {
-    Header: 'Please Define some columns',
-    accessor: '',
-  },
+  tableColumns: [
+    {
+      Header: 'Please Define some columns',
+      accessor: '',
+    },
+  ],
 };
 
 ReactTable.defaultProps = defaultANCTableProps;
