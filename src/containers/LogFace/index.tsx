@@ -399,7 +399,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
             </a>
           </div>
         </div>
-        {this.props.dataFetched ? (
+        {this.props.dataFetched && data.length ? (
           <div className="table-container">
             <Table striped={true} borderless={true}>
               <thead id="header">
