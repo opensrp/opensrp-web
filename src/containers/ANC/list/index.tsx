@@ -17,7 +17,7 @@ import clientReducer, {
 import { allANC } from '../../ANC/list/tests/fixtures';
 import { loadANCList } from './helpers/dataLoading';
 import { useFilters } from './helpers/hooks';
-import { useColumns } from './helpers/tableDefinition';
+import { createColumns } from './helpers/tableDefinition';
 
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
@@ -43,10 +43,6 @@ interface ANCTableProps {
   data: Client[];
 }
 
-const ANCTable: React.FC<ANCTableProps> = props => {
-  return <ReactTable {...{ data: props.data, tableColumns: useColumns() }} />;
-};
-
 /** dumb component responsible for showing ANC listings */
 const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator, ANCArray } = props;
@@ -55,6 +51,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
   const [filterState, addFilter, setFilterState] = useFilters();
 
   const state = useAsync({ promiseFn: loadANCList, service });
+  const columns = createColumns();
 
   return (
     <div>
@@ -66,7 +63,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
       <IfFulfilled state={state}>
         {data => (
           <Col>
-            <ANCTable data={props.ANCArray} />
+            <ReactTable {...{ data: ANCArray, tableColumns: React.useMemo(() => columns, []) }} />;
           </Col>
         )}
       </IfFulfilled>
