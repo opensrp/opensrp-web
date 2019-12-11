@@ -1,12 +1,12 @@
 /** Presentational component and container for the ANC listing page */
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { prependListener } from 'cluster';
 import React from 'react';
 import { IfFulfilled, IfPending, IfRejected, useAsync } from 'react-async';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
+import { ReactTable } from '../../../components/ReactTable';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientReducer, {
   Client,
@@ -15,9 +15,9 @@ import clientReducer, {
 } from '../../../store/ducks/clients';
 // TODO - remove fixtures.
 import { allANC } from '../../ANC/list/tests/fixtures';
-import { loadANCList } from './dataLoading';
-import { useFilters } from './hooks';
-import { ReactTable, useColumns } from './tableDefinition';
+import { loadANCList } from './helpers/dataLoading';
+import { useFilters } from './helpers/hooks';
+import { useColumns } from './helpers/tableDefinition';
 
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);

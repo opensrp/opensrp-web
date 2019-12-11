@@ -1,7 +1,7 @@
 import { PromiseFn } from 'react-async';
-import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
-import store from '../../../store';
-import { Client, fetchClients } from '../../../store/ducks/clients';
+import { OPENSRP_CLIENT_ENDPOINT } from '../../../../configs/env';
+import store from '../../../../store';
+import { Client, fetchClients } from '../../../../store/ducks/clients';
 
 /** Queries OpenSRP server for single page of anc records its arguments are
  * are de-structured from the options passed into the useAsync hook
