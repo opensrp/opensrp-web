@@ -10,6 +10,7 @@ export const useColumns = () => {
     () => [
       {
         /** placeholder for location table crumb */
+        // TODO - the location tableCrumb will be a render prop
         Header: () => (
           <>
             <nav aria-label="breadcrumb">
@@ -85,7 +86,7 @@ interface ANCTableProps {
   data: Client[];
 }
 
-const ANCTable: React.FC<ANCTableProps> = props => {
+const ReactTable: React.FC<ANCTableProps> = props => {
   const { tableColumns, data } = props;
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
@@ -156,6 +157,6 @@ const defaultANCTableProps: ANCTableProps = {
   },
 };
 
-ANCTable.defaultProps = defaultANCTableProps;
+ReactTable.defaultProps = defaultANCTableProps;
 
-export { ANCTable };
+export { ReactTable };

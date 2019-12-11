@@ -1,5 +1,6 @@
 /** Presentational component and container for the ANC listing page */
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { prependListener } from 'cluster';
 import React from 'react';
 import { IfFulfilled, IfPending, IfRejected, useAsync } from 'react-async';
 import { connect } from 'react-redux';
@@ -38,6 +39,14 @@ const defaultANCListProps: ANCListProps = {
   service: OpenSRPService,
 };
 
+interface ANCTableProps {
+  data: Client[];
+}
+
+const ANCTable: React.FC<ANCTableProps> = props => {
+  return <ReactTable {...{ data: props.data, tableColumns: useColumns() }} />;
+};
+
 /** dumb component responsible for showing ANC listings */
 const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator, ANCArray } = props;
@@ -46,8 +55,6 @@ const ANCListView: React.FC<ANCListProps> = props => {
   const [filterState, addFilter, setFilterState] = useFilters();
 
   const state = useAsync({ promiseFn: loadANCList, service });
-
-  const columns = useColumns();
 
   return (
     <div>
@@ -59,7 +66,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
       <IfFulfilled state={state}>
         {data => (
           <Col>
-            <ReactTable {...{ tableColumns: columns, data: props.ANCArray }} />
+            <ANCTable data={props.ANCArray} />
           </Col>
         )}
       </IfFulfilled>
