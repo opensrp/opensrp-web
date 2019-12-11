@@ -3,6 +3,7 @@ import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
+  ALL,
   COMMUNE,
   COUNTRY,
   DISTRICT,
