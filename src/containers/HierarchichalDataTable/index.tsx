@@ -21,11 +21,9 @@ import {
   GROWTH_STATUS,
   HIERARCHICAL_DATA_URL,
   HIGH,
-  HIGH_RISK,
   INAPPROPRIATELY_FED,
   LOGFACE_RISK,
   LOW,
-  LOW_RISK,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_WOMAN,
@@ -39,6 +37,9 @@ import {
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
+  RED,
+  RED_ALERT,
+  RISK,
   SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
   STUNTED,
@@ -66,9 +67,9 @@ reducerRegistry.register(reducerName, locationsReducer);
 reducerRegistry.register(smsReducerName, smsReducer);
 
 export interface LocationWithData extends Location {
-  high_risk?: number;
+  redAlert?: number;
   inappropriateFeeding?: number;
-  low_risk?: number;
+  risk?: number;
   no_risk?: number;
   overweight?: number;
   stunting?: number;
@@ -83,6 +84,7 @@ interface State {
 }
 
 type RISK_HIGHLIGHTER_TYPE =
+  | RED
   | HIGH
   | LOW
   | NO
@@ -127,8 +129,8 @@ const defaultProps: Props = {
 };
 
 interface Totals {
-  high_risk?: number;
-  low_risk?: number;
+  redAlert?: number;
+  risk?: number;
   no_risk?: number;
   inappropriateFeeding?: number;
   overweight?: number;
@@ -157,15 +159,20 @@ function getVillageRiskTotals(
   }
   const reducer = (accumulator: Totals, dataItem: SmsData) => {
     switch ((dataItem as any)[field]) {
+      case RED:
+        return {
+          ...accumulator,
+          redAlert: (accumulator as any).redAlert + 1,
+        };
       case HIGH:
         return {
           ...accumulator,
-          high_risk: (accumulator as any).high_risk + 1,
+          risk: (accumulator as any).risk + 1,
         };
       case LOW:
         return {
           ...accumulator,
-          low_risk: (accumulator as any).low_risk + 1,
+          risk: (accumulator as any).risk + 1,
         };
       case NO_RISK_LOWERCASE:
         return {
@@ -199,9 +206,9 @@ function getVillageRiskTotals(
   let totalsMap: Totals;
   if (module !== NUTRITION) {
     totalsMap = {
-      high_risk: 0,
-      low_risk: 0,
       no_risk: 0,
+      redAlert: 0,
+      risk: 0,
     };
   } else {
     totalsMap = {
@@ -219,9 +226,9 @@ function getRiskTotals(locations: LocationWithData[], module: string) {
   const reducer = (accumulator: Totals, location: LocationWithData): Totals => {
     if (module !== NUTRITION) {
       return {
-        high_risk: (accumulator as any).high_risk + location.high_risk,
-        low_risk: (accumulator as any).low_risk + location.low_risk,
         no_risk: (accumulator as any).no_risk + location.no_risk,
+        redAlert: (accumulator as any).redAlert + location.redAlert,
+        risk: (accumulator as any).risk + location.risk,
       };
     } else {
       return {
@@ -236,9 +243,9 @@ function getRiskTotals(locations: LocationWithData[], module: string) {
   let totalsMap: Totals;
   if (module !== NUTRITION) {
     totalsMap = {
-      high_risk: 0,
-      low_risk: 0,
       no_risk: 0,
+      redAlert: 0,
+      risk: 0,
     };
   } else {
     totalsMap = {
@@ -252,7 +259,7 @@ function getRiskTotals(locations: LocationWithData[], module: string) {
 }
 function getTotal(riskTotals: Totals, module: string) {
   if (module !== NUTRITION) {
-    return (riskTotals as any).high_risk + riskTotals.low_risk + riskTotals.no_risk;
+    return (riskTotals as any).redAlert + riskTotals.risk + riskTotals.no_risk;
   } else {
     return (
       (riskTotals as any).overweight +
@@ -283,9 +290,9 @@ function addDataToLocations(
       if (module !== NUTRITION) {
         villagesWithData.push({
           ...locations.villages[village],
-          high_risk: villageRiskTotals.high_risk,
-          low_risk: villageRiskTotals.low_risk,
           no_risk: villageRiskTotals.no_risk,
+          redAlert: villageRiskTotals.redAlert,
+          risk: villageRiskTotals.risk,
           total: totalRisk,
         });
       } else {
@@ -312,9 +319,9 @@ function addDataToLocations(
       if (module !== NUTRITION) {
         communesWithData.push({
           ...locations.communes[commune],
-          high_risk: communeRisktotals.high_risk,
-          low_risk: communeRisktotals.low_risk,
           no_risk: communeRisktotals.no_risk,
+          redAlert: communeRisktotals.redAlert,
+          risk: communeRisktotals.risk,
           total: totalRisk,
         });
       } else {
@@ -342,9 +349,9 @@ function addDataToLocations(
       if (module !== NUTRITION) {
         districtsWithData.push({
           ...locations.districts[district],
-          high_risk: districtRisktotals.high_risk,
-          low_risk: districtRisktotals.low_risk,
           no_risk: districtRisktotals.no_risk,
+          redAlert: districtRisktotals.redAlert,
+          risk: districtRisktotals.risk,
           total: totalRisk,
         });
       } else {
@@ -372,9 +379,9 @@ function addDataToLocations(
       if (module !== NUTRITION) {
         provincesWithData.push({
           ...locations.provinces[province],
-          high_risk: provinceRisktotals.high_risk,
-          low_risk: provinceRisktotals.low_risk,
           no_risk: provinceRisktotals.no_risk,
+          redAlert: provinceRisktotals.redAlert,
+          risk: provinceRisktotals.risk,
           total: totalRisk,
         });
       } else {
@@ -557,8 +564,8 @@ class HierarchichalDataTable extends Component<Props, State> {
                     {this.props.module !== NUTRITION ? (
                       <tr>
                         <th className="default-width" />
-                        <th className="default-width">{HIGH_RISK}</th>
-                        <th className="default-width">{LOW_RISK}</th>
+                        <th className="default-width">{RED_ALERT}</th>
+                        <th className="default-width">{RISK}</th>
                         <th className="default-width">{NO_RISK}</th>
                         <th className="default-width">{TOTAL}</th>
                       </tr>
@@ -597,19 +604,20 @@ class HierarchichalDataTable extends Component<Props, State> {
                             </td>
                             <td
                               className={`default-width ${
+                                this.props.risk_highligter === RED ? this.props.risk_highligter : ''
+                              }`}
+                            >
+                              {element.redAlert}
+                            </td>
+                            <td
+                              className={`default-width ${
+                                this.props.risk_highligter === LOW ||
                                 this.props.risk_highligter === HIGH
                                   ? this.props.risk_highligter
                                   : ''
                               }`}
                             >
-                              {element.high_risk}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === LOW ? this.props.risk_highligter : ''
-                              }`}
-                            >
-                              {element.low_risk}
+                              {element.risk}
                             </td>
                             <td
                               className={`default-width ${
@@ -693,17 +701,20 @@ class HierarchichalDataTable extends Component<Props, State> {
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === HIGH ? this.props.risk_highligter : ''
+                              this.props.risk_highligter === RED ? this.props.risk_highligter : ''
                             }`}
                           >
-                            {element.high_risk}
+                            {element.redAlert}
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === LOW ? this.props.risk_highligter : ''
+                              this.props.risk_highligter === LOW ||
+                              this.props.risk_highligter === HIGH
+                                ? this.props.risk_highligter
+                                : ''
                             }`}
                           >
-                            {element.low_risk}
+                            {element.risk}
                           </td>
                           <td
                             className={`default-width ${
@@ -926,9 +937,9 @@ const getTotals = (dataToShow: LocationWithData[], module: string) => {
   const reducer = (accumulator: Partial<LocationWithData>, currentValue: any) => {
     if (module !== NUTRITION) {
       return {
-        high_risk: accumulator.high_risk + currentValue.high_risk,
-        low_risk: accumulator.low_risk + currentValue.low_risk,
         no_risk: accumulator.no_risk + currentValue.no_risk,
+        redAlert: accumulator.redAlert + currentValue.redAlert,
+        risk: accumulator.risk + currentValue.risk,
         total: accumulator.total + currentValue.total,
       };
     } else {
@@ -944,9 +955,9 @@ const getTotals = (dataToShow: LocationWithData[], module: string) => {
   let totalsMap: { [key: string]: number };
   if (module !== NUTRITION) {
     totalsMap = {
-      high_risk: 0,
-      low_risk: 0,
       no_risk: 0,
+      redAlert: 0,
+      risk: 0,
       total: 0,
     };
   } else {

@@ -14,6 +14,7 @@ import {
   NUTRITION,
   OVERWEIGHT,
   PREGNANCY,
+  RED,
   RED_ALERT,
   RISK,
   SEVERE_WASTING,
@@ -76,7 +77,7 @@ function DataCircleCard({
     {
       class: 'red',
       riskLabel: RED_ALERT,
-      riskType: HIGH,
+      riskType: RED,
       riskValue: redAlert,
     },
     {
