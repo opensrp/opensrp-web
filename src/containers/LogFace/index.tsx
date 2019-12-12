@@ -26,13 +26,10 @@ import {
   LOG_FACE,
   LOGFACE_SEARCH_PLACEHOLDER,
   NBC_AND_PNC,
-  NBC_AND_PNC_LOGFACE_SMS_TYPES,
   NBC_AND_PNC_LOGFACE_URL,
   NUTRITION,
-  NUTRITION_LOGFACE_SMS_TYPES,
   NUTRITION_LOGFACE_URL,
   PREGNANCY,
-  PREGNANCY_LOGFACE_SMS_TYPES,
   PREGNANCY_LOGFACE_URL,
   RISK,
   RISK_LEVEL,
@@ -65,7 +62,7 @@ import {
 import TestReducer, {
   fetchSms,
   getFilterArgs,
-  getFilteredSmsData,
+  getSmsData,
   reducerName,
   SmsData,
   smsDataFetched,
@@ -264,7 +261,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
           .then((result: SmsData[]) => {
             fetchSmsDataActionCreator(result);
           })
-          .catch(error => {
+          .catch(() => {
             // console.log(error);
           });
       }
@@ -606,7 +603,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 }
 
-const mapStateToprops = (state: any, ownProps: any): any => {
+const mapStateToprops = (state: any): any => {
   const result = {
     communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
@@ -614,24 +611,7 @@ const mapStateToprops = (state: any, ownProps: any): any => {
     filterArgsInStore: getFilterArgs(state),
     isUserLocationDataFetched: userLocationDataFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
-    smsData: getFilteredSmsData(state, getFilterArgs(state) as Array<
-      (smsData: SmsData) => boolean
-    >).filter((smsData: SmsData) => {
-      // here we filter based on the module we are in.
-      switch (ownProps.module) {
-        case PREGNANCY:
-          return PREGNANCY_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
-
-        case NBC_AND_PNC:
-          return NBC_AND_PNC_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
-
-        case NUTRITION:
-          return NUTRITION_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
-
-        default:
-          return true;
-      }
-    }),
+    smsData: getSmsData(state),
     userIdFetched: userIdFetched(state),
     userLocationData: getUserLocations(state),
     userUUID: getUserId(state),
