@@ -1,4 +1,5 @@
-import { Client, Household } from '../../ducks/clients';
+import { Client } from '../../ducks/clients';
+import { Household } from '../../ducks/households';
 import { Event } from '../events';
 export const client1: Client = {
   type: 'Client',
