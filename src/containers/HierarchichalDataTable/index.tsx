@@ -85,6 +85,7 @@ interface State {
 
 type RISK_HIGHLIGHTER_TYPE =
   | RED
+  | RISK
   | HIGH
   | LOW
   | NO
@@ -492,16 +493,23 @@ class HierarchichalDataTable extends Component<Props, State> {
       field = LOGFACE_RISK;
     }
     const villageData = nextProps.smsData.filter((dataItem: SmsData) => {
-      return (
-        locationIds.includes(dataItem.location_id) &&
-        (nextProps.risk_highligter === ALL
-          ? true
-          : nextProps.risk_highligter
-          ? (dataItem as any)[field].includes(
-              nextProps.risk_highligter ? nextProps.risk_highligter : ''
-            )
-          : true)
-      );
+      if (nextProps.risk_highligter === RISK) {
+        return (
+          (locationIds.includes(dataItem.location_id) && (dataItem as any)[field].includes(HIGH)) ||
+          (dataItem as any)[field].includes(LOW)
+        );
+      } else {
+        return (
+          locationIds.includes(dataItem.location_id) &&
+          (nextProps.risk_highligter === ALL
+            ? true
+            : nextProps.risk_highligter
+            ? (dataItem as any)[field].includes(
+                nextProps.risk_highligter ? nextProps.risk_highligter : ''
+              )
+            : true)
+        );
+      }
     });
 
     return {
@@ -613,8 +621,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                             </td>
                             <td
                               className={`default-width ${
-                                this.props.risk_highligter === LOW ||
-                                this.props.risk_highligter === HIGH
+                                this.props.risk_highligter === RISK
                                   ? this.props.risk_highligter
                                   : ''
                               }`}
@@ -710,10 +717,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === LOW ||
-                              this.props.risk_highligter === HIGH
-                                ? this.props.risk_highligter
-                                : ''
+                              this.props.risk_highligter === RISK ? this.props.risk_highligter : ''
                             }`}
                           >
                             {element.risk}
