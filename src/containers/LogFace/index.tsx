@@ -172,6 +172,18 @@ export class LogFace extends React.Component<PropsInterface, State> {
         filteredData: nextProps.smsData,
       };
     } else {
+      const smsDataInDescendingOrderByEventId: SmsData[] = prevState.filteredData.sort(
+        sortFunction
+      );
+      if (smsDataInDescendingOrderByEventId.length) {
+        const highestId = smsDataInDescendingOrderByEventId[0].event_id;
+        const smsData = nextProps.smsData.find((smsDataItem: SmsData) => {
+          return smsDataItem.event_id > highestId;
+        });
+        if (smsData) {
+          prevState.filteredData.push(smsData);
+        }
+      }
       return {
         filteredData: prevState.filteredData.filter(locationFilterFunction),
       };
