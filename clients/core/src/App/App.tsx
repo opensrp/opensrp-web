@@ -47,7 +47,6 @@ class App extends Component {
                 component={ConnectedClientList}
               />
 
-              {/* tslint:disable jsx-no-lambda */}
               <Route
                 exact={true}
                 path={LOGIN_URL}
@@ -65,7 +64,6 @@ class App extends Component {
                   />
                 )}
               />
-              {/* tslint:enable jsx-no-lambda */}
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                 exact={true}

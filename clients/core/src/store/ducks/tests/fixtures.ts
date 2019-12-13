@@ -4,7 +4,6 @@ import { Household } from '../../ducks/households';
 
 export const client1: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557670951023,
   serverVersion: 1557670950986,
   clientApplicationVersion: 2,
@@ -16,7 +15,6 @@ export const client1: Client = {
   addresses: [
     {
       preferred: null,
-      // tslint:disable-next-line: object-literal-sort-keys
       addressType: '',
       startDate: null,
       endDate: null,
@@ -53,7 +51,6 @@ export const client1: Client = {
 
 export const client2: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557670951165,
   serverVersion: 1557670950999,
   clientApplicationVersion: 2,
@@ -81,7 +78,6 @@ export const client2: Client = {
 
 export const client3: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557672169407,
   serverVersion: 1557672169404,
   clientApplicationVersion: 2,
@@ -93,7 +89,6 @@ export const client3: Client = {
   addresses: [
     {
       preferred: null,
-      // tslint:disable-next-line: object-literal-sort-keys
       addressType: '',
       startDate: null,
       endDate: null,
@@ -156,7 +151,6 @@ export const client4: Client = {
 };
 export const client5: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737485545,
   serverVersion: 1557737485527,
   clientApplicationVersion: 2,
@@ -184,7 +178,6 @@ export const client5: Client = {
 };
 export const client6: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737728445,
   serverVersion: 1557737728441,
   clientApplicationVersion: 2,
@@ -196,13 +189,11 @@ export const client6: Client = {
   addresses: [
     {
       preferred: null,
-      // tslint:disable-next-line: object-literal-sort-keys
       addressType: '',
       startDate: null,
       endDate: null,
       addressFields: {
         street: 'no street',
-        // tslint:disable-next-line: object-literal-sort-keys
         address2: '3',
       },
       latitude: null,
@@ -236,7 +227,6 @@ export const client6: Client = {
 };
 export const client7: Client = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1557737728487,
   serverVersion: 1557737728441,
   clientApplicationVersion: 2,
@@ -263,7 +253,6 @@ export const client7: Client = {
 };
 export const household1: Household = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1657737728487,
   serverVersion: 1557737728441,
   clientApplicationVersion: 2,
@@ -292,7 +281,6 @@ export const household1: Household = {
 
 export const household2: Household = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1757737728487,
   serverVersion: 1557737728441,
   clientApplicationVersion: 2,
@@ -321,7 +309,6 @@ export const household2: Household = {
 
 export const household3: Household = {
   type: 'Client',
-  // tslint:disable-next-line: object-literal-sort-keys
   dateCreated: 1857737728487,
   serverVersion: 1557737728441,
   clientApplicationVersion: 2,

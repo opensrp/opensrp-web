@@ -1,4 +1,3 @@
-/* tslint:disable object-literal-sort-keys */
 export const updateResponse = {
     ok: true,
     redirected: false,

@@ -1,4 +1,3 @@
-/* tslint:disable object-literal-sort-keys */
 export const plansListResponse = [
   {
     identifier: '0e85c238-39c1-4cea-a926-3d89f0c98427',
