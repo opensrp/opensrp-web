@@ -8,6 +8,9 @@ import { Router } from 'react-router';
 import ConnectedCompartments from '..';
 import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_FILTER_FUNCTION } from '../../../constants';
 import locationsReducer, {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocations,
   reducerName as locationsReducerName,
 } from '../../../store/ducks/locations';
 import smsReducer, {
@@ -16,6 +19,13 @@ import smsReducer, {
   SmsData,
 } from '../../../store/ducks/sms_events';
 import store from '../../../store/index';
+import {
+  communes,
+  districts,
+  provinces,
+  villages,
+} from '../../HierarchichalDataTable/test/fixtures';
+import { userLocations } from '../../LogFace/tests/userLocationFixtures';
 import { smsDataFixtures } from './fixtures';
 
 const history = createBrowserHistory();
@@ -23,6 +33,15 @@ reducerRegistry.register(smsReducerName, smsReducer);
 reducerRegistry.register(locationsReducerName, locationsReducer);
 
 describe('Compartments', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    store.dispatch(fetchLocations(provinces));
+    store.dispatch(fetchLocations(districts));
+    store.dispatch(fetchLocations(communes));
+    store.dispatch(fetchLocations(villages));
+    store.dispatch(fetchUserLocations(userLocations));
+    store.dispatch(fetchUserId('515ad0e9-fccd-4cab-8861-0ef3ecb831e0'));
+  });
   it('must render without crashing', () => {
     shallow(
       <Provider store={store}>
@@ -55,8 +74,11 @@ describe('Compartments', () => {
     // the sub-heading right below the title
     expect(toJson(wrapper.find('#breadcrumb'))).toMatchSnapshot('subtitle');
 
-    // ensure 3 data circle cards are found
-    expect(wrapper.find('DataCircleCard')).toHaveLength(3);
+    // ensure 0 data circle cards are found
+    expect(wrapper.find('DataCircleCard')).toHaveLength(0);
+
+    // ensure that we find a Ripple loader
+    expect(wrapper.find('Ripple')).toHaveLength(1);
 
     expect(wrapper.find('div.compartment-wrapper.compartments').find('Row')).toHaveLength(2);
   });
