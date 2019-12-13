@@ -15,6 +15,7 @@
         "jest": "jest --coverage --verbose --color",
         "test": "cd ../../ && yarn test packages/opensrp-server-service --verbose --collectCoverage=true && cd clients/core",
         "tsc": "tsc",
+        "lint": "eslint './**/*.{js,jsx,ts,tsx}'",
         "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
     },
     "jest": {
