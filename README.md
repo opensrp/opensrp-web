@@ -75,6 +75,34 @@ See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/d
 
 See [guidelines](docs/codeQuality.md) on recommended coding conventions for this project.
 
+## Creating a New Client
+
+```sh
+cd clients
+npx create-react-app my-new-client --typescript
+```
+
+remember to remove the `.igtignore` file created by npx
+
+Add a `.prettierrc` file such as this one.
+
+```sh
+{
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "es5"
+}
+```
+
+Add an `images.d.ts` file (image type definitions); an example can be found in `clients/core`
+
+Finally, you need to modify `test` and `lint` scripts in `clients/my-new-client/package.json` file to match these:
+
+```sh
+"test": "cp ./.env ../../.env && cd ../../ && yarn test clients/core --verbose --collectCoverage=true && cd clients/core",,
+"lint": "eslint './**/*.{js,jsx,ts,tsx}'"
+```
+
 ## Creating a New Package
 
 ```sh
@@ -99,16 +127,14 @@ It’s also important to have the new package start at a version like 0.0.0 beca
 
 Here's an example sample `package.json` for a package:
 
-```
+```json
 {
     "name": "@opensrp/my-new-package",
     "version": "0.0.0",
     "description": "My new my-new-package",
     "main": "dist/index.js",
     "types": "dist/types",
-    "files": [
-        "dist"
-    ],
+    "files": ["dist"],
     "publishConfig": {
         "access": "public"
     },
@@ -121,9 +147,7 @@ Here's an example sample `package.json` for a package:
     },
     "jest": {
         "automock": false,
-        "setupFiles": [
-            "../../setupTests"
-        ]
+        "setupFiles": ["../../setupTests"]
     },
     "bugs": {
         "url": "https://github.com/opensrp/opensrp-web/issues"
