@@ -57,14 +57,14 @@ export const setTotalRecords = (totalCount: number): SetTotalRecordsAction => ({
   type: SET_TOTAL_RECORDS,
 });
 
-// actions
-export const removeHouseholds = (): RemoveHouseholdsAction => removeHouseholdsAction;
-
 /** removeHouseholds action */
 export const removeHouseholdsAction: RemoveHouseholdsAction = {
   householdsById: {},
   type: REMOVE_HOUSEHOLDS,
 };
+
+// actions
+export const removeHouseholds = (): RemoveHouseholdsAction => removeHouseholdsAction;
 
 /** interface for household state in redux store */
 interface HouseholdState {

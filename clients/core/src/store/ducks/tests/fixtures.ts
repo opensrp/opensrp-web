@@ -1,5 +1,7 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
+/* eslint-disable @typescript-eslint/camelcase */
+
 export const client1: Client = {
   type: 'Client',
   // tslint:disable-next-line: object-literal-sort-keys

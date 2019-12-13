@@ -1,19 +1,19 @@
 .search-bar-icon {
   position: absolute;
-  color: #C2C2C2;
+  color: #c2c2c2;
   padding: 8px 18px;
   z-index: 10;
-  font-size:12px;
+  font-size: 12px;
 }
 
 .search-bar-input {
   padding-left: 56px;
-  caret-color: #0192D4;
+  caret-color: #0192d4;
   font-size: 12px;
 }
 
-.search-bar-input::placeholder{
-  color: #C2C2C2;
+.search-bar-input::placeholder {
+  color: #c2c2c2;
 }
 
 .form-control {
