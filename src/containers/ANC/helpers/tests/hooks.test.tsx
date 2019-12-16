@@ -1,8 +1,11 @@
 import { mount } from 'enzyme';
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 import { useParamFilters } from '../hooks';
 
 import { ReactWrapper } from 'enzyme';
+
+const act = ReactTestUtils.act;
 
 /** interface for the state that is returned  by the hook. */
 interface ReactWrapperWithHookState<T> extends ReactWrapper {
@@ -42,38 +45,46 @@ describe('src/containers/ANC/hooks.useParamsFilters', () => {
     jest.resetAllMocks();
   });
 
-  //   it('works just fine', () => {
-  //     const wrapper = HookWrapper(useParamFilters, mount);
+  it('works just fine', () => {
+    const wrapper = HookWrapper(useParamFilters, mount);
 
-  //     const { filterParams } = wrapper.getProps();
-  //     expect(filterParams).toEqual({});
-  //   });
+    const { filterParams } = wrapper.getProps();
+    expect(filterParams).toEqual({});
+  });
 
   it('appending filters work correctly', () => {
     const wrapper = HookWrapper(useParamFilters, mount);
-    const { appendFilters, filterParams } = wrapper.getProps();
-    expect(filterParams).toEqual({});
+    expect(wrapper.getProps().filterParams).toEqual({});
 
-    appendFilters({ pageSize: 2 });
+    act(() => {
+      wrapper.getProps().addFilters({ pageSize: 2 });
+    });
     wrapper.update();
     expect(wrapper.getProps().filterParams).toEqual({ pageSize: 2 });
 
-    appendFilters({ searchText: 'Doc' });
+    act(() => {
+      wrapper.getProps().addFilters({ searchText: 'Doc' });
+    });
     wrapper.update();
     expect(wrapper.getProps().filterParams).toEqual({ pageSize: 2, searchText: 'Doc' });
   });
 
-  //   it('resetsFilters correctly', () => {
-  //     const wrapper = HookWrapper(useParamFilters, mount);
-  //     const { renewFilters, filterParams } = wrapper.getProps();
-  //     expect(filterParams).toEqual({});
+  it('resetsFilters correctly', () => {
+    const wrapper = HookWrapper(useParamFilters, mount);
+    expect(wrapper.getProps().filterParams).toEqual({});
 
-  //     renewFilters({ pageSize: 5 });
-  //     wrapper.update();
-  //     expect(filterParams).toEqual({ pageSize: 2 });
+    act(() => {
+      wrapper.getProps().resetFilters({ pageSize: 5 });
+    });
 
-  //     renewFilters({ searchText: 'text' });
-  //     wrapper.update();
-  //     expect(filterParams).toEqual({ searchText: 'text' });
-  //   });
+    wrapper.update();
+    expect(wrapper.getProps().filterParams).toEqual({ pageSize: 5 });
+
+    act(() => {
+      wrapper.getProps().resetFilters({ searchText: 'text' });
+    });
+
+    wrapper.update();
+    expect(wrapper.getProps().filterParams).toEqual({ searchText: 'text' });
+  });
 });
