@@ -66,7 +66,7 @@ function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTabl
               <tr key={`tbody-tr-${i}`} {...row.getRowProps()}>
                 {row.cells.map((cell: any, index: number) => {
                   return (
-                    <td key={'tbody-td-${index}'} {...cell.getCellProps()}>
+                    <td key={`tbody-td-${index}`} {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </td>
                   );
