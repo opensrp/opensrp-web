@@ -14,7 +14,6 @@ import {
   NBC_AND_PNC_ANALYSIS_ENDPOINT,
   OPENSRP_LOGOUT_URL,
   SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
-  SUPERSET_SMS_DATA_SLICE,
 } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
@@ -290,25 +289,19 @@ export const Routes = (props: RoutesProps) => {
             exact={false}
             path={PREGNANCY_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={PREGNANCY} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NBC_AND_PNC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={NBC_AND_PNC} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NUTRITION_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={NUTRITION} />}
           />
           {/* tslint:disable jsx-no-lambda */}
           <Route

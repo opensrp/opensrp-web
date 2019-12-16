@@ -6,7 +6,6 @@ import {
   ALL,
   HIGH,
   INAPPROPRIATELY_FED,
-  LOW,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_WOMAN,
   NO,
