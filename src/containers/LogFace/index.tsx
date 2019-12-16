@@ -138,7 +138,7 @@ export const LogFace = ({
   useEffect(() => {
     removeFilterArgs();
     fetchData();
-  }, [removeFilterArgs]);
+  }, []);
 
   useEffect(() => {
     const intervalId: NodeJS.Timeout = setInterval(() => {
@@ -164,7 +164,7 @@ export const LogFace = ({
         clearInterval(intervalId);
       }
     };
-  }, [fetchSmsDataActionCreator, smsData]);
+  }, []);
 
   const [dropdownOpenRiskLevel, setDropdownOpenRiskLevel] = useState<boolean>(false);
   const [riskLabel, setRiskLabel] = useState<string>('');
@@ -173,6 +173,7 @@ export const LogFace = ({
   const [dropdownOpenType, setDropdownOpenType] = useState<boolean>(false);
   const [typeLabel, setTypeLabel] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filterString, setFilterString] = useState<string>('');
   const [filteredData, setFilteredData] = useState<SmsData[]>([]);
 
   useEffect(() => {
@@ -222,9 +223,6 @@ export const LogFace = ({
       }
     }
   }, [
-    riskLabel,
-    locationLabel,
-    typeLabel,
     userLocationData,
     userUUID,
     provinces,
@@ -232,7 +230,6 @@ export const LogFace = ({
     communes,
     villages,
     filterArgsInStore,
-    filteredData,
     removeFilterArgs,
     addFilterArgs,
     smsData,
@@ -245,52 +242,41 @@ export const LogFace = ({
     }
   };
 
-  const handleRiskLevelDropdownClick = (event: React.MouseEvent) => {
-    setRiskLabel((event.target as HTMLInputElement).innerText);
+  useEffect(() => {
     setFilteredData(
-      filterDataByDropDowns(smsData, {
+      filterDataByTextSearch(smsData, filterString, {
         locationLabel,
         riskLabel,
         typeLabel,
       }).sort(sortFunction)
     );
     resetCurrentPage();
+  }, [locationLabel, riskLabel, typeLabel]);
+
+  useEffect(() => {
+    setFilteredData(
+      filterDataByTextSearch(smsData, filterString, {
+        locationLabel,
+        riskLabel,
+        typeLabel,
+      }).sort(sortFunction)
+    );
+  }, [filterString]);
+
+  const handleRiskLevelDropdownClick = (event: React.MouseEvent) => {
+    setRiskLabel((event.target as HTMLInputElement).innerText);
   };
 
   const handleTermChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const filterString = (event.target as HTMLInputElement).value;
-    setFilteredData(
-      filterDataByTextSearch(smsData, filteredData, filterString, {
-        locationLabel,
-        riskLabel,
-        typeLabel,
-      }).sort(sortFunction)
-    );
-    resetCurrentPage();
+    setFilterString((event.target as HTMLInputElement).value);
   };
 
-  const handleLocationDropdownClick = (event: React.MouseEvent) => {
+  const handleLocationDropdownClick = async (event: React.MouseEvent) => {
     setLocationLabel((event.target as HTMLInputElement).innerText);
-    setFilteredData(
-      filterDataByDropDowns(smsData, {
-        locationLabel,
-        riskLabel,
-        typeLabel,
-      }).sort(sortFunction)
-    );
-    resetCurrentPage();
   };
 
   const handleTypeDropdownClick = (event: React.MouseEvent) => {
     setTypeLabel((event.target as HTMLInputElement).innerText);
-    setFilteredData(
-      filterDataByDropDowns(smsData, {
-        locationLabel,
-        riskLabel,
-        typeLabel,
-      }).sort(sortFunction)
-    );
-    resetCurrentPage();
   };
 
   const toggleTypeDropDown = () => {
@@ -375,7 +361,7 @@ export const LogFace = ({
                 <span>{locationLabel.length ? locationLabel : SELECT_LOCATION}</span>
               </DropdownToggle>
               <DropdownMenu>
-                {map(getAllLocations(filteredData).concat(ALL), location => {
+                {map(getAllLocations(smsData).concat(ALL), location => {
                   return (
                     <DropdownItem onClick={handleLocationDropdownClick} key={location}>
                       {location}
@@ -554,7 +540,6 @@ function getAllLocations(smsData: SmsData[]): string[] {
  */
 function filterDataByTextSearch(
   allSmsData: SmsData[],
-  filteredSmsData: SmsData[],
   filterString: string,
   dropDownLabels: DropDownLabels
 ): SmsData[] {
@@ -564,13 +549,9 @@ function filterDataByTextSearch(
   );
   let smsDataFilteredByDropDowns = allSmsData;
   if (isFiltered) {
-    if (!filterString.length) {
-      smsDataFilteredByDropDowns = filterDataByDropDowns(allSmsData, dropDownLabels);
-    } else {
-      smsDataFilteredByDropDowns = filteredSmsData.length
-        ? filteredSmsData
-        : filterDataByDropDowns(allSmsData, dropDownLabels);
-    }
+    smsDataFilteredByDropDowns = filterDataByDropDowns(allSmsData, dropDownLabels);
+  } else {
+    smsDataFilteredByDropDowns = allSmsData;
   }
   return smsDataFilteredByDropDowns.filter(
     dataItem =>
@@ -596,7 +577,7 @@ function filterDataByDropDowns(smsData: SmsData[], dropDownLabels: DropDownLabel
         ? dataItem.logface_risk.toLowerCase().includes(allLabels[0])
         : allLabels[0] === ALL || !allLabels[0].length) &&
       (allLabels[1].length && allLabels[1] !== ALL
-        ? dataItem.health_worker_location_name.includes(allLabels[1])
+        ? dataItem.health_worker_location_name.replace(/\s+/g, ' ').includes(allLabels[1])
         : allLabels[1] === ALL || !allLabels[1].length) &&
       (allLabels[2].length && allLabels[2] !== ALL
         ? dataItem.sms_type.includes(allLabels[2])
