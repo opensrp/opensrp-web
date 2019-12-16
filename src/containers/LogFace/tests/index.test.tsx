@@ -6,7 +6,7 @@ import toJson from 'enzyme-to-json';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ConnectedLogFace from '..';
-import { DEFAULT_NUMBER_OF_LOGFACE_ROWS } from '../../../constants';
+import { DEFAULT_NUMBER_OF_LOGFACE_ROWS, PREGNANCY } from '../../../constants';
 import store from '../../../store';
 import reducer, {
   fetchLocations,
@@ -14,7 +14,7 @@ import reducer, {
   fetchUserLocations,
   reducerName,
 } from '../../../store/ducks/locations';
-import { fetchSms } from '../../../store/ducks/sms_events';
+import { fetchSms, removeSms } from '../../../store/ducks/sms_events';
 import {
   communes,
   districts,
@@ -27,7 +27,10 @@ import { userLocations } from './userLocationFixtures';
 reducerRegistry.register(reducerName, reducer);
 
 describe('components/ConnectedHeader', () => {
-  const props = { module: 'Pregnancy' };
+  const props = { module: PREGNANCY };
+  afterEach(() => {
+    store.dispatch(removeSms);
+  });
   beforeEach(() => {
     jest.resetAllMocks();
     store.dispatch(fetchLocations(provinces));
@@ -37,7 +40,6 @@ describe('components/ConnectedHeader', () => {
     store.dispatch(fetchUserLocations(userLocations));
     store.dispatch(fetchUserId('515ad0e9-fccd-4cab-8861-0ef3ecb831e0'));
   });
-
   it('renders without crashing', () => {
     shallow(
       <Provider store={store}>
@@ -49,9 +51,13 @@ describe('components/ConnectedHeader', () => {
   it('renders correctly', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ConnectedLogFace {...props} />
+        <ConnectedRouter history={history}>
+          <ConnectedLogFace {...props} />
+        </ConnectedRouter>
       </Provider>
     );
+
+    wrapper.update();
     expect(toJson(wrapper.find('table'))).toMatchSnapshot('table snapshot');
     expect(toJson(wrapper.find('.location-type-filter'))).toMatchSnapshot('filter div');
     expect(toJson(wrapper.find('input#input'))).toMatchSnapshot('search div');
@@ -76,6 +82,7 @@ describe('components/ConnectedHeader', () => {
   });
 
   it('search works correctly', () => {
+    store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
         <ConnectedRouter history={history}>
@@ -85,7 +92,7 @@ describe('components/ConnectedHeader', () => {
     );
 
     expect(wrapper.find('input').length).toBe(1);
-    wrapper.find('input').simulate('change', { target: { value: '1569837448461' } });
+    // wrapper.find('input').simulate('change', { target: { value: '1569837448461' } });
     // + 1 is added here to unclude the header `tr`
     expect(wrapper.find('tr').length).toBe(DEFAULT_NUMBER_OF_LOGFACE_ROWS + 1);
   });

@@ -283,7 +283,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
-            disabled={false}
+            disabled={true}
             id="dropdown-basic"
             variant="success"
           >
@@ -296,7 +296,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
-                  disabled={false}
+                  disabled={true}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -307,8 +307,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary"
-                    disabled={false}
+                    className="dropdown-toggle btn btn-secondary disabled"
+                    disabled={true}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
