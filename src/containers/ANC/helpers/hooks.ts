@@ -17,11 +17,11 @@ export function useParamFilters() {
   /** filter params will be added to those already existing
    * @param {FilterStateAction} params - the filter param to add to state
    */
-  const appendFilters = (params: FilterStateAction) =>
+  const addFilters = (params: FilterStateAction) =>
     setFilterFilterParams({ ...filterParams, ...params });
 
   /** repopulates the state with new filter params */
   const resetFilters = (params: FilterStateAction) => setFilterFilterParams({ ...params });
 
-  return { filterParams, setFilterFilterParams, appendFilters, resetFilters };
+  return { filterParams, setFilterFilterParams, addFilters, resetFilters };
 }
