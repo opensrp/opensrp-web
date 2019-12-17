@@ -1,7 +1,9 @@
 import * as gatekeeper from '@onaio/gatekeeper';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 
-import { headerShouldNotRender, oAuthUserInfoGetter } from '../utils';
+import { smsDataFixtures } from '../../containers/Compartments/test/fixtures';
+import { groupBy, headerShouldNotRender, oAuthUserInfoGetter } from '../utils';
+import groupedSmsData from './fixtures';
 
 jest.mock('@onaio/gatekeeper', () => ({
   getOnadataUserInfo: jest.fn(),
@@ -32,5 +34,9 @@ describe('helpers/utils', () => {
   it('Ensure header should render works correctly', () => {
     window.history.pushState({}, 'Page Title', '/login');
     expect(headerShouldNotRender()).toBe(true);
+  });
+
+  it('Ensure groupBy works correctly', () => {
+    expect(groupBy(smsDataFixtures.slice(0, 3), 'event_id')).toEqual(groupedSmsData);
   });
 });
