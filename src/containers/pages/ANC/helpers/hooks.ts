@@ -22,7 +22,7 @@ export interface FilterStateAction {
 /** encapsulates state holding functions that will be applied
  * to the store data as filters.
  */
-export function useFilters() {
+export function useFilterFunctions() {
   const [filters, setFilters] = useState<FilterState>({});
 
   const addFilters = (action: FilterStateAction) =>

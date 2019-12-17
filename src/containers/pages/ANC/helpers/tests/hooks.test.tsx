@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import { ReactWrapper } from 'enzyme';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import { useFilters } from '../hooks';
+import { useFilterFunctions } from '../hooks';
 import { anotherFilterStateAction, filterStateAction } from './fixtures';
 
 const act = ReactTestUtils.act;
@@ -46,14 +46,14 @@ describe('src/containers/ANC/hooks.useParamsFilters', () => {
   });
 
   it('works just fine', () => {
-    const wrapper = HookWrapper(useFilters, mount);
+    const wrapper = HookWrapper(useFilterFunctions, mount);
 
     const { getFilters } = wrapper.getProps();
     expect(getFilters()).toEqual([]);
   });
 
   it('adding filters work correctly', () => {
-    const wrapper = HookWrapper(useFilters, mount);
+    const wrapper = HookWrapper(useFilterFunctions, mount);
 
     act(() => {
       wrapper.getProps().addFilters(filterStateAction);
@@ -76,7 +76,7 @@ describe('src/containers/ANC/hooks.useParamsFilters', () => {
   });
 
   it('adding filters with same id correctly', () => {
-    const wrapper = HookWrapper(useFilters, mount);
+    const wrapper = HookWrapper(useFilterFunctions, mount);
 
     act(() => {
       wrapper.getProps().addFilters(filterStateAction);
@@ -99,7 +99,7 @@ describe('src/containers/ANC/hooks.useParamsFilters', () => {
   });
 
   it('resets filters corectly', () => {
-    const wrapper = HookWrapper(useFilters, mount);
+    const wrapper = HookWrapper(useFilterFunctions, mount);
 
     act(() => {
       wrapper.getProps().addFilters(filterStateAction);
