@@ -20,7 +20,7 @@ import {
   SMS_FILTER_FUNCTION,
   STUNTED,
 } from '../../constants';
-import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
+import { getLinkToHierarchichalDataTable, getLinkToPatientDetail } from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';

@@ -13,11 +13,9 @@ import { PaginationData, Paginator, PaginatorProps } from '../../components/Pagi
 import RiskColoring from '../../components/RiskColoring';
 import {
   GET_FORM_DATA_ROW_LIMIT,
-  LOCATION_SLICES,
   SUPERSET_FETCH_TIMEOUT_INTERVAL,
   SUPERSET_PREGNANCY_DATA_EXPORT,
   SUPERSET_SMS_DATA_SLICE,
-  USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
@@ -40,25 +38,21 @@ import {
   TYPE,
 } from '../../constants';
 import {
+  fetchData,
   getFilterFunctionAndLocationLevel,
   getLinkToPatientDetail,
   getLocationId,
   sortFunction,
 } from '../../helpers/utils';
-import { OpenSRPService } from '../../services/opensrp';
 import supersetFetch from '../../services/superset';
-import store from '../../store';
 import {
   fetchLocations,
-  fetchUserId,
   fetchUserLocations,
   getLocationsOfLevel,
   getUserId,
   getUserLocations,
   Location,
-  userIdFetched,
   UserLocation,
-  userLocationDataFetched,
 } from '../../store/ducks/locations';
 import locationsReducer, { reducerName as locationReducerName } from '../../store/ducks/locations';
 import {
@@ -457,46 +451,6 @@ export const LogFace = ({
     </div>
   );
 };
-
-/**
- * fetch the following data asynchronously and add to store:
- * a. userId
- * b. USER_LOCATION_DATA_SLICE
- * c. LOCATION_SLICES
- * d. SUPERSET_SMS_DATA_SLICE
- */
-function fetchData() {
-  if (!userIdFetched(store.getState())) {
-    const opensrpService = new OpenSRPService('/security/authenticate');
-
-    opensrpService.read('').then((response: any) => {
-      store.dispatch(fetchUserId((response as any).user.attributes._PERSON_UUID));
-    });
-  }
-
-  // fetch user location details
-  if (!userLocationDataFetched(store.getState())) {
-    supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
-      store.dispatch(fetchUserLocations(result));
-    });
-  }
-
-  // fetch all location slices
-  for (const slice in LOCATION_SLICES) {
-    if (slice) {
-      supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
-        store.dispatch(fetchLocations(result));
-      });
-    }
-  }
-
-  // check if sms data is fetched and then fetch if not fetched already
-  if (!smsDataFetched(store.getState())) {
-    supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
-      store.dispatch(fetchSms(result));
-    });
-  }
-}
 
 /**
  * @param {string} module a string represeting the module this logface is being used for.

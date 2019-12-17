@@ -1,6 +1,12 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
-import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
+import {
+  LOCATION_SLICES,
+  ONADATA_OAUTH_STATE,
+  OPENSRP_OAUTH_STATE,
+  SUPERSET_SMS_DATA_SLICE,
+  USER_LOCATION_DATA_SLICE,
+} from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
   ALL,
@@ -26,8 +32,19 @@ import {
   VIETNAM_COUNTRY_LOCATION_ID,
   VILLAGE,
 } from '../constants';
-import { Location, UserLocation } from '../store/ducks/locations';
-import { SmsData } from '../store/ducks/sms_events';
+import { OpenSRPService } from '../services/opensrp';
+import supersetFetch from '../services/superset';
+import store from '../store';
+import {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocations,
+  Location,
+  userIdFetched,
+  UserLocation,
+  userLocationDataFetched,
+} from '../store/ducks/locations';
+import { fetchSms, SmsData, smsDataFetched } from '../store/ducks/sms_events';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
@@ -470,5 +487,45 @@ export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
     return `${prependWith}/${PATIENT_DETAIL}/${smsData.anc_id}`;
   } else {
     return `#`;
+  }
+}
+
+/**
+ * fetch the following data asynchronously from superset and add to store:
+ * a. userId
+ * b. USER_LOCATION_DATA_SLICE
+ * c. LOCATION_SLICES
+ * d. SUPERSET_SMS_DATA_SLICE
+ */
+export function fetchData() {
+  if (!userIdFetched(store.getState())) {
+    const opensrpService = new OpenSRPService('/security/authenticate');
+
+    opensrpService.read('').then((response: any) => {
+      store.dispatch(fetchUserId((response as any).user.attributes._PERSON_UUID));
+    });
+  }
+
+  // fetch user location details
+  if (!userLocationDataFetched(store.getState())) {
+    supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+      store.dispatch(fetchUserLocations(result));
+    });
+  }
+
+  // fetch all location slices
+  for (const slice in LOCATION_SLICES) {
+    if (slice) {
+      supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+        store.dispatch(fetchLocations(result));
+      });
+    }
+  }
+
+  // check if sms data is fetched and then fetch if not fetched already
+  if (!smsDataFetched(store.getState())) {
+    supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
+      store.dispatch(fetchSms(result));
+    });
   }
 }
