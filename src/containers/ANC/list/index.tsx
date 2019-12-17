@@ -22,7 +22,7 @@ import { useColumns } from './helpers/tableDefinition';
 reducerRegistry.register(clientReducerName, clientReducer);
 
 /** types for ANCList page component props */
-interface ANCListProps {
+export interface ANCListProps {
   /** creates action that dispatched , adds clients to store */
   fetchClientsCreator: typeof fetchClients;
   /** the opensrpService */
@@ -47,7 +47,7 @@ const ANCTable: React.FC<ANCTableProps> = props => {
 };
 
 /** dumb component responsible for showing ANC listings */
-const ANCListView: React.FC<ANCListProps> = props => {
+export const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator, ANCArray } = props;
 
   const state = useAsync({ promiseFn: loadANCList, service });
@@ -58,7 +58,7 @@ const ANCListView: React.FC<ANCListProps> = props => {
       <IfPending state={state}>
         <Loading />
       </IfPending>
-      <IfRejected state={state}>{error => alert(error.message)}</IfRejected>
+      <IfRejected state={state}>{error => <h2>{error.message}</h2>}</IfRejected>
       <IfFulfilled state={state}>
         {data => (
           <Col>
