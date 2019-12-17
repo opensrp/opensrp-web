@@ -159,7 +159,9 @@ export function getFilterFunctionAndLocationLevel(
   if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
     userLocationLevel = 0;
     locationFilterFunction = () => true;
-  } else if (locationIdIn(userLocationId, provinces)) {
+  }
+
+  if (locationIdIn(userLocationId, provinces)) {
     userLocationLevel = 1;
     locationFilterFunction = (smsData: SmsData): boolean => {
       // tslint:disable-next-line: no-shadowed-variable
@@ -175,7 +177,9 @@ export function getFilterFunctionAndLocationLevel(
         return false;
       }
     };
-  } else if (locationIdIn(userLocationId, districts)) {
+  }
+
+  if (locationIdIn(userLocationId, districts)) {
     userLocationLevel = 2;
     locationFilterFunction = (smsData: SmsData): boolean => {
       // tslint:disable-next-line: no-shadowed-variable
@@ -188,7 +192,9 @@ export function getFilterFunctionAndLocationLevel(
         return false;
       }
     };
-  } else if (locationIdIn(userLocationId, communes)) {
+  }
+
+  if (locationIdIn(userLocationId, communes)) {
     userLocationLevel = 3;
     locationFilterFunction = (smsData: SmsData): boolean => {
       // tslint:disable-next-line: no-shadowed-variable
@@ -201,7 +207,9 @@ export function getFilterFunctionAndLocationLevel(
         return false;
       }
     };
-  } else if (locationIdIn(userLocationId, villages)) {
+  }
+
+  if (locationIdIn(userLocationId, villages)) {
     userLocationLevel = 4;
     locationFilterFunction = (smsData: SmsData): boolean => {
       return userLocationId === smsData.location_id;
