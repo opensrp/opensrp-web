@@ -134,13 +134,12 @@ export class LogFace extends React.Component<PropsInterface, State> {
     const allLabels: string[] = [riskLabel, locationLabel, typeLabel];
     const userLocationId = getLocationId(nextProps.userLocationData, nextProps.userUUID);
 
-    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(
-      userLocationId,
+    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(userLocationId, [
       nextProps.provinces,
       nextProps.districts,
       nextProps.communes,
-      nextProps.villages
-    );
+      nextProps.villages,
+    ]);
     if (
       locationFilterFunction &&
       !(

@@ -148,10 +148,7 @@ export interface FilterFunctionAndLocationLevel {
  */
 export function getFilterFunctionAndLocationLevel(
   userLocationId: string,
-  provinces: Location[],
-  districts: Location[],
-  communes: Location[],
-  villages: Location[]
+  [provinces, districts, communes, villages]: Location[][]
 ): FilterFunctionAndLocationLevel {
   let locationFilterFunction: (smsData: SmsData) => boolean = () => {
     return false;

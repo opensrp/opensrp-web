@@ -133,10 +133,7 @@ class Compartments extends React.Component<Props, State> {
 
     const { locationLevel, locationFilterFunction } = getFilterFunctionAndLocationLevel(
       userLocationId,
-      props.provinces,
-      props.districts,
-      props.communes,
-      props.villages
+      [props.provinces, props.districts, props.communes, props.villages]
     );
 
     if (
