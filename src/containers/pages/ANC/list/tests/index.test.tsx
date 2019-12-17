@@ -2,10 +2,10 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import ConnectedANCListView, { ANCListProps, ANCListView } from '..';
-import { OpenSRPService } from '../../../../services/opensrp';
-import store from '../../../../store';
-import * as clientDux from '../../../../store/ducks/clients';
+import ConnectedANCListView, { ANCListProps, ANCListView } from '../../list';
+import { OpenSRPService } from '../../../../../services/opensrp';
+import store from '../../../../../store';
+import * as clientDux from '../../../../../store/ducks/clients';
 import { allANC } from './fixtures';
 
 // tslint:disable-next-line: no-var-requires

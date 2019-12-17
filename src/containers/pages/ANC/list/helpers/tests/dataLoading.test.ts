@@ -1,5 +1,5 @@
-import { OpenSRPService } from '../../../../../services/opensrp';
-import { fetchClients } from '../../../../../store/ducks/clients';
+import { OpenSRPService } from '../../../../../../services/opensrp';
+import { fetchClients } from '../../../../../../store/ducks/clients';
 import { allANC } from '../../tests/fixtures';
 import { loadANCList } from '../dataLoading';
 

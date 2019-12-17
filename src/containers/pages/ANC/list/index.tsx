@@ -5,16 +5,16 @@ import { IfFulfilled, IfPending, IfRejected, useAsync } from 'react-async';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
-import { ReactTable } from '../../../components/ReactTable';
-import { OpenSRPService } from '../../../services/opensrp';
+import Loading from '../../../../components/page/Loading';
+import { ReactTable } from '../../../../components/ReactTable';
+import { OpenSRPService } from '../../../../services/opensrp';
 import clientReducer, {
   Client,
   fetchClients,
   reducerName as clientReducerName,
-} from '../../../store/ducks/clients';
+} from '../../../../store/ducks/clients';
 // TODO - remove fixtures.
-import { allANC } from '../../ANC/list/tests/fixtures';
+import { allANC } from './tests/fixtures';
 import { loadANCList } from './helpers/dataLoading';
 import { useColumns } from './helpers/tableDefinition';
 

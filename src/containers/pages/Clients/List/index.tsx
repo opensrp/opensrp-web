@@ -4,15 +4,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
-import { OpenSRPService } from '../../../services/opensrp';
+import Loading from '../../../../components/page/Loading';
+import { OPENSRP_CLIENT_ENDPOINT } from '../../../../configs/env';
+import { OpenSRPService } from '../../../../services/opensrp';
 import clientsReducer, {
   Client,
   fetchClients,
   getClientsArray,
   reducerName as clientsReducerName,
-} from '../../../store/ducks/clients';
+} from '../../../../store/ducks/clients';
 import './clientList.css';
 
 /** register the clients reducer */

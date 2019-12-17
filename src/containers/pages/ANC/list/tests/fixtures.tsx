@@ -1,4 +1,4 @@
-import { Client } from '../../../../store/ducks/clients';
+import { Client } from '../../../../../store/ducks/clients';
 
 // tslint:disable: object-literal-sort-keys
 export const allANC: any[] = [
