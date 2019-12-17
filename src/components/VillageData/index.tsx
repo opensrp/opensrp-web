@@ -6,8 +6,6 @@ import {
   GRAVIDITY,
   LOCATION,
   NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_WOMAN,
-  NUTRITION,
   PARITY,
   PATIENT_ID,
   PREGNANCY,
@@ -23,7 +21,7 @@ import './index.css';
 export interface Props {
   current_level: number;
   smsData: SmsData[];
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
+  module: string;
 }
 
 interface State {

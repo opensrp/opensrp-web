@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
-import { ConnectedLogout, ConnectedOauthCallback } from '@onaio/gatekeeper';
+import { ConnectedLogout, ConnectedOauthCallback, LogoutProps } from '@onaio/gatekeeper';
 import { isAuthenticated } from '@onaio/session-reducer';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -252,7 +252,9 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={LOGOUT_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => <ConnectedLogout {...{ logoutURL: OPENSRP_LOGOUT_URL }} />}
+            component={() => (
+              <ConnectedLogout {...({ logoutURL: OPENSRP_LOGOUT_URL } as Partial<LogoutProps>)} />
+            )}
           />
 
           <ConnectedPrivateRoute
