@@ -82,7 +82,7 @@ interface Props {
   villages: Location[];
   smsData: SmsData[];
   compartMentUrl: string;
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
+  module: string;
   permissionLevel: number;
 }
 

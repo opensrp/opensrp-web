@@ -403,7 +403,7 @@ export function buildHeaderBreadCrumb(
  * @return link to module compartment
  */
 export function getModuleLink(
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
+  module: string
 ): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
   switch (module) {
     case PREGNANCY:
@@ -421,16 +421,16 @@ export function getModuleLink(
 
 /**
  * Get a link to the HierrarchichalDataTable component
- * @param {HIGH | LOW | NO} riskLevel string value that will be passed to hierarchichalDataTable
+ * @param {string} riskLevel string value that will be passed to hierarchichalDataTable
  * as prop. representing that column should be coloured.
- * @param {PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''} module string representing the module
+ * @param {string} module string representing the module
  * @param {string} title title to be passed to hierarchichal data table as a prop
  * @param {number} permissionLevel - number ranging from 0 - 4 that represents the permission level of the user.
  * @param {string} locationId - the users location id.
  */
 export function getLinkToHierarchichalDataTable(
-  riskLevel: HIGH | LOW | NO,
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '',
+  riskLevel: string,
+  module: string,
   title: string,
   permissionLevel: number,
   locationId: string

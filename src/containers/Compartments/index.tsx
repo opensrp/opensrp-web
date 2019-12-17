@@ -78,7 +78,7 @@ interface Props {
   addFilterArgs: any;
   removeFilterArgs: any;
   filterArgs: SMS_FILTER_FUNCTION[];
-  module: PREGNANCY | NBC_AND_PNC | NUTRITION | '';
+  module: string;
   provinces: Location[];
   districts: Location[];
   communes: Location[];
