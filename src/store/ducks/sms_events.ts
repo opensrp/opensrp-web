@@ -29,12 +29,7 @@ export interface SmsData {
   mother_symptoms: string;
 }
 
-export interface SmsDataByEventId {
-  [key: string]: SmsData;
-}
-
 // actions
-
 /** FETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 /** REMOVE_SMS action type */
