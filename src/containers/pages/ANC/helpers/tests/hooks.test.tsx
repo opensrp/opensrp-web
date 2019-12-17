@@ -1,10 +1,9 @@
 import { mount } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import { FilterStateAction, useFilters } from '../hooks';
-
-import { ReactWrapper } from 'enzyme';
-import { any } from 'prop-types';
+import { useFilters } from '../hooks';
+import { anotherFilterStateAction, filterStateAction } from './fixtures';
 
 const act = ReactTestUtils.act;
 
@@ -41,10 +40,6 @@ export function HookWrapper<ExpectedState = any>(
   return wrapper;
 }
 
-/** test all setter functions
- * test
- */
-
 describe('src/containers/ANC/hooks.useParamsFilters', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -53,48 +48,70 @@ describe('src/containers/ANC/hooks.useParamsFilters', () => {
   it('works just fine', () => {
     const wrapper = HookWrapper(useFilters, mount);
 
-    const { filters } = wrapper.getProps();
-    expect(filters).toEqual({});
+    const { getFilters } = wrapper.getProps();
+    expect(getFilters()).toEqual([]);
   });
 
   it('adding filters work correctly', () => {
     const wrapper = HookWrapper(useFilters, mount);
-    expect(wrapper.getProps().filters).toEqual({});
 
     act(() => {
-      const filterStateAction: FilterStateAction = {
-        filterId: 'random',
-        fitlerFunction: f => !!f,
-        properties: {},
-      };
-      wrapper.getProps().addFilters();
+      wrapper.getProps().addFilters(filterStateAction);
     });
     wrapper.update();
-    expect(wrapper.getProps().filters).toEqual({ pageSize: 2 });
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
 
     act(() => {
-      wrapper.getProps().addFilters({ searchText: 'Doc' });
+      wrapper.getProps().addFilters(anotherFilterStateAction);
     });
     wrapper.update();
-    expect(wrapper.getProps().filters).toEqual({ pageSize: 2, searchText: 'Doc' });
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction, anotherFilterStateAction]);
+
+    act(() => {
+      wrapper.getProps().removeFilters();
+    });
+    wrapper.update();
+    expect(wrapper.getProps().getFilters()).toEqual([]);
   });
 
-  it('resetsFilters correctly', () => {
+  it('adding filters with same id correctly', () => {
     const wrapper = HookWrapper(useFilters, mount);
-    expect(wrapper.getProps().filters).toEqual({});
 
     act(() => {
-      wrapper.getProps().resetFilters({ pageSize: 5 });
+      wrapper.getProps().addFilters(filterStateAction);
     });
-
     wrapper.update();
-    expect(wrapper.getProps().filters).toEqual({ pageSize: 5 });
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
 
     act(() => {
-      wrapper.getProps().resetFilters({ searchText: 'text' });
+      wrapper.getProps().addFilters({ ...anotherFilterStateAction, filterId: 'random' });
     });
-
     wrapper.update();
-    expect(wrapper.getProps().filters).toEqual({ searchText: 'text' });
+    expect(wrapper.getProps().getFilters()).toEqual([
+      { ...anotherFilterStateAction, filterId: 'random' },
+    ]);
+    expect(wrapper.getProps().getFilterById('random')).toEqual({
+      ...anotherFilterStateAction,
+      filterId: 'random',
+    });
+  });
+
+  it('resets filters corectly', () => {
+    const wrapper = HookWrapper(useFilters, mount);
+
+    act(() => {
+      wrapper.getProps().addFilters(filterStateAction);
+    });
+    wrapper.update();
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
+    expect(wrapper.getProps().getFilters()).toEqual([filterStateAction]);
+
+    act(() => {
+      wrapper.getProps().resetFilters(anotherFilterStateAction);
+    });
+    wrapper.update();
+    expect(wrapper.getProps().getFilters()).toEqual([anotherFilterStateAction]);
   });
 });
