@@ -16,7 +16,6 @@ import clientReducer, {
 // TODO - remove fixtures.
 import { allANC } from '../../ANC/list/tests/fixtures';
 import { loadANCList } from './helpers/dataLoading';
-import { useFilters } from './helpers/hooks';
 import { useColumns } from './helpers/tableDefinition';
 
 /**  register clients reducer */
@@ -50,9 +49,6 @@ const ANCTable: React.FC<ANCTableProps> = props => {
 /** dumb component responsible for showing ANC listings */
 const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator, ANCArray } = props;
-
-  /** these filters are applied to the data as its being retrieved from the store */
-  const [filterState, addFilter, setFilterState] = useFilters();
 
   const state = useAsync({ promiseFn: loadANCList, service });
 
