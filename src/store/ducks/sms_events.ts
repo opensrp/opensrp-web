@@ -155,7 +155,7 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
  * @return { { [key: string] : SmsData}[] } - SmsData object[] as values, respective ids as keys
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
-  return Object.values((state as any)[reducerName].smsData);
+  return values((state as any)[reducerName].smsData);
 }
 
 /** returns true if sms data has been fetched from superset and false
