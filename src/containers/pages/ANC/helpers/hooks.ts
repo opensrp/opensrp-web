@@ -1,21 +1,22 @@
+import { get, values } from 'lodash';
 import { useState } from 'react';
+import { FlexObject } from '../../../../helpers/utils';
 
 /** types for a function used as to filter */
 export type FilterFunction = <T>(dataObj: T) => boolean;
 
-/** describes how filter state information will be stored */
+/** describes how filter state information will be stored ; a filter id as the key
+ * whose value is the filter function and arbitrary miscellaneous obj.
+ */
 interface FilterState {
-  [k: string]: {
-    filter: FilterFunction;
-    [key: string]: any;
-  };
+  [filterId: string]: FilterStateAction;
 }
 
 /** interface for dataObj handled by setFilterState */
 export interface FilterStateAction {
   filterId: string;
   filterFunction: FilterFunction;
-  properties: { [key: string]: any };
+  misc: FlexObject;
 }
 
 /** encapsulates state holding functions that will be applied
@@ -27,13 +28,18 @@ export function useFilters() {
   const addFilters = (action: FilterStateAction) =>
     setFilters({
       ...filters,
-      [action.filterId]: { filter: action.filterFunction, ...action.properties },
+      [action.filterId]: { ...action },
     });
 
   const resetFilters = (action: FilterStateAction) =>
     setFilters({
-      [action.filterId]: { filter: action.filterFunction, ...action.properties },
+      [action.filterId]: { ...action },
     });
 
-  return [filters, addFilters, setFilters, resetFilters];
+  const getFilters = () => values(filters);
+  const getFilterById = (filterId: string) => get(filters, filterId, null);
+
+  const removeFilters = () => setFilters({});
+
+  return { addFilters, resetFilters, getFilters, getFilterById, removeFilters };
 }
