@@ -62,10 +62,12 @@ export function headerShouldNotRender(): boolean {
 export function groupBy(list: FlexObject[], field: string): FlexObject {
   const dataMap: FlexObject = {};
   list.forEach((listElement: FlexObject) => {
-    if (!dataMap[listElement[field]]) {
-      dataMap[listElement[field]] = {
-        ...listElement,
-      };
+    if (listElement[field]) {
+      if (!dataMap[listElement[field]]) {
+        dataMap[listElement[field]] = {
+          ...listElement,
+        };
+      }
     }
   });
   return dataMap;
