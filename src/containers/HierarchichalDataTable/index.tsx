@@ -22,6 +22,7 @@ import {
   HIERARCHICAL_DATA_URL,
   HIGH,
   INAPPROPRIATELY_FED,
+  INAPPROPRIATELY_FED_CAPITALIZED,
   LOGFACE_RISK,
   LOW,
   NBC_AND_PNC_CHILD,
@@ -34,6 +35,7 @@ import {
   NUTRITION_COMPARTMENTS_URL,
   NUTRITION_STATUS,
   OVERWEIGHT,
+  OVERWEIGHT_CAPITALIZED,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
@@ -41,8 +43,10 @@ import {
   RED_ALERT,
   RISK,
   SEVERE_WASTING,
+  SEVERE_WASTING_CAPITALIZED,
   SMS_FILTER_FUNCTION,
   STUNTED,
+  STUNTED_CAPITALIZED,
   TOTAL,
   UP,
   VILLAGE,
@@ -591,10 +595,10 @@ class HierarchichalDataTable extends Component<Props, State> {
                     ) : (
                       <tr>
                         <th className="default-width" />
-                        <th className="default-width">{STUNTED}</th>
-                        <th className="default-width">{SEVERE_WASTING}</th>
-                        <th className="default-width">{OVERWEIGHT}</th>
-                        <th className="default-width">{INAPPROPRIATELY_FED}</th>
+                        <th className="default-width">{STUNTED_CAPITALIZED}</th>
+                        <th className="default-width">{SEVERE_WASTING_CAPITALIZED}</th>
+                        <th className="default-width">{OVERWEIGHT_CAPITALIZED}</th>
+                        <th className="default-width">{INAPPROPRIATELY_FED_CAPITALIZED}</th>
                         <th className="default-width">{TOTAL}</th>
                       </tr>
                     )}
