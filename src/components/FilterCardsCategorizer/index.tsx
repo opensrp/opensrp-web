@@ -88,11 +88,11 @@ export interface Props<T, IFilter> {
   /** render prop accepts a function that is given data of type GroupedFilters
    * then it can supply a custom interface to display the results
    */
-  renderCard?: (groupedFilters: Array<GroupedFilters<T, IFilter>>) => JSX.Element;
+  renderCard: (groupedFilters: Array<GroupedFilters<T, IFilter>>) => JSX.Element;
 }
 
 /** default props for the categorizer component */
-export const defaultProps: Props<{}, {}> = {
+export const defaultProps: Omit<Props<{}, {}>, 'renderCard'> = {
   accessor: '',
   categories: new Set(['']),
   data: [],
