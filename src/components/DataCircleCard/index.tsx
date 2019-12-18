@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
   ALL,
-  HIGH,
   INAPPROPRIATELY_FED,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_WOMAN,
@@ -20,7 +19,7 @@ import {
   SMS_FILTER_FUNCTION,
   STUNTED,
 } from '../../constants';
-import { getLinkToHierarchichalDataTable, getLinkToPatientDetail } from '../../helpers/utils';
+import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';

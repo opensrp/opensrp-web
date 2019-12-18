@@ -9,7 +9,6 @@ import {
 } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
 import {
-  ALL,
   CHILD_PATIENT_DETAIL,
   COMMUNE,
   COUNTRY,
@@ -27,7 +26,6 @@ import {
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
-  RED,
   VIETNAM,
   VIETNAM_COUNTRY_LOCATION_ID,
   VILLAGE,
