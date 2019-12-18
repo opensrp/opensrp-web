@@ -75,7 +75,6 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  width: 57px;
 }
 
 .compartment-data-table .table-container table #body {
@@ -94,7 +93,6 @@
 }
 
 .compartment-data-table .default-width {
-  width: 20%;
   padding: 20px;
 }
 
@@ -171,4 +169,8 @@
 
 span.divider {
   color: #0292d3 !important;
+}
+
+td.default-width:nth-of-type(1) {
+  width: 15%;
 }
