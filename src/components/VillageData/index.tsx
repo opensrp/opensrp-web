@@ -2,9 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle, Row, Table } from 'reactstrap';
 import {
+  CURRENT_SYMPTOMS,
+  CURRENT_WEIGHT,
+  DAYS_SINCE_BIRTH,
   EDD,
   GRAVIDITY,
   LOCATION,
+  LOCATION_OF_BIRTH,
+  LOCATION_OF_RESIDENCE,
   NBC_AND_PNC_CHILD,
   NUTRITION,
   PARITY,
@@ -84,19 +89,19 @@ export default class VillageData extends React.Component<Props, State> {
                       ) : this.props.module === NUTRITION ? (
                         <tr>
                           <th className="default-width">{PATIENT_ID}</th>
-                          <th className="default-width">{'Days since birth'}</th>
-                          <th className="default-width">{'Location of residence'}</th>
-                          <th className="default-width">{'current Weight'}</th>
-                          <th className="default-width">{'Location of birth'}</th>
+                          <th className="default-width">{DAYS_SINCE_BIRTH}</th>
+                          <th className="default-width">{LOCATION_OF_RESIDENCE}</th>
+                          <th className="default-width">{CURRENT_WEIGHT}</th>
+                          <th className="default-width">{LOCATION_OF_BIRTH}</th>
                           <th className="default-width">{RISK_CATEGORY}</th>
                         </tr>
                       ) : (
                         <tr>
                           <th className="default-width">{PATIENT_ID}</th>
-                          <th className="default-width">{'Days since birth'}</th>
-                          <th className="default-width">{'Location of residence'}</th>
-                          <th className="default-width">{'current symptoms'}</th>
-                          <th className="default-width">{'Location of birth'}</th>
+                          <th className="default-width">{DAYS_SINCE_BIRTH}</th>
+                          <th className="default-width">{LOCATION_OF_RESIDENCE}</th>
+                          <th className="default-width">{CURRENT_SYMPTOMS}</th>
+                          <th className="default-width">{LOCATION_OF_BIRTH}</th>
                           <th className="default-width">{RISK_CATEGORY}</th>
                         </tr>
                       )}

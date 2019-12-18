@@ -60,18 +60,26 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const DAYS_SINCE_BIRTH = 'Days since birth';
+export type DAYS_SINCE_BIRTH = typeof DAYS_SINCE_BIRTH;
 export const VIETNAM_COUNTRY_LOCATION_ID = 'd1865325-11e6-4e39-817b-e676c1affecf';
 export type VIETNAM_COUNTRY_LOCATION_ID = typeof VIETNAM_COUNTRY_LOCATION_ID;
 export const CHILD_WEIGHT_MONITORING = 'Child Weight Monitoring';
 export type CHILD_WEIGHT_MONITORING = typeof CHILD_WEIGHT_MONITORING;
 export const LENGTH_HEIGHT_MONITORING = 'Length/Height Monitoring';
 export type LENGTH_HEIGHT_MONITORING = typeof LENGTH_HEIGHT_MONITORING;
+export const CURRENT_WEIGHT = 'Current weight';
+export type CURRENT_WEIGHT = typeof CURRENT_WEIGHT;
+export const CURRENT_SYMPTOMS = 'Current symptoms';
+export type CURRENT_SYMPTOMS = typeof CURRENT_SYMPTOMS;
 export const CURRENT_NUTRTION = 'current nutrition';
 export type CURRENT_NUTRTION = typeof CURRENT_NUTRTION;
 export const CURRENT_PREGNANCY = 'current pregnancy';
 export type CURRENT_PREGNANCY = typeof CURRENT_PREGNANCY;
 export const LOCATION_OF_RESIDENCE = 'Location of Residence';
 export type LOCATION_OF_RESIDENCE = typeof LOCATION_OF_RESIDENCE;
+export const LOCATION_OF_BIRTH = 'Location of birth';
+export type LOCATION_OF_BIRTH = typeof LOCATION_OF_BIRTH;
 export const RISK_CARTEGORIZATION = 'Risk Cartegorization';
 export type RISK_CARTEGORIZATION = typeof RISK_CARTEGORIZATION;
 export const HIGH = 'high';
