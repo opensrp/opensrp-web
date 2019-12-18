@@ -158,52 +158,61 @@ function getVillageRiskTotals(
   } else {
     field = LOGFACE_RISK;
   }
-  const reducer = (accumulator: Totals, dataItem: SmsData) => {
-    switch ((dataItem as any)[field]) {
-      case RED:
-        return {
-          ...accumulator,
-          redAlert: (accumulator as any).redAlert + 1,
-        };
-      case HIGH:
-        return {
-          ...accumulator,
-          risk: (accumulator as any).risk + 1,
-        };
-      case LOW:
-        return {
-          ...accumulator,
-          risk: (accumulator as any).risk + 1,
-        };
-      case NO_RISK_LOWERCASE:
-        return {
-          ...accumulator,
-          no_risk: (accumulator as any).no_risk + 1,
-        };
-      case OVERWEIGHT:
-        return {
-          ...accumulator,
-          overweight: (accumulator as any).overweight + 1,
-        };
-      case SEVERE_WASTING:
+  let reducer = null;
+  if (module === NUTRITION) {
+    reducer = (accumulator: Totals, dataItem: SmsData) => {
+      if (dataItem[NUTRITION_STATUS] === SEVERE_WASTING) {
         return {
           ...accumulator,
           wasting: (accumulator as any).wasting + 1,
         };
-      case STUNTED:
+      } else if (dataItem[NUTRITION_STATUS] === OVERWEIGHT) {
+        return {
+          ...accumulator,
+          overweight: (accumulator as any).overweight + 1,
+        };
+      } else if (dataItem[GROWTH_STATUS] === STUNTED) {
         return {
           ...accumulator,
           stunting: (accumulator as any).stunting + 1,
         };
-      case INAPPROPRIATELY_FED:
+      } else if (dataItem[FEEDING_CATEGORY] === INAPPROPRIATELY_FED) {
         return {
           ...accumulator,
           inappropriateFeeding: (accumulator as any).inappropriateFeeding + 1,
         };
-      default:
-        return accumulator as any;
-    }
-  };
+      } else {
+        return accumulator;
+      }
+    };
+  } else {
+    reducer = (accumulator: Totals, dataItem: SmsData) => {
+      switch ((dataItem as any)[field]) {
+        case RED:
+          return {
+            ...accumulator,
+            redAlert: (accumulator as any).redAlert + 1,
+          };
+        case HIGH:
+          return {
+            ...accumulator,
+            risk: (accumulator as any).risk + 1,
+          };
+        case LOW:
+          return {
+            ...accumulator,
+            risk: (accumulator as any).risk + 1,
+          };
+        case NO_RISK_LOWERCASE:
+          return {
+            ...accumulator,
+            no_risk: (accumulator as any).no_risk + 1,
+          };
+        default:
+          return accumulator as any;
+      }
+    };
+  }
   let totalsMap: Totals;
   if (module !== NUTRITION) {
     totalsMap = {
