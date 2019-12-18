@@ -230,7 +230,7 @@ export const Compartments = ({
               (dataItem: SmsData) => {
                 return (
                   Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-                  Date.parse(dataItem.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                  Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
@@ -264,21 +264,12 @@ export const Compartments = ({
 
   // this should only run when the module is NBC & PNC
   useEffect(() => {
-    const newBorn: SmsData[] =
-      module === NBC_AND_PNC
-        ? filteredData.filter((dataItem: SmsData) => {
-            return dataItem.client_type === EC_CHILD;
-          })
-        : [];
+    const newBorn: SmsData[] = module === NBC_AND_PNC ? filteredData.filter(filterByEcChild) : [];
 
     setDataCircleCardChildData(
       module === NBC_AND_PNC
         ? {
-            filterArgs: [
-              (dataItem: SmsData) => {
-                return dataItem.client_type === EC_CHILD;
-              },
-            ] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByEcChild] as SMS_FILTER_FUNCTION[],
             module: NBC_AND_PNC_CHILD,
             noRisk: getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn, 'logface_risk'),
             permissionLevel: userLocationLevel,
@@ -477,8 +468,8 @@ export const Compartments = ({
 };
 
 /**
- * get the number of sms_reports with a certain value in their logface_risk
- * field
+ * get the number of sms_reports with a certain value in one of its fields
+ * specified by field.
  * @param {string} risk - value of logface_risk to look for
  */
 const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string | any) => {
@@ -546,6 +537,14 @@ const filterByDateInLast1Week = (dataItem: SmsData): boolean => {
     Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
     Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
   );
+};
+
+/**
+ * @param {SmsData} dataItem an SmsData item to be filtered out or in.
+ * @return {boolean} should the dataItem be filtered in or out.
+ */
+const filterByEcChild: (smsData: SmsData) => boolean = (dataItem: SmsData) => {
+  return dataItem.client_type === EC_CHILD;
 };
 
 const mapStateToprops = (state: Partial<Store>) => {
