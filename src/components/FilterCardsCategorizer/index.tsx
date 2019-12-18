@@ -1,5 +1,6 @@
+import { get } from 'lodash';
 import moment from 'moment';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 /** enumerable values for time unit */
 export enum TimeUnit {
@@ -113,17 +114,22 @@ function FilterCardsCategorizer<T, IFilter>(props: Props<T, IFilter>) {
   } = props;
   const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T, IFilter>>>([]);
 
-  setGroupedFilters(
-    groupFilterData<T, IFilter>(
-      periods,
-      data,
-      categories,
-      categoryField,
-      timeField,
-      props.parentFilters
-    )
-  );
-  return renderCard && renderCard(groupedFilters);
+  useEffect(() => {
+    setGroupedFilters(
+      groupFilterData<T, IFilter>(
+        periods,
+        data,
+        categories,
+        categoryField,
+        timeField,
+        props.parentFilters
+      )
+    );
+  }, []);
+  if (renderCard !== undefined) {
+    return renderCard(groupedFilters);
+  }
+  return null;
 }
 
 FilterCardsCategorizer.defaultProps = defaultProps;
@@ -148,8 +154,8 @@ export function groupFilterData<T, IFilter>(
   const filteredData: Array<GroupedFilters<T, IFilter>> = [];
   periods.forEach(period => {
     categories.forEach(category => {
-      const filterFunction = (entry: any) =>
-        entry[categoryField] === category && isInPeriod<T>(entry, period, timeField);
+      const filterFunction = (entry: T) =>
+        get(entry, categoryField) === category && isInPeriod<T>(entry, period, timeField);
 
       const processedData = data.filter(dataObj => filterFunction(dataObj));
       filteredData.push({
@@ -181,7 +187,7 @@ export function isInPeriod<T>(
   startPeriod: string | null = null
 ): boolean {
   const now = moment(startPeriod ? startPeriod : {});
-  const dataObjEta = moment((dataObj as any)[timeField]);
+  const dataObjEta = moment(get(dataObj, timeField));
   /** duration to end of period */
   const periodBounds = moment.duration(period.timeLength, period.timeUnit);
   /** eta to the event described by data object */
