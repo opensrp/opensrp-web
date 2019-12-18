@@ -97,7 +97,7 @@ function DataCircleCard({
     {
       class: 'total-children',
       riskLabel: 'Total Children',
-      riskType: HIGH,
+      riskType: ALL,
       riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any).reduce(
         (a: number, b: number) => Number(a) + b,
         0
