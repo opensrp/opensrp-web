@@ -102,7 +102,7 @@ export const defaultProps: Props<{}, {}> = {
 };
 
 /** the FilterCardsCategorizer component */
-export function FilterCardsCategorizer<T, IFilter>(props: Props<T, IFilter>) {
+function FilterCardsCategorizer<T, IFilter>(props: Props<T, IFilter>) {
   const {
     periods,
     data,
@@ -125,6 +125,9 @@ export function FilterCardsCategorizer<T, IFilter>(props: Props<T, IFilter>) {
   );
   return renderCard && renderCard(groupedFilters);
 }
+
+FilterCardsCategorizer.defaultProps = defaultProps;
+export { FilterCardsCategorizer };
 
 /** creates an object showing how the data was filtered
  * based on the periods and the category field passed in as props
