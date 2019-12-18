@@ -84,6 +84,13 @@ describe('Compartments', () => {
   });
 
   it('must display the correct data', () => {
+    // find sms_types PREGNANCY_REGISTRATION and change their lmp_edd to be a date in the future.
+    for (const dataItem in smsDataFixtures) {
+      if (smsDataFixtures[dataItem].sms_type === PREGNANCY_REGISTRATION) {
+        smsDataFixtures[dataItem].lmp_edd = new Date(new Date().getTime() + 10 * 86400000);
+      }
+    }
+
     store.dispatch(fetchSms(smsDataFixtures));
     const wrapper = mount(
       <Provider store={store}>
