@@ -174,13 +174,12 @@ export const LogFace = ({
     const allLabels: string[] = [riskLabel, locationLabel, typeLabel];
     const userLocationId = getLocationId(userLocationData, userUUID);
 
-    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(
-      userLocationId,
+    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(userLocationId, [
       provinces,
       districts,
       communes,
-      villages
-    );
+      villages,
+    ]);
     if (
       locationFilterFunction &&
       !(

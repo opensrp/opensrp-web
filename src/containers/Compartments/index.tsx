@@ -140,7 +140,7 @@ export const Compartments = ({
   useEffect(() => {
     const { locationLevel, locationFilterFunction } = getFilterFunctionAndLocationLevel(
       userLocationId,
-      [props.provinces, props.districts, props.communes, props.villages]
+      [provinces, districts, communes, villages]
     );
 
     if (
