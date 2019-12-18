@@ -8,7 +8,6 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
-import { getModuleLink } from '../../components/DataCircleCard';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -28,7 +27,6 @@ import {
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
-  NUTRITION,
   PREGNANCY,
   PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
@@ -38,6 +36,7 @@ import {
   VILLAGE,
 } from '../../constants';
 import { locationDataIsAvailable } from '../../helpers/utils';
+import { getModuleLink } from '../../helpers/utils';
 import supersetFetch from '../../services/superset';
 import locationsReducer, {
   fetchLocations,
@@ -82,7 +81,7 @@ interface Props {
   villages: Location[];
   smsData: SmsData[];
   compartMentUrl: string;
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
+  module: string;
   permissionLevel: number;
 }
 
@@ -298,7 +297,9 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     } else {
       dataToShow =
-        nextProps.current_level === 1
+        nextProps.current_level === 0
+          ? locationsWithData.provinces
+          : nextProps.current_level === 1
           ? locationsWithData.districts
           : nextProps.current_level === 2
           ? locationsWithData.communes

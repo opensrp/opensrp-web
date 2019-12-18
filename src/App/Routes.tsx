@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
-import { ConnectedLogout, ConnectedOauthCallback } from '@onaio/gatekeeper';
+import { ConnectedLogout, ConnectedOauthCallback, LogoutProps } from '@onaio/gatekeeper';
 import { isAuthenticated } from '@onaio/session-reducer';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -12,6 +12,7 @@ import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
 import {
   NBC_AND_PNC_ANALYSIS_ENDPOINT,
+  OPENSRP_LOGOUT_URL,
   SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
   SUPERSET_SMS_DATA_SLICE,
 } from '../configs/env';
@@ -122,11 +123,12 @@ export const Routes = (props: RoutesProps) => {
             // tslint:disable-next-line: jsx-no-lambda
             component={() => (
               <ModuleHome
+                deactivateLinks={true}
                 title={NUTRITION_DASHBOARD_WELCOME}
                 description={PREGNANCY_DESCRIPTION}
                 logFaceUrl={NUTRITION_LOGFACE_URL}
-                compartmentUrl={NUTRITION_COMPARTMENTS_URL}
-                analysisUrl={NUTRITION_ANALYSIS_URL}
+                compartmentUrl={'#'}
+                analysisUrl={'#'}
               />
             )}
           />
@@ -249,7 +251,10 @@ export const Routes = (props: RoutesProps) => {
             disableLoginProtection={false}
             exact={true}
             path={LOGOUT_URL}
-            component={ConnectedLogout}
+            // tslint:disable-next-line: jsx-no-lambda
+            component={() => (
+              <ConnectedLogout {...({ logoutURL: OPENSRP_LOGOUT_URL } as Partial<LogoutProps>)} />
+            )}
           />
 
           <ConnectedPrivateRoute

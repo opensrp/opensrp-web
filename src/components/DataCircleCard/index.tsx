@@ -3,25 +3,25 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
-  HIERARCHICAL_DATA_URL,
   HIGH,
   HIGH_RISK,
   LOW,
   LOW_RISK,
   NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_COMPARTMENTS_URL,
   NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NUTRITION,
-  NUTRITION_COMPARTMENTS_URL,
   PREGNANCY,
-  PREGNANCY_COMPARTMENTS_URL,
   SMS_FILTER_FUNCTION,
 } from '../../constants';
+import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
+/**
+ * interface for props to be passed to DataCircleCard component.
+ */
 interface Props {
   highRisk: number;
   lowRisk: number;
@@ -31,30 +31,13 @@ interface Props {
   filterArgs?: SMS_FILTER_FUNCTION[];
   module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
   className?: string;
+  userLocationId: string;
+  permissionLevel: number;
 }
 
 /**
- * Get a link to any of the modules compartments.
- * @param module string representing the module whose link you would like to get
- * @return link to module compartment
+ * functional component that takes in props
  */
-export function getModuleLink(
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | ''
-): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
-  switch (module) {
-    case PREGNANCY:
-      return PREGNANCY_COMPARTMENTS_URL;
-    case NUTRITION:
-      return NUTRITION_COMPARTMENTS_URL;
-    case NBC_AND_PNC_WOMAN:
-      return NBC_AND_PNC_COMPARTMENTS_URL;
-    case NBC_AND_PNC_CHILD:
-      return NBC_AND_PNC_COMPARTMENTS_URL;
-    default:
-      return '';
-  }
-}
-
 function DataCircleCard({
   highRisk,
   lowRisk,
@@ -64,13 +47,10 @@ function DataCircleCard({
   filterArgs,
   module,
   className = '',
+  userLocationId,
+  permissionLevel,
 }: Props) {
-  // this should be gotten dynamically based on the logged in user
-  // level is a integer ranging from 0 to 3, 0 for province, 1 for
-  // 1 for District, 2 for commune and 3 for village.
-  const level = 1;
-  const locationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
-  const permissionLevel = 1;
+  const locationId = userLocationId;
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
@@ -78,9 +58,7 @@ function DataCircleCard({
         <ul className="circlesRow">
           <li className="red">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${HIGH}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(HIGH, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -94,9 +72,7 @@ function DataCircleCard({
           </li>
           <li className="orange">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${LOW}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(LOW, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {
@@ -110,9 +86,7 @@ function DataCircleCard({
           </li>
           <li className="green">
             <Link
-              to={`${getModuleLink(
-                module
-              )}${HIERARCHICAL_DATA_URL}/${module}/${NO}/${title}/${level}/down/${locationId}/${permissionLevel}`}
+              to={getLinkToHierarchichalDataTable(NO, module, title, permissionLevel, locationId)}
               // tslint:disable-next-line: jsx-no-lambda
               onClick={() => {
                 if (filterArgs) {

@@ -6,17 +6,14 @@ import {
   GRAVIDITY,
   LOCATION,
   NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_WOMAN,
-  NUTRITION,
   PARITY,
   PATIENT_ID,
   PREGNANCY,
   PREVIOUS_PREGNANCY_RISK,
   RISK_CATEGORY,
 } from '../../constants';
-import { getNumberOfDaysSinceDate } from '../../helpers/utils';
+import { getModuleLink, getNumberOfDaysSinceDate } from '../../helpers/utils';
 import { SmsData } from '../../store/ducks/sms_events';
-import { getModuleLink } from '../DataCircleCard';
 import { PaginationData, Paginator, PaginatorProps } from '../Paginator';
 import RiskColoring from '../RiskColoring';
 import './index.css';
@@ -24,7 +21,7 @@ import './index.css';
 export interface Props {
   current_level: number;
   smsData: SmsData[];
-  module: PREGNANCY | NBC_AND_PNC_CHILD | NBC_AND_PNC_WOMAN | NUTRITION | '';
+  module: string;
 }
 
 interface State {
@@ -64,7 +61,7 @@ export default class VillageData extends React.Component<Props, State> {
     };
     return (
       <React.Fragment>
-        {this.props.current_level === 3 ? (
+        {this.props.current_level >= 3 ? (
           <React.Fragment>
             <Row className="village villageDataRow">
               <Card className="table-card">

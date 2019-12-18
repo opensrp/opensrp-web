@@ -110,6 +110,11 @@ export const OPENSRP_USER_URL =
   'https://reveal-stage.smartregister.org/opensrp/user-details';
 export type OPENSRP_USER_URL = typeof OPENSRP_USER_URL;
 
+export const OPENSRP_LOGOUT_URL =
+  process.env.REACT_APP_OPENSRP_LOGOUT_URL ||
+  'https://opensrp-miecd-stage.smartregister.org/opensrp/logout.do';
+export type OPENSRP_LOGOUT_URL = typeof OPENSRP_LOGOUT_URL;
+
 export const OPENSRP_OAUTH_STATE = process.env.REACT_APP_OPENSRP_OAUTH_STATE || 'opensrp';
 export type OPENSRP_OAUTH_STATE = typeof OPENSRP_OAUTH_STATE;
 
@@ -185,3 +190,6 @@ export type LOCATION_SLICES = typeof LOCATION_SLICES;
 
 export const SUPERSET_SMS_DATA_SLICE = process.env.REACT_APP_SUPERSET_SMS_DATA_SLICE || '0';
 export type SUPERSET_SMS_DATA_SLICE = typeof SUPERSET_SMS_DATA_SLICE;
+
+export const USER_LOCATION_DATA_SLICE = process.env.REACT_APP_USER_LOCATION_DATA_SLICE || '0';
+export type USER_LOCATION_DATA_SLICE = typeof USER_LOCATION_DATA_SLICE;

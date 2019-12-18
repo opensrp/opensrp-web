@@ -56,6 +56,8 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
+export const VIETNAM_COUNTRY_LOCATION_ID = 'd1865325-11e6-4e39-817b-e676c1affecf';
+export type VIETNAM_COUNTRY_LOCATION_ID = typeof VIETNAM_COUNTRY_LOCATION_ID;
 export const CHILD_WEIGHT_MONITORING = 'Child Weight Monitoring';
 export type CHILD_WEIGHT_MONITORING = typeof CHILD_WEIGHT_MONITORING;
 export const LENGTH_HEIGHT_MONITORING = 'Length/Height Monitoring';
@@ -193,6 +195,7 @@ export const PARITY = 'Parity';
 export type PARITY = typeof PARITY;
 export const LOCATION = 'Location';
 export type LOCATION = typeof LOCATION;
+
 export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
 export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
 export const CURRENT_EDD = 'Current EDD';
@@ -271,7 +274,7 @@ export const HEIGHT = 'height';
 export type HEIGHT = typeof HEIGHT;
 export const WEIGHT = 'weight';
 export type WEIGHT = typeof WEIGHT;
-export const RISK = 'risks';
+export const RISK = 'risk';
 export type RISK = typeof RISK;
 export const LMP_EDD = 'lmp_edd';
 export type LMP_EDD = typeof LMP_EDD;
@@ -306,6 +309,8 @@ export type HOME_VISIT_REPORT = typeof HOME_VISIT_REPORT;
 export const BIRTH_REPORT = 'Birth Report';
 export type BIRTH_REPORT = typeof BIRTH_REPORT;
 export const DEATH_REPORT = 'Death Report';
+export const FAMILY_REGISTRATION = 'Family Member Registration';
+export type FAMILY_REGISTRATION = typeof FAMILY_REGISTRATION;
 export type DEATH_REPORT = typeof DEATH_REPORT;
 export const POSTNATAL_AND_NEWBORN_CARE = 'Postnatal and Newborn Care';
 export type POSTNATAL_AND_NEWBORN_CARE = typeof POSTNATAL_AND_NEWBORN_CARE;
@@ -323,6 +328,7 @@ export const ACCOUNT_CHECK = 'Account Check';
 export type ACCOUNT_CHECK = typeof ACCOUNT_CHECK;
 export const PREGNANCY_LOGFACE_SMS_TYPES = [
   PREGNANCY_IDENTIFICATION,
+  PREGNANCY_DETECTION,
   PREGNANCY_REGISTRATION,
   SOCIAL_DETERMINANTS,
   ANC_REPORT,
@@ -335,6 +341,8 @@ export const PREGNANCY_LOGFACE_SMS_TYPES = [
   ACCOUNT_CHECK,
   DELIVERY_PLANNING,
   BIRTH_REPORT,
+  FAMILY_REGISTRATION,
+  DEATH_REPORT,
 ];
 export const NBC_AND_PNC_LOGFACE_SMS_TYPES = [
   HOME_VISIT_REPORT,

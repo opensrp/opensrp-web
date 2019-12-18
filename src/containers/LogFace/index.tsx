@@ -11,14 +11,17 @@ import { PaginationData, Paginator, PaginatorProps } from '../../components/Pagi
 import RiskColoring from '../../components/RiskColoring';
 import {
   GET_FORM_DATA_ROW_LIMIT,
+  LOCATION_SLICES,
   SUPERSET_FETCH_TIMEOUT_INTERVAL,
   SUPERSET_PREGNANCY_DATA_EXPORT,
+  USER_LOCATION_DATA_SLICE,
 } from '../../configs/env';
 import { SmsTypes } from '../../configs/settings';
 import {
   ALL,
   DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   EVENT_ID,
+  LOCATION,
   LOGFACE_SEARCH_PLACEHOLDER,
   NBC_AND_PNC,
   NBC_AND_PNC_LOGFACE_SMS_TYPES,
@@ -26,6 +29,7 @@ import {
   NUTRITION_LOGFACE_SMS_TYPES,
   PREGNANCY,
   PREGNANCY_LOGFACE_SMS_TYPES,
+  RISK,
   RISK_LEVEL,
   RISK_LEVELS,
   SELECT_LOCATION,
@@ -33,17 +37,35 @@ import {
   SELECT_TYPE,
   TYPE,
 } from '../../constants';
-import { FlexObject, sortFunction } from '../../helpers/utils';
+import {
+  getFilterFunctionAndLocationLevel,
+  getLocationId,
+  sortFunction,
+} from '../../helpers/utils';
+import { OpenSRPService } from '../../services/opensrp';
 import supersetFetch from '../../services/superset';
+import {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocations,
+  getLocationsOfLevel,
+  getUserId,
+  getUserLocations,
+  Location,
+  userIdFetched,
+  UserLocation,
+  userLocationDataFetched,
+} from '../../store/ducks/locations';
 import TestReducer, {
   fetchSms,
-  getSmsData,
+  getFilterArgs,
+  getFilteredSmsData,
   reducerName,
   SmsData,
   smsDataFetched,
 } from '../../store/ducks/sms_events';
+import { addFilterArgs, removeFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
-
 reducerRegistry.register(reducerName, TestReducer);
 
 interface PropsInterface {
@@ -53,6 +75,20 @@ interface PropsInterface {
   dataFetched: boolean;
   numberOfRows: number;
   sliceId: string;
+  userUUID: string;
+  userLocationData: UserLocation[];
+  provinces: Location[];
+  districts: Location[];
+  communes: Location[];
+  villages: Location[];
+  addFilterArgs: any;
+  removeFilterArgs: any;
+  fetchLocations: any;
+  fetchUserLocations: any;
+  userIdFetched: boolean;
+  isUserLocationDataFetched: boolean;
+  fetchUserIdActionCreator: any;
+  filterArgsInStore: Array<(smsData: SmsData) => boolean>;
 }
 
 interface State {
@@ -68,20 +104,59 @@ interface State {
 }
 
 const defaultprops: PropsInterface = {
+  addFilterArgs,
+  communes: [],
   dataFetched: false,
+  districts: [],
+  fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocations,
+  filterArgsInStore: [],
   header: '',
+  isUserLocationDataFetched: false,
   numberOfRows: DEFAULT_NUMBER_OF_LOGFACE_ROWS,
+  provinces: [],
+  removeFilterArgs,
   sliceId: '0',
   smsData: [],
+  userIdFetched: false,
+  userLocationData: [],
+  userUUID: '',
+  villages: [],
 };
 
 export class LogFace extends React.Component<PropsInterface, State> {
   public static defaultProps = defaultprops;
 
   public static getDerivedStateFromProps(nextProps: PropsInterface, prevState: State) {
+    const { riskLabel, locationLabel, typeLabel } = prevState;
+    const allLabels: string[] = [riskLabel, locationLabel, typeLabel];
+    const userLocationId = getLocationId(nextProps.userLocationData, nextProps.userUUID);
+
+    const { locationFilterFunction } = getFilterFunctionAndLocationLevel(userLocationId, [
+      nextProps.provinces,
+      nextProps.districts,
+      nextProps.communes,
+      nextProps.villages,
+    ]);
+    if (
+      locationFilterFunction &&
+      !(
+        nextProps.filterArgsInStore
+          .map((element: any) => {
+            return element.toString();
+          })
+          .indexOf(locationFilterFunction.toString()) > -1
+      )
+    ) {
+      nextProps.removeFilterArgs();
+      nextProps.addFilterArgs([locationFilterFunction as ((smsData: SmsData) => boolean)]);
+    }
+
     if (
       !prevState.filteredData.length &&
+      allLabels.every((label: string) => !label.length || label === ALL) &&
       !(
         document.getElementById('input') &&
         (document.getElementById('input') as HTMLInputElement)!.value
@@ -92,7 +167,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
       };
     } else {
       return {
-        filteredData: prevState.filteredData,
+        filteredData: prevState.filteredData.filter(locationFilterFunction),
       };
     }
   }
@@ -113,8 +188,46 @@ export class LogFace extends React.Component<PropsInterface, State> {
     };
   }
 
-  public componentDidMount() {
+  public async componentDidMount() {
     const { fetchSmsDataActionCreator } = this.props;
+
+    this.props.removeFilterArgs();
+    const {
+      // tslint:disable-next-line: no-shadowed-variable
+      fetchLocations,
+      // tslint:disable-next-line: no-shadowed-variable
+      fetchUserLocations,
+      isUserLocationDataFetched,
+      // tslint:disable-next-line: no-shadowed-variable
+      userIdFetched,
+    } = this.props;
+
+    if (!userIdFetched) {
+      const opensrpService = new OpenSRPService('/security/authenticate');
+
+      opensrpService.read('').then((response: any) => {
+        this.props.fetchUserIdActionCreator((response as any).user.attributes._PERSON_UUID);
+      });
+    }
+
+    // fetch user location details
+    if (!isUserLocationDataFetched) {
+      supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+        fetchUserLocations(result);
+      });
+    }
+
+    // fetch all location slices
+    for (const slice in LOCATION_SLICES) {
+      if (slice) {
+        await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+          fetchLocations(result);
+        });
+      }
+    }
+
+    // check if sms data is fetched and then fetch if not fetched already
+
     if (!this.props.dataFetched) {
       supersetFetch(this.props.sliceId).then((result: SmsData[]) => {
         fetchSmsDataActionCreator(result);
@@ -143,13 +256,13 @@ export class LogFace extends React.Component<PropsInterface, State> {
     });
   }
 
-  public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  public handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     // we need to prevent a reaload of the page
-    e.preventDefault();
+    event.preventDefault();
   }
 
-  public handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const filteredData: SmsData[] = this.filterData((e.target as HTMLInputElement).value);
+  public handleTermChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const filteredData: SmsData[] = this.filterData((event.target as HTMLInputElement).value);
     if (this.state.currentPage > 1) {
       this.setState({
         currentPage: 1,
@@ -161,6 +274,7 @@ export class LogFace extends React.Component<PropsInterface, State> {
   };
 
   public render() {
+    const data = this.state.filteredData.sort(sortFunction);
     const routePaginatorProps: PaginatorProps = {
       endLabel: 'last',
       nextLabel: 'next',
@@ -173,9 +287,9 @@ export class LogFace extends React.Component<PropsInterface, State> {
       pageNeighbours: 3,
       previousLabel: 'previous',
       startLabel: 'first',
-      totalRecords: this.props.smsData.length,
+      totalRecords: data.length,
     };
-    const data = this.state.filteredData.sort(sortFunction);
+
     return (
       <div className="logface-content">
         <div>
@@ -338,38 +452,56 @@ export class LogFace extends React.Component<PropsInterface, State> {
     }
   }
 
-  private isAllSelected = (e: React.MouseEvent) => {
-    return (e.target as HTMLInputElement).innerText === ALL;
+  /**
+   * filter sms data based on an event a user event based on the logface_risk, health_worker_location_name,
+   * sms_type fields
+   * @param {SmsData[]} smsData a list of SmsData objects
+   * @param {React.MouseEvent} event the event we are filtering data based on.
+   * @param {string} filterBy the category by which we are filtering the smsData.
+   */
+  private getFilteredData = (smsData: SmsData[], event?: React.MouseEvent, filterBy?: string) => {
+    const allLabels = [this.state.riskLabel, this.state.locationLabel, this.state.typeLabel];
+    if (event && event.target) {
+      switch (filterBy) {
+        case RISK:
+          allLabels.splice(0, 1, (event.target as HTMLInputElement).innerText);
+          break;
+        case LOCATION.toLowerCase():
+          allLabels.splice(1, 1, (event.target as HTMLInputElement).innerText);
+          break;
+        case TYPE.toLowerCase():
+          allLabels.splice(2, 1, (event.target as HTMLInputElement).innerText);
+          break;
+      }
+    }
+    const dataFiltered = smsData.filter((dataItem: SmsData) => {
+      return (
+        (allLabels[0].length && allLabels[0] !== ALL
+          ? dataItem.logface_risk.toLowerCase().includes(allLabels[0])
+          : allLabels[0] === ALL || !allLabels[0].length) &&
+        (allLabels[1].length && allLabels[1] !== ALL
+          ? dataItem.health_worker_location_name.includes(allLabels[1])
+          : allLabels[1] === ALL || !allLabels[1].length) &&
+        (allLabels[2].length && allLabels[2] !== ALL
+          ? dataItem.sms_type.includes(allLabels[2])
+          : allLabels[2] === ALL || !allLabels[2].length)
+      );
+    });
+    return dataFiltered;
   };
 
-  private getFilteredData = (
-    e: React.MouseEvent,
-    data: SmsData[],
-    field: string,
-    lowerCase: boolean
-  ) => {
-    return data.filter((dataItem: FlexObject) => {
-      const val = lowerCase ? dataItem[field].toLowerCase() : dataItem[field];
-      return val.includes((e.target as HTMLInputElement).innerText);
-    });
-  };
-
-  private handleRiskLevelDropdownClick = (e: React.MouseEvent) => {
+  private handleRiskLevelDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'logface_risk', true),
-      riskLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'risk'),
+      riskLabel: (event.target as HTMLInputElement).innerText,
     });
   };
-  private handleLocationDropdownClick = (e: React.MouseEvent) => {
+  private handleLocationDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'health_worker_location_name', false),
-      locationLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'location'),
+      locationLabel: (event.target as HTMLInputElement).innerText,
     });
   };
 
@@ -384,18 +516,32 @@ export class LogFace extends React.Component<PropsInterface, State> {
     return Array.from(new Set(locations));
   };
 
-  private handleTypeDropdownClick = (e: React.MouseEvent) => {
+  private handleTypeDropdownClick = (event: React.MouseEvent) => {
     this.setState({
       currentPage: 1,
-      filteredData: this.isAllSelected(e)
-        ? this.props.smsData
-        : this.getFilteredData(e, this.props.smsData, 'sms_type', false),
-      typeLabel: (e.target as HTMLInputElement).innerText,
+      filteredData: this.getFilteredData(this.props.smsData, event, 'type'),
+      typeLabel: (event.target as HTMLInputElement).innerText,
     });
   };
 
   private filterData(filterString: string): SmsData[] {
-    return this.props.smsData.filter(
+    const { riskLabel, locationLabel, typeLabel } = this.state;
+    const isFiltered: boolean = [riskLabel, locationLabel, typeLabel].some(
+      (label: string) => label.length || label !== ALL
+    );
+    let activeData;
+    if (isFiltered) {
+      if (!filterString.length) {
+        activeData = this.getFilteredData(this.props.smsData);
+      } else {
+        activeData = this.state.filteredData.length
+          ? this.state.filteredData
+          : this.getFilteredData(this.props.smsData);
+      }
+    } else {
+      activeData = this.props.smsData;
+    }
+    return activeData.filter(
       dataItem =>
         dataItem.event_id.toLocaleLowerCase().includes(filterString.toLocaleLowerCase()) ||
         dataItem.health_worker_name
@@ -422,25 +568,46 @@ export class LogFace extends React.Component<PropsInterface, State> {
 
 const mapStateToprops = (state: any, ownProps: any): any => {
   const result = {
+    communes: getLocationsOfLevel(state, 'Commune'),
     dataFetched: smsDataFetched(state),
-    smsData: getSmsData(state).filter((smsData: SmsData) => {
+    districts: getLocationsOfLevel(state, 'District'),
+    filterArgsInStore: getFilterArgs(state),
+    isUserLocationDataFetched: userLocationDataFetched(state),
+    provinces: getLocationsOfLevel(state, 'Province'),
+    smsData: getFilteredSmsData(state, getFilterArgs(state) as Array<
+      (smsData: SmsData) => boolean
+    >).filter((smsData: SmsData) => {
       // here we filter based on the module we are in.
       switch (ownProps.header) {
         case PREGNANCY:
           return PREGNANCY_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         case NBC_AND_PNC:
           return NBC_AND_PNC_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         case NUTRITION:
           return NUTRITION_LOGFACE_SMS_TYPES.includes(smsData.sms_type);
+
         default:
           return true;
       }
     }),
+    userIdFetched: userIdFetched(state),
+    userLocationData: getUserLocations(state),
+    userUUID: getUserId(state),
+    villages: getLocationsOfLevel(state, 'Village'),
   };
   return result;
 };
 
-const mapPropsToActions = { fetchSmsDataActionCreator: fetchSms };
+const mapPropsToActions = {
+  addFilterArgs,
+  fetchLocations,
+  fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocations,
+  removeFilterArgs,
+};
 
 const ConnectedLogFace = connect(
   mapStateToprops,

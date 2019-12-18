@@ -31,10 +31,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
@@ -55,10 +55,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
@@ -79,10 +79,10 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/1/down/eccfe905-0e03-4188-98bc-22f141cccd0e/1"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span

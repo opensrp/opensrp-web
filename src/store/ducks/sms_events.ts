@@ -1,6 +1,7 @@
-import { keyBy, values } from 'lodash';
+import { values } from 'lodash';
 import { AnyAction, Store } from 'redux';
-import { SMS_FILTER_FUNCTION } from '../../constants';
+import { EVENT_ID, SMS_FILTER_FUNCTION } from '../../constants';
+import { groupBy } from '../../helpers/utils';
 
 /** The reducer name */
 export const reducerName = 'SmsReducer';
@@ -19,7 +20,7 @@ export interface SmsData {
   height: number;
   weight: number;
   previous_risks: string;
-  lmp_edd: number;
+  lmp_edd: any;
   parity: number;
   gravidity: number;
   location_id: string;
@@ -29,7 +30,6 @@ export interface SmsData {
 }
 
 // actions
-
 /** FETCH_SMS action type */
 export const FETCHED_SMS = 'opensrp/reducer/FETCHED_SMS';
 /** REMOVE_SMS action type */
@@ -80,7 +80,7 @@ export type SmsActionTypes =
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
   return {
-    smsData: keyBy(smsDataList, (smsData: SmsData) => smsData.event_id),
+    smsData: groupBy(smsDataList, EVENT_ID),
     type: FETCHED_SMS as typeof FETCHED_SMS,
   };
 };

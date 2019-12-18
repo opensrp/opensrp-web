@@ -103,10 +103,13 @@ describe('reducers/sms_events/getFilteredSmsData', () => {
         (smsData: SmsData) => {
           return smsData.height >= 48;
         },
+        (smsData: SmsData) => {
+          return smsData.height < 56;
+        },
       ] as SMS_FILTER_FUNCTION[])
     ).toEqual(
       smsDataFixtures.filter((element: SmsData) => {
-        return element.height >= 48;
+        return element.height >= 48 && element.height < 56;
       })
     );
   });

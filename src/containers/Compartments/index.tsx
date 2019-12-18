@@ -1,3 +1,4 @@
+import { getUser, User } from '@onaio/session-reducer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { CardGroup, Row } from 'reactstrap';
@@ -5,11 +6,13 @@ import { Store } from 'redux';
 import ConnectedDataCircleCard from '../../components/DataCircleCard';
 import Ripple from '../../components/page/Loading';
 import VillageData from '../../components/VillageData';
-import { LOCATION_SLICES, SUPERSET_SMS_DATA_SLICE } from '../../configs/env';
 import {
-  COMMUNE,
+  LOCATION_SLICES,
+  SUPERSET_SMS_DATA_SLICE,
+  USER_LOCATION_DATA_SLICE,
+} from '../../configs/env';
+import {
   COMPARTMENTS,
-  DISTRICT,
   EC_CHILD,
   EC_WOMAN,
   HIGH,
@@ -21,19 +24,36 @@ import {
   NO_RISK_LOWERCASE,
   NUTRITION,
   PREGNANCY,
-  PROVINCE,
   SMS_FILTER_FUNCTION,
-  VILLAGE,
 } from '../../constants';
-import { getCommune, getDistrict, getProvince, locationDataIsAvailable } from '../../helpers/utils';
+import {
+  buildHeaderBreadCrumb,
+  getFilterFunctionAndLocationLevel,
+  getLocationId,
+  HeaderBreadCrumb,
+} from '../../helpers/utils';
+import { FlexObject } from '../../helpers/utils';
+import { OpenSRPService } from '../../services/opensrp';
 import supersetFetch from '../../services/superset';
-import { fetchLocations, getLocationsOfLevel, Location } from '../../store/ducks/locations';
+import {
+  fetchLocations,
+  fetchUserId,
+  fetchUserLocationId,
+  fetchUserLocations,
+  getLocationsOfLevel,
+  getUserId,
+  getUserLocations,
+  Location,
+  userIdFetched,
+  UserLocation,
+  userLocationDataFetched,
+  userLocationIdFetched,
+} from '../../store/ducks/locations';
 import {
   addFilterArgs,
   fetchSms,
   getFilterArgs,
   getFilteredSmsData,
-  getSmsData,
   removeFilterArgs,
   SmsData,
   smsDataFetched,
@@ -43,46 +63,64 @@ import './index.css';
 interface Props {
   filterArgsInStore: SMS_FILTER_FUNCTION[];
   smsData: SmsData[];
+  userLocationData: UserLocation[];
   fetchSmsDataActionCreator: typeof fetchSms;
   fetchLocationsActionCreator: typeof fetchLocations;
+  fetchUserLocationsActionCreator: typeof fetchUserLocations;
+  fetchUserIdActionCreator: typeof fetchUserId;
+  fetchUserLocationIdActionCreator: typeof fetchUserLocationId;
   dataFetched: boolean;
+  isUserLocationIdFetched: boolean;
+  isUserLocationDataFetched: boolean;
+  user: User;
+  userIdFetched: boolean;
+  userUUID: string;
   addFilterArgs: any;
   removeFilterArgs: any;
   filterArgs: SMS_FILTER_FUNCTION[];
-  module: PREGNANCY | NBC_AND_PNC | NUTRITION | '';
+  module: string;
   provinces: Location[];
   districts: Location[];
   communes: Location[];
   villages: Location[];
 }
 
-interface HeaderBreadCrumb {
-  location: string;
-  path: string;
-  locationId: string;
-  level: string;
-}
-
 interface State {
+  userLocationId: string;
   locationAndPath: HeaderBreadCrumb;
+  locationFilterFunction: (smsData: SmsData) => boolean;
+  userLocationLevel: 0 | 1 | 2 | 3 | 4;
+  filteredData: SmsData[];
 }
-const defaultProps: Props = {
+const defaultCompartmentProps: Props = {
   addFilterArgs,
   communes: [],
   dataFetched: false,
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
+  fetchUserLocationsActionCreator: fetchUserLocations,
   filterArgs: [],
   filterArgsInStore: [],
+  isUserLocationDataFetched: false,
+  isUserLocationIdFetched: false,
   module: '',
   provinces: [],
   removeFilterArgs,
   smsData: [],
+  user: {
+    name: '',
+    username: '',
+  },
+  userIdFetched: false,
+  userLocationData: [],
+  userUUID: '',
   villages: [],
 };
 class Compartments extends React.Component<Props, State> {
-  public static defaultProps: Props = defaultProps;
+  public static defaultProps: Props = defaultCompartmentProps;
 
   /**
    * Here we determine the location id that the user is assiged to
@@ -91,186 +129,97 @@ class Compartments extends React.Component<Props, State> {
    * @param state
    */
   public static getDerivedStateFromProps(props: Props, state: State): State {
-    // add filter for this location here
-    const userLocationId = 'eccfe905-0e03-4188-98bc-22f141cccd0e';
-    let filterFunction;
-    if (
-      Compartments.isProvince(userLocationId, props.provinces) &&
-      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
-    ) {
-      filterFunction = (smsData: SmsData) => {
-        const smsDataVillage = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return smsDataVillage
-          ? getProvince(
-              smsDataVillage as (Location & { level: VILLAGE }),
-              props.districts,
-              props.communes
-            ) === userLocationId
-          : false;
-      };
-    } else if (
-      Compartments.isDistrict(userLocationId, props.districts) &&
-      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
-    ) {
-      filterFunction = (smsData: SmsData) => {
-        const smsDataVillage = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return smsDataVillage
-          ? getDistrict(smsDataVillage as (Location & { level: VILLAGE }), props.communes) ===
-              userLocationId
-          : false;
-      };
-    } else if (
-      Compartments.isCommune(userLocationId, props.communes) &&
-      locationDataIsAvailable(props.villages, props.communes, props.districts, props.provinces)
-    ) {
-      filterFunction = (smsData: SmsData) => {
-        const smsDataVillage = props.villages.find(village => {
-          return village.location_id === smsData.location_id;
-        });
-        return smsDataVillage
-          ? getCommune(smsDataVillage as (Location & { level: VILLAGE })) === userLocationId
-          : false;
-      };
-    }
+    const userLocationId = getLocationId(props.userLocationData, props.userUUID);
+
+    const { locationLevel, locationFilterFunction } = getFilterFunctionAndLocationLevel(
+      userLocationId,
+      [props.provinces, props.districts, props.communes, props.villages]
+    );
 
     if (
-      filterFunction &&
+      locationFilterFunction &&
       !(
         props.filterArgsInStore
           .map(element => {
             return element.toString();
           })
-          .indexOf(filterFunction.toString()) > -1
+          .indexOf(locationFilterFunction.toString()) > -1
       )
     ) {
       props.removeFilterArgs();
       props.addFilterArgs(props.filterArgs);
-      props.addFilterArgs([filterFunction as SMS_FILTER_FUNCTION]);
+      props.addFilterArgs([locationFilterFunction as SMS_FILTER_FUNCTION]);
     }
-    const locationPath = Compartments.buildHeaderBreadCrumb(userLocationId, props);
+    const locationPath = buildHeaderBreadCrumb(
+      userLocationId,
+      props.provinces,
+      props.districts,
+      props.communes,
+      props.villages
+    );
+
     if (locationPath) {
       return {
+        filteredData: props.smsData.filter(locationFilterFunction),
         locationAndPath: locationPath,
+        locationFilterFunction,
+        userLocationId,
+        userLocationLevel: locationLevel,
       } as State;
     } else {
       return {
+        filteredData: props.smsData.filter(locationFilterFunction),
         locationAndPath: state.locationAndPath,
-      };
+        locationFilterFunction,
+        userLocationId,
+        userLocationLevel: locationLevel,
+      } as State;
     }
   }
-
-  /**
-   * returns an object that is used to create the header breadcrumb on the Compartments component
-   * @param locationId - location ID  of where the user is assigned;
-   * this could be a province, district, commune or village
-   * @return { HeaderBreadCrumb } an object representing information
-   * required to build the header breadcrumb and to filter out data
-   */
-  private static buildHeaderBreadCrumb(locationId: string, props: Props): HeaderBreadCrumb {
-    if (Compartments.isProvince(locationId, props.provinces)) {
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === locationId
-      );
-      return {
-        level: PROVINCE,
-        location: userProvince!.location_name,
-        locationId: userProvince!.location_id,
-        path: '',
-      };
-    } else if (Compartments.isDistrict(locationId, props.districts)) {
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === locationId
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: DISTRICT,
-        location: userDistrict!.location_name,
-        locationId: userDistrict!.location_id,
-        path: `${userProvince!.location_name} / `,
-      };
-    } else if (Compartments.isCommune(locationId, props.communes)) {
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === locationId
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: COMMUNE,
-        location: userCommune!.location_name,
-        locationId: userCommune!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
-      };
-    } else if (Compartments.isVillage(locationId, props.villages)) {
-      const userVillage = props.villages.find(
-        (village: Location) => village.location_id === locationId
-      );
-      const userCommune = props.communes.find(
-        (commune: Location) => commune.location_id === userVillage!.parent_id
-      );
-      const userDistrict = props.districts.find(
-        (district: Location) => district.location_id === userCommune!.parent_id
-      );
-      const userProvince = props.provinces.find(
-        (province: Location) => province.location_id === userDistrict!.parent_id
-      );
-      return {
-        level: VILLAGE,
-        location: userVillage!.location_name,
-        locationId: userVillage!.location_id,
-        path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
-          userCommune!.location_name
-        } / `,
-      };
-    }
-    return { path: '', location: '', locationId: '', level: '' };
-  }
-
-  private static isProvince = (locationId: string, provinces: Location[]) => {
-    return provinces.find((province: Location) => province.location_id === locationId);
-  };
-
-  private static isDistrict = (locationId: string, districts: Location[]) => {
-    return districts.find((district: Location) => district.location_id === locationId);
-  };
-
-  private static isCommune = (locationId: string, communes: Location[]) => {
-    return communes.find((commune: Location) => commune.location_id === locationId);
-  };
-
-  private static isVillage = (locationId: string, villages: Location[]) => {
-    return villages.find((village: Location) => village.location_id === locationId);
-  };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
+      filteredData: [],
       locationAndPath: {
         level: '',
         location: '',
         locationId: '',
         path: '',
       },
+      locationFilterFunction: () => false,
+      userLocationId: '',
+      userLocationLevel: 4,
     };
   }
-  public componentDidMount() {
+  public async componentDidMount() {
     this.props.removeFilterArgs();
-    const { fetchLocationsActionCreator } = this.props;
+    const { fetchLocationsActionCreator, fetchUserLocationsActionCreator } = this.props;
+
+    // fetch user UUID from OpenSRP
+    // tslint:disable-next-line: no-shadowed-variable
+    const { userIdFetched } = this.props;
+
+    if (!userIdFetched) {
+      const opensrpService = new OpenSRPService('/security/authenticate');
+
+      opensrpService.read('').then((response: any) => {
+        this.props.fetchUserIdActionCreator((response as any).user.attributes._PERSON_UUID);
+      });
+    }
+
+    // fetch user location details
+    if (!this.props.isUserLocationDataFetched) {
+      supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+        fetchUserLocationsActionCreator(result);
+      });
+    }
 
     // fetch all location slices
     for (const slice in LOCATION_SLICES) {
       if (slice) {
-        supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+        await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
           fetchLocationsActionCreator(result);
         });
       }
@@ -286,46 +235,61 @@ class Compartments extends React.Component<Props, State> {
   }
 
   public render() {
+    const { userLocationId, filteredData, userLocationLevel } = this.state;
+
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, this.props.smsData),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, this.props.smsData),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, this.props.smsData),
-            title: this.props.smsData.length + ' Total Pregnancies',
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData),
+            permissionLevel: userLocationLevel,
+            title: filteredData.length + ' Total Pregnancies',
           }
         : null;
 
     const last2WeeksSmsData =
-      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(false, true) : [];
+      this.props.module === PREGNANCY
+        ? this.filterSmsByPreviousWeekPeriod(userLocationId, false, true)
+        : [];
     const pregnancyDataCircleCard2Props =
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+                return (
+                  Date.parse(smsData.lmp_edd) - Date.now() > 0 &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                );
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
+            permissionLevel: userLocationLevel,
             title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
           }
         : null;
 
     const last1WeekSmsData =
-      this.props.module === PREGNANCY ? this.filterSmsByPreviousWeekPeriod(true) : [];
+      this.props.module === PREGNANCY
+        ? this.filterSmsByPreviousWeekPeriod(userLocationId, true, false)
+        : [];
     const pregnancyDataCircleCard3Props =
       this.props.module === PREGNANCY
         ? {
             filterArgs: [
               (smsData: SmsData) => {
-                return Date.now() - Date.parse(smsData.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+                return (
+                  Date.parse(smsData.lmp_edd) - Date.now() > 0 &&
+                  Date.parse(smsData.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
+                );
               },
             ] as SMS_FILTER_FUNCTION[],
             highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
+            permissionLevel: userLocationLevel,
             title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
           }
         : null;
@@ -348,11 +312,12 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
+            permissionLevel: userLocationLevel,
             title: newBorn.length + ' Total Newborn',
           }
         : null;
 
-    const woman: SmsData[] = this.props.smsData.filter((smsData: SmsData) => {
+    const woman: SmsData[] = filteredData.filter((smsData: SmsData) => {
       return smsData.client_type === EC_WOMAN;
     });
 
@@ -367,6 +332,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
             lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
             noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
+            permissionLevel: userLocationLevel,
             title: woman.length + ' Total mother in PNC',
           }
         : null;
@@ -378,6 +344,7 @@ class Compartments extends React.Component<Props, State> {
             highRisk: 0,
             lowRisk: 0,
             noRisk: 0,
+            permissionLevel: 0,
             title: 'test title',
           }
         : null;
@@ -402,36 +369,42 @@ class Compartments extends React.Component<Props, State> {
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard1Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard2Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
                   <ConnectedDataCircleCard
                     {...pregnancyDataCircleCard3Props}
+                    userLocationId={userLocationId}
                     module={this.props.module}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardChildData}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_CHILD}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardWomanData}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_WOMAN}
                   />
                 ) : null}
                 {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardTestProps}
+                    userLocationId={userLocationId}
                     module={NBC_AND_PNC_WOMAN}
                     className={'invisible-but-visible'}
                   />
@@ -444,9 +417,9 @@ class Compartments extends React.Component<Props, State> {
             {this.props.module === PREGNANCY && this.props.smsData.length ? (
               <VillageData
                 {...{
-                  current_level: 3,
+                  current_level: userLocationLevel,
                   module: this.props.module,
-                  smsData: this.props.smsData,
+                  smsData: filteredData,
                 }}
               />
             ) : null}
@@ -465,14 +438,19 @@ class Compartments extends React.Component<Props, State> {
    * @param {boolean} last2Weeks - filter smsData using filterByDataInLast2Weeks function
    */
   private filterSmsByPreviousWeekPeriod = (
+    locId: string,
     last1Week?: boolean,
     last2Weeks?: boolean
   ): SmsData[] => {
     let filteredData: SmsData[] = [];
     if (last2Weeks) {
-      filteredData = this.props.smsData.filter(this.filterByDateInLast2Weeks);
+      filteredData = this.props.smsData
+        .filter((d: FlexObject) => d.location_id === locId)
+        .filter(this.filterByDateInLast2Weeks);
     } else if (last1Week) {
-      filteredData = this.props.smsData.filter(this.filterByDateInLast1Week);
+      filteredData = this.props.smsData
+        .filter((d: FlexObject) => d.location_id === locId)
+        .filter(this.filterByDateInLast1Week);
     }
     return filteredData;
     /**  in the very near future we should be able to filter by an administrative unit
@@ -489,15 +467,23 @@ class Compartments extends React.Component<Props, State> {
    * the period of the last 2 weeks
    */
   private filterByDateInLast2Weeks = (dataItem: SmsData): boolean => {
-    return Date.now() - Date.parse(dataItem.EventDate) < 2 * MICROSECONDS_IN_A_WEEK;
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() <
+        2 * MICROSECONDS_IN_A_WEEK <
+        (Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK)
+    );
   };
 
   /**
-   * Filter for smsData objects whose EventDate fields are within
+   * Filter for smsData objects whose EventDate fields are withinthis.filterByDateInLast1Week(dataItem)
    * the period of the last 1 week
    */
   private filterByDateInLast1Week = (dataItem: SmsData): boolean => {
-    return Date.now() - Date.parse(dataItem.EventDate) < MICROSECONDS_IN_A_WEEK;
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
+    );
   };
 
   /**
@@ -523,10 +509,14 @@ const mapStateToprops = (state: Partial<Store>) => {
     dataFetched: smsDataFetched(state),
     districts: getLocationsOfLevel(state, 'District'),
     filterArgsInStore: getFilterArgs(state),
+    isUserLocationDataFetched: userLocationDataFetched(state),
+    isUserLocationIdFetched: userLocationIdFetched(state),
     provinces: getLocationsOfLevel(state, 'Province'),
-    smsData: getFilterArgs(state)
-      ? getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[])
-      : getSmsData(state),
+    smsData: getFilteredSmsData(state, getFilterArgs(state) as SMS_FILTER_FUNCTION[]),
+    user: getUser(state),
+    userIdFetched: userIdFetched(state),
+    userLocationData: getUserLocations(state),
+    userUUID: getUserId(state),
     villages: getLocationsOfLevel(state, 'Village'),
   };
 };
@@ -535,6 +525,9 @@ const mapDispatchToProps = {
   addFilterArgs,
   fetchLocationsActionCreator: fetchLocations,
   fetchSmsDataActionCreator: fetchSms,
+  fetchUserIdActionCreator: fetchUserId,
+  fetchUserLocationIdActionCreator: fetchUserLocationId,
+  fetchUserLocationsActionCreator: fetchUserLocations,
   removeFilterArgs,
 };
 

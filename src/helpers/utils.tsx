@@ -2,8 +2,22 @@ import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
 import { URLS_TO_HIDE_HEADER } from '../configs/settings';
-import { VILLAGE } from '../constants';
-import { Location } from '../store/ducks/locations';
+import {
+  COMMUNE,
+  DISTRICT,
+  HIERARCHICAL_DATA_URL,
+  NBC_AND_PNC_CHILD,
+  NBC_AND_PNC_COMPARTMENTS_URL,
+  NBC_AND_PNC_WOMAN,
+  NUTRITION,
+  NUTRITION_COMPARTMENTS_URL,
+  PREGNANCY,
+  PREGNANCY_COMPARTMENTS_URL,
+  PROVINCE,
+  VIETNAM_COUNTRY_LOCATION_ID,
+  VILLAGE,
+} from '../constants';
+import { Location, UserLocation } from '../store/ducks/locations';
 import { SmsData } from '../store/ducks/sms_events';
 
 /** Interface for an object that is allowed to have any property */
@@ -28,11 +42,39 @@ export function oAuthUserInfoGetter(apiResponse: { [key: string]: any }): Sessio
   }
 }
 
-export function headerShouldNotRender() {
+/**
+ * determines weather the header should be rendered.
+ */
+export function headerShouldNotRender(): boolean {
   return RegExp(URLS_TO_HIDE_HEADER.join('|')).test(window.location.pathname);
 }
 
-export function getNumberSuffix(num: number) {
+/**
+ * Group objects in a list by some field as their key.
+ * @param list a list of objects to be grouped into a single object with keys for each.
+ * @param field a field to as the key by which the objects in the list will be attached.
+ * @return returns an object that contains all the objects in the list passed to it with
+ * keys as values of the field passed as the second argument.
+ */
+export function groupBy(list: FlexObject[], field: string): FlexObject {
+  const dataMap: FlexObject = {};
+  list.forEach((listElement: FlexObject) => {
+    if (listElement[field]) {
+      if (!dataMap[listElement[field]]) {
+        dataMap[listElement[field]] = {
+          ...listElement,
+        };
+      }
+    }
+  });
+  return dataMap;
+}
+
+/**
+ * Append a number suffix such as 'st' for 1 and 'nd' for 2 and so on.
+ * @param num
+ */
+export function getNumberSuffix(num: number): string {
   const divisionBy10Remaninder: number = num % 10;
   if (divisionBy10Remaninder === 1) {
     return 'st';
@@ -59,6 +101,125 @@ export const sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
     return 0;
   }
 };
+
+/**
+ *
+ * @param userLocationData - an array of UserLocation data fetched from a supserset slice
+ * @param userUUID - the UUID of the user logged in obtained from an openSRP endpoitnt.
+ */
+export function getLocationId(userLocationData: UserLocation[], userUUID: string) {
+  const userDetailObj =
+    userLocationData.length &&
+    userLocationData.find(
+      (userLocationDataItem: UserLocation) => userLocationDataItem.provider_id === userUUID
+    );
+  if (userDetailObj) {
+    return userDetailObj.location_id;
+  }
+}
+
+/**
+ *
+ * @param locationId location ID that we want to find in locations
+ * @param locations a list of Location objects from which we want to find a location ID
+ */
+export const locationIdIn = (locationId: string, locations: Location[]) => {
+  return locations.find((location: Location) => location.location_id === locationId);
+};
+
+/**
+ * An object representing the filter function and location level for a logged in user.
+ */
+export interface FilterFunctionAndLocationLevel {
+  locationFilterFunction: (smsData: SmsData) => boolean;
+  locationLevel: number;
+}
+
+/**
+ * calculate the filter function and location level for a logged in user
+ * @param userLocationId - the location ID of the logged in user.
+ * @param provinces - a list of locations of level province
+ * @param districts - a list of locations of level district
+ * @param communes - a list of locations of level commune
+ * @param villages - a list of locations of level village
+ * @return {FilterFunctionAndLocationLevel} an object that contains the users
+ * location level and a filter function based on that location level.
+ */
+export function getFilterFunctionAndLocationLevel(
+  userLocationId: string,
+  [provinces, districts, communes, villages]: Location[][]
+): FilterFunctionAndLocationLevel {
+  let locationFilterFunction: (smsData: SmsData) => boolean = () => {
+    return false;
+  };
+
+  let userLocationLevel = 4;
+
+  if (userLocationId === VIETNAM_COUNTRY_LOCATION_ID) {
+    userLocationLevel = 0;
+    locationFilterFunction = () => true;
+  }
+
+  if (locationIdIn(userLocationId, provinces)) {
+    userLocationLevel = 1;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return (
+          userLocationId ===
+          getProvince(village as (Location & { level: VILLAGE }), districts, communes)
+        );
+      } else {
+        return false;
+      }
+    };
+  }
+
+  if (locationIdIn(userLocationId, districts)) {
+    userLocationLevel = 2;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return userLocationId === getDistrict(village as (Location & { level: VILLAGE }), communes);
+      } else {
+        return false;
+      }
+    };
+  }
+
+  if (locationIdIn(userLocationId, communes)) {
+    userLocationLevel = 3;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      // tslint:disable-next-line: no-shadowed-variable
+      const village = villages.find((location: Location) => {
+        return location.location_id === smsData.location_id;
+      });
+      if (village) {
+        return userLocationId === getCommune(village as (Location & { level: VILLAGE }));
+      } else {
+        return false;
+      }
+    };
+  }
+
+  if (locationIdIn(userLocationId, villages)) {
+    userLocationLevel = 4;
+    locationFilterFunction = (smsData: SmsData): boolean => {
+      return userLocationId === smsData.location_id;
+    };
+  }
+
+  return {
+    locationFilterFunction,
+    locationLevel: userLocationLevel,
+  } as FilterFunctionAndLocationLevel;
+}
 
 /**
  * Given a village return it's commune's location ID
@@ -99,6 +260,10 @@ export const getProvince = (
     : null;
 };
 
+/**
+ * Filter smsData by patientID and then sort.
+ * @param props
+ */
 export const filterByPatientAndSort = (props: {
   patientId: string;
   smsData: SmsData[];
@@ -118,6 +283,10 @@ export const filterByPatientAndSort = (props: {
     });
 };
 
+/**
+ * get number of days since a certain day specified by a date string.
+ * @param date
+ */
 export const getNumberOfDaysSinceDate = (date: string): number => {
   return Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24));
 };
@@ -140,4 +309,134 @@ export function locationDataIsAvailable(
   provinces: Location[]
 ) {
   return villages.length && districts.length && communes.length && provinces.length;
+}
+
+/*
+ * an object representing information required to build the header breadcrumb and to filter out data
+ */
+export interface HeaderBreadCrumb {
+  location: string;
+  path: string;
+  locationId: string;
+  level: string;
+}
+
+/**
+ * returns an object that is used to create the header breadcrumb on the Compartments component
+ * @param locationId - location ID  of where the user is assigned;
+ * this could be a province, district, commune or village
+ * @return { HeaderBreadCrumb }
+ */
+export function buildHeaderBreadCrumb(
+  locationId: string,
+  provinces: Location[],
+  districts: Location[],
+  communes: Location[],
+  villages: Location[]
+): HeaderBreadCrumb {
+  if (locationIdIn(locationId, provinces)) {
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === locationId
+    );
+    return {
+      level: PROVINCE,
+      location: userProvince!.location_name,
+      locationId: userProvince!.location_id,
+      path: '',
+    };
+  } else if (locationIdIn(locationId, districts)) {
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === locationId
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: DISTRICT,
+      location: userDistrict!.location_name,
+      locationId: userDistrict!.location_id,
+      path: `${userProvince!.location_name} / `,
+    };
+  } else if (locationIdIn(locationId, communes)) {
+    const userCommune = communes.find((commune: Location) => commune.location_id === locationId);
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === userCommune!.parent_id
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: COMMUNE,
+      location: userCommune!.location_name,
+      locationId: userCommune!.location_id,
+      path: `${userProvince!.location_name} / ${userDistrict!.location_name} / `,
+    };
+  } else if (locationIdIn(locationId, villages)) {
+    const userVillage = villages.find((village: Location) => village.location_id === locationId);
+    const userCommune = communes.find(
+      (commune: Location) => commune.location_id === userVillage!.parent_id
+    );
+    const userDistrict = districts.find(
+      (district: Location) => district.location_id === userCommune!.parent_id
+    );
+    const userProvince = provinces.find(
+      (province: Location) => province.location_id === userDistrict!.parent_id
+    );
+    return {
+      level: VILLAGE,
+      location: userVillage!.location_name,
+      locationId: userVillage!.location_id,
+      path: `${userProvince!.location_name} / ${userDistrict!.location_name} / ${
+        userCommune!.location_name
+      } / `,
+    };
+  }
+  return { path: '', location: '', locationId: '', level: '' };
+}
+
+/**
+ * Get a link to any of the modules compartments.
+ * @param module string representing the module whose link you would like to get
+ * @return link to module compartment
+ */
+export function getModuleLink(
+  module: string
+): PREGNANCY_COMPARTMENTS_URL | NUTRITION_COMPARTMENTS_URL | NBC_AND_PNC_COMPARTMENTS_URL | '' {
+  switch (module) {
+    case PREGNANCY:
+      return PREGNANCY_COMPARTMENTS_URL;
+    case NUTRITION:
+      return NUTRITION_COMPARTMENTS_URL;
+    case NBC_AND_PNC_WOMAN:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    case NBC_AND_PNC_CHILD:
+      return NBC_AND_PNC_COMPARTMENTS_URL;
+    default:
+      return '';
+  }
+}
+
+/**
+ * Get a link to the HierrarchichalDataTable component
+ * @param {string} riskLevel string value that will be passed to hierarchichalDataTable
+ * as prop. representing that column should be coloured.
+ * @param {string} module string representing the module
+ * @param {string} title title to be passed to hierarchichal data table as a prop
+ * @param {number} permissionLevel - number ranging from 0 - 4 that represents the permission level of the user.
+ * @param {string} locationId - the users location id.
+ */
+export function getLinkToHierarchichalDataTable(
+  riskLevel: string,
+  module: string,
+  title: string,
+  permissionLevel: number,
+  locationId: string
+) {
+  if (permissionLevel === 4) {
+    return '#';
+  } else {
+    return `${getModuleLink(
+      module
+    )}${HIERARCHICAL_DATA_URL}/${module}/${riskLevel}/${title}/${permissionLevel}/down/${locationId}/${permissionLevel}`;
+  }
 }
