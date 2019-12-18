@@ -173,36 +173,28 @@ export const Compartments = ({
   }, [userLocationId, provinces, districts, communes, villages, filterArgsInStore]);
 
   useEffect(() => {
+    const birthsInTheFuture = module === PREGNANCY ? smsData.filter(filterByDateInTheFuture) : [];
     setPregnancyDataCircleCard1Props(
       module === PREGNANCY
         ? ({
+            filterArgs: [filterByDateInTheFuture] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
-            noRisk: getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData, 'logface_risk'),
+            noRisk: getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, birthsInTheFuture, 'logface_risk'),
             permissionLevel: userLocationLevel,
-            redAlert: getNumberOfSmsWithRisk(RED, filteredData, 'logface_risk'),
+            redAlert: getNumberOfSmsWithRisk(RED, birthsInTheFuture, 'logface_risk'),
             risk:
-              getNumberOfSmsWithRisk(LOW, filteredData, 'logface_risk') +
-              getNumberOfSmsWithRisk(HIGH, filteredData, 'logface_risk'),
-            title: filteredData.length + ' Total Pregnancies',
+              getNumberOfSmsWithRisk(LOW, birthsInTheFuture, 'logface_risk') +
+              getNumberOfSmsWithRisk(HIGH, birthsInTheFuture, 'logface_risk'),
+            title: birthsInTheFuture.length + ' Total Pregnancies',
           } as PregnancyAndNBCDataCircleCardProps)
         : null
     );
 
-    const last2WeeksSmsData =
-      module === PREGNANCY
-        ? filterSmsByPreviousWeekPeriod(smsData, userLocationId, false, true)
-        : [];
+    const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
     setPregnancyDataCircleCard2Props(
       module === PREGNANCY
         ? {
-            filterArgs: [
-              (dataItem: SmsData) => {
-                return (
-                  Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-                  Date.parse(dataItem.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
-                );
-              },
-            ] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNext2Weeks] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -219,21 +211,11 @@ export const Compartments = ({
         : null
     );
 
-    const last1WeekSmsData =
-      module === PREGNANCY
-        ? filterSmsByPreviousWeekPeriod(smsData, userLocationId, true, false)
-        : [];
+    const last1WeekSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext1Week) : [];
     setPregnancyDataCircleCard3Props(
       module === PREGNANCY
         ? {
-            filterArgs: [
-              (dataItem: SmsData) => {
-                return (
-                  Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-                  Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
-                );
-              },
-            ] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNext1Week] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -484,59 +466,36 @@ const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string 
 };
 
 /**
- * Filter smsData in order to get smsData in the previous 1 week
- * or the smsData in the previous 2 weeks.
- * @param {boolean} last1Week - filter smsData using filterByDateInLast1Week function
- * @param {boolean} last2Weeks - filter smsData using filterByDateInLast2Weeks function
+ * filter for smsData objects whose EventData fields are within
+ * the period of the next 2 weeks
+ * @param {SmsData} dataItem  sms data item
  */
-const filterSmsByPreviousWeekPeriod = (
-  smsData: SmsData[],
-  locId: string,
-  last1Week?: boolean,
-  last2Weeks?: boolean
-): SmsData[] => {
-  let filteredData: SmsData[] = [];
-  if (last2Weeks) {
-    filteredData = smsData
-      .filter((d: FlexObject) => d.location_id === locId)
-      .filter(filterByDateInLast2Weeks);
-  } else if (last1Week) {
-    filteredData = smsData
-      .filter((d: FlexObject) => d.location_id === locId)
-      .filter(filterByDateInLast1Week);
-  }
-  return filteredData;
-  /**  in the very near future we should be able to filter by an administrative unit
-   * by passing in the following arguments
-   * province?: string,
-   * district?: string,
-   * commune?: string,
-   * village?: string
-   */
-};
-
-/**
- * filter for smsData objects whose EventData fields are withing
- * the period of the last 2 weeks
- */
-const filterByDateInLast2Weeks = (dataItem: SmsData): boolean => {
+const filterByDateInNext2Weeks = (dataItem: SmsData): boolean => {
   return (
     Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-    Date.parse(dataItem.lmp_edd) - Date.now() <
-      2 * MICROSECONDS_IN_A_WEEK <
-      (Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK)
+    Date.parse(dataItem.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
   );
 };
 
 /**
- * Filter for smsData objects whose EventDate fields are withinthis.filterByDateInLast1Week(dataItem)
- * the period of the last 1 week
+ * Filter for smsData objects whose EventDate fields are within
+ * the period of the next 1 week
+ * @param {SmsData} dataItem sms data item
  */
-const filterByDateInLast1Week = (dataItem: SmsData): boolean => {
+const filterByDateInNext1Week = (dataItem: SmsData): boolean => {
   return (
     Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
     Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
   );
+};
+
+/**
+ *
+ * @param dataItem
+ * @param {SmsData} dataItem sms data item
+ */
+const filterByDateInTheFuture = (dataItem: SmsData): boolean => {
+  return Date.parse(dataItem.lmp_edd) - Date.now() > 0;
 };
 
 /**
