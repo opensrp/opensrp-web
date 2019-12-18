@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /** enumerable values for time unit */
 export enum TimeUnit {
@@ -15,9 +15,10 @@ export enum TimeUnit {
 /** interface for how filtered data will be passed back to the calling
  * component or to a display component via render props
  */
-interface GroupedFilters<T, FilterState> {
+export interface GroupedFilters<T, IFilters> {
   /** the parent state, will include current filters and data */
-  parentFilterState: FilterState;
+  parentFilters: IFilters[];
+
   /** chunk of original data that is now currently filtered subject to
    * info in the meta
    */
@@ -38,15 +39,16 @@ interface GroupedFilters<T, FilterState> {
      */
     timeUnit: string;
   };
-  /** an id to uniquely identify this filter if added to the parentFilterState */
+
+  /** an id to uniquely identify this filter if added to the parentFilters */
   filterId: string;
 
-  /** a dynamically generated filter function to be used */
+  /** a dynamically generated filter function */
   filterFunction: (data: T) => boolean;
 }
 
 /** Type interface for duration */
-interface DurationType {
+export interface DurationType {
   /** amount in integers  */
   timeLength: number;
   /** time unit e.g. 'hours', 'minutes' you get it. */
@@ -54,9 +56,9 @@ interface DurationType {
 }
 
 /** props for FilterCardsCategorizer component */
-export interface Props<T, FilterState> {
+export interface Props<T, IFilter> {
   /** the whole filter state passed from the rendering parent component */
-  parentFilterState: FilterState;
+  parentFilters: IFilter[];
 
   /** an array of the records that are getting filtered, the filtration
    * will be done on one of the properties of each object in the data array
@@ -79,14 +81,14 @@ export interface Props<T, FilterState> {
   timeAccessor: string;
 
   /** unique values ; part of the enumerable values of the accessor field
-   * data will be filtered based on at-least on of these values
+   * data will be filtered based on
    */
   categories: Set<string>;
 
   /** render prop accepts a function that is given data of type GroupedFilters
    * then it can supply a custom interface to display the results
    */
-  renderCard?: (groupedFilters: Array<GroupedFilters<T, FilterState>>) => JSX.Element;
+  renderCard?: (groupedFilters: Array<GroupedFilters<T, IFilter>>) => JSX.Element;
 }
 
 /** default props for the categorizer component */
@@ -94,13 +96,13 @@ export const defaultProps: Props<{}, {}> = {
   accessor: '',
   categories: new Set(['']),
   data: [],
-  parentFilterState: {},
-  periods: [{ timeLength: 1, timeUnit: TimeUnit.WEEK }, { timeLength: 2, timeUnit: TimeUnit.WEEK }],
+  parentFilters: [],
+  periods: [{ timeLength: 1970, timeUnit: TimeUnit.YEAR }],
   timeAccessor: '',
 };
 
 /** the FilterCardsCategorizer component */
-function FilterCardsCategorizer<T, FilterState>(props: Props<T, FilterState>) {
+export function FilterCardsCategorizer<T, IFilter>(props: Props<T, IFilter>) {
   const {
     periods,
     data,
@@ -109,16 +111,16 @@ function FilterCardsCategorizer<T, FilterState>(props: Props<T, FilterState>) {
     categories,
     renderCard,
   } = props;
-  const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T, FilterState>>>([]);
+  const [groupedFilters, setGroupedFilters] = useState<Array<GroupedFilters<T, IFilter>>>([]);
 
   setGroupedFilters(
-    groupFilterData<T, FilterState>(
+    groupFilterData<T, IFilter>(
       periods,
       data,
       categories,
       categoryField,
       timeField,
-      props.parentFilterState
+      props.parentFilters
     )
   );
   return renderCard && renderCard(groupedFilters);
@@ -132,16 +134,15 @@ function FilterCardsCategorizer<T, FilterState>(props: Props<T, FilterState>) {
  * @param {string} categoryField - Filter data with respect to above categories for this property name
  * @param {string} timeField - property name for field that holds the eta data for each data obj.
  */
-export function groupFilterData<T, FilterState>(
+export function groupFilterData<T, IFilter>(
   periods: DurationType[],
   data: T[],
   categories: Set<string>,
   categoryField: string,
   timeField: string,
-  parentFilterState: any
-): Array<GroupedFilters<T, FilterState>> {
-  const filteredData: Array<GroupedFilters<T, FilterState>> = [];
-  // TODO - the period is in the form given by the server, need to parse that in an identifible format.
+  parentFilters: IFilter[]
+): Array<GroupedFilters<T, IFilter>> {
+  const filteredData: Array<GroupedFilters<T, IFilter>> = [];
   periods.forEach(period => {
     categories.forEach(category => {
       const filterFunction = (entry: any) =>
@@ -156,7 +157,7 @@ export function groupFilterData<T, FilterState>(
           category,
           ...period,
         },
-        parentFilterState,
+        parentFilters,
       });
     });
   });
