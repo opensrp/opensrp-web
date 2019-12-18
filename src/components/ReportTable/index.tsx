@@ -264,7 +264,7 @@ class ReportTable extends Component<Props, State> {
         <Row id={'chart'}>
           <WeightAndHeightChart
             weights={
-              this.getWeightsArray(this.state.pregnancyEventsArray, 'weight')[
+              this.getWeightsArray(this.state.pregnancyEventsArray, WEIGHT)[
                 this.state.currentPregnancy
               ]
             }
@@ -277,7 +277,7 @@ class ReportTable extends Component<Props, State> {
           {this.props.isNutrition ? (
             <WeightAndHeightChart
               weights={
-                this.getWeightsArray(this.state.pregnancyEventsArray, 'height')[
+                this.getWeightsArray(this.state.pregnancyEventsArray, HEIGHT)[
                   this.state.currentPregnancy
                 ]
               }
