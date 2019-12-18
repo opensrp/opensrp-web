@@ -95,15 +95,6 @@ function DataCircleCard({
 
   const nutritionCircleSpec: CircleSpecProps[] = [
     {
-      class: 'total-children',
-      riskLabel: 'Total Children',
-      riskType: ALL,
-      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any).reduce(
-        (a: number, b: number) => Number(a) + b,
-        0
-      ),
-    },
-    {
       class: 'stunting',
       riskLabel: 'Stunting',
       riskType: STUNTED,
