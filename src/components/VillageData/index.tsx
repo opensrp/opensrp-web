@@ -81,6 +81,15 @@ export default class VillageData extends React.Component<Props, State> {
                           <th className="default-width">{PREVIOUS_PREGNANCY_RISK}</th>
                           <th className="default-width">{RISK_CATEGORY}</th>
                         </tr>
+                      ) : this.props.module === NUTRITION ? (
+                        <tr>
+                          <th className="default-width">{PATIENT_ID}</th>
+                          <th className="default-width">{'Days since birth'}</th>
+                          <th className="default-width">{'Location of residence'}</th>
+                          <th className="default-width">{'current Weight'}</th>
+                          <th className="default-width">{'Location of birth'}</th>
+                          <th className="default-width">{RISK_CATEGORY}</th>
+                        </tr>
                       ) : (
                         <tr>
                           <th className="default-width">{PATIENT_ID}</th>
