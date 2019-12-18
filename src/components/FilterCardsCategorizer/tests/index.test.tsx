@@ -1,5 +1,4 @@
-import React from 'react';
-import { groupFilterData, isInPeriod, TimeUnits } from '..';
+import { DurationType, groupFilterData, isInPeriod, TimeUnit } from '..';
 import { filterTestData } from './fixtures';
 
 // TODO - understand this; document this
@@ -17,19 +16,22 @@ describe('src/components/FilterCards.utils', () => {
   });
 
   it('groups filtered data correctly ', () => {
-    const period = {
-      howLong: 2,
-      unit: TimeUnits.WEEKS,
+    const period: DurationType = {
+      timeLength: 2,
+      timeUnit: TimeUnit.WEEK,
     };
-    const result = groupFilterData<any>(
+    const result = groupFilterData<any, Array<{}>>(
       [period],
       filterTestData,
       new Set(['HighRisk', 'LowRisk']),
       'risk',
-      'edd'
+      'edd',
+      []
     );
     const expected = [
       {
+        filterFunction: expect.anything(),
+        filterId: 'FILTER_CARDS',
         filteredData: [
           {
             edd: 1573471123481,
@@ -39,11 +41,14 @@ describe('src/components/FilterCards.utils', () => {
         ],
         meta: {
           category: 'HighRisk',
-          howLong: 2,
-          unit: `weeks`,
+          timeLength: 2,
+          timeUnit: 'week',
         },
+        parentFilters: [],
       },
       {
+        filterFunction: expect.anything(),
+        filterId: 'FILTER_CARDS',
         filteredData: [
           {
             edd: 1573471123481,
@@ -53,19 +58,20 @@ describe('src/components/FilterCards.utils', () => {
         ],
         meta: {
           category: 'LowRisk',
-          howLong: 2,
-          unit: `weeks`,
+          timeLength: 2,
+          timeUnit: 'week',
         },
+        parentFilters: [],
       },
     ];
-    expect(result).toEqual(expected);
+    expect(result).toMatchObject(expected);
   });
 
   it('Correctly checks a date is without a given range', () => {
     const dataObj = filterTestData[0];
-    const period = {
-      howLong: 2,
-      unit: TimeUnits.WEEKS,
+    const period: DurationType = {
+      timeLength: 2,
+      timeUnit: TimeUnit.WEEK,
     };
     const result = isInPeriod(dataObj, period, 'edd');
     expect(result).toBeFalsy();
@@ -73,9 +79,9 @@ describe('src/components/FilterCards.utils', () => {
 
   it('Correctly checks a date is within a given range', () => {
     const dataObj = filterTestData[3];
-    const period = {
-      howLong: 2,
-      unit: TimeUnits.WEEKS,
+    const period: DurationType = {
+      timeLength: 2,
+      timeUnit: TimeUnit.WEEK,
     };
     const result = isInPeriod(dataObj, period, 'edd');
     expect(result).toBeTruthy();
@@ -86,9 +92,9 @@ describe('src/components/FilterCards.utils', () => {
     const startDate = 1572599427171;
     const dataObj = filterTestData[3];
     dataObj.edd = startDate + 14 * 24 * 60 * 60 * 1000;
-    const period = {
-      howLong: 2,
-      unit: TimeUnits.WEEKS,
+    const period: DurationType = {
+      timeLength: 2,
+      timeUnit: TimeUnit.WEEK,
     };
     const result = isInPeriod(dataObj, period, 'edd');
     expect(result).toBeTruthy();
