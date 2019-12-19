@@ -6,7 +6,7 @@ import { loadANCList } from '../dataLoading';
 // tslint:disable-next-line: no-var-requires
 const fetch = require('jest-fetch-mock');
 
-jest.mock('../../../../../configs/env');
+jest.mock('../../../../../../configs/env');
 
 const controller = new AbortController();
 const signal = controller.signal;
