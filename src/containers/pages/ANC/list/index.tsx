@@ -13,13 +13,12 @@ import { OpenSRPService } from '../../../../services/opensrp';
 import clientReducer, {
   Client,
   fetchClients,
+  getClientsArray,
   reducerName as clientReducerName,
 } from '../../../../store/ducks/clients';
 import { loadANCList } from './helpers/dataLoading';
 import { useColumns } from './helpers/tableDefinition';
 import './index.css';
-// TODO - remove fixtures.
-import { allANC } from './tests/fixtures';
 
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
@@ -91,7 +90,7 @@ type DispatchActions = Pick<ANCListProps, 'fetchClientsCreator'>;
 
 const mapStateToProps = (state: Partial<Store>): DispatchedProps => {
   return {
-    ANCArray: allANC, // getClientsArray(state),
+    ANCArray: getClientsArray(state),
   };
 };
 
