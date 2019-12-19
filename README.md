@@ -42,10 +42,10 @@ yarn lint
 
 you can run `yarn lint` from an clients directory or from the root directory.
 
-Run the tests
+Run the tests:watch
 
 ```sh
-yarn test
+yarn test:watch
 ```
 
 you need to cd into a specific client directory within clients/ in order for tests to work properly.
@@ -131,7 +131,7 @@ Here's an example sample `package.json` for a package:
   "repository": "https://github.com/opensrp/opensrp-web",
   "scripts": {
     "jest": "jest --coverage --verbose --color",
-    "test": "cd ../../ && yarn test packages/opensrp-server-service --verbose --collectCoverage=true && cd clients/core",
+    "test": "cd ../../ && yarn test packages/opensrp-server-service --verbose --collectCoverage=true && cd packages/opensrp-server-service",
     "lint": "eslint './**/*.{js,jsx,ts,tsx}'",
     "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
   },

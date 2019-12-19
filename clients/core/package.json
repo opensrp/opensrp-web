@@ -54,6 +54,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cp ./.env ../../.env && cd ../../ && yarn test clients/core --verbose --collectCoverage=true && cd clients/core",
+    "test:watch": "cp ./.env ../../.env && cd ../../ && yarn test clients/core --verbose --collectCoverage=true --watch && cd clients/core",
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{js,jsx,ts,tsx}'"
   },
