@@ -665,7 +665,7 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 <h2
   id="logface_title"
 >
-  Log Face - 
+  Log Face - Pregnancy
 </h2>
 `;
 
