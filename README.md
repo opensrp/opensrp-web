@@ -79,7 +79,7 @@ See [guidelines](docs/codeQuality.md) on recommended coding conventions for this
 
 ```sh
 cd clients
-npx create-react-app my-new-client --typescript
+yarn create react-app my-app --typescript
 ```
 
 remember to remove the `.igtignore` file created by npx
