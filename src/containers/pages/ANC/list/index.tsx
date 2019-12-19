@@ -62,7 +62,7 @@ export const ANCListView: React.FC<ANCListProps> = props => {
       </Helmet>
       <IfFulfilled state={InitialFetchState}>
         {data => (
-          <Col>
+          <Col className="mb-4">
             <h1 className="homepage-h-1">{`${ANC} (${ANCArray.length})`}</h1>
           </Col>
         )}
