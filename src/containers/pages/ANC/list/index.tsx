@@ -2,21 +2,24 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import React from 'react';
 import { IfFulfilled, IfPending, IfRejected, useAsync } from 'react-async';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import { ReactTable } from '../../../../components/ReactTable';
+import { ANC } from '../../../../constants';
 import { OpenSRPService } from '../../../../services/opensrp';
 import clientReducer, {
   Client,
   fetchClients,
   reducerName as clientReducerName,
 } from '../../../../store/ducks/clients';
-// TODO - remove fixtures.
-import { allANC } from './tests/fixtures';
 import { loadANCList } from './helpers/dataLoading';
 import { useColumns } from './helpers/tableDefinition';
+import './index.css';
+// TODO - remove fixtures.
+import { allANC } from './tests/fixtures';
 
 /**  register clients reducer */
 reducerRegistry.register(clientReducerName, clientReducer);
@@ -25,7 +28,7 @@ reducerRegistry.register(clientReducerName, clientReducer);
 export interface ANCListProps {
   /** creates action that dispatched , adds clients to store */
   fetchClientsCreator: typeof fetchClients;
-  /** the opensrpService */
+  /** the openSRPService */
   service: typeof OpenSRPService;
   /** all anc records in store */
   ANCArray: Client[];
@@ -50,16 +53,26 @@ const ANCTable: React.FC<ANCTableProps> = props => {
 export const ANCListView: React.FC<ANCListProps> = props => {
   const { service, fetchClientsCreator, ANCArray } = props;
 
-  const state = useAsync({ promiseFn: loadANCList, service });
+  const InitialFetchState = useAsync({ promiseFn: loadANCList, service });
 
   return (
     <div>
+      <Helmet>
+        <title>{ANC}</title>
+      </Helmet>
+      <IfFulfilled state={InitialFetchState}>
+        {data => (
+          <Col>
+            <h1 className="homepage-h-1">{`${ANC} (${ANCArray.length})`}</h1>
+          </Col>
+        )}
+      </IfFulfilled>
       {/* Filter section will go here. */}
-      <IfPending state={state}>
+      <IfPending state={InitialFetchState}>
         <Loading />
       </IfPending>
-      <IfRejected state={state}>{error => <h2>{error.message}</h2>}</IfRejected>
-      <IfFulfilled state={state}>
+      <IfRejected state={InitialFetchState}>{error => <h2>{error.message}</h2>}</IfRejected>
+      <IfFulfilled state={InitialFetchState}>
         {data => (
           <Col>
             <ANCTable data={props.ANCArray} />
