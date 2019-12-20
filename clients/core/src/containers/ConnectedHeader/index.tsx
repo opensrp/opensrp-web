@@ -7,11 +7,11 @@ import Header from '../../components/page/Header/Header';
 
 /** map state to props */
 const mapStateToProps = (state: Partial<Store>) => {
-  const result = {
-    authenticated: isAuthenticated(state),
-    user: getUser(state),
-  };
-  return result;
+    const result = {
+        authenticated: isAuthenticated(state),
+        user: getUser(state),
+    };
+    return result;
 };
 
 const mapDispatchToProps = { logOutUser };

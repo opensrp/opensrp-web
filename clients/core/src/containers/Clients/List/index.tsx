@@ -8,10 +8,10 @@ import Loading from '../../../components/page/Loading';
 import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientsReducer, {
-  Client,
-  fetchClients,
-  getClientsArray,
-  reducerName as clientsReducerName,
+    Client,
+    fetchClients,
+    getClientsArray,
+    reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './clientList.css';
 
@@ -20,71 +20,71 @@ reducerRegistry.register(clientsReducerName, clientsReducer);
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
-  opensrpService: typeof OpenSRPService;
-  clientsArray: Client[];
-  fetchClientsActionCreator: typeof fetchClients;
+    opensrpService: typeof OpenSRPService;
+    clientsArray: Client[];
+    fetchClientsActionCreator: typeof fetchClients;
 }
 
 /** default props for the clientList component */
 export const defaultClientListProps: ClientListProps = {
-  clientsArray: [],
-  fetchClientsActionCreator: fetchClients,
-  opensrpService: OpenSRPService,
+    clientsArray: [],
+    fetchClientsActionCreator: fetchClients,
+    opensrpService: OpenSRPService,
 };
 
 /** Display the client list  */
 class ClientList extends React.Component<ClientListProps, {}> {
-  public static defaultProps: ClientListProps = defaultClientListProps;
-  constructor(props: ClientListProps) {
-    super(props);
-  }
-
-  public async componentDidMount() {
-    const { fetchClientsActionCreator, opensrpService } = this.props;
-    const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
-    const response = await clientService.list();
-    fetchClientsActionCreator(response);
-  }
-
-  public render() {
-    /** render loader if there are no clients in state */
-    const { clientsArray } = this.props;
-    if (!some(clientsArray)) {
-      return <Loading />;
+    public static defaultProps: ClientListProps = defaultClientListProps;
+    constructor(props: ClientListProps) {
+        super(props);
     }
-    return (
-      <div>
-        <Table striped={true}>
-          <thead>
-            <tr>
-              <th>Identifier</th>
-              <th>First Name</th>
-              <th>Middle Name</th>
-              <th>Last Name</th>
-              <th>Gender</th>
-              <th>actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {clientsArray.map((client: Client) => {
-              return (
-                <tr key={client._id}>
-                  <td>{client._id}</td>
-                  <td>{client.firstName}</td>
-                  <td>{client.middleName}</td>
-                  <td>{client.lastName}</td>
-                  <td>{client.gender}</td>
-                  <td>
-                    <a href={`${'#'}`}> view </a>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      </div>
-    );
-  }
+
+    public async componentDidMount() {
+        const { fetchClientsActionCreator, opensrpService } = this.props;
+        const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const response = await clientService.list();
+        fetchClientsActionCreator(response);
+    }
+
+    public render() {
+        /** render loader if there are no clients in state */
+        const { clientsArray } = this.props;
+        if (!some(clientsArray)) {
+            return <Loading />;
+        }
+        return (
+            <div>
+                <Table striped={true}>
+                    <thead>
+                        <tr>
+                            <th>Identifier</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {clientsArray.map((client: Client) => {
+                            return (
+                                <tr key={client._id}>
+                                    <td>{client._id}</td>
+                                    <td>{client.firstName}</td>
+                                    <td>{client.middleName}</td>
+                                    <td>{client.lastName}</td>
+                                    <td>{client.gender}</td>
+                                    <td>
+                                        <a href={`${'#'}`}> view </a>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+        );
+    }
 }
 
 export { ClientList };
@@ -93,15 +93,15 @@ export { ClientList };
 
 /** Interface to describe props from mapStateToProps */
 interface DispatchedStateProps {
-  clientsArray: Client[];
+    clientsArray: Client[];
 }
 
 /** Map props to state  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
-  const result = {
-    clientsArray: getClientsArray(state),
-  };
-  return result;
+    const result = {
+        clientsArray: getClientsArray(state),
+    };
+    return result;
 };
 
 /** map props to actions */

@@ -6,7 +6,7 @@ import { Reducer } from 'redux';
 
 /** Initial reducers in the reducer registry */
 const defaultReducers: Registry = {
-  router: connectReducer as Reducer,
+    router: connectReducer as Reducer,
 };
 
 /** Add users reducer to registry */
@@ -18,7 +18,7 @@ const store = getConnectedStore(defaultReducers);
 
 /** Set listener to add reducers to store when registered */
 reducerRegistry.setChangeListener(reducers => {
-  store.replaceReducer(combine(reducers));
+    store.replaceReducer(combine(reducers));
 });
 
 export default store;

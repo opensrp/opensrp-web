@@ -12,89 +12,89 @@ reducerRegistry.register(reducerName, reducer);
 
 jest.mock('../../../../configs/env');
 describe('containers/clients/list/ClientList', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
 
-  it('renders without crashing', () => {
-    const mock: jest.Mock = jest.fn();
-    const opensrpServiceMock: jest.Mock = jest.fn();
-    const props = {
-      clientsArray: fixtures.clients,
-      fetchClientsActionCreator: mock,
-      location: mock,
-      match: mock,
-      opensrpService: opensrpServiceMock,
-    };
-    shallow(<ClientList {...props} />);
-  });
+    it('renders without crashing', () => {
+        const mock: jest.Mock = jest.fn();
+        const opensrpServiceMock: jest.Mock = jest.fn();
+        const props = {
+            clientsArray: fixtures.clients,
+            fetchClientsActionCreator: mock,
+            location: mock,
+            match: mock,
+            opensrpService: opensrpServiceMock,
+        };
+        shallow(<ClientList {...props} />);
+    });
 
-  it('renders correctly', () => {
-    const mock: jest.Mock = jest.fn();
-    const opensrpServiceMock: jest.Mock = jest.fn();
-    const props = {
-      clientsArray: fixtures.clients,
-      fetchClientsActionCreator: mock,
-      location: mock,
-      match: mock,
-      opensrpService: opensrpServiceMock,
-    };
-    const wrapper = mount(<ClientList {...props} />);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.unmount();
-  });
+    it('renders correctly', () => {
+        const mock: jest.Mock = jest.fn();
+        const opensrpServiceMock: jest.Mock = jest.fn();
+        const props = {
+            clientsArray: fixtures.clients,
+            fetchClientsActionCreator: mock,
+            location: mock,
+            match: mock,
+            opensrpService: opensrpServiceMock,
+        };
+        const wrapper = mount(<ClientList {...props} />);
+        expect(toJson(wrapper)).toMatchSnapshot();
+        wrapper.unmount();
+    });
 
-  it('renders correctly when clientsArray is an empty array', () => {
-    const mock: jest.Mock = jest.fn();
-    const opensrpServiceMock: jest.Mock = jest.fn();
-    const props = {
-      clientsArray: [],
-      fetchClientsActionCreator: mock,
-      location: mock,
-      match: mock,
-      opensrpService: opensrpServiceMock,
-    };
-    const wrapper = mount(<ClientList {...props} />);
-    expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
-    wrapper.unmount();
-  });
+    it('renders correctly when clientsArray is an empty array', () => {
+        const mock: jest.Mock = jest.fn();
+        const opensrpServiceMock: jest.Mock = jest.fn();
+        const props = {
+            clientsArray: [],
+            fetchClientsActionCreator: mock,
+            location: mock,
+            match: mock,
+            opensrpService: opensrpServiceMock,
+        };
+        const wrapper = mount(<ClientList {...props} />);
+        expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
+        wrapper.unmount();
+    });
 
-  it('works correctly with the redux store', () => {
-    store.dispatch(fetchClients(fixtures.clients));
-    const mock: jest.Mock = jest.fn();
-    const opensrpServiceMock: jest.Mock = jest.fn();
-    const props = {
-      fetchClientsActionCreator: mock,
-      location: mock,
-      match: mock,
-      opensrpService: opensrpServiceMock,
-    };
-    const wrapper = mount(
-      <Provider store={store}>
-        <ConnectedClientsList {...props} />
+    it('works correctly with the redux store', () => {
+        store.dispatch(fetchClients(fixtures.clients));
+        const mock: jest.Mock = jest.fn();
+        const opensrpServiceMock: jest.Mock = jest.fn();
+        const props = {
+            fetchClientsActionCreator: mock,
+            location: mock,
+            match: mock,
+            opensrpService: opensrpServiceMock,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <ConnectedClientsList {...props} />
+                );
+            </Provider>,
         );
-      </Provider>
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.unmount();
-  });
+        expect(toJson(wrapper)).toMatchSnapshot();
+        wrapper.unmount();
+    });
 
-  it('calls openSRPService with the correct params', () => {
-    const mock: jest.Mock = jest.fn();
-    const opensrpServiceMock: jest.Mock = jest.fn();
-    const props = {
-      fetchClientsActionCreator: mock,
-      location: mock,
-      match: mock,
-      opensrpService: opensrpServiceMock,
-    };
-    const wrapper = mount(
-      <Provider store={store}>
-        <ConnectedClientsList {...props} />
+    it('calls openSRPService with the correct params', () => {
+        const mock: jest.Mock = jest.fn();
+        const opensrpServiceMock: jest.Mock = jest.fn();
+        const props = {
+            fetchClientsActionCreator: mock,
+            location: mock,
+            match: mock,
+            opensrpService: opensrpServiceMock,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <ConnectedClientsList {...props} />
+                );
+            </Provider>,
         );
-      </Provider>
-    );
-    expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
-    wrapper.unmount();
-  });
+        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
+        wrapper.unmount();
+    });
 });

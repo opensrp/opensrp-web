@@ -8,60 +8,60 @@ import HeaderBreadcrumb from '../HeaderBreadcrumb';
 const history = createBrowserHistory();
 
 describe('components/page/HeaderBreadcrumb', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
 
-  it('renders without crashing', () => {
-    const props = {
-      currentPage: {
-        label: 'IRS',
-        url: '/irs',
-      },
-      pages: [
-        {
-          label: 'Home',
-          url: '/',
-        },
-      ],
-    };
-    shallow(
-      <Router history={history}>
-        <HeaderBreadcrumb {...props} />
-      </Router>
-    );
-  });
+    it('renders without crashing', () => {
+        const props = {
+            currentPage: {
+                label: 'IRS',
+                url: '/irs',
+            },
+            pages: [
+                {
+                    label: 'Home',
+                    url: '/',
+                },
+            ],
+        };
+        shallow(
+            <Router history={history}>
+                <HeaderBreadcrumb {...props} />
+            </Router>,
+        );
+    });
 
-  it('renders HeaderBreadcrumb correctly', () => {
-    const props = {
-      currentPage: {
-        label: 'IRS',
-        url: '/irs',
-      },
-      pages: [
-        {
-          label: 'Home',
-          url: '/',
-        },
-        {
-          label: 'Programs',
-          url: '/programs',
-        },
-        {
-          label: 'Provinces',
-          url: '',
-        },
-        {
-          label: 'Disctricts',
-        },
-      ],
-    };
-    const wrapper = mount(
-      <Router history={history}>
-        <HeaderBreadcrumb {...props} />
-      </Router>
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.unmount();
-  });
+    it('renders HeaderBreadcrumb correctly', () => {
+        const props = {
+            currentPage: {
+                label: 'IRS',
+                url: '/irs',
+            },
+            pages: [
+                {
+                    label: 'Home',
+                    url: '/',
+                },
+                {
+                    label: 'Programs',
+                    url: '/programs',
+                },
+                {
+                    label: 'Provinces',
+                    url: '',
+                },
+                {
+                    label: 'Disctricts',
+                },
+            ],
+        };
+        const wrapper = mount(
+            <Router history={history}>
+                <HeaderBreadcrumb {...props} />
+            </Router>,
+        );
+        expect(toJson(wrapper)).toMatchSnapshot();
+        wrapper.unmount();
+    });
 });

@@ -24,58 +24,58 @@ library.add(faUser, faChartLine, faCog);
 
 /** Main App component */
 class App extends Component {
-  public render() {
-    return (
-      <Container fluid={true}>
-        <ConnectedHeader />
-        <Row id="main-page-row">
-          <Col md={2} className="side-menu-section">
-            <SideMenu {...sideMenuProps} />
-          </Col>
-          <Col md={10} className="container-section">
-            <Switch>
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path="/"
-                component={Home}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={CLIENT_URL}
-                component={ConnectedClientList}
-              />
+    public render() {
+        return (
+            <Container fluid={true}>
+                <ConnectedHeader />
+                <Row id="main-page-row">
+                    <Col md={2} className="side-menu-section">
+                        <SideMenu {...sideMenuProps} />
+                    </Col>
+                    <Col md={10} className="container-section">
+                        <Switch>
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path="/"
+                                component={Home}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={CLIENT_URL}
+                                component={ConnectedClientList}
+                            />
 
-              <Route
-                exact={true}
-                path={LOGIN_URL}
-                render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
-              />
-              <Route
-                exact={true}
-                path="/oauth/callback/:id"
-                render={routeProps => (
-                  <ConnectedOauthCallback
-                    LoadingComponent={Loading}
-                    providers={providers}
-                    oAuthUserInfoGetter={oAuthUserInfoGetter}
-                    {...routeProps}
-                  />
-                )}
-              />
-              <ConnectedPrivateRoute
-                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
-                exact={true}
-                path={LOGOUT_URL}
-                component={ConnectedLogout}
-              />
-            </Switch>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+                            <Route
+                                exact={true}
+                                path={LOGIN_URL}
+                                render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
+                            />
+                            <Route
+                                exact={true}
+                                path="/oauth/callback/:id"
+                                render={routeProps => (
+                                    <ConnectedOauthCallback
+                                        LoadingComponent={Loading}
+                                        providers={providers}
+                                        oAuthUserInfoGetter={oAuthUserInfoGetter}
+                                        {...routeProps}
+                                    />
+                                )}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOGOUT_URL}
+                                component={ConnectedLogout}
+                            />
+                        </Switch>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 }
 
 export default App;
