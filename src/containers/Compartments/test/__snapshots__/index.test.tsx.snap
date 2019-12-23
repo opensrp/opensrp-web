@@ -36,22 +36,13 @@ Array [
           <li
             className="red"
             key="0"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  1
-                </span>
-              </a>
-            </Link>
+              1
+            </span>
             <span
               className="risk-level"
             >
@@ -61,22 +52,13 @@ Array [
           <li
             className="orange"
             key="1"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  1
-                </span>
-              </a>
-            </Link>
+              1
+            </span>
             <span
               className="risk-level"
             >
@@ -86,22 +68,13 @@ Array [
           <li
             className="green"
             key="2"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  0
-                </span>
-              </a>
-            </Link>
+              0
+            </span>
             <span
               className="risk-level"
             >
@@ -146,22 +119,13 @@ Array [
           <li
             className="red"
             key="0"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  1
-                </span>
-              </a>
-            </Link>
+              1
+            </span>
             <span
               className="risk-level"
             >
@@ -171,22 +135,13 @@ Array [
           <li
             className="orange"
             key="1"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  1
-                </span>
-              </a>
-            </Link>
+              1
+            </span>
             <span
               className="risk-level"
             >
@@ -196,22 +151,13 @@ Array [
           <li
             className="green"
             key="2"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  0
-                </span>
-              </a>
-            </Link>
+              0
+            </span>
             <span
               className="risk-level"
             >
@@ -256,22 +202,13 @@ Array [
           <li
             className="red"
             key="0"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  0
-                </span>
-              </a>
-            </Link>
+              0
+            </span>
             <span
               className="risk-level"
             >
@@ -281,22 +218,13 @@ Array [
           <li
             className="orange"
             key="1"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  0
-                </span>
-              </a>
-            </Link>
+              0
+            </span>
             <span
               className="risk-level"
             >
@@ -306,22 +234,13 @@ Array [
           <li
             className="green"
             key="2"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  0
-                </span>
-              </a>
-            </Link>
+              0
+            </span>
             <span
               className="risk-level"
             >
