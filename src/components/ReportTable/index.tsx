@@ -26,7 +26,7 @@ import './index.css';
 
 interface Props {
   singlePatientEvents: SmsData[];
-  isNutrition: boolean;
+  isChild: boolean;
 }
 
 /**
@@ -76,11 +76,11 @@ export const convertToStringArray = (smsData: PregnancySmsData): string[] => {
 
 export const getEventsPregnancyArray = (
   singlePatientEvents: SmsData[],
-  isNutrition: boolean
+  isChild: boolean
 ): PregnancySmsData[][] => {
   // remove event types that we are not interested in and retain
   // only pregnancy registration, ANC and birth reports
-  singlePatientEvents = !isNutrition
+  singlePatientEvents = !isChild
     ? singlePatientEvents.filter((event: SmsData) => {
         return (
           event.sms_type.toLowerCase() === BIRTH_REPORT.toLowerCase() ||
@@ -130,7 +130,7 @@ export const getEventsPregnancyArray = (
 class ReportTable extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      pregnancyEventsArray: getEventsPregnancyArray(props.singlePatientEvents, props.isNutrition),
+      pregnancyEventsArray: getEventsPregnancyArray(props.singlePatientEvents, props.isChild),
     };
   }
 
@@ -268,13 +268,13 @@ class ReportTable extends Component<Props, State> {
                 this.state.currentPregnancy
               ]
             }
-            chartWrapperId={this.props.isNutrition ? 'nutrition-chart' : 'pregnancy-chart'}
-            title={this.props.isNutrition ? CHILD_WEIGHT_MONITORING : MOTHER_WEIGHT_TRACKING}
-            legendString={this.props.isNutrition ? CHILD_WEIGHT : MOTHERS_WEIGHT}
+            chartWrapperId={this.props.isChild ? 'nutrition-chart' : 'pregnancy-chart'}
+            title={this.props.isChild ? CHILD_WEIGHT_MONITORING : MOTHER_WEIGHT_TRACKING}
+            legendString={this.props.isChild ? CHILD_WEIGHT : MOTHERS_WEIGHT}
             units={KG}
             xAxisLabel={WEIGHT}
           />
-          {this.props.isNutrition ? (
+          {this.props.isChild ? (
             <WeightAndHeightChart
               weights={
                 this.getWeightsArray(this.state.pregnancyEventsArray, HEIGHT)[

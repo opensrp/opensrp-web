@@ -29,14 +29,10 @@ import './index.css';
 interface Props extends RouteComponentProps {
   patientId: string;
   smsData: SmsData[];
-  isNutrition: boolean;
+  isChild: boolean;
 }
 
-export const PatientDetails = ({
-  isNutrition = false,
-  patientId = 'none',
-  smsData = [],
-}: Props) => {
+export const PatientDetails = ({ isChild = false, patientId = 'none', smsData = [] }: Props) => {
   const [filteredData, setFilteredData] = useState<SmsData[]>([]);
   const lastLocation = useLastLocation();
   useEffect(() => {
@@ -60,20 +56,20 @@ export const PatientDetails = ({
       </div>
       <Row>
         <BasicInformation
-          labelValuePairs={getBasicInformationProps(patientId, isNutrition, filteredData)}
+          labelValuePairs={getBasicInformationProps(patientId, isChild, filteredData)}
         />
       </Row>
-      <ReportTable isNutrition={isNutrition} singlePatientEvents={filteredData} />
+      <ReportTable isChild={isChild} singlePatientEvents={filteredData} />
     </div>
   );
 };
 
 function getBasicInformationProps(
   patientId: string,
-  isNutrition: boolean,
+  isChild: boolean,
   filteredData: SmsData[]
 ): LabelValuePair[] {
-  const basicInformationProps = !isNutrition
+  const basicInformationProps = !isChild
     ? ([
         { label: ID, value: patientId },
         { label: LOCATION, value: getCurrentLocation(filteredData) },
@@ -176,10 +172,10 @@ const mapStateToprops = (
   state: any,
   ownProps: RouteComponentProps<{
     patient_id: string;
-  }> & { isNutrition: boolean }
+  }> & { isChild: boolean }
 ) => {
   return {
-    isNutrition: ownProps.isNutrition,
+    isChild: ownProps.isChild,
     patientId: ownProps.match.params.patient_id,
     smsData: getSmsData(state),
   };

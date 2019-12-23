@@ -257,7 +257,7 @@ export const Routes = (props: RoutesProps) => {
               })()}
               // tslint:disable-next-line: jsx-no-lambda
               component={(routeProps: any) => (
-                <ConnectedPatientDetails isNutrition={true} {...routeProps} />
+                <ConnectedPatientDetails isChild={true} {...routeProps} />
               )}
             />
             <ConnectedPrivateRoute
@@ -280,7 +280,7 @@ export const Routes = (props: RoutesProps) => {
               })()}
               // tslint:disable-next-line: jsx-no-lambda
               component={(routeProps: any) => (
-                <ConnectedPatientDetails isNutrition={true} {...routeProps} />
+                <ConnectedPatientDetails isChild={true} {...routeProps} />
               )}
             />
             <ConnectedPrivateRoute
