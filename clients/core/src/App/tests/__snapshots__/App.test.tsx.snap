@@ -105,6 +105,15 @@ exports[`App renders App correctly 1`] = `
               >
                 <Row
                   tag="div"
+                  widths={
+                    Array [
+                      "xs",
+                      "sm",
+                      "md",
+                      "lg",
+                      "xl",
+                    ]
+                  }
                 >
                   <div
                     className="row"
@@ -255,6 +264,15 @@ exports[`App renders App correctly 1`] = `
           <Row
             id="main-page-row"
             tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
           >
             <div
               className="row"
@@ -333,6 +351,15 @@ exports[`App renders App correctly 1`] = `
                     >
                       <Row
                         tag="div"
+                        widths={
+                          Array [
+                            "xs",
+                            "sm",
+                            "md",
+                            "lg",
+                            "xl",
+                          ]
+                        }
                       >
                         <div
                           className="row"
@@ -762,6 +789,15 @@ exports[`App renders App correctly 1`] = `
                               <Row
                                 className="welcome-box"
                                 tag="div"
+                                widths={
+                                  Array [
+                                    "xs",
+                                    "sm",
+                                    "md",
+                                    "lg",
+                                    "xl",
+                                  ]
+                                }
                               >
                                 <div
                                   className="welcome-box row"

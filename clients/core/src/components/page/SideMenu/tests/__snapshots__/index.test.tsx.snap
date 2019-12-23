@@ -59,7 +59,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -103,11 +103,11 @@
+@@ -112,11 +112,11 @@
                         \\"label\\": \\"All clients\\",
                         \\"url\\": \\"/clients\\",
                       },
@@ -72,7 +72,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
-@@ -125,11 +125,11 @@
+@@ -134,11 +134,11 @@
                           \\"label\\": \\"All clients\\",
                           \\"url\\": \\"/clients\\",
                         },
@@ -85,7 +85,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -240,11 +240,11 @@
+@@ -249,11 +249,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -98,7 +98,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -256,11 +256,11 @@
+@@ -265,11 +265,11 @@
                       >
                         <Transition
                           appear={false}
@@ -111,7 +111,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -268,13 +268,17 @@
+@@ -277,13 +277,17 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
