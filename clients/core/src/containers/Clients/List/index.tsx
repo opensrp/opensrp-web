@@ -14,7 +14,7 @@ import clientsReducer, {
     reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './clientList.css';
-import { generatePayload } from '../../../services/opensrp';
+import { generateOptions } from '../../../services/opensrp';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -42,7 +42,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
 
     public async componentDidMount() {
         const { fetchClientsActionCreator, opensrpService } = this.props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generatePayload);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
         const response = await clientService.list();
         fetchClientsActionCreator(response);
     }

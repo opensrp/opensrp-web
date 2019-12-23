@@ -1,7 +1,7 @@
 import { getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { authenticateUser } from '@onaio/session-reducer';
 import store from '../../../store';
-import { generateHeaders, generatePayload } from '../index';
+import { generateHeaders, generateOptions } from '../index';
 import { OpenSRPAPIResponse } from './fixtures/session';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -28,7 +28,7 @@ describe('services/OpenSRP', () => {
 
     it('generatePayload works fine', async () => {
         const signal = new AbortController().signal;
-        const response = generatePayload(signal, 'GET');
+        const response = generateOptions(signal, 'GET');
         expect(response).toEqual({
             headers: {
                 accept: 'application/json',
