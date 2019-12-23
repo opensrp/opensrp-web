@@ -320,21 +320,14 @@ export const Compartments = ({
   ] = useState<null | NutritionDataCircleCardProps>(null);
 
   useEffect(() => {
-    const childrenUnder2 = filteredData.filter((dataItem: SmsData) => {
-      return new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 2;
-    });
+    const childrenUnder2 = filteredData.filter(childrenUnder2FilterFunction);
 
-    const childrenUnder5 = filteredData.filter((dataItem: SmsData) => {
-      return (
-        new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 5 &&
-        new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > 2
-      );
-    });
+    const childrenUnder5 = filteredData.filter(childrenUnder5FilterFunction);
 
     setDataCircleCardNutrition1(
       module === NUTRITION
         ? {
-            filterArgs: [],
+            filterArgs: [childrenUnder5FilterFunction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder5,
@@ -354,7 +347,7 @@ export const Compartments = ({
     setDataCircleCardNutrition2(
       module === NUTRITION
         ? {
-            filterArgs: [],
+            filterArgs: [childrenUnder2FilterFunction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder2,
@@ -453,6 +446,27 @@ export const Compartments = ({
         <Ripple />
       )}
     </div>
+  );
+};
+
+/**
+ * filter function for smsData based on data_of_birth field
+ * @param {SmsData} dataItem - SmsData item
+ * @returns {boolean}
+ */
+const childrenUnder2FilterFunction = (dataItem: SmsData): boolean => {
+  return new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 2;
+};
+
+/**
+ * filter function for smsData based on data_of_birth field
+ * @param {SmsData} dataItem - SmsData item
+ * @returns {boolean}
+ */
+const childrenUnder5FilterFunction = (dataItem: SmsData) => {
+  return (
+    new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 5 &&
+    new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > 2
   );
 };
 
