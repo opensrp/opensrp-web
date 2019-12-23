@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
 
-import { Route, Switch } from 'react-router';
+import { Route, RouteComponentProps, Switch } from 'react-router';
 import { LastLocationProvider } from 'react-router-last-location';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
@@ -255,7 +255,10 @@ export const Routes = (props: RoutesProps) => {
                   PREGNANCY_COMPARTMENTS_URL,
                 ].map(url => `${url}${CHILD_PATIENT_DETAIL_URL}`);
               })()}
-              component={ConnectedChildPatientDetails}
+              // tslint:disable-next-line: jsx-no-lambda
+              component={(routeProps: RouteComponentProps) => (
+                <ConnectedPatientDetails isNutrition={true} {...routeProps} />
+              )}
             />
             <ConnectedPrivateRoute
               disableLoginProtection={false}
@@ -275,7 +278,10 @@ export const Routes = (props: RoutesProps) => {
                   url => `${url}${CHILD_PATIENT_DETAIL_URL}`
                 );
               })()}
-              component={ConnectedChildPatientDetails}
+              // tslint:disable-next-line: jsx-no-lambda
+              component={(routeProps: RouteComponentProps) => (
+                <ConnectedPatientDetails isNutrition={true} {...routeProps} />
+              )}
             />
             <ConnectedPrivateRoute
               disableLoginProtection={false}
