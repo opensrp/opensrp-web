@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
-import { OpenSRPService } from '../../../services/opensrp';
+import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
+import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {
     Client,
     fetchClients,
@@ -14,6 +14,7 @@ import clientsReducer, {
     reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './clientList.css';
+import { generatePayload } from '../../../services/opensrp';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -41,7 +42,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
 
     public async componentDidMount() {
         const { fetchClientsActionCreator, opensrpService } = this.props;
-        const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generatePayload);
         const response = await clientService.list();
         fetchClientsActionCreator(response);
     }

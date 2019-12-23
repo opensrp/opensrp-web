@@ -1,6 +1,7 @@
 import store from '../../store';
 import { getAccessToken } from '../../store/selectors';
 import { IncomingHttpHeaders } from 'http';
+import { OpenSRPService } from '../../../../../packages/opensrp-server-service';
 
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
