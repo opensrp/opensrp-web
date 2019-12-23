@@ -288,13 +288,15 @@ export const getProvince = (
  * Filter smsData by patientID and then sort.
  * @param props
  */
-export const filterByPatientAndSort = (props: {
+export const filterByPatientAndSort = (patientIdAndSmsData: {
   patientId: string;
   smsData: SmsData[];
 }): SmsData[] => {
-  return props.smsData
+  return patientIdAndSmsData.smsData
     .filter((dataItem: SmsData): boolean => {
-      return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
+      return dataItem.anc_id
+        .toLocaleLowerCase()
+        .includes(patientIdAndSmsData.patientId.toLocaleLowerCase());
     })
     .sort((event1: SmsData, event2: SmsData): number => {
       if (event1.EventDate < event2.EventDate) {
