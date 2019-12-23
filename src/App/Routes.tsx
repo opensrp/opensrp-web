@@ -47,7 +47,6 @@ import {
   SMS_FILTER_FUNCTION,
 } from '../constants';
 import { PREGNANCY_URL } from '../constants';
-import ConnectedChildPatientDetails from '../containers/ChildPatientDetails';
 import Compartments from '../containers/Compartments';
 import ConnectedHierarchichalDataTable from '../containers/HierarchichalDataTable';
 import ConnectedLogFace from '../containers/LogFace';
