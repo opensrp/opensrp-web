@@ -8,6 +8,7 @@ import {
   CHILD_HEIGHT_MONITORING,
   CHILD_WEIGHT,
   CHILD_WEIGHT_MONITORING,
+  CURRENT_NUTRTION,
   CURRENT_PREGNANCY,
   GESTATION_PERIOD,
   HEIGHT,
@@ -224,38 +225,57 @@ class ReportTable extends Component<Props, State> {
         <Row id="filter-panel">
           <p>Showing reports for:&emsp;</p>
           <div className="filters">
-            <Dropdown
-              isOpen={this.state.dropdownOpenPregnancy}
-              toggle={this.togglePregnancyDropDown}
-            >
-              <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
-                <span>
-                  {this.state.pregnancyDropdownLabel.length
-                    ? this.state.pregnancyDropdownLabel
-                    : 'select pregnancy'}
-                </span>
-              </DropdownToggle>
-              <DropdownMenu>
-                {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map(
-                  (pregnancy, i) => {
-                    return (
-                      <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
-                        {(() => {
-                          if (i === 0) {
-                            return CURRENT_PREGNANCY;
-                          } else {
-                            const pregnancyIndex =
-                              this.getPregnancyStringArray(this.state.pregnancyEventsArray).length -
-                              i;
-                            return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
-                          }
-                        })()}
-                      </DropdownItem>
-                    );
-                  }
-                )}
-              </DropdownMenu>
-            </Dropdown>
+            {this.props.isChild ? (
+              <Dropdown
+                isOpen={false}
+                // tslint:disable-next-line: jsx-no-lambda no-empty
+                toggle={() => {
+                  // we don't want to do any thing here for now
+                }}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  {CURRENT_NUTRTION}
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>{CURRENT_NUTRTION}</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Dropdown
+                isOpen={this.state.dropdownOpenPregnancy}
+                toggle={this.togglePregnancyDropDown}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  <span>
+                    {this.state.pregnancyDropdownLabel.length
+                      ? this.state.pregnancyDropdownLabel
+                      : 'select pregnancy'}
+                  </span>
+                </DropdownToggle>
+                <DropdownMenu>
+                  {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map(
+                    (pregnancy, i) => {
+                      return (
+                        <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
+                          {(() => {
+                            if (i === 0) {
+                              return CURRENT_PREGNANCY;
+                            } else {
+                              const pregnancyIndex =
+                                this.getPregnancyStringArray(this.state.pregnancyEventsArray)
+                                  .length - i;
+                              return (
+                                pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy'
+                              );
+                            }
+                          })()}
+                        </DropdownItem>
+                      );
+                    }
+                  )}
+                </DropdownMenu>
+              </Dropdown>
+            )}
           </div>
         </Row>
         <Row id="tableRow">
