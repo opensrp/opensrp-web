@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http';
 
 /** defaults */
-const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
+export const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
 
 /** allowed http methods */
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -29,14 +29,10 @@ export function getDefaultHeaders(
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
-export function getPayloadFn(
-    signal: AbortSignal,
-    method: HTTPMethod,
-): { headers: HeadersInit; method: HTTPMethod; signal: AbortSignal } {
+export function getPayloadFn(signal: AbortSignal, method: HTTPMethod): { headers: HeadersInit; method: HTTPMethod } {
     return {
         headers: getDefaultHeaders() as HeadersInit,
         method,
-        signal,
     };
 }
 
