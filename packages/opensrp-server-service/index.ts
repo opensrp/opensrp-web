@@ -29,7 +29,7 @@ export function getDefaultHeaders(
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
-export function getPayloadFn(signal: AbortSignal, method: HTTPMethod): { headers: HeadersInit; method: HTTPMethod } {
+export function getFetchOptions(signal: AbortSignal, method: HTTPMethod): { headers: HeadersInit; method: HTTPMethod } {
     return {
         headers: getDefaultHeaders() as HeadersInit,
         method,
@@ -96,7 +96,7 @@ export class OpenSRPService {
     public endpoint: string;
     public generalURL: string;
     public getURL: typeof getURLFn;
-    public getPayload: typeof getPayloadFn;
+    public getOptions: typeof getFetchOptions;
     public signal: AbortSignal;
 
     /**
@@ -109,12 +109,12 @@ export class OpenSRPService {
     constructor(
         baseURL: string = OPENSRP_API_BASE_URL,
         endpoint: string,
-        getPayload: typeof getPayloadFn = getPayloadFn,
+        getPayload: typeof getFetchOptions = getFetchOptions,
         signal: AbortSignal = new AbortController().signal,
         getURL: typeof getURLFn = getURLFn,
     ) {
         this.endpoint = endpoint;
-        this.getPayload = getPayload;
+        this.getOptions = getPayload;
         this.signal = signal;
         this.baseURL = baseURL;
         this.generalURL = `${this.baseURL}${this.endpoint}`;
@@ -132,7 +132,7 @@ export class OpenSRPService {
     public async create<T>(data: T, params: paramsType = null, method: HTTPMethod = 'POST'): Promise<{}> {
         const url = this.getURL(this.generalURL, params);
         const payload = {
-            ...this.getPayload(this.signal, method),
+            ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
             body: JSON.stringify(data),
@@ -156,7 +156,7 @@ export class OpenSRPService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async read(id: string | number, params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
         const url = this.getURL(`${this.generalURL}/${id}`, params);
-        const response = await fetch(url, this.getPayload(this.signal, method));
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
             throw new Error(`OpenSRPService read on ${this.endpoint} failed, HTTP status ${response.status}`);
@@ -176,7 +176,7 @@ export class OpenSRPService {
     public async update<T>(data: T, params: paramsType = null, method: HTTPMethod = 'PUT'): Promise<{}> {
         const url = this.getURL(this.generalURL, params);
         const payload = {
-            ...this.getPayload(this.signal, method),
+            ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
             body: JSON.stringify(data),
@@ -199,7 +199,7 @@ export class OpenSRPService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async list(params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
         const url = this.getURL(this.generalURL, params);
-        const response = await fetch(url, this.getPayload(this.signal, method));
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
             throw new Error(`OpenSRPService list on ${this.endpoint} failed, HTTP status ${response.status}`);
@@ -217,7 +217,7 @@ export class OpenSRPService {
      */
     public async delete<T>(params: paramsType = null, method: HTTPMethod = 'DELETE'): Promise<{}> {
         const url = this.getURL(this.generalURL, params);
-        const response = await fetch(url, this.getPayload(this.signal, method));
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (response.ok || response.status === 204 || response.status === 200) {
             return {};
