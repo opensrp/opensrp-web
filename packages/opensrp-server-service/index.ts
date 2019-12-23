@@ -111,18 +111,18 @@ export class OpenSRPService {
      * @param getPayload - a function to get the payload
      */
     constructor(
-        endpoint: string,
         baseURL: string = OPENSRP_API_BASE_URL,
-        getURL: typeof getURLFn = getURLFn,
+        endpoint: string,
         getPayload: typeof getPayloadFn = getPayloadFn,
         signal: AbortSignal = new AbortController().signal,
+        getURL: typeof getURLFn = getURLFn,
     ) {
         this.endpoint = endpoint;
+        this.getPayload = getPayload;
+        this.signal = signal;
         this.baseURL = baseURL;
         this.generalURL = `${this.baseURL}${this.endpoint}`;
         this.getURL = getURL;
-        this.getPayload = getPayload;
-        this.signal = signal;
     }
 
     /** create method
