@@ -132,6 +132,7 @@ export const LogFace = ({
   useEffect(() => {
     removeFilterArgs();
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -158,6 +159,7 @@ export const LogFace = ({
         clearInterval(intervalId);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [dropdownOpenRiskLevel, setDropdownOpenRiskLevel] = useState<boolean>(false);
@@ -215,6 +217,7 @@ export const LogFace = ({
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     userLocationData,
     userUUID,
@@ -244,6 +247,7 @@ export const LogFace = ({
       }).sort(sortFunction)
     );
     resetCurrentPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locationLabel, riskLabel, typeLabel]);
 
   useEffect(() => {
@@ -254,6 +258,7 @@ export const LogFace = ({
         typeLabel,
       }).sort(sortFunction)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterString]);
 
   const handleRiskLevelDropdownClick = (event: React.MouseEvent) => {

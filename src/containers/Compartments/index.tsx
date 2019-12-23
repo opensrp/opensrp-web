@@ -130,11 +130,13 @@ export const Compartments = ({
   useEffect(() => {
     removeFilterArgs();
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // update state when some props change
   useEffect(() => {
     setUserLocationId(getLocationId(userLocationData, userUUID));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userUUID, userLocationData]);
 
   useEffect(() => {
@@ -170,6 +172,7 @@ export const Compartments = ({
     setLocationAndPath(locationPath);
     setLocationFilterFunction(locationFilterFunction);
     setUserLocationLevel(locationLevel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocationId, provinces, districts, communes, villages, filterArgsInStore]);
 
   useEffect(() => {
@@ -229,6 +232,7 @@ export const Compartments = ({
           }
         : null
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredData, userLocationId]);
 
   const [
@@ -303,6 +307,7 @@ export const Compartments = ({
           }
         : null
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredData]);
 
   const [
@@ -365,6 +370,7 @@ export const Compartments = ({
           }
         : null
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredData]);
 
   const [circleCardComponent, setCircleCardComponent] = useState<ReactNodeArray>([]);
@@ -396,6 +402,7 @@ export const Compartments = ({
       });
     });
     setCircleCardComponent(componentArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     dataCircleCardNutrition1,
     dataCircleCardNutrition2,

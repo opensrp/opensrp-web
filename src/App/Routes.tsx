@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
 
-import { Route, RouteComponentProps, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { LastLocationProvider } from 'react-router-last-location';
 import Loading from '../components/page/Loading';
 import SideMenu from '../components/page/SideMenu';
