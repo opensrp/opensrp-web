@@ -298,7 +298,7 @@ interface PatientIDAndSmsData {
  * @return {SmsData[]} filtered smsData
  */
 export const filterByPatientId = (patientIdAndSmsData: PatientIDAndSmsData): SmsData[] => {
-  return patientIdAndSmsData.smsData.filter((dataItem: SmsData): boolean => {
+  return [...patientIdAndSmsData.smsData].filter((dataItem: SmsData): boolean => {
     return dataItem.anc_id
       .toLocaleLowerCase()
       .includes(patientIdAndSmsData.patientId.toLocaleLowerCase());
@@ -310,7 +310,7 @@ export const filterByPatientId = (patientIdAndSmsData: PatientIDAndSmsData): Sms
  * @param {SmsData[]} smsData an array of smsData objects to sortby eventdate
  */
 export const sortByEventDate = (smsData: SmsData[]) => {
-  return smsData.sort((event1: SmsData, event2: SmsData): number => {
+  return [...smsData].sort((event1: SmsData, event2: SmsData): number => {
     if (event1.EventDate < event2.EventDate) {
       return -1;
     }
