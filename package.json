@@ -46,6 +46,7 @@
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "react-router-last-location": "^2.0.1",
     "react-scripts": "^3.0.1",
     "react-vis": "^1.11.7",
     "reactstrap": "^8.0.1",
