@@ -172,14 +172,17 @@ function getPreviousPregnancyRisk(filteredData: SmsData[]): string {
   }
 }
 
-const mapStateToprops = (state: any, ownProps: any) => {
-  const patient_id = ownProps.match.params.patient_id;
-  const result = {
-    isNutrition: ownProps.match.url.includes(NUTRITION.toLowerCase()),
-    patientId: patient_id,
+const mapStateToprops = (
+  state: any,
+  ownProps: RouteComponentProps<{
+    patient_id: string;
+  }> & { isNutrition: boolean }
+) => {
+  return {
+    isNutrition: ownProps.isNutrition,
+    patientId: ownProps.match.params.patient_id,
     smsData: getSmsData(state),
   };
-  return result;
 };
 
 const ConnectedPatientDetails = connect(

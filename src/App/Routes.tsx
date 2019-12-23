@@ -256,7 +256,7 @@ export const Routes = (props: RoutesProps) => {
                 ].map(url => `${url}${CHILD_PATIENT_DETAIL_URL}`);
               })()}
               // tslint:disable-next-line: jsx-no-lambda
-              component={(routeProps: RouteComponentProps) => (
+              component={(routeProps: any) => (
                 <ConnectedPatientDetails isNutrition={true} {...routeProps} />
               )}
             />
@@ -279,7 +279,7 @@ export const Routes = (props: RoutesProps) => {
                 );
               })()}
               // tslint:disable-next-line: jsx-no-lambda
-              component={(routeProps: RouteComponentProps) => (
+              component={(routeProps: any) => (
                 <ConnectedPatientDetails isNutrition={true} {...routeProps} />
               )}
             />
