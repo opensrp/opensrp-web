@@ -22,7 +22,7 @@ import {
   RESIDENCE,
   RISK_CARTEGORIZATION,
 } from '../../constants';
-import { filterByPatientAndSort } from '../../helpers/utils';
+import { filterByPatientId, sortByEventDate } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -41,10 +41,12 @@ export const PatientDetails = ({
   const lastLocation = useLastLocation();
   useEffect(() => {
     setFilteredData(
-      filterByPatientAndSort({
-        patientId,
-        smsData,
-      })
+      sortByEventDate(
+        filterByPatientId({
+          patientId,
+          smsData,
+        })
+      )
     );
   }, [patientId, smsData]);
   return (

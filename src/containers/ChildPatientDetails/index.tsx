@@ -35,7 +35,7 @@ import {
   RISK_CARTEGORIZATION,
   WEIGHT,
 } from '../../constants';
-import { filterByPatientAndSort, getNumberOfDaysSinceDate } from '../../helpers/utils';
+import { filterByPatientId, getNumberOfDaysSinceDate, sortByEventDate } from '../../helpers/utils';
 import { getSmsData, SmsData } from '../../store/ducks/sms_events';
 import './index.css';
 interface Props extends RouteComponentProps {
@@ -56,7 +56,7 @@ class ChildPatientDetails extends Component<Props, State> {
   public static defaultProps: Partial<Props> = defaultProps;
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      filteredData: filterByPatientAndSort(props).filter((smsData: SmsData) => {
+      filteredData: sortByEventDate(filterByPatientId(props)).filter((smsData: SmsData) => {
         return (
           smsData.sms_type === NUTRITION_REGISTRATION ||
           smsData.sms_type === NUTRITION_REPORT ||
