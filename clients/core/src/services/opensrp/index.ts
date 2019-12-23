@@ -27,7 +27,7 @@ export function generateHeaders(
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
-export function generatePayload(
+export function generateOptions(
     signal: AbortSignal,
     method: HTTPMethod,
 ): { headers: HeadersInit; method: HTTPMethod; signal: AbortSignal } {
