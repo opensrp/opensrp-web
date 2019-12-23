@@ -11331,6 +11331,7 @@ opencollective-postinstall@^2.0.2:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "opensrp-server-service@file:packages/opensrp-server-service":
   version "0.0.0"
   dependencies:
@@ -11392,7 +11393,10 @@ opn@^5.1.0:
 opn@^5.5.0:
 >>>>>>> Move opensrp-server-service installation point
 =======
+=======
+>>>>>>> Cleanup merge
 opn@^5.5.0:
+<<<<<<< HEAD
 =======
 "opensrp-server-service@file:packages/opensrp-server-service":
   version "0.0.0"
@@ -11452,7 +11456,12 @@ opn@^5.5.0:
 
 opn@^5.1.0:
 >>>>>>> Ran yarn
+<<<<<<< HEAD
 >>>>>>> Ran yarn
+=======
+=======
+>>>>>>> Cleanup merge
+>>>>>>> Cleanup merge
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
   integrity sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
