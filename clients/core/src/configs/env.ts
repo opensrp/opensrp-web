@@ -112,3 +112,10 @@ export type OPENSRP_API_BASE_URL = typeof OPENSRP_API_BASE_URL;
 /** the clients endpoint NOTE: does not end with / */
 export const OPENSRP_CLIENT_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/search';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+
+/** the households endpoint NOTE: does not end with / */
+export const OPENSRP_HOUSEHOLD_ENDPOINT = process.env.REACT_APP_OPENSRP_HOUSEHOLD_ENDPOINT || 'client/searchByCriteria';
+export type OPENSRP_HOUSEHOLD_ENDPOINT = typeof OPENSRP_HOUSEHOLD_ENDPOINT;
+
+/** page size for every list of */
+export const PAGINATION_SIZE = 50;
