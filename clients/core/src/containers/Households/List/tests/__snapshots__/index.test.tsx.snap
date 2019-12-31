@@ -81,6 +81,5 @@ exports[`containers/households/list/Householdlist works correctly with the redux
       </div>
     </Ripple>
   </HouseholdList>
-  );
 </Provider>
 `;
