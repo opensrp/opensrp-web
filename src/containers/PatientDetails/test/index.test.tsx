@@ -18,6 +18,7 @@ jest.mock('highcharts');
 const props = {
   match: {
     params: { patient_id: '0' },
+    url: 'nutrition',
   },
 };
 

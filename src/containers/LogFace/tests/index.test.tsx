@@ -27,7 +27,7 @@ import { userLocations } from './userLocationFixtures';
 reducerRegistry.register(reducerName, reducer);
 
 describe('components/ConnectedHeader', () => {
-  const props = { header: 'Pregnancy' };
+  const props = { module: 'Pregnancy' };
   beforeEach(() => {
     jest.resetAllMocks();
     store.dispatch(fetchLocations(provinces));

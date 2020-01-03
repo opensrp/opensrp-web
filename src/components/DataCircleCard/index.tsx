@@ -5,6 +5,7 @@ import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
   HIGH,
   HIGH_RISK,
+  INAPPROPRIATELY_FED,
   LOW,
   LOW_RISK,
   NBC_AND_PNC_CHILD,
@@ -12,10 +13,14 @@ import {
   NO,
   NO_RISK,
   NUTRITION,
+  OVERWEIGHT,
   PREGNANCY,
+  SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
+  STUNTED,
 } from '../../constants';
 import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
+import { FlexObject } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
 
@@ -23,9 +28,14 @@ import './index.css';
  * interface for props to be passed to DataCircleCard component.
  */
 interface Props {
-  highRisk: number;
-  lowRisk: number;
-  noRisk: number;
+  highRisk?: number;
+  lowRisk?: number;
+  noRisk?: number;
+  totalChildren?: number;
+  stunting?: number;
+  wasting?: number;
+  overweight?: number;
+  inappropriateFeeding?: number;
   title: string;
   addFilterArgsActionCreator?: typeof addFilterArgs;
   filterArgs?: SMS_FILTER_FUNCTION[];
@@ -38,10 +48,21 @@ interface Props {
 /**
  * functional component that takes in props
  */
+interface CircleSpecProps {
+  class: string;
+  riskLabel: string;
+  riskType: string;
+  riskValue: any;
+}
+
 function DataCircleCard({
   highRisk,
   lowRisk,
   noRisk,
+  stunting,
+  wasting,
+  overweight,
+  inappropriateFeeding,
   title,
   addFilterArgsActionCreator = addFilterArgs,
   filterArgs,
@@ -50,54 +71,92 @@ function DataCircleCard({
   userLocationId,
   permissionLevel,
 }: Props) {
-  const locationId = userLocationId;
+  const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
+    {
+      class: 'red',
+      riskLabel: HIGH_RISK,
+      riskType: HIGH,
+      riskValue: highRisk,
+    },
+    {
+      class: 'orange',
+      riskLabel: LOW_RISK,
+      riskType: LOW,
+      riskValue: lowRisk,
+    },
+    {
+      class: 'green',
+      riskLabel: NO_RISK,
+      riskType: NO,
+      riskValue: noRisk,
+    },
+  ];
+
+  const nutritionCircleSpec: CircleSpecProps[] = [
+    {
+      class: 'total-children',
+      riskLabel: 'Total Children',
+      riskType: HIGH,
+      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any).reduce(
+        (a: number, b: number) => Number(a) + b,
+        0
+      ),
+    },
+    {
+      class: 'stunting',
+      riskLabel: 'Stunting',
+      riskType: STUNTED,
+      riskValue: stunting,
+    },
+    {
+      class: 'wasting',
+      riskLabel: 'Wasting',
+      riskType: SEVERE_WASTING,
+      riskValue: wasting,
+    },
+    {
+      class: 'overweight',
+      riskLabel: 'Overweight',
+      riskType: OVERWEIGHT,
+      riskValue: overweight,
+    },
+    {
+      class: 'inappropriate-feeding',
+      riskLabel: 'Inappropriate Feeding',
+      riskType: INAPPROPRIATELY_FED,
+      riskValue: inappropriateFeeding,
+    },
+  ];
+
   return (
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>{title}</CardTitle>
       <CardBody>
         <ul className="circlesRow">
-          <li className="red">
-            <Link
-              to={getLinkToHierarchichalDataTable(HIGH, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{highRisk}</span>
-            </Link>
-            <span className="risk-level">{HIGH_RISK}</span>
-          </li>
-          <li className="orange">
-            <Link
-              to={getLinkToHierarchichalDataTable(LOW, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{lowRisk}</span>
-            </Link>
-            <span className="risk-level">{LOW_RISK}</span>
-          </li>
-          <li className="green">
-            <Link
-              to={getLinkToHierarchichalDataTable(NO, module, title, permissionLevel, locationId)}
-              // tslint:disable-next-line: jsx-no-lambda
-              onClick={() => {
-                if (filterArgs) {
-                  addFilterArgsActionCreator(filterArgs);
-                }
-              }}
-            >
-              <span className="number">{noRisk}</span>
-            </Link>
-            <span className="risk-level">{NO_RISK}</span>
-          </li>
+          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
+            (spec: FlexObject, i: number) => (
+              <li className={spec.class} key={i}>
+                <Link
+                  to={getLinkToHierarchichalDataTable(
+                    spec.riskType,
+                    module,
+                    title,
+                    permissionLevel,
+                    userLocationId
+                  )}
+                  // tslint:disable-next-line: jsx-no-lambda
+                  onClick={() => {
+                    if (filterArgs) {
+                      addFilterArgsActionCreator(filterArgs);
+                    }
+                  }}
+                >
+                  <span className="number">{spec.riskValue}</span>
+                </Link>
+                <span className="risk-level">{spec.riskLabel}</span>
+              </li>
+            )
+          )}
         </ul>
       </CardBody>
     </Card>

@@ -102,6 +102,10 @@
   margin: 0;
 }
 
+.compartment-wrapper span.risk-level {
+  text-align: center;
+}
+
 .compartment-data-table table thead tr th {
   text-align: center;
   color: #3a484f;
@@ -146,6 +150,21 @@
 
 .compartment-data-table .no {
   background-color: rgba(55, 174, 18, 0.10000000149011612);
+}
+.compartment-data-table .stunted {
+  background-color: #ffaead;
+}
+
+.compartment-data-table .severe-wasting {
+  background-color: #50c4f9;
+}
+
+.compartment-data-table .overweight {
+  background-color: #bab0ff;
+}
+
+.compartment-data-table .inappropriately-fed {
+  background-color: #50c4f9;
 }
 
 span.divider {

@@ -1,4 +1,5 @@
 import { getUser, User } from '@onaio/session-reducer';
+import { ReactNodeArray } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { CardGroup, Row } from 'reactstrap';
@@ -25,6 +26,7 @@ import {
   NUTRITION,
   PREGNANCY,
   SMS_FILTER_FUNCTION,
+  VIETNAM_COUNTRY_LOCATION_ID,
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
@@ -155,7 +157,8 @@ class Compartments extends React.Component<Props, State> {
       props.provinces,
       props.districts,
       props.communes,
-      props.villages
+      props.villages,
+      VIETNAM_COUNTRY_LOCATION_ID
     );
 
     if (locationPath) {
@@ -240,9 +243,9 @@ class Compartments extends React.Component<Props, State> {
     const pregnancyDataCircleCard1Props =
       this.props.module === PREGNANCY
         ? {
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData),
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, filteredData, 'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, filteredData, 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, filteredData, 'logface_risk'),
             permissionLevel: userLocationLevel,
             title: filteredData.length + ' Total Pregnancies',
           }
@@ -263,9 +266,13 @@ class Compartments extends React.Component<Props, State> {
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || []),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || []),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last2WeeksSmsData || []),
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, last2WeeksSmsData || [], 'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, last2WeeksSmsData || [], 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(
+              NO_RISK_LOWERCASE,
+              last2WeeksSmsData || [],
+              'logface_risk'
+            ),
             permissionLevel: userLocationLevel,
             title: last2WeeksSmsData.length + ' Total Pregnancies due in 2 weeks',
           }
@@ -286,9 +293,13 @@ class Compartments extends React.Component<Props, State> {
                 );
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || []),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || []),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, last1WeekSmsData || []),
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, last1WeekSmsData || [], 'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, last1WeekSmsData || [], 'logface_risk'),
+            noRisk: this.getNumberOfSmsWithRisk(
+              NO_RISK_LOWERCASE,
+              last1WeekSmsData || [],
+              'logface_risk'
+            ),
             permissionLevel: userLocationLevel,
             title: last1WeekSmsData.length + ' Total Pregnancies due in 1 week',
           }
@@ -309,9 +320,10 @@ class Compartments extends React.Component<Props, State> {
                 return smsData.client_type === EC_CHILD;
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn),
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, newBorn, 'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, newBorn, 'logface_risk'),
+            module: NBC_AND_PNC_CHILD,
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, newBorn, 'logface_risk'),
             permissionLevel: userLocationLevel,
             title: newBorn.length + ' Total Newborn',
           }
@@ -319,6 +331,17 @@ class Compartments extends React.Component<Props, State> {
 
     const woman: SmsData[] = filteredData.filter((smsData: SmsData) => {
       return smsData.client_type === EC_WOMAN;
+    });
+
+    const childrenUnder2 = filteredData.filter((smsData: SmsData) => {
+      return new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 2;
+    });
+
+    const childrenUnder5 = filteredData.filter((smsData: SmsData) => {
+      return (
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() < 5 &&
+        new Date().getFullYear() - new Date(smsData.date_of_birth).getFullYear() > 2
+      );
     });
 
     const dataCircleCardWomanData =
@@ -329,9 +352,10 @@ class Compartments extends React.Component<Props, State> {
                 return smsData.client_type === EC_WOMAN;
               },
             ] as SMS_FILTER_FUNCTION[],
-            highRisk: this.getNumberOfSmsWithRisk(HIGH, woman),
-            lowRisk: this.getNumberOfSmsWithRisk(LOW, woman),
-            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman),
+            highRisk: this.getNumberOfSmsWithRisk(HIGH, woman, 'logface_risk'),
+            lowRisk: this.getNumberOfSmsWithRisk(LOW, woman, 'logface_risk'),
+            module: NBC_AND_PNC_WOMAN,
+            noRisk: this.getNumberOfSmsWithRisk(NO_RISK_LOWERCASE, woman, 'logface_risk'),
             permissionLevel: userLocationLevel,
             title: woman.length + ' Total mother in PNC',
           }
@@ -349,8 +373,79 @@ class Compartments extends React.Component<Props, State> {
           }
         : null;
 
+    const dataCircleCardNutrition1 =
+      this.props.module === NUTRITION
+        ? {
+            filterArgs: [],
+            inappropriateFeeding: this.getNumberOfSmsWithRisk(
+              'inappropriately fed',
+              filteredData,
+              'feeding_category'
+            ),
+            module: NUTRITION,
+            overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
+            permissionLevel: userLocationLevel,
+            stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
+            title: 'Children Under 5',
+            totalChildren: 0,
+            wasting: this.getNumberOfSmsWithRisk(
+              'severe wasting',
+              filteredData,
+              'nutrition_status'
+            ),
+          }
+        : null;
+
+    const dataCircleCardNutrition2 =
+      this.props.module === NUTRITION
+        ? {
+            filterArgs: [],
+            inappropriateFeeding: this.getNumberOfSmsWithRisk(
+              'inappropriately fed',
+              filteredData,
+              'feeding_category'
+            ),
+            module: NUTRITION,
+            overweight: this.getNumberOfSmsWithRisk('overweight', filteredData, 'nutrition_status'),
+            permissionLevel: userLocationLevel,
+            stunting: this.getNumberOfSmsWithRisk('stunted', filteredData, 'growth_status'),
+            title: 'Children Under 2',
+            totalChildren: 0,
+            wasting: this.getNumberOfSmsWithRisk(
+              'severe wasting',
+              filteredData,
+              'nutrition_status'
+            ),
+          }
+        : null;
+
     const path = this.state.locationAndPath.path;
     const location = this.state.locationAndPath.location;
+    const circleCardProps: FlexObject = {
+      [PREGNANCY]: [
+        pregnancyDataCircleCard1Props,
+        pregnancyDataCircleCard2Props,
+        pregnancyDataCircleCard3Props,
+      ],
+      [NBC_AND_PNC]: [dataCircleCardChildData, dataCircleCardWomanData],
+      [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2],
+    };
+    const circleCardComponent: ReactNodeArray = [];
+    Object.keys(circleCardProps).forEach((module: string) => {
+      circleCardProps[module].forEach((prop: any, index: number) => {
+        if (this.props.module === module) {
+          circleCardComponent.push(
+            <ConnectedDataCircleCard
+              key={index}
+              userLocationId={userLocationId}
+              module={module}
+              {...prop}
+            />
+          );
+        }
+      });
+    });
+
     return (
       <div className="compartment-wrapper compartments compartment-data-table">
         <Row>
@@ -366,41 +461,7 @@ class Compartments extends React.Component<Props, State> {
           <React.Fragment>
             <div className="cards-row">
               <CardGroup>
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard1Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard1Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard2Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard2Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === PREGNANCY && pregnancyDataCircleCard3Props ? (
-                  <ConnectedDataCircleCard
-                    {...pregnancyDataCircleCard3Props}
-                    userLocationId={userLocationId}
-                    module={this.props.module}
-                  />
-                ) : null}
-                {this.props.module === NBC_AND_PNC && dataCircleCardChildData ? (
-                  <ConnectedDataCircleCard
-                    {...dataCircleCardChildData}
-                    userLocationId={userLocationId}
-                    module={NBC_AND_PNC_CHILD}
-                  />
-                ) : null}
-                {this.props.module === NBC_AND_PNC && dataCircleCardWomanData ? (
-                  <ConnectedDataCircleCard
-                    {...dataCircleCardWomanData}
-                    userLocationId={userLocationId}
-                    module={NBC_AND_PNC_WOMAN}
-                  />
-                ) : null}
+                {circleCardComponent}
                 {this.props.module === NBC_AND_PNC && dataCircleCardTestProps ? (
                   <ConnectedDataCircleCard
                     {...dataCircleCardTestProps}
@@ -409,12 +470,10 @@ class Compartments extends React.Component<Props, State> {
                     className={'invisible-but-visible'}
                   />
                 ) : null}
-                {this.props.module === NUTRITION
-                  ? 'nothing to show for the nutrition module right now'
-                  : null}
               </CardGroup>
             </div>
-            {this.props.module === PREGNANCY && this.props.smsData.length ? (
+            {(this.props.module === PREGNANCY || this.props.module === NUTRITION) &&
+            this.props.smsData.length ? (
               <VillageData
                 {...{
                   current_level: userLocationLevel,
@@ -491,9 +550,9 @@ class Compartments extends React.Component<Props, State> {
    * field
    * @param {string} risk - value of logface_risk to look for
    */
-  private getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[]) => {
+  private getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string | any) => {
     function reducer(accumulator: number, currentValue: SmsData) {
-      if (currentValue.logface_risk.toLowerCase().includes(risk)) {
+      if ((currentValue as any)[field].toLowerCase().includes(risk)) {
         return accumulator + 1;
       } else {
         return accumulator;

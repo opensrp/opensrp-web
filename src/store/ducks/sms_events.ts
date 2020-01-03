@@ -27,6 +27,10 @@ export interface SmsData {
   client_type: string;
   child_symptoms: string;
   mother_symptoms: string;
+  date_of_birth: string;
+  nutrition_status: string;
+  growth_status: string;
+  feeding_category: string;
 }
 
 // actions
