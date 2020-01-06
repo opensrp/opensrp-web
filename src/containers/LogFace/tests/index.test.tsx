@@ -49,6 +49,7 @@ describe('components/ConnectedHeader', () => {
   });
 
   it('renders correctly', () => {
+    store.dispatch(fetchSms(smsSlice));
     const wrapper = mount(
       <Provider store={store}>
         <ConnectedRouter history={history}>
