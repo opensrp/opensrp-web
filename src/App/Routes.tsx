@@ -18,6 +18,7 @@ import {
 import { providers } from '../configs/settings';
 import {
   CHILD_PATIENT_DETAIL,
+  CHILD_PATIENT_DETAIL_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
@@ -251,7 +252,7 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/${CHILD_PATIENT_DETAIL}/:patient_id`);
+              ].map(url => `${url}${CHILD_PATIENT_DETAIL_URL}`);
             })()}
             component={ConnectedChildPatientDetails}
           />
@@ -270,7 +271,7 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={(() => {
               return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
-                url => `${url}/${CHILD_PATIENT_DETAIL}/:patient_id`
+                url => `${url}${CHILD_PATIENT_DETAIL_URL}`
               );
             })()}
             component={ConnectedChildPatientDetails}

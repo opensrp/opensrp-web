@@ -60,7 +60,8 @@ export const REPORTS_URL = '/';
 export type REPORTS_URL = typeof REPORTS_URL;
 export const PATIENT_DETAIL_URL = `/${PATIENT_DETAIL}/:patient_id`;
 export type PATIENT_DETAIL_URL = typeof PATIENT_DETAIL_URL;
-
+export const CHILD_PATIENT_DETAIL_URL = `/${CHILD_PATIENT_DETAIL}/:patient_id`;
+export type CHILD_PATIENT_DETAIL_URL = typeof CHILD_PATIENT_DETAIL_URL;
 // string literals
 export const DAYS_SINCE_BIRTH = 'Days since birth';
 export type DAYS_SINCE_BIRTH = typeof DAYS_SINCE_BIRTH;
