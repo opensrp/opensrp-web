@@ -120,7 +120,7 @@ export const LogFace = ({
   districts = [],
   fetchSmsDataActionCreator = fetchSms,
   filterArgsInStore = [],
-  module = '',
+  module,
   numberOfRows = DEFAULT_NUMBER_OF_LOGFACE_ROWS,
   provinces = [],
   removeFilterArgs = removeFilterArgsActionCreator,
