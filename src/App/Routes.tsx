@@ -35,7 +35,7 @@ import {
   NUTRITION_REGISTRATION,
   NUTRITION_REPORT,
   NUTRITION_URL,
-  PATIENT_DETAIL,
+  PATIENT_DETAIL_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
@@ -239,7 +239,7 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/${PATIENT_DETAIL}/:patient_id`);
+              ].map(url => `${url}${PATIENT_DETAIL_URL}`);
             })()}
             component={ConnectedPatientDetails}
           />
@@ -260,7 +260,7 @@ export const Routes = (props: RoutesProps) => {
             exact={true}
             path={(() => {
               return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
-                url => `${url}/${PATIENT_DETAIL}/:patient_id`
+                url => `${url}${PATIENT_DETAIL_URL}`
               );
             })()}
             component={ConnectedPatientDetails}
