@@ -26,7 +26,7 @@ import { userLocations } from './userLocationFixtures';
 
 reducerRegistry.register(reducerName, reducer);
 
-describe('components/ConnectedHeader', () => {
+describe('containers/LogFace', () => {
   const props = { module: PREGNANCY };
   afterEach(() => {
     store.dispatch(removeSms);
