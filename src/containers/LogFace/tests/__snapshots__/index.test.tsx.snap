@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/ConnectedHeader renders correctly: filter div 1`] = `
+exports[`containers/LogFace renders correctly: filter div 1`] = `
 Array [
   <div
     className="location-type-filter"
@@ -27,7 +27,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
-            disabled={true}
+            disabled={false}
             id="dropdown-basic"
             variant="success"
           >
@@ -40,7 +40,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
-                  disabled={true}
+                  disabled={false}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -51,8 +51,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary disabled"
-                    disabled={true}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -187,7 +187,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
-            disabled={true}
+            disabled={false}
             id="dropdown-basic"
             variant="success"
           >
@@ -200,7 +200,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
-                  disabled={true}
+                  disabled={false}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -211,8 +211,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary disabled"
-                    disabled={true}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -236,6 +236,22 @@ Array [
               role="menu"
               tabIndex="-1"
             >
+              <DropdownItem
+                key="Yen Phu Village"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Yen Phu Village
+                </button>
+              </DropdownItem>
               <DropdownItem
                 key="all"
                 onClick={[Function]}
@@ -283,7 +299,7 @@ Array [
             aria-haspopup={true}
             caret={true}
             color="secondary"
-            disabled={true}
+            disabled={false}
             id="dropdown-basic"
             variant="success"
           >
@@ -296,7 +312,7 @@ Array [
                   aria-haspopup={true}
                   className="dropdown-toggle"
                   color="secondary"
-                  disabled={true}
+                  disabled={false}
                   id="dropdown-basic"
                   innerRef={[Function]}
                   onClick={[Function]}
@@ -307,8 +323,8 @@ Array [
                     aria-expanded={false}
                     aria-haspopup={true}
                     aria-label={null}
-                    className="dropdown-toggle btn btn-secondary disabled"
-                    disabled={true}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
                     id="dropdown-basic"
                     onClick={[Function]}
                     type="button"
@@ -661,7 +677,7 @@ Array [
 ]
 `;
 
-exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
+exports[`containers/LogFace renders correctly: logface title 1`] = `
 <h2
   id="logface_title"
 >
@@ -669,7 +685,7 @@ exports[`components/ConnectedHeader renders correctly: logface title 1`] = `
 </h2>
 `;
 
-exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
+exports[`containers/LogFace renders correctly: paginator 1`] = `
 <div
   className="paginator"
 >
@@ -682,7 +698,7 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
     pageNeighbours={3}
     previousLabel="previous"
     startLabel="first"
-    totalRecords={0}
+    totalRecords={32}
   >
     <BasePaginator
       ariaLabel="page navigation"
@@ -695,7 +711,7 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
       pageNeighbours={3}
       previousLabel="previous"
       startLabel="first"
-      totalRecords={0}
+      totalRecords={32}
     >
       <Pagination
         aria-label="page navigation"
@@ -779,11 +795,107 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
               </li>
             </PaginationItem>
             <PaginationItem
-              className="page-item  disabled"
+              className="page-item  active"
+              key="0"
               tag="li"
             >
               <li
-                className="page-item  disabled page-item"
+                className="page-item  active page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    1
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="1"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    2
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="2"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    3
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="3"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    4
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item  "
+              tag="li"
+            >
+              <li
+                className="page-item   page-item"
               >
                 <PaginationLink
                   aria-label="next"
@@ -813,22 +925,22 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
               </li>
             </PaginationItem>
             <PaginationItem
-              className="page-item disabled"
+              className="page-item "
               tag="li"
             >
               <li
-                className="page-item disabled page-item"
+                className="page-item  page-item"
               >
                 <PaginationLink
                   aria-label="last"
-                  className="page-link disabled"
+                  className="page-link "
                   href="#"
                   onClick={[Function]}
                   tag="a"
                 >
                   <a
                     aria-label="last"
-                    className="page-link disabled page-link"
+                    className="page-link  page-link"
                     href="#"
                     onClick={[Function]}
                   >
@@ -854,10 +966,10 @@ exports[`components/ConnectedHeader renders correctly: paginator 1`] = `
 </div>
 `;
 
-exports[`components/ConnectedHeader renders correctly: search div 1`] = `
+exports[`containers/LogFace renders correctly: search div 1`] = `
 <input
   className="form-control logface-search"
-  disabled={true}
+  disabled={false}
   id="input"
   name="input"
   onBlur={[Function]}
@@ -867,4 +979,288 @@ exports[`components/ConnectedHeader renders correctly: search div 1`] = `
 />
 `;
 
-exports[`components/ConnectedHeader renders correctly: table snapshot 1`] = `null`;
+exports[`containers/LogFace renders correctly: table snapshot 1`] = `
+<table
+  className="table table-borderless table-striped"
+>
+  <thead
+    id="header"
+  >
+    <tr>
+      <th
+        className="default-width"
+      >
+        ID
+      </th>
+      <th
+        className="default-width"
+      >
+        Event Date
+      </th>
+      <th
+        className="default-width"
+      >
+        Location
+      </th>
+      <th
+        className="default-width"
+      >
+        SMS Type
+      </th>
+      <th
+        className="default-width"
+      >
+        Reporter
+      </th>
+      <th
+        className="default-width"
+      >
+        Patient
+      </th>
+      <th
+        className="small-width"
+      >
+        Age
+      </th>
+      <th
+        className="large-width"
+      >
+        Message
+      </th>
+      <th
+        className="default-width"
+      >
+        Risk Level
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    id="body"
+  >
+    <tr
+      key="1570173602178"
+    >
+      <td
+        className="default-width"
+      >
+        1570173602178
+      </td>
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Response Report
+      </td>
+      <td
+        className="default-width"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <a
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            onClick={[Function]}
+          >
+            100P9K-20191001-01
+          </a>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        3d
+      </td>
+      <td
+        className="large-width"
+      >
+        Symptoms = No symptoms  
+Intervention = Ambulance On Time 
+Health Status = 
+      </td>
+      <td
+        className="default-width"
+      >
+        <riskColoring
+          risk="no risk"
+        >
+          <span
+            className="badge badge-success"
+            id="default-width"
+          >
+            <div>
+              <p>
+                No Risk
+              </p>
+            </div>
+          </span>
+        </riskColoring>
+      </td>
+    </tr>
+    <tr
+      key="1570173399115"
+    >
+      <td
+        className="default-width"
+      >
+        1570173399115
+      </td>
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Red Alert Report
+      </td>
+      <td
+        className="default-width"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <a
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            onClick={[Function]}
+          >
+            100P9K-20191001-01
+          </a>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        3d
+      </td>
+      <td
+        className="large-width"
+      >
+        Symptoms = Coughing, Fever 
+Location = At home 
+Interventions = 
+      </td>
+      <td
+        className="default-width"
+      >
+        <riskColoring
+          risk="red"
+        >
+          <span
+            className="badge badge-danger"
+            id="default-width"
+          >
+            <div>
+              <p>
+                Red Alert
+              </p>
+            </div>
+          </span>
+        </riskColoring>
+      </td>
+    </tr>
+    <tr
+      key="1570171129630"
+    >
+      <td
+        className="default-width"
+      >
+        1570171129630
+      </td>
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Pregnancy Registration
+      </td>
+      <td
+        className="default-width"
+      >
+        HMN
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/patient_detail/100PAH"
+        >
+          <a
+            href="/pregnancy_log_face/patient_detail/100PAH"
+            onClick={[Function]}
+          >
+            100PAH
+          </a>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        30y 9m
+      </td>
+      <td
+        className="large-width"
+      >
+        EDD = 09-10-2019
+Gravidity = 3
+Parity = 1
+Weight = 55 
+Height = 145
+BMI = 26
+Previous Gynaecology History = Previous pregnancy too close or too far, Home Delivery
+Current Symptoms = Heavy sweating, Coughing
+      </td>
+      <td
+        className="default-width"
+      >
+        <riskColoring
+          risk="red"
+        >
+          <span
+            className="badge badge-danger"
+            id="default-width"
+          >
+            <div>
+              <p>
+                Red Alert
+              </p>
+            </div>
+          </span>
+        </riskColoring>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
