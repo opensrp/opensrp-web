@@ -17,7 +17,6 @@ import {
 } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
-  CHILD_PATIENT_DETAIL,
   CHILD_PATIENT_DETAIL_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
