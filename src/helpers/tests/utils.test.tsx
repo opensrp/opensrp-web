@@ -44,6 +44,7 @@ import {
   headerShouldNotRender,
   locationDataIsAvailable,
   oAuthUserInfoGetter,
+  provinces,
   sortByEventDate,
   sortFunction,
 } from '../utils';
@@ -125,6 +126,131 @@ describe('helpers/utils/getLinkToPatientDetail', () => {
     const smsDataItem = smsDataFixtures[0];
     smsDataItem.client_type = 'NULL';
     expect(getLinkToPatientDetail(smsDataFixtures[0], 'test')).toEqual('#');
+describe('getNumberSuffix', () => {
+  it('returns correct values for given inputs', () => {
+    expect(getNumberSuffix(1)).toEqual('st');
+    expect(getNumberSuffix(2)).toEqual('nd');
+    expect(getNumberSuffix(3)).toEqual('rd');
+    expect(getNumberSuffix(4)).toEqual('th');
+  });
+});
+
+describe('sortFuction', () => {
+  it('returns 0 when the sms event_id is the same', () => {
+    const smsData1: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[0]));
+    expect(sortFunction(smsData1, smsData1)).toEqual(0);
+  });
+  it('returns 1 when the second sms event_id is larger than the first', () => {
+    const smsData1: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[0]));
+    const smsData2: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[1]));
+    smsData2.event_id = `{Number(smsData1.event_id) + 3}`;
+    expect(sortFunction(smsData1, smsData2)).toEqual(1);
+  });
+  it('returns -1 when the first sms event_id is larger than the second', () => {
+    const smsData1: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[0]));
+    const smsData2: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[1]));
+    smsData2.event_id = `{Number(smsData1.event_id) + 3}`;
+    expect(sortFunction(smsData2, smsData1)).toEqual(-1);
+  });
+});
+
+describe('getModuleLink', () => {
+  it('returns the correct value given specific input', () => {
+    expect(getModuleLink(PREGNANCY)).toEqual(PREGNANCY_COMPARTMENTS_URL);
+    expect(getModuleLink(NUTRITION)).toEqual(NUTRITION_COMPARTMENTS_URL);
+    expect(getModuleLink(NBC_AND_PNC_CHILD)).toEqual(NBC_AND_PNC_COMPARTMENTS_URL);
+    expect(getModuleLink(NBC_AND_PNC_WOMAN)).toEqual(NBC_AND_PNC_COMPARTMENTS_URL);
+  });
+});
+
+describe('getLinkToHierarchichalDataTable', () => {
+  expect(
+    getLinkToHierarchichalDataTable('low', PREGNANCY, 'test title', 0, 'location023423423423')
+  ).toEqual(
+    '/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/0/down/location023423423423/0'
+  );
+});
+
+describe('buildHeaderBreadCrumb', () => {
+  it('works correctly if location id is a province', () => {
+    expect(
+      buildHeaderBreadCrumb(
+        'd79168ed-ae95-43d1-8e45-9078212815f6',
+        provinces,
+        districts,
+        communes,
+        villages
+      )
+    ).toEqual({
+      level: 'Province',
+      location: 'Lang Son Province',
+      locationId: 'd79168ed-ae95-43d1-8e45-9078212815f6',
+      path: '',
+    });
+  });
+
+  it('works correctly if location id is a district', () => {
+    expect(
+      buildHeaderBreadCrumb(
+        '623b644d-a1f2-4c5e-b065-d60c0ae6501f',
+        provinces,
+        districts,
+        communes,
+        villages
+      )
+    ).toEqual({
+      level: 'District',
+      location: 'Tay Ho District',
+      locationId: '623b644d-a1f2-4c5e-b065-d60c0ae6501f',
+      path: 'Hanoi / ',
+    });
+  });
+
+  it('works correctly if location id is a commune', () => {
+    expect(
+      buildHeaderBreadCrumb(
+        '46d98781-7cc4-4c28-8379-a3552a57acfe',
+        provinces,
+        districts,
+        communes,
+        villages
+      )
+    ).toEqual({
+      level: 'Commune',
+      location: 'Yen Phu Ward',
+      locationId: '46d98781-7cc4-4c28-8379-a3552a57acfe',
+      path: 'Hanoi / Tay Ho District / ',
+    });
+  });
+  it('works correctly if location id is a village', () => {
+    expect(
+      buildHeaderBreadCrumb(
+        'bb37165f-2ee9-4cad-a3b5-020c0cc75ccf',
+        provinces,
+        districts,
+        communes,
+        villages
+      )
+    ).toEqual({
+      level: 'Village',
+      location: 'Yen Phu Village',
+      locationId: 'bb37165f-2ee9-4cad-a3b5-020c0cc75ccf',
+      path: 'Hanoi / Tay Ho District / Yen Phu Ward / ',
+    });
+  });
+});
+
+describe('location data is available', () => {
+  expect(locationDataIsAvailable(villages, communes, districts, provinces)).toEqual(4);
+  expect(locationDataIsAvailable([], [], [], [])).toEqual(0);
+});
+
+describe('getNumberOfDaysSinceDate', () => {
+  it('returns the correct number of days between 1/1/2020 and now', () => {
+    const dateString = '01/01/2020';
+    expect(getNumberOfDaysSinceDate(dateString)).toEqual(
+      Math.floor((new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24))
+    );
   });
 });
 
