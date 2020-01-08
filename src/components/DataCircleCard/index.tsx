@@ -140,7 +140,7 @@ function DataCircleCard({
           {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
             (spec: FlexObject, i: number) => (
               <li
-                className={spec.class}
+                className={`${spec.class} circle`}
                 key={i}
                 // tslint:disable-next-line: jsx-no-lambda
                 onClick={() => {
