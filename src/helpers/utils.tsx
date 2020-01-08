@@ -293,7 +293,7 @@ interface PatientIDAndSmsData {
   smsData: SmsData[];
 }
 /**
- * Filter smsData by patientID and then sort.
+ * Filter smsData by patientID.
  * @param {PatientIDAndSmsData} patientIdAndSmsData an object with the patient id and smsData
  * @return {SmsData[]} filtered smsData
  */
