@@ -14,7 +14,17 @@ exports[`DataCircleCard must render correctly 1`] = `
       <div
         className="card-title"
       >
-        test title
+        <Link
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+        >
+          <a
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+            onClick={[Function]}
+          >
+            test title
+          </a>
+        </Link>
       </div>
     </CardTitle>
     <CardBody
@@ -32,23 +42,21 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/high/test title/undefined/down/undefined/undefined"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
                   className="number"
-                >
-                  10
-                </span>
+                />
               </a>
             </Link>
             <span
               className="risk-level"
             >
-              High Risk
+              Red Alert
             </span>
           </li>
           <li
@@ -57,23 +65,21 @@ exports[`DataCircleCard must render correctly 1`] = `
           >
             <Link
               onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
+              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
             >
               <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/undefined/down/undefined/undefined"
+                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
                 onClick={[Function]}
               >
                 <span
                   className="number"
-                >
-                  10
-                </span>
+                />
               </a>
             </Link>
             <span
               className="risk-level"
             >
-              Low Risk
+              risk
             </span>
           </li>
           <li

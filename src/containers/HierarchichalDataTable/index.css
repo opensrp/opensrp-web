@@ -75,7 +75,6 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  width: 57px;
 }
 
 .compartment-data-table .table-container table #body {
@@ -94,7 +93,6 @@
 }
 
 .compartment-data-table .default-width {
-  width: 20%;
   padding: 20px;
 }
 
@@ -140,17 +138,19 @@
   width: 100%;
 }
 
-.compartment-data-table .high {
+.compartment-data-table .red {
   background-color: #ffe8e6;
+  border-radius: 0;
 }
 
-.compartment-data-table .low {
+.compartment-data-table .risk {
   background-color: #ffe9db;
 }
 
 .compartment-data-table .no {
   background-color: rgba(55, 174, 18, 0.10000000149011612);
 }
+
 .compartment-data-table .stunted {
   background-color: #ffaead;
 }
@@ -169,4 +169,8 @@
 
 span.divider {
   color: #0292d3 !important;
+}
+
+td.default-width:nth-of-type(1) {
+  width: 15%;
 }

@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
-  HIGH,
-  HIGH_RISK,
+  ALL,
   INAPPROPRIATELY_FED,
-  LOW,
-  LOW_RISK,
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_WOMAN,
   NO,
@@ -15,6 +12,9 @@ import {
   NUTRITION,
   OVERWEIGHT,
   PREGNANCY,
+  RED,
+  RED_ALERT,
+  RISK,
   SEVERE_WASTING,
   SMS_FILTER_FUNCTION,
   STUNTED,
@@ -28,8 +28,8 @@ import './index.css';
  * interface for props to be passed to DataCircleCard component.
  */
 interface Props {
-  highRisk?: number;
-  lowRisk?: number;
+  redAlert?: number;
+  risk?: number;
   noRisk?: number;
   totalChildren?: number;
   stunting?: number;
@@ -56,8 +56,8 @@ interface CircleSpecProps {
 }
 
 function DataCircleCard({
-  highRisk,
-  lowRisk,
+  redAlert,
+  risk,
   noRisk,
   stunting,
   wasting,
@@ -74,15 +74,15 @@ function DataCircleCard({
   const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
     {
       class: 'red',
-      riskLabel: HIGH_RISK,
-      riskType: HIGH,
-      riskValue: highRisk,
+      riskLabel: RED_ALERT,
+      riskType: RED,
+      riskValue: redAlert,
     },
     {
       class: 'orange',
-      riskLabel: LOW_RISK,
-      riskType: LOW,
-      riskValue: lowRisk,
+      riskLabel: RISK,
+      riskType: RISK,
+      riskValue: risk,
     },
     {
       class: 'green',
@@ -93,15 +93,6 @@ function DataCircleCard({
   ];
 
   const nutritionCircleSpec: CircleSpecProps[] = [
-    {
-      class: 'total-children',
-      riskLabel: 'Total Children',
-      riskType: HIGH,
-      riskValue: ([stunting, wasting, overweight, inappropriateFeeding] as any).reduce(
-        (a: number, b: number) => Number(a) + b,
-        0
-      ),
-    },
     {
       class: 'stunting',
       riskLabel: 'Stunting',
@@ -130,7 +121,19 @@ function DataCircleCard({
 
   return (
     <Card className={`dataCircleCard ${className}`}>
-      <CardTitle>{title}</CardTitle>
+      <CardTitle>
+        <Link
+          to={getLinkToHierarchichalDataTable(ALL, module, title, permissionLevel, userLocationId)}
+          // tslint:disable-next-line: jsx-no-lambda
+          onClick={() => {
+            if (filterArgs) {
+              addFilterArgsActionCreator(filterArgs);
+            }
+          }}
+        >
+          {title}
+        </Link>
+      </CardTitle>
       <CardBody>
         <ul className="circlesRow">
           {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(

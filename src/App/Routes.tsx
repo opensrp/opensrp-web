@@ -14,10 +14,10 @@ import {
   NBC_AND_PNC_ANALYSIS_ENDPOINT,
   OPENSRP_LOGOUT_URL,
   SUPERSET_PREGNANCY_ANALYSIS_ENDPOINT,
-  SUPERSET_SMS_DATA_SLICE,
 } from '../configs/env';
 import { providers } from '../configs/settings';
 import {
+  CHILD_PATIENT_DETAIL_URL,
   HIERARCHICAL_DATA_URL,
   LOGOUT_URL,
   NBC_AND_PNC,
@@ -35,6 +35,7 @@ import {
   NUTRITION_REGISTRATION,
   NUTRITION_REPORT,
   NUTRITION_URL,
+  PATIENT_DETAIL_URL,
   PREGNANCY,
   PREGNANCY_ANALYSIS_URL,
   PREGNANCY_COMPARTMENTS_URL,
@@ -238,7 +239,7 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/patient_detail/:patient_id`);
+              ].map(url => `${url}${PATIENT_DETAIL_URL}`);
             })()}
             component={ConnectedPatientDetails}
           />
@@ -250,7 +251,27 @@ export const Routes = (props: RoutesProps) => {
                 NUTRITION_COMPARTMENTS_URL,
                 NBC_AND_PNC_COMPARTMENTS_URL,
                 PREGNANCY_COMPARTMENTS_URL,
-              ].map(url => `${url}/child_patient_detail/:patient_id`);
+              ].map(url => `${url}${CHILD_PATIENT_DETAIL_URL}`);
+            })()}
+            component={ConnectedChildPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
+                url => `${url}${PATIENT_DETAIL_URL}`
+              );
+            })()}
+            component={ConnectedPatientDetails}
+          />
+          <ConnectedPrivateRoute
+            disableLoginProtection={false}
+            exact={true}
+            path={(() => {
+              return [NUTRITION_LOGFACE_URL, NBC_AND_PNC_LOGFACE_URL, PREGNANCY_LOGFACE_URL].map(
+                url => `${url}${CHILD_PATIENT_DETAIL_URL}`
+              );
             })()}
             component={ConnectedChildPatientDetails}
           />
@@ -268,25 +289,19 @@ export const Routes = (props: RoutesProps) => {
             exact={false}
             path={PREGNANCY_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={PREGNANCY} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={PREGNANCY} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NBC_AND_PNC_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={NBC_AND_PNC} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={NBC_AND_PNC} />}
           />
           <ConnectedPrivateRoute
             exact={false}
             path={NUTRITION_LOGFACE_URL}
             // tslint:disable-next-line: jsx-no-lambda
-            component={() => (
-              <ConnectedLogFace module={NUTRITION} sliceId={SUPERSET_SMS_DATA_SLICE} />
-            )}
+            component={() => <ConnectedLogFace module={NUTRITION} />}
           />
           {/* tslint:disable jsx-no-lambda */}
           <Route

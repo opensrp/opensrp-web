@@ -11,27 +11,16 @@
   margin-top: 3% !important;
 }
 
-.village td:nth-of-type(2),
-.village th:nth-of-type(2),
-.village td:nth-of-type(3),
-.village th:nth-of-type(3),
-.village td:nth-of-type(7),
-.village th:nth-of-type(7),
-.village td:nth-of-type(5),
-.village th:nth-of-type(5) {
-  width: 6%;
-}
-
 .village td:first-of-type,
 .village th:first-of-type {
   width: 9%;
 }
 
-.compartment-data-table .card-body {
+.village .card-body {
   padding: 0;
 }
 
-.compartment-data-table .table-card {
+.village .table-card {
   background-color: #ffffff;
   border: 1px solid #dadce0;
   border-radius: 5px;
@@ -40,11 +29,11 @@
   margin: 0 !important;
 }
 
-.compartment-data-table .table-card thead > tr {
+.village .table-card thead > tr {
   border: 1px solid #dadce0;
 }
 
-.compartment-data-table .card-title {
+.village .card-title {
   background-color: #ffffff;
   border: 1px solid #dadce0;
   color: #3a484f;
@@ -56,7 +45,7 @@
   padding: 15px 20px;
 }
 
-.compartment-data-table .rt-tr.-odd {
+.village .rt-tr.-odd {
   background-color: #f8f9fa;
 }
 
@@ -64,24 +53,24 @@
   padding-left: 15px;
 }
 
-.compartment-data-table .ReactTable .rt-thead.-header {
+.village .ReactTable .rt-thead.-header {
   box-shadow: 0 0px 0px 0 #dadce0;
 }
 
-.compartment-data-table table td {
+.village table td {
   border: 1px solid #dadce0;
   text-align: center;
 }
 
-.compartment-data-table a,
-.compartment-data-table a:hover,
-.compartment-data-table a:active,
-.compartment-data-table a:visited {
+.village a,
+.village a:hover,
+.village a:active,
+.village a:visited {
   color: #0292d3;
   text-decoration: none;
 }
 
-.compartment-data-table table td:nth-child(1) {
+.village table td:nth-child(1) {
   text-align: left;
   padding-left: 1%;
   color: #0292d3;
@@ -90,12 +79,12 @@
   line-height: 18px;
 }
 
-.compartment-data-table .card-title > span {
+.village .card-title > span {
   color: #7c7c7c;
 }
 
-.compartment-data-table .rt-th.rt-resizable-header.-cursor-pointer,
-.compartment-data-table table td {
+.village .rt-th.rt-resizable-header.-cursor-pointer,
+.village table td {
   color: #3a484f;
   font-size: 14px;
   font-weight: 400;
@@ -103,73 +92,73 @@
   width: 57px;
 }
 
-.compartment-data-table .table-container table #body {
+.village .table-container table #body {
   overflow: auto;
 }
 
-.compartment-data-table > h1 {
+.village > h1 {
   padding: 15px 0;
 }
 
-.compartment-data-table #header {
+.village #header {
   position: relative;
   top: 0;
   height: 50px;
   border-bottom: 0.5px solid #dadce0;
 }
 
-.compartment-data-table .default-width {
+.village .default-width {
   width: 20%;
   padding: 20px;
 }
 
-.compartment-data-table table {
+.village table {
   margin: 0;
 }
 
-.compartment-data-table table thead tr th {
+.village table thead tr th {
   text-align: center;
   color: #3a484f;
   font-size: 15px;
   font-weight: 400;
 }
 
-.compartment-data-table table tbody tr:first-child td {
+.village table tbody tr:first-child td {
   border-top: none;
 }
 
-.compartment-data-table td#total,
-.compartment-data-table #header {
+.village td#total,
+.village #header {
   color: #3a484f;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.063rem;
 }
 
-.compartment-data-table table.table.table-borderless.table-striped,
-.compartment-data-table .card-title {
+.village table.table.table-borderless.table-striped,
+.village .card-title {
   margin: 0;
   border: none;
 }
 
-.compartment-data-table td.default-width {
+.village td.default-width {
   border: 1px solid #dadce0;
   margin: 0;
 }
 
-.compartment-data-table #no-rows > td {
+.village #no-rows > td {
   width: 100%;
 }
 
-.compartment-data-table .high {
+.village .high {
   background-color: #ffe8e6;
 }
 
-.compartment-data-table .low {
+.village .low {
   background-color: #ffe9db;
 }
 
-.compartment-data-table .no {
+.village .no {
   background-color: rgba(55, 174, 18, 0.10000000149011612);
 }
 
