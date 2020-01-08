@@ -43,7 +43,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
+      - run: cd clients/miecd && yarn install
 
       - save_cache:
           paths:
@@ -51,4 +51,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: cd clients/miecd && yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
