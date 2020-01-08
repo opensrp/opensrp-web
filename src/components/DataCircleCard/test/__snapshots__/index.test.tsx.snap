@@ -28,17 +28,21 @@ exports[`DataCircleCard must render correctly 1`] = `
       </div>
     </CardTitle>
     <CardBody
+      className="circlesRow"
       tag="div"
     >
       <div
-        className="card-body"
+        className="circlesRow card-body"
       >
-        <ul
-          className="circlesRow"
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
         >
-          <li
+          <a
             className="red circle"
-            key="0"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
             onClick={[Function]}
           >
             <span
@@ -49,10 +53,17 @@ exports[`DataCircleCard must render correctly 1`] = `
             >
               Red Alert
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="orange circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+        >
+          <a
             className="orange circle"
-            key="1"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
             onClick={[Function]}
           >
             <span
@@ -63,10 +74,17 @@ exports[`DataCircleCard must render correctly 1`] = `
             >
               risk
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+        >
+          <a
             className="green circle"
-            key="2"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
             onClick={[Function]}
           >
             <span
@@ -79,8 +97,8 @@ exports[`DataCircleCard must render correctly 1`] = `
             >
               No Risk
             </span>
-          </li>
-        </ul>
+          </a>
+        </Link>
       </div>
     </CardBody>
   </div>

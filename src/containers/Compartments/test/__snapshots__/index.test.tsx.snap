@@ -25,17 +25,21 @@ Array [
       </div>
     </CardTitle>
     <CardBody
+      className="circlesRow"
       tag="div"
     >
       <div
-        className="card-body"
+        className="circlesRow card-body"
       >
-        <ul
-          className="circlesRow"
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
         >
-          <li
+          <a
             className="red circle"
-            key="0"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -48,10 +52,17 @@ Array [
             >
               Red Alert
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="orange circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="orange circle"
-            key="1"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -64,10 +75,17 @@ Array [
             >
               risk
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="green circle"
-            key="2"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -80,8 +98,8 @@ Array [
             >
               No Risk
             </span>
-          </li>
-        </ul>
+          </a>
+        </Link>
       </div>
     </CardBody>
   </div>,
@@ -108,17 +126,21 @@ Array [
       </div>
     </CardTitle>
     <CardBody
+      className="circlesRow"
       tag="div"
     >
       <div
-        className="card-body"
+        className="circlesRow card-body"
       >
-        <ul
-          className="circlesRow"
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
         >
-          <li
+          <a
             className="red circle"
-            key="0"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -131,10 +153,17 @@ Array [
             >
               Red Alert
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="orange circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="orange circle"
-            key="1"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -147,10 +176,17 @@ Array [
             >
               risk
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="green circle"
-            key="2"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -163,8 +199,8 @@ Array [
             >
               No Risk
             </span>
-          </li>
-        </ul>
+          </a>
+        </Link>
       </div>
     </CardBody>
   </div>,
@@ -191,17 +227,21 @@ Array [
       </div>
     </CardTitle>
     <CardBody
+      className="circlesRow"
       tag="div"
     >
       <div
-        className="card-body"
+        className="circlesRow card-body"
       >
-        <ul
-          className="circlesRow"
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
         >
-          <li
+          <a
             className="red circle"
-            key="0"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -214,10 +254,17 @@ Array [
             >
               Red Alert
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="orange circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="orange circle"
-            key="1"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -230,10 +277,17 @@ Array [
             >
               risk
             </span>
-          </li>
-          <li
+          </a>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
+        >
+          <a
             className="green circle"
-            key="2"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
             onClick={[Function]}
           >
             <span
@@ -246,8 +300,8 @@ Array [
             >
               No Risk
             </span>
-          </li>
-        </ul>
+          </a>
+        </Link>
       </div>
     </CardBody>
   </div>,
