@@ -37,7 +37,7 @@ exports[`DataCircleCard must render correctly 1`] = `
           className="circlesRow"
         >
           <li
-            className="red"
+            className="red circle"
             key="0"
             onClick={[Function]}
           >
@@ -51,7 +51,7 @@ exports[`DataCircleCard must render correctly 1`] = `
             </span>
           </li>
           <li
-            className="orange"
+            className="orange circle"
             key="1"
             onClick={[Function]}
           >
@@ -65,7 +65,7 @@ exports[`DataCircleCard must render correctly 1`] = `
             </span>
           </li>
           <li
-            className="green"
+            className="green circle"
             key="2"
             onClick={[Function]}
           >
