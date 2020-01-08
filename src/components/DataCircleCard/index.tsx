@@ -135,35 +135,31 @@ function DataCircleCard({
           {title}
         </Link>
       </CardTitle>
-      <CardBody>
-        <ul className="circlesRow">
-          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
-            (spec: FlexObject, i: number) => (
-              <li
-                className={`${spec.class} circle`}
-                key={i}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={() => {
-                  if (filterArgs) {
-                    addFilterArgsActionCreator(filterArgs);
-                  }
-                  history.push(
-                    getLinkToHierarchichalDataTable(
-                      spec.riskType,
-                      module,
-                      title,
-                      permissionLevel,
-                      userLocationId
-                    )
-                  );
-                }}
-              >
-                <span className="number">{spec.riskValue}</span>
-                <span className="risk-level">{spec.riskLabel}</span>
-              </li>
-            )
-          )}
-        </ul>
+      <CardBody className="circlesRow">
+        {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
+          (spec: FlexObject, i: number) => (
+            <Link
+              className={`${spec.class} circle`}
+              key={i}
+              // tslint:disable-next-line: jsx-no-lambda
+              onClick={() => {
+                if (filterArgs) {
+                  addFilterArgsActionCreator(filterArgs);
+                }
+              }}
+              to={getLinkToHierarchichalDataTable(
+                spec.riskType,
+                module,
+                title,
+                permissionLevel,
+                userLocationId
+            )}
+            >
+              <span className="number">{spec.riskValue}</span>
+              <span className="risk-level">{spec.riskLabel}</span>
+            </Link>
+          )
+        )}
       </CardBody>
     </Card>
   );
