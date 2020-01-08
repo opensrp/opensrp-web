@@ -51,4 +51,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn test --verbose --coverage=true --forceExit --detectOpenHandles
+      - run: cd clients/miecd &&  yarn test --verbose --coverage=true --forceExit --detectOpenHandles
