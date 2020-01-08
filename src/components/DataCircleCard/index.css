@@ -17,16 +17,6 @@
     margin-top: 12%;
 }
 
-.compartment-wrapper ul {
-    padding: 0;
-}
-
-.compartment-wrapper .dataCircleCard>.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .compartment-wrapper .dataCircleCard {
     padding: 0;
     background-color: #ffffff;
@@ -39,6 +29,7 @@
 .compartment-wrapper .circlesRow {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .compartment-wrapper .card-group>.card {
