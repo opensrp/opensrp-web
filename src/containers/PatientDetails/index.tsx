@@ -11,11 +11,18 @@ import {
   BACK,
   BACKPAGE_ICON,
   CHILD_AGE,
+  COULD_NOT_FIND_ANY_EDD,
+  COULD_NOT_FIND_ANY_LOCATION,
   CURRENT_EDD,
   CURRENT_GRAVIDITY,
   CURRENT_PARITY,
+  FEEDING_CATEGORY,
+  GROWTH_STATUS,
   ID,
   LOCATION,
+  NO_RISK_CATEGORY,
+  NO_RISK_LOWERCASE,
+  NUTRITION_STATUS,
   PATIENT_DETAILS,
   PREVIOUS_PREGNANCY_RISK,
   RESIDENCE,
@@ -94,7 +101,7 @@ function getCurrentEdd(filteredData: SmsData[]): string {
       return reversedFilteredData[data].lmp_edd + '';
     }
   }
-  return 'could not find any edd';
+  return COULD_NOT_FIND_ANY_EDD;
 }
 
 function getAge(filteredData: SmsData[]): string {
@@ -111,7 +118,7 @@ function getAge(filteredData: SmsData[]): string {
 function getNutritionStatus(filteredData: SmsData[]): string {
   const reversedFilteredData: SmsData[] = [...filteredData];
   reversedFilteredData.reverse();
-  const statusFields: string[] = ['nutrition_status', 'growth_status', 'feeding_category'];
+  const statusFields: string[] = [NUTRITION_STATUS, GROWTH_STATUS, FEEDING_CATEGORY];
   for (const data in reversedFilteredData) {
     if (reversedFilteredData[data]) {
       for (const field in statusFields) {
@@ -121,7 +128,7 @@ function getNutritionStatus(filteredData: SmsData[]): string {
       }
     }
   }
-  return 'no risk category';
+  return NO_RISK_CATEGORY;
 }
 
 function getCurrentGravidity(filteredData: SmsData[]): number {
@@ -154,7 +161,7 @@ function getCurrentLocation(filteredData: SmsData[]): string {
       return reversedFilteredData[data].health_worker_location_name;
     }
   }
-  return 'could not find any location';
+  return COULD_NOT_FIND_ANY_LOCATION;
 }
 
 function getPreviousPregnancyRisk(filteredData: SmsData[]): string {
@@ -163,7 +170,7 @@ function getPreviousPregnancyRisk(filteredData: SmsData[]): string {
   if (reversedFilteredData[1]) {
     return reversedFilteredData[1].logface_risk;
   } else {
-    return 'no risk';
+    return NO_RISK_LOWERCASE;
   }
 }
 
