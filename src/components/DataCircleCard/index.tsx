@@ -153,7 +153,7 @@ function DataCircleCard({
                 title,
                 permissionLevel,
                 userLocationId
-            )}
+              )}
             >
               <span className="number">{spec.riskValue}</span>
               <span className="risk-level">{spec.riskLabel}</span>
