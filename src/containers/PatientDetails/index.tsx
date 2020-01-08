@@ -167,12 +167,11 @@ function getPreviousPregnancyRisk(filteredData: SmsData[]): string {
   }
 }
 
-const mapStateToprops = (
-  state: any,
-  ownProps: RouteComponentProps<{
-    patient_id: string;
-  }> & { isChild: boolean }
-) => {
+type RouterProps = RouteComponentProps<{
+  patient_id: string;
+}> & { isChild: boolean };
+
+const mapStateToprops = (state: any, ownProps: RouterProps) => {
   return {
     isChild: ownProps.isChild,
     patientId: ownProps.match.params.patient_id,
