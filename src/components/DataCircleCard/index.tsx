@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {
   ALL,
@@ -27,7 +27,7 @@ import './index.css';
 /**
  * interface for props to be passed to DataCircleCard component.
  */
-interface Props {
+interface Props extends RouteComponentProps {
   redAlert?: number;
   risk?: number;
   noRisk?: number;
@@ -70,6 +70,7 @@ function DataCircleCard({
   className = '',
   userLocationId,
   permissionLevel,
+  history,
 }: Props) {
   const pregnancyAndPncCircleSpec: CircleSpecProps[] = [
     {
@@ -134,33 +135,31 @@ function DataCircleCard({
           {title}
         </Link>
       </CardTitle>
-      <CardBody>
-        <ul className="circlesRow">
-          {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
-            (spec: FlexObject, i: number) => (
-              <li className={spec.class} key={i}>
-                <Link
-                  to={getLinkToHierarchichalDataTable(
-                    spec.riskType,
-                    module,
-                    title,
-                    permissionLevel,
-                    userLocationId
-                  )}
-                  // tslint:disable-next-line: jsx-no-lambda
-                  onClick={() => {
-                    if (filterArgs) {
-                      addFilterArgsActionCreator(filterArgs);
-                    }
-                  }}
-                >
-                  <span className="number">{spec.riskValue}</span>
-                </Link>
-                <span className="risk-level">{spec.riskLabel}</span>
-              </li>
-            )
-          )}
-        </ul>
+      <CardBody className="circlesRow">
+        {(module !== NUTRITION ? pregnancyAndPncCircleSpec : nutritionCircleSpec).map(
+          (spec: FlexObject, i: number) => (
+            <Link
+              className={`${spec.class} circle`}
+              key={i}
+              // tslint:disable-next-line: jsx-no-lambda
+              onClick={() => {
+                if (filterArgs) {
+                  addFilterArgsActionCreator(filterArgs);
+                }
+              }}
+              to={getLinkToHierarchichalDataTable(
+                spec.riskType,
+                module,
+                title,
+                permissionLevel,
+                userLocationId
+              )}
+            >
+              <span className="number">{spec.riskValue}</span>
+              <span className="risk-level">{spec.riskLabel}</span>
+            </Link>
+          )
+        )}
       </CardBody>
     </Card>
   );
@@ -171,6 +170,6 @@ const mapDispatchToProps = { addFilterArgsActionCreator: addFilterArgs };
 const ConnectedDataCircleCard = connect(
   null,
   mapDispatchToProps
-)(DataCircleCard);
+)(withRouter(DataCircleCard));
 
 export default ConnectedDataCircleCard;

@@ -28,86 +28,77 @@ exports[`DataCircleCard must render correctly 1`] = `
       </div>
     </CardTitle>
     <CardBody
+      className="circlesRow"
       tag="div"
     >
       <div
-        className="card-body"
+        className="circlesRow card-body"
       >
-        <ul
-          className="circlesRow"
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
         >
-          <li
-            className="red"
-            key="0"
+          <a
+            className="red circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
-            >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                />
-              </a>
-            </Link>
+            <span
+              className="number"
+            />
             <span
               className="risk-level"
             >
               Red Alert
             </span>
-          </li>
-          <li
-            className="orange"
-            key="1"
+          </a>
+        </Link>
+        <Link
+          className="orange circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+        >
+          <a
+            className="orange circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
-            >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                />
-              </a>
-            </Link>
+            <span
+              className="number"
+            />
             <span
               className="risk-level"
             >
               risk
             </span>
-          </li>
-          <li
-            className="green"
-            key="2"
+          </a>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+        >
+          <a
+            className="green circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+            onClick={[Function]}
           >
-            <Link
-              onClick={[Function]}
-              to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+            <span
+              className="number"
             >
-              <a
-                href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
-                onClick={[Function]}
-              >
-                <span
-                  className="number"
-                >
-                  10
-                </span>
-              </a>
-            </Link>
+              10
+            </span>
             <span
               className="risk-level"
             >
               No Risk
             </span>
-          </li>
-        </ul>
+          </a>
+        </Link>
       </div>
     </CardBody>
   </div>
