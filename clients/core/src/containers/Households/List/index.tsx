@@ -133,7 +133,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         this.getHouseholdList({ searchText });
     };
 
-    private getHouseholdList(extraParams: FlexObject = {}) {
+    private async getHouseholdList(extraParams: FlexObject = {}) {
         const clientType = this.state.clientType;
         const params = {
             clientType,
