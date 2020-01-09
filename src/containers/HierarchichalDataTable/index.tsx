@@ -42,6 +42,7 @@ import {
   PROVINCE,
   RED,
   RED_ALERT,
+  RED_ALERT_CLASSNAME,
   RISK,
   SEVERE_WASTING,
   SEVERE_WASTING_CAPITALIZED,
@@ -717,7 +718,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === RED ? 'red-alert' : ''
+                              this.props.risk_highligter === RED ? RED_ALERT_CLASSNAME : ''
                             }`}
                           >
                             {element.redAlert}
