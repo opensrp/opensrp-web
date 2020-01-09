@@ -193,11 +193,12 @@ export const Compartments = ({
         : null
     );
 
-    const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
+    const last2WeeksSmsData =
+      module === PREGNANCY ? smsData.filter(filterByDateInNextNWeeks(2)) : [];
     setPregnancyDataCircleCard2Props(
       module === PREGNANCY
         ? {
-            filterArgs: [filterByDateInNext2Weeks] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNextNWeeks(2)] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -214,11 +215,12 @@ export const Compartments = ({
         : null
     );
 
-    const last1WeekSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext1Week) : [];
+    const last1WeekSmsData =
+      module === PREGNANCY ? smsData.filter(filterByDateInNextNWeeks(1)) : [];
     setPregnancyDataCircleCard3Props(
       module === PREGNANCY
         ? {
-            filterArgs: [filterByDateInNext1Week] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNextNWeeks(1)] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -453,7 +455,7 @@ export const Compartments = ({
  * filter function for smsData based on date_of_birth field
  * @param {SmsData} dataItem - SmsData item
  * @param {number} startAge - the begining of age range we are filtering for.
- * @returns {boolean} endAge  - the ending of age range we are filtering for.
+ * @returns filterFunction  - the ending of age range we are filtering for.
  */
 const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
   return (dataItem: SmsData) => {
@@ -467,8 +469,11 @@ const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
  * get the number of sms_reports with a certain value in one of its fields
  * specified by field.
  * @param {string} risk - value of logface_risk to look for
+ * @param {SmsData[]} smsData - an array of SmsData objects
+ * @param {string | any} field - sms event field for which we want to
+ * check the value passed in risk
  */
-const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string | any) => {
+const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string) => {
   function reducer(accumulator: number, currentValue: SmsData) {
     if ((currentValue as any)[field].toLowerCase().includes(risk)) {
       return accumulator + 1;
@@ -480,27 +485,15 @@ const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string 
 };
 
 /**
- * filter for smsData objects whose EventData fields are within
- * the period of the next 2 weeks
- * @param {SmsData} dataItem  sms data item
+ * @param {number} n number of weeks future
  */
-const filterByDateInNext2Weeks = (dataItem: SmsData): boolean => {
-  return (
-    Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-    Date.parse(dataItem.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
-  );
-};
-
-/**
- * Filter for smsData objects whose EventDate fields are within
- * the period of the next 1 week
- * @param {SmsData} dataItem sms data item
- */
-const filterByDateInNext1Week = (dataItem: SmsData): boolean => {
-  return (
-    Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-    Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
-  );
+const filterByDateInNextNWeeks = (n: number) => {
+  return (dataItem: SmsData) => {
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() < n * MICROSECONDS_IN_A_WEEK
+    );
+  };
 };
 
 /**
