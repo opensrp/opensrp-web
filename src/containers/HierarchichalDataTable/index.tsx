@@ -717,7 +717,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                           </td>
                           <td
                             className={`default-width ${
-                              this.props.risk_highligter === RED ? this.props.risk_highligter : ''
+                              this.props.risk_highligter === RED ? 'red-alert' : ''
                             }`}
                           >
                             {element.redAlert}

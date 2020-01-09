@@ -149,7 +149,7 @@
   width: 100%;
 }
 
-.compartment-data-table .red {
+.compartment-data-table .red-alert {
   background-color: #ffe8e6;
   border-radius: 0;
 }
