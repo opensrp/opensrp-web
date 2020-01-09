@@ -6,7 +6,16 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import ConnectedCompartments from '..';
-import { PREGNANCY, PREGNANCY_REGISTRATION, SMS_FILTER_FUNCTION } from '../../../constants';
+import {
+  NBC_AND_PNC,
+  NEWBORN_REPORT,
+  NUTRITION,
+  NUTRITION_REGISTRATION,
+  NUTRITION_REPORT,
+  PREGNANCY,
+  PREGNANCY_REGISTRATION,
+  SMS_FILTER_FUNCTION,
+} from '../../../constants';
 import locationsReducer, {
   fetchLocations,
   fetchUserId,
@@ -45,11 +54,20 @@ describe('Compartments', () => {
   it('must render without crashing', () => {
     shallow(
       <Provider store={store}>
-        <ConnectedCompartments />
+        <ConnectedCompartments
+          filterArgs={
+            [
+              (smsData: SmsData) => {
+                return smsData.sms_type === PREGNANCY_REGISTRATION;
+              },
+            ] as SMS_FILTER_FUNCTION[]
+          }
+          module={PREGNANCY}
+        />
       </Provider>
     );
   });
-  it('must render correctly', () => {
+  it('must render correctly for pregnancy module', () => {
     store.dispatch(fetchSms([]));
     const wrapper = mount(
       <Provider store={store}>
@@ -113,5 +131,50 @@ describe('Compartments', () => {
     expect(
       toJson(wrapper.find('div.compartment-wrapper.compartments').find('.dataCircleCard.card'))
     ).toMatchSnapshot('compartments');
+  });
+  it('must render correctly for Nutrition module', () => {
+    store.dispatch(fetchSms(smsDataFixtures));
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <ConnectedCompartments
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return (
+                    smsData.sms_type === NUTRITION_REPORT ||
+                    smsData.sms_type === NUTRITION_REGISTRATION
+                  );
+                },
+              ] as SMS_FILTER_FUNCTION[]
+            }
+            module={NUTRITION}
+          />
+        </Router>
+      </Provider>
+    );
+
+    expect(toJson(wrapper.find('DataCircleCard'))).toMatchSnapshot();
+  });
+
+  it('must render correctly for NBC_AND_PNC module', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <ConnectedCompartments
+            filterArgs={
+              [
+                (smsData: SmsData) => {
+                  return smsData.sms_type === NEWBORN_REPORT;
+                },
+              ] as SMS_FILTER_FUNCTION[]
+            }
+            module={NBC_AND_PNC}
+          />
+        </Router>
+      </Provider>
+    );
+
+    expect(toJson(wrapper.find('DataCircleCard'))).toMatchSnapshot();
   });
 });
