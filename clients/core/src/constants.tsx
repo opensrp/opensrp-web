@@ -56,3 +56,5 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const HOUSEHOLD_CLIENT_TYPE = 'ec_family';
+export type HOUSEHOLD_CLIENT_TYPE = typeof HOUSEHOLD_CLIENT_TYPE;

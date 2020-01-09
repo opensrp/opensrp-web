@@ -19,6 +19,7 @@ import householdsReducer, {
     setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
+import { HOUSEHOLD_CLIENT_TYPE } from '../../../constants';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -35,16 +36,16 @@ export interface HouseholdListProps {
 
 export interface HouseholdListState {
     loading: boolean;
-    pageNumber: string;
+    pageNumber: number;
     searchPlaceholder: string;
-    clientType: string;
+    clientType: HOUSEHOLD_CLIENT_TYPE;
 }
 
 export const defaultHouseholdListState: HouseholdListState = {
     loading: true,
-    pageNumber: '1',
+    pageNumber: 1,
     searchPlaceholder: 'Search Household',
-    clientType: 'ec_family',
+    clientType: HOUSEHOLD_CLIENT_TYPE,
 };
 
 /** default props for the householdList component */
@@ -132,7 +133,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         this.getHouseholdList({ searchText });
     };
 
-    private async getHouseholdList(extraParams: FlexObject = {}) {
+    private getHouseholdList(extraParams: FlexObject = {}) {
         const clientType = this.state.clientType;
         const params = {
             clientType,
