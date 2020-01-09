@@ -320,14 +320,14 @@ export const Compartments = ({
   ] = useState<null | NutritionDataCircleCardProps>(null);
 
   useEffect(() => {
-    const childrenUnder2 = filteredData.filter(childrenUnder2FilterFunction);
+    const childrenUnder2 = filteredData.filter(childrenAgeRangeFilterFunction(0, 2));
 
-    const childrenUnder5 = filteredData.filter(childrenUnder5FilterFunction);
+    const childrenUnder5 = filteredData.filter(childrenAgeRangeFilterFunction(0, 2));
 
     setDataCircleCardNutrition1(
       module === NUTRITION
         ? {
-            filterArgs: [childrenUnder5FilterFunction],
+            filterArgs: [childrenAgeRangeFilterFunction(2, 5)],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder5,
@@ -347,7 +347,7 @@ export const Compartments = ({
     setDataCircleCardNutrition2(
       module === NUTRITION
         ? {
-            filterArgs: [childrenUnder2FilterFunction],
+            filterArgs: [childrenAgeRangeFilterFunction(0, 2)],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder2,
@@ -452,24 +452,17 @@ export const Compartments = ({
 /**
  * filter function for smsData based on date_of_birth field
  * @param {SmsData} dataItem - SmsData item
- * @returns {boolean}
+ * @param {number} startAge - the begining of age range we are filtering for.
+ * @returns {boolean} endAge  - the ending of age range we are filtering for.
  */
-const childrenUnder2FilterFunction = (dataItem: SmsData): boolean => {
-  return new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 2;
+const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
+  return (dataItem: SmsData) => {
+    return (
+      new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < endAge &&
+      new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > startAge
+    );
+  };
 };
-
-/**
- * filter function for smsData based on date_of_birth field
- * @param {SmsData} dataItem - SmsData item
- * @returns {boolean}
- */
-const childrenUnder5FilterFunction = (dataItem: SmsData) => {
-  return (
-    new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 5 &&
-    new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > 2
-  );
-};
-
 /**
  * get the number of sms_reports with a certain value in one of its fields
  * specified by field.
