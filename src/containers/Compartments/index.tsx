@@ -450,7 +450,7 @@ export const Compartments = ({
 };
 
 /**
- * filter function for smsData based on data_of_birth field
+ * filter function for smsData based on date_of_birth field
  * @param {SmsData} dataItem - SmsData item
  * @returns {boolean}
  */
@@ -459,7 +459,7 @@ const childrenUnder2FilterFunction = (dataItem: SmsData): boolean => {
 };
 
 /**
- * filter function for smsData based on data_of_birth field
+ * filter function for smsData based on date_of_birth field
  * @param {SmsData} dataItem - SmsData item
  * @returns {boolean}
  */
