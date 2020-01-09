@@ -324,7 +324,7 @@ export const Compartments = ({
   useEffect(() => {
     const childrenUnder2 = filteredData.filter(childrenAgeRangeFilterFunction(0, 2));
 
-    const childrenUnder5 = filteredData.filter(childrenAgeRangeFilterFunction(0, 2));
+    const childrenUnder5 = filteredData.filter(childrenAgeRangeFilterFunction(2, 5));
 
     setDataCircleCardNutrition1(
       module === NUTRITION
