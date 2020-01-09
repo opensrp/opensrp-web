@@ -133,7 +133,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         this.getHouseholdList({ searchText });
     };
 
-    private async getHouseholdList(extraParams: FlexObject = {}) {
+    private getHouseholdList(extraParams: FlexObject = {}) {
         const clientType = this.state.clientType;
         const params = {
             clientType,
@@ -148,18 +148,22 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
             opensrpService,
         } = this.props;
         const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
-        const response = await hosueholdService.list(params);
-        removeHouseholdsActionCreator();
-        this.setState(
-            {
-                ...this.state,
-                loading: false,
-            },
-            () => {
-                fetchHouseholdsActionCreator(response.clients);
-                setTotalRecordsActionCreator(response.total);
-            },
-        );
+        hosueholdService
+            .list(params)
+            .then((response: FlexObject) => {
+                removeHouseholdsActionCreator();
+                this.setState(
+                    {
+                        ...this.state,
+                        loading: false,
+                    },
+                    () => {
+                        fetchHouseholdsActionCreator(response.clients);
+                        setTotalRecordsActionCreator(response.total);
+                    },
+                );
+            })
+            .catch(error => {});
     }
 }
 
