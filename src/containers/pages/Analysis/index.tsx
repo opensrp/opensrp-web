@@ -28,9 +28,9 @@ export class Analysis extends React.Component<Props, State> {
 
   public render() {
     return (
-      <div className="analysis-content">
+      <div className="analysis">
         <div>
-          <h2 id="analysis_title">{`${this.props.module} - ${ANALYSIS}`}</h2>
+          <h2 className="analysis-title">{`${this.props.module} - ${ANALYSIS}`}</h2>
         </div>
         <div className="analysis-wrapper">
           {this.state.loading ? <Ripple /> : null}
@@ -41,6 +41,7 @@ export class Analysis extends React.Component<Props, State> {
             onLoad={this.hideSpinner}
             src={this.props.endpoint}
             title="pregnancy sms events analysis"
+            className="analysis-iframe"
           />
         </div>
       </div>
