@@ -6,7 +6,10 @@ import MockDate from 'mockdate';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import ConnectedCompartments, { childrenAgeRangeFilterFunction } from '..';
+import ConnectedCompartments, {
+  childrenAgeRangeFilterFunction,
+  filterByDateInNextNWeeks,
+} from '..';
 import {
   NBC_AND_PNC,
   NEWBORN_REPORT,
@@ -193,5 +196,33 @@ describe('components/Compartments/childrenAgeRangeFilterFunction', () => {
     expect(smsData.filter(childrenAgeRangeFilterFunction(0, 3)).length).toEqual(2);
     expect(smsData.filter(childrenAgeRangeFilterFunction(0, 10)).length).toEqual(3);
     MockDate.reset();
+  });
+});
+
+describe('components/Copartments/filterByDateInNextNWeeks', () => {
+  it('returns the correct sms data items within range', () => {
+    MockDate.set(new Date('01/01/2020').getTime());
+    const smsData = ([
+      { lmp_edd: '01/02/2020' },
+      { lmp_edd: '01/03/2020' },
+      { lmp_edd: '01/05/2020' },
+      { lmp_edd: '01/15/2020' },
+      { lmp_edd: '01/08/2020' },
+      { lmp_edd: '01/09/2020' },
+      { lmp_edd: '01/12/2020' },
+      { lmp_edd: '04/08/2020' },
+      { lmp_edd: '04/09/2020' },
+      { lmp_edd: '05/12/2020' },
+      { lmp_edd: '07/08/2020' },
+      { lmp_edd: '02/09/2020' },
+      { lmp_edd: '10/12/2020' },
+    ] as unknown) as SmsData[];
+    expect(smsData.filter(filterByDateInNextNWeeks(1)).length).toEqual(3);
+    expect(smsData.filter(filterByDateInNextNWeeks(2)).length).toEqual(6);
+    expect(smsData.filter(filterByDateInNextNWeeks(3)).length).toEqual(7);
+    expect(smsData.filter(filterByDateInNextNWeeks(6)).length).toEqual(8);
+    expect(smsData.filter(filterByDateInNextNWeeks(15)).length).toEqual(10);
+    expect(smsData.filter(filterByDateInNextNWeeks(20)).length).toEqual(11);
+    expect(smsData.filter(filterByDateInNextNWeeks(25)).length).toEqual(11);
   });
 });
