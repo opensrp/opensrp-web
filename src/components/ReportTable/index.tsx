@@ -8,6 +8,7 @@ import {
   CHILD_HEIGHT_MONITORING,
   CHILD_WEIGHT,
   CHILD_WEIGHT_MONITORING,
+  CURRENT_NUTRTION,
   CURRENT_PREGNANCY,
   GESTATION_PERIOD,
   HEIGHT,
@@ -26,7 +27,7 @@ import './index.css';
 
 interface Props {
   singlePatientEvents: SmsData[];
-  isNutrition: boolean;
+  isChild: boolean;
 }
 
 /**
@@ -76,11 +77,11 @@ export const convertToStringArray = (smsData: PregnancySmsData): string[] => {
 
 export const getEventsPregnancyArray = (
   singlePatientEvents: SmsData[],
-  isNutrition: boolean
+  isChild: boolean
 ): PregnancySmsData[][] => {
   // remove event types that we are not interested in and retain
   // only pregnancy registration, ANC and birth reports
-  singlePatientEvents = !isNutrition
+  singlePatientEvents = !isChild
     ? singlePatientEvents.filter((event: SmsData) => {
         return (
           event.sms_type.toLowerCase() === BIRTH_REPORT.toLowerCase() ||
@@ -130,7 +131,7 @@ export const getEventsPregnancyArray = (
 class ReportTable extends Component<Props, State> {
   public static getDerivedStateFromProps(props: Props, state: State) {
     return {
-      pregnancyEventsArray: getEventsPregnancyArray(props.singlePatientEvents, props.isNutrition),
+      pregnancyEventsArray: getEventsPregnancyArray(props.singlePatientEvents, props.isChild),
     };
   }
 
@@ -224,38 +225,57 @@ class ReportTable extends Component<Props, State> {
         <Row id="filter-panel">
           <p>Showing reports for:&emsp;</p>
           <div className="filters">
-            <Dropdown
-              isOpen={this.state.dropdownOpenPregnancy}
-              toggle={this.togglePregnancyDropDown}
-            >
-              <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
-                <span>
-                  {this.state.pregnancyDropdownLabel.length
-                    ? this.state.pregnancyDropdownLabel
-                    : 'select pregnancy'}
-                </span>
-              </DropdownToggle>
-              <DropdownMenu>
-                {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map(
-                  (pregnancy, i) => {
-                    return (
-                      <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
-                        {(() => {
-                          if (i === 0) {
-                            return CURRENT_PREGNANCY;
-                          } else {
-                            const pregnancyIndex =
-                              this.getPregnancyStringArray(this.state.pregnancyEventsArray).length -
-                              i;
-                            return pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy';
-                          }
-                        })()}
-                      </DropdownItem>
-                    );
-                  }
-                )}
-              </DropdownMenu>
-            </Dropdown>
+            {this.props.isChild ? (
+              <Dropdown
+                isOpen={false}
+                // tslint:disable-next-line: jsx-no-lambda no-empty
+                toggle={() => {
+                  // we don't want to do any thing here for now
+                }}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  {CURRENT_NUTRTION}
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>{CURRENT_NUTRTION}</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Dropdown
+                isOpen={this.state.dropdownOpenPregnancy}
+                toggle={this.togglePregnancyDropDown}
+              >
+                <DropdownToggle variant="success" id="dropdown-basic" caret={true}>
+                  <span>
+                    {this.state.pregnancyDropdownLabel.length
+                      ? this.state.pregnancyDropdownLabel
+                      : 'select pregnancy'}
+                  </span>
+                </DropdownToggle>
+                <DropdownMenu>
+                  {this.getPregnancyStringArray(this.state.pregnancyEventsArray).map(
+                    (pregnancy, i) => {
+                      return (
+                        <DropdownItem onClick={this.handlePregnancyDropDownClick} key={i}>
+                          {(() => {
+                            if (i === 0) {
+                              return CURRENT_PREGNANCY;
+                            } else {
+                              const pregnancyIndex =
+                                this.getPregnancyStringArray(this.state.pregnancyEventsArray)
+                                  .length - i;
+                              return (
+                                pregnancyIndex + getNumberSuffix(pregnancyIndex) + ' pregnancy'
+                              );
+                            }
+                          })()}
+                        </DropdownItem>
+                      );
+                    }
+                  )}
+                </DropdownMenu>
+              </Dropdown>
+            )}
           </div>
         </Row>
         <Row id="tableRow">
@@ -268,13 +288,13 @@ class ReportTable extends Component<Props, State> {
                 this.state.currentPregnancy
               ]
             }
-            chartWrapperId={this.props.isNutrition ? 'nutrition-chart' : 'pregnancy-chart'}
-            title={this.props.isNutrition ? CHILD_WEIGHT_MONITORING : MOTHER_WEIGHT_TRACKING}
-            legendString={this.props.isNutrition ? CHILD_WEIGHT : MOTHERS_WEIGHT}
+            chartWrapperId={this.props.isChild ? 'nutrition-chart' : 'pregnancy-chart'}
+            title={this.props.isChild ? CHILD_WEIGHT_MONITORING : MOTHER_WEIGHT_TRACKING}
+            legendString={this.props.isChild ? CHILD_WEIGHT : MOTHERS_WEIGHT}
             units={KG}
             xAxisLabel={WEIGHT}
           />
-          {this.props.isNutrition ? (
+          {this.props.isChild ? (
             <WeightAndHeightChart
               weights={
                 this.getWeightsArray(this.state.pregnancyEventsArray, HEIGHT)[

@@ -2,11 +2,14 @@ import * as gatekeeper from '@onaio/gatekeeper';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 
 import { smsDataFixtures } from '../../containers/Compartments/test/fixtures';
+import { SmsData } from '../../store/ducks/sms_events';
 import {
+  filterByPatientId,
   getLinkToPatientDetail,
   groupBy,
   headerShouldNotRender,
   oAuthUserInfoGetter,
+  sortByEventDate,
 } from '../utils';
 import groupedSmsData from './fixtures';
 
@@ -63,5 +66,35 @@ describe('helpers/utils/getLinkToPatientDetail', () => {
     const smsDataItem = smsDataFixtures[0];
     smsDataItem.client_type = 'NULL';
     expect(getLinkToPatientDetail(smsDataFixtures[0], 'test')).toEqual('#');
+  });
+});
+
+describe('helpers/utils/filterByPatientId', () => {
+  it('must returns the correct value given certain input', () => {
+    const patientId = '100NG6';
+    const filteredData = [...smsDataFixtures].filter((dataItem: SmsData): boolean => {
+      return dataItem.anc_id.toLocaleLowerCase().includes(patientId.toLocaleLowerCase());
+    });
+    expect(
+      filterByPatientId({
+        patientId,
+        smsData: [...smsDataFixtures],
+      })
+    ).toEqual(filteredData);
+  });
+});
+
+describe('helpers/utils/sortByEventDate', () => {
+  it('must sort data in ascending order based on the event date', () => {
+    const sortedSmsData = [...smsDataFixtures].sort((event1: SmsData, event2: SmsData): number => {
+      if (event1.EventDate < event2.EventDate) {
+        return -1;
+      }
+      if (event1.EventDate > event2.EventDate) {
+        return 1;
+      }
+      return 0;
+    });
+    expect(sortByEventDate(smsDataFixtures)).toEqual(sortedSmsData);
   });
 });

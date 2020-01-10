@@ -285,26 +285,40 @@ export const getProvince = (
 };
 
 /**
- * Filter smsData by patientID and then sort.
- * @param props
+ * @member {string} patientId the patient id
+ * @member {SmsData[]} smsData an array of SmsData objects.
  */
-export const filterByPatientAndSort = (props: {
+interface PatientIDAndSmsData {
   patientId: string;
   smsData: SmsData[];
-}): SmsData[] => {
-  return props.smsData
-    .filter((dataItem: SmsData): boolean => {
-      return dataItem.anc_id.toLocaleLowerCase().includes(props.patientId.toLocaleLowerCase());
-    })
-    .sort((event1: SmsData, event2: SmsData): number => {
-      if (event1.EventDate < event2.EventDate) {
-        return -1;
-      }
-      if (event1.EventDate > event2.EventDate) {
-        return 1;
-      }
-      return 0;
-    });
+}
+/**
+ * Filter smsData by patientID.
+ * @param {PatientIDAndSmsData} patientIdAndSmsData an object with the patient id and smsData
+ * @return {SmsData[]} filtered smsData
+ */
+export const filterByPatientId = (patientIdAndSmsData: PatientIDAndSmsData): SmsData[] => {
+  return [...patientIdAndSmsData.smsData].filter((dataItem: SmsData): boolean => {
+    return dataItem.anc_id
+      .toLocaleLowerCase()
+      .includes(patientIdAndSmsData.patientId.toLocaleLowerCase());
+  });
+};
+
+/**
+ * sort SmsData[] by EventDate in ascending order
+ * @param {SmsData[]} smsData an array of smsData objects to sortby eventdate
+ */
+export const sortByEventDate = (smsData: SmsData[]) => {
+  return [...smsData].sort((event1: SmsData, event2: SmsData): number => {
+    if (event1.EventDate < event2.EventDate) {
+      return -1;
+    }
+    if (event1.EventDate > event2.EventDate) {
+      return 1;
+    }
+    return 0;
+  });
 };
 
 /**

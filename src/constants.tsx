@@ -288,6 +288,10 @@ export const CHILD_HEIGHT_VS_MONTHS = 'Child height vs month';
 export type CHILD_HEIGHT_VS_MONTHS = typeof CHILD_HEIGHT_VS_MONTHS;
 export const CHILD_WEIGHT_VS_MONTHS = 'Child weight vs month';
 export type CHILD_WEIGHT_VS_MONTHS = typeof CHILD_WEIGHT_VS_MONTHS;
+export const NO_RISK_CATEGORY = 'no risk category';
+export type NO_RISK_CATEGORY = typeof NO_RISK_CATEGORY;
+export const COULD_NOT_FIND_ANY_EDD = 'could not find any edd';
+export type COULD_NOT_FIND_ANY_EDD = typeof COULD_NOT_FIND_ANY_EDD;
 
 // typings
 export type SMS_FILTER_FUNCTION = (smsData: SmsData) => boolean;
