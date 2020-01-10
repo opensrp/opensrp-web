@@ -6,11 +6,11 @@ exports[`Analysis must render correctly: Analysis snapshot 1`] = `
   module=""
 >
   <div
-    className="analysis-content"
+    className="analysis"
   >
     <div>
       <h2
-        id="analysis_title"
+        className="analysis-title"
       >
          - Analysis
       </h2>
@@ -65,6 +65,7 @@ exports[`Analysis must render correctly: Analysis snapshot 1`] = `
         </div>
       </Ripple>
       <iframe
+        className="analysis-iframe"
         frameBorder="0"
         onLoad={[Function]}
         scrolling="yes"
