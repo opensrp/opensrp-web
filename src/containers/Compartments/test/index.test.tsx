@@ -2,10 +2,11 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
+import MockDate from 'mockdate';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import ConnectedCompartments from '..';
+import ConnectedCompartments, { childrenAgeRangeFilterFunction } from '..';
 import {
   NBC_AND_PNC,
   NEWBORN_REPORT,
@@ -176,5 +177,21 @@ describe('Compartments', () => {
     );
 
     expect(toJson(wrapper.find('DataCircleCard'))).toMatchSnapshot();
+  });
+});
+
+describe('components/Compartments/childrenAgeRangeFilterFunction', () => {
+  it('returns the correct sms data items within range', () => {
+    MockDate.set(new Date('01/01/2020').getTime());
+    const smsData = ([
+      { date_of_birth: new Date('01/01/2019').getTime() },
+      { date_of_birth: new Date('01/01/2019').getTime() },
+      { date_of_birth: new Date('01/20/2019').getTime() },
+      { date_of_birth: new Date('01/20/2016').getTime() },
+    ] as unknown) as SmsData[];
+    expect(smsData.filter(childrenAgeRangeFilterFunction(0, 2)).length).toEqual(2);
+    expect(smsData.filter(childrenAgeRangeFilterFunction(0, 3)).length).toEqual(2);
+    expect(smsData.filter(childrenAgeRangeFilterFunction(0, 10)).length).toEqual(3);
+    MockDate.reset();
   });
 });
