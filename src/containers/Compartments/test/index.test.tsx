@@ -131,7 +131,6 @@ describe('Compartments', () => {
       </Provider>
     );
 
-
     expect(
       wrapper
         .find('DataCircleCard')
