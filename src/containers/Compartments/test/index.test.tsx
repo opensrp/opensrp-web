@@ -131,10 +131,25 @@ describe('Compartments', () => {
       </Provider>
     );
 
-    // the numbers in this snapshot encode the correctness of the private functions in the Compartments component
+
     expect(
-      toJson(wrapper.find('div.compartment-wrapper.compartments').find('.dataCircleCard.card'))
-    ).toMatchSnapshot('compartments');
+      wrapper
+        .find('DataCircleCard')
+        .at(0)
+        .props()
+    ).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('DataCircleCard')
+        .at(1)
+        .props()
+    ).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('DataCircleCard')
+        .at(2)
+        .props()
+    ).toMatchSnapshot();
   });
   it('must render correctly for Nutrition module', () => {
     store.dispatch(fetchSms(smsDataFixtures));
