@@ -336,719 +336,86 @@ Array [
 `;
 
 exports[`Compartments must render correctly for NBC_AND_PNC module 1`] = `
-Array [
-  <DataCircleCard
-    addFilterArgsActionCreator={[Function]}
-    filterArgs={
-      Array [
-        [Function],
-      ]
-    }
-    module="NBC & PNC_CHILD"
-    noRisk={0}
-    permissionLevel={0}
-    redAlert={0}
-    risk={0}
-    title="0 Total Newborn"
-    userLocationId="d1865325-11e6-4e39-817b-e676c1affecf"
-  >
-    <Card
-      className="dataCircleCard "
-      tag="div"
-    >
-      <div
-        className="dataCircleCard  card"
-      >
-        <CardTitle
-          tag="div"
-        >
-          <div
-            className="card-title"
-          >
-            <Link
-              onClick={[Function]}
-              to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/all/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            >
-              <a
-                href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/all/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                0 Total Newborn
-              </a>
-            </Link>
-          </div>
-        </CardTitle>
-        <CardBody
-          tag="div"
-        >
-          <div
-            className="card-body"
-          >
-            <ul
-              className="circlesRow"
-            >
-              <li
-                className="red"
-                key="0"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/red/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/red/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Red Alert
-                </span>
-              </li>
-              <li
-                className="orange"
-                key="1"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/risk/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/risk/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  risk
-                </span>
-              </li>
-              <li
-                className="green"
-                key="2"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/no/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_CHILD/no/0 Total Newborn/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  No Risk
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardBody>
-      </div>
-    </Card>
-  </DataCircleCard>,
-  <DataCircleCard
-    addFilterArgsActionCreator={[Function]}
-    filterArgs={
-      Array [
-        [Function],
-      ]
-    }
-    module="NBC & PNC_WOMAN"
-    noRisk={0}
-    permissionLevel={0}
-    redAlert={1}
-    risk={1}
-    title="2 Total mother in PNC"
-    userLocationId="d1865325-11e6-4e39-817b-e676c1affecf"
-  >
-    <Card
-      className="dataCircleCard "
-      tag="div"
-    >
-      <div
-        className="dataCircleCard  card"
-      >
-        <CardTitle
-          tag="div"
-        >
-          <div
-            className="card-title"
-          >
-            <Link
-              onClick={[Function]}
-              to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/all/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            >
-              <a
-                href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/all/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                2 Total mother in PNC
-              </a>
-            </Link>
-          </div>
-        </CardTitle>
-        <CardBody
-          tag="div"
-        >
-          <div
-            className="card-body"
-          >
-            <ul
-              className="circlesRow"
-            >
-              <li
-                className="red"
-                key="0"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/red/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/red/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      1
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Red Alert
-                </span>
-              </li>
-              <li
-                className="orange"
-                key="1"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/risk/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/risk/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      1
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  risk
-                </span>
-              </li>
-              <li
-                className="green"
-                key="2"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/no/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/no/2 Total mother in PNC/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  No Risk
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardBody>
-      </div>
-    </Card>
-  </DataCircleCard>,
-  <DataCircleCard
-    addFilterArgsActionCreator={[Function]}
-    className="invisible-but-visible"
-    filterArgs={Array []}
-    module="NBC & PNC_WOMAN"
-    noRisk={0}
-    permissionLevel={0}
-    redAlert={0}
-    risk={0}
-    title="test title"
-    userLocationId="d1865325-11e6-4e39-817b-e676c1affecf"
-  >
-    <Card
-      className="dataCircleCard invisible-but-visible"
-      tag="div"
-    >
-      <div
-        className="dataCircleCard invisible-but-visible card"
-      >
-        <CardTitle
-          tag="div"
-        >
-          <div
-            className="card-title"
-          >
-            <Link
-              onClick={[Function]}
-              to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/all/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            >
-              <a
-                href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/all/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                test title
-              </a>
-            </Link>
-          </div>
-        </CardTitle>
-        <CardBody
-          tag="div"
-        >
-          <div
-            className="card-body"
-          >
-            <ul
-              className="circlesRow"
-            >
-              <li
-                className="red"
-                key="0"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/red/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/red/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Red Alert
-                </span>
-              </li>
-              <li
-                className="orange"
-                key="1"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/risk/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/risk/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  risk
-                </span>
-              </li>
-              <li
-                className="green"
-                key="2"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/no/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nbc_and_pnc_compartments/hierarchicaldata/NBC & PNC_WOMAN/no/test title/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  No Risk
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardBody>
-      </div>
-    </Card>
-  </DataCircleCard>,
-]
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "module": "NBC & PNC_CHILD",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "title": "0 Total Newborn",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for NBC_AND_PNC module 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "module": "NBC & PNC_WOMAN",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "title": "2 Total mother in PNC",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for NBC_AND_PNC module 3`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "className": "invisible-but-visible",
+  "filterArgs": Array [],
+  "module": "NBC & PNC_WOMAN",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "title": "test title",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
 `;
 
 exports[`Compartments must render correctly for Nutrition module 1`] = `
-Array [
-  <DataCircleCard
-    addFilterArgsActionCreator={[Function]}
-    filterArgs={
-      Array [
-        [Function],
-      ]
-    }
-    inappropriateFeeding={0}
-    module="Nutrition"
-    overweight={0}
-    permissionLevel={0}
-    stunting={0}
-    title="Children Under 5"
-    totalChildren={0}
-    userLocationId="d1865325-11e6-4e39-817b-e676c1affecf"
-    wasting={0}
-  >
-    <Card
-      className="dataCircleCard "
-      tag="div"
-    >
-      <div
-        className="dataCircleCard  card"
-      >
-        <CardTitle
-          tag="div"
-        >
-          <div
-            className="card-title"
-          >
-            <Link
-              onClick={[Function]}
-              to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/all/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            >
-              <a
-                href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/all/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                Children Under 5
-              </a>
-            </Link>
-          </div>
-        </CardTitle>
-        <CardBody
-          tag="div"
-        >
-          <div
-            className="card-body"
-          >
-            <ul
-              className="circlesRow"
-            >
-              <li
-                className="stunting"
-                key="0"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/stunted/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/stunted/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Stunting
-                </span>
-              </li>
-              <li
-                className="wasting"
-                key="1"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/severe wasting/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/severe wasting/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Wasting
-                </span>
-              </li>
-              <li
-                className="overweight"
-                key="2"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/overweight/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/overweight/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Overweight
-                </span>
-              </li>
-              <li
-                className="inappropriate-feeding"
-                key="3"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/inappropriately fed/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/inappropriately fed/Children Under 5/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Inappropriate Feeding
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardBody>
-      </div>
-    </Card>
-  </DataCircleCard>,
-  <DataCircleCard
-    addFilterArgsActionCreator={[Function]}
-    filterArgs={
-      Array [
-        [Function],
-      ]
-    }
-    inappropriateFeeding={0}
-    module="Nutrition"
-    overweight={0}
-    permissionLevel={0}
-    stunting={0}
-    title="Children Under 2"
-    totalChildren={0}
-    userLocationId="d1865325-11e6-4e39-817b-e676c1affecf"
-    wasting={0}
-  >
-    <Card
-      className="dataCircleCard "
-      tag="div"
-    >
-      <div
-        className="dataCircleCard  card"
-      >
-        <CardTitle
-          tag="div"
-        >
-          <div
-            className="card-title"
-          >
-            <Link
-              onClick={[Function]}
-              to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/all/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            >
-              <a
-                href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/all/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                onClick={[Function]}
-              >
-                Children Under 2
-              </a>
-            </Link>
-          </div>
-        </CardTitle>
-        <CardBody
-          tag="div"
-        >
-          <div
-            className="card-body"
-          >
-            <ul
-              className="circlesRow"
-            >
-              <li
-                className="stunting"
-                key="0"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/stunted/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/stunted/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Stunting
-                </span>
-              </li>
-              <li
-                className="wasting"
-                key="1"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/severe wasting/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/severe wasting/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Wasting
-                </span>
-              </li>
-              <li
-                className="overweight"
-                key="2"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/overweight/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/overweight/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Overweight
-                </span>
-              </li>
-              <li
-                className="inappropriate-feeding"
-                key="3"
-              >
-                <Link
-                  onClick={[Function]}
-                  to="/nutrition_commpartments_url/hierarchicaldata/Nutrition/inappropriately fed/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                >
-                  <a
-                    href="/nutrition_commpartments_url/hierarchicaldata/Nutrition/inappropriately fed/Children Under 2/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="number"
-                    >
-                      0
-                    </span>
-                  </a>
-                </Link>
-                <span
-                  className="risk-level"
-                >
-                  Inappropriate Feeding
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardBody>
-      </div>
-    </Card>
-  </DataCircleCard>,
-]
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "inappropriateFeeding": 0,
+  "module": "Nutrition",
+  "overweight": 0,
+  "permissionLevel": 0,
+  "stunting": 0,
+  "title": "Children Under 5",
+  "totalChildren": 0,
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+  "wasting": 0,
+}
+`;
+
+exports[`Compartments must render correctly for Nutrition module 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "inappropriateFeeding": 0,
+  "module": "Nutrition",
+  "overweight": 0,
+  "permissionLevel": 0,
+  "stunting": 0,
+  "title": "Children Under 2",
+  "totalChildren": 0,
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+  "wasting": 0,
+}
 `;
 
 exports[`Compartments must render correctly for pregnancy module: compartment title 1`] = `
