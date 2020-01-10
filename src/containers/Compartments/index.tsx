@@ -489,7 +489,7 @@ const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string)
 /**
  * @param {number} n number of weeks future
  */
-const filterByDateInNextNWeeks = (n: number) => {
+export const filterByDateInNextNWeeks = (n: number) => {
   return (dataItem: SmsData) => {
     return (
       Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
