@@ -306,6 +306,52 @@ Array [
     </CardBody>
   </div>,
 ]
+exports[`Compartments must display the correct data 1`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "title": "2 Total Pregnancies",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must display the correct data 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "title": "2 Total Pregnancies due in 2 weeks",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must display the correct data 3`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "title": "0 Total Pregnancies due in 1 week",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
 `;
 
 exports[`Compartments must render correctly for NBC_AND_PNC module 1`] = `
