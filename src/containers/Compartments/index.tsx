@@ -26,6 +26,7 @@ import {
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
+  convertMilisecondsToYear,
   fetchData,
   getFilterFunctionAndLocationLevel,
   getLocationId,
@@ -457,14 +458,15 @@ export const Compartments = ({
  * @param {number} startAge - the begining of age range we are filtering for.
  * @returns filterFunction  - the ending of age range we are filtering for.
  */
-const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
+export const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
   return (dataItem: SmsData) => {
-    return (
-      new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < endAge &&
-      new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > startAge
+    const ageInYears = convertMilisecondsToYear(
+      new Date().getTime() - new Date(dataItem.date_of_birth).getTime()
     );
+    return ageInYears < endAge && ageInYears > startAge;
   };
 };
+
 /**
  * get the number of sms_reports with a certain value in one of its fields
  * specified by field.
