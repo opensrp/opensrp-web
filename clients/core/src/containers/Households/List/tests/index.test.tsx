@@ -4,8 +4,13 @@ import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from '../../../../store';
-import householdsReducer, { reducerName as householdsReducerName } from '../../../../store/ducks/households';
-import { HouseholdList, HouseholdListProps } from '../index';
+import householdsReducer, {
+    reducerName as householdsReducerName,
+    fetchHouseholds,
+    setTotalRecords,
+} from '../../../../store/ducks/households';
+import ConnectedHouseholdList, { HouseholdList, HouseholdListProps } from '../index';
+import * as fixtures from '../../../../store/ducks/tests/fixtures';
 
 reducerRegistry.register(householdsReducerName, householdsReducer);
 
@@ -27,7 +32,7 @@ describe('containers/households/list/Householdlist', () => {
         shallow(<HouseholdList {...props} />);
     });
 
-    it('works correctly with the redux store', () => {
+    it('renders correctly', () => {
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
@@ -42,6 +47,19 @@ describe('containers/households/list/Householdlist', () => {
             </Provider>,
         );
         expect(toJson(wrapper)).toMatchSnapshot();
+        wrapper.unmount();
+    });
+
+    it('works correctly with the redux store', () => {
+        store.dispatch(fetchHouseholds([fixtures.household1]));
+        store.dispatch(setTotalRecords(23));
+        const wrapper = mount(
+            <Provider store={store}>
+                <ConnectedHouseholdList />
+            </Provider>,
+        );
+        const foundProps = wrapper.find('HouseholdList').props() as any;
+        expect(foundProps.householdsArray).toEqual([fixtures.household1]);
         wrapper.unmount();
     });
 });

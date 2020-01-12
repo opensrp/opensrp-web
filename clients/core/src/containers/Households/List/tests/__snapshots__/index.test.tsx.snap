@@ -1,5 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/households/list/Householdlist renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <HouseholdList
+    fetchHouseholdsActionCreator={[MockFunction]}
+    householdsArray={Array []}
+    opensrpService={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "undefined",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removeHouseholdsActionCreator={[MockFunction]}
+    setTotalRecordsActionCreator={[MockFunction]}
+    totalRecordsCount={0}
+  >
+    <Ripple
+      borderColor="#ff5d00"
+      borderStyle="solid"
+      borderWidth="4px"
+      height="64px"
+      minHeight="80vh"
+      width="64px"
+    >
+      <div
+        className="lds-ripple-parent"
+        style={
+          Object {
+            "minHeight": "80vh",
+          }
+        }
+      >
+        <div
+          className="lds-ripple"
+          style={
+            Object {
+              "height": "64px",
+              "width": "64px",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "borderColor": "#ff5d00",
+                "borderStyle": "solid",
+                "borderWidth": "4px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "borderColor": "#ff5d00",
+                "borderStyle": "solid",
+                "borderWidth": "4px",
+              }
+            }
+          />
+        </div>
+      </div>
+    </Ripple>
+  </HouseholdList>
+</Provider>
+`;
+
 exports[`containers/households/list/Householdlist works correctly with the redux store 1`] = `
 <Provider
   store={

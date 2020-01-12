@@ -135,7 +135,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
 
     /**
      * it can contain searchText or level or both
-     * @param extraParams 
+     * @param extraParams
      */
     private getHouseholdList(extraParams: FlexObject = {}) {
         const clientType = this.state.clientType;
