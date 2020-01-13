@@ -110,7 +110,6 @@ export const Compartments = ({
     locationId: '',
     path: '',
   });
-  const [, setLocationFilterFunction] = useState<(smsData: SmsData) => boolean>(() => false);
   const [userLocationId, setUserLocationId] = useState<string>('');
   const [userLocationLevel, setUserLocationLevel] = useState<number>(4);
 
@@ -171,7 +170,6 @@ export const Compartments = ({
 
     setFilteredData(smsData.filter(locationFilterFunction));
     setLocationAndPath(locationPath);
-    setLocationFilterFunction(locationFilterFunction);
     setUserLocationLevel(locationLevel);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocationId, provinces, districts, communes, villages, filterArgsInStore]);
