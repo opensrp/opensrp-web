@@ -509,18 +509,18 @@ export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
  * c. LOCATION_SLICES
  * d. SUPERSET_SMS_DATA_SLICE
  */
-export function fetchData() {
+export async function fetchData() {
   if (!userIdFetched(store.getState())) {
     const opensrpService = new OpenSRPService('/security/authenticate');
 
-    opensrpService.read('').then((response: any) => {
+    await opensrpService.read('').then((response: any) => {
       store.dispatch(fetchUserId((response as any).user.attributes._PERSON_UUID));
     });
   }
 
   // fetch user location details
   if (!userLocationDataFetched(store.getState())) {
-    supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+    await supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
       store.dispatch(fetchUserLocations(result));
     });
   }
@@ -528,7 +528,7 @@ export function fetchData() {
   // fetch all location slices
   for (const slice in LOCATION_SLICES) {
     if (slice) {
-      supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+      await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
         store.dispatch(fetchLocations(result));
       });
     }
@@ -536,7 +536,7 @@ export function fetchData() {
 
   // check if sms data is fetched and then fetch if not fetched already
   if (!smsDataFetched(store.getState())) {
-    supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
+    await supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
       store.dispatch(fetchSms(result));
     });
   }
