@@ -194,12 +194,14 @@ export const Compartments = ({
         : null
     );
 
-    const last2WeeksSmsData =
-      module === PREGNANCY ? smsData.filter(filterByDateInNextNWeeks(2)) : [];
+    const filterByDateInNext2Weeks = filterByDateInNextNWeeks(2);
+    const filterByDateInNext1Week = filterByDateInNextNWeeks(1);
+
+    const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
     setPregnancyDataCircleCard2Props(
       module === PREGNANCY
         ? {
-            filterArgs: [filterByDateInNextNWeeks(2)] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNext2Weeks] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -216,12 +218,11 @@ export const Compartments = ({
         : null
     );
 
-    const last1WeekSmsData =
-      module === PREGNANCY ? smsData.filter(filterByDateInNextNWeeks(1)) : [];
+    const last1WeekSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext1Week) : [];
     setPregnancyDataCircleCard3Props(
       module === PREGNANCY
         ? {
-            filterArgs: [filterByDateInNextNWeeks(1)] as SMS_FILTER_FUNCTION[],
+            filterArgs: [filterByDateInNext1Week] as SMS_FILTER_FUNCTION[],
             module: PREGNANCY,
             noRisk: getNumberOfSmsWithRisk(
               NO_RISK_LOWERCASE,
@@ -323,14 +324,16 @@ export const Compartments = ({
   ] = useState<null | NutritionDataCircleCardProps>(null);
 
   useEffect(() => {
-    const childrenUnder2 = filteredData.filter(childrenAgeRangeFilterFunction(0, 2));
+    const childrenBetween0And2FilterFunction = childrenAgeRangeFilterFunction(0, 2);
+    const childrenBetween2And5FilterFuction = childrenAgeRangeFilterFunction(2, 5);
+    const childrenUnder2 = filteredData.filter(childrenBetween0And2FilterFunction);
 
-    const childrenUnder5 = filteredData.filter(childrenAgeRangeFilterFunction(2, 5));
+    const childrenUnder5 = filteredData.filter(childrenBetween2And5FilterFuction);
 
     setDataCircleCardNutrition1(
       module === NUTRITION
         ? {
-            filterArgs: [childrenAgeRangeFilterFunction(2, 5)],
+            filterArgs: [childrenBetween2And5FilterFuction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder5,
@@ -350,7 +353,7 @@ export const Compartments = ({
     setDataCircleCardNutrition2(
       module === NUTRITION
         ? {
-            filterArgs: [childrenAgeRangeFilterFunction(0, 2)],
+            filterArgs: [childrenBetween0And2FilterFunction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder2,
