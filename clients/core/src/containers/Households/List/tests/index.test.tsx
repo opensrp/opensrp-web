@@ -8,6 +8,8 @@ import householdsReducer, {
     reducerName as householdsReducerName,
     fetchHouseholds,
     setTotalRecords,
+    removeHouseholds,
+    removeHouseholdsAction,
 } from '../../../../store/ducks/households';
 import ConnectedHouseholdList, { HouseholdList, HouseholdListProps } from '../index';
 import * as fixtures from '../../../../store/ducks/tests/fixtures';
@@ -53,13 +55,70 @@ describe('containers/households/list/Householdlist', () => {
     it('works correctly with the redux store', () => {
         store.dispatch(fetchHouseholds([fixtures.household1]));
         store.dispatch(setTotalRecords(23));
-        const wrapper = mount(
+        let wrapper = mount(
             <Provider store={store}>
                 <ConnectedHouseholdList />
             </Provider>,
         );
-        const foundProps = wrapper.find('HouseholdList').props() as any;
+        let foundProps = wrapper.find('HouseholdList').props() as any;
         expect(foundProps.householdsArray).toEqual([fixtures.household1]);
+        expect(foundProps.totalRecordsCount).toEqual(23);
+
+        // trying to remove households and match with props.
+        store.dispatch(removeHouseholds());
+        wrapper = mount(
+            <Provider store={store}>
+                <ConnectedHouseholdList />
+            </Provider>,
+        );
+
+        foundProps = wrapper.find('HouseholdList').props() as any;
+        console.warn('when remove households', foundProps);
+        expect(foundProps.householdsArray).toEqual([]);
         wrapper.unmount();
+    });
+
+    it('render household-list container correctly', () => {
+        const props: HouseholdListProps = {
+            fetchHouseholdsActionCreator: jest.fn(),
+            householdsArray: [],
+            opensrpService: jest.fn(),
+            removeHouseholdsActionCreator: jest.fn(),
+            setTotalRecordsActionCreator: jest.fn(),
+            totalRecordsCount: 0,
+        };
+        const wrapper = mount(<HouseholdList {...props} />);
+
+        // initially the loading icon would show
+        const loadingComponent = wrapper.find('.lds-ripple-parent');
+        expect(loadingComponent.length).toBe(1);
+
+        // showing household-list container
+        wrapper.setState({ ...wrapper.state(), loading: false });
+        const householdListContainer = wrapper.find('.household-title');
+        expect(householdListContainer.length).toBe(1);
+        wrapper.unmount();
+    });
+
+    it('selectors are working as expected', () => {
+        const mountComponent = () => {
+            const wrapper = mount(
+                <Provider store={store}>
+                    <ConnectedHouseholdList />
+                </Provider>,
+            );
+            const householdListWrapper = wrapper.find('HouseholdList');
+            expect(householdListWrapper.length).toBe(1);
+            const householdListProps: HouseholdListProps = householdListWrapper.props() as HouseholdListProps;
+            return { householdListWrapper, householdListProps, wrapper };
+        };
+        // Adding list of households to the store
+        mountComponent().householdListProps.fetchHouseholdsActionCreator(fixtures.households);
+
+        // Mounting the container again to get the effect of the previous call
+        const householdListProps = mountComponent().householdListProps;
+
+        // matching the expected result
+        expect(householdListProps.householdsArray).toEqual(fixtures.households);
     });
 });
