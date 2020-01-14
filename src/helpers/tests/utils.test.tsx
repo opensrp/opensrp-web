@@ -1,6 +1,13 @@
 import * as gatekeeper from '@onaio/gatekeeper';
-import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
+import {
+  LOCATION_SLICES,
+  ONADATA_OAUTH_STATE,
+  OPENSRP_OAUTH_STATE,
+  SUPERSET_SMS_DATA_SLICE,
+  USER_LOCATION_DATA_SLICE,
+} from '../../configs/env';
 
+import reducerRegistry from '@onaio/redux-reducer-registry';
 import {
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
@@ -17,10 +24,14 @@ import {
   provinces,
   villages,
 } from '../../containers/HierarchichalDataTable/test/fixtures';
+import * as supersetService from '../../services/superset';
+import locationsReducer, { reducerName as locationsReducerName } from '../../store/ducks/locations';
 import { SmsData } from '../../store/ducks/sms_events';
+import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
 import {
   buildHeaderBreadCrumb,
   convertMilisecondsToYear,
+  fetchData,
   filterByPatientId,
   getLinkToHierarchichalDataTable,
   getLinkToPatientDetail,
@@ -35,6 +46,9 @@ import {
   sortFunction,
 } from '../utils';
 import groupedSmsData from './fixtures';
+
+reducerRegistry.register(smsReducerName, smsReducer);
+reducerRegistry.register(locationsReducerName, locationsReducer);
 
 jest.mock('@onaio/gatekeeper', () => ({
   getOnadataUserInfo: jest.fn(),
@@ -279,5 +293,24 @@ describe('getNumberOfDaysSinceDate', () => {
     expect(getNumberOfDaysSinceDate(dateString)).toEqual(
       Math.floor((new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24))
     );
+  });
+});
+
+describe('helpers/utils/fetchData', () => {
+  it('must fetch data from superset in correct order', () => {
+    // mock the supersetFetch method; it's exported as default from the supersetService module
+    const spy = jest.spyOn(supersetService, 'default');
+
+    // call fetchData
+    fetchData();
+
+    // ensure spy was called and called with the correct arguments
+    expect(spy).toHaveBeenCalled();
+    expect(spy.mock.calls[0][0]).toEqual(USER_LOCATION_DATA_SLICE);
+    expect(spy.mock.calls[1][0]).toEqual(LOCATION_SLICES[0]);
+    expect(spy.mock.calls[2][0]).toEqual(LOCATION_SLICES[1]);
+    expect(spy.mock.calls[3][0]).toEqual(LOCATION_SLICES[2]);
+    expect(spy.mock.calls[4][0]).toEqual(LOCATION_SLICES[3]);
+    expect(spy.mock.calls[5][0]).toEqual(SUPERSET_SMS_DATA_SLICE);
   });
 });
