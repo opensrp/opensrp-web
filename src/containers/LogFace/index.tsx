@@ -404,7 +404,6 @@ export const LogFace = ({
           <Table striped={true} borderless={true}>
             <thead id="header">
               <tr>
-                <th className="default-width">ID</th>
                 <th className="default-width">Event Date</th>
                 <th className="default-width">Location</th>
                 <th className="default-width">SMS Type</th>
@@ -424,7 +423,6 @@ export const LogFace = ({
                 dataObj => {
                   return (
                     <tr key={dataObj.event_id}>
-                      <td className="default-width">{dataObj.event_id}</td>
                       <td className="default-width">{dataObj.EventDate}</td>
                       <td className="default-width">{dataObj.health_worker_location_name}</td>
                       <td className="default-width">{dataObj.sms_type}</td>
