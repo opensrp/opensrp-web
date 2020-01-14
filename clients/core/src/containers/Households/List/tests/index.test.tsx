@@ -13,6 +13,7 @@ import householdsReducer, {
 } from '../../../../store/ducks/households';
 import ConnectedHouseholdList, { HouseholdList, HouseholdListProps } from '../index';
 import * as fixtures from '../../../../store/ducks/tests/fixtures';
+import * as householdDucks from '../../../../store/ducks/households';
 
 reducerRegistry.register(householdsReducerName, householdsReducer);
 
@@ -73,7 +74,6 @@ describe('containers/households/list/Householdlist', () => {
         );
 
         foundProps = wrapper.find('HouseholdList').props() as any;
-        console.warn('when remove households', foundProps);
         expect(foundProps.householdsArray).toEqual([]);
         wrapper.unmount();
     });
@@ -120,5 +120,22 @@ describe('containers/households/list/Householdlist', () => {
 
         // matching the expected result
         expect(householdListProps.householdsArray).toEqual(fixtures.households);
+    });
+
+    it('spy on selectors', () => {
+        const spyOnFetchHouseholds = jest.spyOn(householdDucks, 'fetchHouseholds');
+        const spyOnTotalRecords = jest.spyOn(householdDucks, 'setTotalRecords');
+        store.dispatch(fetchHouseholds(fixtures.households));
+        store.dispatch(setTotalRecords(2));
+
+        mount(
+            <Provider store={store}>
+                <ConnectedHouseholdList />
+            </Provider>,
+        );
+
+        expect(spyOnFetchHouseholds).toHaveBeenCalledTimes(1);
+        expect(spyOnTotalRecords).toHaveBeenCalledTimes(1);
+        expect(spyOnFetchHouseholds).toHaveBeenCalledWith(fixtures.households);
     });
 });
