@@ -103,20 +103,20 @@ td {
 }
 
 .table-container table #body > tr td:nth-child(8) {
-  width: 25%;
+  width: 26%;
   height: 20%;
 }
 
 .large-width {
-  width: 25%;
+  width: 26%;
 }
 
 .default-width {
-  width: 10%;
+  width: 12%;
 }
 
 .small-width {
-  width: 5%;
+  width: 7%;
 }
 
 .paginator {
