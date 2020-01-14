@@ -435,7 +435,9 @@ export const LogFace = ({
                       <td className="small-width">{dataObj.age}</td>
                       <td className="large-width">{dataObj.message}</td>
                       <td className="default-width">
-                        <RiskColoring {...{ risk: dataObj.logface_risk }} />
+                        <Link to={getLinkToPatientDetail(dataObj, getModuleLogFaceUrlLink(module))}>
+                          <RiskColoring {...{ risk: dataObj.logface_risk }} />
+                        </Link>
                       </td>
                     </tr>
                   );
