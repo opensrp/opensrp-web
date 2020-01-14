@@ -167,10 +167,7 @@
   background-color: #50c4f9;
 }
 
-span.divider {
+.compartment-data-table span.divider {
   color: #0292d3 !important;
 }
 
-td.default-width:nth-of-type(1) {
-  width: 15%;
-}
