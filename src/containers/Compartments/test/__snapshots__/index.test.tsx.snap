@@ -1,314 +1,385 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Compartments must display the correct data: compartments 1`] = `
-Array [
-  <div
-    className="dataCircleCard  card"
-  >
-    <CardTitle
-      tag="div"
-    >
-      <div
-        className="card-title"
-      >
-        <Link
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            2 Total Pregnancies
-          </a>
-        </Link>
-      </div>
-    </CardTitle>
-    <CardBody
-      className="circlesRow"
-      tag="div"
-    >
-      <div
-        className="circlesRow card-body"
-      >
-        <Link
-          className="red circle"
-          key="0"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="red circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              1
-            </span>
-            <span
-              className="risk-level"
-            >
-              Red Alert
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="orange circle"
-          key="1"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="orange circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              1
-            </span>
-            <span
-              className="risk-level"
-            >
-              risk
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="green circle"
-          key="2"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="green circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              0
-            </span>
-            <span
-              className="risk-level"
-            >
-              No Risk
-            </span>
-          </a>
-        </Link>
-      </div>
-    </CardBody>
-  </div>,
-  <div
-    className="dataCircleCard  card"
-  >
-    <CardTitle
-      tag="div"
-    >
-      <div
-        className="card-title"
-      >
-        <Link
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            2 Total Pregnancies due in 2 weeks
-          </a>
-        </Link>
-      </div>
-    </CardTitle>
-    <CardBody
-      className="circlesRow"
-      tag="div"
-    >
-      <div
-        className="circlesRow card-body"
-      >
-        <Link
-          className="red circle"
-          key="0"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="red circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              1
-            </span>
-            <span
-              className="risk-level"
-            >
-              Red Alert
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="orange circle"
-          key="1"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="orange circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              1
-            </span>
-            <span
-              className="risk-level"
-            >
-              risk
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="green circle"
-          key="2"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="green circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/2 Total Pregnancies due in 2 weeks/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              0
-            </span>
-            <span
-              className="risk-level"
-            >
-              No Risk
-            </span>
-          </a>
-        </Link>
-      </div>
-    </CardBody>
-  </div>,
-  <div
-    className="dataCircleCard  card"
-  >
-    <CardTitle
-      tag="div"
-    >
-      <div
-        className="card-title"
-      >
-        <Link
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            0 Total Pregnancies due in 1 week
-          </a>
-        </Link>
-      </div>
-    </CardTitle>
-    <CardBody
-      className="circlesRow"
-      tag="div"
-    >
-      <div
-        className="circlesRow card-body"
-      >
-        <Link
-          className="red circle"
-          key="0"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="red circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              0
-            </span>
-            <span
-              className="risk-level"
-            >
-              Red Alert
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="orange circle"
-          key="1"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="orange circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              0
-            </span>
-            <span
-              className="risk-level"
-            >
-              risk
-            </span>
-          </a>
-        </Link>
-        <Link
-          className="green circle"
-          key="2"
-          onClick={[Function]}
-          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-        >
-          <a
-            className="green circle"
-            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/0 Total Pregnancies due in 1 week/0/down/d1865325-11e6-4e39-817b-e676c1affecf/0"
-            onClick={[Function]}
-          >
-            <span
-              className="number"
-            >
-              0
-            </span>
-            <span
-              className="risk-level"
-            >
-              No Risk
-            </span>
-          </a>
-        </Link>
-      </div>
-    </CardBody>
-  </div>,
-]
+exports[`Compartments must display the correct data 1`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "staticContext": undefined,
+  "title": "2 Total Pregnancies",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
 `;
 
-exports[`Compartments must render correctly: compartment title 1`] = `
+exports[`Compartments must display the correct data 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "staticContext": undefined,
+  "title": "2 Total Pregnancies due in 2 weeks",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must display the correct data 3`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "Pregnancy",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "staticContext": undefined,
+  "title": "0 Total Pregnancies due in 1 week",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for NBC_AND_PNC module 1`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "NBC & PNC_CHILD",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "staticContext": undefined,
+  "title": "0 Total Newborn",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for NBC_AND_PNC module 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "NBC & PNC_WOMAN",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 1,
+  "risk": 1,
+  "staticContext": undefined,
+  "title": "2 Total mother in PNC",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for NBC_AND_PNC module 3`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "className": "invisible-but-visible",
+  "filterArgs": Array [],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "NBC & PNC_WOMAN",
+  "noRisk": 0,
+  "permissionLevel": 0,
+  "redAlert": 0,
+  "risk": 0,
+  "staticContext": undefined,
+  "title": "test title",
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+}
+`;
+
+exports[`Compartments must render correctly for Nutrition module 1`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "inappropriateFeeding": 0,
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "Nutrition",
+  "overweight": 0,
+  "permissionLevel": 0,
+  "staticContext": undefined,
+  "stunting": 0,
+  "title": "Children Under 5",
+  "totalChildren": 0,
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+  "wasting": 0,
+}
+`;
+
+exports[`Compartments must render correctly for Nutrition module 2`] = `
+Object {
+  "addFilterArgsActionCreator": [Function],
+  "filterArgs": Array [
+    [Function],
+  ],
+  "history": Object {
+    "action": "POP",
+    "block": [Function],
+    "createHref": [Function],
+    "go": [Function],
+    "goBack": [Function],
+    "goForward": [Function],
+    "length": 1,
+    "listen": [Function],
+    "location": Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    },
+    "push": [Function],
+    "replace": [Function],
+  },
+  "inappropriateFeeding": 0,
+  "location": Object {
+    "hash": "",
+    "pathname": "/",
+    "search": "",
+    "state": undefined,
+  },
+  "match": Object {
+    "isExact": true,
+    "params": Object {},
+    "path": "/",
+    "url": "/",
+  },
+  "module": "Nutrition",
+  "overweight": 0,
+  "permissionLevel": 0,
+  "staticContext": undefined,
+  "stunting": 0,
+  "title": "Children Under 2",
+  "totalChildren": 0,
+  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
+  "wasting": 0,
+}
+`;
+
+exports[`Compartments must render correctly for pregnancy module: compartment title 1`] = `
 <h2
   id="compartment_title"
 >
@@ -316,7 +387,7 @@ exports[`Compartments must render correctly: compartment title 1`] = `
 </h2>
 `;
 
-exports[`Compartments must render correctly: subtitle 1`] = `
+exports[`Compartments must render correctly for pregnancy module: subtitle 1`] = `
 <p
   id="breadcrumb"
 >

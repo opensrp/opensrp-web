@@ -26,6 +26,7 @@ import {
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
+  convertMilisecondsToYear,
   fetchData,
   getFilterFunctionAndLocationLevel,
   getLocationId,
@@ -109,7 +110,6 @@ export const Compartments = ({
     locationId: '',
     path: '',
   });
-  const [, setLocationFilterFunction] = useState<(smsData: SmsData) => boolean>(() => false);
   const [userLocationId, setUserLocationId] = useState<string>('');
   const [userLocationLevel, setUserLocationLevel] = useState<number>(4);
 
@@ -170,7 +170,6 @@ export const Compartments = ({
 
     setFilteredData(smsData.filter(locationFilterFunction));
     setLocationAndPath(locationPath);
-    setLocationFilterFunction(locationFilterFunction);
     setUserLocationLevel(locationLevel);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocationId, provinces, districts, communes, villages, filterArgsInStore]);
@@ -192,6 +191,9 @@ export const Compartments = ({
           } as PregnancyAndNBCDataCircleCardProps)
         : null
     );
+
+    const filterByDateInNext2Weeks = filterByDateInNextNWeeks(2);
+    const filterByDateInNext1Week = filterByDateInNextNWeeks(1);
 
     const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
     setPregnancyDataCircleCard2Props(
@@ -320,21 +322,16 @@ export const Compartments = ({
   ] = useState<null | NutritionDataCircleCardProps>(null);
 
   useEffect(() => {
-    const childrenUnder2 = filteredData.filter((dataItem: SmsData) => {
-      return new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 2;
-    });
+    const childrenBetween0And2FilterFunction = childrenAgeRangeFilterFunction(0, 2);
+    const childrenBetween2And5FilterFuction = childrenAgeRangeFilterFunction(2, 5);
+    const childrenUnder2 = filteredData.filter(childrenBetween0And2FilterFunction);
 
-    const childrenUnder5 = filteredData.filter((dataItem: SmsData) => {
-      return (
-        new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() < 5 &&
-        new Date().getFullYear() - new Date(dataItem.date_of_birth).getFullYear() > 2
-      );
-    });
+    const childrenUnder5 = filteredData.filter(childrenBetween2And5FilterFuction);
 
     setDataCircleCardNutrition1(
       module === NUTRITION
         ? {
-            filterArgs: [],
+            filterArgs: [childrenBetween2And5FilterFuction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder5,
@@ -354,7 +351,7 @@ export const Compartments = ({
     setDataCircleCardNutrition2(
       module === NUTRITION
         ? {
-            filterArgs: [],
+            filterArgs: [childrenBetween0And2FilterFunction],
             inappropriateFeeding: getNumberOfSmsWithRisk(
               'inappropriately fed',
               childrenUnder2,
@@ -457,11 +454,29 @@ export const Compartments = ({
 };
 
 /**
+ * filter function for smsData based on date_of_birth field
+ * @param {SmsData} dataItem - SmsData item
+ * @param {number} startAge - the begining of age range we are filtering for.
+ * @returns filterFunction  - the ending of age range we are filtering for.
+ */
+export const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
+  return (dataItem: SmsData) => {
+    const ageInYears = convertMilisecondsToYear(
+      new Date().getTime() - new Date(dataItem.date_of_birth).getTime()
+    );
+    return ageInYears < endAge && ageInYears > startAge;
+  };
+};
+
+/**
  * get the number of sms_reports with a certain value in one of its fields
  * specified by field.
  * @param {string} risk - value of logface_risk to look for
+ * @param {SmsData[]} smsData - an array of SmsData objects
+ * @param {string | any} field - sms event field for which we want to
+ * check the value passed in risk
  */
-const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string | any) => {
+const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string) => {
   function reducer(accumulator: number, currentValue: SmsData) {
     if ((currentValue as any)[field].toLowerCase().includes(risk)) {
       return accumulator + 1;
@@ -473,27 +488,15 @@ const getNumberOfSmsWithRisk = (risk: string, smsData: SmsData[], field: string 
 };
 
 /**
- * filter for smsData objects whose EventData fields are within
- * the period of the next 2 weeks
- * @param {SmsData} dataItem  sms data item
+ * @param {number} n number of weeks future
  */
-const filterByDateInNext2Weeks = (dataItem: SmsData): boolean => {
-  return (
-    Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-    Date.parse(dataItem.lmp_edd) - Date.now() < 2 * MICROSECONDS_IN_A_WEEK
-  );
-};
-
-/**
- * Filter for smsData objects whose EventDate fields are within
- * the period of the next 1 week
- * @param {SmsData} dataItem sms data item
- */
-const filterByDateInNext1Week = (dataItem: SmsData): boolean => {
-  return (
-    Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
-    Date.parse(dataItem.lmp_edd) - Date.now() < MICROSECONDS_IN_A_WEEK
-  );
+export const filterByDateInNextNWeeks = (n: number) => {
+  return (dataItem: SmsData) => {
+    return (
+      Date.parse(dataItem.lmp_edd) - Date.now() > 0 &&
+      Date.parse(dataItem.lmp_edd) - Date.now() < n * MICROSECONDS_IN_A_WEEK
+    );
+  };
 };
 
 /**

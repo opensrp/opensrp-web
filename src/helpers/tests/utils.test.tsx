@@ -4,6 +4,7 @@ import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 import { smsDataFixtures } from '../../containers/Compartments/test/fixtures';
 import { SmsData } from '../../store/ducks/sms_events';
 import {
+  convertMilisecondsToYear,
   filterByPatientId,
   getLinkToPatientDetail,
   groupBy,
@@ -96,5 +97,13 @@ describe('helpers/utils/sortByEventDate', () => {
       return 0;
     });
     expect(sortByEventDate(smsDataFixtures)).toEqual(sortedSmsData);
+  });
+});
+
+describe('helpers/utils/convertMillisecondsToYear', () => {
+  it('must return correct value for given input', () => {
+    expect(convertMilisecondsToYear(new Date('01/01/2020').getTime())).toEqual(50);
+    expect(convertMilisecondsToYear(new Date('01/01/1997').getTime())).toEqual(27);
+    expect(convertMilisecondsToYear(new Date('01/01/2007').getTime())).toEqual(37);
   });
 });
