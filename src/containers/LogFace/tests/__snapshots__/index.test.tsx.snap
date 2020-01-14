@@ -990,11 +990,6 @@ exports[`containers/LogFace renders correctly: table snapshot 1`] = `
       <th
         className="default-width"
       >
-        ID
-      </th>
-      <th
-        className="default-width"
-      >
         Event Date
       </th>
       <th
@@ -1040,11 +1035,6 @@ exports[`containers/LogFace renders correctly: table snapshot 1`] = `
     <tr
       key="1570173602178"
     >
-      <td
-        className="default-width"
-      >
-        1570173602178
-      </td>
       <td
         className="default-width"
       >
@@ -1116,11 +1106,6 @@ Health Status =
       <td
         className="default-width"
       >
-        1570173399115
-      </td>
-      <td
-        className="default-width"
-      >
         2019-10-04
       </td>
       <td
@@ -1186,11 +1171,6 @@ Interventions =
     <tr
       key="1570171129630"
     >
-      <td
-        className="default-width"
-      >
-        1570171129630
-      </td>
       <td
         className="default-width"
       >
