@@ -1084,20 +1084,29 @@ Health Status =
       <td
         className="default-width"
       >
-        <riskColoring
-          risk="no risk"
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <span
-            className="badge badge-success"
-            id="default-width"
+          <a
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            onClick={[Function]}
           >
-            <div>
-              <p>
-                No Risk
-              </p>
-            </div>
-          </span>
-        </riskColoring>
+            <riskColoring
+              risk="no risk"
+            >
+              <span
+                className="badge badge-success"
+                id="default-width"
+              >
+                <div>
+                  <p>
+                    No Risk
+                  </p>
+                </div>
+              </span>
+            </riskColoring>
+          </a>
+        </Link>
       </td>
     </tr>
     <tr
@@ -1152,20 +1161,29 @@ Interventions =
       <td
         className="default-width"
       >
-        <riskColoring
-          risk="red"
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <span
-            className="badge badge-danger"
-            id="default-width"
+          <a
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            onClick={[Function]}
           >
-            <div>
-              <p>
-                Red Alert
-              </p>
-            </div>
-          </span>
-        </riskColoring>
+            <riskColoring
+              risk="red"
+            >
+              <span
+                className="badge badge-danger"
+                id="default-width"
+              >
+                <div>
+                  <p>
+                    Red Alert
+                  </p>
+                </div>
+              </span>
+            </riskColoring>
+          </a>
+        </Link>
       </td>
     </tr>
     <tr
@@ -1225,20 +1243,29 @@ Current Symptoms = Heavy sweating, Coughing
       <td
         className="default-width"
       >
-        <riskColoring
-          risk="red"
+        <Link
+          to="/pregnancy_log_face/patient_detail/100PAH"
         >
-          <span
-            className="badge badge-danger"
-            id="default-width"
+          <a
+            href="/pregnancy_log_face/patient_detail/100PAH"
+            onClick={[Function]}
           >
-            <div>
-              <p>
-                Red Alert
-              </p>
-            </div>
-          </span>
-        </riskColoring>
+            <riskColoring
+              risk="red"
+            >
+              <span
+                className="badge badge-danger"
+                id="default-width"
+              >
+                <div>
+                  <p>
+                    Red Alert
+                  </p>
+                </div>
+              </span>
+            </riskColoring>
+          </a>
+        </Link>
       </td>
     </tr>
   </tbody>
