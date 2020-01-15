@@ -5,8 +5,9 @@ import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
@@ -115,6 +116,7 @@ interface Props {
   compartMentUrl: string;
   module: string;
   permissionLevel: number;
+  history: any;
 }
 
 const defaultProps: Props = {
@@ -124,6 +126,7 @@ const defaultProps: Props = {
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  history: null,
   module: '',
   permissionLevel: 3,
   provinces: [],
@@ -569,6 +572,11 @@ class HierarchichalDataTable extends Component<Props, State> {
         this.props.provinces
       )
     ) {
+      const tableRowLink = `${getModuleLink(this.props.module)}${HIERARCHICAL_DATA_URL}/${
+        this.props.module
+      }/${this.props.risk_highligter}/${this.props.title}/${
+        this.props.current_level ? this.props.current_level + 1 : 1
+      }/down/`;
       return (
         <Container fluid={true} className="compartment-data-table">
           <Link to={this.urlToRedirect()} className="back-page">
@@ -606,106 +614,92 @@ class HierarchichalDataTable extends Component<Props, State> {
                   <tbody id="body">
                     {this.state.data.length ? (
                       this.state.data.map((element: LocationWithData) => {
-                        return this.props.module !== NUTRITION ? (
-                          <tr key={element.location_id}>
-                            <td className="default-width">
-                              {this.props.current_level === 3 ? (
-                                element.location_name
-                              ) : (
-                                <Link
-                                  to={`${getModuleLink(
-                                    this.props.module
-                                  )}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
-                                    this.props.risk_highligter
-                                  }/${this.props.title}/${
-                                    this.props.current_level ? this.props.current_level + 1 : 1
-                                  }/down/${element.location_id}/${this.props.permissionLevel}`}
+                        return (
+                          <tr
+                            key={element.location_id}
+                            // tslint:disable-next-line: jsx-no-lambda
+                            onClick={() => {
+                              this.props.history.push(
+                                this.props.current_level === 3
+                                  ? '#'
+                                  : `${tableRowLink}${element.location_id}/${this.props.permissionLevel}`
+                              );
+                            }}
+                          >
+                            {this.props.module !== NUTRITION ? (
+                              <React.Fragment>
+                                <td className="default-width">{element.location_name}</td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === RED
+                                      ? this.props.risk_highligter
+                                      : ''
+                                  }`}
                                 >
-                                  {element.location_name}
-                                </Link>
-                              )}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === RED ? this.props.risk_highligter : ''
-                              }`}
-                            >
-                              {element.redAlert}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === RISK
-                                  ? this.props.risk_highligter
-                                  : ''
-                              }`}
-                            >
-                              {element.risk}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === NO ? this.props.risk_highligter : ''
-                              }`}
-                            >
-                              {element.no_risk}
-                            </td>
-                            <td className={'default-width'}>{element.total}</td>
-                          </tr>
-                        ) : (
-                          <tr key={element.location_id}>
-                            <td className="default-width">
-                              {this.props.current_level === 3 ? (
-                                element.location_name
-                              ) : (
-                                <Link
-                                  to={`${getModuleLink(
-                                    this.props.module
-                                  )}${HIERARCHICAL_DATA_URL}/${this.props.module}/${
-                                    this.props.risk_highligter
-                                  }/${this.props.title}/${
-                                    this.props.current_level ? this.props.current_level + 1 : 1
-                                  }/down/${element.location_id}/${this.props.permissionLevel}`}
+                                  {element.redAlert}
+                                </td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === RISK
+                                      ? this.props.risk_highligter
+                                      : ''
+                                  }`}
                                 >
-                                  {element.location_name}
-                                </Link>
-                              )}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === STUNTED
-                                  ? this.props.risk_highligter.split(' ').join('-')
-                                  : ''
-                              }`}
-                            >
-                              {element.stunting}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === SEVERE_WASTING
-                                  ? this.props.risk_highligter.split(' ').join('-')
-                                  : ''
-                              }`}
-                            >
-                              {element.wasting}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === OVERWEIGHT
-                                  ? this.props.risk_highligter.split(' ').join('-')
-                                  : ''
-                              }`}
-                            >
-                              {element.overweight}
-                            </td>
-                            <td
-                              className={`default-width ${
-                                this.props.risk_highligter === INAPPROPRIATELY_FED
-                                  ? this.props.risk_highligter.split(' ').join('-')
-                                  : ''
-                              }`}
-                            >
-                              {element.inappropriateFeeding}
-                            </td>
-                            <td className={'default-width'}>{element.total}</td>
+                                  {element.risk}
+                                </td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === NO
+                                      ? this.props.risk_highligter
+                                      : ''
+                                  }`}
+                                >
+                                  {element.no_risk}
+                                </td>
+                                <td className={'default-width'}>{element.total}</td>
+                              </React.Fragment>
+                            ) : (
+                              <React.Fragment>
+                                <td className="default-width">{element.location_name}</td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === STUNTED
+                                      ? this.props.risk_highligter.split(' ').join('-')
+                                      : ''
+                                  }`}
+                                >
+                                  {element.stunting}
+                                </td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === SEVERE_WASTING
+                                      ? this.props.risk_highligter.split(' ').join('-')
+                                      : ''
+                                  }`}
+                                >
+                                  {element.wasting}
+                                </td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === OVERWEIGHT
+                                      ? this.props.risk_highligter.split(' ').join('-')
+                                      : ''
+                                  }`}
+                                >
+                                  {element.overweight}
+                                </td>
+                                <td
+                                  className={`default-width ${
+                                    this.props.risk_highligter === INAPPROPRIATELY_FED
+                                      ? this.props.risk_highligter.split(' ').join('-')
+                                      : ''
+                                  }`}
+                                >
+                                  {element.inappropriateFeeding}
+                                </td>
+                                <td className={'default-width'}>{element.total}</td>
+                              </React.Fragment>
+                            )}
                           </tr>
                         );
                       })
@@ -1013,9 +1007,11 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
 
 const mapDispatchToProps = { fetchLocationsActionCreator: fetchLocations };
 
-const ConnectedHierarchichalDataTable = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HierarchichalDataTable);
+const ConnectedHierarchichalDataTable = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(HierarchichalDataTable)
+);
 
 export default ConnectedHierarchichalDataTable;
