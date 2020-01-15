@@ -45,6 +45,9 @@
   padding-left: 12px;
 }
 
+.back-page:hover{
+  cursor: pointer;
+}
 .compartment-data-table .ReactTable .rt-thead.-header {
   box-shadow: 0 0px 0px 0 #dadce0;
 }

@@ -581,12 +581,16 @@ class HierarchichalDataTable extends Component<Props, State> {
       }/down/`;
       return (
         <Container fluid={true} className="compartment-data-table">
-          <Link to={this.urlToRedirect()} className="back-page">
-            <span>
-              <FontAwesomeIcon icon={BACKPAGE_ICON} size="sm" />
-              <span>{BACK}</span>
-            </span>
-          </Link>
+          <span
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => {
+              window.history.go(-1);
+            }}
+            className="back-page"
+          >
+            <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
+            <span>{BACK}</span>
+          </span>
           <h1>{this.props.title}</h1>
           <Row className="villageDataRow">
             <Card className="table-card">
