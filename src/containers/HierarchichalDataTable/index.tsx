@@ -803,9 +803,9 @@ class HierarchichalDataTable extends Component<Props, State> {
                 smsData: this.state.villageData,
               }}
             />
-          ) : (
-            <NoRecord />
-          )}
+          ) : this.props.current_level === 3 ? (
+            <NoRecord message={'no records to show for this commune'} />
+          ) : null}
         </Container>
       );
     } else {
