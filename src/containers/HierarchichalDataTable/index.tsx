@@ -5,8 +5,9 @@ import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
@@ -115,6 +116,7 @@ interface Props {
   compartMentUrl: string;
   module: string;
   permissionLevel: number;
+  history: any;
 }
 
 const defaultProps: Props = {
@@ -124,6 +126,7 @@ const defaultProps: Props = {
   direction: 'down',
   districts: [],
   fetchLocationsActionCreator: fetchLocations,
+  history: null,
   module: '',
   permissionLevel: 3,
   provinces: [],
@@ -612,20 +615,20 @@ class HierarchichalDataTable extends Component<Props, State> {
                     {this.state.data.length ? (
                       this.state.data.map((element: LocationWithData) => {
                         return (
-                          <tr key={element.location_id}>
+                          <tr
+                            key={element.location_id}
+                            // tslint:disable-next-line: jsx-no-lambda
+                            onClick={() => {
+                              this.props.history.push(
+                                this.props.current_level === 3
+                                  ? '#'
+                                  : `${tableRowLink}${element.location_id}/${this.props.permissionLevel}`
+                              );
+                            }}
+                          >
                             {this.props.module !== NUTRITION ? (
                               <React.Fragment>
-                                <td className="default-width">
-                                  {this.props.current_level === 3 ? (
-                                    element.location_name
-                                  ) : (
-                                    <Link
-                                      to={`${tableRowLink}${element.location_id}/${this.props.permissionLevel}`}
-                                    >
-                                      {element.location_name}
-                                    </Link>
-                                  )}
-                                </td>
+                                <td className="default-width">{element.location_name}</td>
                                 <td
                                   className={`default-width ${
                                     this.props.risk_highligter === RED
@@ -657,17 +660,7 @@ class HierarchichalDataTable extends Component<Props, State> {
                               </React.Fragment>
                             ) : (
                               <React.Fragment>
-                                <td className="default-width">
-                                  {this.props.current_level === 3 ? (
-                                    element.location_name
-                                  ) : (
-                                    <Link
-                                      to={`${tableRowLink}${element.location_id}/${this.props.permissionLevel}`}
-                                    >
-                                      {element.location_name}
-                                    </Link>
-                                  )}
-                                </td>
+                                <td className="default-width">{element.location_name}</td>
                                 <td
                                   className={`default-width ${
                                     this.props.risk_highligter === STUNTED
@@ -1014,9 +1007,11 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): any => {
 
 const mapDispatchToProps = { fetchLocationsActionCreator: fetchLocations };
 
-const ConnectedHierarchichalDataTable = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HierarchichalDataTable);
+const ConnectedHierarchichalDataTable = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(HierarchichalDataTable)
+);
 
 export default ConnectedHierarchichalDataTable;
