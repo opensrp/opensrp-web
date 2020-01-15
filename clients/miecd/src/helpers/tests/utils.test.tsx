@@ -30,12 +30,7 @@ import { OpenSRPService } from '../../services/opensrp';
 import locationsReducer, { reducerName as locationsReducerName } from '../../store/ducks/locations';
 import { SmsData } from '../../store/ducks/sms_events';
 import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
-import {
-  districts,
-  provinces,
-  villages
-} from "../../containers/HierarchichalDataTable/test/fixtures";
-import { SmsData } from "../../store/ducks/sms_events";
+
 import {
   buildHeaderBreadCrumb,
   convertMillisecondsToYear,
@@ -53,7 +48,10 @@ import {
   provinces,
   sortByEventDate,
   sortFunction,
-  getLinkToPatientDetail
+  getLinkToPatientDetail,
+  filterByPatientId,
+  sortByEventDate,
+  convertMilisecondsToYear
 } from "../utils";
 import groupedSmsData from "./fixtures";
 
