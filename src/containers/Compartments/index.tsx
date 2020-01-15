@@ -245,10 +245,6 @@ export const Compartments = ({
     dataCircleCardWomanData,
     setDataCircleCardWomanData,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
-  const [
-    dataCircleCardTestProps,
-    setDataCircleCardTestProps,
-  ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
 
   // this should only run when the module is NBC & PNC
   useEffect(() => {
@@ -296,19 +292,6 @@ export const Compartments = ({
         : null
     );
 
-    setDataCircleCardTestProps(
-      module === NBC_AND_PNC
-        ? {
-            filterArgs: [],
-            module: 'test',
-            noRisk: 0,
-            permissionLevel: 0,
-            redAlert: 0,
-            risk: 0,
-            title: 'test title',
-          }
-        : null
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredData]);
 
