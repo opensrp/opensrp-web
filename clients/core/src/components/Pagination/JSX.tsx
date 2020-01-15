@@ -36,7 +36,7 @@ export const BootstrapJSX: React.FC<Props> = props => {
 
     return (
         <React.Fragment>
-            <Pagination aria-label="pagination" size="sm">
+            <Pagination aria-label="pagination" size="md">
                 <PaginationItem className={`page-item ${canPreviousPage ? '' : 'disabled'}`}>
                     <PaginationLink
                         className={`page-link`}
@@ -82,18 +82,19 @@ export const BootstrapJSX: React.FC<Props> = props => {
                 })}
                 {paginationState.showEndingEllipsis && (
                     <PaginationItem className={`page-item`}>
-                        <PaginationLink
-                            className={`page-link`}
-                            href="#"
-                            aria-label={'ellipsis'}
-                            // tslint:disable-next-line: jsx-no-lambda
-                            onClick={(): Promise<void> | undefined => fetchMoreApiData && fetchMoreApiData()}
-                        >
-                            <span aria-hidden="true">{paginationState.ellipsisIsLoading ? 'Loading' : '...'}</span>
-                            <span className="sr-only">
-                                {paginationState.ellipsisIsLoading ? 'pagination Loading' : 'pagintation fully loaded'}
-                            </span>
-                        </PaginationLink>
+                        {paginationState.ellipsisIsLoading ? (
+                            'Loading'
+                        ) : (
+                            <PaginationLink
+                                className={`page-link`}
+                                href="#"
+                                aria-label={'ellipsis'}
+                                // tslint:disable-next-line: jsx-no-lambda
+                                onClick={(): Promise<void> | undefined => fetchMoreApiData && fetchMoreApiData()}
+                            >
+                                . . .
+                            </PaginationLink>
+                        )}
                     </PaginationItem>
                 )}
                 <PaginationItem className={`page-item  ${canNextPage ? '' : 'disabled'}`}>
