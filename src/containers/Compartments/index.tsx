@@ -421,7 +421,7 @@ export const Compartments = ({
         <React.Fragment>
           <div className="cards-row">
             <CardGroup>
-              {circleCardComponent}
+              {circleCardComponent.slice(0, 2)}
               {module === NBC_AND_PNC && dataCircleCardTestProps ? (
                 <ConnectedDataCircleCard
                   {...dataCircleCardTestProps}
@@ -431,6 +431,9 @@ export const Compartments = ({
                 />
               ) : null}
             </CardGroup>
+          </div>
+          <div className="cards-row">
+            <CardGroup>{circleCardComponent[2] ? circleCardComponent[2] : null}</CardGroup>
           </div>
           {(module === PREGNANCY || module === NUTRITION) && smsData.length ? (
             <VillageData
