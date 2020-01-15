@@ -56,13 +56,13 @@ exports[`DataCircleCard must render correctly 1`] = `
           </a>
         </Link>
         <Link
-          className="orange circle"
+          className="yellow circle"
           key="1"
           onClick={[Function]}
           to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
         >
           <a
-            className="orange circle"
+            className="yellow circle"
             href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
             onClick={[Function]}
           >
