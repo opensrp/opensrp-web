@@ -216,12 +216,6 @@ describe('Compartments', () => {
         .at(1)
         .props()
     ).toMatchSnapshot();
-    expect(
-      wrapper
-        .find('DataCircleCard')
-        .at(2)
-        .props()
-    ).toMatchSnapshot();
   });
 });
 

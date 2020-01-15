@@ -235,52 +235,6 @@ Object {
 }
 `;
 
-exports[`Compartments must render correctly for NBC_AND_PNC module 3`] = `
-Object {
-  "addFilterArgsActionCreator": [Function],
-  "className": "invisible-but-visible",
-  "filterArgs": Array [],
-  "history": Object {
-    "action": "POP",
-    "block": [Function],
-    "createHref": [Function],
-    "go": [Function],
-    "goBack": [Function],
-    "goForward": [Function],
-    "length": 1,
-    "listen": [Function],
-    "location": Object {
-      "hash": "",
-      "pathname": "/",
-      "search": "",
-      "state": undefined,
-    },
-    "push": [Function],
-    "replace": [Function],
-  },
-  "location": Object {
-    "hash": "",
-    "pathname": "/",
-    "search": "",
-    "state": undefined,
-  },
-  "match": Object {
-    "isExact": true,
-    "params": Object {},
-    "path": "/",
-    "url": "/",
-  },
-  "module": "NBC & PNC_WOMAN",
-  "noRisk": 0,
-  "permissionLevel": 0,
-  "redAlert": 0,
-  "risk": 0,
-  "staticContext": undefined,
-  "title": "test title",
-  "userLocationId": "d1865325-11e6-4e39-817b-e676c1affecf",
-}
-`;
-
 exports[`Compartments must render correctly for Nutrition module 1`] = `
 Object {
   "addFilterArgsActionCreator": [Function],
