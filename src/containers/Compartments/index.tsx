@@ -420,17 +420,7 @@ export const Compartments = ({
       {dataFetched && filteredData.length ? (
         <React.Fragment>
           <div className="cards-row">
-            <CardGroup>
-              {circleCardComponent.slice(0, 2)}
-              {module === NBC_AND_PNC && dataCircleCardTestProps ? (
-                <ConnectedDataCircleCard
-                  {...dataCircleCardTestProps}
-                  userLocationId={userLocationId}
-                  module={NBC_AND_PNC_WOMAN}
-                  className={'invisible-but-visible'}
-                />
-              ) : null}
-            </CardGroup>
+            <CardGroup>{circleCardComponent.slice(0, 2)}</CardGroup>
           </div>
           <div className="cards-row">
             <CardGroup>{circleCardComponent[2] ? circleCardComponent[2] : null}</CardGroup>
