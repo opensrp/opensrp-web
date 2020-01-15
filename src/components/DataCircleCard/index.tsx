@@ -80,7 +80,7 @@ function DataCircleCard({
       riskValue: redAlert,
     },
     {
-      class: 'orange',
+      class: 'yellow',
       riskLabel: RISK,
       riskType: RISK,
       riskValue: risk,
