@@ -1,116 +1,113 @@
 .compartment-wrapper .circlesRow .circle {
-    list-style-type: none;
-    width: 5.5rem;
-    height: 5.5rem;
-    border-radius: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  list-style-type: none;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 3.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .compartment-wrapper .circlesRow .circle:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.compartment-wrapper .card-body>p {
-    margin-top: 12%;
+.compartment-wrapper .card-body > p {
+  margin-top: 12%;
 }
 
 .compartment-wrapper .dataCircleCard {
-    padding: 0;
-    background-color: #ffffff;
-    border: 0.063em solid #dadce0;
-    border-radius: 0.313rem;
-    box-shadow: 0 0.063em 0.188em 0 #d7d7e0;
-    height: 14.375rem;
+  padding: 0;
+  background-color: #ffffff;
+  border: 0.063em solid #dadce0;
+  border-radius: 0.313rem;
+  box-shadow: 0 0.063em 0.188em 0 #d7d7e0;
+  height: 14.375rem;
 }
 
 .compartment-wrapper .circlesRow {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.compartment-wrapper .card-group>.card {
-    flex: 1 1 auto;
+.compartment-wrapper .card-group > .card {
+  flex: 1 1 auto;
 }
 
 .compartment-wrapper .card {
-    border: 0px;
-    margin: 20px 50px 20px 0;
+  border: 0px;
+  margin: 20px 50px 20px 0;
 }
 
-.compartment-wrapper .circlesRow>.red {
-    background-color: #ff1e1e;
+.compartment-wrapper .circlesRow > .red {
+  background-color: #ff1e1e;
 }
 
 .compartment-wrapper .circlesRow>.yellow {
     background-color: #FFD300;
 }
 
-.compartment-wrapper .circlesRow>.green {
-    background-color: #37ae12;
+.compartment-wrapper .circlesRow > .green {
+  background-color: #37ae12;
 }
 
-.compartment-wrapper .circlesRow>.total-children {
-    background-color: #637381;
+.compartment-wrapper .circlesRow > .total-children {
+  background-color: #637381;
 }
 
-.compartment-wrapper .circlesRow>.stunting {
-    background-color: #ff6361;
+.compartment-wrapper .circlesRow > .stunting {
+  background-color: #ff6361;
 }
 
-.compartment-wrapper .circlesRow>.wasting {
-    background-color: #003f5c;
+.compartment-wrapper .circlesRow > .wasting {
+  background-color: #003f5c;
 }
 
-.compartment-wrapper .circlesRow>.overweight {
-    background-color: #58508d;
+.compartment-wrapper .circlesRow > .overweight {
+  background-color: #58508d;
 }
 
-.compartment-wrapper .circlesRow>.inappropriate-feeding {
-    background-color: #003f5c;
+.compartment-wrapper .circlesRow > .inappropriate-feeding {
+  background-color: #003f5c;
 }
 
-.compartment-wrapper .circlesRow>.green,
-.compartment-wrapper .circlesRow>.red,
-.compartment-wrapper .circlesRow>.orange {
-    border: none !important;
+.compartment-wrapper .circlesRow > .green,
+.compartment-wrapper .circlesRow > .red,
+.compartment-wrapper .circlesRow > .orange {
+  border: none !important;
 }
 
 .compartments .card-title {
-    border-bottom: 0.063em solid #dadce0;
-    color: #001429;
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.375rem;
-    text-align: left;
-    padding: 1rem;
+  border-bottom: 0.063em solid #dadce0;
+  color: #001429;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  text-align: left;
+  padding: 1rem;
 }
 
 .compartment-wrapper span.number {
-    color: #ffffff;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 0.875rem;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 0.875rem;
 }
 
 .compartment-wrapper span.risk-level {
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 0.875rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 0.875rem;
 }
 
-.compartment-wrapper .circleRow>a,
+.compartment-wrapper .circleRow > a,
 .compartment-wrapper a:hover {
-    color: inherit;
-    text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
 }
 
-@media (max-width: 1365px) {}
-
-.dataCircleCard.invisible-but-visible.card {
-    visibility: hidden;
+@media (max-width: 1365px) {
 }

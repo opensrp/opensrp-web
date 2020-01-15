@@ -114,16 +114,16 @@ export const Compartments = ({
   const [userLocationLevel, setUserLocationLevel] = useState<number>(4);
 
   const [
-    pregnancyDataCircleCard1Props,
-    setPregnancyDataCircleCard1Props,
+    allPregnanciesProps,
+    setallPregnanciesProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
   const [
-    pregnancyDataCircleCard2Props,
-    setPregnancyDataCircleCard2Props,
+    pregnaciesDueIn2WeeksProps,
+    setpregnaciesDueIn2WeeksProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
   const [
-    pregnancyDataCircleCard3Props,
-    setPregnancyDataCircleCard3Props,
+    pregnanciesDueIn1WeekProps,
+    setpregnanciesDueIn1WeekProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
 
   // fetch data and add to store when the component mounts
@@ -176,7 +176,7 @@ export const Compartments = ({
 
   useEffect(() => {
     const birthsInTheFuture = module === PREGNANCY ? smsData.filter(filterByDateInTheFuture) : [];
-    setPregnancyDataCircleCard1Props(
+    setallPregnanciesProps(
       module === PREGNANCY
         ? ({
             filterArgs: [filterByDateInTheFuture] as SMS_FILTER_FUNCTION[],
@@ -196,7 +196,7 @@ export const Compartments = ({
     const filterByDateInNext1Week = filterByDateInNextNWeeks(1);
 
     const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
-    setPregnancyDataCircleCard2Props(
+    setpregnaciesDueIn2WeeksProps(
       module === PREGNANCY
         ? {
             filterArgs: [filterByDateInNext2Weeks] as SMS_FILTER_FUNCTION[],
@@ -217,7 +217,7 @@ export const Compartments = ({
     );
 
     const last1WeekSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext1Week) : [];
-    setPregnancyDataCircleCard3Props(
+    setpregnanciesDueIn1WeekProps(
       module === PREGNANCY
         ? {
             filterArgs: [filterByDateInNext1Week] as SMS_FILTER_FUNCTION[],
@@ -244,10 +244,6 @@ export const Compartments = ({
   const [
     dataCircleCardWomanData,
     setDataCircleCardWomanData,
-  ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
-  const [
-    dataCircleCardTestProps,
-    setDataCircleCardTestProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
 
   // this should only run when the module is NBC & PNC
@@ -296,19 +292,6 @@ export const Compartments = ({
         : null
     );
 
-    setDataCircleCardTestProps(
-      module === NBC_AND_PNC
-        ? {
-            filterArgs: [],
-            module: 'test',
-            noRisk: 0,
-            permissionLevel: 0,
-            redAlert: 0,
-            risk: 0,
-            title: 'test title',
-          }
-        : null
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredData]);
 
@@ -374,11 +357,7 @@ export const Compartments = ({
 
   useEffect(() => {
     const circleCardProps: FlexObject = {
-      [PREGNANCY]: [
-        pregnancyDataCircleCard1Props,
-        pregnancyDataCircleCard2Props,
-        pregnancyDataCircleCard3Props,
-      ],
+      [PREGNANCY]: [pregnanciesDueIn1WeekProps, pregnaciesDueIn2WeeksProps, allPregnanciesProps],
       [NBC_AND_PNC]: [dataCircleCardChildData, dataCircleCardWomanData],
       [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2],
     };
@@ -405,9 +384,9 @@ export const Compartments = ({
     dataCircleCardNutrition2,
     dataCircleCardWomanData,
     dataCircleCardChildData,
-    pregnancyDataCircleCard1Props,
-    pregnancyDataCircleCard2Props,
-    pregnancyDataCircleCard3Props,
+    allPregnanciesProps,
+    pregnaciesDueIn2WeeksProps,
+    pregnanciesDueIn1WeekProps,
   ]);
 
   return (
@@ -424,17 +403,10 @@ export const Compartments = ({
       {dataFetched && filteredData.length ? (
         <React.Fragment>
           <div className="cards-row">
-            <CardGroup>
-              {circleCardComponent}
-              {module === NBC_AND_PNC && dataCircleCardTestProps ? (
-                <ConnectedDataCircleCard
-                  {...dataCircleCardTestProps}
-                  userLocationId={userLocationId}
-                  module={NBC_AND_PNC_WOMAN}
-                  className={'invisible-but-visible'}
-                />
-              ) : null}
-            </CardGroup>
+            <CardGroup>{circleCardComponent.slice(0, 2)}</CardGroup>
+          </div>
+          <div className="cards-row">
+            <CardGroup>{circleCardComponent[2] ? circleCardComponent[2] : null}</CardGroup>
           </div>
           {(module === PREGNANCY || module === NUTRITION) && smsData.length ? (
             <VillageData
