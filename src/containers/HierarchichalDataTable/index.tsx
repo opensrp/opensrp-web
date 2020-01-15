@@ -8,6 +8,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Store } from 'redux';
+import NoRecord from '../../components/NoRecord';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -802,7 +803,9 @@ class HierarchichalDataTable extends Component<Props, State> {
                 smsData: this.state.villageData,
               }}
             />
-          ) : null}
+          ) : (
+            <NoRecord />
+          )}
         </Container>
       );
     } else {
