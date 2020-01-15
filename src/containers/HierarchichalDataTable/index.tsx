@@ -812,21 +812,6 @@ class HierarchichalDataTable extends Component<Props, State> {
     }
   }
 
-  private urlToRedirect() {
-    switch (this.props.module) {
-      case PREGNANCY:
-        return PREGNANCY_COMPARTMENTS_URL;
-      case NBC_AND_PNC_WOMAN:
-        return NBC_AND_PNC_COMPARTMENTS_URL;
-      case NBC_AND_PNC_CHILD:
-        return NBC_AND_PNC_COMPARTMENTS_URL;
-      case NUTRITION:
-        return NUTRITION_COMPARTMENTS_URL;
-      default:
-        return '';
-    }
-  }
-
   private getLevelString = () => {
     if (this.props.current_level === 0) {
       return PROVINCE;
