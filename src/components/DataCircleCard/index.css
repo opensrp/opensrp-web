@@ -1,8 +1,8 @@
 .compartment-wrapper .circlesRow .circle {
   list-style-type: none;
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 3.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 3.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
