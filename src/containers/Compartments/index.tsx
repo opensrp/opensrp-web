@@ -114,16 +114,16 @@ export const Compartments = ({
   const [userLocationLevel, setUserLocationLevel] = useState<number>(4);
 
   const [
-    pregnancyDataCircleCard1Props,
-    setPregnancyDataCircleCard1Props,
+    allPregnanciesProps,
+    setallPregnanciesProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
   const [
-    pregnancyDataCircleCard2Props,
-    setPregnancyDataCircleCard2Props,
+    pregnaciesDueIn2WeeksProps,
+    setpregnaciesDueIn2WeeksProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
   const [
-    pregnancyDataCircleCard3Props,
-    setPregnancyDataCircleCard3Props,
+    pregnanciesDueIn1WeekProps,
+    setpregnanciesDueIn1WeekProps,
   ] = useState<null | PregnancyAndNBCDataCircleCardProps>(null);
 
   // fetch data and add to store when the component mounts
@@ -176,7 +176,7 @@ export const Compartments = ({
 
   useEffect(() => {
     const birthsInTheFuture = module === PREGNANCY ? smsData.filter(filterByDateInTheFuture) : [];
-    setPregnancyDataCircleCard1Props(
+    setallPregnanciesProps(
       module === PREGNANCY
         ? ({
             filterArgs: [filterByDateInTheFuture] as SMS_FILTER_FUNCTION[],
@@ -196,7 +196,7 @@ export const Compartments = ({
     const filterByDateInNext1Week = filterByDateInNextNWeeks(1);
 
     const last2WeeksSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext2Weeks) : [];
-    setPregnancyDataCircleCard2Props(
+    setpregnaciesDueIn2WeeksProps(
       module === PREGNANCY
         ? {
             filterArgs: [filterByDateInNext2Weeks] as SMS_FILTER_FUNCTION[],
@@ -217,7 +217,7 @@ export const Compartments = ({
     );
 
     const last1WeekSmsData = module === PREGNANCY ? smsData.filter(filterByDateInNext1Week) : [];
-    setPregnancyDataCircleCard3Props(
+    setpregnanciesDueIn1WeekProps(
       module === PREGNANCY
         ? {
             filterArgs: [filterByDateInNext1Week] as SMS_FILTER_FUNCTION[],
@@ -374,11 +374,7 @@ export const Compartments = ({
 
   useEffect(() => {
     const circleCardProps: FlexObject = {
-      [PREGNANCY]: [
-        pregnancyDataCircleCard1Props,
-        pregnancyDataCircleCard2Props,
-        pregnancyDataCircleCard3Props,
-      ],
+      [PREGNANCY]: [pregnanciesDueIn1WeekProps, pregnaciesDueIn2WeeksProps, allPregnanciesProps],
       [NBC_AND_PNC]: [dataCircleCardChildData, dataCircleCardWomanData],
       [NUTRITION]: [dataCircleCardNutrition1, dataCircleCardNutrition2],
     };
@@ -405,9 +401,9 @@ export const Compartments = ({
     dataCircleCardNutrition2,
     dataCircleCardWomanData,
     dataCircleCardChildData,
-    pregnancyDataCircleCard1Props,
-    pregnancyDataCircleCard2Props,
-    pregnancyDataCircleCard3Props,
+    allPregnanciesProps,
+    pregnaciesDueIn2WeeksProps,
+    pregnanciesDueIn1WeekProps,
   ]);
 
   return (
