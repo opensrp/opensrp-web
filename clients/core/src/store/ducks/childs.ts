@@ -76,3 +76,61 @@ const initialState: ImmutableChildState = SeamlessImmutable({
     childsById: {},
     totalRecords: 0,
 });
+
+/** the child reducer function */
+export default function reducer(
+    state: ImmutableChildState = initialState,
+    action: ChildActionTypes,
+): ImmutableChildState {
+    switch (action.type) {
+        case CHILDS_FETCHED:
+            return SeamlessImmutable({
+                ...state,
+                childsById: { ...state.childsById, ...action.childsById },
+            });
+        case REMOVE_CHILDS:
+            return SeamlessImmutable({
+                ...state,
+                childsById: action.childsById,
+            });
+        case SET_TOTAL_RECORDS:
+            return SeamlessImmutable({
+                ...state,
+                totalRecords: action.totalRecords,
+            });
+        default:
+            return state;
+    }
+}
+
+/** returns all child in the store as values whose keys are their respective ids
+ * @param {Partial<Store>} state - the redux store
+ * @return { { [key: string] : Child} } - child object as values, respective ids as keys
+ */
+export function getChildsById(state: Partial<Store>): { [key: string]: Child } {
+    return (state as any)[reducerName].childsById;
+}
+
+/** gets child as an array of child objects
+ * @param {Partial<Store>} state - the redux store
+ * @return {Child[]} - an array of childs objs
+ */
+export function getChildArray(state: Partial<Store>): Child[] {
+    return values(getChildsById(state));
+}
+
+/** get a specific child by their id
+ * @param {Partial<Store>} state - the redux store
+ * @return {Child | null} a child obj if the id is found else null
+ */
+export function getChildById(state: Partial<Store>, id: string): Child | null {
+    return get(getChildsById(state), id) || null;
+}
+
+/** returns the count of all records present in server
+ * @param {Partial<Store>} state - the redux store
+ * @return { number } - total records value from the store
+ */
+export function getTotalRecords(state: Partial<Store>): number {
+    return (state as any)[reducerName].totalRecords;
+}
