@@ -250,4 +250,29 @@ describe('HierarchichalDataTable', () => {
     );
     expect(toJson(wrapper.find('.norecord'))).toMatchSnapshot('norecord');
   });
+
+  it('must ensure the back button works correctly', () => {
+    const props = {
+      match: {
+        params: {
+          module: 'pregnancy',
+          risk_highlighter: 'high_risk',
+          title: 'Total Pregnancies',
+        },
+      },
+    };
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <ConnectedHierarchichalDataTable {...props} />
+        </Router>
+      </Provider>
+    );
+
+    const mockFunction = jest.fn();
+    window.history.go = mockFunction;
+    wrapper.find('.back-page').simulate('click');
+    expect(mockFunction).toHaveBeenCalled();
+  });
 });
