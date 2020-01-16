@@ -1,4 +1,3 @@
-// tslint:disable object-literal-sort-keys
 const groupedSmsData = {
   '1569423656162': {
     EventDate: '2019-09-25',
