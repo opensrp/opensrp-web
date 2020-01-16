@@ -231,16 +231,13 @@ describe('HierarchichalDataTable', () => {
     const props = {
       match: {
         params: {
-          current_level: 3,
-          direction: 'up',
-          from_level: 2,
           module: 'pregnancy',
-          node_id: '13',
           risk_highlighter: 'high_risk',
           title: 'Total Pregnancies',
-        } as any,
+        },
       },
     };
+
     const wrapper = mount(
       <Provider store={store}>
         <Router history={history}>
@@ -248,6 +245,35 @@ describe('HierarchichalDataTable', () => {
         </Router>
       </Provider>
     );
+
+    history.push(
+      '/pregnancy_compartments/hierarchicaldata/Pregnancy/no/21%20Total%20Pregnancies/3/down/6792a597-4549-4f5f-9720-3d05e8bda8a0/0'
+    );
     expect(toJson(wrapper.find('.norecord'))).toMatchSnapshot('norecord');
+  });
+
+  it('must ensure the back button works correctly', () => {
+    const props = {
+      match: {
+        params: {
+          module: 'pregnancy',
+          risk_highlighter: 'high_risk',
+          title: 'Total Pregnancies',
+        },
+      },
+    };
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <ConnectedHierarchichalDataTable {...props} />
+        </Router>
+      </Provider>
+    );
+
+    const mockFunction = jest.fn();
+    window.history.go = mockFunction;
+    wrapper.find('.back-page').simulate('click');
+    expect(mockFunction).toBeCalledWith(-1);
   });
 });

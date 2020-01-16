@@ -5,9 +5,8 @@ import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import NoRecord from '../../components/NoRecord';
 import Loading from '../../components/page/Loading/index';
@@ -27,19 +26,13 @@ import {
   INAPPROPRIATELY_FED_CAPITALIZED,
   LOGFACE_RISK,
   LOW,
-  NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_COMPARTMENTS_URL,
-  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
   NUTRITION,
-  NUTRITION_COMPARTMENTS_URL,
   NUTRITION_STATUS,
   OVERWEIGHT,
   OVERWEIGHT_CAPITALIZED,
-  PREGNANCY,
-  PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
   RED,
   RED_ALERT,
@@ -581,12 +574,16 @@ class HierarchichalDataTable extends Component<Props, State> {
       }/down/`;
       return (
         <Container fluid={true} className="compartment-data-table">
-          <Link to={this.urlToRedirect()} className="back-page">
-            <span>
-              <FontAwesomeIcon icon={BACKPAGE_ICON} size="sm" />
-              <span>{BACK}</span>
-            </span>
-          </Link>
+          <span
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={() => {
+              window.history.go(-1);
+            }}
+            className="back-page"
+          >
+            <FontAwesomeIcon icon={BACKPAGE_ICON} size="lg" />
+            <span>{BACK}</span>
+          </span>
           <h1>{this.props.title}</h1>
           <Row className="villageDataRow">
             <Card className="table-card">
@@ -805,21 +802,6 @@ class HierarchichalDataTable extends Component<Props, State> {
       );
     } else {
       return <Loading />;
-    }
-  }
-
-  private urlToRedirect() {
-    switch (this.props.module) {
-      case PREGNANCY:
-        return PREGNANCY_COMPARTMENTS_URL;
-      case NBC_AND_PNC_WOMAN:
-        return NBC_AND_PNC_COMPARTMENTS_URL;
-      case NBC_AND_PNC_CHILD:
-        return NBC_AND_PNC_COMPARTMENTS_URL;
-      case NUTRITION:
-        return NUTRITION_COMPARTMENTS_URL;
-      default:
-        return '';
     }
   }
 
