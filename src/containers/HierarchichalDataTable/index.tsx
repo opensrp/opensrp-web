@@ -9,6 +9,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
+import NoRecord from '../../components/NoRecord';
 import Loading from '../../components/page/Loading/index';
 import VillageData from '../../components/VillageData';
 import { LOCATION_SLICES } from '../../configs/env';
@@ -796,6 +797,8 @@ class HierarchichalDataTable extends Component<Props, State> {
                 smsData: this.state.villageData,
               }}
             />
+          ) : this.props.current_level === 3 ? (
+            <NoRecord message={'No Patient Level data to show for this commune'} />
           ) : null}
         </Container>
       );
