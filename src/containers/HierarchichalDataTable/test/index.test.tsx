@@ -274,6 +274,6 @@ describe('HierarchichalDataTable', () => {
     const mockFunction = jest.fn();
     window.history.go = mockFunction;
     wrapper.find('.back-page').simulate('click');
-    expect(mockFunction).toHaveBeenCalled();
+    expect(mockFunction).toBeCalledWith(-1);
   });
 });
