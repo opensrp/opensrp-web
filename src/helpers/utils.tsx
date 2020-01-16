@@ -1,6 +1,5 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
-import superset from '@onaio/superset-connector/dist/types';
 import {
   LOCATION_SLICES,
   ONADATA_OAUTH_STATE,
