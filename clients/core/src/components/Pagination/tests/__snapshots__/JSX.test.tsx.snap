@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`src/components/pagination/bootsrapJSX ellipsis operations work correctly : ellipsis pagination  link when loading 1`] = `
+<PaginationItem
+  className="page-item"
+  tag="li"
+>
+  <li
+    className="page-item page-item"
+  >
+    Loading
+  </li>
+</PaginationItem>
+`;
+
+exports[`src/components/pagination/bootsrapJSX ellipsis operations work correctly when not loading : ellipsis pagination link 1`] = `
+<PaginationItem
+  className="page-item"
+  tag="li"
+>
+  <li
+    className="page-item page-item"
+  >
+    <PaginationLink
+      aria-label="ellipsis"
+      className="page-link"
+      href="#"
+      onClick={[Function]}
+      tag="a"
+    >
+      <a
+        aria-label="ellipsis"
+        className="page-link page-link"
+        href="#"
+        onClick={[Function]}
+      >
+        . . .
+      </a>
+    </PaginationLink>
+  </li>
+</PaginationItem>
+`;

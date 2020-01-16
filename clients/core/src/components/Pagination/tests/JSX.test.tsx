@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { BootstrapJSX } from '../JSX';
+import { BootstrapJSX, Props } from '../JSX';
+import toJson from 'enzyme-to-json';
 
 describe('src/components/pagination/bootsrapJSX', () => {
     beforeEach(() => {
@@ -9,13 +11,13 @@ describe('src/components/pagination/bootsrapJSX', () => {
 
     it('renders without crashing', () => {
         const genericMock = jest.fn();
-        const props = {
+        const props: Props = {
             paginationState: {
                 ellipsisIsLoading: false,
                 showEndingEllipsis: false,
                 currentPage: 4,
                 pagesToDisplay: ['2', '3', '4', '5', '6'],
-            },
+            } as any,
             nextPage: genericMock,
             firstPage: genericMock,
             lastPage: genericMock,
@@ -36,7 +38,7 @@ describe('src/components/pagination/bootsrapJSX', () => {
                 showEndingEllipsis: false,
                 currentPage: 4,
                 pagesToDisplay: ['2', '3', '4', '5', '6'],
-            },
+            } as any,
             nextPage: genericMock,
             firstPage: genericMock,
             lastPage: genericMock,
@@ -72,7 +74,7 @@ describe('src/components/pagination/bootsrapJSX', () => {
                 showEndingEllipsis: true,
                 currentPage: 6,
                 pagesToDisplay: ['4', '5', '6'],
-            },
+            } as any,
             nextPage: genericMock,
             firstPage: genericMock,
             lastPage: genericMock,
@@ -92,13 +94,8 @@ describe('src/components/pagination/bootsrapJSX', () => {
         // last pagination item should not be disabled
         expect(paginationItems.at(7).hasClass('disabled')).toBeTruthy();
 
-        // simulate click on ellipsis
-        paginationItems
-            .at(5)
-            .find('PaginationLink')
-            .simulate('click');
-        wrapper.update();
-        expect(moreApiDataMock).toHaveBeenCalledTimes(0);
+        // ellipsis should not be clickable when loading
+        expect(toJson(paginationItems.at(5))).toMatchSnapshot(`ellipsis pagination  link when loading`);
     });
 
     it('ellipsis operations work correctly when not loading ', () => {
@@ -110,7 +107,7 @@ describe('src/components/pagination/bootsrapJSX', () => {
                 showEndingEllipsis: true,
                 currentPage: 6,
                 pagesToDisplay: ['4', '5', '6'],
-            },
+            } as any,
             nextPage: genericMock,
             firstPage: genericMock,
             lastPage: genericMock,
@@ -125,12 +122,13 @@ describe('src/components/pagination/bootsrapJSX', () => {
         const paginationItems = wrapper.find('PaginationItem');
         expect(paginationItems.length).toEqual(8);
         // simulate click on ellipsis
+        expect(toJson(paginationItems.at(5))).toMatchSnapshot('ellipsis pagination link');
         paginationItems
             .at(5)
             .find('PaginationLink')
             .simulate('click');
         wrapper.update();
-        expect(moreApiDataMock).toHaveBeenCalledTimes(0);
+        expect(moreApiDataMock).toHaveBeenCalledTimes(1);
     });
 
     it('pagination items invokes the correct callbacks', () => {
@@ -141,7 +139,7 @@ describe('src/components/pagination/bootsrapJSX', () => {
                 showEndingEllipsis: false,
                 currentPage: 4,
                 pagesToDisplay: ['2', '3', '4', '5', '6'],
-            },
+            } as any,
             nextPage: genericMock,
             firstPage: genericMock,
             lastPage: genericMock,
