@@ -25,6 +25,9 @@ import {
   villages,
 } from '../../containers/HierarchichalDataTable/test/fixtures';
 import * as supersetService from '../../services/superset';
+import flushPromises from 'flush-promises';
+import { OpenSRPService } from '../../services/opensrp';
+
 import locationsReducer, { reducerName as locationsReducerName } from '../../store/ducks/locations';
 import { SmsData } from '../../store/ducks/sms_events';
 import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
@@ -297,20 +300,35 @@ describe('getNumberOfDaysSinceDate', () => {
 });
 
 describe('helpers/utils/fetchData', () => {
-  it('must fetch data from superset in correct order', () => {
-    // mock the supersetFetch method; it's exported as default from the supersetService module
-    const spy = jest.spyOn(supersetService, 'default');
+  it('must fetch data from superset in correct order', async () => {
+    // mock the read method in OpenSRPService
+    jest.mock('../../services/opensrp');
+    const mockRead = jest.fn();
+    OpenSRPService.prototype.read = mockRead;
+    mockRead.mockReturnValue(
+      Promise.resolve({
+        user: {
+          attributes: {},
+        },
+      })
+    );
 
+    // mock supersetFetch
+    const mockFunction = jest.fn().mockReturnValue({
+      then: jest.fn(),
+    });
     // call fetchData
-    fetchData();
+    fetchData(mockFunction);
+
+    await flushPromises();
 
     // ensure spy was called and called with the correct arguments
-    expect(spy).toHaveBeenCalled();
-    expect(spy.mock.calls[0][0]).toEqual(USER_LOCATION_DATA_SLICE);
-    expect(spy.mock.calls[1][0]).toEqual(LOCATION_SLICES[0]);
-    expect(spy.mock.calls[2][0]).toEqual(LOCATION_SLICES[1]);
-    expect(spy.mock.calls[3][0]).toEqual(LOCATION_SLICES[2]);
-    expect(spy.mock.calls[4][0]).toEqual(LOCATION_SLICES[3]);
-    expect(spy.mock.calls[5][0]).toEqual(SUPERSET_SMS_DATA_SLICE);
+    expect(mockFunction).toHaveBeenCalled();
+    expect(mockFunction.mock.calls[0][0]).toEqual(USER_LOCATION_DATA_SLICE);
+    expect(mockFunction.mock.calls[1][0]).toEqual(LOCATION_SLICES[0]);
+    expect(mockFunction.mock.calls[2][0]).toEqual(LOCATION_SLICES[1]);
+    expect(mockFunction.mock.calls[3][0]).toEqual(LOCATION_SLICES[2]);
+    expect(mockFunction.mock.calls[4][0]).toEqual(LOCATION_SLICES[3]);
+    expect(mockFunction.mock.calls[5][0]).toEqual(SUPERSET_SMS_DATA_SLICE);
   });
 });
