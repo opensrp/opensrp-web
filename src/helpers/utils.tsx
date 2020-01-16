@@ -1,5 +1,6 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
+import superset from '@onaio/superset-connector/dist/types';
 import {
   LOCATION_SLICES,
   ONADATA_OAUTH_STATE,
@@ -509,7 +510,8 @@ export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
  * c. LOCATION_SLICES
  * d. SUPERSET_SMS_DATA_SLICE
  */
-export async function fetchData() {
+// tslint:disable-next-line: no-shadowed-variable
+export async function fetchData(supersetFetchMethod: any = supersetFetch) {
   if (!userIdFetched(store.getState())) {
     const opensrpService = new OpenSRPService('/security/authenticate');
 
@@ -520,7 +522,7 @@ export async function fetchData() {
 
   // fetch user location details
   if (!userLocationDataFetched(store.getState())) {
-    await supersetFetch(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
+    await supersetFetchMethod(USER_LOCATION_DATA_SLICE).then((result: UserLocation[]) => {
       store.dispatch(fetchUserLocations(result));
     });
   }
@@ -528,7 +530,7 @@ export async function fetchData() {
   // fetch all location slices
   for (const slice in LOCATION_SLICES) {
     if (slice) {
-      await supersetFetch(LOCATION_SLICES[slice]).then((result: Location[]) => {
+      await supersetFetchMethod(LOCATION_SLICES[slice]).then((result: Location[]) => {
         store.dispatch(fetchLocations(result));
       });
     }
@@ -536,7 +538,7 @@ export async function fetchData() {
 
   // check if sms data is fetched and then fetch if not fetched already
   if (!smsDataFetched(store.getState())) {
-    await supersetFetch(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
+    await supersetFetchMethod(SUPERSET_SMS_DATA_SLICE).then((result: SmsData[]) => {
       store.dispatch(fetchSms(result));
     });
   }
