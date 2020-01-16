@@ -508,8 +508,8 @@ export function getLinkToPatientDetail(smsData: SmsData, prependWith: string) {
  * b. USER_LOCATION_DATA_SLICE
  * c. LOCATION_SLICES
  * d. SUPERSET_SMS_DATA_SLICE
+ * @param supersetFetchMethod - optional method to fetch data from superset
  */
-// tslint:disable-next-line: no-shadowed-variable
 export async function fetchData(supersetFetchMethod: any = supersetFetch) {
   if (!userIdFetched(store.getState())) {
     const opensrpService = new OpenSRPService('/security/authenticate');
