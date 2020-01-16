@@ -53,3 +53,33 @@ export const setLocations = (locations: LocationHierarchy): SetLocationAction =>
     locations,
     type: SET_LOCATIONS,
 });
+
+/** interface for location state in redux store */
+interface LocationState {
+    locations: {
+        [key: string]: LocationHierarchy;
+    };
+}
+
+/** Create an immutable location state */
+export type ImmutableLocationsState = LocationState & SeamlessImmutable.ImmutableObject<LocationState>;
+
+/** initial locations-state */
+const initialState: ImmutableLocationsState = SeamlessImmutable({
+    locations: {},
+});
+
+/** the locations reducer function */
+export default function reducer(
+    state: ImmutableLocationsState = initialState,
+    action: LocationActionTypes,
+): ImmutableLocationsState {
+    switch (action.type) {
+        case SET_LOCATIONS:
+            return SeamlessImmutable({
+                locations: action.locations,
+            });
+        default:
+            return state;
+    }
+}
