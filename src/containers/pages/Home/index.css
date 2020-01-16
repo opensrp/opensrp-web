@@ -15,18 +15,20 @@
   max-width: 25%;
   min-width: 140px;
   flex: 1;
-  font-family: 'Trebuchet MS', 'Helvetica';
+  font-family: 'Roboto', 'Helvetica';
 }
 
 .main-container {
   display: flex;
-  font-family: 'Trebuchet MS', 'Helvetica';
+  font-family: 'Roboto', 'Helvetica';
   font-size: 16px;
+  background: white;
 }
 
 .main-container .content {
   height: 100%;
   position: relative;
+  background: #f8fafe;
 }
 
 .home-main {
@@ -51,7 +53,6 @@
 }
 
 .home-main .button-style {
-  padding: 14px 20px;
   border-radius: 24px;
   border: 1px solid #4d54b4;
   background: initial;
@@ -61,11 +62,18 @@
 }
 
 .home-main .button-style.default {
-  padding: 14px 20px;
-  background-color: #4d54b4;
   border-radius: 24px;
   width: 100%;
   color: #ffffff;
+  font-family: Roboto;
+  letter-spacing: 0.1px;
+  color: #4d54b4;
+  height: 40px;
+}
+
+.home-main .button-style.default:hover {
+  color: #ffffff;
+  background: #4d54b4;
 }
 
 .home-main .home-sub-containers {
@@ -81,7 +89,6 @@
 .sub-container-heading {
   border: none;
   font-size: 22px;
-  margin: 5px 5px 5px 20px;
   text-align: left;
 }
 

@@ -47,8 +47,9 @@
 
 .card-title {
   background-color: #ffffff;
-  border: 1px solid #dadce0;
   color: #3a484f;
+  border-bottom: 1px solid #dadce0;
+  font-family: Roboto;
   font-size: 1.636rem;
   font-weight: 500;
   letter-spacing: -0.018rem;

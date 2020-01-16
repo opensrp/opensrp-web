@@ -1,6 +1,5 @@
 .side-collapse-nav.nav {
   cursor: pointer;
-  padding: 4px 12px 2px 20px;
   max-width: initial !important;
 }
 
@@ -40,6 +39,11 @@
 
 .side-nav-item.nav:hover {
   color: #0192d4 !important;
+}
+
+.side-nav-item.nav svg {
+  width: 24px;
+  height: 20px;
 }
 
 .side-menu-container .collapse {

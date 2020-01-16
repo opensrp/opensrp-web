@@ -234,6 +234,8 @@ export const RESIDENCE = 'Location of residence';
 export type RESIDENCE = typeof RESIDENCE;
 export const LOCATION = 'Location';
 export type LOCATION = typeof LOCATION;
+export const RED_ALERT_CLASSNAME = 'red-alert';
+export type RED_ALERT_CLASSNAME = typeof RED_ALERT_CLASSNAME;
 
 export const PREVIOUS_PREGNANCY_RISK = 'Previous Pregnancy Risk';
 export type PREVIOUS_PREGNANCY_RISK = typeof PREVIOUS_PREGNANCY_RISK;
