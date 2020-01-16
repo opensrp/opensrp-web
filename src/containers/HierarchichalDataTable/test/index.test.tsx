@@ -226,4 +226,28 @@ describe('HierarchichalDataTable', () => {
     );
     expect(toJson(wrapper.find('tbody'))).toMatchSnapshot('hierarchichalDataTable');
   });
+
+  it("must show the no record message when there's no data to show for a commune", () => {
+    const props = {
+      match: {
+        params: {
+          current_level: 3,
+          direction: 'up',
+          from_level: 2,
+          module: 'pregnancy',
+          node_id: '13',
+          risk_highlighter: 'high_risk',
+          title: 'Total Pregnancies',
+        } as any,
+      },
+    };
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router history={history}>
+          <ConnectedHierarchichalDataTable {...props} />
+        </Router>
+      </Provider>
+    );
+    expect(toJson(wrapper.find('.norecord'))).toMatchSnapshot('norecord');
+  });
 });
