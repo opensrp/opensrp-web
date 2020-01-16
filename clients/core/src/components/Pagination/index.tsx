@@ -8,7 +8,7 @@ import { BootstrapJSX } from './JSX';
  * and uses some of its properties to calculate the pagination pages
  * to be displayed based on the currently selected page
  */
-const fetchPagesToDisplay = (state: PaginationState<ExtendingOptions>): string[] => {
+export const fetchPagesToDisplay = (state: PaginationState<ExtendingOptions>): string[] => {
     const { totalRecords, pageNeighbors, pageSize, currentPage } = state;
     return fetchPageNumbers(totalRecords, pageNeighbors, pageSize, currentPage);
 };
@@ -23,13 +23,16 @@ export interface ExtendingOptions {
 }
 
 // action types strings
-const START_QUERY_FOR_MORE_API_PAGES = 'START_QUERY_FOR_MORE_API_PAGES';
-const END_QUERY_FOR_MORE_API_PAGES = 'END_QUERY_FOR_MORE_API_PAGES';
-const STOP_SHOWING_ELLIPSIS = 'STOP_SHOWING_ELLIPSIS';
+export const START_QUERY_FOR_MORE_API_PAGES = 'START_QUERY_FOR_MORE_API_PAGES';
+export type START_QUERY_FOR_MORE_API_PAGES = typeof START_QUERY_FOR_MORE_API_PAGES;
+export const END_QUERY_FOR_MORE_API_PAGES = 'END_QUERY_FOR_MORE_API_PAGES';
+export type END_QUERY_FOR_MORE_API_PAGES = typeof END_QUERY_FOR_MORE_API_PAGES;
+export const STOP_SHOWING_ELLIPSIS = 'STOP_SHOWING_ELLIPSIS';
+export type STOP_SHOWING_ELLIPSIS = typeof STOP_SHOWING_ELLIPSIS;
 
 /** describes an action that changes the ellipsis-pagination-item status */
 interface EllipsisActions {
-    type: typeof START_QUERY_FOR_MORE_API_PAGES | typeof END_QUERY_FOR_MORE_API_PAGES | typeof STOP_SHOWING_ELLIPSIS;
+    type: START_QUERY_FOR_MORE_API_PAGES | END_QUERY_FOR_MORE_API_PAGES | STOP_SHOWING_ELLIPSIS;
     payload: {
         loading: boolean;
         showEllipsis: boolean;
@@ -39,16 +42,16 @@ interface EllipsisActions {
 /** decides if component gets to show an ellipsis pagination link that once clicked
  * queries the api for the next server page of data
  */
-const canShowEllipsis = (
+export const canShowEllipsis = (
     state: PaginationState<ExtendingOptions>,
     isThereMoreApiPages: (state: PaginationState<ExtendingOptions>) => Promise<boolean>,
     dispatch: (action: ActionTypes<ExtendingOptions, EllipsisActions>) => void,
 ): void => {
     const { totalPages, pagesToDisplay, pageNeighbors } = state;
-    const lastPageIsInRange = pagesToDisplay.filter((page: string) => totalPages.toString() === page);
-    const thereIsPaginationRoom = pagesToDisplay.length < 1 + 2 * pageNeighbors;
+    const lastPageIsInRange = pagesToDisplay.filter((page: string) => totalPages.toString() === page).length > 0;
+    const thereIsPaginationItemRoom = pagesToDisplay.length < 1 + 2 * pageNeighbors;
 
-    if (lastPageIsInRange && thereIsPaginationRoom) {
+    if (lastPageIsInRange && thereIsPaginationItemRoom) {
         dispatch({
             type: START_QUERY_FOR_MORE_API_PAGES,
             payload: {
@@ -90,7 +93,7 @@ const canShowEllipsis = (
  *  adds the property `pagesToDisplay` to the state so that we can have a limited
  * number of pagination items displayed by the pagination component at any one time
  */
-function bootstrapReducer(
+export function bootstrapReducer(
     state: PaginationState<ExtendingOptions>,
     action: ActionTypes<ExtendingOptions, EllipsisActions>,
 ): PaginationState<ExtendingOptions> {
@@ -101,19 +104,19 @@ function bootstrapReducer(
                 ...action.changes,
                 pagesToDisplay,
             };
-        case 'START_QUERY_FOR_MORE_API_PAGES':
+        case START_QUERY_FOR_MORE_API_PAGES:
             return {
                 ...state,
                 showEndingEllipsis: action.payload.showEllipsis,
                 ellipsisIsLoading: action.payload.loading,
             };
-        case 'END_QUERY_FOR_MORE_API_PAGES':
+        case END_QUERY_FOR_MORE_API_PAGES:
             return {
                 ...state,
                 showEndingEllipsis: action.payload.showEllipsis,
                 ellipsisIsLoading: action.payload.loading,
             };
-        case 'STOP_SHOWING_ELLIPSIS':
+        case STOP_SHOWING_ELLIPSIS:
             return {
                 ...state,
                 showEndingEllipsis: action.payload.showEllipsis,
@@ -124,7 +127,7 @@ function bootstrapReducer(
     }
 }
 
-interface Props {
+export interface Props {
     onPageChangeHandler?(currentPage: number, pageSize: number): void;
     pageNeighbors: number;
     pageSize: number;
@@ -133,9 +136,10 @@ interface Props {
     fetchMoreApiData?: () => Promise<void>;
 }
 
-const defaultProps: Partial<Props> = {
+const defaultProps: Pick<Props, 'pageNeighbors' | 'pageSize' | 'totalRecords'> = {
     pageNeighbors: 3,
     pageSize: 30,
+    totalRecords: 0,
 };
 
 /** bootstrap-powered pagination component  */
@@ -176,7 +180,7 @@ const Pagination: React.FC<Props> = props => {
     React.useEffect(() => {
         canShowEllipsis(paginationState, localIsThereMoreApiPages, dispatch);
         onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
-    }, [dispatch, isThereMoreApiPages, onPageChangeHandler, paginationState.currentPage]);
+    }, [paginationState.currentPage]);
 
     return (
         <BootstrapJSX

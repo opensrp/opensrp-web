@@ -8,7 +8,7 @@ interface ActionCreators {
     (): void;
 }
 
-interface Props {
+export interface Props {
     paginationState: PaginationState<ExtendingOptions>;
     nextPage: ActionCreators;
     firstPage: ActionCreators;
