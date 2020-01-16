@@ -12,6 +12,7 @@
         "@onaio/connected-reducer-registry": "^0.0.1",
         "@onaio/gatekeeper": "^0.0.14",
         "@onaio/loaders": "^0.0.1",
+        "@onaio/pagination": "/home/peter/Desktop/onaio/js-tools/packages/Pagination/",
         "@onaio/redux-reducer-registry": "^0.0.8",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
