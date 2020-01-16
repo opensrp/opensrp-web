@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`src/components/NoRecord must render correctly 1`] = `
+<NoRecord
+  message="test message"
+>
+  <div
+    className="norecord"
+  >
+    test message
+  </div>
+</NoRecord>
+`;
