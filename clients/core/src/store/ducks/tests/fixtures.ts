@@ -1,5 +1,6 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
+import { Child } from '../childs';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -335,5 +336,33 @@ export const household3: Household = {
     _rev: 'v1',
 };
 
+export const child1: Child = {
+    type: 'Client',
+    dateCreated: 1751437728487,
+    serverVersion: 1557937728441,
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 2,
+    baseEntityId: '906fc91h-4cce-412a-8327-ca2315ekoeo9',
+    identifiers: {
+        opensrp_id: '3117124',
+    },
+    addresses: [],
+    attributes: {
+        residence: '6f7ca772-b368-4c3d-bd9c-011ra698203a',
+    },
+    firstName: 'zysan',
+    middleName: '',
+    lastName: 'DADA',
+    birthdate: 358110000088,
+    birthdateApprox: false,
+    deathdateApprox: false,
+    relationships: {
+        family_head: ['gjio081-c153-4bcc-85c3-0b7c3d9f2263'],
+        primary_caregiver: ['jklf5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    },
+    _id: '922db682a-0f31-4935-9114-c4d33d148617',
+    _rev: 'v1',
+};
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
+export const childList: Child[] = [child1];
