@@ -5,9 +5,8 @@ import './index.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import NoRecord from '../../components/NoRecord';
 import Loading from '../../components/page/Loading/index';
@@ -27,19 +26,13 @@ import {
   INAPPROPRIATELY_FED_CAPITALIZED,
   LOGFACE_RISK,
   LOW,
-  NBC_AND_PNC_CHILD,
-  NBC_AND_PNC_COMPARTMENTS_URL,
-  NBC_AND_PNC_WOMAN,
   NO,
   NO_RISK,
   NO_RISK_LOWERCASE,
   NUTRITION,
-  NUTRITION_COMPARTMENTS_URL,
   NUTRITION_STATUS,
   OVERWEIGHT,
   OVERWEIGHT_CAPITALIZED,
-  PREGNANCY,
-  PREGNANCY_COMPARTMENTS_URL,
   PROVINCE,
   RED,
   RED_ALERT,
