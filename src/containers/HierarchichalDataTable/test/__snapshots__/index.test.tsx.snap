@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HierarchichalDataTable must show the no record message when there's no data to show for a commune: norecord 1`] = `
-<div
-  className="norecord"
->
-  No Patient Level data to show for this commune
-</div>
-`;
+exports[`HierarchichalDataTable must show the no record message when there's no data to show for a commune: norecord 1`] = `null`;
 
 exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = `
 <Table
