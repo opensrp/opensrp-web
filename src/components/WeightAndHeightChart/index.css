@@ -2,10 +2,6 @@ div#chart-wrapper {
   margin: auto;
 }
 
-.card {
-  margin: auto;
-}
-
 .highcharts-point {
   fill: white;
   stroke: #0093db;
@@ -14,4 +10,5 @@ div#chart-wrapper {
 
 #chart > .card {
   margin-bottom: 30px;
+  width: 100%;
 }
