@@ -150,8 +150,6 @@ describe('helpers/utils/convertMillisecondsToYear', () => {
   });
 });
 
-
-
 describe('getNumberSuffix', () => {
   it('returns correct values for given inputs', () => {
     expect(getNumberSuffix(1)).toEqual('st');
