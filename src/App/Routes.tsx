@@ -293,19 +293,19 @@ export const Routes = (props: RoutesProps) => {
             />
 
             <ConnectedPrivateRoute
-              exact={false}
+              exact={true}
               path={PREGNANCY_LOGFACE_URL}
               // tslint:disable-next-line: jsx-no-lambda
               component={() => <ConnectedLogFace module={PREGNANCY} />}
             />
             <ConnectedPrivateRoute
-              exact={false}
+              exact={true}
               path={NBC_AND_PNC_LOGFACE_URL}
               // tslint:disable-next-line: jsx-no-lambda
               component={() => <ConnectedLogFace module={NBC_AND_PNC} />}
             />
             <ConnectedPrivateRoute
-              exact={false}
+              exact={true}
               path={NUTRITION_LOGFACE_URL}
               // tslint:disable-next-line: jsx-no-lambda
               component={() => <ConnectedLogFace module={NUTRITION} />}
