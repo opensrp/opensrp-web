@@ -8,6 +8,7 @@ import {
 } from '../../configs/env';
 
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import flushPromises from 'flush-promises';
 import {
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
@@ -24,8 +25,6 @@ import {
   provinces,
   villages,
 } from '../../containers/HierarchichalDataTable/test/fixtures';
-import * as supersetService from '../../services/superset';
-import flushPromises from 'flush-promises';
 import { OpenSRPService } from '../../services/opensrp';
 
 import locationsReducer, { reducerName as locationsReducerName } from '../../store/ducks/locations';
@@ -33,10 +32,10 @@ import { SmsData } from '../../store/ducks/sms_events';
 import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
 import {
   buildHeaderBreadCrumb,
-  convertMilisecondsToYear,
+  convertMillisecondsToYear,
   fetchData,
   filterByPatientId,
-  getLinkToHierarchichalDataTable,
+  getLinkToHierarchicalDataTable,
   getLinkToPatientDetail,
   getModuleLink,
   getNumberOfDaysSinceDate,
@@ -161,9 +160,9 @@ describe('helpers/utils/sortByEventDate', () => {
 
 describe('helpers/utils/convertMillisecondsToYear', () => {
   it('must return correct value for given input', () => {
-    expect(convertMilisecondsToYear(new Date('01/01/2020').getTime())).toEqual(50);
-    expect(convertMilisecondsToYear(new Date('01/01/1997').getTime())).toEqual(27);
-    expect(convertMilisecondsToYear(new Date('01/01/2007').getTime())).toEqual(37);
+    expect(convertMillisecondsToYear(new Date('01/01/2020').getTime())).toEqual(50);
+    expect(convertMillisecondsToYear(new Date('01/01/1997').getTime())).toEqual(27);
+    expect(convertMillisecondsToYear(new Date('01/01/2007').getTime())).toEqual(37);
   });
 });
 
@@ -176,7 +175,7 @@ describe('getNumberSuffix', () => {
   });
 });
 
-describe('sortFuction', () => {
+describe('sortFunction', () => {
   it('returns 0 when the sms event_id is the same', () => {
     const smsData1: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[0]));
     expect(sortFunction(smsData1, smsData1)).toEqual(0);
@@ -204,9 +203,9 @@ describe('getModuleLink', () => {
   });
 });
 
-describe('getLinkToHierarchichalDataTable', () => {
+describe('getLinkToHierarchicalDataTable', () => {
   expect(
-    getLinkToHierarchichalDataTable('low', PREGNANCY, 'test title', 0, 'location023423423423')
+    getLinkToHierarchicalDataTable('low', PREGNANCY, 'test title', 0, 'location023423423423')
   ).toEqual(
     '/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/0/down/location023423423423/0'
   );

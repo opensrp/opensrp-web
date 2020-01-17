@@ -26,7 +26,7 @@ import {
 } from '../../constants';
 import {
   buildHeaderBreadCrumb,
-  convertMilisecondsToYear,
+  convertMillisecondsToYear,
   fetchData,
   getFilterFunctionAndLocationLevel,
   getLocationId,
@@ -433,7 +433,7 @@ export const Compartments = ({
  */
 export const childrenAgeRangeFilterFunction = (startAge: number, endAge: number) => {
   return (dataItem: SmsData) => {
-    const ageInYears = convertMilisecondsToYear(
+    const ageInYears = convertMillisecondsToYear(
       new Date().getTime() - new Date(dataItem.date_of_birth).getTime()
     );
     return ageInYears < endAge && ageInYears > startAge;

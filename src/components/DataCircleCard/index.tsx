@@ -19,7 +19,7 @@ import {
   SMS_FILTER_FUNCTION,
   STUNTED,
 } from '../../constants';
-import { getLinkToHierarchichalDataTable } from '../../helpers/utils';
+import { getLinkToHierarchicalDataTable } from '../../helpers/utils';
 import { FlexObject } from '../../helpers/utils';
 import { addFilterArgs } from '../../store/ducks/sms_events';
 import './index.css';
@@ -124,7 +124,7 @@ function DataCircleCard({
     <Card className={`dataCircleCard ${className}`}>
       <CardTitle>
         <Link
-          to={getLinkToHierarchichalDataTable(ALL, module, title, permissionLevel, userLocationId)}
+          to={getLinkToHierarchicalDataTable(ALL, module, title, permissionLevel, userLocationId)}
           // tslint:disable-next-line: jsx-no-lambda
           onClick={() => {
             if (filterArgs) {
@@ -147,7 +147,7 @@ function DataCircleCard({
                   addFilterArgsActionCreator(filterArgs);
                 }
               }}
-              to={getLinkToHierarchichalDataTable(
+              to={getLinkToHierarchicalDataTable(
                 spec.riskType,
                 module,
                 title,

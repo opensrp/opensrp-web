@@ -99,12 +99,12 @@ export function groupBy(list: FlexObject[], field: string): FlexObject {
  * @param num
  */
 export function getNumberSuffix(num: number): string {
-  const divisionBy10Remaninder: number = num % 10;
-  if (divisionBy10Remaninder === 1) {
+  const divisionBy10Remainder: number = num % 10;
+  if (divisionBy10Remainder === 1) {
     return 'st';
-  } else if (divisionBy10Remaninder === 2) {
+  } else if (divisionBy10Remainder === 2) {
     return 'nd';
-  } else if (divisionBy10Remaninder === 3) {
+  } else if (divisionBy10Remainder === 3) {
     return 'rd';
   } else {
     return 'th';
@@ -128,8 +128,8 @@ export const sortFunction = (firstE1: SmsData, secondE1: SmsData): number => {
 
 /**
  *
- * @param userLocationData - an array of UserLocation data fetched from a supserset slice
- * @param userUUID - the UUID of the user logged in obtained from an openSRP endpoitnt.
+ * @param userLocationData - an array of UserLocation data fetched from a  Superset slice
+ * @param userUUID - the UUID of the user logged in obtained from an openSRP endpoint.
  */
 export function getLocationId(userLocationData: UserLocation[], userUUID: string) {
   const userDetailObj =
@@ -247,7 +247,7 @@ export function getFilterFunctionAndLocationLevel(
 
 /**
  * Given a village return it's commune's location ID
- * @param {Location} village - village Location to find commnue
+ * @param {Location} village - village Location to find commune
  */
 export const getCommune = (village: Location & { level: VILLAGE }): string => {
   return village.parent_id;
@@ -307,7 +307,7 @@ export const filterByPatientId = (patientIdAndSmsData: PatientIDAndSmsData): Sms
 
 /**
  * sort SmsData[] by EventDate in ascending order
- * @param {SmsData[]} smsData an array of smsData objects to sortby eventdate
+ * @param {SmsData[]} smsData an array of smsData objects to sort by event date
  */
 export const sortByEventDate = (smsData: SmsData[]) => {
   return [...smsData].sort((event1: SmsData, event2: SmsData): number => {
@@ -331,14 +331,14 @@ export const getNumberOfDaysSinceDate = (date: string): number => {
 
 /**
  * The typical use of this util function is by a props that would like to check if its
- * location props(distticts, villages, communes and provices that are attached to the store)
+ * location props(districts, villages, communes and provinces that are attached to the store)
  * all have Location data.
  *
- * returns true if villages, districts, communes and provices all have a length greater than 0.
+ * returns true if villages, districts, communes and provinces all have a length greater than 0.
  * @param {Location[]} villages an array of village locations
  * @param {Location[]} communes an array of communes locations
  * @param {Location[]} districts an array of district locations
- * @param {Location[]} provices an array of province locations
+ * @param {Location[]} provinces an array of province locations
  */
 export function locationDataIsAvailable(
   villages: Location[],
@@ -463,15 +463,15 @@ export function getModuleLink(
 }
 
 /**
- * Get a link to the HierrarchichalDataTable component
- * @param {string} riskLevel string value that will be passed to hierarchichalDataTable
+ * Get a link to the HierarchicalDataTable component
+ * @param {string} riskLevel string value that will be passed to hierarchicalDataTable
  * as prop. representing that column should be coloured.
  * @param {string} module string representing the module
- * @param {string} title title to be passed to hierarchichal data table as a prop
+ * @param {string} title title to be passed to hierarchical data table as a prop
  * @param {number} permissionLevel - number ranging from 0 - 4 that represents the permission level of the user.
  * @param {string} locationId - the users location id.
  */
-export function getLinkToHierarchichalDataTable(
+export function getLinkToHierarchicalDataTable(
   riskLevel: string,
   module: string,
   title: string,
@@ -543,6 +543,6 @@ export async function fetchData(supersetFetchMethod: typeof supersetFetch = supe
   }
 }
 
-export const convertMilisecondsToYear = (mSeconds: number) => {
+export const convertMillisecondsToYear = (mSeconds: number) => {
   return Math.floor(mSeconds / (365 * 24 * 60 * 60 * 1000));
 };
