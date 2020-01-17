@@ -1,6 +1,14 @@
 import * as gatekeeper from '@onaio/gatekeeper';
-import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
+import {
+  LOCATION_SLICES,
+  ONADATA_OAUTH_STATE,
+  OPENSRP_OAUTH_STATE,
+  SUPERSET_SMS_DATA_SLICE,
+  USER_LOCATION_DATA_SLICE,
+} from '../../configs/env';
 
+import reducerRegistry from '@onaio/redux-reducer-registry';
+import flushPromises from 'flush-promises';
 import {
   NBC_AND_PNC_CHILD,
   NBC_AND_PNC_COMPARTMENTS_URL,
@@ -17,12 +25,17 @@ import {
   provinces,
   villages,
 } from '../../containers/HierarchichalDataTable/test/fixtures';
+import { OpenSRPService } from '../../services/opensrp';
+
+import locationsReducer, { reducerName as locationsReducerName } from '../../store/ducks/locations';
 import { SmsData } from '../../store/ducks/sms_events';
+import smsReducer, { reducerName as smsReducerName } from '../../store/ducks/sms_events';
 import {
   buildHeaderBreadCrumb,
-  convertMilisecondsToYear,
+  convertMillisecondsToYear,
+  fetchData,
   filterByPatientId,
-  getLinkToHierarchichalDataTable,
+  getLinkToHierarchicalDataTable,
   getLinkToPatientDetail,
   getModuleLink,
   getNumberOfDaysSinceDate,
@@ -35,6 +48,9 @@ import {
   sortFunction,
 } from '../utils';
 import groupedSmsData from './fixtures';
+
+reducerRegistry.register(smsReducerName, smsReducer);
+reducerRegistry.register(locationsReducerName, locationsReducer);
 
 jest.mock('@onaio/gatekeeper', () => ({
   getOnadataUserInfo: jest.fn(),
@@ -144,9 +160,9 @@ describe('helpers/utils/sortByEventDate', () => {
 
 describe('helpers/utils/convertMillisecondsToYear', () => {
   it('must return correct value for given input', () => {
-    expect(convertMilisecondsToYear(new Date('01/01/2020').getTime())).toEqual(50);
-    expect(convertMilisecondsToYear(new Date('01/01/1997').getTime())).toEqual(27);
-    expect(convertMilisecondsToYear(new Date('01/01/2007').getTime())).toEqual(37);
+    expect(convertMillisecondsToYear(new Date('01/01/2020').getTime())).toEqual(50);
+    expect(convertMillisecondsToYear(new Date('01/01/1997').getTime())).toEqual(27);
+    expect(convertMillisecondsToYear(new Date('01/01/2007').getTime())).toEqual(37);
   });
 });
 
@@ -159,7 +175,7 @@ describe('getNumberSuffix', () => {
   });
 });
 
-describe('sortFuction', () => {
+describe('sortFunction', () => {
   it('returns 0 when the sms event_id is the same', () => {
     const smsData1: SmsData = JSON.parse(JSON.stringify(smsDataFixtures[0]));
     expect(sortFunction(smsData1, smsData1)).toEqual(0);
@@ -187,9 +203,9 @@ describe('getModuleLink', () => {
   });
 });
 
-describe('getLinkToHierarchichalDataTable', () => {
+describe('getLinkToHierarchicalDataTable', () => {
   expect(
-    getLinkToHierarchichalDataTable('low', PREGNANCY, 'test title', 0, 'location023423423423')
+    getLinkToHierarchicalDataTable('low', PREGNANCY, 'test title', 0, 'location023423423423')
   ).toEqual(
     '/pregnancy_compartments/hierarchicaldata/Pregnancy/low/test title/0/down/location023423423423/0'
   );
@@ -279,5 +295,39 @@ describe('getNumberOfDaysSinceDate', () => {
     expect(getNumberOfDaysSinceDate(dateString)).toEqual(
       Math.floor((new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24))
     );
+  });
+});
+
+describe('helpers/utils/fetchData', () => {
+  it('must fetch data from superset in correct order', async () => {
+    // mock the read method in OpenSRPService
+    jest.mock('../../services/opensrp');
+    const mockRead = jest.fn();
+    OpenSRPService.prototype.read = mockRead;
+    mockRead.mockReturnValue(
+      Promise.resolve({
+        user: {
+          attributes: {},
+        },
+      })
+    );
+
+    // mock supersetFetch
+    const mockFunction = jest.fn().mockReturnValue({
+      then: jest.fn(),
+    });
+    // call fetchData
+    fetchData(mockFunction);
+
+    await flushPromises();
+
+    // ensure spy was called and called with the correct arguments
+    expect(mockFunction).toHaveBeenCalled();
+    expect(mockFunction.mock.calls[0][0]).toEqual(USER_LOCATION_DATA_SLICE);
+    expect(mockFunction.mock.calls[1][0]).toEqual(LOCATION_SLICES[0]);
+    expect(mockFunction.mock.calls[2][0]).toEqual(LOCATION_SLICES[1]);
+    expect(mockFunction.mock.calls[3][0]).toEqual(LOCATION_SLICES[2]);
+    expect(mockFunction.mock.calls[4][0]).toEqual(LOCATION_SLICES[3]);
+    expect(mockFunction.mock.calls[5][0]).toEqual(SUPERSET_SMS_DATA_SLICE);
   });
 });
