@@ -53,3 +53,8 @@
 .badge-warning {
   background-color: #ff8533;
 }
+
+.badge-info {
+  background-color: inherit;
+  color: #9596a3;
+}
