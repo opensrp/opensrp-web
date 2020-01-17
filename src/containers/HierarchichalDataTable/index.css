@@ -41,11 +41,11 @@
   background-color: #f8f9fa;
 }
 
-.back-page > span > span {
+.back-page > span {
   padding-left: 12px;
 }
 
-.back-page:hover{
+.back-page:hover {
   cursor: pointer;
 }
 .compartment-data-table .ReactTable .rt-thead.-header {
@@ -184,4 +184,3 @@
 .compartment-data-table span.divider {
   color: #0292d3 !important;
 }
-
