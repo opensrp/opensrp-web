@@ -8,7 +8,7 @@ import Select from 'react-select';
 export interface ComponentProps {
     name?: string;
     childNodes: any;
-    addBreadcrumItem(item: Location): any,
+    addBreadcrumItem(item: Location): any;
 }
 
 /* interface for locations  **/
@@ -20,6 +20,27 @@ const buttonDropdownStyle = {
     backgroundColor: 'white',
     color: '#2297d6',
     border: '0px',
+};
+
+const SearchApp = (props: ComponentProps) => {
+    const options = props.childNodes.map((b: Location) => {
+        return {
+            label: b.label,
+            value: b,
+        };
+    });
+
+    return (
+        <div>
+            <Select
+                value={null}
+                autoFocus
+                menuIsOpen
+                onChange={(e: any) => props.addBreadcrumItem(e.value)}
+                options={options}
+            />
+        </div>
+    );
 };
 
 /* probable searched items will appear as list **/
