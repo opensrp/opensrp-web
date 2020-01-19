@@ -4,29 +4,32 @@ import SeamlessImmutable from 'seamless-immutable';
 /** The reducer name */
 export const reducerName = 'locations';
 
-/** A single node for location hierarchy */
-export interface LocationNode {
-    [key: string]: {
-        id: string;
-        label: string;
-        node: {
+/** Inteface for Location */
+export interface Location {
+    id: string;
+    label: string;
+    node: {
+        locationId: string;
+        name: string;
+        parentLocation?: {
             locationId: string;
             name: string;
+            voided: boolean;
             parentLocation?: {
                 locationId: string;
                 name: string;
                 voided: boolean;
-                parentLocation?: {
-                    locationId: string;
-                    name: string;
-                    voided: boolean;
-                };
             };
-            tags: string[];
-            voided: boolean;
         };
-        children?: LocationNode;
+        tags: string[];
+        voided: boolean;
     };
+    children?: LocationNode;
+}
+
+/** A single node for location hierarchy */
+export interface LocationNode {
+    [key: string]: Location;
 }
 
 /** Interface for location object */
