@@ -12,7 +12,7 @@ export interface LocationNode {
         node: {
             locationId: string;
             name: string;
-            parentLocation: {
+            parentLocation?: {
                 locationId: string;
                 name: string;
                 voided: boolean;
@@ -82,4 +82,12 @@ export default function reducer(
         default:
             return state;
     }
+}
+
+/** get location hierarchy
+ * @param {Partial<Store>} state - the redux store
+ * @return {Household | null} a household obj if the id is found else null
+ */
+export function getLocationHierarchy(state: Partial<Store>): LocationHierarchy | null {
+    return (state as any)[reducerName].locations;
 }

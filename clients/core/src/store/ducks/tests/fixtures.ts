@@ -1,5 +1,6 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
+import { LocationHierarchy } from '../locations';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -333,6 +334,40 @@ export const household3: Household = {
     },
     _id: '3ffb682a-0f31-4935-9114-c4d33d148617',
     _rev: 'v1',
+};
+
+export const location: LocationHierarchy = {
+    locationsHierarchy: {
+        map: {
+            'c768ef20-01fe-4877-b670-9b6570be17be': {
+                id: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                label: 'BANGLADESH',
+                node: {
+                    locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                    name: 'BANGLADESH',
+                    tags: ['Country'],
+                    voided: false,
+                },
+                children: {
+                    'e380918b-c409-40c0-a426-58ccc4411d53': {
+                        id: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                        label: 'DHAKA',
+                        node: {
+                            locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                            name: 'DHAKA',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: false,
+                            },
+                            tags: ['Clinic'],
+                            voided: false,
+                        },
+                    },
+                },
+            },
+        },
+    },
 };
 
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
