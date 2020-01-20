@@ -352,6 +352,7 @@ export const location: LocationHierarchy = {
                     'e380918b-c409-40c0-a426-58ccc4411d53': {
                         id: 'e380918b-c409-40c0-a426-58ccc4411d53',
                         label: 'DHAKA',
+                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
                         node: {
                             locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
                             name: 'DHAKA',
@@ -364,8 +365,30 @@ export const location: LocationHierarchy = {
                             voided: false,
                         },
                     },
+                    'a821918b-c401-5ac0-b526-58clp4310b31': {
+                        id: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                        label: 'Khulna',
+                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                        node: {
+                            locationId: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                            name: 'DHAKA',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: false,
+                            },
+                            tags: ['Clinic'],
+                            voided: false,
+                        },
+                    },
                 },
             },
+        },
+        parentChildren: {
+            'c768ef20-01fe-4877-b670-9b6570be17be': [
+                'e380918b-c409-40c0-a426-58ccc4411d53',
+                'a821918b-c401-5ac0-b526-58clp4310b31',
+            ],
         },
     },
 };

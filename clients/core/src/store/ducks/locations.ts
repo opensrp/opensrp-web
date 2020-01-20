@@ -8,25 +8,24 @@ export const reducerName = 'locations';
 export interface Location {
     id: string;
     label: string;
+    parent?: string;
     node: {
         locationId: string;
         name: string;
-        parentLocation?: {
-            locationId: string;
-            name: string;
-            voided: boolean;
-            parentLocation?: {
-                locationId: string;
-                name: string;
-                voided: boolean;
-            };
-        };
+        parentLocation?: ParentLocation;
         tags: string[];
         voided: boolean;
     };
     children?: LocationNode;
 }
 
+/** interface for the parent location. */
+export interface ParentLocation {
+    locationId: string;
+    name: string;
+    voided: boolean;
+    parentLocation?: ParentLocation;
+}
 /** A single node for location hierarchy */
 export interface LocationNode {
     [key: string]: Location;
@@ -36,6 +35,9 @@ export interface LocationNode {
 export interface LocationHierarchy {
     locationsHierarchy: {
         map: LocationNode;
+        parentChildren: {
+            [key: string]: string[];
+        };
     };
 }
 
