@@ -1,0 +1,20 @@
+div.card {
+  max-width: 149px;
+  max-height: 272px;
+  margin-left: 0 0 10px 20px;
+}
+
+div.card:first-child {
+  margin-left: 0;
+}
+
+.card-title p {
+  font-size: 2rem;
+}
+
+.card-body a {
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 0.75rem;
+}
