@@ -2,7 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
 import store from '../../index';
 import householdReducer, { setLocations, reducerName as locationReducer, getLocationHierarchy } from '../locations';
-
+import * as locationDucksModule from '../locations';
 import * as fixtures from '../tests/fixtures';
 
 reducerRegistry.register(locationReducer, householdReducer);
@@ -19,5 +19,12 @@ describe('reducers/locations', () => {
     it(' set locations correctly', () => {
         store.dispatch(setLocations(fixtures.location));
         expect(getLocationHierarchy(store.getState())).toEqual(fixtures.location);
+    });
+
+    it(' spy on location hierarchy', () => {
+        const spyOnLocationHierarchy = jest.spyOn(locationDucksModule, 'setLocations');
+        store.dispatch(setLocations(fixtures.location));
+        expect(spyOnLocationHierarchy).toHaveBeenCalledTimes(1);
+        expect(spyOnLocationHierarchy).toHaveBeenCalledWith(fixtures.location);
     });
 });
