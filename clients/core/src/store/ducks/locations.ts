@@ -54,7 +54,7 @@ interface SetLocationAction extends AnyAction {
 export type LocationActionTypes = SetLocationAction | AnyAction;
 
 /** setLocation action */
-export const setLocations = (locations: LocationHierarchy): SetLocationAction => ({
+export const setLocations = (locations: LocationHierarchy | null): SetLocationAction => ({
     locations,
     type: SET_LOCATIONS,
 });
