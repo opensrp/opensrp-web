@@ -22,8 +22,8 @@ describe('reducers/locations', () => {
     });
 
     it(' can set locations on a non empty state', () => {
-        store.dispatch(setLocations(null));
-        expect(getLocationHierarchy(store.getState())).toEqual(null);
+        store.dispatch(setLocations(fixtures.location2));
+        expect(getLocationHierarchy(store.getState())).toEqual(fixtures.location2);
         store.dispatch(setLocations(fixtures.location));
         expect(getLocationHierarchy(store.getState())).toEqual(fixtures.location);
     });
