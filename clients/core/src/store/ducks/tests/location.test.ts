@@ -20,11 +20,4 @@ describe('reducers/locations', () => {
         store.dispatch(setLocations(fixtures.location));
         expect(getLocationHierarchy(store.getState())).toEqual(fixtures.location);
     });
-
-    it(' spy on location hierarchy', () => {
-        const spyOnLocationHierarchy = jest.spyOn(locationDucksModule, 'setLocations');
-        store.dispatch(setLocations(fixtures.location));
-        expect(spyOnLocationHierarchy).toHaveBeenCalledTimes(1);
-        expect(spyOnLocationHierarchy).toHaveBeenCalledWith(fixtures.location);
-    });
 });
