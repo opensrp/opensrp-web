@@ -5,9 +5,23 @@ import { Store } from 'redux';
 import { Link } from 'react-router-dom';
 import { Col, Row, Table } from 'reactstrap';
 import SearchBox from '../../../components/page/SearchBox';
+import { OpenSRPService } from '../../../services/opensrp';
+import { OPENSRP_CHILD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
+import { FlexObject } from '../../../helpers/utils';
 
 /** Display the child list  */
 class ChildList extends React.Component<{}, {}> {
+    componentDidMount() {
+        const params = {
+            clientType: 'child',
+            pageNumber: 1,
+            pageSize: PAGINATION_SIZE,
+        };
+        const hosueholdService = new OpenSRPService(`${OPENSRP_CHILD_ENDPOINT}`);
+        hosueholdService.list(params).then((response: FlexObject) => {
+            console.log('response', response);
+        });
+    }
     public render() {
         return (
             <div>

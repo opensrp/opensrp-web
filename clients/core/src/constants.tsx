@@ -56,3 +56,5 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const CHILD_CLIENT_TYPE = 'child';
+export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
