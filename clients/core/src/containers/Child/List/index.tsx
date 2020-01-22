@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Table } from 'reactstrap';
 import SearchBox from '../../../components/page/SearchBox';
 
-/** Display the client list  */
-class ClientList extends React.Component<{}, {}> {
+/** Display the child list  */
+class ChildList extends React.Component<{}, {}> {
     public render() {
         return (
             <div>
@@ -41,9 +41,7 @@ class ClientList extends React.Component<{}, {}> {
                                     <td>0171211111</td>
                                     <td>22-01-2020</td>
                                     <td className="members-table-field">10</td>
-                                    <td>
-                                        <Link to={`/child/profile/`}>View</Link>
-                                    </td>
+                                    <td>View</td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -54,7 +52,7 @@ class ClientList extends React.Component<{}, {}> {
     }
 }
 
-export { ClientList };
+export { ChildList };
 
 /** Map props to state  */
 const mapStateToProps = (state: Partial<Store>) => {
@@ -64,7 +62,7 @@ const mapStateToProps = (state: Partial<Store>) => {
 /** map props to actions */
 const mapDispatchToProps = {};
 
-/** connect clientsList to the redux store */
-const ConnectedChildList = connect(mapStateToProps, mapDispatchToProps)(ClientList);
+/** connect childList to the redux store */
+const ConnectedChildList = connect(mapStateToProps, mapDispatchToProps)(ChildList);
 
 export default ConnectedChildList;
