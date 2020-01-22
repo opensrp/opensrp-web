@@ -16,6 +16,7 @@ module.exports =  {
   rules:  {
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-inferrable-types': 'warn',
+    "prettier/prettier": "warn",
   },
   settings:  {
     react:  {
