@@ -21,6 +21,7 @@ jest.mock('../../../../configs/env');
 describe('containers/households/list/Householdlist', () => {
     beforeEach(() => {
         jest.resetAllMocks();
+        // TODO - dispatch actions that clean the store here.
     });
 
     it('renders without crashing', () => {
@@ -29,6 +30,7 @@ describe('containers/households/list/Householdlist', () => {
             list: listMock,
         }));
 
+        // TODO - Do we have to mock the action creators here??? why are we mocking them out?
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
@@ -40,6 +42,7 @@ describe('containers/households/list/Householdlist', () => {
         shallow(<HouseholdList {...props} />);
     });
 
+    // TODO - I think this test is a proper subset `render household-list container correctly`
     it('renders correctly', () => {
         const listMock = jest.fn(async () => fixtures.households);
         const classMock = jest.fn(() => ({
@@ -66,6 +69,9 @@ describe('containers/households/list/Householdlist', () => {
     it('works correctly with the redux store', () => {
         store.dispatch(fetchHouseholds([fixtures.household1]));
         store.dispatch(setTotalRecords(23));
+
+        // TODO - you also want to make sure we are not making api calls here, so either mock out the service or use jest-fetch-mock
+
         let wrapper = mount(
             <Provider store={store}>
                 <ConnectedHouseholdList />
@@ -113,9 +119,11 @@ describe('containers/households/list/Householdlist', () => {
         wrapper.update();
         const householdListContainer = wrapper.find('.household-title');
         expect(householdListContainer.length).toBe(1);
+        // TODO - you also want to look at the rendered html if the data that supposed to be rendered.
         wrapper.unmount();
     });
 
+    //TODO - Am not quite sure what's happening here but i don't think this belongs here, tests for selectors working as supposed to are supposed to be the dux module
     it('selectors are working as expected', () => {
         const mountComponent = () => {
             const wrapper = mount(
@@ -138,6 +146,8 @@ describe('containers/households/list/Householdlist', () => {
         expect(householdListProps.householdsArray).toEqual(fixtures.households);
     });
 
+    // TODO -(nitpick) test titles should say why/what you are testing not how you are doing it, a better title for this test-case could be selectors are called with correct arguments
+    // TODO - the other ones are very okay.
     it('spy on selectors', () => {
         const spyOnFetchHouseholds = jest.spyOn(householdDucks, 'fetchHouseholds');
         const spyOnTotalRecords = jest.spyOn(householdDucks, 'setTotalRecords');
