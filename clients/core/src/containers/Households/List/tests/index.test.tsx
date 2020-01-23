@@ -24,10 +24,15 @@ describe('containers/households/list/Householdlist', () => {
     });
 
     it('renders without crashing', () => {
+        const listMock = jest.fn(async () => fixtures.households);
+        const classMock = jest.fn(() => ({
+            list: listMock,
+        }));
+
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
-            opensrpService: jest.fn(),
+            opensrpService: classMock as any,
             removeHouseholdsActionCreator: jest.fn(),
             setTotalRecordsActionCreator: jest.fn(),
             totalRecordsCount: 0,
@@ -36,10 +41,15 @@ describe('containers/households/list/Householdlist', () => {
     });
 
     it('renders correctly', () => {
+        const listMock = jest.fn(async () => fixtures.households);
+        const classMock = jest.fn(() => ({
+            list: listMock,
+        }));
+
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
-            opensrpService: jest.fn(),
+            opensrpService: classMock as any,
             removeHouseholdsActionCreator: jest.fn(),
             setTotalRecordsActionCreator: jest.fn(),
             totalRecordsCount: 0,

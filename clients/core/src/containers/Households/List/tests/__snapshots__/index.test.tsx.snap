@@ -25,7 +25,25 @@ exports[`containers/households/list/Householdlist renders correctly 1`] = `
         "results": Array [
           Object {
             "type": "return",
-            "value": undefined,
+            "value": Object {
+              "list": [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "clientType": "ec_family",
+                      "pageNumber": 1,
+                      "pageSize": undefined,
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
           },
         ],
       }
