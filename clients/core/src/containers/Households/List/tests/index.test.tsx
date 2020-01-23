@@ -78,16 +78,23 @@ describe('containers/households/list/Householdlist', () => {
         wrapper.unmount();
     });
 
-    it('render household-list container correctly', () => {
+    it('render household-list container correctly', async () => {
+        const listMock = jest.fn(async () => ({}));
+        const classMock = jest.fn(() => ({
+            list: listMock,
+        }));
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
-            opensrpService: jest.fn(),
+            opensrpService: classMock as any,
             removeHouseholdsActionCreator: jest.fn(),
             setTotalRecordsActionCreator: jest.fn(),
             totalRecordsCount: 0,
         };
+
         const wrapper = mount(<HouseholdList {...props} />);
+
+        await new Promise(resolve => setImmediate(resolve));
 
         // initially the loading icon would show
         const loadingComponent = wrapper.find('.lds-ripple-parent');
