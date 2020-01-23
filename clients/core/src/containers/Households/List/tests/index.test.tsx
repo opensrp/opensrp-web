@@ -78,15 +78,20 @@ describe('containers/households/list/Householdlist', () => {
         wrapper.unmount();
     });
 
-    it('render household-list container correctly', () => {
+    it('render household-list container correctly', async () => {
+        const listMock = jest.fn(async () => fixtures.households);
+        const classMock = jest.fn(() => ({
+            list: listMock,
+        }));
         const props: HouseholdListProps = {
             fetchHouseholdsActionCreator: jest.fn(),
             householdsArray: [],
-            opensrpService: jest.fn(),
+            opensrpService: classMock as any,
             removeHouseholdsActionCreator: jest.fn(),
             setTotalRecordsActionCreator: jest.fn(),
             totalRecordsCount: 0,
         };
+
         const wrapper = mount(<HouseholdList {...props} />);
 
         // initially the loading icon would show
@@ -94,7 +99,8 @@ describe('containers/households/list/Householdlist', () => {
         expect(loadingComponent.length).toBe(1);
 
         // showing household-list container
-        wrapper.setState({ ...wrapper.state(), loading: false });
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
         const householdListContainer = wrapper.find('.household-title');
         expect(householdListContainer.length).toBe(1);
         wrapper.unmount();
