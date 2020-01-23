@@ -79,7 +79,7 @@ describe('containers/households/list/Householdlist', () => {
     });
 
     it('render household-list container correctly', async () => {
-        const listMock = jest.fn(async () => ({}));
+        const listMock = jest.fn(async () => fixtures.households);
         const classMock = jest.fn(() => ({
             list: listMock,
         }));
@@ -94,14 +94,13 @@ describe('containers/households/list/Householdlist', () => {
 
         const wrapper = mount(<HouseholdList {...props} />);
 
-        await new Promise(resolve => setImmediate(resolve));
-
         // initially the loading icon would show
         const loadingComponent = wrapper.find('.lds-ripple-parent');
         expect(loadingComponent.length).toBe(1);
 
         // showing household-list container
-        wrapper.setState({ ...wrapper.state(), loading: false });
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
         const householdListContainer = wrapper.find('.household-title');
         expect(householdListContainer.length).toBe(1);
         wrapper.unmount();
