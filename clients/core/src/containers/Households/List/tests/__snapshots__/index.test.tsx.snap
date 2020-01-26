@@ -1,5 +1,250 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/households/list/Householdlist render household-list container correctly 1`] = `
+<HouseholdList
+  fetchHouseholdsActionCreator={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          undefined,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  householdsArray={Array []}
+  opensrpService={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "undefined",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": Object {
+            "list": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "clientType": "ec_family",
+                    "pageNumber": 1,
+                    "pageSize": undefined,
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+              ],
+            },
+          },
+        },
+      ],
+    }
+  }
+  removeHouseholdsActionCreator={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  setTotalRecordsActionCreator={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          undefined,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  totalRecordsCount={0}
+>
+  <div>
+    <h3
+      className="household-title"
+    >
+       Household (
+      0
+      ) 
+    </h3>
+    <Row
+      tag="div"
+    >
+      <div
+        className="row"
+      >
+        <Col
+          md={5}
+          tag="div"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <div
+            className="col-md-5"
+          >
+            <div
+              className="household-search-bar"
+            >
+              <SearchBox
+                placeholder="Search Household"
+                searchCallBack={[Function]}
+              >
+                <div
+                  id="custom-search-input"
+                >
+                  <InputGroup
+                    className="shadow-sm"
+                    tag="div"
+                  >
+                    <div
+                      className="shadow-sm input-group"
+                    >
+                      <span
+                        className="input-group-btn search-bar-icon"
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon={
+                            Array [
+                              "fas",
+                              "search",
+                            ]
+                          }
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size={null}
+                          spin={false}
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        />
+                      </span>
+                      <Input
+                        className="search-bar-input"
+                        onChange={[Function]}
+                        onKeyPress={[Function]}
+                        placeholder="Search Household"
+                        type="text"
+                      >
+                        <input
+                          className="search-bar-input form-control"
+                          onChange={[Function]}
+                          onKeyPress={[Function]}
+                          placeholder="Search Household"
+                          type="text"
+                        />
+                      </Input>
+                    </div>
+                  </InputGroup>
+                </div>
+              </SearchBox>
+            </div>
+          </div>
+        </Col>
+      </div>
+    </Row>
+    <Row
+      tag="div"
+    >
+      <div
+        className="row"
+      >
+        <Col
+          tag="div"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <div
+            className="col"
+          >
+            <Table
+              className="shadow-sm"
+              responsiveTag="div"
+              tag="table"
+            >
+              <table
+                className="shadow-sm table"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      HH ID Number
+                    </th>
+                    <th>
+                      Family Name
+                    </th>
+                    <th>
+                      Head of Household
+                    </th>
+                    <th>
+                      Phone
+                    </th>
+                    <th>
+                      Registered Date
+                    </th>
+                    <th>
+                      Members
+                    </th>
+                    <th>
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody />
+              </table>
+            </Table>
+          </div>
+        </Col>
+      </div>
+    </Row>
+  </div>
+</HouseholdList>
+`;
+
 exports[`containers/households/list/Householdlist renders correctly 1`] = `
 <Provider
   store={
