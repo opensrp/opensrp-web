@@ -38,7 +38,7 @@ export interface ANCClientType extends BaseClient {
 const reducerName = 'ANC';
 
 /** ANC Reducer */
-const ANCReducer = reducerFactory<ANCClientType>();
+const reducer = reducerFactory<ANCClientType>();
 
 // action
 /** actionCreator returns action to to add anc records to store */
@@ -52,7 +52,7 @@ const getAllANCArray = getClientsArrayFactory<ANCClientType>(reducerName);
 export {
     reducerName,
     removeClientsAction as removeANCAction,
-    ANCReducer,
+    reducer,
     getAllANCArray,
     getANCById,
     getAllANCById,
