@@ -6,7 +6,7 @@ import {
     getClientsArrayFactory,
     getClientByIdFactory,
     getClientsByIdFactory,
-} from './base';
+} from './baseClient';
 import { FlexObject } from '../../helpers/utils';
 
 /** describes an ANC client object */

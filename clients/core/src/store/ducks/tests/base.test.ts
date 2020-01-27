@@ -9,7 +9,7 @@ import {
     getClientsByIdFactory,
     removeClientsAction,
     BaseClient,
-} from '../base';
+} from '../baseClient';
 import * as fixtures from '../tests/fixtures';
 import { FlexObject } from '../../../helpers/utils';
 
