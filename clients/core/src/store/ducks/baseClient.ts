@@ -21,6 +21,8 @@ export interface BaseClient {
 export const CLIENTS_FETCHED = 'opensrp/reducer/clients/CLIENTS_FETCHED';
 /** REMOVE_CLIENTS action type */
 export const REMOVE_CLIENTS = 'opensrp/reducer/clients/REMOVE_CLIENTS';
+/** SET_TOTAL_RECORDS action type */
+export const SET_TOTAL_RECORDS = 'opensrp/reducer/clients/SET_TOTAL_RECORDS';
 
 /** interface for authorize action
  * ClientType - generic type - client type being handled by this function
@@ -34,6 +36,12 @@ export interface FetchClientsAction<ClientType> extends AnyAction {
 interface RemoveClientsAction extends AnyAction {
     clientsById: {};
     type: typeof REMOVE_CLIENTS;
+}
+
+/** Interface for setTotalRecordsAction */
+interface SetTotalRecordsAction extends AnyAction {
+    totalRecords: number;
+    type: typeof SET_TOTAL_RECORDS;
 }
 
 /** Create type for clients reducer actions */
@@ -63,6 +71,12 @@ export const removeClientsAction: RemoveClientsAction = {
     type: REMOVE_CLIENTS,
 };
 
+/** setTotalRecords action */
+export const setTotalRecords = (totalCount: number): SetTotalRecordsAction => ({
+    totalRecords: totalCount,
+    type: SET_TOTAL_RECORDS,
+});
+
 // The reducer
 
 /** interface for clients state in redux store
@@ -81,6 +95,7 @@ export type ImmutableClientsState<ClientType> = ClientState<ClientType> &
 /** initial clients-state state */
 const initialState = SeamlessImmutable({
     clientsById: {},
+    totalRecords: 0,
 });
 
 /** factory function to create reducer
@@ -102,6 +117,11 @@ export const reducerFactory = <ClientType>() =>
                 return SeamlessImmutable({
                     ...state,
                     clientsById: action.clientsById,
+                });
+            case SET_TOTAL_RECORDS:
+                return SeamlessImmutable({
+                    ...state,
+                    totalRecords: action.totalRecords,
                 });
             default:
                 return state;
@@ -148,4 +168,16 @@ export const getClientByIdFactory = <ClientType>(reducerName: string) =>
      */
     function(state: Partial<Store>, id: string): ClientType | null {
         return get(getClientsByIdFactory<ClientType>(reducerName)(state), id) || null;
+    };
+
+/** factory function that creates selector
+ * ClientType - generic type - client type being handled by this function
+ */
+export const getTotalRecordsFactory = (reducerName: string) =>
+    /** returns the count of all records present in server
+     * @param {Partial<Store>} state - the redux store
+     * @return { number } - total records value from the store
+     */
+    function(state: Partial<Store>): number {
+        return (state as any)[reducerName].totalRecords;
     };
