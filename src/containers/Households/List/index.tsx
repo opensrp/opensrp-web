@@ -24,6 +24,7 @@ import householdsReducer, {
   setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
+import LocationBreadcrumb from '../../../components/page/Breadcrumb';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -88,6 +89,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
           </Row>
           <Row>
             <Col>
+              <LocationBreadcrumb />
               <Table className="shadow-sm">
                 <thead>
                   <tr>
@@ -183,9 +185,6 @@ const mapDispatchToProps = {
 };
 
 /** connect householdsList to the redux store */
-const ConnectedHouseholdList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HouseholdList);
+const ConnectedHouseholdList = connect(mapStateToProps, mapDispatchToProps)(HouseholdList);
 
 export default ConnectedHouseholdList;
