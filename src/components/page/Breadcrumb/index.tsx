@@ -11,11 +11,20 @@ import {
 } from 'reactstrap';
 import Select from 'react-select';
 
-let buttonDropdownStyle = {
+const buttonDropdownStyle = {
   backgroundColor: 'white',
   color: '#2297d6',
   border: '0px',
-  fontSize: '12px'
+  fontSize: '12px',
+};
+
+const select_style = {
+  control: (base: any) => ({
+    ...base,
+    border: 0,
+    // This line disable the blue border
+    boxShadow: "none",
+  }),
 };
 
 class LocationDropdown extends React.Component<ComponentProps, any> {
@@ -47,7 +56,7 @@ class LocationDropdown extends React.Component<ComponentProps, any> {
         <DropdownToggle caret style={buttonDropdownStyle}>
           {props.name}
         </DropdownToggle>
-        <DropdownMenu style={{ width: '250px' }}>
+        <DropdownMenu style={{ width: '250px', fontSize: '13px' }}>
           <div style={{ paddingLeft: '8px' }}> Change option </div>
           <Select
             value={null}
@@ -57,6 +66,7 @@ class LocationDropdown extends React.Component<ComponentProps, any> {
               props.addBreadcrumItem(e.value);
               this.toggle();
             }}
+            styles={select_style}
             options={this.getOptions()}
           />
         </DropdownMenu>
@@ -84,9 +94,9 @@ class LocationBreadcrumb extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    console.log("location breadcrumb mounted");
+    console.log('location breadcrumb mounted');
     this.setState({
-      breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')]
+      breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
     });
   }
 
@@ -107,7 +117,7 @@ class LocationBreadcrumb extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App">
+      <div className="app-breadcrumb">
         <Breadcrumb className="custom-breadcrumb">
           {this.state.breadcrumItems.map((item: Location, index: number) => {
             return (

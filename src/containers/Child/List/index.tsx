@@ -2,7 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Col, Row, Table } from 'reactstrap';
+import { Col, Row, Table, FormGroup, Label, Input } from 'reactstrap';
 import { Store } from 'redux';
 import LocationBreadcrumb from '../../../components/page/Breadcrumb';
 import Loading from '../../../components/page/Loading';
@@ -69,6 +69,20 @@ class ChildList extends React.Component<ChildListProps, any> {
             <div className="household-search-bar">
               <SearchBox searchCallBack={() => {}} placeholder={`Search Client`} />
             </div>
+          </Col>
+          <Col md={3} style={{ marginTop: '23px' }}>
+            <FormGroup>
+              <Input
+                type="select"
+                name="select"
+                className="shadow-sm"
+                style={{ fontSize: '12px', borderRadius: '1px' }}
+              >
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female"> Female</option>
+              </Input>
+            </FormGroup>
           </Col>
         </Row>
         <Row>
