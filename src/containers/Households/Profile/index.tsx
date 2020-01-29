@@ -168,8 +168,8 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
                       <tr key={member.baseEntityId}>
                         <td>{member.firstName}</td>
                         <td>{member.lastName}</td>
-                        <td>{member.attributes.age_year_part}</td>
-                        <td>{member.attributes.registration_status}</td>
+                        <td>{member.attributes.dynamicProperties.age_year_part}</td>
+                        <td>{member.attributes.dynamicProperties.registration_status}</td>
                         <td>
                           <a href={`${'#'}`}> View </a>
                           <a href={`${'#'}`} className="remove-btn">
