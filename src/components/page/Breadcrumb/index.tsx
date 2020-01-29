@@ -65,7 +65,8 @@ class LocationDropdown extends React.Component<ComponentProps, any> {
   }
 }
 
-export const renameProperty = (ob: any = {}, oldKey: string = '', newKey: string = '') => {
+export const renameProperty = (obj: any = {}, oldKey: string = '', newKey: string = '') => {
+  let ob = JSON.parse(JSON.stringify(obj));
   ob[newKey] = ob[oldKey];
   delete ob[oldKey];
   return ob;
@@ -73,13 +74,20 @@ export const renameProperty = (ob: any = {}, oldKey: string = '', newKey: string
 
 const initialState = {
   posts: [],
-  breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
+  breadcrumItems: [],
 };
 
-class LocationBreadcrumb extends React.Component<{}, any> {
+class LocationBreadcrumb extends React.Component<any, any> {
   constructor(props: {}) {
     super(props);
     this.state = initialState;
+  }
+
+  componentDidMount() {
+    console.log("location breadcrumb mounted");
+    this.setState({
+      breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')]
+    });
   }
 
   addBreadcrumItem = (position: number, item: Location): void => {
@@ -90,6 +98,7 @@ class LocationBreadcrumb extends React.Component<{}, any> {
   };
 
   getChildren = (ob: Location) => {
+    console.log('children', ob);
     if (ob.children === undefined) return [];
     return Object.keys(ob.children).map((item: string, index: number) => {
       return ob.children![item];
