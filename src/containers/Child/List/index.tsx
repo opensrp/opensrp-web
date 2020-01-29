@@ -16,6 +16,7 @@ import clientsReducer, {
   reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './childStyle.css';
+import { async } from 'q';
 
 /** props Interface for the clientList component */
 export interface ChildListProps {
@@ -39,8 +40,13 @@ class ChildList extends React.Component<ChildListProps, any> {
     };
   }
 
-  public async componentDidMount() {
-    const params = {
+  public componentDidMount() {
+    this.getDataFromServer();
+  }
+
+  getDataFromServer = async(extraParam: any = {}) => {
+    const params: any = {
+      ...extraParam,
       clientType: 'child',
       pageNumber: '1',
       pageSize: PAGINATION_SIZE,
@@ -53,7 +59,15 @@ class ChildList extends React.Component<ChildListProps, any> {
       totalRecords: response.total,
       childArray: response.clients,
     });
-  }
+  };
+
+  genderFilter = (e: any) => {
+    this.getDataFromServer({ gender: e.target.value });
+  };
+
+  searchFilter = (searchText: string) => {
+    this.getDataFromServer({ searchText });
+  };
 
   public render() {
     /** render loader if there are no clients in state */
@@ -67,7 +81,7 @@ class ChildList extends React.Component<ChildListProps, any> {
         <Row>
           <Col md={5}>
             <div className="household-search-bar">
-              <SearchBox searchCallBack={() => {}} placeholder={`Search Client`} />
+              <SearchBox searchCallBack={this.searchFilter} placeholder={`Search Client`} />
             </div>
           </Col>
           <Col md={3} style={{ marginTop: '23px' }}>
@@ -76,6 +90,7 @@ class ChildList extends React.Component<ChildListProps, any> {
                 type="select"
                 name="select"
                 className="shadow-sm"
+                onChange={this.genderFilter}
                 style={{ fontSize: '12px', borderRadius: '1px' }}
               >
                 <option value="">Select gender</option>
