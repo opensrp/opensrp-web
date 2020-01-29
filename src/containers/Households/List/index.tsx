@@ -111,7 +111,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                         <td>{household.attributes.dynamicProperties.family_head}</td>
                         <td>{household.attributes.dynamicProperties.phone_number}</td>
                         <td>{household.dateCreated}</td>
-                        <td className="members-table-field">{household.attributes.memberCount}</td>
+                        <td className="members-table-field">{household.attributes.dynamicProperties.member_count}</td>
                         <td>
                           <Link to={`/household/profile/${household.baseEntityId}/`}>View</Link>
                         </td>

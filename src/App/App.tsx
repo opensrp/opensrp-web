@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { HOUSEHOLD_PROFILE_URL, HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL } from '../constants';
+import { HOUSEHOLD_PROFILE_URL, HOUSEHOLD_URL, LOGIN_URL, LOGOUT_URL, CHILD_URL, ANC_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -21,6 +21,8 @@ import ConnectedHouseholdProfile from '../containers/Households/Profile';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import ConnectedChildList from '../containers/Child/List';
+import ConnectedANCList from '../containers/ANC/List';
 
 library.add(faUser, faChartLine, faCog, faSearch, faArrowLeft);
 
@@ -53,6 +55,18 @@ class App extends Component {
                 exact={true}
                 path={HOUSEHOLD_URL}
                 component={ConnectedHouseholdList}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={CHILD_URL}
+                component={ConnectedChildList}
+              />
+              <ConnectedPrivateRoute
+                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                exact={true}
+                path={ANC_URL}
+                component={ConnectedANCList}
               />
               <ConnectedPrivateRoute
                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
