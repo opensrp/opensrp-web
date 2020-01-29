@@ -2,10 +2,10 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { some } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Table, Row, Col } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
+import { OPENSRP_CLIENT_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
 import { OpenSRPService } from '../../../services/opensrp';
 import clientsReducer, {
   Client,
@@ -14,6 +14,7 @@ import clientsReducer, {
   reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './clientList.css';
+import SearchBox from '../../../components/page/SearchBox/SearchBox';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -33,14 +34,28 @@ export const defaultClientListProps: ClientListProps = {
 };
 
 /** Display the client list  */
-class ClientList extends React.Component<ClientListProps, {}> {
+class ClientList extends React.Component<ClientListProps, any> {
   public static defaultProps: ClientListProps = defaultClientListProps;
 
+  constructor(props: ClientListProps) {
+    super(props);
+    this.state = {
+      totalRecords: 0,
+    }
+  }
+
   public async componentDidMount() {
+    const params = {
+      clientType: 'clients',
+      pageNumber: '1',
+      pageSize: PAGINATION_SIZE,
+    };
     const { fetchClientsActionCreator, opensrpService } = this.props;
-    const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
-    const response = await clientService.list();
-    fetchClientsActionCreator(response);
+    const clientService = new opensrpService('client/searchByCriteria');
+    const response = await clientService.list(params);
+    console.log('clients total --> ', response.total);
+    fetchClientsActionCreator(response.clients);
+    this.setState({ totalRecords: response.total });
   }
 
   public render() {
@@ -51,6 +66,15 @@ class ClientList extends React.Component<ClientListProps, {}> {
     }
     return (
       <div>
+        <h3 className="household-title"> Clients ({this.state.totalRecords})</h3>
+        {/* <Row>
+          <Col md={5}>
+            <div className="household-search-bar">
+              <SearchBox searchCallBack={() => {}} placeholder={`Search Client`} />
+            </div>
+          </Col>
+        </Row> */}
+
         <Table striped={true}>
           <thead>
             <tr>
@@ -65,8 +89,8 @@ class ClientList extends React.Component<ClientListProps, {}> {
           <tbody>
             {clientsArray.map((client: Client) => {
               return (
-                <tr key={client._id}>
-                  <td>{client._id}</td>
+                <tr key={client.id}>
+                  <td>{client.id}</td>
                   <td>{client.firstName}</td>
                   <td>{client.middleName}</td>
                   <td>{client.lastName}</td>
@@ -105,9 +129,6 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 const mapDispatchToProps = { fetchClientsActionCreator: fetchClients };
 
 /** connect clientsList to the redux store */
-const ConnectedClientList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClientList);
+const ConnectedClientList = connect(mapStateToProps, mapDispatchToProps)(ClientList);
 
 export default ConnectedClientList;

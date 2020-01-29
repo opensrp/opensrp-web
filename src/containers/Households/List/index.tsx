@@ -108,8 +108,8 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                       <tr key={household.baseEntityId}>
                         <td>{household.baseEntityId}</td>
                         <td>{household.lastName}</td>
-                        <td>{household.attributes.HouseholdHead}</td>
-                        <td>{household.attributes.phoneNumber}</td>
+                        <td>{household.attributes.dynamicProperties.family_head}</td>
+                        <td>{household.attributes.dynamicProperties.phone_number}</td>
                         <td>{household.dateCreated}</td>
                         <td className="members-table-field">{household.attributes.memberCount}</td>
                         <td>
@@ -147,6 +147,9 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
     const response = await hosueholdService.list(params);
     removeHouseholdsActionCreator();
+
+
+    console.log('child list', response.clients);
     this.setState(
       {
         ...this.state,

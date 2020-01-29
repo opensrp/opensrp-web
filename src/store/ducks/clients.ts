@@ -27,7 +27,8 @@ export interface Client {
   relationships: {
     [key: string]: string[];
   };
-  _id: string;
+  id?: string;
+  _id?: string;
   _rev: string;
 }
 
