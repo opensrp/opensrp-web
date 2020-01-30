@@ -127,6 +127,7 @@ export function bootstrapReducer(
     }
 }
 
+/** describes props object to the Pagination component */
 export interface Props {
     onPageChangeHandler?(currentPage: number, pageSize: number): void;
     pageNeighbors: number;
@@ -136,6 +137,7 @@ export interface Props {
     fetchMoreApiData?: () => Promise<void>;
 }
 
+/** default props for the pagination component */
 const defaultProps: Pick<Props, 'pageNeighbors' | 'pageSize' | 'totalRecords'> = {
     pageNeighbors: 3,
     pageSize: 30,
