@@ -93,7 +93,7 @@ class ChildList extends React.Component<ChildListProps, any> {
                 onChange={this.genderFilter}
                 style={{ fontSize: '12px', borderRadius: '1px' }}
               >
-                <option value="">Select gender</option>
+                <option value="">All gender</option>
                 <option value="Male">Male</option>
                 <option value="Female"> Female</option>
               </Input>

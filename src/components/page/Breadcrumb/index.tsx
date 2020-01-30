@@ -77,6 +77,7 @@ class LocationDropdown extends React.Component<ComponentProps, any> {
 
 export const renameProperty = (obj: any = {}, oldKey: string = '', newKey: string = '') => {
   let ob = JSON.parse(JSON.stringify(obj));
+  ob['label'] = 'Country';
   ob[newKey] = ob[oldKey];
   delete ob[oldKey];
   return ob;
@@ -108,7 +109,6 @@ class LocationBreadcrumb extends React.Component<any, any> {
   };
 
   getChildren = (ob: Location) => {
-    console.log('children', ob);
     if (ob.children === undefined) return [];
     return Object.keys(ob.children).map((item: string, index: number) => {
       return ob.children![item];
