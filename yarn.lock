@@ -2090,8 +2090,10 @@
   resolved "https://registry.yarnpkg.com/@onaio/loaders/-/loaders-0.0.1.tgz#bccf621fd1e2842f962220a570d0898965765db9"
   integrity sha512-EJZQ9dXnKI2dATXtRnEIe/zzAvrtXhT0DTIylLLT5ihq/kyM2PxjjFcNgrlsBHhxVs/7+OkKg2IoXfSUzfA4ng==
 
-"@onaio/pagination@/home/peter/Desktop/onaio/js-tools/packages/Pagination/":
-  version "0.0.2"
+"@onaio/pagination@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@onaio/pagination/-/pagination-0.0.3.tgz#59d3ab687bbafcff12e028d82f1dfe185c804f2b"
+  integrity sha512-pqZXU9npqJRCKlYgTg4QML2wqBS0/s4YzUPwSz6nn1WuO/XELCxzXTBzxJwmit2Ck1StzK2Ah4lR22jeOYXZiQ==
   dependencies:
     bootstrap "^4.3.1"
     reactstrap "^8.0.1"
