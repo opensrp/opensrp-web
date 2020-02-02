@@ -1,6 +1,7 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
+import { LocationHierarchy } from '../locations';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -702,6 +703,119 @@ export const rawANCClientsPage2 = {
             revision: 'v1',
         },
     ],
+};
+export const location: LocationHierarchy = {
+    locationsHierarchy: {
+        map: {
+            'c768ef20-01fe-4877-b670-9b6570be17be': {
+                id: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                label: 'BANGLADESH',
+                node: {
+                    locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                    name: 'BANGLADESH',
+                    tags: ['Country'],
+                    voided: false,
+                },
+                children: {
+                    'e380918b-c409-40c0-a426-58ccc4411d53': {
+                        id: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                        label: 'DHAKA',
+                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                        node: {
+                            locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                            name: 'DHAKA',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: false,
+                            },
+                            tags: ['Clinic'],
+                            voided: false,
+                        },
+                    },
+                    'a821918b-c401-5ac0-b526-58clp4310b31': {
+                        id: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                        label: 'Khulna',
+                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                        node: {
+                            locationId: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                            name: 'DHAKA',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: false,
+                            },
+                            tags: ['Clinic'],
+                            voided: false,
+                        },
+                    },
+                },
+            },
+        },
+        parentChildren: {
+            'c768ef20-01fe-4877-b670-9b6570be17be': [
+                'e380918b-c409-40c0-a426-58ccc4411d53',
+                'a821918b-c401-5ac0-b526-58clp4310b31',
+            ],
+        },
+    },
+};
+
+export const location2: LocationHierarchy = {
+    locationsHierarchy: {
+        map: {
+            'c918d34j-02fe-4837-b670-9b6570be17be': {
+                id: 'c918d34j-02fe-4837-b670-9b6570be17be',
+                label: 'BANGLADESH',
+                node: {
+                    locationId: 'd768ef20-01fe-40911-b670-9b6570be17be',
+                    name: 'BANGLADESH',
+                    tags: ['Country'],
+                    voided: false,
+                },
+                children: {
+                    'e380918b-c409-40c0-a426-58ckjad353': {
+                        id: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                        label: 'Jessore',
+                        parent: 'c918d34j-02fe-4837-b670-9b6570be17be',
+                        node: {
+                            locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
+                            name: 'Jessore',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: true,
+                            },
+                            tags: ['Hospital'],
+                            voided: false,
+                        },
+                    },
+                    'a821718b-c401-5ac0-b526-58clp4310b31': {
+                        id: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                        label: 'Khulna',
+                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                        node: {
+                            locationId: 'a821918b-c401-5ac0-b526-58clp4310b31',
+                            name: 'DHAKA',
+                            parentLocation: {
+                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
+                                name: 'BANGLADESH',
+                                voided: false,
+                            },
+                            tags: ['Clinic'],
+                            voided: false,
+                        },
+                    },
+                },
+            },
+        },
+        parentChildren: {
+            'c918d34j-02fe-4837-b670-9b6570be17be': [
+                'e380918b-c409-40c0-a426-58ckjad353',
+                'a821718b-c401-5ac0-b526-58clp4310b31',
+            ],
+        },
+    },
 };
 
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
