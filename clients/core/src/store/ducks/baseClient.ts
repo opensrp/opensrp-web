@@ -6,6 +6,7 @@
 import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
+import { FlexObject } from '../../helpers/utils';
 
 /** describes primary required properties for a client object from opensrp
  * extend this to create generic types for clients.
@@ -101,7 +102,7 @@ const initialState = SeamlessImmutable({
 /** factory function to create reducer
  * ClientType - generic type - client type being handled by this function
  */
-export const reducerFactory = <ClientType>() =>
+export const reducerFactory = <ClientType>(reducerName: string) =>
     /** the clients reducer function */
     function reducer(
         state: ImmutableClientsState<ClientType> = initialState,
@@ -111,17 +112,26 @@ export const reducerFactory = <ClientType>() =>
             case CLIENTS_FETCHED:
                 return SeamlessImmutable({
                     ...state,
-                    clientsById: { ...state.clientsById, ...action.clientsById },
+                    [reducerName]: {
+                        ...(state as FlexObject)[reducerName],
+                        clientsById: { ...(state as FlexObject)[reducerName].clientsById, ...action.clientsById },
+                    },
                 });
             case REMOVE_CLIENTS:
                 return SeamlessImmutable({
                     ...state,
-                    clientsById: action.clientsById,
+                    [reducerName]: {
+                        ...(state as FlexObject)[reducerName],
+                        clientsById: { ...action.clientsById },
+                    },
                 });
             case SET_TOTAL_RECORDS:
                 return SeamlessImmutable({
                     ...state,
-                    totalRecords: action.totalRecords,
+                    [reducerName]: {
+                        ...(state as FlexObject)[reducerName],
+                        totalRecords: action.totalRecords,
+                    },
                 });
             default:
                 return state;
