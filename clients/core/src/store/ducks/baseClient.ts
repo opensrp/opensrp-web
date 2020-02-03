@@ -7,6 +7,7 @@ import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../helpers/utils';
+import { reducerName } from '@onaio/gatekeeper/dist/types/ducks/gatekeeper';
 
 /** describes primary required properties for a client object from opensrp
  * extend this to create generic types for clients.
@@ -31,18 +32,21 @@ export const SET_TOTAL_RECORDS = 'opensrp/reducer/clients/SET_TOTAL_RECORDS';
 export interface FetchClientsAction<ClientType> extends AnyAction {
     clientsById: Dictionary<ClientType>;
     type: typeof CLIENTS_FETCHED;
+    reducerName: string;
 }
 
 /** Interface for removeClientsAction */
 interface RemoveClientsAction extends AnyAction {
     clientsById: {};
     type: typeof REMOVE_CLIENTS;
+    reducerName: string;
 }
 
 /** Interface for setTotalRecordsAction */
 interface SetTotalRecordsAction extends AnyAction {
     totalRecords: number;
     type: typeof SET_TOTAL_RECORDS;
+    reducerName: string;
 }
 
 /** Create type for clients reducer actions */
@@ -52,8 +56,9 @@ export type ClientsActionTypes<ClientType> = FetchClientsAction<ClientType> | Re
 
 /** creates the action creator
  * ClientType - generic type - client type being handled by this function
+ * @param {string} reducerName - generic name of reducer
  */
-export function fetchClientsFactory<ClientType extends BaseClient>() {
+export function fetchClientsFactory<ClientType extends BaseClient>(reducerName: string) {
     /** Fetch clients action creator
      * @param {Client []} clientsList - clients array to add to store
      * @return {FetchClientsAction} - an action to add clients to redux store
@@ -61,22 +66,32 @@ export function fetchClientsFactory<ClientType extends BaseClient>() {
     return (clientsList: ClientType[] = []): FetchClientsAction<ClientType> => ({
         clientsById: keyBy<ClientType>(clientsList, (client: ClientType) => client.baseEntityId),
         type: CLIENTS_FETCHED,
+        reducerName,
     });
 }
 
 // actions
 
-/** removeClientsAction action */
-export const removeClientsAction: RemoveClientsAction = {
+/** removeClientsAction action
+ * @param {string} reducerName - name of reducer
+ */
+export const removeClientsAction = (reducerName: string): RemoveClientsAction => ({
     clientsById: {},
     type: REMOVE_CLIENTS,
-};
-
-/** setTotalRecords action */
-export const setTotalRecords = (totalCount: number): SetTotalRecordsAction => ({
-    totalRecords: totalCount,
-    type: SET_TOTAL_RECORDS,
+    reducerName,
 });
+
+/** creates actions to set total records */
+export function setTotalRecordsFactory(reducerName: string) {
+    /** setTotalRecords action
+     * @param {number} totalCount -  the number of records got form api
+     */
+    return (totalCount: number): SetTotalRecordsAction => ({
+        totalRecords: totalCount,
+        type: SET_TOTAL_RECORDS,
+        reducerName,
+    });
+}
 
 // The reducer
 
