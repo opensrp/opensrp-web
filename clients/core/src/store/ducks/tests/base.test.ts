@@ -9,17 +9,20 @@ import {
     getClientsByIdFactory,
     removeClientsFactory,
     BaseClient,
+    setTotalRecordsFactory,
+    getTotalRecordsFactory,
 } from '../baseClient';
 import * as fixtures from '../tests/fixtures';
 import { FlexObject } from '../../../helpers/utils';
-import {
+import ANCReducer, {
     reducerName as ANCReducerName,
-    reducer as ANCReducer,
     fetchANC,
     getANCById,
     getAllANCArray,
     getAllANCById,
     removeANCAction,
+    setTotalANCRecords,
+    getTotalANCRecords,
 } from '../anc';
 
 interface TestClient extends BaseClient {
@@ -58,6 +61,8 @@ const getBaseClientById = getClientByIdFactory<TestClient>(customReducerName);
 const getBaseClientsArray = getClientsArrayFactory<TestClient>(customReducerName);
 const fetchBaseClients = fetchClientsFactory<TestClient>(customReducerName);
 const removeBaseClientsAction = removeClientsFactory(customReducerName);
+const setBaseTotalRecords = setTotalRecordsFactory(customReducerName);
+const getBaseTotalRecords = getTotalRecordsFactory(customReducerName);
 
 describe('reducers/clients', () => {
     beforeEach(() => {
@@ -78,7 +83,6 @@ describe('reducers/clients', () => {
     it('fetches clients correctly', () => {
         store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2]));
         store.dispatch(fetchANC([fixtures.ANCClient1, fixtures.ANCClient2]));
-        console.log(store.getState());
         expect(getBaseClientsById(store.getState())).toEqual({
             '71ad460c-bf76-414e-9be1-0d1b2cb1bce8': fixtures.client1,
             '7d97182f-d623-4553-8651-5a29d2fe3f0b': fixtures.client2,
@@ -127,5 +131,20 @@ describe('reducers/clients', () => {
         store.dispatch(fetchANC([fixtures.ANCClient2]));
         numberOfANC = getAllANCArray(store.getState()).length;
         expect(numberOfANC).toEqual(2);
+    });
+
+    it('sets total records correctly', () => {
+        store.dispatch(setBaseTotalRecords(5));
+        expect(getBaseTotalRecords(store.getState())).toEqual(5);
+        store.dispatch(setBaseTotalRecords(10));
+        expect(getBaseTotalRecords(store.getState())).toEqual(10);
+        expect(getTotalANCRecords(store.getState())).toEqual(0);
+
+        store.dispatch(setTotalANCRecords(4));
+        expect(getBaseTotalRecords(store.getState())).toEqual(10);
+        expect(getTotalANCRecords(store.getState())).toEqual(4);
+
+        store.dispatch(setTotalANCRecords(9));
+        expect(getTotalANCRecords(store.getState())).toEqual(9);
     });
 });

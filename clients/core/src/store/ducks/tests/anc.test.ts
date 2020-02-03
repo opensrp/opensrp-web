@@ -1,15 +1,7 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
 import store from '../../index';
-import {
-    reducerName,
-    reducer as ANCReducer,
-    fetchANC,
-    getANCById,
-    getAllANCArray,
-    getAllANCById,
-    removeANCAction,
-} from '../anc';
+import ANCReducer, { reducerName, fetchANC, getANCById, getAllANCArray, getAllANCById, removeANCAction } from '../anc';
 import * as fixtures from '../tests/fixtures';
 
 reducerRegistry.register(reducerName, ANCReducer);
