@@ -151,7 +151,7 @@ export const getClientsByIdFactory = <ClientType>(
      */
     return function(state: Partial<Store>): Dictionary<ClientType> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return (state as any)[reducerName].clientsById;
+        return (state as any)[reducerName][reducerName].clientsById;
     };
 };
 
@@ -189,5 +189,5 @@ export const getTotalRecordsFactory = (reducerName: string) =>
      * @return { number } - total records value from the store
      */
     function(state: Partial<Store>): number {
-        return (state as any)[reducerName].totalRecords;
+        return (state as any)[reducerName][reducerName].totalRecords;
     };
