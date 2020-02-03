@@ -2,7 +2,7 @@ import {
     reducerFactory,
     BaseClient,
     fetchClientsFactory,
-    removeClientsAction,
+    removeClientsFactory,
     getClientsArrayFactory,
     getClientByIdFactory,
     getClientsByIdFactory,
@@ -38,23 +38,16 @@ export interface ANCClientType extends BaseClient {
 const reducerName = 'ANC';
 
 /** ANC Reducer */
-const reducer = reducerFactory<ANCClientType>();
+const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-const fetchANC = fetchClientsFactory<ANCClientType>();
+const fetchANC = fetchClientsFactory<ANCClientType>(reducerName);
 
 // selectors
 const getAllANCById = getClientsByIdFactory<ANCClientType>(reducerName);
 const getANCById = getClientByIdFactory<ANCClientType>(reducerName);
 const getAllANCArray = getClientsArrayFactory<ANCClientType>(reducerName);
+const removeANCAction = removeClientsFactory(reducerName);
 
-export {
-    reducerName,
-    removeClientsAction as removeANCAction,
-    reducer,
-    getAllANCArray,
-    getANCById,
-    getAllANCById,
-    fetchANC,
-};
+export { reducerName, removeANCAction, reducer, getAllANCArray, getANCById, getAllANCById, fetchANC };
