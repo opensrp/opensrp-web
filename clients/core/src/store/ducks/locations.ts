@@ -94,3 +94,11 @@ export default function reducer(
 export function getLocationHierarchy(state: Partial<Store>): LocationHierarchy | null {
     return (state as any)[reducerName].locations;
 }
+
+export const RenameLocationProperty = (locations: any, oldKey = '', newKey = '') => {
+    locations = SeamlessImmutable(locations);
+    locations['label'] = 'Country';
+    locations[newKey] = locations[oldKey];
+    delete locations[oldKey];
+    return locations;
+};
