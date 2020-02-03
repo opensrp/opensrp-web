@@ -7,11 +7,20 @@ import {
     getClientByIdFactory,
     getClientsArrayFactory,
     getClientsByIdFactory,
-    removeClientsAction,
+    removeClientsFactory,
     BaseClient,
 } from '../baseClient';
 import * as fixtures from '../tests/fixtures';
 import { FlexObject } from '../../../helpers/utils';
+import {
+    reducerName as ANCReducerName,
+    reducer as ANCReducer,
+    fetchANC,
+    getANCById,
+    getAllANCArray,
+    getAllANCById,
+    removeANCAction,
+} from '../anc';
 
 interface TestClient extends BaseClient {
     type: 'Client';
@@ -39,55 +48,84 @@ interface TestClient extends BaseClient {
 
 const customReducerName = 'base';
 
-const baseReducer = reducerFactory<TestClient>();
+const baseReducer = reducerFactory<TestClient>(customReducerName);
 
 reducerRegistry.register(customReducerName, baseReducer);
+reducerRegistry.register(ANCReducerName, ANCReducer);
 
-const getClientsById = getClientsByIdFactory<TestClient>(customReducerName);
-const getClientById = getClientByIdFactory<TestClient>(customReducerName);
-const getClientsArray = getClientsArrayFactory<TestClient>(customReducerName);
-const fetchClients = fetchClientsFactory<TestClient>();
+const getBaseClientsById = getClientsByIdFactory<TestClient>(customReducerName);
+const getBaseClientById = getClientByIdFactory<TestClient>(customReducerName);
+const getBaseClientsArray = getClientsArrayFactory<TestClient>(customReducerName);
+const fetchBaseClients = fetchClientsFactory<TestClient>(customReducerName);
+const removeBaseClientsAction = removeClientsFactory(customReducerName);
 
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeClientsAction);
+        store.dispatch(removeBaseClientsAction);
+        store.dispatch(removeANCAction);
     });
 
     it('selectors work for empty initialState', () => {
-        expect(getClientsById(store.getState())).toEqual({});
-        expect(getClientsArray(store.getState())).toEqual([]);
-        expect(getClientById(store.getState(), 'some-id')).toBeNull();
+        expect(getBaseClientsById(store.getState())).toEqual({});
+        expect(getBaseClientsArray(store.getState())).toEqual([]);
+        expect(getBaseClientById(store.getState(), 'some-id')).toBeNull();
+        expect(getANCById(store.getState(), 'some-id')).toBeNull();
+        expect(getAllANCArray(store.getState())).toEqual([]);
+        expect(getAllANCById(store.getState())).toEqual({});
     });
 
     it('fetches clients correctly', () => {
-        store.dispatch(fetchClients([fixtures.client1, fixtures.client2]));
-        expect(getClientsById(store.getState())).toEqual({
+        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2]));
+        store.dispatch(fetchANC([fixtures.ANCClient1, fixtures.ANCClient2]));
+        console.log(store.getState());
+        expect(getBaseClientsById(store.getState())).toEqual({
             '71ad460c-bf76-414e-9be1-0d1b2cb1bce8': fixtures.client1,
             '7d97182f-d623-4553-8651-5a29d2fe3f0b': fixtures.client2,
         });
-        expect(getClientsArray(store.getState())).toEqual(values([fixtures.client1, fixtures.client2]));
-        expect(getClientById(store.getState(), '71ad460c-bf76-414e-9be1-0d1b2cb1bce8')).toEqual(fixtures.client1);
+        expect(getBaseClientsArray(store.getState())).toEqual(values([fixtures.client1, fixtures.client2]));
+        expect(getBaseClientById(store.getState(), '71ad460c-bf76-414e-9be1-0d1b2cb1bce8')).toEqual(fixtures.client1);
+        expect(getAllANCById(store.getState())).toEqual({
+            'f1a3e6ee-58d2-4d5c-9588-5e2658abe21c': fixtures.ANCClient1,
+            '564fce60-29c8-4a9d-b99b-6a74411a1457': fixtures.ANCClient2,
+        });
+        expect(getAllANCArray(store.getState())).toEqual(values([fixtures.ANCClient1, fixtures.ANCClient2]));
+        expect(getANCById(store.getState(), 'f1a3e6ee-58d2-4d5c-9588-5e2658abe21c')).toEqual(fixtures.ANCClient1);
     });
 
     it('removes clients correctly', () => {
-        store.dispatch(fetchClients([fixtures.client1, fixtures.client2]));
-        let numberOfClients = getClientsArray(store.getState()).length;
+        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2]));
+        let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
+        store.dispatch(fetchANC([fixtures.ANCClient1, fixtures.ANCClient2]));
+        let numberOfANC = getAllANCArray(store.getState()).length;
+        expect(numberOfANC).toEqual(2);
 
-        store.dispatch(removeClientsAction);
-        numberOfClients = getClientsArray(store.getState()).length;
+        store.dispatch(removeBaseClientsAction);
+        numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(0);
+
+        store.dispatch(removeANCAction);
+        numberOfANC = getAllANCArray(store.getState()).length;
+        expect(numberOfANC).toEqual(0);
     });
 
     it('dispatches clients correctly on non-empty state', () => {
-        store.dispatch(removeClientsAction);
-        store.dispatch(fetchClients([fixtures.client1]));
-        let numberOfClients = getClientsArray(store.getState()).length;
+        store.dispatch(removeBaseClientsAction);
+        store.dispatch(fetchBaseClients([fixtures.client1]));
+        let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);
 
-        store.dispatch(fetchClients([fixtures.client2]));
-        numberOfClients = getClientsArray(store.getState()).length;
+        store.dispatch(fetchBaseClients([fixtures.client2]));
+        numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
+
+        store.dispatch(fetchANC([fixtures.ANCClient1]));
+        let numberOfANC = getAllANCArray(store.getState()).length;
+        expect(numberOfANC).toEqual(1);
+
+        store.dispatch(fetchANC([fixtures.ANCClient2]));
+        numberOfANC = getAllANCArray(store.getState()).length;
+        expect(numberOfANC).toEqual(2);
     });
 });
