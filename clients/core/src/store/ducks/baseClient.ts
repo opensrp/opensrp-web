@@ -7,8 +7,6 @@ import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../helpers/utils';
-import { reducerName } from '@onaio/gatekeeper/dist/types/ducks/gatekeeper';
-
 /** describes primary required properties for a client object from opensrp
  * extend this to create generic types for clients.
  */
@@ -75,7 +73,7 @@ export function fetchClientsFactory<ClientType extends BaseClient>(reducerName: 
 /** removeClientsAction action
  * @param {string} reducerName - name of reducer
  */
-export const removeClientsAction = (reducerName: string): RemoveClientsAction => ({
+export const removeClientsFactory = (reducerName: string): RemoveClientsAction => ({
     clientsById: {},
     type: REMOVE_CLIENTS,
     reducerName,
@@ -123,30 +121,25 @@ export const reducerFactory = <ClientType>(reducerName: string) =>
         state: ImmutableClientsState<ClientType> = initialState,
         action: ClientsActionTypes<ClientType>,
     ): ImmutableClientsState<ClientType> {
+        const actionReducerName = action.reducerName;
+        if (reducerName !== actionReducerName) {
+            return state;
+        }
         switch (action.type) {
             case CLIENTS_FETCHED:
                 return SeamlessImmutable({
                     ...state,
-                    [reducerName]: {
-                        ...(state as FlexObject)[reducerName],
-                        clientsById: { ...(state as FlexObject)[reducerName].clientsById, ...action.clientsById },
-                    },
+                    clientsById: { ...state.clientsById, ...action.clientsById },
                 });
             case REMOVE_CLIENTS:
                 return SeamlessImmutable({
                     ...state,
-                    [reducerName]: {
-                        ...(state as FlexObject)[reducerName],
-                        clientsById: { ...action.clientsById },
-                    },
+                    clientsById: action.clientsById,
                 });
             case SET_TOTAL_RECORDS:
                 return SeamlessImmutable({
                     ...state,
-                    [reducerName]: {
-                        ...(state as FlexObject)[reducerName],
-                        totalRecords: action.totalRecords,
-                    },
+                    totalRecords: action.totalRecords,
                 });
             default:
                 return state;
@@ -166,7 +159,7 @@ export const getClientsByIdFactory = <ClientType>(
      */
     return function(state: Partial<Store>): Dictionary<ClientType> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return (state as any)[reducerName][reducerName].clientsById;
+        return (state as any)[reducerName].clientsById;
     };
 };
 
@@ -204,5 +197,5 @@ export const getTotalRecordsFactory = (reducerName: string) =>
      * @return { number } - total records value from the store
      */
     function(state: Partial<Store>): number {
-        return (state as any)[reducerName][reducerName].totalRecords;
+        return (state as FlexObject)[reducerName].totalRecords;
     };
