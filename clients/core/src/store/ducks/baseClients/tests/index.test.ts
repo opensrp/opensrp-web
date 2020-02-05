@@ -11,7 +11,7 @@ import {
     BaseClient,
     setTotalRecordsFactory,
     getTotalRecordsFactory,
-} from '../baseClient';
+} from '..';
 import * as fixtures from '../../tests/fixtures';
 import { FlexObject } from '../../../../helpers/utils';
 import ANCReducer, {
