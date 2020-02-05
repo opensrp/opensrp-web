@@ -12,7 +12,7 @@ import {
     setTotalRecordsFactory,
     getTotalRecordsFactory,
 } from '../baseClient';
-import * as fixtures from '../tests/fixtures';
+import * as fixtures from './fixtures';
 import { FlexObject } from '../../../helpers/utils';
 import ANCReducer, {
     reducerName as ANCReducerName,
