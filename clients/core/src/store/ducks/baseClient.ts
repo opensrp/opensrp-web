@@ -73,7 +73,7 @@ export function fetchClientsFactory<ClientType extends BaseClient>(reducerName: 
 /** removeClientsAction action
  * @param {string} reducerName - name of reducer
  */
-export const removeClientsFactory = (reducerName: string): RemoveClientsAction => ({
+export const removeClientsFactory = (reducerName: string) => (): RemoveClientsAction => ({
     clientsById: {},
     type: REMOVE_CLIENTS,
     reducerName,

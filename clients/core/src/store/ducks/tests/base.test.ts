@@ -67,8 +67,8 @@ const getBaseTotalRecords = getTotalRecordsFactory(customReducerName);
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeBaseClientsAction);
-        store.dispatch(removeANCAction);
+        store.dispatch(removeBaseClientsAction());
+        store.dispatch(removeANCAction());
     });
 
     it('selectors work for empty initialState', () => {
@@ -105,17 +105,17 @@ describe('reducers/clients', () => {
         let numberOfANC = getAllANCArray(store.getState()).length;
         expect(numberOfANC).toEqual(2);
 
-        store.dispatch(removeBaseClientsAction);
+        store.dispatch(removeBaseClientsAction());
         numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(0);
 
-        store.dispatch(removeANCAction);
+        store.dispatch(removeANCAction());
         numberOfANC = getAllANCArray(store.getState()).length;
         expect(numberOfANC).toEqual(0);
     });
 
     it('dispatches clients correctly on non-empty state', () => {
-        store.dispatch(removeBaseClientsAction);
+        store.dispatch(removeBaseClientsAction());
         store.dispatch(fetchBaseClients([fixtures.client1]));
         let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);
