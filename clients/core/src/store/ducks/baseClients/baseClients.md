@@ -47,17 +47,22 @@ Glad you asked; The above example should have given you some clue, but am all to
 `reducerFactory` - this a factory method that returns a function that can be used as the reducer.
 currently it supports 3 action types: - adding clients - removing clients - setting total records
 
-for action creators
+**for action creators:**
 
 `fetchClientsFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
+
 `removeClientsFactory` - Use this to create action creators that return actions to remove all clients from a slice of the store
+
 `setTotalRecordsFactory` - This will create an action creator that adds the total number of records to specific slice of the store
 
-for the selectors:
+**for the selectors:**
 
 `getClientsByIdFactory` which returns a selector that gets all clients from a store slice as an object
+
 `getClientByIdFactory` which returns a selector that gets a single client from a store slice as an object
+
 `getClientsArrayFactory` which returns a selector that gets all clients from a store slice as an array
+
 `getTotalRecordsFactory` which returns a selector that gets the total number of records in a store slice
 
 ## Can You modify me
