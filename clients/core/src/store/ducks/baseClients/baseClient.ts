@@ -6,7 +6,7 @@
 import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
-import { FlexObject } from '../../helpers/utils';
+import { FlexObject } from '../../../helpers/utils';
 /** describes primary required properties for a client object from opensrp
  * extend this to create generic types for clients.
  */

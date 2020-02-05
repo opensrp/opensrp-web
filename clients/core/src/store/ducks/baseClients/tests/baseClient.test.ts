@@ -1,6 +1,6 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { values } from 'lodash';
-import store from '../../index';
+import store from '../../../index';
 import {
     reducerFactory,
     fetchClientsFactory,
@@ -12,8 +12,8 @@ import {
     setTotalRecordsFactory,
     getTotalRecordsFactory,
 } from '../baseClient';
-import * as fixtures from './fixtures';
-import { FlexObject } from '../../../helpers/utils';
+import * as fixtures from '../../tests/fixtures';
+import { FlexObject } from '../../../../helpers/utils';
 import ANCReducer, {
     reducerName as ANCReducerName,
     fetchANC,
@@ -23,7 +23,7 @@ import ANCReducer, {
     removeANCAction,
     setTotalANCRecords,
     getTotalANCRecords,
-} from '../anc';
+} from '../../anc';
 
 interface TestClient extends BaseClient {
     type: 'Client';

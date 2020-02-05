@@ -8,7 +8,7 @@ import {
     getClientsByIdFactory,
     setTotalRecordsFactory,
     getTotalRecordsFactory,
-} from './baseClient';
+} from './baseClients/baseClient';
 import { FlexObject } from '../../helpers/utils';
 
 /** describes an ANC client object */

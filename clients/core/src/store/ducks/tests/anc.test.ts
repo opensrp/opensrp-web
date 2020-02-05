@@ -33,7 +33,7 @@ describe('reducers/clients', () => {
         let numberOfClients = getAllANCArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
 
-        store.dispatch(removeANCAction);
+        store.dispatch(removeANCAction());
         numberOfClients = getAllANCArray(store.getState()).length;
         expect(numberOfClients).toEqual(0);
     });
