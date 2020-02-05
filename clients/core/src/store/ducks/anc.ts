@@ -37,7 +37,7 @@ export interface ANCClientType extends BaseClient {
 }
 
 /** reducer name for the ANC module */
-export const reducerName = 'ANC';
+export const reducerName = 'opensrp-web/client-type/ANC';
 
 /** ANC Reducer */
 const reducer = reducerFactory<ANCClientType>(reducerName);

@@ -49,7 +49,7 @@ interface TestClient extends BaseClient {
     _rev: string;
 }
 
-const customReducerName = 'base';
+const customReducerName = 'opensrp-web/client-type/base';
 
 const baseReducer = reducerFactory<TestClient>(customReducerName);
 
