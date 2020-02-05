@@ -1,8 +1,3 @@
-/** This file contains the generic materials required for
- * other client types such as client, household, child and ANC
- * generic material includes model, constants, actions, reducer and selectors
- * by giving in the data type it provide the common operatoins.
- */
 import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
