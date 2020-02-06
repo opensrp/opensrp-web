@@ -50,6 +50,7 @@ export type ClientsActionTypes<ClientType> = FetchClientsAction<ClientType> | Re
 /** creates the action creator
  * ClientType - generic type - client type being handled by this function
  * @param {string} reducerName - generic name of reducer
+ * @returns {(clientsList: ClientType[] = []): FetchClientsAction<ClientType>} - the action creator
  */
 export function fetchClientsFactory<ClientType extends BaseClient>(reducerName: string) {
     /** Fetch clients action creator
@@ -63,10 +64,9 @@ export function fetchClientsFactory<ClientType extends BaseClient>(reducerName: 
     });
 }
 
-// actions
-
-/** removeClientsAction action
+/** removeClientsAction action ; action creator factory
  * @param {string} reducerName - name of reducer
+ * @returns {(): RemoveClientsAction} - the action creator
  */
 export const removeClientsFactory = (reducerName: string) => (): RemoveClientsAction => ({
     clientsById: {},
@@ -145,6 +145,8 @@ export const reducerFactory = <ClientType>(reducerName: string) =>
 
 /** factory function that creates selector
  * ClientType - generic type - client type being handled by this function
+ *  @param {string} reducerName - the reducerName
+ *  @returns {((state: Partial<Store>) => Dictionary<ClientType>)}
  */
 export const getClientsByIdFactory = <ClientType>(
     reducerName: string,
@@ -160,6 +162,8 @@ export const getClientsByIdFactory = <ClientType>(
 
 /** factory function that creates selector
  * ClientType - generic type - client type being handled by this function
+ * @param {string} reducerName - name of the reducer
+ * @returns {(state: Partial<Store>): ClientType[]}
  */
 export const getClientsArrayFactory = <ClientType>(reducerName: string) =>
     /** gets clients as an array of clients objects
@@ -173,6 +177,8 @@ export const getClientsArrayFactory = <ClientType>(reducerName: string) =>
 
 /** factory function that creates selector
  * ClientType - generic type - client type being handled by this function
+ * @param {string} - reducerName -  name of reducer
+ * @returns {(state: Partial<Store>, id: string): ClientType | null}
  */
 export const getClientByIdFactory = <ClientType>(reducerName: string) =>
     /** get a specific client by their id
@@ -185,6 +191,8 @@ export const getClientByIdFactory = <ClientType>(reducerName: string) =>
 
 /** factory function that creates selector
  * ClientType - generic type - client type being handled by this function
+ * @param {string} reducerName -  name of reducer
+ * @returns {(state: Partial<Store<any, AnyAction>>) => number}
  */
 export const getTotalRecordsFactory = (reducerName: string) =>
     /** returns the count of all records present in server
