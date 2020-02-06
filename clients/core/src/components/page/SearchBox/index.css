@@ -1,0 +1,26 @@
+.search-bar-icon {
+    position: absolute;
+    color: #c2c2c2;
+    padding: 8px 18px;
+    z-index: 10;
+    font-size: 12px;
+}
+
+.search-bar-input {
+    padding-left: 56px;
+    caret-color: #0192d4;
+    font-size: 12px;
+}
+
+.search-bar-input::placeholder {
+    color: #c2c2c2;
+}
+
+.form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#custom-search-input {
+    max-width: 200px;
+}

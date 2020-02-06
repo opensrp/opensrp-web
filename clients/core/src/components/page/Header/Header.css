@@ -1,0 +1,35 @@
+.navbar-brand img {
+    max-height: 64px;
+    max-width: 100%;
+}
+
+.bg-navbar {
+    background: #2b475e !important;
+    padding: 0;
+}
+
+.bg-top-nav {
+    background: #233f56;
+    /* box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59); */
+    text-align: center;
+}
+
+.account-text {
+    justify-content: center;
+    color: #ffffff;
+}
+
+.account-text:hover {
+    color: #d7d7e0;
+}
+.bg-dropdown-text {
+    justify-content: center;
+    text-align: center;
+    font-family: roboto;
+    color: #233f56;
+}
+
+.center-account-text {
+    justify-content: center;
+    font-family: roboto;
+}
