@@ -11,11 +11,11 @@ Object {
       >
         <img
           alt="unicef"
-          src="logo.png"
+          src="test-file-stub"
         />
         <img
           alt="unicef"
-          src="vietnam-moh.png"
+          src="test-file-stub"
         />
       </ForwardRef>
     </nav>,
@@ -74,11 +74,11 @@ Object {
       >
         <img
           alt="unicef"
-          src="logo.png"
+          src="test-file-stub"
         />
         <img
           alt="unicef"
-          src="vietnam-moh.png"
+          src="test-file-stub"
         />
       </ForwardRef>
     </nav>,

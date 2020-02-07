@@ -43,7 +43,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild1"
-            src="pregnant-woman.svg"
+            src="test-file-stub"
           />
           <div
             className="home-sub-containers"
@@ -97,7 +97,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild2"
-            src="carrying-baby.svg"
+            src="test-file-stub"
           />
           <div
             className="home-sub-containers"
@@ -151,7 +151,7 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
           <img
             alt="woman"
             id="womanchild3"
-            src="baby-feeding.svg"
+            src="test-file-stub"
           />
           <div
             className="home-sub-containers"

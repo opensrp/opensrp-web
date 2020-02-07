@@ -35,12 +35,12 @@ exports[`CustomOAuth login must render correctly 1`] = `
         <img
           alt="unicef vietnam"
           className="moh"
-          src="vietnam-moh.png"
+          src="test-file-stub"
         />
         <img
           alt="unicef vietnam"
           className="unicef"
-          src="uni-vietnam.png"
+          src="test-file-stub"
         />
       </div>
       <div

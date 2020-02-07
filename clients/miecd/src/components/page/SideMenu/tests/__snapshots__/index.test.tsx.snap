@@ -43,11 +43,19 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
               onClick={[Function]}
               style={Object {}}
             >
-              <ForwardRef(SvgHome)>
-                <svg>
-                  home.svg
-                </svg>
-              </ForwardRef(SvgHome)>
+              <FontAwesomeIcon
+                icon={
+                  Array [
+                    "fas",
+                    "home",
+                  ]
+                }
+                size="lg"
+              >
+                <i
+                  className="fa fas,home"
+                />
+              </FontAwesomeIcon>
               <span
                 className="collapse-menu-title"
               >
@@ -77,12 +85,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         childNavs={Array []}
 -                       collapsedModuleLabel=\\"\\"
 +                       collapsedModuleLabel=\\"Pregnancy\\"
-                        customIcon={
+                        key=\\"0\\"
+                        parentNav={
                           Object {
-                            \\"$$typeof\\": Symbol(react.forward_ref),
-                            \\"render\\": [Function SvgHome],
-                          }
-@@ -160,11 +160,11 @@
+                            \\"icon\\": Array [
+                              \\"fas\\",
+@@ -154,11 +154,11 @@
                         }
                         setCollapsedModuleLabel={[Function anonymous]}
                       >
@@ -90,12 +98,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           childNavs={Array []}
 -                         collapsedModuleLabel=\\"\\"
 +                         collapsedModuleLabel=\\"Pregnancy\\"
-                          customIcon={
+                          history={
                             Object {
-                              \\"$$typeof\\": Symbol(react.forward_ref),
-                              \\"render\\": [Function SvgHome],
-                            }
-@@ -345,11 +345,11 @@
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -341,11 +341,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/pregnancy_analysis\\",
                             },
@@ -103,12 +111,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         }
 -                       collapsedModuleLabel=\\"\\"
 +                       collapsedModuleLabel=\\"Pregnancy\\"
-                        customIcon={
+                        key=\\"1\\"
+                        parentNav={
                           Object {
-                            \\"$$typeof\\": Symbol(react.forward_ref),
-                            \\"render\\": [Function SvgPregnancy],
-                          }
-@@ -382,11 +382,11 @@
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -372,11 +372,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/pregnancy_analysis\\",
                               },
@@ -116,12 +124,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           }
 -                         collapsedModuleLabel=\\"\\"
 +                         collapsedModuleLabel=\\"Pregnancy\\"
-                          customIcon={
+                          history={
                             Object {
-                              \\"$$typeof\\": Symbol(react.forward_ref),
-                              \\"render\\": [Function SvgPregnancy],
-                            }
-@@ -511,11 +511,11 @@
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -503,11 +503,11 @@
                             <Collapse
                               appear={false}
                               enter={true}
@@ -134,7 +142,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               onEntered={[Function noop]}
                               onEntering={[Function noop]}
                               onExit={[Function noop]}
-@@ -527,11 +527,11 @@
+@@ -519,11 +519,11 @@
                             >
                               <Transition
                                 appear={false}
@@ -147,7 +155,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                 onEntered={[Function bound onEntered]}
                                 onEntering={[Function bound onEntering]}
                                 onExit={[Function bound onExit]}
-@@ -539,12 +539,16 @@
+@@ -531,12 +531,16 @@
                                 onExiting={[Function bound onExiting]}
                                 timeout={350}
                                 unmountOnExit={false}
@@ -166,7 +174,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
                                     vertical={false}
-@@ -736,11 +740,11 @@
+@@ -728,11 +732,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/nbc_and_pnc_analysis\\",
                             },
@@ -174,12 +182,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         }
 -                       collapsedModuleLabel=\\"\\"
 +                       collapsedModuleLabel=\\"Pregnancy\\"
-                        customIcon={
+                        key=\\"2\\"
+                        parentNav={
                           Object {
-                            \\"$$typeof\\": Symbol(react.forward_ref),
-                            \\"render\\": [Function SvgNbcandpnc],
-                          }
-@@ -773,11 +777,11 @@
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -759,11 +763,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/nbc_and_pnc_analysis\\",
                               },
@@ -187,12 +195,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           }
 -                         collapsedModuleLabel=\\"\\"
 +                         collapsedModuleLabel=\\"Pregnancy\\"
-                          customIcon={
+                          history={
                             Object {
-                              \\"$$typeof\\": Symbol(react.forward_ref),
-                              \\"render\\": [Function SvgNbcandpnc],
-                            }
-@@ -1127,11 +1131,11 @@
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -1115,11 +1119,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/nutrition_analysis\\",
                             },
@@ -200,12 +208,12 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         }
 -                       collapsedModuleLabel=\\"\\"
 +                       collapsedModuleLabel=\\"Pregnancy\\"
-                        customIcon={
+                        key=\\"3\\"
+                        parentNav={
                           Object {
-                            \\"$$typeof\\": Symbol(react.forward_ref),
-                            \\"render\\": [Function SvgNutrition],
-                          }
-@@ -1164,11 +1168,11 @@
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -1146,11 +1150,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/nutrition_analysis\\",
                               },
@@ -213,9 +221,9 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           }
 -                         collapsedModuleLabel=\\"\\"
 +                         collapsedModuleLabel=\\"Pregnancy\\"
-                          customIcon={
+                          history={
                             Object {
-                              \\"$$typeof\\": Symbol(react.forward_ref),
-                              \\"render\\": [Function SvgNutrition],
-                            }"
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],"
 `;
