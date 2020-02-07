@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders App correctly 1`] = `
+<div
+  className="row login-row"
+>
+  <div
+    className="image col-lg col-xl"
+  />
+  <div
+    className="col-lg col-xl login-section"
+  >
+    <div
+      className="logo"
+    >
+      <img
+        alt="unicef vietnam"
+        className="moh"
+        src="test-file-stub"
+      />
+      <img
+        alt="unicef vietnam"
+        className="unicef"
+        src="test-file-stub"
+      />
+    </div>
+    <div
+      className="center"
+    >
+      <h3>
+        MIECD VIETNAM
+      </h3>
+      <ProviderLinks
+        providers={Object {}}
+      >
+        <div
+          className="gatekeeper-login"
+        >
+          <p
+            className="gatekeeper-p"
+          >
+            Please log in with one of the following providers
+          </p>
+        </div>
+      </ProviderLinks>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 58 (101010) - https://sketch.com -->
+    <title>7365E90D-00CD-40C7-95B7-EEA454AA4A4F</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="search-box/default" transform="translate(-19.000000, -11.000000)">
+            <g id="search-box">
+                <g id="search-icon-inline" transform="translate(16.000000, 8.000000)">
+                    <path d="M20.49,19 L14.76,13.27 C15.53,12.2 16,10.91 16,9.5 C16,5.91 13.09,3 9.5,3 C5.91,3 3,5.91 3,9.5 C3,13.09 5.91,16 9.5,16 C10.91,16 12.2,15.53 13.27,14.76 L19,20.49 L20.49,19 Z M5,9.5 C5,7.01 7.01,5 9.5,5 C11.99,5 14,7.01 14,9.5 C14,11.99 11.99,14 9.5,14 C7.01,14 5,11.99 5,9.5 Z" id="Shape" fill="#BBBBBB" fill-rule="nonzero"></path>
+                    <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

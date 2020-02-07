@@ -1,0 +1,99 @@
+#image-settings {
+  height: 100%;
+}
+
+#image-settings a {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background: #001429;
+  padding: 0px 55px 0px 20px;
+}
+
+#image-settings a img {
+  height: 40px;
+  margin-top: 10px;
+}
+
+#image-settings a img:nth-child(2) {
+  width: 40px;
+}
+
+.main-app-container .main-container .sidebar {
+  position: relative;
+}
+
+.navbar {
+  padding: 0;
+  background-color: rgb(0, 36, 68);
+  height: 7vh;
+}
+
+.collapse {
+  padding-right: 20px;
+}
+
+.nav-link {
+  color: white;
+  padding: 5px;
+}
+
+.main-app-container .collapse {
+  padding: 0;
+}
+
+.main-app-container .navbar-collapse ul li {
+  padding: 12px 20px;
+  background: #001429;
+}
+
+.main-app-container .navbar .navbar-collapse ul li.dropdown a:hover {
+  color: #ffffff;
+}
+
+.main-app-container .navbar .navbar-collapse ul li.dropdown button a {
+  color: #666666;
+}
+
+.main-app-container .navbar .navbar-collapse ul li.dropdown button a:hover {
+  color: #666666 !important;
+}
+
+.bg-navbar {
+  background: #2b475e !important;
+  box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59);
+  padding: 0;
+}
+
+.bg-top-nav {
+  background: #233f56;
+  /* box-shadow: 0 1px 12px 0 rgba(195, 203, 222, 0.59); */
+  text-align: center;
+}
+
+.account-text {
+  justify-content: center;
+  color: #ffffff;
+}
+
+.account-text:hover {
+  color: #d7d7e0;
+}
+
+.bg-dropdown-text {
+  justify-content: center;
+  text-align: center;
+  color: #233f56;
+}
+
+.center-account-text {
+  justify-content: center;
+}
+
+@media screen and (min-width: 480px) {
+  .navbar-expand-md .navbar-collapse {
+    display: flex;
+    flex-basis: 100%;
+    flex: 1;
+  }
+}

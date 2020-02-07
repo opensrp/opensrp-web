@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PregnancyHome must render correctly 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <ModuleHome
+    analysisUrl="/pregnancy_analysis"
+    compartmentUrl="/pregnancy_compartments"
+    deactivateLinks={false}
+    description="This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
+patients in your geographical location. The Module covers the whole pregnancy period
+from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
+reports/Death reports, Risk Reports, Risk alerts and ResponseReports."
+    logFaceUrl="#"
+    logfaceUrl="/pregnancy_log_face"
+    title="Welcome to the pregnancy dashboard"
+  >
+    <div
+      className="module-home-main"
+    >
+      <div
+        className="welcome-text"
+      >
+        <h1>
+          Welcome to the pregnancy dashboard
+        </h1>
+        <p>
+          This dashboard displays information collected from MIECD Viet Nam Pregnancy Module for
+patients in your geographical location. The Module covers the whole pregnancy period
+from conception to delivery and includes Pregnancy Registration, ANC visits, Birth
+reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
+        </p>
+      </div>
+      <div
+        className="components-list"
+      >
+        <div
+          className="spacer"
+        >
+          <div
+            className="home-sub-containers"
+          >
+            <div
+              className="sub-container-heading"
+            >
+              <p>
+                Log face
+              </p>
+            </div>
+            <hr />
+            <div
+              className="sub-container-message"
+            >
+              <div
+                id="cont-size"
+              >
+                <p>
+                  Display of all messages receioved from MIECD in chronological order
+                </p>
+              </div>
+              <div
+                id="cont-sized"
+              >
+                <Link
+                  to="#"
+                >
+                  <LinkAnchor
+                    href="/"
+                    navigate={[Function]}
+                  >
+                    <a
+                      href="/"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="spacer"
+        >
+          <div
+            className="home-sub-containers"
+          >
+            <div
+              className="sub-container-heading"
+            >
+              <p>
+                Compartments
+              </p>
+            </div>
+            <hr />
+            <div
+              className="sub-container-message"
+            >
+              <div
+                id="cont-size"
+              >
+                <p>
+                  This is the aggregation and categorization of patients data
+                </p>
+              </div>
+              <div
+                id="cont-sized"
+              >
+                <Link
+                  to="/pregnancy_compartments"
+                >
+                  <LinkAnchor
+                    href="/pregnancy_compartments"
+                    navigate={[Function]}
+                  >
+                    <a
+                      href="/pregnancy_compartments"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="spacer"
+        >
+          <div
+            className="home-sub-containers"
+          >
+            <div
+              className="sub-container-heading"
+            >
+              <p>
+                Analysis
+              </p>
+            </div>
+            <hr />
+            <div
+              className="sub-container-message"
+            >
+              <div
+                id="cont-size"
+              >
+                <p>
+                  Important analysis and indicators generated from collected data
+                </p>
+              </div>
+              <div
+                id="cont-sized"
+              >
+                <Link
+                  to="/pregnancy_analysis"
+                >
+                  <LinkAnchor
+                    href="/pregnancy_analysis"
+                    navigate={[Function]}
+                  >
+                    <a
+                      href="/pregnancy_analysis"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ModuleHome>
+</Router>
+`;

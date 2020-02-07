@@ -1,0 +1,11 @@
+.compartment-wrapper #breadcrumb {
+  color: #0292d3;
+}
+
+.compartment-wrapper .breadcrumb-row.row {
+  padding-left: 1.5rem;
+}
+
+.compartment-wrapper span#breadcrumb-span {
+  color: #637381;
+}

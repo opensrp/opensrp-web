@@ -1,0 +1,163 @@
+#navrow {
+  display: flex;
+  justify-content: center;
+}
+
+.village .card {
+  width: 100%;
+}
+
+.village td:first-of-type,
+.village th:first-of-type {
+  width: 9%;
+}
+
+.village .card-body {
+  padding: 0;
+}
+
+.village .table-card {
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d7d7e0;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.village .table-card thead > tr {
+  border: 1px solid #dadce0;
+}
+
+.village .card-title {
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+  color: #3a484f;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.018rem;
+  line-height: 1rem;
+  text-align: left;
+  padding: 15px 20px;
+}
+
+.village .rt-tr.-odd {
+  background-color: #f8f9fa;
+}
+
+.back-page > span > span {
+  padding-left: 15px;
+}
+
+.village .ReactTable .rt-thead.-header {
+  box-shadow: 0 0px 0px 0 #dadce0;
+}
+
+.village table td {
+  border: 1px solid #dadce0;
+  text-align: center;
+}
+
+.village a,
+.village a:hover,
+.village a:active,
+.village a:visited {
+  color: #0292d3;
+  text-decoration: none;
+}
+
+.village table td:nth-child(1) {
+  text-align: left;
+  padding-left: 1%;
+  color: #0292d3;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.village .card-title > span {
+  color: #7c7c7c;
+}
+
+.village .rt-th.rt-resizable-header.-cursor-pointer,
+.village table td {
+  color: #3a484f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  width: 57px;
+}
+
+.village .table-container table #body {
+  overflow: auto;
+}
+
+.village > h1 {
+  padding: 15px 0;
+}
+
+.village #header {
+  position: relative;
+  top: 0;
+  height: 50px;
+  border-bottom: 0.5px solid #dadce0;
+}
+
+.village .default-width {
+  width: 20%;
+  padding: 20px;
+}
+
+.village table {
+  margin: 0;
+}
+
+.village table thead tr th {
+  text-align: center;
+  color: #3a484f;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.village table tbody tr:first-child td {
+  border-top: none;
+}
+
+.village td#total,
+.village #header {
+  color: #3a484f;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.063rem;
+}
+
+.village table.table.table-borderless.table-striped,
+.village .card-title {
+  margin: 0;
+  border: none;
+}
+
+.village td.default-width {
+  border: 1px solid #dadce0;
+  margin: 0;
+}
+
+.village #no-rows > td {
+  width: 100%;
+}
+
+.village .high {
+  background-color: #ffe8e6;
+}
+
+.village .low {
+  background-color: #ffe9db;
+}
+
+.village .no {
+  background-color: rgba(55, 174, 18, 0.10000000149011612);
+}
+
+span.divider {
+  color: #0292d3 !important;
+}

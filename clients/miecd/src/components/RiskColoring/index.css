@@ -1,0 +1,60 @@
+.green {
+  background-color: rgba(152, 255, 131, 0.24);
+  border-radius: 10px;
+  border: 2px solid rgba(152, 255, 131) !important;
+}
+
+.blue {
+  background-color: rgba(138, 228, 255, 0.24);
+  border-radius: 10px;
+  border: 2px solid rgba(138, 228, 255) !important;
+}
+
+.yellow {
+  background-color: rgba(252, 255, 104, 0.24);
+  border-radius: 10px;
+  border: 2px solid rgba(252, 255, 104) !important;
+}
+
+.red {
+  background-color: rgba(255, 196, 196, 0.24);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 196, 196) !important;
+}
+
+.risk-default {
+  background-color: None;
+}
+
+.badge {
+  padding: 0;
+  width: 70px;
+  height: 24px;
+  border-radius: 1.25rem;
+}
+
+.badge div {
+  height: 100%;
+  position: relative;
+}
+
+.badge div p {
+  text-align: center;
+  position: relative;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.badge-danger {
+  background-color: #d0021b;
+}
+
+.badge-warning {
+  background-color: #ff8533;
+}
+
+.badge-info {
+  background-color: inherit;
+  color: #9596a3;
+}

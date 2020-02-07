@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/page/SideMenu renders side menu correctly 1`] = `
+<ul
+  className="side-collapse-nav nav"
+  id="Home"
+  onClick={[Function]}
+>
+  <NavItem
+    tag="li"
+  >
+    <li
+      className="nav-item"
+    >
+      <NavLink
+        className="nav nav-link side-nav-item active-collapse-menu"
+        to="/"
+      >
+        <Link
+          aria-current="page"
+          className="nav nav-link side-nav-item active-collapse-menu active"
+          style={Object {}}
+          to={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": null,
+            }
+          }
+        >
+          <LinkAnchor
+            aria-current="page"
+            className="nav nav-link side-nav-item active-collapse-menu active"
+            href="/"
+            navigate={[Function]}
+            style={Object {}}
+          >
+            <a
+              aria-current="page"
+              className="nav nav-link side-nav-item active-collapse-menu active"
+              href="/"
+              onClick={[Function]}
+              style={Object {}}
+            >
+              <FontAwesomeIcon
+                icon={
+                  Array [
+                    "fas",
+                    "home",
+                  ]
+                }
+                size="lg"
+              >
+                <i
+                  className="fa fas,home"
+                />
+              </FontAwesomeIcon>
+              <span
+                className="collapse-menu-title"
+              >
+                 
+                Home
+                 
+              </span>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </NavLink>
+    </li>
+  </NavItem>
+</ul>
+`;
+
+exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from clicks on parentNavs: Everything 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -138,11 +138,11 @@
+                    <div
+                      className=\\"side-menu-extend col\\"
+                    >
+                      <withRouter(SubMenu)
+                        childNavs={Array []}
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"0\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"fas\\",
+@@ -154,11 +154,11 @@
+                        }
+                        setCollapsedModuleLabel={[Function anonymous]}
+                      >
+                        <SubMenu
+                          childNavs={Array []}
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -341,11 +341,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/pregnancy_analysis\\",
+                            },
+                          ]
+                        }
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"1\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -372,11 +372,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/pregnancy_analysis\\",
+                              },
+                            ]
+                          }
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -503,11 +503,11 @@
+                            <Collapse
+                              appear={false}
+                              enter={true}
+                              exit={true}
+                              in={false}
+-                             isOpen={false}
++                             isOpen={true}
+                              mountOnEnter={false}
+                              onEnter={[Function noop]}
+                              onEntered={[Function noop]}
+                              onEntering={[Function noop]}
+                              onExit={[Function noop]}
+@@ -519,11 +519,11 @@
+                            >
+                              <Transition
+                                appear={false}
+                                enter={true}
+                                exit={true}
+-                               in={false}
++                               in={true}
+                                mountOnEnter={false}
+                                onEnter={[Function noop]}
+                                onEntered={[Function bound onEntered]}
+                                onEntering={[Function bound onEntering]}
+                                onExit={[Function bound onExit]}
+@@ -531,12 +531,16 @@
+                                onExiting={[Function bound onExiting]}
+                                timeout={350}
+                                unmountOnExit={false}
+                              >
+                                <div
+-                                 className=\\"collapse\\"
+-                                 style={Object {}}
++                                 className=\\"collapsing\\"
++                                 style={
++                                   Object {
++                                     \\"height\\": 0,
++                                   }
++                                 }
+                                >
+                                  <Nav
+                                    key=\\"child-nav-0\\"
+                                    tag=\\"ul\\"
+                                    vertical={false}
+@@ -728,11 +732,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/nbc_and_pnc_analysis\\",
+                            },
+                          ]
+                        }
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"2\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -759,11 +763,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/nbc_and_pnc_analysis\\",
+                              },
+                            ]
+                          }
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],
+@@ -1115,11 +1119,11 @@
+                              \\"label\\": \\"Analysis\\",
+                              \\"url\\": \\"/nutrition_analysis\\",
+                            },
+                          ]
+                        }
+-                       collapsedModuleLabel=\\"\\"
++                       collapsedModuleLabel=\\"Pregnancy\\"
+                        key=\\"3\\"
+                        parentNav={
+                          Object {
+                            \\"icon\\": Array [
+                              \\"far\\",
+@@ -1146,11 +1150,11 @@
+                                \\"label\\": \\"Analysis\\",
+                                \\"url\\": \\"/nutrition_analysis\\",
+                              },
+                            ]
+                          }
+-                         collapsedModuleLabel=\\"\\"
++                         collapsedModuleLabel=\\"Pregnancy\\"
+                          history={
+                            Object {
+                              \\"action\\": \\"POP\\",
+                              \\"block\\": [Function block],
+                              \\"createHref\\": [Function createHref],"
+`;

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataCircleCard must render correctly 1`] = `
+<Card
+  className="dataCircleCard "
+  tag="div"
+>
+  <div
+    className="dataCircleCard  card"
+  >
+    <CardTitle
+      tag="div"
+    >
+      <div
+        className="card-title"
+      >
+        <Link
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+        >
+          <LinkAnchor
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
+            onClick={[Function]}
+          >
+            <a
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
+            >
+              test title
+            </a>
+          </LinkAnchor>
+        </Link>
+      </div>
+    </CardTitle>
+    <CardBody
+      className="circlesRow"
+      tag="div"
+    >
+      <div
+        className="circlesRow card-body"
+      >
+        <Link
+          className="red circle"
+          key="0"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+        >
+          <LinkAnchor
+            className="red circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
+            onClick={[Function]}
+          >
+            <a
+              className="red circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
+            >
+              <span
+                className="number"
+              />
+              <span
+                className="risk-level"
+              >
+                Red Alert
+              </span>
+            </a>
+          </LinkAnchor>
+        </Link>
+        <Link
+          className="yellow circle"
+          key="1"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+        >
+          <LinkAnchor
+            className="yellow circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
+            onClick={[Function]}
+          >
+            <a
+              className="yellow circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
+            >
+              <span
+                className="number"
+              />
+              <span
+                className="risk-level"
+              >
+                risk
+              </span>
+            </a>
+          </LinkAnchor>
+        </Link>
+        <Link
+          className="green circle"
+          key="2"
+          onClick={[Function]}
+          to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+        >
+          <LinkAnchor
+            className="green circle"
+            href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
+            onClick={[Function]}
+          >
+            <a
+              className="green circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
+            >
+              <span
+                className="number"
+              >
+                10
+              </span>
+              <span
+                className="risk-level"
+              >
+                No Risk
+              </span>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </div>
+    </CardBody>
+  </div>
+</Card>
+`;

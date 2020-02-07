@@ -1,0 +1,59 @@
+.dataItem {
+  border: 1px solid black;
+  width: 20rem;
+}
+
+.right {
+  text-align: right;
+  color: #637381;
+}
+
+.left {
+  text-align: left;
+  color: #001429;
+}
+
+.row {
+  margin: auto;
+}
+
+#detailsRow {
+  width: 100%;
+}
+
+#detailsCard {
+  width: 100%;
+}
+
+#detailsCard .row {
+  margin: 0 !important;
+}
+
+#detailsRow #detailsCard table,
+#detailsRow #detailsCard table td {
+  border: none;
+  background: #ffffff;
+  font-size: 18px;
+}
+
+#detailsRow #detailsCard table td:first-child {
+  color: #637381;
+  text-align: right;
+}
+
+#detailsRow #detailsCard table td:nth-child(2) {
+  color: #001429;
+}
+
+.card-title {
+  background-color: #ffffff;
+  color: #3a484f;
+  border-bottom: 1px solid #dadce0;
+  font-family: Roboto;
+  font-size: 1.636rem;
+  font-weight: 500;
+  letter-spacing: -0.018rem;
+  line-height: 2rem;
+  text-align: left;
+  padding: 0.5em 1rem;
+}

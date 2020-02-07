@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasicInformation must render correctly 1`] = `
+<BasicInformation
+  labelValuePairs={
+    Array [
+      Object {
+        "label": "currentEdd",
+        "value": "test edd",
+      },
+      Object {
+        "label": "currentGravidity",
+        "value": 20,
+      },
+      Object {
+        "label": "currentParity",
+        "value": 20,
+      },
+      Object {
+        "label": "id",
+        "value": "test",
+      },
+      Object {
+        "label": "location",
+        "value": "Test Location",
+      },
+      Object {
+        "label": "previousPregnancyRisk",
+        "value": "no risk",
+      },
+    ]
+  }
+>
+  <Row
+    id="detailsRow"
+    tag="div"
+    widths={
+      Array [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+      ]
+    }
+  >
+    <div
+      className="row"
+      id="detailsRow"
+    >
+      <Card
+        id="detailsCard"
+        tag="div"
+      >
+        <div
+          className="card"
+          id="detailsCard"
+        >
+          <CardTitle
+            tag="div"
+          >
+            <div
+              className="card-title"
+            >
+              Basic Information
+            </div>
+          </CardTitle>
+          <Row
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="row"
+            >
+              <Col
+                className="detailsColumn"
+                lg="6"
+                sm="12"
+                tag="div"
+                widths={
+                  Array [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl",
+                  ]
+                }
+              >
+                <div
+                  className="detailsColumn col-sm-12 col-lg-6"
+                >
+                  <Table
+                    borderless={true}
+                    responsiveTag="div"
+                    tag="table"
+                  >
+                    <table
+                      className="table table-borderless"
+                    >
+                      <tbody>
+                        <tr
+                          key="1"
+                        >
+                          <td>
+                            currentGravidity
+                          </td>
+                          <td>
+                            20
+                          </td>
+                        </tr>
+                        <tr
+                          key="3"
+                        >
+                          <td>
+                            id
+                          </td>
+                          <td>
+                            test
+                          </td>
+                        </tr>
+                        <tr
+                          key="5"
+                        >
+                          <td>
+                            previousPregnancyRisk
+                          </td>
+                          <td>
+                            no risk
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Table>
+                </div>
+              </Col>
+              <Col
+                className="detailsColumn"
+                lg="6"
+                sm="12"
+                tag="div"
+                widths={
+                  Array [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl",
+                  ]
+                }
+              >
+                <div
+                  className="detailsColumn col-sm-12 col-lg-6"
+                >
+                  <Table
+                    borderless={true}
+                    responsiveTag="div"
+                    tag="table"
+                  >
+                    <table
+                      className="table table-borderless"
+                    >
+                      <tbody>
+                        <tr
+                          key="0"
+                        >
+                          <td>
+                            currentEdd
+                          </td>
+                          <td>
+                            test edd
+                          </td>
+                        </tr>
+                        <tr
+                          key="2"
+                        >
+                          <td>
+                            currentParity
+                          </td>
+                          <td>
+                            20
+                          </td>
+                        </tr>
+                        <tr
+                          key="4"
+                        >
+                          <td>
+                            location
+                          </td>
+                          <td>
+                            Test Location
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Table>
+                </div>
+              </Col>
+            </div>
+          </Row>
+        </div>
+      </Card>
+    </div>
+  </Row>
+</BasicInformation>
+`;

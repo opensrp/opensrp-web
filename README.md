@@ -9,8 +9,8 @@ OpenSRP web is the web interface to the OpenSRP server. OpenSRP uses OpenMRS bac
 
 The structure of this repository is inherited from [create-react-app](https://github.com/facebook/create-react-app).
 
-- We try follow the [BEM](https://en.bem.info/methodology/quick-start/) or Block Element Modifier guidelines for CSS.
-- We strictly follow the [three principles of redux](https://redux.js.org/introduction/three-principles).
+-   We try follow the [BEM](https://en.bem.info/methodology/quick-start/) or Block Element Modifier guidelines for CSS.
+-   We strictly follow the [three principles of redux](https://redux.js.org/introduction/three-principles).
 
 ## Getting started
 
@@ -55,8 +55,8 @@ This is because, clients may each have a separate `.env` files.
 
 The configurations are located in the `configs` directory and are split into two modules:
 
-- **env.ts**: this module reads configurations from environment variables
-- **settings.ts**: this module holds more complicated configurations
+-   **env.ts**: this module reads configurations from environment variables
+-   **settings.ts**: this module holds more complicated configurations
 
 ## Creating a new package/
 
@@ -119,35 +119,35 @@ Here's an example sample `package.json` for a package:
 
 ```json
 {
-  "name": "@opensrp/my-new-package",
-  "version": "0.0.0",
-  "description": "My new my-new-package",
-  "main": "dist/index.js",
-  "types": "dist/types",
-  "files": ["dist"],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/opensrp/opensrp-web",
-  "scripts": {
-    "jest": "jest --coverage --verbose --color",
-    "test": "cd ../../ && yarn test packages/opensrp-server-service --verbose --collectCoverage=true && cd packages/opensrp-server-service",
-    "lint": "eslint './**/*.{js,jsx,ts,tsx}'",
-    "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
-  },
-  "jest": {
-    "automock": false,
-    "setupFiles": ["../../setupTests"]
-  },
-  "bugs": {
-    "url": "https://github.com/opensrp/opensrp-web/issues"
-  },
-  "author": "Ona Engineering",
-  "license": "Apache-2.0",
-  "private": false,
-  "dependencies": {
-    "@onaio/session-reducer": "^0.0.11"
-  }
+    "name": "@opensrp/my-new-package",
+    "version": "0.0.0",
+    "description": "My new my-new-package",
+    "main": "dist/index.js",
+    "types": "dist/types",
+    "files": ["dist"],
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": "https://github.com/opensrp/opensrp-web",
+    "scripts": {
+        "jest": "jest --coverage --verbose --color",
+        "test": "cd ../../ && yarn test packages/opensrp-server-service --verbose --collectCoverage=true && cd packages/opensrp-server-service",
+        "lint": "eslint './**/*.{js,jsx,ts,tsx}'",
+        "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
+    },
+    "jest": {
+        "automock": false,
+        "setupFiles": ["../../setupTests"]
+    },
+    "bugs": {
+        "url": "https://github.com/opensrp/opensrp-web/issues"
+    },
+    "author": "Ona Engineering",
+    "license": "Apache-2.0",
+    "private": false,
+    "dependencies": {
+        "@onaio/session-reducer": "^0.0.11"
+    }
 }
 ```
 
@@ -155,12 +155,12 @@ Additionally, a new package must have a `tsconfig.json` file that looks like so:
 
 ```json
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "declarationDir": "dist/types"
-  },
-  "include": ["src"]
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "declarationDir": "dist/types"
+    },
+    "include": ["src"]
 }
 ```
 

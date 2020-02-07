@@ -1,0 +1,342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReportTable must render correctly 1`] = `
+<tbody
+  className="body"
+>
+  <tr
+    className="listview-tr"
+    key="0"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Pregnancy Registration",
+          "2019-09-25",
+          "Husna Hariz",
+          "EDD = 2019-04-01
+Gravidity = 3
+Parity = 2
+Weight = 54 
+Height = 160
+Previous Gynaecology History = Diabetes, High blood pressure
+Current Symptoms = Flaccid Paralysis",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Pregnancy Registration
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-25
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        EDD = 2019-04-01
+Gravidity = 3
+Parity = 2
+Weight = 54 
+Height = 160
+Previous Gynaecology History = Diabetes, High blood pressure
+Current Symptoms = Flaccid Paralysis
+      </td>
+    </ElementMap>
+  </tr>
+  <tr
+    className="listview-tr"
+    key="1"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Birth Report",
+          "2019-09-25",
+          "Husna Hariz",
+          "Child DOB = 2020-01-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Birth Report
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-25
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        Child DOB = 2020-01-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour
+      </td>
+    </ElementMap>
+  </tr>
+  <tr
+    className="listview-tr"
+    key="2"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Birth Report",
+          "2019-09-25",
+          "Husna Hariz",
+          "Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Birth Report
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-25
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour
+      </td>
+    </ElementMap>
+  </tr>
+  <tr
+    className="listview-tr"
+    key="3"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Birth Report",
+          "2019-09-27",
+          "Husna Hariz",
+          "Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Birth Report
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-27
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour
+      </td>
+    </ElementMap>
+  </tr>
+  <tr
+    className="listview-tr"
+    key="4"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Birth Report",
+          "2019-09-27",
+          "Husna Hariz",
+          "Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Birth Report
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-27
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour
+      </td>
+    </ElementMap>
+  </tr>
+  <tr
+    className="listview-tr"
+    key="5"
+  >
+    <ElementMap
+      HTMLTag="td"
+      className="listview-th"
+      items={
+        Array [
+          "Birth Report",
+          "2019-09-27",
+          "Husna Hariz",
+          "Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour",
+        ]
+      }
+    >
+      <td
+        className="listview-th"
+        key="0"
+      >
+        Birth Report
+      </td>
+      <td
+        className="listview-th"
+        key="1"
+      >
+        2019-09-27
+      </td>
+      <td
+        className="listview-th"
+        key="2"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="listview-th"
+        key="3"
+      >
+        Child DOB = 2020-04-01 
+Child Gender = M 
+Delivery Location = District hospitals/CDC 
+Newborn Symptoms = Hypothermia, Fever 
+Child Weight = 25 
+Child Length = 31 
+Child Risk = red_alert 
+Breastfeeding = Breastfeeding during 1st hour
+      </td>
+    </ElementMap>
+  </tr>
+</tbody>
+`;

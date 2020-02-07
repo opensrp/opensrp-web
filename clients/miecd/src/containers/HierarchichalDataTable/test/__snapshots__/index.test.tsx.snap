@@ -1,0 +1,1474 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HierarchichalDataTable must show the no record message when there's no data to show for a commune: norecord 1`] = `null`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 1`] = `
+<Table
+  borderless={true}
+  responsiveTag="div"
+  striped={true}
+  tag="table"
+>
+  <table
+    className="table table-borderless table-striped"
+  >
+    <thead
+      id="header"
+    >
+      <tr>
+        <th
+          className="default-width"
+        />
+        <th
+          className="default-width"
+        >
+          Red Alert
+        </th>
+        <th
+          className="default-width"
+        >
+          risk
+        </th>
+        <th
+          className="default-width"
+        >
+          No Risk
+        </th>
+        <th
+          className="default-width"
+        >
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      id="body"
+    >
+      <tr
+        key="d79168ed-ae95-43d1-8e45-9078212815f6"
+        onClick={[Function]}
+      >
+        <td
+          className="default-width"
+        >
+          Lang Son Province
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width"
+        >
+          0
+        </td>
+      </tr>
+      <tr
+        key="c13b5c95-55c3-4848-9509-b82596274d96"
+        onClick={[Function]}
+      >
+        <td
+          className="default-width"
+        >
+          Dien Bien
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width"
+        >
+          0
+        </td>
+      </tr>
+      <tr
+        key="78a12165-3c12-471f-8755-c96bac123292"
+        onClick={[Function]}
+      >
+        <td
+          className="default-width"
+        >
+          Hanoi
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          9
+        </td>
+        <td
+          className="default-width "
+        >
+          6
+        </td>
+        <td
+          className="default-width"
+        >
+          25
+        </td>
+      </tr>
+      <tr
+        key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+        onClick={[Function]}
+      >
+        <td
+          className="default-width"
+        >
+          Loc Binh
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width "
+        >
+          0
+        </td>
+        <td
+          className="default-width"
+        >
+          0
+        </td>
+      </tr>
+      <tr
+        key="total"
+      >
+        <td
+          className="default-width"
+          id="total"
+        >
+          Total(
+          Province
+          )
+        </td>
+        <td
+          className="default-width "
+        >
+          10
+        </td>
+        <td
+          className="default-width "
+        >
+          9
+        </td>
+        <td
+          className="default-width "
+        >
+          6
+        </td>
+        <td
+          className="default-width"
+        >
+          25
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</Table>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 2`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 3`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 4`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 5`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 6`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 7`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 8`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`HierarchichalDataTable renders correctly: hierarchichalDataTable 9`] = `
+<tbody
+  id="body"
+>
+  <tr
+    key="d79168ed-ae95-43d1-8e45-9078212815f6"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Lang Son Province
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="c13b5c95-55c3-4848-9509-b82596274d96"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Dien Bien
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="78a12165-3c12-471f-8755-c96bac123292"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Hanoi
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+  <tr
+    key="f7d1d9bb-95dc-43bc-8434-0dddd1f3d374"
+    onClick={[Function]}
+  >
+    <td
+      className="default-width"
+    >
+      Loc Binh
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width "
+    >
+      0
+    </td>
+    <td
+      className="default-width"
+    >
+      0
+    </td>
+  </tr>
+  <tr
+    key="total"
+  >
+    <td
+      className="default-width"
+      id="total"
+    >
+      Total(
+      Province
+      )
+    </td>
+    <td
+      className="default-width "
+    >
+      10
+    </td>
+    <td
+      className="default-width "
+    >
+      9
+    </td>
+    <td
+      className="default-width "
+    >
+      6
+    </td>
+    <td
+      className="default-width"
+    >
+      25
+    </td>
+  </tr>
+</tbody>
+`;

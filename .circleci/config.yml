@@ -21,7 +21,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
+      - run: cd clients/miecd && yarn install
 
       - save_cache:
           paths:
@@ -36,6 +36,9 @@ jobs:
       - run:
           name: Run test with coverage for clients/core
           command: cp clients/core/.env.sample ./.env && yarn test clients/core --verbose --collectCoverage=true --forceExit --detectOpenHandles && rm ./.env && cp ./coverage/coverage-final.json ./coverage/coverage-clients-core-final.json
+      - run:
+         name: Run test with coverage for clients/miecd
+         command: cp clients/miecd/.env.sample ./.env && yarn test clients/miecd --verbose --collectCoverage=true --forceExit --detectOpenHandles && rm ./.env && cp ./coverage/coverage-final.json ./coverage/coverage-clients-miecd-final.json
       - run:
           name: Run test with coverage for the packages
           command: yarn test packages --verbose --collectCoverage=true --forceExit --detectOpenHandles && cp ./coverage/coverage-final.json ./coverage/coverage-packages-final.json && node ./mapCoverage.js

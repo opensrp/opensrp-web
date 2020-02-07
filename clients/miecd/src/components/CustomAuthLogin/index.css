@@ -1,0 +1,131 @@
+.main-app-container .login-row {
+  background: #00aeef;
+}
+
+.main-app-container .login-row .child {
+  max-width: 120%;
+  height: 100vh;
+}
+
+.main-app-container .login-row div[class='col-lg'] {
+  padding: 0;
+  overflow: hidden;
+}
+
+.main-app-container .login-row .col-6 .row {
+  height: 100vh;
+}
+
+.main-app-container .login-row .center {
+  background: white;
+  border-radius: 1%;
+  border: 2px solid #dadce0;
+  margin: auto;
+  width: 70%;
+  height: auto;
+  position: relative;
+  top: 25%;
+}
+
+.main-app-container .login-row .logo {
+  top: 7%;
+  margin: auto;
+  width: 70%;
+  position: relative;
+}
+
+.main-app-container .login-row .center h1 {
+  width: 90%;
+  color: #1b314b;
+  font-size: 40px;
+  margin: auto;
+  margin-top: 7%;
+}
+
+.main-app-container .login-row .center p {
+  width: 90%;
+  margin: auto;
+}
+
+.main-app-container .login-row input {
+  display: block;
+  width: 90%;
+}
+
+.main-app-container .login-row .MuiFormControl-root {
+  display: block !important;
+  margin: 0 !important;
+  margin: 5% 0 5% 0 !important;
+}
+
+.main-app-container .login-row .MuiInputBase-root {
+  width: 100%;
+}
+
+.main-app-container .login-row form {
+  width: 90%;
+  margin: auto !important;
+}
+
+.login-row .unicef {
+  float: right;
+  width: 30%;
+}
+
+.main-app-container .login-row .moh {
+  float: right;
+  width: 12%;
+}
+
+.main-app-container .login-row .forgot-password {
+  color: #1cabe2 !important;
+}
+
+.main-app-container .login-row button {
+  margin: 5% 0 5% 0 !important;
+  background-color: #1cabe2 !important;
+  margin-bottom: 11% !important;
+}
+
+.main-app-container .login-row .gatekeeper-btn {
+  max-width: 100% !important;
+  text-align: center;
+  background: linear-gradient(#0e9dd4, #1cabe2);
+}
+
+.main-app-container .login-row div.gatekeeper-login {
+  margin-top: 0 !important;
+}
+
+.main-app-container .login-row h3 {
+  margin-top: 6%;
+  margin-left: 7%;
+  color: #1b314b;
+}
+
+.main-app-container .login-row p {
+  margin-bottom: 1rem !important;
+}
+
+.main-app-container .login-row .login-section {
+  background: url('../../assets/images/unicef-logo-bg.svg') center no-repeat;
+  background-position: left 0px top 25%;
+}
+
+.main-app-container .login-row .image {
+  background: url('../../assets/images/child-hero.jpg') center no-repeat;
+  background-size: cover;
+}
+
+html {
+  height: 100%;
+}
+
+div#openSRP-root {
+  height: 100%;
+  width: 100%;
+}
+
+.main-app-container .login-row.row {
+  height: 100%;
+}

@@ -1,0 +1,60 @@
+.side-collapse-nav.nav {
+  cursor: pointer;
+  max-width: initial !important;
+}
+
+.nav-item-extend {
+  width: 100%;
+  padding-left: 20px;
+}
+
+.collapse-menu-title {
+  padding-left: 12px;
+}
+
+.active-collapse-menu {
+  color: #0192d4 !important;
+}
+
+.active-collapse-menu:hover {
+  color: #0192d4 !important;
+}
+
+.side-nav-active {
+  border-right: 4px solid #209fd9;
+}
+
+.side-menu-container .side-menu-extend ul.nav .collapse.show {
+  padding-right: initial;
+  padding-left: 33px;
+}
+
+.side-nav-item.nav {
+  max-width: initial;
+  background-color: initial;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.side-nav-item.nav:hover {
+  color: #0192d4 !important;
+}
+
+.side-nav-item.nav svg {
+  width: 24px;
+  height: 20px;
+}
+
+.side-menu-container .collapse {
+  padding-right: initial;
+  padding-left: 33px;
+}
+
+.side-menu-container .active-collapse-menu path {
+  fill: #0192d4;
+}
+
+.side-menu-container path {
+  fill: #1b314b;
+}

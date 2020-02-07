@@ -1,0 +1,1306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/LogFace renders correctly: filter div 1`] = `
+Array [
+  <div
+    className="location-type-filter"
+  >
+    <span>
+      Risk Level
+    </span>
+    <Dropdown
+      a11y={true}
+      active={false}
+      addonType={false}
+      direction="down"
+      inNavbar={false}
+      isOpen={false}
+      nav={false}
+      setActiveFromChild={false}
+      toggle={[Function]}
+    >
+      <Manager>
+        <div
+          className="dropdown"
+          onKeyDown={[Function]}
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            caret={true}
+            color="secondary"
+            disabled={false}
+            id="dropdown-basic"
+            variant="success"
+          >
+            <Reference>
+              <InnerReference
+                setReferenceNode={[Function]}
+              >
+                <Button
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  className="dropdown-toggle"
+                  color="secondary"
+                  disabled={false}
+                  id="dropdown-basic"
+                  innerRef={[Function]}
+                  onClick={[Function]}
+                  tag="button"
+                  variant="success"
+                >
+                  <button
+                    aria-expanded={false}
+                    aria-haspopup={true}
+                    aria-label={null}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
+                    id="dropdown-basic"
+                    onClick={[Function]}
+                    type="button"
+                    variant="success"
+                  >
+                    <span>
+                      Select risk
+                    </span>
+                  </button>
+                </Button>
+              </InnerReference>
+            </Reference>
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            tag="div"
+          >
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <DropdownItem
+                key="red"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  red
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="high"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  high
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="low"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  low
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="no risk"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  no risk
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
+                </button>
+              </DropdownItem>
+            </div>
+          </DropdownMenu>
+        </div>
+      </Manager>
+    </Dropdown>
+  </div>,
+  <div
+    className="location-type-filter"
+  >
+    <span>
+      Select Location
+    </span>
+    <Dropdown
+      a11y={true}
+      active={false}
+      addonType={false}
+      direction="down"
+      inNavbar={false}
+      isOpen={false}
+      nav={false}
+      setActiveFromChild={false}
+      toggle={[Function]}
+    >
+      <Manager>
+        <div
+          className="dropdown"
+          onKeyDown={[Function]}
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            caret={true}
+            color="secondary"
+            disabled={false}
+            id="dropdown-basic"
+            variant="success"
+          >
+            <Reference>
+              <InnerReference
+                setReferenceNode={[Function]}
+              >
+                <Button
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  className="dropdown-toggle"
+                  color="secondary"
+                  disabled={false}
+                  id="dropdown-basic"
+                  innerRef={[Function]}
+                  onClick={[Function]}
+                  tag="button"
+                  variant="success"
+                >
+                  <button
+                    aria-expanded={false}
+                    aria-haspopup={true}
+                    aria-label={null}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
+                    id="dropdown-basic"
+                    onClick={[Function]}
+                    type="button"
+                    variant="success"
+                  >
+                    <span>
+                      Select Location
+                    </span>
+                  </button>
+                </Button>
+              </InnerReference>
+            </Reference>
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            tag="div"
+          >
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <DropdownItem
+                key="Yen Phu Village"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Yen Phu Village
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
+                </button>
+              </DropdownItem>
+            </div>
+          </DropdownMenu>
+        </div>
+      </Manager>
+    </Dropdown>
+  </div>,
+  <div
+    className="location-type-filter"
+  >
+    <span>
+      Type
+    </span>
+    <Dropdown
+      a11y={true}
+      active={false}
+      addonType={false}
+      direction="down"
+      inNavbar={false}
+      isOpen={false}
+      nav={false}
+      setActiveFromChild={false}
+      toggle={[Function]}
+    >
+      <Manager>
+        <div
+          className="dropdown"
+          onKeyDown={[Function]}
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            caret={true}
+            color="secondary"
+            disabled={false}
+            id="dropdown-basic"
+            variant="success"
+          >
+            <Reference>
+              <InnerReference
+                setReferenceNode={[Function]}
+              >
+                <Button
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  className="dropdown-toggle"
+                  color="secondary"
+                  disabled={false}
+                  id="dropdown-basic"
+                  innerRef={[Function]}
+                  onClick={[Function]}
+                  tag="button"
+                  variant="success"
+                >
+                  <button
+                    aria-expanded={false}
+                    aria-haspopup={true}
+                    aria-label={null}
+                    className="dropdown-toggle btn btn-secondary"
+                    disabled={false}
+                    id="dropdown-basic"
+                    onClick={[Function]}
+                    type="button"
+                    variant="success"
+                  >
+                    <span>
+                      Select Type
+                    </span>
+                  </button>
+                </Button>
+              </InnerReference>
+            </Reference>
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            tag="div"
+          >
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <DropdownItem
+                key="Response Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Response Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Red Alert Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Red Alert Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Social Determinants"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Social Determinants
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="ANC Visit"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  ANC Visit
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Delivery Planning"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Delivery Planning
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Pregnancy Detection"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Pregnancy Detection
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Pregnancy Identification"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Pregnancy Identification
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Pregnancy registration"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Pregnancy registration
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="ANC Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  ANC Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Home Visit Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Home Visit Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Birth Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Birth Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Death Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Death Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Postnatal and Newborn Care"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Postnatal and Newborn Care
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Nutrition Registration"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Nutrition Registration
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Nutrition Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Nutrition Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Monthly Nutrition Report"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Monthly Nutrition Report
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Departure Code"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Departure Code
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Refusal Code"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Refusal Code
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="Account Check"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  Account Check
+                </button>
+              </DropdownItem>
+              <DropdownItem
+                key="all"
+                onClick={[Function]}
+                tag="button"
+                toggle={true}
+              >
+                <button
+                  className="dropdown-item"
+                  onClick={[Function]}
+                  role="menuitem"
+                  tabIndex="0"
+                  type="button"
+                >
+                  all
+                </button>
+              </DropdownItem>
+            </div>
+          </DropdownMenu>
+        </div>
+      </Manager>
+    </Dropdown>
+  </div>,
+]
+`;
+
+exports[`containers/LogFace renders correctly: logface title 1`] = `
+<h2
+  id="logface_title"
+>
+  Log Face - Pregnancy
+</h2>
+`;
+
+exports[`containers/LogFace renders correctly: paginator 1`] = `
+<div
+  className="paginator"
+>
+  <Paginator
+    ariaLabel="page navigation"
+    endLabel="last"
+    nextLabel="next"
+    onPageChange={[Function]}
+    pageLimit={5}
+    pageNeighbours={3}
+    previousLabel="previous"
+    startLabel="first"
+    totalRecords={32}
+  >
+    <BasePaginator
+      ariaLabel="page navigation"
+      currentPage={1}
+      endLabel="last"
+      nextLabel="next"
+      onPageChange={[Function]}
+      pageChangeHandler={[Function]}
+      pageLimit={5}
+      pageNeighbours={3}
+      previousLabel="previous"
+      startLabel="first"
+      totalRecords={32}
+    >
+      <Pagination
+        aria-label="page navigation"
+        listTag="ul"
+        size="sm"
+        tag="nav"
+      >
+        <nav
+          aria-label="page navigation"
+          className=""
+        >
+          <ul
+            className="pagination pagination-sm"
+          >
+            <PaginationItem
+              className="page-item disabled"
+              tag="li"
+            >
+              <li
+                className="page-item disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="first"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="first"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      first
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      first
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item disabled"
+              tag="li"
+            >
+              <li
+                className="page-item disabled page-item"
+              >
+                <PaginationLink
+                  aria-label="previous"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="previous"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      previous
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      previous
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item  active"
+              key="0"
+              tag="li"
+            >
+              <li
+                className="page-item  active page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    1
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="1"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    2
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="2"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    3
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              key="3"
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    4
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item  "
+              tag="li"
+            >
+              <li
+                className="page-item   page-item"
+              >
+                <PaginationLink
+                  aria-label="next"
+                  className="page-link"
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="next"
+                    className="page-link page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      next
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      next
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+            <PaginationItem
+              className="page-item "
+              tag="li"
+            >
+              <li
+                className="page-item  page-item"
+              >
+                <PaginationLink
+                  aria-label="last"
+                  className="page-link "
+                  href="#"
+                  onClick={[Function]}
+                  tag="a"
+                >
+                  <a
+                    aria-label="last"
+                    className="page-link  page-link"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      last
+                    </span>
+                    <span
+                      className="sr-only"
+                    >
+                      last
+                    </span>
+                  </a>
+                </PaginationLink>
+              </li>
+            </PaginationItem>
+          </ul>
+        </nav>
+      </Pagination>
+    </BasePaginator>
+  </Paginator>
+</div>
+`;
+
+exports[`containers/LogFace renders correctly: search div 1`] = `
+<input
+  className="form-control logface-search"
+  disabled={false}
+  id="input"
+  name="input"
+  onBlur={[Function]}
+  onChange={[Function]}
+  placeholder="Search ID, Reporter, Patients"
+  type="text"
+/>
+`;
+
+exports[`containers/LogFace renders correctly: table snapshot 1`] = `
+<table
+  className="table table-borderless table-striped"
+>
+  <thead
+    id="header"
+  >
+    <tr>
+      <th
+        className="default-width"
+      >
+        Event Date
+      </th>
+      <th
+        className="default-width"
+      >
+        Location
+      </th>
+      <th
+        className="default-width"
+      >
+        SMS Type
+      </th>
+      <th
+        className="default-width"
+      >
+        Reporter
+      </th>
+      <th
+        className="default-width"
+      >
+        Patient
+      </th>
+      <th
+        className="small-width"
+      >
+        Age
+      </th>
+      <th
+        className="large-width"
+      >
+        Message
+      </th>
+      <th
+        className="default-width"
+      >
+        Risk Level
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    id="body"
+  >
+    <tr
+      key="1570173602178"
+    >
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Response Report
+      </td>
+      <td
+        className="default-width"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              100P9K-20191001-01
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        3d
+      </td>
+      <td
+        className="large-width"
+      >
+        Symptoms = No symptoms  
+Intervention = Ambulance On Time 
+Health Status = 
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              <riskColoring
+                risk="no risk"
+              >
+                <span
+                  className="badge badge-success"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      No Risk
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+    </tr>
+    <tr
+      key="1570173399115"
+    >
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Red Alert Report
+      </td>
+      <td
+        className="default-width"
+      >
+        Husna Hariz
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              100P9K-20191001-01
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        3d
+      </td>
+      <td
+        className="large-width"
+      >
+        Symptoms = Coughing, Fever 
+Location = At home 
+Interventions = 
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              <riskColoring
+                risk="red"
+              >
+                <span
+                  className="badge badge-danger"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      Red Alert
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+    </tr>
+    <tr
+      key="1570171129630"
+    >
+      <td
+        className="default-width"
+      >
+        2019-10-04
+      </td>
+      <td
+        className="default-width"
+      >
+        Yen Phu Village
+      </td>
+      <td
+        className="default-width"
+      >
+        Pregnancy Registration
+      </td>
+      <td
+        className="default-width"
+      >
+        HMN
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/patient_detail/100PAH"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/patient_detail/100PAH"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/patient_detail/100PAH"
+              onClick={[Function]}
+            >
+              100PAH
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+      <td
+        className="small-width"
+      >
+        30y 9m
+      </td>
+      <td
+        className="large-width"
+      >
+        EDD = 09-10-2019
+Gravidity = 3
+Parity = 1
+Weight = 55 
+Height = 145
+BMI = 26
+Previous Gynaecology History = Previous pregnancy too close or too far, Home Delivery
+Current Symptoms = Heavy sweating, Coughing
+      </td>
+      <td
+        className="default-width"
+      >
+        <Link
+          to="/pregnancy_log_face/patient_detail/100PAH"
+        >
+          <LinkAnchor
+            href="/pregnancy_log_face/patient_detail/100PAH"
+            navigate={[Function]}
+          >
+            <a
+              href="/pregnancy_log_face/patient_detail/100PAH"
+              onClick={[Function]}
+            >
+              <riskColoring
+                risk="red"
+              >
+                <span
+                  className="badge badge-danger"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      Red Alert
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

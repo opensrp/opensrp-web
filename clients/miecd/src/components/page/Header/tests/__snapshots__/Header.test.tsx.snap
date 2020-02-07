@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/page/Header renders header correctly when authenticated: Sign Out 1`] = `
+<NavLink
+  activeClassName="active"
+  className="nav-link"
+  to="/logout"
+>
+  <Link
+    aria-current={null}
+    className="nav-link"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/logout",
+        "search": "",
+        "state": null,
+      }
+    }
+  >
+    <LinkAnchor
+      aria-current={null}
+      className="nav-link"
+      href="/logout"
+      navigate={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/logout"
+        onClick={[Function]}
+      >
+        Sign Out
+      </a>
+    </LinkAnchor>
+  </Link>
+</NavLink>
+`;
+
+exports[`components/page/Header renders header correctly: Login 1`] = `
+<NavLink
+  activeClassName="active"
+  className="nav-link"
+  to="/login"
+>
+  <Link
+    aria-current={null}
+    className="nav-link"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/login",
+        "search": "",
+        "state": null,
+      }
+    }
+  >
+    <LinkAnchor
+      aria-current={null}
+      className="nav-link"
+      href="/login"
+      navigate={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </LinkAnchor>
+  </Link>
+</NavLink>
+`;
