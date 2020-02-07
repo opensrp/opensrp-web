@@ -28,8 +28,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: cd clients/miecd &&  yarn test --verbose --coverage=true --forceExit --detectOpenHandles
       # run linter
       - run:
           name: Run linter
