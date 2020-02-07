@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /** A bootstrap powered pagination component
  * inspired by https://scotch.io/tutorials/build-custom-pagination-with-react
  */

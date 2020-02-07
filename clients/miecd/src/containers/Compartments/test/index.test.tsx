@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';

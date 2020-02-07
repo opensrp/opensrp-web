@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 const groupedSmsData = {
     '1569423656162': {
         EventDate: '2019-09-25',
@@ -178,11 +179,11 @@ Contact = 1`,
         location_id: '1234567890987654321',
         location_of_death: ' NULL',
         logface_risk: ' NULL',
-        message: `Blood Pressure = 118-78 
-Weight = 80 
-Current Symptoms = No symptoms 
-Supplements = Takes Supplements 
-Risk = No Risk 
+        message: `Blood Pressure = 118-78
+Weight = 80
+Current Symptoms = No symptoms
+Supplements = Takes Supplements
+Risk = No Risk
 Contact = 2`,
         micronutrients: ' NULL',
         mother_symptoms: 'No symptoms',

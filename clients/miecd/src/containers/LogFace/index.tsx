@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import superset from '@onaio/superset-connector';
 import { Field, Formik } from 'formik';
@@ -132,7 +134,6 @@ export const LogFace = ({
     useEffect(() => {
         removeFilterArgs();
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -159,7 +160,6 @@ export const LogFace = ({
                 clearInterval(intervalId);
             }
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [dropdownOpenRiskLevel, setDropdownOpenRiskLevel] = useState<boolean>(false);
@@ -214,7 +214,6 @@ export const LogFace = ({
                 }
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         userLocationData,
         userUUID,
@@ -244,7 +243,6 @@ export const LogFace = ({
             }).sort(sortFunction),
         );
         resetCurrentPage();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locationLabel, riskLabel, typeLabel]);
 
     useEffect(() => {
@@ -255,7 +253,6 @@ export const LogFace = ({
                 typeLabel,
             }).sort(sortFunction),
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterString]);
 
     const handleRiskLevelDropdownClick = (event: React.MouseEvent) => {

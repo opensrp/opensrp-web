@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 // tslint:disable object-literal-sort-keys
 import { SmsData } from '../../../store/ducks/sms_events';
 

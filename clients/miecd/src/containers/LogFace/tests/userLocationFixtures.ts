@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { UserLocation } from '../../../store/ducks/locations';
 
 // tslint:disable object-literal-sort-keys

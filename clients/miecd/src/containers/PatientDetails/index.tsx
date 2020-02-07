@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -67,7 +68,6 @@ export const PatientDetails = ({ isChild = false, patientId = 'none', smsData = 
         </div>
     );
 };
-
 function getBasicInformationProps(patientId: string, isChild: boolean, filteredData: SmsData[]): LabelValuePair[] {
     const basicInformationProps = !isChild
         ? ([

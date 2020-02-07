@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from 'react';
 import 'react-table/react-table.css';
 import { Card, CardBody, CardTitle, Container, Row, Table } from 'reactstrap';

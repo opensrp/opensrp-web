@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { SmsData } from '../../../store/ducks/sms_events';
 
 export const smsDataFixtures: SmsData[] = [

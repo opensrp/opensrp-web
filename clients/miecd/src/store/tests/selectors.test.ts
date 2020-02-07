@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { authenticateUser, logOutUser } from '@onaio/session-reducer';
 import { FlushThunks } from 'redux-testkit';
 import store from '..';

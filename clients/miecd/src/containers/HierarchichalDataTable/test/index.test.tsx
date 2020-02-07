@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';

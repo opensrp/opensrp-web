@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { Location, UserLocation } from '../../../store/ducks/locations';
 
 export const districts: Location[] = [

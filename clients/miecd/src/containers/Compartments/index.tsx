@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { ReactNodeArray } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -121,13 +123,11 @@ export const Compartments = ({
     useEffect(() => {
         removeFilterArgs();
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // update state when some props change
     useEffect(() => {
         setUserLocationId(getLocationId(userLocationData, userUUID));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userUUID, userLocationData]);
 
     useEffect(() => {
@@ -164,7 +164,6 @@ export const Compartments = ({
         setFilteredData(smsData.filter(locationFilterFunction));
         setLocationAndPath(locationPath);
         setUserLocationLevel(locationLevel);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userLocationId, provinces, districts, communes, villages, filterArgsInStore]);
 
     useEffect(() => {
@@ -219,7 +218,6 @@ export const Compartments = ({
                   }
                 : null,
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filteredData, userLocationId]);
 
     const [dataCircleCardChildData, setDataCircleCardChildData] = useState<null | PregnancyAndNBCDataCircleCardProps>(
@@ -272,8 +270,6 @@ export const Compartments = ({
                   }
                 : null,
         );
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filteredData]);
 
     const [dataCircleCardNutrition1, setDataCircleCardNutrition1] = useState<null | NutritionDataCircleCardProps>(null);
@@ -325,7 +321,6 @@ export const Compartments = ({
                   }
                 : null,
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filteredData]);
 
     const [circleCardComponent, setCircleCardComponent] = useState<ReactNodeArray>([]);
@@ -353,7 +348,6 @@ export const Compartments = ({
             });
         });
         setCircleCardComponent(componentArray);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dataCircleCardNutrition1,
         dataCircleCardNutrition2,

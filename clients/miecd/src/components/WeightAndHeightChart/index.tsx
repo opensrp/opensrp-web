@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import * as Highcharts from 'highcharts';
 import * as React from 'react';
 import { Card, CardTitle } from 'reactstrap';

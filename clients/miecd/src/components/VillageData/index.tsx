@@ -35,6 +35,7 @@ interface State {
 }
 
 const defaultProps: Props = {
+    // eslint-disable-next-line @typescript-eslint/camelcase
     current_level: 0,
     module: '',
     smsData: [],
