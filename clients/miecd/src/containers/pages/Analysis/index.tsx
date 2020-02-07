@@ -4,55 +4,55 @@ import { ANALYSIS } from '../../../constants';
 import './index.css';
 
 interface State {
-  loading: boolean;
+    loading: boolean;
 }
 
 interface Props {
-  endpoint: string;
-  module: string;
+    endpoint: string;
+    module: string;
 }
 
 const defaultProps: Props = {
-  endpoint: '',
-  module: '',
+    endpoint: '',
+    module: '',
 };
 
 export class Analysis extends React.Component<Props, State> {
-  public static defaultProps = defaultProps;
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      loading: true,
+    public static defaultProps = defaultProps;
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            loading: true,
+        };
+    }
+
+    public render() {
+        return (
+            <div className="analysis">
+                <div>
+                    <h2 className="analysis-title">{`${this.props.module} - ${ANALYSIS}`}</h2>
+                </div>
+                <div className="analysis-wrapper">
+                    {this.state.loading ? <Ripple /> : null}
+                    <iframe
+                        seamless={true}
+                        scrolling="yes"
+                        frameBorder="0"
+                        onLoad={this.hideSpinner}
+                        src={this.props.endpoint}
+                        title="pregnancy sms events analysis"
+                        className="analysis-iframe"
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    private hideSpinner = () => {
+        this.setState({
+            loading: false,
+        });
     };
-  }
-
-  public render() {
-    return (
-      <div className="analysis">
-        <div>
-          <h2 className="analysis-title">{`${this.props.module} - ${ANALYSIS}`}</h2>
-        </div>
-        <div className="analysis-wrapper">
-          {this.state.loading ? <Ripple /> : null}
-          <iframe
-            seamless={true}
-            scrolling="yes"
-            frameBorder="0"
-            onLoad={this.hideSpinner}
-            src={this.props.endpoint}
-            title="pregnancy sms events analysis"
-            className="analysis-iframe"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  private hideSpinner = () => {
-    this.setState({
-      loading: false,
-    });
-  };
 }
 
 export default Analysis;

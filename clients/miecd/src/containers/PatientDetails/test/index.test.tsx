@@ -16,29 +16,29 @@ const history = createBrowserHistory();
 jest.genMockFromModule('highcharts');
 jest.mock('highcharts');
 const props = {
-  match: {
-    params: { patient_id: '0' },
-    url: 'nutrition',
-  },
+    match: {
+        params: { patient_id: '0' },
+        url: 'nutrition',
+    },
 };
 
 describe('PatientDetails', () => {
-  it('Renders without crashing', () => {
-    shallow(
-      <Provider store={store}>
-        <Router history={history}>
-          <PatientDetails {...props} />
-        </Router>
-      </Provider>
-    );
-  });
-  it('must render correctly', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Router history={history}>
-          <PatientDetails {...props} />
-        </Router>
-      </Provider>
-    );
-  });
+    it('Renders without crashing', () => {
+        shallow(
+            <Provider store={store}>
+                <Router history={history}>
+                    <PatientDetails {...props} />
+                </Router>
+            </Provider>,
+        );
+    });
+    it('must render correctly', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router history={history}>
+                    <PatientDetails {...props} />
+                </Router>
+            </Provider>,
+        );
+    });
 });

@@ -8,29 +8,29 @@ export const reducerName = 'SmsReducer';
 
 /** Interface for SMS record object as received from discover */
 export interface SmsData {
-  age: string;
-  EventDate: string;
-  event_id: string;
-  health_worker_location_name: string;
-  message: string | number;
-  anc_id: string;
-  logface_risk: string;
-  health_worker_name: string;
-  sms_type: string;
-  height: number;
-  weight: number;
-  previous_risks: string;
-  lmp_edd: any;
-  parity: number;
-  gravidity: number;
-  location_id: string;
-  client_type: string;
-  child_symptoms: string;
-  mother_symptoms: string;
-  date_of_birth: string;
-  nutrition_status: string;
-  growth_status: string;
-  feeding_category: string;
+    age: string;
+    EventDate: string;
+    event_id: string;
+    health_worker_location_name: string;
+    message: string | number;
+    anc_id: string;
+    logface_risk: string;
+    health_worker_name: string;
+    sms_type: string;
+    height: number;
+    weight: number;
+    previous_risks: string;
+    lmp_edd: any;
+    parity: number;
+    gravidity: number;
+    location_id: string;
+    client_type: string;
+    child_symptoms: string;
+    mother_symptoms: string;
+    date_of_birth: string;
+    nutrition_status: string;
+    growth_status: string;
+    feeding_category: string;
 }
 
 // actions
@@ -45,36 +45,31 @@ export const REMOVE_FILTER_ARGS = 'opensrp/reducer/REMOVE_FILTER_ARGS';
 
 /** interface for sms fetch */
 export interface FetchSmsAction extends AnyAction {
-  smsData: { [key: string]: SmsData };
-  type: typeof FETCHED_SMS;
+    smsData: { [key: string]: SmsData };
+    type: typeof FETCHED_SMS;
 }
 
 /** interface for Remove Sms action */
 export interface RemoveSmsAction extends AnyAction {
-  // tslint:disable-next-line: no-empty
-  smsData: {};
-  type: typeof REMOVE_SMS;
+    // tslint:disable-next-line: no-empty
+    smsData: {};
+    type: typeof REMOVE_SMS;
 }
 
 /** Interface for Remove  filter args action */
 export interface RemoveFilterArgs extends AnyAction {
-  filterArgs: null;
-  type: typeof REMOVE_FILTER_ARGS;
+    filterArgs: null;
+    type: typeof REMOVE_FILTER_ARGS;
 }
 
 /** Interface for AddFilterArgs */
 export interface AddFilterArgsAction extends AnyAction {
-  filterArgs: SMS_FILTER_FUNCTION[];
-  type: typeof ADD_FILTER_ARGS;
+    filterArgs: SMS_FILTER_FUNCTION[];
+    type: typeof ADD_FILTER_ARGS;
 }
 
 /** Create type for SMS reducer actions */
-export type SmsActionTypes =
-  | FetchSmsAction
-  | AddFilterArgsAction
-  | RemoveSmsAction
-  | RemoveFilterArgs
-  | AnyAction;
+export type SmsActionTypes = FetchSmsAction | AddFilterArgsAction | RemoveSmsAction | RemoveFilterArgs | AnyAction;
 
 // action Creators
 
@@ -83,73 +78,73 @@ export type SmsActionTypes =
  * @return {FetchSmsAction} - an action to add SmsData to redux store
  */
 export const fetchSms = (smsDataList: SmsData[] = []): FetchSmsAction => {
-  return {
-    smsData: groupBy(smsDataList, EVENT_ID),
-    type: FETCHED_SMS as typeof FETCHED_SMS,
-  };
+    return {
+        smsData: groupBy(smsDataList, EVENT_ID),
+        type: FETCHED_SMS as typeof FETCHED_SMS,
+    };
 };
 
 /** REMOVE SMS action */
 export const removeSms: RemoveSmsAction = {
-  smsData: {},
-  type: REMOVE_SMS,
+    smsData: {},
+    type: REMOVE_SMS,
 };
 
 /** Add filter args action creator */
 export const addFilterArgs = (filterArgs: SMS_FILTER_FUNCTION[]): AddFilterArgsAction => {
-  return {
-    filterArgs,
-    type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
-  };
+    return {
+        filterArgs,
+        type: ADD_FILTER_ARGS as typeof ADD_FILTER_ARGS,
+    };
 };
 
 export const removeFilterArgs = (): RemoveFilterArgs => {
-  return { filterArgs: null, type: REMOVE_FILTER_ARGS };
+    return { filterArgs: null, type: REMOVE_FILTER_ARGS };
 };
 // The reducer
 
 /** interface for sms state in redux store */
 interface SmsState {
-  smsData: { [key: string]: SmsData };
-  smsDataFetched: boolean;
-  filterArgs: SMS_FILTER_FUNCTION[] | null;
+    smsData: { [key: string]: SmsData };
+    smsDataFetched: boolean;
+    filterArgs: SMS_FILTER_FUNCTION[] | null;
 }
 
 /** initial sms-state state */
 const initialState: SmsState = {
-  filterArgs: null,
-  smsData: {},
-  smsDataFetched: false,
+    filterArgs: null,
+    smsData: {},
+    smsDataFetched: false,
 };
 
 /** the sms reducer function */
 export default function reducer(state: SmsState = initialState, action: SmsActionTypes): SmsState {
-  switch (action.type) {
-    case FETCHED_SMS:
-      return {
-        ...state,
-        smsData: { ...state.smsData, ...action.smsData },
-        smsDataFetched: true,
-      };
-    case REMOVE_SMS:
-      return {
-        ...state,
-        smsData: action.smsData,
-        smsDataFetched: false,
-      };
-    case ADD_FILTER_ARGS:
-      return {
-        ...state,
-        filterArgs: [...(state.filterArgs ? state.filterArgs : []), ...action.filterArgs],
-      };
-    case REMOVE_FILTER_ARGS:
-      return {
-        ...state,
-        filterArgs: action.filterArgs,
-      };
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case FETCHED_SMS:
+            return {
+                ...state,
+                smsData: { ...state.smsData, ...action.smsData },
+                smsDataFetched: true,
+            };
+        case REMOVE_SMS:
+            return {
+                ...state,
+                smsData: action.smsData,
+                smsDataFetched: false,
+            };
+        case ADD_FILTER_ARGS:
+            return {
+                ...state,
+                filterArgs: [...(state.filterArgs ? state.filterArgs : []), ...action.filterArgs],
+            };
+        case REMOVE_FILTER_ARGS:
+            return {
+                ...state,
+                filterArgs: action.filterArgs,
+            };
+        default:
+            return state;
+    }
 }
 
 // // Selectors
@@ -159,14 +154,14 @@ export default function reducer(state: SmsState = initialState, action: SmsActio
  * @return { { [key: string] : SmsData}[] } - SmsData object[] as values, respective ids as keys
  */
 export function getSmsData(state: Partial<Store>): SmsData[] {
-  return values((state as any)[reducerName].smsData);
+    return values((state as any)[reducerName].smsData);
 }
 
 /** returns true if sms data has been fetched from superset and false
  * if the data has not been fetched
  */
 export function smsDataFetched(state: Partial<Store>): boolean {
-  return (state as any)[reducerName].smsDataFetched;
+    return (state as any)[reducerName].smsDataFetched;
 }
 
 /**
@@ -176,24 +171,21 @@ export function smsDataFetched(state: Partial<Store>): boolean {
  * @param {SMS_FILTER_FUNCTION[]}  filterArgs - an array of SMS_FILTER_FUNCTIONs.
  * @return {SmsData[]} - an array of SmsData objects that have passed the filtration criteria of all the filterArgs.
  */
-export function getFilteredSmsData(
-  state: Partial<Store>,
-  filterArgs: SMS_FILTER_FUNCTION[]
-): SmsData[] {
-  let results = values((state as any)[reducerName].smsData);
-  for (const filterArgsIndex in filterArgs) {
-    if (filterArgsIndex) {
-      results = results.filter(filterArgs[filterArgsIndex]);
+export function getFilteredSmsData(state: Partial<Store>, filterArgs: SMS_FILTER_FUNCTION[]): SmsData[] {
+    let results = values((state as any)[reducerName].smsData);
+    for (const filterArgsIndex in filterArgs) {
+        if (filterArgsIndex) {
+            results = results.filter(filterArgs[filterArgsIndex]);
+        }
     }
-  }
-  return results;
+    return results;
 }
 
 /** Returns the filterArgs currently in the store */
 export function getFilterArgs(state: Partial<Store>): SMS_FILTER_FUNCTION[] {
-  if ((state as any)[reducerName].filterArgs) {
-    return (state as any)[reducerName].filterArgs;
-  } else {
-    return [];
-  }
+    if ((state as any)[reducerName].filterArgs) {
+        return (state as any)[reducerName].filterArgs;
+    } else {
+        return [];
+    }
 }

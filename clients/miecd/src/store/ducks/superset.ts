@@ -13,13 +13,13 @@ export const RESET = 'reveal/reducer/superset/RESET';
 
 /** interface for authorize action */
 interface AuthorizeSupersetAction extends AnyAction {
-  authorized: boolean;
-  type: typeof AUTHORIZE;
+    authorized: boolean;
+    type: typeof AUTHORIZE;
 }
 
 /** interface for reset action */
 interface ResetSupersetAction extends AnyAction {
-  type: typeof RESET;
+    type: typeof RESET;
 }
 
 /** Create type for Superset reducer actions */
@@ -27,32 +27,31 @@ export type SupersetActionTypes = AuthorizeSupersetAction | ResetSupersetAction 
 
 /** interface for Superset state */
 interface SupersetState {
-  authorized: boolean | null;
+    authorized: boolean | null;
 }
 
 /** immutable Superset state */
-export type ImmutableSupersetState = SupersetState &
-  SeamlessImmutable.ImmutableObject<SupersetState>;
+export type ImmutableSupersetState = SupersetState & SeamlessImmutable.ImmutableObject<SupersetState>;
 
 /** initial Superset state */
 const initialState: ImmutableSupersetState = SeamlessImmutable({
-  authorized: null,
+    authorized: null,
 });
 
 /** the Superset reducer function */
 export default function reducer(state = initialState, action: SupersetActionTypes): SupersetState {
-  switch (action.type) {
-    case AUTHORIZE:
-      return state.merge({
-        authorized: action.authorized,
-      });
-    case RESET:
-      return state.merge({
-        authorized: null,
-      });
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case AUTHORIZE:
+            return state.merge({
+                authorized: action.authorized,
+            });
+        case RESET:
+            return state.merge({
+                authorized: null,
+            });
+        default:
+            return state;
+    }
 }
 
 // action creators
@@ -61,13 +60,13 @@ export default function reducer(state = initialState, action: SupersetActionType
  * @param {boolean} authorized - whether superset is authorized or not
  */
 export const authorizeSuperset = (authorized: boolean): AuthorizeSupersetAction => ({
-  authorized,
-  type: AUTHORIZE,
+    authorized,
+    type: AUTHORIZE,
 });
 
 /** reset action creator */
 export const resetSuperset = (): ResetSupersetAction => ({
-  type: RESET,
+    type: RESET,
 });
 
 // selectors
@@ -76,5 +75,5 @@ export const resetSuperset = (): ResetSupersetAction => ({
  * @param {Partial<Store>} state - the redux store
  */
 export function isAuthorized(state: Partial<Store>): boolean | null {
-  return (state as any)[reducerName].authorized;
+    return (state as any)[reducerName].authorized;
 }

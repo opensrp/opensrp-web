@@ -8,25 +8,25 @@ import Home from '..';
 const history = createBrowserHistory();
 
 describe('containers/pages/Home', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
 
-  it('renders without crashing', () => {
-    shallow(
-      <Router history={history}>
-        <Home />
-      </Router>
-    );
-  });
+    it('renders without crashing', () => {
+        shallow(
+            <Router history={history}>
+                <Home />
+            </Router>,
+        );
+    });
 
-  it('renders Home correctly', () => {
-    const wrapper = mount(
-      <Router history={history}>
-        <Home />
-      </Router>
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.unmount();
-  });
+    it('renders Home correctly', () => {
+        const wrapper = mount(
+            <Router history={history}>
+                <Home />
+            </Router>,
+        );
+        expect(toJson(wrapper)).toMatchSnapshot();
+        wrapper.unmount();
+    });
 });

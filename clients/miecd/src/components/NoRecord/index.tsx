@@ -6,7 +6,7 @@ import './index.css';
  * @member {string} message - message to be showed by the component
  */
 interface Props {
-  message: string;
+    message: string;
 }
 
 /**
@@ -15,5 +15,5 @@ interface Props {
  * @param {string} message - message to be showed by the component
  */
 export default function NoRecord({ message = '' }: Props) {
-  return <div className="norecord">{message}</div>;
+    return <div className="norecord">{message}</div>;
 }

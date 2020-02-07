@@ -15,22 +15,22 @@ import ConnectedRoutes from './Routes';
 library.add(faUser, faChartLine, faCog, faHome, faArrowLeft);
 /** Main App component */
 class App extends Component {
-  public render() {
-    return (
-      <div className="main-app-container">
-        {/* tslint:enable jsx-no-lambda */}
-        <Route
-          exact={true}
-          path={LOGIN_URL}
-          // tslint:disable-next-line: jsx-no-lambda
-          render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
-        />
-        {/* tslint:enable jsx-no-lambda */}
-        <ConnectedHeader />
-        {!headerShouldNotRender() && <ConnectedRoutes />}
-      </div>
-    );
-  }
+    public render() {
+        return (
+            <div className="main-app-container">
+                {/* tslint:enable jsx-no-lambda */}
+                <Route
+                    exact={true}
+                    path={LOGIN_URL}
+                    // tslint:disable-next-line: jsx-no-lambda
+                    render={routeProps => <CustomOauthLogin providers={providers} {...routeProps} />}
+                />
+                {/* tslint:enable jsx-no-lambda */}
+                <ConnectedHeader />
+                {!headerShouldNotRender() && <ConnectedRoutes />}
+            </div>
+        );
+    }
 }
 
 export default App;

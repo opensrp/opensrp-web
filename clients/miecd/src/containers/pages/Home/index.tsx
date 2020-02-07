@@ -8,80 +8,80 @@ import { NBC_AND_PNC_URL, NUTRITION_URL, PREGNANCY_URL } from '../../../constant
 import './index.css';
 
 class Home extends React.Component<{}, {}> {
-  public render() {
-    return (
-      <div className="home-main">
-        <div className="welcome-text">
-          <h1>Welcome to the MIECD dashboard</h1>
-        </div>
-        <div className="components-list">
-          <div className="spacer">
-            <img src={womanchild1} id="womanchild1" alt="woman" />
-            <div className="home-sub-containers">
-              {/* <div className="sub-container-heading">
+    public render() {
+        return (
+            <div className="home-main">
+                <div className="welcome-text">
+                    <h1>Welcome to the MIECD dashboard</h1>
+                </div>
+                <div className="components-list">
+                    <div className="spacer">
+                        <img src={womanchild1} id="womanchild1" alt="woman" />
+                        <div className="home-sub-containers">
+                            {/* <div className="sub-container-heading">
                 <p>Log face</p>
               </div> */}
-              <div className="sub-container-message">
-                <div id="cont-size">
-                  <h1>Pregnancy</h1>
-                </div>
-                <div id="cont-size">
-                  <h4>View the latest message updates about your patients.</h4>
-                </div>
-                <div id="cont-sized">
-                  <Link to={PREGNANCY_URL}>
-                    <button className="button-style default">View</button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="spacer">
-            <img src={womanchild2} id="womanchild2" alt="woman" />
-            <div className="home-sub-containers">
-              {/* <div className="sub-container-heading">
+                            <div className="sub-container-message">
+                                <div id="cont-size">
+                                    <h1>Pregnancy</h1>
+                                </div>
+                                <div id="cont-size">
+                                    <h4>View the latest message updates about your patients.</h4>
+                                </div>
+                                <div id="cont-sized">
+                                    <Link to={PREGNANCY_URL}>
+                                        <button className="button-style default">View</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="spacer">
+                        <img src={womanchild2} id="womanchild2" alt="woman" />
+                        <div className="home-sub-containers">
+                            {/* <div className="sub-container-heading">
                 <p>Log face</p>
               </div> */}
-              <div className="sub-container-message">
-                <div id="cont-size">
-                  <h1>NBC & PNC</h1>
-                </div>
-                <div id="cont-size">
-                  <h4>View the latest message updates about your patients.</h4>
-                </div>
-                <div id="cont-sized">
-                  <Link to={NBC_AND_PNC_URL}>
-                    <button className="button-style default">View</button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="spacer">
-            <img src={womanchild3} id="womanchild3" alt="woman" />
-            <div className="home-sub-containers">
-              {/* <div className="sub-container-heading">
+                            <div className="sub-container-message">
+                                <div id="cont-size">
+                                    <h1>NBC & PNC</h1>
+                                </div>
+                                <div id="cont-size">
+                                    <h4>View the latest message updates about your patients.</h4>
+                                </div>
+                                <div id="cont-sized">
+                                    <Link to={NBC_AND_PNC_URL}>
+                                        <button className="button-style default">View</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="spacer">
+                        <img src={womanchild3} id="womanchild3" alt="woman" />
+                        <div className="home-sub-containers">
+                            {/* <div className="sub-container-heading">
                 <p>Log face</p>
               </div> */}
-              <div className="sub-container-message">
-                <div id="cont-size">
-                  <h1>Nutrition</h1>
+                            <div className="sub-container-message">
+                                <div id="cont-size">
+                                    <h1>Nutrition</h1>
+                                </div>
+                                <div id="cont-size">
+                                    <h4>View the latest message updates about your patients.</h4>
+                                </div>
+                                <div id="cont-sized">
+                                    <Link to={NUTRITION_URL}>
+                                        <button className="button-style default">View</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="cont-size">
-                  <h4>View the latest message updates about your patients.</h4>
-                </div>
-                <div id="cont-sized">
-                  <Link to={NUTRITION_URL}>
-                    <button className="button-style default">View</button>
-                  </Link>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default Home;

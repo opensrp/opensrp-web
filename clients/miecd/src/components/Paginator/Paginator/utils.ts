@@ -4,19 +4,19 @@
  * @param {number | null} stop - the upper bound number of the loop
  * @param {number} step - the interval between any 2 numbers in the interval
  */
-export const range = (start: number, stop: number | null = null, step: number = 1) => {
-  let begin: number = start;
-  let end: number;
-  if (stop == null) {
-    begin = 0;
-    end = start;
-  } else {
-    end = stop;
-  }
+export const range = (start: number, stop: number | null = null, step = 1) => {
+    let begin: number = start;
+    let end: number;
+    if (stop == null) {
+        begin = 0;
+        end = start;
+    } else {
+        end = stop;
+    }
 
-  return Array(Math.ceil(Math.abs((end - begin) / step)))
-    .fill(begin)
-    .map((x, y) => x + y * step);
+    return Array(Math.ceil(Math.abs((end - begin) / step)))
+        .fill(begin)
+        .map((x, y) => x + y * step);
 };
 
 /** Let's say we have 10 pages and we set neighbourPillsNum to 2
@@ -34,15 +34,11 @@ export const range = (start: number, stop: number | null = null, step: number = 
  * @param {number} currentPage - the currently selected page
  * @return {number []} - Array of numbers that will form the pills between previous and next
  */
-export const fetchPageNumbers = (
-  neighbourPillsNum: number,
-  totalPages: number,
-  currentPage: number
-) => {
-  const startPage = Math.max(1, currentPage - neighbourPillsNum);
-  const endPage = Math.min(totalPages + 1, currentPage + neighbourPillsNum + 1);
+export const fetchPageNumbers = (neighbourPillsNum: number, totalPages: number, currentPage: number) => {
+    const startPage = Math.max(1, currentPage - neighbourPillsNum);
+    const endPage = Math.min(totalPages + 1, currentPage + neighbourPillsNum + 1);
 
-  const numberedPages: number[] = range(startPage, endPage);
+    const numberedPages: number[] = range(startPage, endPage);
 
-  return numberedPages;
+    return numberedPages;
 };
