@@ -84,16 +84,21 @@ reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
                 <Link
                   to="#"
                 >
-                  <a
+                  <LinkAnchor
                     href="/"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style "
+                    <a
+                      href="/"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>
@@ -129,16 +134,21 @@ reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
                 <Link
                   to="/pregnancy_compartments"
                 >
-                  <a
+                  <LinkAnchor
                     href="/pregnancy_compartments"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style "
+                    <a
+                      href="/pregnancy_compartments"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>
@@ -174,16 +184,21 @@ reports/Death reports, Risk Reports, Risk alerts and ResponseReports.
                 <Link
                   to="/pregnancy_analysis"
                 >
-                  <a
+                  <LinkAnchor
                     href="/pregnancy_analysis"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style "
+                    <a
+                      href="/pregnancy_analysis"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style "
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>

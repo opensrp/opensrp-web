@@ -20,28 +20,43 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
           aria-current="page"
           className="nav nav-link side-nav-item active-collapse-menu active"
           style={Object {}}
-          to="/"
+          to={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": null,
+            }
+          }
         >
-          <a
+          <LinkAnchor
             aria-current="page"
             className="nav nav-link side-nav-item active-collapse-menu active"
             href="/"
-            onClick={[Function]}
+            navigate={[Function]}
             style={Object {}}
           >
-            <ForwardRef(SvgHome)>
-              <svg>
-                home.svg
-              </svg>
-            </ForwardRef(SvgHome)>
-            <span
-              className="collapse-menu-title"
+            <a
+              aria-current="page"
+              className="nav nav-link side-nav-item active-collapse-menu active"
+              href="/"
+              onClick={[Function]}
+              style={Object {}}
             >
-               
-              Home
-               
-            </span>
-          </a>
+              <ForwardRef(SvgHome)>
+                <svg>
+                  home.svg
+                </svg>
+              </ForwardRef(SvgHome)>
+              <span
+                className="collapse-menu-title"
+              >
+                 
+                Home
+                 
+              </span>
+            </a>
+          </LinkAnchor>
         </Link>
       </NavLink>
     </li>
@@ -54,7 +69,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -129,11 +129,11 @@
+@@ -138,11 +138,11 @@
                     <div
                       className=\\"side-menu-extend col\\"
                     >
@@ -67,7 +82,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgHome],
                           }
-@@ -151,11 +151,11 @@
+@@ -160,11 +160,11 @@
                         }
                         setCollapsedModuleLabel={[Function anonymous]}
                       >
@@ -80,7 +95,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgHome],
                             }
-@@ -321,11 +321,11 @@
+@@ -345,11 +345,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/pregnancy_analysis\\",
                             },
@@ -93,7 +108,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgPregnancy],
                           }
-@@ -358,11 +358,11 @@
+@@ -382,11 +382,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/pregnancy_analysis\\",
                               },
@@ -106,7 +121,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgPregnancy],
                             }
-@@ -473,11 +473,11 @@
+@@ -511,11 +511,11 @@
                             <Collapse
                               appear={false}
                               enter={true}
@@ -119,7 +134,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               onEntered={[Function noop]}
                               onEntering={[Function noop]}
                               onExit={[Function noop]}
-@@ -489,11 +489,11 @@
+@@ -527,11 +527,11 @@
                             >
                               <Transition
                                 appear={false}
@@ -132,7 +147,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                 onEntered={[Function bound onEntered]}
                                 onEntering={[Function bound onEntering]}
                                 onExit={[Function bound onExit]}
-@@ -501,12 +501,16 @@
+@@ -539,12 +539,16 @@
                                 onExiting={[Function bound onExiting]}
                                 timeout={350}
                                 unmountOnExit={false}
@@ -151,7 +166,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                                     key=\\"child-nav-0\\"
                                     tag=\\"ul\\"
                                     vertical={false}
-@@ -656,11 +660,11 @@
+@@ -736,11 +740,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/nbc_and_pnc_analysis\\",
                             },
@@ -164,7 +179,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNbcandpnc],
                           }
-@@ -693,11 +697,11 @@
+@@ -773,11 +777,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/nbc_and_pnc_analysis\\",
                               },
@@ -177,7 +192,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                               \\"$$typeof\\": Symbol(react.forward_ref),
                               \\"render\\": [Function SvgNbcandpnc],
                             }
-@@ -991,11 +995,11 @@
+@@ -1127,11 +1131,11 @@
                               \\"label\\": \\"Analysis\\",
                               \\"url\\": \\"/nutrition_analysis\\",
                             },
@@ -190,7 +205,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                             \\"$$typeof\\": Symbol(react.forward_ref),
                             \\"render\\": [Function SvgNutrition],
                           }
-@@ -1028,11 +1032,11 @@
+@@ -1164,11 +1168,11 @@
                                 \\"label\\": \\"Analysis\\",
                                 \\"url\\": \\"/nutrition_analysis\\",
                               },

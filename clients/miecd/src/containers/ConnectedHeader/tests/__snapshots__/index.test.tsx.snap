@@ -6,7 +6,7 @@ Object {
     <nav
       id="image-settings"
     >
-      <Link
+      <ForwardRef
         to="/"
       >
         <img
@@ -17,7 +17,7 @@ Object {
           alt="unicef"
           src="vietnam-moh.png"
         />
-      </Link>
+      </ForwardRef>
     </nav>,
     <NavbarToggler
       onClick={[Function]}
@@ -48,13 +48,13 @@ Object {
         tag="ul"
         vertical={false}
       >
-        <NavLink
+        <ForwardRef
           activeClassName="active"
           className="nav-link"
           to="/login"
         >
           Login
-        </NavLink>
+        </ForwardRef>
       </Nav>
     </Collapse>,
   ],
@@ -69,7 +69,7 @@ Object {
     <nav
       id="image-settings"
     >
-      <Link
+      <ForwardRef
         to="/"
       >
         <img
@@ -80,7 +80,7 @@ Object {
           alt="unicef"
           src="vietnam-moh.png"
         />
-      </Link>
+      </ForwardRef>
     </nav>,
     <NavbarToggler
       onClick={[Function]}
@@ -141,13 +141,13 @@ Object {
               tag="button"
               toggle={true}
             >
-              <NavLink
+              <ForwardRef
                 activeClassName="active"
                 className="nav-link"
                 to="/logout"
               >
                 Sign Out
-              </NavLink>
+              </ForwardRef>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>

@@ -71,16 +71,21 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
                 <Link
                   to="/pregnancy"
                 >
-                  <a
+                  <LinkAnchor
                     href="/pregnancy"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style default"
+                    <a
+                      href="/pregnancy"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style default"
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>
@@ -120,16 +125,21 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
                 <Link
                   to="/nbc_and_pnc"
                 >
-                  <a
+                  <LinkAnchor
                     href="/nbc_and_pnc"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style default"
+                    <a
+                      href="/nbc_and_pnc"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style default"
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>
@@ -169,16 +179,21 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
                 <Link
                   to="/nutrition"
                 >
-                  <a
+                  <LinkAnchor
                     href="/nutrition"
-                    onClick={[Function]}
+                    navigate={[Function]}
                   >
-                    <button
-                      className="button-style default"
+                    <a
+                      href="/nutrition"
+                      onClick={[Function]}
                     >
-                      View
-                    </button>
-                  </a>
+                      <button
+                        className="button-style default"
+                      >
+                        View
+                      </button>
+                    </a>
+                  </LinkAnchor>
                 </Link>
               </div>
             </div>

@@ -34,6 +34,15 @@ exports[`BasicInformation must render correctly 1`] = `
   <Row
     id="detailsRow"
     tag="div"
+    widths={
+      Array [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+      ]
+    }
   >
     <div
       className="row"
@@ -58,6 +67,15 @@ exports[`BasicInformation must render correctly 1`] = `
           </CardTitle>
           <Row
             tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
           >
             <div
               className="row"

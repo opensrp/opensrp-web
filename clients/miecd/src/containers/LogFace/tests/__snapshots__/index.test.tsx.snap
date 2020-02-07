@@ -9,6 +9,7 @@ Array [
       Risk Level
     </span>
     <Dropdown
+      a11y={true}
       active={false}
       addonType={false}
       direction="down"
@@ -169,6 +170,7 @@ Array [
       Select Location
     </span>
     <Dropdown
+      a11y={true}
       active={false}
       addonType={false}
       direction="down"
@@ -281,6 +283,7 @@ Array [
       Type
     </span>
     <Dropdown
+      a11y={true}
       active={false}
       addonType={false}
       direction="down"
@@ -1061,12 +1064,17 @@ exports[`containers/LogFace renders correctly: table snapshot 1`] = `
         <Link
           to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            100P9K-20191001-01
-          </a>
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              100P9K-20191001-01
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
       <td
@@ -1087,25 +1095,30 @@ Health Status =
         <Link
           to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            <riskColoring
-              risk="no risk"
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
             >
-              <span
-                className="badge badge-success"
-                id="default-width"
+              <riskColoring
+                risk="no risk"
               >
-                <div>
-                  <p>
-                    No Risk
-                  </p>
-                </div>
-              </span>
-            </riskColoring>
-          </a>
+                <span
+                  className="badge badge-success"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      No Risk
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
     </tr>
@@ -1138,12 +1151,17 @@ Health Status =
         <Link
           to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            100P9K-20191001-01
-          </a>
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
+            >
+              100P9K-20191001-01
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
       <td
@@ -1164,25 +1182,30 @@ Interventions =
         <Link
           to="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            <riskColoring
-              risk="red"
+            <a
+              href="/pregnancy_log_face/child_patient_detail/100P9K-20191001-01"
+              onClick={[Function]}
             >
-              <span
-                className="badge badge-danger"
-                id="default-width"
+              <riskColoring
+                risk="red"
               >
-                <div>
-                  <p>
-                    Red Alert
-                  </p>
-                </div>
-              </span>
-            </riskColoring>
-          </a>
+                <span
+                  className="badge badge-danger"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      Red Alert
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
     </tr>
@@ -1215,12 +1238,17 @@ Interventions =
         <Link
           to="/pregnancy_log_face/patient_detail/100PAH"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/patient_detail/100PAH"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            100PAH
-          </a>
+            <a
+              href="/pregnancy_log_face/patient_detail/100PAH"
+              onClick={[Function]}
+            >
+              100PAH
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
       <td
@@ -1246,25 +1274,30 @@ Current Symptoms = Heavy sweating, Coughing
         <Link
           to="/pregnancy_log_face/patient_detail/100PAH"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_log_face/patient_detail/100PAH"
-            onClick={[Function]}
+            navigate={[Function]}
           >
-            <riskColoring
-              risk="red"
+            <a
+              href="/pregnancy_log_face/patient_detail/100PAH"
+              onClick={[Function]}
             >
-              <span
-                className="badge badge-danger"
-                id="default-width"
+              <riskColoring
+                risk="red"
               >
-                <div>
-                  <p>
-                    Red Alert
-                  </p>
-                </div>
-              </span>
-            </riskColoring>
-          </a>
+                <span
+                  className="badge badge-danger"
+                  id="default-width"
+                >
+                  <div>
+                    <p>
+                      Red Alert
+                    </p>
+                  </div>
+                </span>
+              </riskColoring>
+            </a>
+          </LinkAnchor>
         </Link>
       </td>
     </tr>

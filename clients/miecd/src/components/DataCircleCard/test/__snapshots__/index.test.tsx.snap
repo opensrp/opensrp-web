@@ -18,12 +18,18 @@ exports[`DataCircleCard must render correctly 1`] = `
           onClick={[Function]}
           to="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
         >
-          <a
+          <LinkAnchor
             href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
             onClick={[Function]}
           >
-            test title
-          </a>
+            <a
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/all/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
+            >
+              test title
+            </a>
+          </LinkAnchor>
         </Link>
       </div>
     </CardTitle>
@@ -40,20 +46,27 @@ exports[`DataCircleCard must render correctly 1`] = `
           onClick={[Function]}
           to="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
         >
-          <a
+          <LinkAnchor
             className="red circle"
             href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
             onClick={[Function]}
           >
-            <span
-              className="number"
-            />
-            <span
-              className="risk-level"
+            <a
+              className="red circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/red/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
             >
-              Red Alert
-            </span>
-          </a>
+              <span
+                className="number"
+              />
+              <span
+                className="risk-level"
+              >
+                Red Alert
+              </span>
+            </a>
+          </LinkAnchor>
         </Link>
         <Link
           className="yellow circle"
@@ -61,20 +74,27 @@ exports[`DataCircleCard must render correctly 1`] = `
           onClick={[Function]}
           to="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
         >
-          <a
+          <LinkAnchor
             className="yellow circle"
             href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
             onClick={[Function]}
           >
-            <span
-              className="number"
-            />
-            <span
-              className="risk-level"
+            <a
+              className="yellow circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/risk/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
             >
-              risk
-            </span>
-          </a>
+              <span
+                className="number"
+              />
+              <span
+                className="risk-level"
+              >
+                risk
+              </span>
+            </a>
+          </LinkAnchor>
         </Link>
         <Link
           className="green circle"
@@ -82,22 +102,29 @@ exports[`DataCircleCard must render correctly 1`] = `
           onClick={[Function]}
           to="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
         >
-          <a
+          <LinkAnchor
             className="green circle"
             href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+            navigate={[Function]}
             onClick={[Function]}
           >
-            <span
-              className="number"
+            <a
+              className="green circle"
+              href="/pregnancy_compartments/hierarchicaldata/Pregnancy/no/test title/undefined/down/undefined/undefined"
+              onClick={[Function]}
             >
-              10
-            </span>
-            <span
-              className="risk-level"
-            >
-              No Risk
-            </span>
-          </a>
+              <span
+                className="number"
+              >
+                10
+              </span>
+              <span
+                className="risk-level"
+              >
+                No Risk
+              </span>
+            </a>
+          </LinkAnchor>
         </Link>
       </div>
     </CardBody>

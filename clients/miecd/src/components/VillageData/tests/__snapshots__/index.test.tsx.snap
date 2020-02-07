@@ -48,12 +48,17 @@ Array [
       <Link
         to="/pregnancy_compartments/patient_detail/100RH2"
       >
-        <a
+        <LinkAnchor
           href="/pregnancy_compartments/patient_detail/100RH2"
-          onClick={[Function]}
+          navigate={[Function]}
         >
-          100RH2
-        </a>
+          <a
+            href="/pregnancy_compartments/patient_detail/100RH2"
+            onClick={[Function]}
+          >
+            100RH2
+          </a>
+        </LinkAnchor>
       </Link>
     </td>
     <td
@@ -103,12 +108,17 @@ Array [
       <Link
         to="/pregnancy_compartments/patient_detail/100RJ0"
       >
-        <a
+        <LinkAnchor
           href="/pregnancy_compartments/patient_detail/100RJ0"
-          onClick={[Function]}
+          navigate={[Function]}
         >
-          100RJ0
-        </a>
+          <a
+            href="/pregnancy_compartments/patient_detail/100RJ0"
+            onClick={[Function]}
+          >
+            100RJ0
+          </a>
+        </LinkAnchor>
       </Link>
     </td>
     <td
@@ -164,12 +174,17 @@ Array [
       <Link
         to="/pregnancy_compartments/patient_detail/100RKX"
       >
-        <a
+        <LinkAnchor
           href="/pregnancy_compartments/patient_detail/100RKX"
-          onClick={[Function]}
+          navigate={[Function]}
         >
-          100RKX
-        </a>
+          <a
+            href="/pregnancy_compartments/patient_detail/100RKX"
+            onClick={[Function]}
+          >
+            100RKX
+          </a>
+        </LinkAnchor>
       </Link>
     </td>
     <td
@@ -225,12 +240,17 @@ Array [
       <Link
         to="/pregnancy_compartments/patient_detail/100RMT"
       >
-        <a
+        <LinkAnchor
           href="/pregnancy_compartments/patient_detail/100RMT"
-          onClick={[Function]}
+          navigate={[Function]}
         >
-          100RMT
-        </a>
+          <a
+            href="/pregnancy_compartments/patient_detail/100RMT"
+            onClick={[Function]}
+          >
+            100RMT
+          </a>
+        </LinkAnchor>
       </Link>
     </td>
     <td
@@ -286,12 +306,17 @@ Array [
       <Link
         to="/pregnancy_compartments/patient_detail/100RNP"
       >
-        <a
+        <LinkAnchor
           href="/pregnancy_compartments/patient_detail/100RNP"
-          onClick={[Function]}
+          navigate={[Function]}
         >
-          100RNP
-        </a>
+          <a
+            href="/pregnancy_compartments/patient_detail/100RNP"
+            onClick={[Function]}
+          >
+            100RNP
+          </a>
+        </LinkAnchor>
       </Link>
     </td>
     <td
