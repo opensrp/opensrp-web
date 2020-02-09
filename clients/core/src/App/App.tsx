@@ -19,6 +19,7 @@ import ConnectedClientList from '../containers/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import ChildProfile from '../containers/Child/Profile';
 
 library.add(faUser, faChartLine, faCog);
 
@@ -43,6 +44,12 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
+                                path="/child-profile"
+                                component={ChildProfile}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
                                 path={CLIENT_URL}
                                 component={ConnectedClientList}
                             />
@@ -52,6 +59,7 @@ class App extends Component {
                                 path={LOGIN_URL}
                                 render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
                             />
+
                             <Route
                                 exact={true}
                                 path="/oauth/callback/:id"

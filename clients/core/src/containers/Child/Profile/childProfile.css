@@ -1,0 +1,89 @@
+.page-title{
+    border-bottom: 1px solid #DFE3E8;
+  }
+  
+  #basic-info-container{
+    background-color: #FFFFFF;
+    border: 1px solid #DADCE0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 #D7D7E0;
+    margin-top: 25px;
+    font-size: 16px;
+  }
+  
+  .basic-info-header{
+    margin: 15px !important;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DADCE0;
+    color: #3A484F;
+  }
+  
+  .basic-info-body{
+    margin: 0px 8px;
+  }
+  
+  .basic-info-edit{
+    margin-left: 5px;
+    font-size: 14px;
+  }
+  
+  .basic-info-table tbody{
+    font-size: 16px;
+    color: #3A484F;
+  }
+  
+  .basic-info-label{
+    color: #7C7C7C;
+  }
+  
+  #members-list-container{
+    margin-top: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #DADCE0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 #D7D7E0;
+  }
+  
+  .members-list-header{
+    margin: 15px !important;
+    color: #3A484F;
+    font-size: 16px;
+  }
+  
+  .table-striped>tbody>tr:nth-child(odd)>td,
+  .table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: white;
+  }
+  .table-striped>tbody>tr:nth-child(even)>td,
+  .table-striped>tbody>tr:nth-child(even)>th {
+    background-color: #f8f9fd;
+  }
+  
+  table.table-bordered > thead > tr > th{
+    border: 1px solid #DADCE0;
+  }
+  
+  .remove-btn{
+    padding-left: 5px;
+    color: #d8413f;
+  }
+  
+  .remove-btn:hover{
+    color:red;
+  }
+
+  .table {
+    border: 0px outset #f2f2f2;
+}
+
+.nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
