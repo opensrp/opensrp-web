@@ -9,7 +9,7 @@ reducerRegistry.register(reducerName, ANCReducer);
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeANCAction);
+        store.dispatch(removeANCAction());
     });
 
     it('selectors work for empty initialState', () => {
