@@ -46,7 +46,7 @@ export const SET_LOCATIONS = 'opensrp/reducer/locations/SET_LOCATIONS';
 
 /** Interface for setLocationAction */
 interface SetLocationAction extends AnyAction {
-    locations: LocationHierarchy;
+    locations: LocationHierarchy | null;
     type: typeof SET_LOCATIONS;
 }
 
