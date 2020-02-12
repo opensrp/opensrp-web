@@ -68,5 +68,5 @@ currently it supports 3 action types: - adding clients - removing clients - sett
 ## Can You modify me
 
 Well yes, but within reason, If you want to add new code that needs to be shared across ANC, child, household etc. then by all means feel free.
-If you need to add say an `actionType` specific to one the above then the recommended way would be to extend me through composition(or whatever works)
-in the respective module that requires the added functionality
+
+If you need to add say an `actionType` specific to one the above then the recommended way would be to extend me through composition(or whatever works) in the respective module that requires the added functionality
