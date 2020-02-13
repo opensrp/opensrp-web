@@ -3,6 +3,7 @@ import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
 import { LocationHierarchy } from '../locations';
 import { Event } from '../events';
+import { Child } from '../child';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -921,6 +922,91 @@ export const event3: Event = {
     version: 29787303842,
 };
 
+export const child1: Child = {
+    type: 'Client',
+    dateCreated: 1751437728487,
+    serverVersion: 1557937728441,
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 2,
+    baseEntityId: '906fc91h-4cce-412a-8327-ca2315ekoeo9',
+    identifiers: {
+        opensrp_id: '3117124',
+    },
+    addresses: [],
+    attributes: {
+        residence: '6f7ca772-b368-4c3d-bd9c-011ra698203a',
+    },
+    firstName: 'zysan',
+    middleName: '',
+    lastName: 'DADA',
+    birthdate: 358110000088,
+    birthdateApprox: false,
+    deathdateApprox: false,
+    relationships: {
+        family_head: ['gjio081-c153-4bcc-85c3-0b7c3d9f2263'],
+        primary_caregiver: ['jklf5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    },
+    _id: '922db682a-0f31-4935-9114-c4d33d148617',
+    _rev: 'v1',
+};
+
+export const child2: Child = {
+    type: 'Client',
+    dateCreated: 1851437728487,
+    serverVersion: 1257937728441,
+    clientApplicationVersion: 21,
+    clientDatabaseVersion: 1,
+    baseEntityId: '406fc91h-4cce-412a-8327-ca2315ekoeo9',
+    identifiers: {
+        opensrp_id: '3117124',
+    },
+    addresses: [],
+    attributes: {
+        residence: '1f7ca772-b368-4c3d-bd9c-011ra698203a',
+    },
+    firstName: 'zysan',
+    middleName: '',
+    lastName: 'DADA',
+    birthdate: 458110000088,
+    birthdateApprox: true,
+    deathdateApprox: true,
+    relationships: {
+        family_head: ['gjio081-c153-4bcc-85c3-0b7c3d9f2263'],
+        primary_caregiver: ['jklf5172-c153-4bcc-85c3-0b7c3d9f2263'],
+    },
+    _id: '922db682a-0f31-4935-9114-c4d33d148617',
+    _rev: 'v1',
+};
+
+export const child3: Child = {
+    type: 'Client',
+    dateCreated: 1751437728487,
+    serverVersion: 1557937728441,
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 2,
+    baseEntityId: '306fc91h-4cce-41qa-9327-ca2315ekoeo9',
+    identifiers: {
+        opensrp_id: '3117124',
+    },
+    addresses: [],
+    attributes: {
+        residence: '9f7ca772-b368-4d39-bd9c-011ra698203a',
+    },
+    firstName: 'tanvir',
+    middleName: '',
+    lastName: 'DADA',
+    birthdate: 3581101103188,
+    birthdateApprox: false,
+    deathdateApprox: true,
+    relationships: {
+        family_head: ['gjio081-c153-4bcc-85c3-0b7c3d9f2263'],
+        primary_caregiver: ['jklf5181-c153-4bcc-85c3-0b7c3d9f2263'],
+    },
+    _id: '912db682a-0f31-4935-9114-c4d33d148617',
+    _rev: 'v1',
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
+export const childList: Child[] = [child1, child2, child3];
