@@ -11,23 +11,23 @@ import {
 import { Store } from 'redux';
 
 /** The reducer name */
-export const reducerName = 'opensrp-web/client-type/households';
+export const reducerName = 'opensrp-web/client-type/child';
 
 /** Interface for household object same as client */
-export type Household = Client;
+export type Child = Client;
 
 /** Client Reducer */
-const reducer = reducerFactory<Household>(reducerName);
+const reducer = reducerFactory<Child>(reducerName);
 
 // action creators
-export const fetchHouseholds = fetchClientsFactory<Household>(reducerName);
-export const removeHouseholds = removeClientsFactory(reducerName);
+export const fetchChildList = fetchClientsFactory<Child>(reducerName);
+export const removeChildList = removeClientsFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
-export const getHouseholdsById = getClientsByIdFactory<Household>(reducerName);
-export const getHouseholdsArray = getClientsArrayFactory<Household>(reducerName);
-export const getHouseholdById = getClientByIdFactory<Household>(reducerName);
+export const getChildListById = getClientsByIdFactory<Child>(reducerName);
+export const getChildArray = getClientsArrayFactory<Child>(reducerName);
+export const getChildById = getClientByIdFactory<Child>(reducerName);
 
 export function getTotalRecords(state: Partial<Store>): number {
     return (state as any)[reducerName].totalRecords;
