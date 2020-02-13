@@ -1,18 +1,18 @@
 import { FlexObject } from '../../helpers/utils';
 import {
-    BaseClient,
-    reducerFactory,
-    getClientsByIdFactory,
-    getClientsArrayFactory,
-    getClientByIdFactory,
-    fetchClientsFactory,
-    removeClientsFactory,
+    BaseDux,
+    fetchFactory,
+    removeFactory,
     setTotalRecordsFactory,
+    reducerFactory,
+    getItemsByIdFactory,
+    getItemsArrayFactory,
+    getItemByIdFactory,
     getTotalRecordsFactory,
-} from './baseClients';
+} from './baseDux';
 
 /** Interface for client object as received from clientServices */
-export interface Client extends BaseClient {
+export interface Client extends BaseDux {
     dateCreated: number;
     serverVersion: number;
     clientApplicationVersion: number;
@@ -41,14 +41,14 @@ export const reducerName = 'opensrp-web/client-type/clients';
 const reducer = reducerFactory<Client>(reducerName);
 
 // action creators
-export const fetchClients = fetchClientsFactory<Client>(reducerName);
-export const removeClients = removeClientsFactory(reducerName);
+export const fetchClients = fetchFactory<Client>(reducerName);
+export const removeClients = removeFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // Selectors
-export const getClientsById = getClientsByIdFactory<Client>(reducerName);
-export const getClientsArray = getClientsArrayFactory<Client>(reducerName);
-export const getClientById = getClientByIdFactory<Client>(reducerName);
+export const getClientsById = getItemsByIdFactory<Client>(reducerName);
+export const getClientsArray = getItemsArrayFactory<Client>(reducerName);
+export const getClientById = getItemByIdFactory<Client>(reducerName);
 export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;
