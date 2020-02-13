@@ -8,6 +8,7 @@ import {
     fetchClientsFactory,
     removeClientsFactory,
     setTotalRecordsFactory,
+    getTotalRecordsFactory,
 } from './baseClients';
 
 /** Interface for client object as received from clientServices */
@@ -39,14 +40,15 @@ export const reducerName = 'opensrp-web/client-type/clients';
 /** Client Reducer */
 const reducer = reducerFactory<Client>(reducerName);
 
-// action
-/** actionCreator returns action to to add anc records to store */
+// action creators
 export const fetchClients = fetchClientsFactory<Client>(reducerName);
 export const removeClients = removeClientsFactory(reducerName);
+export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // Selectors
 export const getClientsById = getClientsByIdFactory<Client>(reducerName);
 export const getClientsArray = getClientsArrayFactory<Client>(reducerName);
 export const getClientById = getClientByIdFactory<Client>(reducerName);
+export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;

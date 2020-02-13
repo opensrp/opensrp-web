@@ -7,8 +7,8 @@ import {
     getClientsByIdFactory,
     getClientsArrayFactory,
     getClientByIdFactory,
+    getTotalRecordsFactory,
 } from './baseClients';
-import { Store } from 'redux';
 
 /** The reducer name */
 export const reducerName = 'opensrp-web/client-type/households';
@@ -28,9 +28,6 @@ export const setTotalRecords = setTotalRecordsFactory(reducerName);
 export const getHouseholdsById = getClientsByIdFactory<Household>(reducerName);
 export const getHouseholdsArray = getClientsArrayFactory<Household>(reducerName);
 export const getHouseholdById = getClientByIdFactory<Household>(reducerName);
-
-export function getTotalRecords(state: Partial<Store>): number {
-    return (state as any)[reducerName].totalRecords;
-}
+export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;
