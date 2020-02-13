@@ -8,7 +8,7 @@ import householdReducer, {
     getHouseholdsById,
     getTotalRecords,
     reducerName as houseHoldReducerName,
-    removeHouseholdsAction,
+    removeHouseholds,
     setTotalRecords,
 } from '../households';
 
@@ -19,7 +19,7 @@ reducerRegistry.register(houseHoldReducerName, householdReducer);
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeHouseholdsAction);
+        store.dispatch(removeHouseholds());
     });
 
     it('selectors work for empty initialState', () => {
@@ -53,7 +53,7 @@ describe('reducers/clients', () => {
         let numberOfHouseholds = getHouseholdsArray(store.getState()).length;
         expect(numberOfHouseholds).toEqual(3);
 
-        store.dispatch(removeHouseholdsAction);
+        store.dispatch(removeHouseholds());
         numberOfHouseholds = getHouseholdsArray(store.getState()).length;
         expect(numberOfHouseholds).toEqual(0);
     });
