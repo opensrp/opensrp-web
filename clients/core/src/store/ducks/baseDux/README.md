@@ -8,16 +8,16 @@ So instead of rewriting and duplicating lots of boilerplate to create say the AN
 
 ```typescript
 import {
-    reducerFactory,
-    BaseClient,
-    fetchClientsFactory,
-    removeClientsFactory,
-    getClientsArrayFactory,
-    getClientByIdFactory,
-    getClientsByIdFactory,
+    fetchFactory,
+    removeFactory,
     setTotalRecordsFactory,
+    reducerFactory,
+    getItemsByIdFactory,
+    getItemsArrayFactory,
+    getItemByIdFactory,
     getTotalRecordsFactory,
-} from './baseClients/baseClient';
+    BaseDux,
+} from './baseDux';
 
 /** reducer name for the ANC module */
 export const reducerName = 'opensrp-web/client-type/ANC';
@@ -27,14 +27,14 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchClientsFactory<ANCClientType>(reducerName);
-export const removeANCAction = removeClientsFactory(reducerName);
+export const fetchANC = fetchFactory<ANCClientType>(reducerName);
+export const removeANCAction = removeFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
-export const getAllANCById = getClientsByIdFactory<ANCClientType>(reducerName);
-export const getANCById = getClientByIdFactory<ANCClientType>(reducerName);
-export const getAllANCArray = getClientsArrayFactory<ANCClientType>(reducerName);
+export const getAllANCById = getItemsByIdFactory<ANCClientType>(reducerName);
+export const getANCById = getItemByIdFactory<ANCClientType>(reducerName);
+export const getAllANCArray = getItemsArrayFactory<ANCClientType>(reducerName);
 export const getTotalANCRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;
@@ -45,23 +45,23 @@ export default reducer;
 Glad you asked; The above example should have given you some clue, but am all to happy to summarize this for you here:
 
 `reducerFactory` - this a factory method that returns a function that can be used as the reducer.
-currently it supports 3 action types: - adding clients - removing clients - setting total records
+currently it supports 3 action types: - adding items - removing items - setting total records
 
 **for action creators:**
 
-`fetchClientsFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
+`fetchFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
 
-`removeClientsFactory` - Use this to create action creators that return actions to remove all clients from a slice of the store
+`removeFactory` - Use this to create action creators that return actions to remove all items from a slice of the store
 
 `setTotalRecordsFactory` - This will create an action creator that adds the total number of records to specific slice of the store
 
 **for the selectors:**
 
-`getClientsByIdFactory` which returns a selector that gets all clients from a store slice as an object
+`getItemsByIdFactory` which returns a selector that gets all items from a store slice as an object
 
-`getClientByIdFactory` which returns a selector that gets a single client from a store slice as an object
+`getItemByIdFactory` which returns a selector that gets a single item from a store slice as an object
 
-`getClientsArrayFactory` which returns a selector that gets all clients from a store slice as an array
+`getItemsArrayFactory` which returns a selector that gets all objects from a store slice as an array
 
 `getTotalRecordsFactory` which returns a selector that gets the total number of records in a store slice
 
