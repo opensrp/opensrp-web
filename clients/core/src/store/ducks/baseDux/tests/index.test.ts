@@ -3,12 +3,12 @@ import { values } from 'lodash';
 import store from '../../../index';
 import {
     reducerFactory,
-    fetchClientsFactory,
-    getClientByIdFactory,
-    getClientsArrayFactory,
-    getClientsByIdFactory,
-    removeClientsFactory,
-    BaseClient,
+    fetchFactory,
+    getItemByIdFactory,
+    getItemsArrayFactory,
+    getItemsByIdFactory,
+    removeFactory,
+    BaseDux,
     setTotalRecordsFactory,
     getTotalRecordsFactory,
 } from '..';
@@ -25,7 +25,7 @@ import ANCReducer, {
     getTotalANCRecords,
 } from '../../anc';
 
-interface TestClient extends BaseClient {
+interface TestClient extends BaseDux {
     type: 'Client';
     dateCreated: number;
     serverVersion: number;
@@ -56,11 +56,11 @@ const baseReducer = reducerFactory<TestClient>(customReducerName);
 reducerRegistry.register(customReducerName, baseReducer);
 reducerRegistry.register(ANCReducerName, ANCReducer);
 
-const getBaseClientsById = getClientsByIdFactory<TestClient>(customReducerName);
-const getBaseClientById = getClientByIdFactory<TestClient>(customReducerName);
-const getBaseClientsArray = getClientsArrayFactory<TestClient>(customReducerName);
-const fetchBaseClients = fetchClientsFactory<TestClient>(customReducerName);
-const removeBaseClientsAction = removeClientsFactory(customReducerName);
+const getBaseClientsById = getItemsByIdFactory<TestClient>(customReducerName);
+const getBaseClientById = getItemByIdFactory<TestClient>(customReducerName);
+const getBaseClientsArray = getItemsArrayFactory<TestClient>(customReducerName);
+const fetchBaseClients = fetchFactory<TestClient>(customReducerName);
+const removeBaseClientsAction = removeFactory(customReducerName);
 const setBaseTotalRecords = setTotalRecordsFactory(customReducerName);
 const getBaseTotalRecords = getTotalRecordsFactory(customReducerName);
 

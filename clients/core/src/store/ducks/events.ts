@@ -41,14 +41,12 @@ export const reducerName = 'opensrp-web/events';
 const reducer = reducerFactory<Event>(reducerName);
 
 // action creators
-export const fetchChildList = fetchFactory<Event>(reducerName);
-export const removeChildList = removeFactory(reducerName);
-export const setTotalRecords = setTotalRecordsFactory(reducerName);
+export const fetchEvents = fetchFactory<Event>(reducerName);
+export const removeEvents = removeFactory(reducerName);
 
 // selectors
-export const getChildListById = getItemsByIdFactory<Event>(reducerName);
-export const getChildArray = getItemsArrayFactory<Event>(reducerName);
+export const getEventsById = getItemsByIdFactory<Event>(reducerName);
+export const getEventsArray = getItemsArrayFactory<Event>(reducerName);
 export const getChildById = getItemByIdFactory<Event>(reducerName);
-export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;

@@ -5,7 +5,7 @@ import eventReducer, {
     getEventsArray,
     getEventsById,
     reducerName as eventReducerName,
-    removeEventsAction,
+    removeEvents,
 } from '../events';
 
 import * as fixtures from './fixtures';
@@ -15,7 +15,7 @@ reducerRegistry.register(eventReducerName, eventReducer);
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeEventsAction());
+        store.dispatch(removeEvents());
     });
 
     it('events selectors work for empty initialState', () => {
@@ -56,7 +56,7 @@ describe('reducers/clients', () => {
             '5e8b72c5-0b36-9d7d-829f-279d1482c96a': fixtures.event2,
             '6e8b72c5-0b36-4e46-829f-8ujd1482c96a': fixtures.event1,
         });
-        store.dispatch(removeEventsAction());
+        store.dispatch(removeEvents());
         expect(getEventsArray(store.getState())).toEqual([]);
     });
 });
