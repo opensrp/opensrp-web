@@ -133,6 +133,17 @@ describe('reducers/clients', () => {
         expect(numberOfANC).toEqual(2);
     });
 
+    it('should not save the same object twice', () => {
+        store.dispatch(removeBaseClientsAction());
+        store.dispatch(fetchBaseClients([fixtures.client1]));
+        let numberOfClients = getBaseClientsArray(store.getState()).length;
+        expect(numberOfClients).toEqual(1);
+
+        store.dispatch(fetchBaseClients([fixtures.client1]));
+        numberOfClients = getBaseClientsArray(store.getState()).length;
+        expect(numberOfClients).toEqual(1);
+    });
+
     it('sets total records correctly', () => {
         store.dispatch(setBaseTotalRecords(5));
         expect(getBaseTotalRecords(store.getState())).toEqual(5);
