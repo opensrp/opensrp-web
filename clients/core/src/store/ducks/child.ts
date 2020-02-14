@@ -1,6 +1,6 @@
 import { Client } from './clients';
 import {
-    fetchFactory,
+    fetchActionCreatorFactory,
     removeFactory,
     setTotalRecordsFactory,
     reducerFactory,
@@ -20,7 +20,7 @@ export type Child = Client;
 const reducer = reducerFactory<Child>(reducerName);
 
 // action creators
-export const fetchChildList = fetchFactory<Child>(reducerName);
+export const fetchChildList = fetchActionCreatorFactory<Child>(reducerName, 'baseEntityId');
 export const removeChildList = removeFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 

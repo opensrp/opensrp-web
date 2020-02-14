@@ -2,9 +2,11 @@
 
 ## What am i
 
-Am an abstraction (more like a template), that you can use to create other dux modules that store data that is **similar** in schema to the response object from `/rest/clients/search` from openSRP. Am an attempt at having dry code and i will probably not be usable for any other types of "scheme-ad" data other than openSRP Client-like data. If you have come this far I can only hope you already know what I am referring to by openSRP Clients.
+Am an abstraction (more like a template), that you can use to create other [dux modules](https://github.com/erikras/ducks-modular-redux).
 
-So instead of rewriting and duplicating lots of boilerplate to create say the ANC dux module, etc., you can just import me and use my factory methods to easily create namespaced action creators, selectors and reducers that just work. Its as simple as
+I think the biggest win with me, is that there is reduced boilerplate when it comes to creating dux modules.
+
+currently , the only opinionated part about me is how i structure the stored data, basically it requires that my action creators are given data as list of objects, where each object bears a property akin to a `primary_key` i.e. this one single field should have unique values that are of type `string| number`.
 
 ```typescript
 import {
@@ -27,7 +29,7 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchFactory<ANCClientType>(reducerName);
+export const fetchANC = fetchActionCreatorFactory<ANCClientType, 'baseEntityId'>(reducerName);
 export const removeANCAction = removeFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
@@ -49,7 +51,7 @@ currently it supports 3 action types: - adding items - removing items - setting 
 
 **for action creators:**
 
-`fetchFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
+`fetchActionCreatorFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
 
 `removeFactory` - Use this to create action creators that return actions to remove all items from a slice of the store
 
@@ -64,9 +66,3 @@ currently it supports 3 action types: - adding items - removing items - setting 
 `getItemsArrayFactory` which returns a selector that gets all objects from a store slice as an array
 
 `getTotalRecordsFactory` which returns a selector that gets the total number of records in a store slice
-
-## Can You modify me
-
-Well yes, but within reason, If you want to add new code that needs to be shared across ANC, child, household etc. then by all means feel free.
-
-If you need to add say an `actionType` specific to one the above then the recommended way would be to extend me through composition(or whatever works) in the respective module that requires the added functionality

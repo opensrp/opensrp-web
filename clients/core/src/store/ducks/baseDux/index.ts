@@ -2,35 +2,32 @@ import { get, keyBy, values, Dictionary } from 'lodash';
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { FlexObject } from '../../../helpers/utils';
-/** describes primary required properties for a object from opensrp
- * extend this to create generic types for objects.
- */
-export interface BaseDux {
-    type: 'Client';
-    baseEntityId: string;
-}
+
+/** creates a union types that correctly matches against keys belonging to Obj whose value is of type keyType */
+export type KeysWhoseValuesAreType<Obj, KeyType> = { [K in keyof Obj]: Obj[K] extends KeyType ? K : never }[keyof Obj];
+export type ItemsIdFieldType<T> = KeysWhoseValuesAreType<T, string | number>;
 
 // actions
 
 /** FETCHED action type */
-export const FETCHED = 'opensrp/reducer/items/FETCHED';
+export const FETCHED = 'opensrp/reducer/objects/FETCHED';
 /** REMOVE action type */
-export const REMOVE = 'opensrp/reducer/items/REMOVE';
+export const REMOVE = 'opensrp/reducer/objects/REMOVE';
 /** SET_TOTAL_RECORDS action type */
-export const SET_TOTAL_RECORDS = 'opensrp/reducer/items/SET_TOTAL_RECORDS';
+export const SET_TOTAL_RECORDS = 'opensrp/reducer/objects/SET_TOTAL_RECORDS';
 
 /** interface for authorize action
- *  generic type - item type being handled by this function
+ *  generic type - object type being handled by this function
  */
-export interface FetchAction<GenericType> extends AnyAction {
-    itemsById: Dictionary<GenericType>;
+export interface FetchAction<ObjectType> extends AnyAction {
+    objectsById: Dictionary<ObjectType>;
     type: typeof FETCHED;
     reducerName: string;
 }
 
 /** Interface for removeAction */
 interface RemoveAction extends AnyAction {
-    itemsById: {};
+    objectsById: {};
     type: typeof REMOVE;
     reducerName: string;
 }
@@ -43,22 +40,25 @@ interface SetTotalRecordsAction extends AnyAction {
 }
 
 /** Create type for objects reducer actions */
-export type ItemsActionTypes<GenericType> = FetchAction<GenericType> | RemoveAction | AnyAction;
+export type ItemsActionTypes<ObjectType> = FetchAction<ObjectType> | RemoveAction | AnyAction;
 
 // factory methods for action creators
 
 /** creates the action creator
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  * @param {string} reducerName - generic name of reducer
- * @returns {(itemsList: GenericType[] = []): FetchAction<GenericType>} - the action creator
+ * @param {ItemsIdFieldType<>} idField - key value whose value is more like an id for the objects,
+ * this needs to be unique
+ * @returns {(objectsList: ObjectType[] = []): FetchAction<ObjectType>} - the action creator
  */
-export function fetchFactory<GenericType extends BaseDux>(reducerName: string) {
+export function fetchActionCreatorFactory<ObjectType>(reducerName: string, idField: ItemsIdFieldType<ObjectType>) {
     /** Fetch action creator
-     * @param {item []} objectsList - objects array to add to store
+     * @param {object []} objectsList - objects array to add to store
      * @return {FetchAction} - an action to add objects to redux store
      */
-    return (itemsList: GenericType[] = []): FetchAction<GenericType> => ({
-        itemsById: keyBy<GenericType>(itemsList, (item: GenericType) => item.baseEntityId),
+    return (objectsList: ObjectType[] = []): FetchAction<ObjectType> => ({
+        /** HACK: casting object[field] to unknown since i don't know how to better handle this */
+        objectsById: keyBy<ObjectType>(objectsList, (object: ObjectType) => (object[idField] as unknown) as string),
         type: FETCHED,
         reducerName,
     });
@@ -69,7 +69,7 @@ export function fetchFactory<GenericType extends BaseDux>(reducerName: string) {
  * @returns {(): RemoveAction} - the action creator
  */
 export const removeFactory = (reducerName: string) => (): RemoveAction => ({
-    itemsById: {},
+    objectsById: {},
     type: REMOVE,
     reducerName,
 });
@@ -89,33 +89,33 @@ export function setTotalRecordsFactory(reducerName: string) {
 // The reducer
 
 /** interface for object state in redux store
- * GenericType - generic type - objects type being handled by this function
+ * ObjectType - generic type - objects type being handled by this function
  */
-interface ObjectState<GenericType> {
-    itemsById: { [key: string]: GenericType };
+interface ObjectState<ObjectType> {
+    objectsById: { [key: string]: ObjectType };
 }
 
 /** Create an immutable object state
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  */
-export type ImmutableObjectState<GenericType> = ObjectState<GenericType> &
-    SeamlessImmutable.ImmutableObject<ObjectState<GenericType>>;
+export type ImmutableObjectState<ObjectType> = ObjectState<ObjectType> &
+    SeamlessImmutable.ImmutableObject<ObjectState<ObjectType>>;
 
 /** initial state */
 const initialState = SeamlessImmutable({
-    itemsById: {},
+    objectsById: {},
     totalRecords: 0,
 });
 
 /** factory function to create reducer
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  */
-export const reducerFactory = <GenericType>(reducerName: string) =>
-    /** the items reducer function */
+export const reducerFactory = <ObjectType>(reducerName: string) =>
+    /** the objects reducer function */
     function reducer(
-        state: ImmutableObjectState<GenericType> = initialState,
-        action: ItemsActionTypes<GenericType>,
-    ): ImmutableObjectState<GenericType> {
+        state: ImmutableObjectState<ObjectType> = initialState,
+        action: ItemsActionTypes<ObjectType>,
+    ): ImmutableObjectState<ObjectType> {
         const actionReducerName = action.reducerName;
         if (reducerName !== actionReducerName) {
             return state;
@@ -124,12 +124,12 @@ export const reducerFactory = <GenericType>(reducerName: string) =>
             case FETCHED:
                 return SeamlessImmutable({
                     ...state,
-                    itemsById: { ...state.itemsById, ...action.itemsById },
+                    objectsById: { ...state.objectsById, ...action.objectsById },
                 });
             case REMOVE:
                 return SeamlessImmutable({
                     ...state,
-                    itemsById: action.itemsById,
+                    objectsById: action.objectsById,
                 });
             case SET_TOTAL_RECORDS:
                 return SeamlessImmutable({
@@ -144,53 +144,53 @@ export const reducerFactory = <GenericType>(reducerName: string) =>
 // Selectors
 
 /** factory function that creates selector
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  *  @param {string} reducerName - the reducerName
- *  @returns {((state: Partial<Store>) => Dictionary<GenericType>)}
+ *  @returns {((state: Partial<Store>) => Dictionary<ObjectType>)}
  */
-export const getItemsByIdFactory = <GenericType>(
+export const getItemsByIdFactory = <ObjectType>(
     reducerName: string,
-): ((state: Partial<Store>) => Dictionary<GenericType>) => {
-    /** returns all items in the store as values whose keys are their respective ids
+): ((state: Partial<Store>) => Dictionary<ObjectType>) => {
+    /** returns all objects in the store as values whose keys are their respective ids
      * @param {Partial<Store>} state - the redux store
      */
-    return function(state: Partial<Store>): Dictionary<GenericType> {
+    return function(state: Partial<Store>): Dictionary<ObjectType> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return (state as any)[reducerName].itemsById;
+        return (state as any)[reducerName].objectsById;
     };
 };
 
 /** factory function that creates selector
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  * @param {string} reducerName - name of the reducer
- * @returns {(state: Partial<Store>): GenericType[]}
+ * @returns {(state: Partial<Store>): ObjectType[]}
  */
-export const getItemsArrayFactory = <GenericType>(reducerName: string) =>
+export const getItemsArrayFactory = <ObjectType>(reducerName: string) =>
     /** gets an array of objects
      * @param {Partial<Store>} state - the redux store
      * @return {Item[]} - an array of objs
      */
-    function(state: Partial<Store>): GenericType[] {
-        const getItemsById = getItemsByIdFactory<GenericType>(reducerName);
-        return values<GenericType>(getItemsById(state));
+    function(state: Partial<Store>): ObjectType[] {
+        const getItemsById = getItemsByIdFactory<ObjectType>(reducerName);
+        return values<ObjectType>(getItemsById(state));
     };
 
 /** factory function that creates selector
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  * @param {string} - reducerName -  name of reducer
- * @returns {(state: Partial<Store>, id: string): GenericType | null}
+ * @returns {(state: Partial<Store>, id: string): ObjectType | null}
  */
-export const getItemByIdFactory = <GenericType>(reducerName: string) =>
-    /** get a specific item by their id
+export const getItemByIdFactory = <ObjectType>(reducerName: string) =>
+    /** get a specific object by their id
      * @param {Partial<Store>} state - the redux store
      * @return {Item | null} a obj if the id is found else null
      */
-    function(state: Partial<Store>, id: string): GenericType | null {
-        return get(getItemsByIdFactory<GenericType>(reducerName)(state), id) || null;
+    function(state: Partial<Store>, id: string): ObjectType | null {
+        return get(getItemsByIdFactory<ObjectType>(reducerName)(state), id) || null;
     };
 
 /** factory function that creates selector
- * GenericType - generic type - object type being handled by this function
+ * ObjectType - generic type - object type being handled by this function
  * @param {string} reducerName -  name of reducer
  * @returns {(state: Partial<Store<any, AnyAction>>) => number}
  */

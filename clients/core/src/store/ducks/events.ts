@@ -1,5 +1,5 @@
 import {
-    fetchFactory,
+    fetchActionCreatorFactory,
     removeFactory,
     setTotalRecordsFactory,
     reducerFactory,
@@ -7,11 +7,10 @@ import {
     getItemsArrayFactory,
     getItemByIdFactory,
     getTotalRecordsFactory,
-    BaseDux,
 } from './baseDux';
 
 /** Interface for event object as received from event search */
-export interface Event extends BaseDux {
+export interface Event {
     dateCreated: number;
     serverVersion: number;
     clientApplicationVersion: number;
@@ -41,7 +40,7 @@ export const reducerName = 'opensrp-web/events';
 const reducer = reducerFactory<Event>(reducerName);
 
 // action creators
-export const fetchEvents = fetchFactory<Event>(reducerName);
+export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'baseEntityId');
 export const removeEvents = removeFactory(reducerName);
 
 // selectors

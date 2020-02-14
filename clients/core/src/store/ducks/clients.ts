@@ -1,7 +1,6 @@
 import { FlexObject } from '../../helpers/utils';
 import {
-    BaseDux,
-    fetchFactory,
+    fetchActionCreatorFactory,
     removeFactory,
     setTotalRecordsFactory,
     reducerFactory,
@@ -12,7 +11,9 @@ import {
 } from './baseDux';
 
 /** Interface for client object as received from clientServices */
-export interface Client extends BaseDux {
+export interface Client {
+    type: 'Client';
+    baseEntityId: string;
     dateCreated: number;
     serverVersion: number;
     clientApplicationVersion: number;
@@ -41,7 +42,7 @@ export const reducerName = 'opensrp-web/client-type/clients';
 const reducer = reducerFactory<Client>(reducerName);
 
 // action creators
-export const fetchClients = fetchFactory<Client>(reducerName);
+export const fetchClients = fetchActionCreatorFactory<Client>(reducerName, 'baseEntityId');
 export const removeClients = removeFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 

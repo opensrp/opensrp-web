@@ -1,5 +1,5 @@
 import {
-    fetchFactory,
+    fetchActionCreatorFactory,
     removeFactory,
     setTotalRecordsFactory,
     reducerFactory,
@@ -7,12 +7,11 @@ import {
     getItemsArrayFactory,
     getItemByIdFactory,
     getTotalRecordsFactory,
-    BaseDux,
 } from './baseDux';
 import { FlexObject } from '../../helpers/utils';
 
 /** describes an ANC client object */
-export interface ANCClientType extends BaseDux {
+export interface ANCClientType {
     type: 'Client';
     dateCreated: string;
     serverVersion: number;
@@ -44,7 +43,7 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchFactory<ANCClientType>(reducerName);
+export const fetchANC = fetchActionCreatorFactory<ANCClientType>(reducerName, 'baseEntityId');
 export const removeANCAction = removeFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
