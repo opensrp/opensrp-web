@@ -1,6 +1,6 @@
 import {
     fetchActionCreatorFactory,
-    removeFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
@@ -44,7 +44,7 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 // action
 /** actionCreator returns action to to add anc records to store */
 export const fetchANC = fetchActionCreatorFactory<ANCClientType>(reducerName, 'baseEntityId');
-export const removeANCAction = removeFactory(reducerName);
+export const removeANCAction = removeActionCreatorFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
 // selectors

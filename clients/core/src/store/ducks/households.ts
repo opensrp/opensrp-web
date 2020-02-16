@@ -1,7 +1,7 @@
 import { Client } from './clients';
 import {
     fetchActionCreatorFactory,
-    removeFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
@@ -21,7 +21,7 @@ const reducer = reducerFactory<Household>(reducerName);
 
 // action creators
 export const fetchHouseholds = fetchActionCreatorFactory<Household>(reducerName, 'baseEntityId');
-export const removeHouseholds = removeFactory(reducerName);
+export const removeHouseholds = removeActionCreatorFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // selectors

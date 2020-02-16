@@ -1,6 +1,6 @@
 import {
     fetchActionCreatorFactory,
-    removeFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
@@ -31,6 +31,7 @@ export interface Event {
     _id: string;
     _rev: string;
     isSendToOpenMRS: string;
+    type: string;
 }
 
 /** The reducer name */
@@ -41,7 +42,7 @@ const reducer = reducerFactory<Event>(reducerName);
 
 // action creators
 export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'baseEntityId');
-export const removeEvents = removeFactory(reducerName);
+export const removeEvents = removeActionCreatorFactory(reducerName);
 
 // selectors
 export const getEventsById = getItemsByIdFactory<Event>(reducerName);

@@ -1,7 +1,7 @@
 import { FlexObject } from '../../helpers/utils';
 import {
     fetchActionCreatorFactory,
-    removeFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
@@ -43,7 +43,7 @@ const reducer = reducerFactory<Client>(reducerName);
 
 // action creators
 export const fetchClients = fetchActionCreatorFactory<Client>(reducerName, 'baseEntityId');
-export const removeClients = removeFactory(reducerName);
+export const removeClients = removeActionCreatorFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // Selectors

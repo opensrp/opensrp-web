@@ -68,7 +68,7 @@ export function fetchActionCreatorFactory<ObjectType>(reducerName: string, idFie
  * @param {string} reducerName - name of reducer
  * @returns {(): RemoveAction} - the action creator
  */
-export const removeFactory = (reducerName: string) => (): RemoveAction => ({
+export const removeActionCreatorFactory = (reducerName: string) => (): RemoveAction => ({
     objectsById: {},
     type: REMOVE,
     reducerName,
