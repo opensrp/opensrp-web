@@ -10,8 +10,8 @@ currently , the only opinionated part about me is how i structure the stored dat
 
 ```typescript
 import {
-    fetchFactory,
-    removeFactory,
+    fetchActionCreatorFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
@@ -30,7 +30,7 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 // action
 /** actionCreator returns action to to add anc records to store */
 export const fetchANC = fetchActionCreatorFactory<ANCClientType, 'baseEntityId'>(reducerName);
-export const removeANCAction = removeFactory(reducerName);
+export const removeANCAction = removeActionCreatorFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
@@ -53,7 +53,7 @@ currently it supports 3 action types: - adding items - removing items - setting 
 
 `fetchActionCreatorFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
 
-`removeFactory` - Use this to create action creators that return actions to remove all items from a slice of the store
+`removeActionCreatorFactory` - Use this to create action creators that return actions to remove all items from a slice of the store
 
 `setTotalRecordsFactory` - This will create an action creator that adds the total number of records to specific slice of the store
 
