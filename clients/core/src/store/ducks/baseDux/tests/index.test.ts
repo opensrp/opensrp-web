@@ -7,7 +7,7 @@ import {
     getItemByIdFactory,
     getItemsArrayFactory,
     getItemsByIdFactory,
-    removeFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     getTotalRecordsFactory,
 } from '..';
@@ -59,7 +59,7 @@ const getBaseClientsById = getItemsByIdFactory<TestClient>(customReducerName);
 const getBaseClientById = getItemByIdFactory<TestClient>(customReducerName);
 const getBaseClientsArray = getItemsArrayFactory<TestClient>(customReducerName);
 const fetchBaseClients = fetchActionCreatorFactory<TestClient>(customReducerName, 'baseEntityId');
-const removeBaseClientsAction = removeFactory(customReducerName);
+const removeBaseClientsAction = removeActionCreatorFactory(customReducerName);
 const setBaseTotalRecords = setTotalRecordsFactory(customReducerName);
 const getBaseTotalRecords = getTotalRecordsFactory(customReducerName);
 

@@ -29,7 +29,7 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchActionCreatorFactory<ANCClientType, 'baseEntityId'>(reducerName);
+export const fetchANC = fetchActionCreatorFactory<ANCClientType>(reducerName, 'baseEntityId');
 export const removeANCAction = removeActionCreatorFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
