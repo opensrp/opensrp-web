@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/page/Header renders header correctly when authenticated: Sign Out 1`] = `
+<NavLink
+  activeClassName="active"
+  className="nav-link bg-dropdown-text"
+  to="/logout"
+>
+  <Link
+    aria-current={null}
+    className="nav-link bg-dropdown-text"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/logout",
+        "search": "",
+        "state": null,
+      }
+    }
+  >
+    <LinkAnchor
+      aria-current={null}
+      className="nav-link bg-dropdown-text"
+      href="/logout"
+      navigate={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link bg-dropdown-text"
+        href="/logout"
+        onClick={[Function]}
+      >
+        Sign Out
+      </a>
+    </LinkAnchor>
+  </Link>
+</NavLink>
+`;
+
+exports[`components/page/Header renders header correctly: Brand-image 1`] = `
+<a
+  className="navbar-brand"
+  href="/"
+  onClick={[Function]}
+>
+  <img
+    alt="OpenSRP"
+    src="test-file-stub"
+  />
+</a>
+`;
+
+exports[`components/page/Header renders header correctly: Login 1`] = `
+<NavLink
+  activeClassName="active"
+  className="nav-link account-text"
+  to="/login"
+>
+  <Link
+    aria-current={null}
+    className="nav-link account-text"
+    to={
+      Object {
+        "hash": "",
+        "pathname": "/login",
+        "search": "",
+        "state": null,
+      }
+    }
+  >
+    <LinkAnchor
+      aria-current={null}
+      className="nav-link account-text"
+      href="/login"
+      navigate={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link account-text"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </LinkAnchor>
+  </Link>
+</NavLink>
+`;

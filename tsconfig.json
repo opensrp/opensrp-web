@@ -1,25 +1,27 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "target": "esnext",
+        "sourceMap": false,
+        "lib": ["dom", "dom.iterable", "esnext", "es6"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "isolatedModules": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "noEmit": false,
+        "emitDeclarationOnly": true,
+        "noEmitOnError": true,
+        "jsx": "preserve",
+        "baseUrl": "packages",
+        "declaration": true,
+        "declarationMap": false,
+        "listEmittedFiles": true
+    },
+    "include": ["packages", "clients", "stories", "**/*.ts", "**/*.tsx"],
+    "exclude": ["**/node_modules", "**/coverage", "**/tests", "**/dist", "**/*.spec.ts"]
 }

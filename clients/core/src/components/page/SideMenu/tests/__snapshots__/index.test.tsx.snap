@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/page/SideMenu renders side menu correctly 1`] = `
+<ul
+  className="side-collapse-nav nav"
+  id="Client-Records"
+  onClick={[Function]}
+>
+  <NavItem
+    id="module-link"
+    tag="li"
+  >
+    <li
+      className="nav-item"
+      id="module-link"
+    >
+      <span
+        className="nav nav-link side-nav-item"
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Array [
+              "far",
+              "user",
+            ]
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size="lg"
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+        <span
+          className="collapse-menu-title"
+        >
+           
+          Client Records
+           
+        </span>
+      </span>
+    </li>
+  </NavItem>
+</ul>
+`;
+
+exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from clicks on parentNavs: Everything 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -103,11 +103,11 @@
+                        \\"label\\": \\"All clients\\",
+                        \\"url\\": \\"/clients\\",
+                      },
+                    ]
+                  }
+-                 collapsedModuleLabel={null}
++                 collapsedModuleLabel=\\"Client Records\\"
+                  key=\\"0\\"
+                  parentNav={
+                    Object {
+                      \\"icon\\": Array [
+                        \\"far\\",
+@@ -125,11 +125,11 @@
+                          \\"label\\": \\"All clients\\",
+                          \\"url\\": \\"/clients\\",
+                        },
+                      ]
+                    }
+-                   collapsedModuleLabel={null}
++                   collapsedModuleLabel=\\"Client Records\\"
+                    history={
+                      Object {
+                        \\"action\\": \\"POP\\",
+                        \\"block\\": [Function block],
+                        \\"createHref\\": [Function createHref],
+@@ -240,11 +240,11 @@
+                      <Collapse
+                        appear={false}
+                        enter={true}
+                        exit={true}
+                        in={false}
+-                       isOpen={false}
++                       isOpen={true}
+                        mountOnEnter={false}
+                        onEnter={[Function noop]}
+                        onEntered={[Function noop]}
+                        onEntering={[Function noop]}
+                        onExit={[Function noop]}
+@@ -256,11 +256,11 @@
+                      >
+                        <Transition
+                          appear={false}
+                          enter={true}
+                          exit={true}
+-                         in={false}
++                         in={true}
+                          mountOnEnter={false}
+                          onEnter={[Function noop]}
+                          onEntered={[Function bound onEntered]}
+                          onEntering={[Function bound onEntering]}
+                          onExit={[Function bound onExit]}
+@@ -268,13 +268,17 @@
+                          onExiting={[Function bound onExiting]}
+                          timeout={350}
+                          unmountOnExit={false}
+                        >
+                          <div
+-                           aria-expanded=\\"false\\"
+-                           className=\\"collapse\\"
+-                           style={Object {}}
++                           aria-expanded=\\"true\\"
++                           className=\\"collapsing\\"
++                           style={
++                             Object {
++                               \\"height\\": 0,
++                             }
++                           }
+                          >
+                            <Nav
+                              key=\\"child-nav-0\\"
+                              tag=\\"ul\\"
+                              vertical={false}"
+`;
