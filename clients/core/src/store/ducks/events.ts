@@ -1,12 +1,10 @@
 import {
     fetchActionCreatorFactory,
     removeActionCreatorFactory,
-    setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
     getItemsArrayFactory,
     getItemByIdFactory,
-    getTotalRecordsFactory,
 } from './baseDux';
 
 /** Interface for event object as received from event search */
