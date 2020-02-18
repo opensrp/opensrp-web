@@ -3,18 +3,21 @@ import * as React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { PaginationState } from '@onaio/pagination';
 import { ExtendingOptions } from '.';
+import { START, PREVIOUS, LOADING, ELLIPSIS, NEXT, LAST } from '../../constants';
 
-interface ActionCreators {
+/** describe the helper functions that add domain logic to the dispatch function */
+interface ActionCreatorsWrapperFn {
     (): void;
 }
 
+/** describes props that bootstrapJSX will receive */
 export interface Props {
     paginationState: PaginationState<ExtendingOptions>;
-    nextPage: ActionCreators;
-    firstPage: ActionCreators;
-    lastPage: ActionCreators;
+    nextPage: ActionCreatorsWrapperFn;
+    firstPage: ActionCreatorsWrapperFn;
+    lastPage: ActionCreatorsWrapperFn;
     goToPage: (page: number) => void;
-    previousPage: ActionCreators;
+    previousPage: ActionCreatorsWrapperFn;
     canNextPage: boolean;
     canPreviousPage: boolean;
     fetchMoreApiData?: () => Promise<void>;
@@ -41,24 +44,24 @@ export const BootstrapJSX: React.FC<Props> = props => {
                     <PaginationLink
                         className={`page-link`}
                         href="#"
-                        aria-label="Start"
+                        aria-label={`${START}`}
                         // tslint:disable-next-line: jsx-no-lambda
                         onClick={(): void => firstPage()}
                     >
-                        <span aria-hidden="true">Start</span>
-                        <span className="sr-only">Start</span>
+                        <span aria-hidden="true">{START}</span>
+                        <span className="sr-only">{START}</span>
                     </PaginationLink>
                 </PaginationItem>
                 <PaginationItem className={`page-item ${canPreviousPage ? '' : 'disabled'}`}>
                     <PaginationLink
                         className={`page-link`}
                         href="#"
-                        aria-label="Previous"
+                        aria-label={`${PREVIOUS}`}
                         // tslint:disable-next-line: jsx-no-lambda
                         onClick={(): void => previousPage()}
                     >
-                        <span aria-hidden="true">Previous</span>
-                        <span className="sr-only">Previous</span>
+                        <span aria-hidden="true">{PREVIOUS}</span>
+                        <span className="sr-only">{PREVIOUS}</span>
                     </PaginationLink>
                 </PaginationItem>
                 {paginationState.pagesToDisplay.map((page: string, index: number) => {
@@ -83,12 +86,12 @@ export const BootstrapJSX: React.FC<Props> = props => {
                 {paginationState.showEndingEllipsis && (
                     <PaginationItem className={`page-item`}>
                         {paginationState.ellipsisIsLoading ? (
-                            'Loading'
+                            `${LOADING}`
                         ) : (
                             <PaginationLink
                                 className={`page-link`}
                                 href="#"
-                                aria-label={'ellipsis'}
+                                aria-label={`${ELLIPSIS}`}
                                 // tslint:disable-next-line: jsx-no-lambda
                                 onClick={(): Promise<void> | undefined => fetchMoreApiData && fetchMoreApiData()}
                             >
@@ -101,23 +104,23 @@ export const BootstrapJSX: React.FC<Props> = props => {
                     <PaginationLink
                         className={`page-link`}
                         href="#"
-                        aria-label={'Next'}
+                        aria-label={`${NEXT}`}
                         // tslint:disable-next-line: jsx-no-lambda
                         onClick={(): void => nextPage()}
                     >
-                        <span aria-hidden="true">Next</span>
-                        <span className="sr-only">Next</span>
+                        <span aria-hidden="true">{NEXT}</span>
+                        <span className="sr-only">{NEXT}</span>
                     </PaginationLink>
                 </PaginationItem>
                 <PaginationItem className={`page-item ${canNextPage ? '' : 'disabled'}`}>
                     <PaginationLink
                         href="#"
-                        aria-label="Last"
+                        aria-label={`${LAST}`}
                         // tslint:disable-next-line: jsx-no-lambda
                         onClick={(): void => lastPage()}
                     >
-                        <span aria-hidden="true">Last</span>
-                        <span className="sr-only">Last</span>
+                        <span aria-hidden="true">{LAST}</span>
+                        <span className="sr-only">{LAST}</span>
                     </PaginationLink>
                 </PaginationItem>
             </Pagination>

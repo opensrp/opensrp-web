@@ -56,3 +56,16 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+
+export const NEXT = 'Next';
+export type NEXT = typeof NEXT;
+export const START = 'Start';
+export type START = typeof START;
+export const LAST = 'Last';
+export type LAST = typeof LAST;
+export const PREVIOUS = 'Previous';
+export type PREVIOUS = typeof PREVIOUS;
+export const LOADING = 'Loading';
+export type LOADING = typeof LOADING;
+export const ELLIPSIS = 'ellipsis';
+export type ELLIPSIS = typeof ELLIPSIS;
