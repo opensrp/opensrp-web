@@ -142,7 +142,7 @@ describe('src/components/pagination.bootstrapReducer', () => {
     it('test ellipsis action type: start_query_for_more_api_pages', () => {
         const initialState: any = {};
         const action = {
-            type: START_QUERY_FOR_MORE_API_PAGES,
+            type: START_QUERY_FOR_MORE_API_PAGES as START_QUERY_FOR_MORE_API_PAGES,
             payload: {
                 showEllipsis: false,
                 loading: false,
@@ -158,7 +158,7 @@ describe('src/components/pagination.bootstrapReducer', () => {
     it('test ellipsis action type: end_query_for_more_api_pages', () => {
         const initialState: any = {};
         const action = {
-            type: END_QUERY_FOR_MORE_API_PAGES,
+            type: END_QUERY_FOR_MORE_API_PAGES as END_QUERY_FOR_MORE_API_PAGES,
             payload: {
                 showEllipsis: false,
                 loading: false,
@@ -174,7 +174,7 @@ describe('src/components/pagination.bootstrapReducer', () => {
     it('test ellipsis action type: stop_showing_ellipsis', () => {
         const initialState: any = {};
         const action = {
-            type: STOP_SHOWING_ELLIPSIS,
+            type: STOP_SHOWING_ELLIPSIS as STOP_SHOWING_ELLIPSIS,
             payload: {
                 showEllipsis: false,
                 loading: false,
