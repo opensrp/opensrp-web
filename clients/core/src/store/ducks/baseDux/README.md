@@ -1,4 +1,4 @@
-# Base Clients Dux Module
+# Base Dux Module
 
 ## What am i
 
@@ -6,7 +6,7 @@ Am an abstraction (more like a template), that you can use to create other [dux 
 
 I think the biggest win with me, is that there is reduced boilerplate when it comes to creating dux modules.
 
-currently , the only opinionated part about me is how i structure the stored data, basically it requires that my action creators are given data as list of objects, where each object bears a property akin to a `primary_key` i.e. this one single field should have unique values that are of type `string| number`.
+Currently , the only opinionated part about me is how i structure the stored data, basically it requires that my action creators are given data as list of objects, where each object bears a property akin to a `primary_key` i.e. this one single field should have unique values that are of type `string| number`.
 
 ```typescript
 import {
