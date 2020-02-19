@@ -1,18 +1,17 @@
 import {
-    reducerFactory,
-    BaseClient,
-    fetchClientsFactory,
-    removeClientsFactory,
-    getClientsArrayFactory,
-    getClientByIdFactory,
-    getClientsByIdFactory,
+    fetchActionCreatorFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
+    reducerFactory,
+    getItemsByIdFactory,
+    getItemsArrayFactory,
+    getItemByIdFactory,
     getTotalRecordsFactory,
-} from './baseClients';
+} from './baseDux';
 import { FlexObject } from '../../helpers/utils';
 
 /** describes an ANC client object */
-export interface ANCClientType extends BaseClient {
+export interface ANCClientType {
     type: 'Client';
     dateCreated: string;
     serverVersion: number;
@@ -44,14 +43,14 @@ const reducer = reducerFactory<ANCClientType>(reducerName);
 
 // action
 /** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchClientsFactory<ANCClientType>(reducerName);
-export const removeANCAction = removeClientsFactory(reducerName);
+export const fetchANC = fetchActionCreatorFactory<ANCClientType>(reducerName, 'baseEntityId');
+export const removeANCAction = removeActionCreatorFactory(reducerName);
 export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
-export const getAllANCById = getClientsByIdFactory<ANCClientType>(reducerName);
-export const getANCById = getClientByIdFactory<ANCClientType>(reducerName);
-export const getAllANCArray = getClientsArrayFactory<ANCClientType>(reducerName);
+export const getAllANCById = getItemsByIdFactory<ANCClientType>(reducerName);
+export const getANCById = getItemByIdFactory<ANCClientType>(reducerName);
+export const getAllANCArray = getItemsArrayFactory<ANCClientType>(reducerName);
 export const getTotalANCRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;

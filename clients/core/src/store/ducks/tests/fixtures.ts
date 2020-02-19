@@ -2,6 +2,7 @@ import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
 import { LocationHierarchy } from '../locations';
+import { Event } from '../events';
 import { Child } from '../child';
 /* eslint-disable @typescript-eslint/camelcase */
 
@@ -819,6 +820,108 @@ export const location2: LocationHierarchy = {
     },
 };
 
+export const event1: Event = {
+    _id: '28d5cf94-15ee-4462-ab56-a83eb4c42f73',
+    _rev: 'v1',
+    baseEntityId: '6e8b72c5-0b36-4e46-829f-8ujd1482c96a',
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 2,
+    dateCreated: 358560000000,
+    duration: 0,
+    entityType: 'ec_household',
+    eventDate: 358560000000,
+    eventType: 'Household Registration',
+    formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+    identifiers: {
+        id: '1d-1d1a-4667',
+    },
+    isSendToOpenMRS: 'yes',
+    locationId: '56b112d2-21ce-4818-b603-277bb57f5528',
+    obs: [
+        {
+            fieldCode: '3a46b207-dc8b-4e5b-8b1f-162fca3905ca',
+            fieldDataType: 'text',
+            fieldType: 'concept',
+            formSubmissionField: 'water_source',
+            parentCode: '',
+        },
+    ],
+    providerId: '',
+    serverVersion: 1552287303783,
+    team: '',
+    teamId: '',
+    type: 'Event',
+    version: 1552287303606,
+};
+
+export const event2: Event = {
+    _id: '89asdfk-15ee-4462-ab56-a83eb4c42f73',
+    _rev: 'v1',
+    baseEntityId: '5e8b72c5-0b36-9d7d-829f-279d1482c96a',
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 3,
+    dateCreated: 358560003645,
+    duration: 12,
+    entityType: 'ec_household',
+    eventDate: 358560009256,
+    eventType: 'Household Registration',
+    formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+    identifiers: {
+        id: '1d-1d1a-4667',
+    },
+    isSendToOpenMRS: 'yes',
+    locationId: '56b112d2-21ce-4818-b603-277bb57f5528',
+    obs: [
+        {
+            fieldCode: '3a49jg-dc8b-8eba-8b1f-998d3905ca',
+            fieldDataType: 'text',
+            fieldType: 'concept',
+            formSubmissionField: 'wind_source',
+            parentCode: '',
+        },
+    ],
+    providerId: '',
+    serverVersion: 1552287303783,
+    team: '',
+    teamId: '',
+    type: 'Event',
+    version: 1552287303606,
+};
+
+export const event3: Event = {
+    _id: '67b2jdfk-15ee-4462-ab56-a83eb4c42f73',
+    _rev: 'v1',
+    baseEntityId: '5e8b72c5-0b36-9d7d-829f-09adfj2c96a',
+    clientApplicationVersion: 2,
+    clientDatabaseVersion: 3,
+    dateCreated: 358560003645,
+    duration: 12,
+    entityType: 'ec_household',
+    eventDate: 358560009256,
+    eventType: 'Household Registration',
+    formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+    identifiers: {
+        id: '2d-9d1a-4667',
+    },
+    isSendToOpenMRS: 'yes',
+    locationId: '56b112d2-21ce-4818-b603-277bb57f5528',
+    obs: [
+        {
+            fieldCode: '3a49jg-dc8b-8eba-8b1f-998d3905ca',
+            fieldDataType: 'dropdown',
+            fieldType: 'concept',
+            formSubmissionField: 'food_source',
+            parentCode: '',
+        },
+    ],
+    providerId: '',
+    serverVersion: 1784287303783,
+    team: '',
+    teamId: '',
+    type: 'Event',
+    version: 29787303842,
+};
+
 export const child1: Child = {
     type: 'Client',
     dateCreated: 1751437728487,
@@ -905,4 +1008,5 @@ export const child3: Child = {
 
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
+export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];

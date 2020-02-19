@@ -1,14 +1,14 @@
 import { Client } from './clients';
 import {
-    fetchClientsFactory,
-    removeClientsFactory,
+    fetchActionCreatorFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     reducerFactory,
-    getClientsByIdFactory,
-    getClientsArrayFactory,
-    getClientByIdFactory,
+    getItemsByIdFactory,
+    getItemsArrayFactory,
+    getItemByIdFactory,
     getTotalRecordsFactory,
-} from './baseClients';
+} from './baseDux';
 
 /** The reducer name */
 export const reducerName = 'opensrp-web/client-type/child';
@@ -20,14 +20,14 @@ export type Child = Client;
 const reducer = reducerFactory<Child>(reducerName);
 
 // action creators
-export const fetchChildList = fetchClientsFactory<Child>(reducerName);
-export const removeChildList = removeClientsFactory(reducerName);
+export const fetchChildList = fetchActionCreatorFactory<Child>(reducerName, 'baseEntityId');
+export const removeChildList = removeActionCreatorFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
-export const getChildListById = getClientsByIdFactory<Child>(reducerName);
-export const getChildArray = getClientsArrayFactory<Child>(reducerName);
-export const getChildById = getClientByIdFactory<Child>(reducerName);
+export const getChildListById = getItemsByIdFactory<Child>(reducerName);
+export const getChildArray = getItemsArrayFactory<Child>(reducerName);
+export const getChildById = getItemByIdFactory<Child>(reducerName);
 export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;
