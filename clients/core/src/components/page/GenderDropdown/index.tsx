@@ -37,15 +37,17 @@ export default class GenderDropdown extends Component<GenderDropdownProps, Gende
     render() {
         const { isSearchable } = this.state;
         return (
-            <Fragment>
+            <div id="gender-dropdown">
                 <Select
+                    className="basic-single"
+                    classNamePrefix="select"
                     onChange={(e: any) => this.props.selectCallBack(e.value)}
                     placeholder="Select Gender"
                     isSearchable={isSearchable}
                     options={genderOptions}
                     styles={styles}
                 />
-            </Fragment>
+            </div>
         );
     }
 }
