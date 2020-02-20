@@ -12,11 +12,11 @@ export interface GenderDropdownState {
 }
 
 export interface GenderDropdownProps {
-    selectCallBack(selectedGender: string): void;
+    selectCallBack(gender: string): void;
 }
 
 const genderDropdownDefaultProps: GenderDropdownProps = {
-    selectCallBack: selectedGender => selectedGender,
+    selectCallBack: gender => gender,
 };
 
 const styles = {
@@ -39,6 +39,7 @@ export default class GenderDropdown extends Component<GenderDropdownProps, Gende
         return (
             <Fragment>
                 <Select
+                    onChange={(e: any) => this.props.selectCallBack(e.value)}
                     placeholder="Select Gender"
                     isSearchable={isSearchable}
                     options={genderOptions}
