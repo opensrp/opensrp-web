@@ -17,7 +17,7 @@ export interface DropdownProps {
 }
 
 const dropdownDefaultProps: DropdownProps = {
-    selectCallBack: value => value,
+    selectCallBack: () => {},
     placeholder: 'Select',
     dropdownOptions: [],
 };
