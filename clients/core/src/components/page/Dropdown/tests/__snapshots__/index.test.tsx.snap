@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/page/CustomDropdown renders without crashing: StateManager 1`] = `
+<div
+  id="custom-dropdown"
+>
+  <StateManager
+    className="basic-single"
+    classNamePrefix="select"
+    defaultInputValue=""
+    defaultMenuIsOpen={false}
+    defaultValue={null}
+    isSearchable={false}
+    onChange={[Function]}
+    options={Array []}
+    placeholder="Select"
+    styles={
+      Object {
+        "control": [Function],
+      }
+    }
+  />
+</div>
+`;
+
 exports[`components/page/GenderDropdown renders without crashing: StateManager 1`] = `
 <div
   id="gender-dropdown"
