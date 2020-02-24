@@ -10,7 +10,6 @@ exports[`components/page/CustomDropdown renders without crashing: StateManager 1
     defaultInputValue=""
     defaultMenuIsOpen={false}
     defaultValue={null}
-    isSearchable={false}
     onChange={[Function]}
     options={Array []}
     placeholder="Select"

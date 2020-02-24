@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Select from 'react-select';
 
+/** interface for the dropdown option */
 export interface DropdownOption {
     value: string;
     label: string;
 }
 
-export interface DropdownState {
-    isSearchable: boolean;
-}
-
+/** props interface for the dropdown */
 export interface DropdownProps {
     selectCallBack(value: string): void;
     dropdownOptions: DropdownOption[];
     placeholder: string;
+    isSearchable?: boolean;
 }
 
+/** default props for the Dropdown */
 const dropdownDefaultProps: DropdownProps = {
     selectCallBack: () => {},
     placeholder: 'Select',
     dropdownOptions: [],
+    isSearchable: false,
 };
 
+/** Custom style for react-select */
 const styles = {
     control: (base: any) => ({
         ...base,
@@ -31,27 +33,21 @@ const styles = {
     }),
 };
 
-export default class Dropdown extends Component<DropdownProps, DropdownState> {
-    public static defaultProps: DropdownProps = dropdownDefaultProps;
-    state = {
-        isSearchable: false,
-    };
+const Dropdown = function(props: DropdownProps = dropdownDefaultProps) {
+    const { placeholder, dropdownOptions, isSearchable } = props;
+    return (
+        <div id="custom-dropdown">
+            <Select
+                className="basic-single"
+                classNamePrefix="select"
+                onChange={(e: ValueType) => props.selectCallBack(e.value)}
+                placeholder={placeholder}
+                isSearchable={isSearchable}
+                options={dropdownOptions}
+                styles={styles}
+            />
+        </div>
+    );
+};
 
-    render() {
-        const { isSearchable } = this.state;
-        const { placeholder, dropdownOptions } = this.props;
-        return (
-            <div id="custom-dropdown">
-                <Select
-                    className="basic-single"
-                    classNamePrefix="select"
-                    onChange={(e: any) => this.props.selectCallBack(e.value)}
-                    placeholder={placeholder}
-                    isSearchable={isSearchable}
-                    options={dropdownOptions}
-                    styles={styles}
-                />
-            </div>
-        );
-    }
-}
+export default Dropdown;

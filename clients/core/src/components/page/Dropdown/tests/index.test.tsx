@@ -2,6 +2,7 @@ import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
 import Dropdown, { DropdownProps } from '..';
+import { dropdownOptions, dropdownOption1 } from '../../../../store/ducks/tests/fixtures';
 
 describe('components/page/CustomDropdown', () => {
     beforeEach(() => {
@@ -26,16 +27,16 @@ describe('components/page/CustomDropdown', () => {
         const props: DropdownProps = {
             selectCallBack: callBackMock,
             placeholder: 'Select',
-            dropdownOptions: [],
+            dropdownOptions: dropdownOptions,
         };
         const wrapper = mount(<Dropdown {...props} />);
         expect(callBackMock).toHaveBeenCalledTimes(0);
         wrapper
             .find('Select')
             .instance()
-            .selectOption({ label: 'Male', value: 'Male' });
+            .selectOption(dropdownOption1);
 
         expect(callBackMock).toHaveBeenCalledTimes(1);
-        expect(callBackMock).toHaveBeenCalledWith('Male');
+        expect(callBackMock).toHaveBeenCalledWith(dropdownOption1.value);
     });
 });
