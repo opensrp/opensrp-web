@@ -4,7 +4,6 @@ import { ANCClientType } from '../anc';
 import { LocationHierarchy } from '../locations';
 import { Event } from '../events';
 import { Child } from '../child';
-import { DropdownOption } from '../../../components/page/Dropdown';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -1007,23 +1006,7 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
-export const dropdownOption1: DropdownOption = {
-    value: 'Male',
-    label: 'Male',
-};
-
-export const dropdownOption2: DropdownOption = {
-    value: 'Female',
-    label: 'Female',
-};
-
-export const dropdownOption3: DropdownOption = {
-    value: 'Others',
-    label: 'Other',
-};
-
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
-export const dropdownOptions: DropdownOption[] = [dropdownOption1, dropdownOption2, dropdownOption3];
