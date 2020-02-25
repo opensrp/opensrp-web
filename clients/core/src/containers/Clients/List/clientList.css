@@ -10,3 +10,7 @@ th .form-control {
   border: none;
   font: inherit;
 }
+
+.filter-row {
+  margin-bottom: 20px;
+}

@@ -56,3 +56,7 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+
+// url constants
+export const PAGINATION_SIZE = 10;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
