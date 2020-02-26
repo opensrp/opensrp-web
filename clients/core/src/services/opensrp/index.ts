@@ -23,7 +23,8 @@ export function generateHeaders(
     };
 }
 
-/** get payload for fetch
+/** generate options that are to be added to openSRPService fetch request
+ * @param {AbortSignal} signal -  signal object that allows you to communicate with a DOM request
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
