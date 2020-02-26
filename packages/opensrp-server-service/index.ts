@@ -26,6 +26,7 @@ export function getDefaultHeaders(
 }
 
 /** get payload for fetch
+ * @param {AbortSignal} signal - signal object that allows you to communicate with a DOM request
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
