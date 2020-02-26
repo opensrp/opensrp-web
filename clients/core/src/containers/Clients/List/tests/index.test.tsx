@@ -91,10 +91,9 @@ describe('containers/clients/list/ClientList', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <ConnectedClientsList {...props} />
-                );
             </Provider>,
         );
-        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
+        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/searchByCriteria');
         wrapper.unmount();
     });
 });

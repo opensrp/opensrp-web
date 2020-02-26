@@ -279,7 +279,7 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
-          "client/search",
+          "client/searchByCriteria",
         ],
       ],
       "results": Array [
@@ -290,205 +290,56 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
       ],
     }
   }
+  removeClients={[Function]}
+  setTotalRecords={[Function]}
+  totalRecords={0}
 >
-  <div>
-    <Table
-      responsiveTag="div"
-      striped={true}
-      tag="table"
+  <Ripple
+    borderColor="#ff5d00"
+    borderStyle="solid"
+    borderWidth="4px"
+    height="64px"
+    minHeight="80vh"
+    width="64px"
+  >
+    <div
+      className="lds-ripple-parent"
+      style={
+        Object {
+          "minHeight": "80vh",
+        }
+      }
     >
-      <table
-        className="table table-striped"
+      <div
+        className="lds-ripple"
+        style={
+          Object {
+            "height": "64px",
+            "width": "64px",
+          }
+        }
       >
-        <thead>
-          <tr>
-            <th>
-              Identifier
-            </th>
-            <th>
-              First Name
-            </th>
-            <th>
-              Middle Name
-            </th>
-            <th>
-              Last Name
-            </th>
-            <th>
-              Gender
-            </th>
-            <th>
-              actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key="9b67a82d-dac7-40c0-85aa-e5976339a6b6"
-          >
-            <td>
-              9b67a82d-dac7-40c0-85aa-e5976339a6b6
-            </td>
-            <td>
-              Khumpai
-            </td>
-            <td />
-            <td>
-              Family
-            </td>
-            <td>
-              Male
-            </td>
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="a30116d5-0612-419e-9b93-00c87df4ffbb"
-          >
-            <td>
-              a30116d5-0612-419e-9b93-00c87df4ffbb
-            </td>
-            <td>
-              Pramoj
-            </td>
-            <td />
-            <td>
-              Khumpai
-            </td>
-            <td />
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="b23307c2-cbbb-481f-9cd7-f218564cc4bc"
-          >
-            <td>
-              b23307c2-cbbb-481f-9cd7-f218564cc4bc
-            </td>
-            <td>
-              Sepsook
-            </td>
-            <td />
-            <td>
-              Family
-            </td>
-            <td>
-              Male
-            </td>
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="e5929901-9377-413c-850c-e41b48b34d5f"
-          >
-            <td>
-              e5929901-9377-413c-850c-e41b48b34d5f
-            </td>
-            <td>
-              Udom
-            </td>
-            <td />
-            <td>
-              Sepsook
-            </td>
-            <td />
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="faa436bb-0aa5-4c5f-a2fe-be687e164205"
-          >
-            <td>
-              faa436bb-0aa5-4c5f-a2fe-be687e164205
-            </td>
-            <td>
-              Imalda
-            </td>
-            <td />
-            <td>
-              DANE
-            </td>
-            <td>
-              Female
-            </td>
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="0a5457f9-3e2e-4432-afae-75b57251651a"
-          >
-            <td>
-              0a5457f9-3e2e-4432-afae-75b57251651a
-            </td>
-            <td>
-              DANE
-            </td>
-            <td />
-            <td>
-              Family
-            </td>
-            <td>
-              Male
-            </td>
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-          <tr
-            key="6dab682a-0f31-4935-9114-c4d33d148617"
-          >
-            <td>
-              6dab682a-0f31-4935-9114-c4d33d148617
-            </td>
-            <td>
-              Peter
-            </td>
-            <td />
-            <td>
-              DANE
-            </td>
-            <td />
-            <td>
-              <a
-                href="#"
-              >
-                 view 
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </Table>
-  </div>
+        <div
+          style={
+            Object {
+              "borderColor": "#ff5d00",
+              "borderStyle": "solid",
+              "borderWidth": "4px",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "borderColor": "#ff5d00",
+              "borderStyle": "solid",
+              "borderWidth": "4px",
+            }
+          }
+        />
+      </div>
+    </div>
+  </Ripple>
 </ClientList>
 `;
 
@@ -561,7 +412,7 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
       [MockFunction] {
         "calls": Array [
           Array [
-            "client/search",
+            "client/searchByCriteria",
           ],
         ],
         "results": Array [
@@ -845,13 +696,14 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
         ]
       }
       fetchClientsActionCreator={[Function]}
+      getTotalRecords={[Function]}
       location={[MockFunction]}
       match={[MockFunction]}
       opensrpService={
         [MockFunction] {
           "calls": Array [
             Array [
-              "client/search",
+              "client/searchByCriteria",
             ],
           ],
           "results": Array [
@@ -862,205 +714,56 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
           ],
         }
       }
+      removeClients={[Function]}
+      setTotalRecords={[Function]}
+      totalRecords={0}
     >
-      <div>
-        <Table
-          responsiveTag="div"
-          striped={true}
-          tag="table"
+      <Ripple
+        borderColor="#ff5d00"
+        borderStyle="solid"
+        borderWidth="4px"
+        height="64px"
+        minHeight="80vh"
+        width="64px"
+      >
+        <div
+          className="lds-ripple-parent"
+          style={
+            Object {
+              "minHeight": "80vh",
+            }
+          }
         >
-          <table
-            className="table table-striped"
+          <div
+            className="lds-ripple"
+            style={
+              Object {
+                "height": "64px",
+                "width": "64px",
+              }
+            }
           >
-            <thead>
-              <tr>
-                <th>
-                  Identifier
-                </th>
-                <th>
-                  First Name
-                </th>
-                <th>
-                  Middle Name
-                </th>
-                <th>
-                  Last Name
-                </th>
-                <th>
-                  Gender
-                </th>
-                <th>
-                  actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                key="9b67a82d-dac7-40c0-85aa-e5976339a6b6"
-              >
-                <td>
-                  9b67a82d-dac7-40c0-85aa-e5976339a6b6
-                </td>
-                <td>
-                  Khumpai
-                </td>
-                <td />
-                <td>
-                  Family
-                </td>
-                <td>
-                  Male
-                </td>
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="a30116d5-0612-419e-9b93-00c87df4ffbb"
-              >
-                <td>
-                  a30116d5-0612-419e-9b93-00c87df4ffbb
-                </td>
-                <td>
-                  Pramoj
-                </td>
-                <td />
-                <td>
-                  Khumpai
-                </td>
-                <td />
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="b23307c2-cbbb-481f-9cd7-f218564cc4bc"
-              >
-                <td>
-                  b23307c2-cbbb-481f-9cd7-f218564cc4bc
-                </td>
-                <td>
-                  Sepsook
-                </td>
-                <td />
-                <td>
-                  Family
-                </td>
-                <td>
-                  Male
-                </td>
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="e5929901-9377-413c-850c-e41b48b34d5f"
-              >
-                <td>
-                  e5929901-9377-413c-850c-e41b48b34d5f
-                </td>
-                <td>
-                  Udom
-                </td>
-                <td />
-                <td>
-                  Sepsook
-                </td>
-                <td />
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="faa436bb-0aa5-4c5f-a2fe-be687e164205"
-              >
-                <td>
-                  faa436bb-0aa5-4c5f-a2fe-be687e164205
-                </td>
-                <td>
-                  Imalda
-                </td>
-                <td />
-                <td>
-                  DANE
-                </td>
-                <td>
-                  Female
-                </td>
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="0a5457f9-3e2e-4432-afae-75b57251651a"
-              >
-                <td>
-                  0a5457f9-3e2e-4432-afae-75b57251651a
-                </td>
-                <td>
-                  DANE
-                </td>
-                <td />
-                <td>
-                  Family
-                </td>
-                <td>
-                  Male
-                </td>
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-              <tr
-                key="6dab682a-0f31-4935-9114-c4d33d148617"
-              >
-                <td>
-                  6dab682a-0f31-4935-9114-c4d33d148617
-                </td>
-                <td>
-                  Peter
-                </td>
-                <td />
-                <td>
-                  DANE
-                </td>
-                <td />
-                <td>
-                  <a
-                    href="#"
-                  >
-                     view 
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+            <div
+              style={
+                Object {
+                  "borderColor": "#ff5d00",
+                  "borderStyle": "solid",
+                  "borderWidth": "4px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "borderColor": "#ff5d00",
+                  "borderStyle": "solid",
+                  "borderWidth": "4px",
+                }
+              }
+            />
+          </div>
+        </div>
+      </Ripple>
     </ClientList>
   </Connect(ClientList)>
   );
