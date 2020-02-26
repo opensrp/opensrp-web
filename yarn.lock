@@ -2192,11 +2192,14 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
+<<<<<<< HEAD
 "@opensrp/server-service@file:packages/opensrp-server-service":
   version "0.0.0"
   dependencies:
     "@onaio/session-reducer" "^0.0.11"
 
+=======
+>>>>>>> Add react-Table npm package
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -7358,6 +7361,14 @@ immer@1.10.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
 
+<<<<<<< HEAD
+=======
+immutable@^3.8.1:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+  integrity sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
+
+>>>>>>> Add react-Table npm package
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
@@ -7535,6 +7546,7 @@ internal-ip@^4.3.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
+<<<<<<< HEAD
 internal-slot@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/internal-slot/-/internal-slot-1.0.2.tgz#9c2e9fb3cd8e5e4256c6f45fe310067fcfa378a3"
@@ -7544,6 +7556,8 @@ internal-slot@^1.0.2:
     has "^1.0.3"
     side-channel "^1.0.2"
 
+=======
+>>>>>>> Add react-Table npm package
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -11850,6 +11864,11 @@ react-scripts@^3.0.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-table@7.0.0-beta.15:
+  version "7.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-beta.15.tgz#66dc4c71f9e77f5c92ac65a307341d6d3e045d33"
+  integrity sha512-Qr0HjVkYIPLi7BJiHm6ZfRIH00Ziu/bdonwouwKY10hsaqQi9AyH9kF4cXJChBQuspfjsnqnP9kQAjsEIoAeUQ==
 
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.13.0"
