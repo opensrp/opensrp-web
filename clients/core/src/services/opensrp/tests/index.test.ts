@@ -27,7 +27,7 @@ describe('services/OpenSRP', () => {
     });
 
     it('generatePayload works fine', async () => {
-        const signal = new AbortController().signal;
+        const { signal } = new AbortController();
         const response = generateOptions(signal, 'GET');
         expect(response).toEqual({
             headers: {
