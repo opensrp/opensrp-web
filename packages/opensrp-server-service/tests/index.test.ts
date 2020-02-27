@@ -1,4 +1,4 @@
-import { getDefaultHeaders, getFilterParams, getURLParams, OpenSRPService, OPENSRP_API_BASE_URL } from '../index';
+import { getDefaultHeaders, getFilterParams, getURLParams, OpenSRPService, OPENSRP_API_BASE_URL, getURLFn } from '..';
 import { createPlan, plansListResponse } from './fixtures/plans';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
@@ -7,6 +7,11 @@ describe('services/OpenSRP', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         fetch.resetMocks();
+    });
+
+    it('getUrlFn wors for no params', () => {
+        const localHost = 'http://localhost';
+        expect(getURLFn('http://localhost')).toEqual(localHost);
     });
 
     it('getDefaultHeaders works', async () => {
