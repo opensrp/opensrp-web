@@ -572,7 +572,6 @@ exports[`App renders App correctly 1`] = `
                                         unmountOnExit={false}
                                       >
                                         <div
-                                          aria-expanded="false"
                                           className="collapse"
                                           style={Object {}}
                                         >
