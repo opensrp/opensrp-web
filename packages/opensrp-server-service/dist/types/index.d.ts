@@ -9,6 +9,7 @@ declare type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * @param {string} accept - the MIME type to accept
  * @param {string} authorizationType - the authorization type
  * @param {string} contentType - the content type
+ * @return {IncomingHttpHeaders} - the headers
  */
 export declare function getDefaultHeaders(accessToken?: string, accept?: string, authorizationType?: string, contentType?: string): IncomingHttpHeaders;
 /** get payload for fetch
