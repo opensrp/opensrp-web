@@ -111,16 +111,14 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -277,13 +277,17 @@
+@@ -277,12 +277,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
                         >
                           <div
--                           aria-expanded=\\"false\\"
 -                           className=\\"collapse\\"
 -                           style={Object {}}
-+                           aria-expanded=\\"true\\"
 +                           className=\\"collapsing\\"
 +                           style={
 +                             Object {
