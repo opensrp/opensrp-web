@@ -35,16 +35,27 @@ jobs:
       # run tests for client/score!
 
       - run:
-          name: Run test with coverage for clients/core
-          command: cp clients/core/.env.sample ./.env && yarn test clients/core --verbose --collectCoverage=true --forceExit --detectOpenHandles && rm ./.env && cp ./coverage/coverage-final.json ./coverage/coverage-clients-core-final.json
+          name: Run test with coverage for clients/core and upload
+          command: > 
+            cp clients/core/.env.sample ./.env
+            && mkdir -p coverage
+            && touch coverage/core.lcov
+            && yarn test clients/core --verbose --collectCoverage=true 
+            --coverageReporters=text-lcov --forceExit --detectOpenHandles > coverage/core.lcov
+            && rm ./.env 
+            && cat coverage/core.lcov | node_modules/coveralls/bin/coveralls.js
 
       - run:
-          name: Run test with coverage for the packages
-          command: yarn test packages --verbose --collectCoverage=true --forceExit --detectOpenHandles && cp ./coverage/coverage-final.json ./coverage/coverage-packages-final.json && node ./mapCoverage.js
+          name: Run test with coverage for the packages and upload
+          command: >
+            touch coverage/packages.lcov
+            && yarn test packages --verbose --collectCoverage=true --coverageReporters=text-lcov
+            --forceExit --detectOpenHandles > coverage/packages.lcov
+            && cat coverage/packages.lcov | node_modules/coveralls/bin/coveralls.js
 
-      - run:
-          name: upload coverage to coveralls
-          command: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      # - run:
+      #     name: upload coverage to coveralls
+      #     command: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
       - store_artifacts:
           path: coverage
