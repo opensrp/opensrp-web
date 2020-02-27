@@ -11,6 +11,7 @@ type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * @param {string} accept - the MIME type to accept
  * @param {string} authorizationType - the authorization type
  * @param {string} contentType - the content type
+ * @return {IncomingHttpHeaders} - the headers
  */
 export function getDefaultHeaders(
     accessToken = 'hunter2',
