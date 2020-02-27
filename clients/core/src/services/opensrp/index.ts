@@ -9,6 +9,7 @@ type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * @param {string} accept - the MIME type to accept
  * @param {string} authorizationType - the authorization type
  * @param {string} contentType - the content type
+ * @returns {IncomingHttpHeaders} - the headers to be attached to fetch request
  */
 export function generateHeaders(
     accessToken = getAccessToken(store.getState()),
@@ -23,15 +24,21 @@ export function generateHeaders(
     };
 }
 
+/** describe options returned by generate options -> usually
+ * to be passed as options in a fetch request
+ */
+interface FetchOptions {
+    headers: HeadersInit;
+    method: HTTPMethod;
+    signal: AbortSignal;
+}
+
 /** generate options that are to be added to openSRPService fetch request
  * @param {AbortSignal} signal -  signal object that allows you to communicate with a DOM request
  * @param {HTTPMethod} method - the HTTP method
- * @returns the payload
+ * @returns {FetchOptions} - options to be added to the fetch request
  */
-export function generateOptions(
-    signal: AbortSignal,
-    method: HTTPMethod,
-): { headers: HeadersInit; method: HTTPMethod; signal: AbortSignal } {
+export function generateOptions(signal: AbortSignal, method: HTTPMethod): FetchOptions {
     return {
         headers: generateHeaders() as HeadersInit,
         method,
