@@ -4,7 +4,7 @@
 import React from 'react';
 import { Column, useSortBy, useTable, ColumnInstance, UseSortByColumnProps, Cell } from 'react-table';
 import './index.css';
-import { PLEASE_DEFINE_SOME_COLUMNS } from '../../constants';
+import { PLEASE_DEFINE_SOME_COLUMNS } from '../../../clients/core/src/constants';
 
 /** props for the ReactTable component */
 interface ReactTableProps<T extends object> {
