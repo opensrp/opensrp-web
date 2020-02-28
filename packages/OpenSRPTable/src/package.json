@@ -1,0 +1,35 @@
+{
+    "name": "@opensrp/opensrp-table",
+    "version": "0.0.1",
+    "types": "dist/types",
+    "description": "A grid component for displaying data",
+    "main": "dist/index.js",
+    "repository": "https://github.com/opensrp/opensrp-web",
+    "author": "Ona Engineering",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/opensrp/opensrp-web/issues"
+    },
+    "scripts": {
+        "jest": "jest --coverage --verbose --color",
+        "tsc": "tsc",
+        "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx'  --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
+    },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "jest": {
+        "setupFiles": [
+            "../../setupTests"
+        ]
+    },
+    "peerDependencies": {
+        "react": "^16.8.6"
+    },
+    "dependencies": {
+        "react-table": "react-table@7.0.0-beta.12"
+    }
+}
