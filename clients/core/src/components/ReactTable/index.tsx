@@ -88,8 +88,6 @@ function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTabl
                     })}
                 </tbody>
             </table>
-            <br />
-            <div>Showing all rows</div>
         </div>
     );
 }
