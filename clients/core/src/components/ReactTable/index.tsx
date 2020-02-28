@@ -24,12 +24,15 @@ const defaultANCTableProps = {
     ],
 };
 
+/** describe the column instance after including hooks. */
+interface ActualColumnInstance<D extends object = {}> extends ColumnInstance<D>, UseSortByColumnProps<D> {}
+
 /** the component definition */
 function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTableProps): ReturnType<React.FC<T>> {
     const { tableColumns, data } = props;
 
     // Use the state and functions returned from useTable to build your UI
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<T>(
         {
             columns: tableColumns,
             data,
@@ -43,7 +46,8 @@ function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTabl
                 <thead>
                     {headerGroups.map((headerGroup, idx) => (
                         <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column: ColumnInstance<UseSortByColumnProps<{}>>, index) => (
+                            {headerGroup.headers.map((c: ColumnInstance<T>, index) => {
+                                const column = (c as unknown) as ActualColumnInstance<T>;
                                 <th key={`thead-th-${index}`} {...column.getHeaderProps(column.getSortByToggleProps())}>
                                     {column.render('Header')}
                                     {/* Add a sort direction indicator */}
@@ -62,8 +66,8 @@ function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTabl
                                             ''
                                         )}
                                     </span>
-                                </th>
-                            ))}
+                                </th>;
+                            })}
                         </tr>
                     ))}
                 </thead>
