@@ -1,7 +1,7 @@
 /** bootstrap tabled component abstracting the jsx part when using
  * the react-table component
  */
-import React from 'react';
+import * as React from 'react';
 import { Column, useSortBy, useTable, ColumnInstance, UseSortByColumnProps, Cell } from 'react-table';
 import { PLEASE_DEFINE_SOME_COLUMNS } from './constants';
 import './index.css';
