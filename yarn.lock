@@ -10108,6 +10108,11 @@ opn@^5.5.0:
   dependencies:
     "@onaio/session-reducer" "^0.0.11"
 
+"opensrp-table@file:packages/OpenSRPTable":
+  version "0.0.1"
+  dependencies:
+    react-table react-table@v7.0.0-rc.11
+
 "opensrp-web@file:clients/core":
   version "0.1.0"
   dependencies:
