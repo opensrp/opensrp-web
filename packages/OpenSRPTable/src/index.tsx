@@ -3,11 +3,11 @@
  */
 import React from 'react';
 import { Column, useSortBy, useTable, ColumnInstance, UseSortByColumnProps, Cell } from 'react-table';
+import { PLEASE_DEFINE_SOME_COLUMNS } from './constants';
 import './index.css';
-import { PLEASE_DEFINE_SOME_COLUMNS } from '../../../clients/core/src/constants';
 
-/** props for the ReactTable component */
-interface ReactTableProps<T extends object> {
+/** props for the OpenSRPTable component */
+interface OpenSRPTableProps<T extends object> {
     /** a memoized list of columns  */
     tableColumns: Column[];
     /** the data to be rendered in table */
@@ -28,7 +28,7 @@ const defaultANCTableProps = {
 interface ActualColumnInstance<D extends object = {}> extends ColumnInstance<D>, UseSortByColumnProps<D> {}
 
 /** the component definition */
-function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTableProps): ReturnType<React.FC<T>> {
+function OpenSRPTable<T extends object>(props: OpenSRPTableProps<T> = defaultANCTableProps): ReturnType<React.FC<T>> {
     const { tableColumns, data } = props;
 
     // Use the state and functions returned from useTable to build your UI
@@ -92,4 +92,4 @@ function ReactTable<T extends object>(props: ReactTableProps<T> = defaultANCTabl
     );
 }
 
-export { ReactTable };
+export { OpenSRPTable };
