@@ -2561,6 +2561,13 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-table@^7.0.8":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.0.8.tgz#a7b9c6efa36b806e1295d7218f05c3fac9389958"
+  integrity sha512-6FD48bQj/BAX/6OiZmbjmjFKwwFunhIoUQDu1Hhr22WvbSBSe/4YtJbPqXRV+8wG+Rk7Yb2JA8kX/vUVxKpUlw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.8.23", "@types/react@^16.9.13":
   version "16.9.23"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
@@ -10093,7 +10100,66 @@ opencollective-postinstall@^2.0.2:
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
 
+<<<<<<< HEAD
 opn@^5.5.0:
+=======
+"opensrp-server-service@file:packages/opensrp-server-service":
+  version "0.0.0"
+  dependencies:
+    "@onaio/session-reducer" "^0.0.11"
+
+"opensrp-web@file:clients/core":
+  version "0.1.0"
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.20"
+    "@fortawesome/free-brands-svg-icons" "^5.10.0"
+    "@fortawesome/free-regular-svg-icons" "^5.10.0"
+    "@fortawesome/free-solid-svg-icons" "^5.10.0"
+    "@fortawesome/react-fontawesome" "^0.1.4"
+    "@onaio/connected-private-route" "^0.0.9"
+    "@onaio/connected-reducer-registry" "^0.0.1"
+    "@onaio/gatekeeper" "^0.0.14"
+    "@onaio/loaders" "^0.0.1"
+    "@onaio/redux-reducer-registry" "^0.0.8"
+    "@onaio/session-reducer" "^0.0.10"
+    "@onaio/superset-connector" "^0.0.13"
+    "@types/bootstrap" "^4.3.1"
+    "@types/fetch-mock" "^7.3.1"
+    "@types/history" "^4.7.2"
+    "@types/jest" "^24.0.16"
+    "@types/lodash" "^4.14.136"
+    "@types/node" "^12.6.8"
+    "@types/react" "^16.8.23"
+    "@types/react-dom" "^16.8.5"
+    "@types/react-redux" "^7.1.1"
+    "@types/react-router" "^5.0.3"
+    "@types/react-router-dom" "^4.3.4"
+    "@types/reactstrap" "^8.0.1"
+    "@types/seamless-immutable" "^7.1.10"
+    bootstrap "^4.3.1"
+    classnames "^2.2.6"
+    client-oauth2 "^4.2.5"
+    connected-react-router "^6.5.2"
+    fetch-mock "^7.3.9"
+    history "^4.9.0"
+    jest-fetch-mock "^2.1.2"
+    lodash "^4.17.15"
+    prop-types "^15.7.2"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-redux "^7.1.0"
+    react-router "^5.0.1"
+    react-router-dom "^5.0.1"
+    react-scripts "^3.0.1"
+    reactstrap "^8.0.1"
+    redux "^4.0.4"
+    redux-thunk "^2.3.0"
+    seamless-immutable "^7.1.4"
+    snapshot-diff "^0.5.2"
+    typescript "^3.5.3"
+
+opn@^5.1.0:
+>>>>>>> Reinstall react-table types in root directory
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
   integrity sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
@@ -11865,10 +11931,10 @@ react-scripts@^3.0.1:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-table@7.0.0-beta.15:
-  version "7.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-beta.15.tgz#66dc4c71f9e77f5c92ac65a307341d6d3e045d33"
-  integrity sha512-Qr0HjVkYIPLi7BJiHm6ZfRIH00Ziu/bdonwouwKY10hsaqQi9AyH9kF4cXJChBQuspfjsnqnP9kQAjsEIoAeUQ==
+react-table@react-table@v7.0.0-rc.11:
+  version "7.0.0-rc.11"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-rc.11.tgz#98c5299ce16a09c8899727955fb4505bd1ed64ac"
+  integrity sha512-Wj2amgPpi69MyMvjIQZMTp+bhun5uAjBtHbDIfAT5n/xa3DN0Frby5aSlMmrmbuWAIB3BLM2ak6hfkuWspXX/A==
 
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.13.0"
