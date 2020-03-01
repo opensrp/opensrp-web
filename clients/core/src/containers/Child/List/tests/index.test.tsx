@@ -21,12 +21,13 @@ describe('containers/child/List', () => {
     it('renders correctly', () => {
         const mock: jest.Mock = jest.fn();
         const opensrpServiceMock: jest.Mock = jest.fn();
-        const props = {
-            clientsArray: fixtures.clients,
-            fetchClientsActionCreator: mock,
-            location: mock,
-            match: mock,
+        const props: ChildListProps = {
+            childArray: [],
+            fetchChild: mock,
             opensrpService: opensrpServiceMock,
+            removeChild: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
         };
         const wrapper = mount(<ChildList {...props} />);
         expect(toJson(wrapper)).toMatchSnapshot();
