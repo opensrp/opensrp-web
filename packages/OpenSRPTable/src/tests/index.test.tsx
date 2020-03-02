@@ -16,8 +16,9 @@ describe('src/components/ReactTable', () => {
         const wrapper = mount(<TestComponent />);
         expect(wrapper.find('.react-table').length).toEqual(1);
         expect(wrapper.find('tbody tr').length).toEqual(404);
+        // sort on visits is disabled.
         expect(wrapper.find('.react-table thead').text()).toMatchInlineSnapshot(
-            `"First Name   ↕Last Name   ↕Age   ↕Visits   ↕Status   ↕Profile Progress   ↕"`,
+            `"First Name   ↕Last Name   ↕Age   ↕VisitsStatus   ↕Profile Progress   ↕"`,
         );
     });
 
@@ -40,5 +41,9 @@ describe('src/components/ReactTable', () => {
                 .text(),
         );
         expect(allFirstNameTDs).toEqual(firstNameSortedTDs);
+        firstNameTH.simulate('click');
+        wrapper.update();
+        // note the arrow changes its now pointing down - expect data to be sorted in desc
+        expect(firstNameTH.text()).toMatchInlineSnapshot(`"First Name   ↓"`);
     });
 });

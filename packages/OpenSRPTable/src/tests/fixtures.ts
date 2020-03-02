@@ -15,6 +15,7 @@ export const columns = [
     {
         Header: 'Visits',
         accessor: 'visits',
+        disableSortBy: true,
     },
     {
         Header: 'Status',
