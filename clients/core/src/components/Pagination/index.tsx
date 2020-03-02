@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ActionTypes, PaginationOptions, PaginationState, usePagination } from '@onaio/pagination';
 import { fetchPageNumbers } from './utils';
 import { BootstrapJSX } from './JSX';
+import { AnyAction } from 'redux';
 
 /** a util function that takes in the usePagination state
  * and uses some of its properties to calculate the pagination pages
@@ -18,76 +19,7 @@ export interface ExtendingOptions {
     fetchPagesToDisplay: typeof fetchPagesToDisplay;
     pageNeighbors: number;
     pagesToDisplay: string[];
-    showEndingEllipsis: boolean;
-    ellipsisIsLoading: boolean;
 }
-
-// action types strings
-export const START_QUERY_FOR_MORE_API_PAGES = 'START_QUERY_FOR_MORE_API_PAGES';
-export type START_QUERY_FOR_MORE_API_PAGES = typeof START_QUERY_FOR_MORE_API_PAGES;
-export const END_QUERY_FOR_MORE_API_PAGES = 'END_QUERY_FOR_MORE_API_PAGES';
-export type END_QUERY_FOR_MORE_API_PAGES = typeof END_QUERY_FOR_MORE_API_PAGES;
-export const STOP_SHOWING_ELLIPSIS = 'STOP_SHOWING_ELLIPSIS';
-export type STOP_SHOWING_ELLIPSIS = typeof STOP_SHOWING_ELLIPSIS;
-
-/** describes an action that changes the ellipsis-pagination-item status */
-interface EllipsisActions {
-    type: START_QUERY_FOR_MORE_API_PAGES | END_QUERY_FOR_MORE_API_PAGES | STOP_SHOWING_ELLIPSIS;
-    payload: {
-        loading: boolean;
-        showEllipsis: boolean;
-    };
-}
-
-/** decides if component gets to show an ellipsis pagination link that once clicked
- * queries the api for the next server page of data
- */
-export const canShowEllipsis = (
-    state: PaginationState<ExtendingOptions>,
-    isThereMoreApiPages: (state: PaginationState<ExtendingOptions>) => Promise<boolean>,
-    dispatch: (action: ActionTypes<ExtendingOptions, EllipsisActions>) => void,
-): void => {
-    const { totalPages, pagesToDisplay, pageNeighbors } = state;
-    const lastPageIsInRange = pagesToDisplay.filter((page: string) => totalPages.toString() === page).length > 0;
-    const thereIsPaginationItemRoom = pagesToDisplay.length < 1 + 2 * pageNeighbors;
-
-    if (lastPageIsInRange && thereIsPaginationItemRoom) {
-        dispatch({
-            type: START_QUERY_FOR_MORE_API_PAGES,
-            payload: {
-                loading: true,
-                showEllipsis: true,
-            },
-        });
-        isThereMoreApiPages(state).then((response: boolean) => {
-            if (response) {
-                dispatch({
-                    type: END_QUERY_FOR_MORE_API_PAGES,
-                    payload: {
-                        loading: false,
-                        showEllipsis: true,
-                    },
-                });
-            } else {
-                dispatch({
-                    type: END_QUERY_FOR_MORE_API_PAGES,
-                    payload: {
-                        loading: false,
-                        showEllipsis: false,
-                    },
-                });
-            }
-        });
-    } else {
-        dispatch({
-            type: 'STOP_SHOWING_ELLIPSIS',
-            payload: {
-                loading: false,
-                showEllipsis: false,
-            },
-        });
-    }
-};
 
 /** custom reducer: adds some properties to state specific to bootstrap ie.
  *  adds the property `pagesToDisplay` to the state so that we can have a limited
@@ -95,7 +27,7 @@ export const canShowEllipsis = (
  */
 export function bootstrapReducer(
     state: PaginationState<ExtendingOptions>,
-    action: ActionTypes<ExtendingOptions, EllipsisActions>,
+    action: ActionTypes<ExtendingOptions, AnyAction>,
 ): PaginationState<ExtendingOptions> {
     switch (action.type) {
         case 'TO_PAGE':
@@ -103,24 +35,6 @@ export function bootstrapReducer(
             return {
                 ...action.changes,
                 pagesToDisplay,
-            };
-        case START_QUERY_FOR_MORE_API_PAGES:
-            return {
-                ...state,
-                showEndingEllipsis: action.payload.showEllipsis,
-                ellipsisIsLoading: action.payload.loading,
-            };
-        case END_QUERY_FOR_MORE_API_PAGES:
-            return {
-                ...state,
-                showEndingEllipsis: action.payload.showEllipsis,
-                ellipsisIsLoading: action.payload.loading,
-            };
-        case STOP_SHOWING_ELLIPSIS:
-            return {
-                ...state,
-                showEndingEllipsis: action.payload.showEllipsis,
-                ellipsisIsLoading: action.payload.loading,
             };
         default:
             return state;
@@ -133,8 +47,6 @@ export interface Props {
     pageNeighbors: number;
     pageSize: number;
     totalRecords: number;
-    isThereMoreApiPages?: (arg: PaginationState<{}>) => Promise<boolean>;
-    fetchMoreApiData?: () => Promise<void>;
 }
 
 /** default props for the pagination component */
@@ -146,9 +58,7 @@ const defaultProps: Pick<Props, 'pageNeighbors' | 'pageSize' | 'totalRecords'> =
 
 /** bootstrap-powered pagination component  */
 const Pagination: React.FC<Props> = props => {
-    const { onPageChangeHandler, pageNeighbors, pageSize, isThereMoreApiPages, totalRecords, fetchMoreApiData } = props;
-
-    const localIsThereMoreApiPages = isThereMoreApiPages ? isThereMoreApiPages : async (): Promise<boolean> => false;
+    const { onPageChangeHandler, pageNeighbors, pageSize, totalRecords } = props;
 
     const initialPageSize = pageSize;
     const initialDisplayedPages = fetchPageNumbers(totalRecords, pageNeighbors, initialPageSize);
@@ -158,8 +68,6 @@ const Pagination: React.FC<Props> = props => {
             fetchPagesToDisplay,
             pageNeighbors,
             pagesToDisplay: initialDisplayedPages,
-            showEndingEllipsis: false,
-            ellipsisIsLoading: false,
         },
         pageSize: initialPageSize,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -176,11 +84,9 @@ const Pagination: React.FC<Props> = props => {
         previousPage,
         canNextPage,
         canPreviousPage,
-        dispatch,
     } = usePagination(options);
 
     React.useEffect(() => {
-        canShowEllipsis(paginationState, localIsThereMoreApiPages, dispatch);
         onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
     }, [paginationState.currentPage]);
 
@@ -195,7 +101,6 @@ const Pagination: React.FC<Props> = props => {
                 previousPage,
                 canNextPage,
                 canPreviousPage,
-                fetchMoreApiData,
             }}
         />
     );

@@ -66,6 +66,3 @@ export type LAST = typeof LAST;
 export const PREVIOUS = 'Previous';
 export type PREVIOUS = typeof PREVIOUS;
 export const LOADING = 'Loading';
-export type LOADING = typeof LOADING;
-export const ELLIPSIS = 'ellipsis';
-export type ELLIPSIS = typeof ELLIPSIS;

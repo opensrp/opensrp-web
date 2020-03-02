@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { PaginationState } from '@onaio/pagination';
 import { ExtendingOptions } from '.';
-import { START, PREVIOUS, LOADING, ELLIPSIS, NEXT, LAST } from '../../constants';
+import { START, PREVIOUS, NEXT, LAST } from '../../constants';
 
 /** describe the helper functions that add domain logic to the dispatch function */
 interface ActionCreatorsWrapperFn {
@@ -20,7 +20,6 @@ export interface Props {
     previousPage: ActionCreatorsWrapperFn;
     canNextPage: boolean;
     canPreviousPage: boolean;
-    fetchMoreApiData?: () => Promise<void>;
 }
 
 /** JSX only Wrapper for bootstrap pagination component*/
@@ -34,7 +33,6 @@ export const BootstrapJSX: React.FC<Props> = props => {
         previousPage,
         canNextPage,
         canPreviousPage,
-        fetchMoreApiData,
     } = props;
 
     return (
@@ -83,23 +81,6 @@ export const BootstrapJSX: React.FC<Props> = props => {
                         </PaginationItem>
                     );
                 })}
-                {paginationState.showEndingEllipsis && (
-                    <PaginationItem className={`page-item`}>
-                        {paginationState.ellipsisIsLoading ? (
-                            `${LOADING}`
-                        ) : (
-                            <PaginationLink
-                                className={`page-link`}
-                                href="#"
-                                aria-label={`${ELLIPSIS}`}
-                                // tslint:disable-next-line: jsx-no-lambda
-                                onClick={(): Promise<void> | undefined => fetchMoreApiData && fetchMoreApiData()}
-                            >
-                                . . .
-                            </PaginationLink>
-                        )}
-                    </PaginationItem>
-                )}
                 <PaginationItem className={`page-item  ${canNextPage ? '' : 'disabled'}`}>
                     <PaginationLink
                         className={`page-link`}
