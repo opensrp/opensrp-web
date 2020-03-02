@@ -61,25 +61,30 @@ function OpenSRPTable<T extends object>(
                         <tr key={`thead-tr-${idx}`} {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((c: ColumnInstance<T>, index: number) => {
                                 const column = (c as unknown) as ActualColumnInstance<T>;
-                                <th key={`thead-th-${index}`} {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                    {column.render('Header')}
-                                    {/* Add a sort direction indicator */}
-                                    <span>
-                                        {column.canSort ? (
-                                            column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <>&nbsp;&nbsp;&nbsp;↓</>
+                                return (
+                                    <th
+                                        key={`thead-th-${index}`}
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                    >
+                                        {column.render('Header')}
+                                        {/* Add a sort direction indicator */}
+                                        <span>
+                                            {column.canSort ? (
+                                                column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <>&nbsp;&nbsp;&nbsp;↓</>
+                                                    ) : (
+                                                        <>&nbsp;&nbsp;&nbsp;↑</>
+                                                    )
                                                 ) : (
-                                                    <>&nbsp;&nbsp;&nbsp;↑</>
+                                                    <>&nbsp;&nbsp;&nbsp;↕</>
                                                 )
                                             ) : (
-                                                <>&nbsp;&nbsp;&nbsp;↕</>
-                                            )
-                                        ) : (
-                                            ''
-                                        )}
-                                    </span>
-                                </th>;
+                                                ''
+                                            )}
+                                        </span>
+                                    </th>
+                                );
                             })}
                         </tr>
                     ))}
