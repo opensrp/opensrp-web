@@ -1,13 +1,15 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { ReactTable } from '..';
+import { OpenSRPTable } from '..';
 import { columns, firstNameSortedTDs, tableData } from './fixtures';
 
-const TestComponent = () => <ReactTable data={tableData} tableColumns={React.useMemo(() => columns, [])} />;
+const TestComponent: React.FC<{}> = () => (
+    <OpenSRPTable data={tableData} tableColumns={React.useMemo(() => columns, [])} />
+);
 
 describe('src/components/ReactTable', () => {
     it('renders without crashing', () => {
-        const wrapper = mount(<TestComponent />);
+        mount(<TestComponent />);
     });
 
     it('renders correctly', () => {
