@@ -3,12 +3,11 @@ import { values } from 'lodash';
 import store from '../../../index';
 import {
     reducerFactory,
-    fetchClientsFactory,
-    getClientByIdFactory,
-    getClientsArrayFactory,
-    getClientsByIdFactory,
-    removeClientsFactory,
-    BaseClient,
+    fetchActionCreatorFactory,
+    getItemByIdFactory,
+    getItemsArrayFactory,
+    getItemsByIdFactory,
+    removeActionCreatorFactory,
     setTotalRecordsFactory,
     getTotalRecordsFactory,
 } from '..';
@@ -25,7 +24,7 @@ import ANCReducer, {
     getTotalANCRecords,
 } from '../../anc';
 
-interface TestClient extends BaseClient {
+interface TestClient {
     type: 'Client';
     dateCreated: number;
     serverVersion: number;
@@ -56,11 +55,11 @@ const baseReducer = reducerFactory<TestClient>(customReducerName);
 reducerRegistry.register(customReducerName, baseReducer);
 reducerRegistry.register(ANCReducerName, ANCReducer);
 
-const getBaseClientsById = getClientsByIdFactory<TestClient>(customReducerName);
-const getBaseClientById = getClientByIdFactory<TestClient>(customReducerName);
-const getBaseClientsArray = getClientsArrayFactory<TestClient>(customReducerName);
-const fetchBaseClients = fetchClientsFactory<TestClient>(customReducerName);
-const removeBaseClientsAction = removeClientsFactory(customReducerName);
+const getBaseClientsById = getItemsByIdFactory<TestClient>(customReducerName);
+const getBaseClientById = getItemByIdFactory<TestClient>(customReducerName);
+const getBaseClientsArray = getItemsArrayFactory<TestClient>(customReducerName);
+const fetchBaseClients = fetchActionCreatorFactory<TestClient>(customReducerName, 'baseEntityId');
+const removeBaseClientsAction = removeActionCreatorFactory(customReducerName);
 const setBaseTotalRecords = setTotalRecordsFactory(customReducerName);
 const getBaseTotalRecords = getTotalRecordsFactory(customReducerName);
 
@@ -81,7 +80,7 @@ describe('reducers/clients', () => {
     });
 
     it('fetches clients correctly', () => {
-        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2]));
+        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2] as TestClient[]));
         store.dispatch(fetchANC([fixtures.ANCClient1, fixtures.ANCClient2]));
         expect(getBaseClientsById(store.getState())).toEqual({
             '71ad460c-bf76-414e-9be1-0d1b2cb1bce8': fixtures.client1,
@@ -98,7 +97,7 @@ describe('reducers/clients', () => {
     });
 
     it('removes clients correctly', () => {
-        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2]));
+        store.dispatch(fetchBaseClients([fixtures.client1, fixtures.client2] as TestClient[]));
         let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
         store.dispatch(fetchANC([fixtures.ANCClient1, fixtures.ANCClient2]));
@@ -116,11 +115,11 @@ describe('reducers/clients', () => {
 
     it('dispatches clients correctly on non-empty state', () => {
         store.dispatch(removeBaseClientsAction());
-        store.dispatch(fetchBaseClients([fixtures.client1]));
+        store.dispatch(fetchBaseClients([fixtures.client1] as TestClient[]));
         let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);
 
-        store.dispatch(fetchBaseClients([fixtures.client2]));
+        store.dispatch(fetchBaseClients([fixtures.client2] as TestClient[]));
         numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
 
@@ -135,11 +134,11 @@ describe('reducers/clients', () => {
 
     it('should not save the same object twice', () => {
         store.dispatch(removeBaseClientsAction());
-        store.dispatch(fetchBaseClients([fixtures.client1]));
+        store.dispatch(fetchBaseClients([fixtures.client1] as TestClient[]));
         let numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);
 
-        store.dispatch(fetchBaseClients([fixtures.client1]));
+        store.dispatch(fetchBaseClients([fixtures.client1] as TestClient[]));
         numberOfClients = getBaseClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);
     });
