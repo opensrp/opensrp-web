@@ -7,7 +7,7 @@ import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane 
 import { Store } from 'redux';
 import { OpenSRPService } from '../../../services/opensrp';
 import './childProfile.css';
-import vaccinationConfig from './vaccinationConfig';
+import vaccinationConfig from './utils/vaccinationConfig';
 import classnames from 'classnames';
 import childReducer, {
     fetchChildList,
@@ -24,6 +24,10 @@ import eventReducer, {
     getEventsArray,
 } from '../../../store/ducks/events';
 import Loading from '../../../components/page/Loading';
+import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
+import SeamlessImmutable from 'seamless-immutable';
+import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
+import { number } from 'prop-types';
 
 /** register the child reducer */
 reducerRegistry.register(childReducerName, childReducer);
@@ -44,22 +48,6 @@ export interface ChildProfileProps extends RouteComponentProps<ChildProfileParam
     events: Event[];
 }
 
-const calculateAge = (dob: number) => {
-    const diff = Date.now() - dob;
-    const date = new Date(diff);
-    return Math.abs(date.getUTCFullYear() - new Date().getFullYear());
-};
-
-/**
- *
- * @param startDate = yyyy-MM-DD
- * @param endDate = yyyy-MM-DD
- */
-const countDaysBetweenDate = function(startDate: any, endDate: any) {
-    const timeDiff = (new Date(endDate) as any) - (new Date(startDate) as any);
-    return timeDiff / (1000 * 60 * 60 * 24);
-};
-
 class ChildProfile extends React.Component<ChildProfileProps> {
     public async componentDidMount() {
         const { fetchChild, fetchEvents } = this.props;
@@ -67,19 +55,16 @@ class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-
-        console.log(params);
-        const opensrpService = new OpenSRPService(`client/search`);
+        const opensrpService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
         const profileResponse = await opensrpService.list(params);
         fetchChild(profileResponse);
-        console.log(profileResponse);
 
-        const eventService = new OpenSRPService(`event/search`);
+        const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
     }
+
     getRegister = () => {
-        console.log('events', this.props.events);
         const vaccinationEeventList = this.props.events
             .filter(d => d.eventType === 'Vaccination')
             .map((d: any) => {
@@ -89,9 +74,7 @@ class ChildProfile extends React.Component<ChildProfileProps> {
                 };
             });
 
-        console.log({ vaccinationEeventList });
-
-        const childHealth = JSON.parse(JSON.stringify(vaccinationConfig));
+        const childHealth = SeamlessImmutable(vaccinationConfig).asMutable();
 
         childHealth.forEach((configData: any) => {
             let flag = false,
@@ -100,12 +83,9 @@ class ChildProfile extends React.Component<ChildProfileProps> {
 
             configData.vaccines.forEach((vaccination: any) => {
                 vaccinationEeventList.forEach((vaccinationEvent: any) => {
-                    console.log(vaccination.field_name, '  ===  ', vaccinationEvent.formSubmissionField);
-
                     if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
                         date = vaccinationEvent.values[0];
                         provider = vaccinationEvent.providerId;
-                        console.log({ vaccinationEvent });
                     }
 
                     if (
@@ -125,7 +105,7 @@ class ChildProfile extends React.Component<ChildProfileProps> {
         return childHealth;
     };
     render() {
-        const { child, events } = this.props;
+        const { child } = this.props;
         if (!child) return <Loading />;
         return (
             <Container id="householdProfile">
