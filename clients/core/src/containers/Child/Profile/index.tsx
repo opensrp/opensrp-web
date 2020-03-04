@@ -79,8 +79,7 @@ class ChildProfile extends React.Component<ChildProfileProps> {
         fetchEvents(eventResponse);
     }
     getRegister = () => {
-
-        console.log('events',this.props.events);
+        console.log('events', this.props.events);
         const vaccinationEeventList = this.props.events
             .filter(d => d.eventType === 'Vaccination')
             .map((d: any) => {
@@ -90,7 +89,7 @@ class ChildProfile extends React.Component<ChildProfileProps> {
                 };
             });
 
-            console.log({vaccinationEeventList});
+        console.log({ vaccinationEeventList });
 
         const childHealth = JSON.parse(JSON.stringify(vaccinationConfig));
 
@@ -101,9 +100,7 @@ class ChildProfile extends React.Component<ChildProfileProps> {
 
             configData.vaccines.forEach((vaccination: any) => {
                 vaccinationEeventList.forEach((vaccinationEvent: any) => {
-
                     console.log(vaccination.field_name, '  ===  ', vaccinationEvent.formSubmissionField);
-
 
                     if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
                         date = vaccinationEvent.values[0];
