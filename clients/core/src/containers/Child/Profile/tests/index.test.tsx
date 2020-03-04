@@ -25,7 +25,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 reducerRegistry.register(childReducerName, childReducer);
 reducerRegistry.register(eventReducerName, eventReducer);
 
-
 const history = createMemoryHistory();
 const path = `/child-profile/:id/`;
 
