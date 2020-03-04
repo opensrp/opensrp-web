@@ -44,11 +44,11 @@ export interface ChildProfileProps extends RouteComponentProps<ChildProfileParam
     removeChild: typeof removeChildList;
     fetchEvents: typeof fetchEvents;
     removeEvents: typeof removeEvents;
-    child: Child;
+    child: Child | undefined;
     events: Event[];
 }
 
-class ChildProfile extends React.Component<ChildProfileProps> {
+export class ChildProfile extends React.Component<ChildProfileProps> {
     public async componentDidMount() {
         const { fetchChild, fetchEvents } = this.props;
         const { match } = this.props;
@@ -96,9 +96,16 @@ class ChildProfile extends React.Component<ChildProfileProps> {
                         flag = true;
                     }
                 });
-                vaccination['given'] = flag ? 'Yes' : 'No';
-                configData['provider'] = provider;
-                configData['givenDate'] = date;
+                vaccination = {
+                    ...vaccination,
+                    given: flag ? 'Yes' : 'No',
+                };
+
+                configData = {
+                    ...configData,
+                    provider,
+                    givenDate: date,
+                };
             });
         });
 
