@@ -39,7 +39,7 @@ export const reducerName = 'opensrp-web/events';
 const reducer = reducerFactory<Event>(reducerName);
 
 // action creators
-export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'baseEntityId');
+export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'formSubmissionId');
 export const removeEvents = removeActionCreatorFactory(reducerName);
 
 // selectors

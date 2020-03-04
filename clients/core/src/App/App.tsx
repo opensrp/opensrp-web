@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_PROFILE_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -44,7 +44,7 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path="/child-profile"
+                                path={`${CHILD_PROFILE_URL}/:id`}
                                 component={ChildProfile}
                             />
                             <ConnectedPrivateRoute
