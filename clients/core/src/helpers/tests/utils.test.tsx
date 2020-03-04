@@ -1,7 +1,7 @@
 import * as gatekeeper from '@onaio/gatekeeper';
 import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../../configs/env';
 
-import { oAuthUserInfoGetter } from '../utils';
+import { oAuthUserInfoGetter, calculateAge, countDaysBetweenDate } from '../utils';
 
 jest.mock('@onaio/gatekeeper', () => ({
     getOnadataUserInfo: jest.fn(),
@@ -38,5 +38,16 @@ describe('helpers/utils', () => {
         expect(openSRPMock).not.toBeCalled();
         onaMock.mockRestore();
         openSRPMock.mockRestore();
+    });
+
+    it('should calculate age correctly', () => {
+        const timestamp: number = 1265068800000;
+        expect(calculateAge(timestamp)).toBe(10);
+    });
+
+    it('should count days correctly', () => {
+        const startDate = new Date('2020-10-02').getTime();
+        const endDate = new Date('2020-10-10').getTime();
+        expect(countDaysBetweenDate(startDate, endDate)).toBe(8);
     });
 });

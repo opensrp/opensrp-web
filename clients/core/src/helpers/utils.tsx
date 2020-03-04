@@ -26,8 +26,7 @@ export function oAuthUserInfoGetter(apiResponse: FlexObject): SessionState | voi
 }
 
 export function calculateAge(dob: number) {
-    const diff = Date.now() - dob;
-    const date = new Date(diff);
+    const date = new Date(dob);
     return Math.abs(date.getUTCFullYear() - new Date().getFullYear());
 }
 
