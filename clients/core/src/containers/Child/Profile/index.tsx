@@ -95,14 +95,16 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     };
                 }
             });
-        registerData = Object.keys(registerData).map((k: any) => {
-            return {
-                time: k,
-                vaccines: registerData[k],
-                providerId: registerData.providerId,
-                takenDate: registerData.takenDate,
-            };
-        });
+        registerData = Object.keys(registerData)
+            .filter((k: any) => k !== 'takenDate' && k !== 'providerId')
+            .map((k: any) => {
+                return {
+                    time: k,
+                    vaccines: registerData[k],
+                    providerId: registerData.providerId,
+                    takenDate: registerData.takenDate,
+                };
+            });
 
         console.log(registerData, { vaccinationEventList });
 
