@@ -82,19 +82,27 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                 if (registerData[timeProperty] === undefined) {
                     registerData = {
                         ...registerData,
+                        takenDate: data.obs[0].values[0],
+                        providerId: data.providerId,
                         [timeProperty]: data.obs[0].formSubmissionField,
                     };
                 } else {
                     registerData = {
                         ...registerData,
+                        takenDate: data.obs[0].values[0],
+                        providerId: data.providerId,
                         [timeProperty]: `${registerData[timeProperty]}, ${data.obs[0].formSubmissionField}`,
                     };
                 }
-                return {
-                    ...data,
-                    _key: getProperty(data.obs[0].values[0]),
-                };
             });
+        registerData = Object.keys(registerData).map((k: any) => {
+            return {
+                time: k,
+                vaccines: registerData[k],
+                providerId: registerData.providerId,
+                takenDate: registerData.takenDate,
+            };
+        });
 
         console.log(registerData, { vaccinationEventList });
 
@@ -131,7 +139,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         //     });
         // });
 
-        return childHealth;
+        return registerData;
     };
     render() {
         const { child } = this.props;
@@ -264,19 +272,10 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                                                     {this.getRegister().map((vaccination: any, index: number) => {
                                                         return (
                                                             <tr key={index}>
-                                                                <td>{vaccination.name}</td>
-                                                                <td> {vaccination.givenDate} </td>
-                                                                <td>{vaccination.provider}</td>
-                                                                <td>
-                                                                    {vaccination.vaccines.map((vaccination: any) => {
-                                                                        return (
-                                                                            vaccination.name +
-                                                                            ' ' +
-                                                                            vaccination.given +
-                                                                            ', '
-                                                                        );
-                                                                    })}
-                                                                </td>
+                                                                <td>{vaccination.time}</td>
+                                                                <td> {vaccination.takenDate} </td>
+                                                                <td>{vaccination.providerId}</td>
+                                                                <td>{vaccination.vaccines}</td>
                                                             </tr>
                                                         );
                                                     })}
