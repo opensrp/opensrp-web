@@ -14,6 +14,7 @@ import clientsReducer, {
     reducerName as clientsReducerName,
 } from '../../../store/ducks/clients';
 import './clientList.css';
+import { Link } from 'react-router-dom';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -41,7 +42,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
 
     public async componentDidMount() {
         const { fetchClientsActionCreator, opensrpService } = this.props;
-        const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const clientService = new opensrpService(`client/search`);
         const response = await clientService.list();
         fetchClientsActionCreator(response);
     }
@@ -54,6 +55,7 @@ class ClientList extends React.Component<ClientListProps, {}> {
         }
         return (
             <div>
+                <Link to={`/child-profile/189148d5-61ed-4607-b398-6eceb2203c8d`}> view</Link>
                 <Table striped={true}>
                     <thead>
                         <tr>

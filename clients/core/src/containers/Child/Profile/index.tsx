@@ -27,7 +27,6 @@ import Loading from '../../../components/page/Loading';
 import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
 import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
-import { number } from 'prop-types';
 
 /** register the child reducer */
 reducerRegistry.register(childReducerName, childReducer);
@@ -55,7 +54,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const opensrpService = new OpenSRPService(`client/search`);
         const profileResponse = await opensrpService.list(params);
         fetchChild(profileResponse);
 
@@ -65,49 +64,72 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
     }
 
     getRegister = () => {
-        const vaccinationEeventList = this.props.events
+        const childHealth: any = [];
+        let registerData: any = {};
+
+        const getProperty = (vaccineTakenDate: any): string => {
+            const days = countDaysBetweenDate(this.props.child!.birthdate, vaccineTakenDate);
+            if (days % 7 === 0) return days / 7 + '_weeks ';
+            else {
+                return `${days / 7}_weeks_${Math.abs(days - 7)}_days`;
+            }
+        };
+
+        const vaccinationEventList = this.props.events
             .filter(d => d.eventType === 'Vaccination')
-            .map((d: any) => {
+            .map((data: any) => {
+                const timeProperty: string = getProperty(data.obs[0].values[0]);
+                if (registerData[timeProperty] === undefined) {
+                    registerData = {
+                        ...registerData,
+                        [timeProperty]: data.obs[0].formSubmissionField,
+                    };
+                } else {
+                    registerData = {
+                        ...registerData,
+                        [timeProperty]: `${registerData[timeProperty]}, ${data.obs[0].formSubmissionField}`,
+                    };
+                }
                 return {
-                    ...d.obs[0],
-                    providerId: d.providerId,
+                    ...data,
+                    _key: getProperty(data.obs[0].values[0]),
                 };
             });
 
-        const childHealth = SeamlessImmutable(vaccinationConfig).asMutable();
+        console.log(registerData, { vaccinationEventList });
 
-        childHealth.forEach((configData: any) => {
-            let flag = false,
-                provider = '',
-                date = '';
+        // childHealth.forEach((configData: any) => {
+        //     let flag = false,
+        //         provider = '',
+        //         date = '';
 
-            configData.vaccines.forEach((vaccination: any) => {
-                vaccinationEeventList.forEach((vaccinationEvent: any) => {
-                    if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
-                        date = vaccinationEvent.values[0];
-                        provider = vaccinationEvent.providerId;
-                    }
+        //     configData.vaccines.forEach((vaccination: any) => {
+        //         vaccinationEeventList.forEach((vaccinationEvent: any) => {
+        //             if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
+        //                 date = vaccinationEvent.values[0];
+        //                 provider = vaccinationEvent.providerId;
+        //             }
 
-                    if (
-                        countDaysBetweenDate(this.props.child.birthdate, vaccinationEvent.values[0]) <=
-                            configData.daysAfterBirthDue &&
-                        vaccination.field_name === vaccinationEvent.formSubmissionField
-                    ) {
-                        flag = true;
-                    }
-                });
-                vaccination = {
-                    ...vaccination,
-                    given: flag ? 'Yes' : 'No',
-                };
+        //             if (
+        //                 countDaysBetweenDate(this.props.child.birthdate, vaccinationEvent.values[0]) <=
+        //                     configData.daysAfterBirthDue &&
+        //                 vaccination.field_name === vaccinationEvent.formSubmissionField
+        //             ) {
+        //                 flag = true;
+        //             }
+        //         });
+        //         vaccination = {
+        //             ...vaccination,
+        //             given: flag ? 'Yes' : 'No',
+        //         };
 
-                configData = {
-                    ...configData,
-                    provider,
-                    givenDate: date,
-                };
-            });
-        });
+        //         configData = {
+        //             ...configData,
+        //             provider,
+        //             givenDate: date,
+        //         };
+        //     });
+        // });
 
         return childHealth;
     };
