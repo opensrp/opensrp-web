@@ -2090,6 +2090,14 @@
   resolved "https://registry.yarnpkg.com/@onaio/loaders/-/loaders-0.0.1.tgz#bccf621fd1e2842f962220a570d0898965765db9"
   integrity sha512-EJZQ9dXnKI2dATXtRnEIe/zzAvrtXhT0DTIylLLT5ihq/kyM2PxjjFcNgrlsBHhxVs/7+OkKg2IoXfSUzfA4ng==
 
+"@onaio/pagination@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@onaio/pagination/-/pagination-0.0.3.tgz#59d3ab687bbafcff12e028d82f1dfe185c804f2b"
+  integrity sha512-pqZXU9npqJRCKlYgTg4QML2wqBS0/s4YzUPwSz6nn1WuO/XELCxzXTBzxJwmit2Ck1StzK2Ah4lR22jeOYXZiQ==
+  dependencies:
+    bootstrap "^4.3.1"
+    reactstrap "^8.0.1"
+
 "@onaio/redux-reducer-registry@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@onaio/redux-reducer-registry/-/redux-reducer-registry-0.0.8.tgz#53433bc95c271fe1f77e5632ec324af6825f56e7"
@@ -9784,6 +9792,57 @@ opencollective-postinstall@^2.0.2:
   version "0.0.0"
   dependencies:
     "@onaio/session-reducer" "^0.0.11"
+
+"opensrp-web@file:clients/core":
+  version "0.1.0"
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.20"
+    "@fortawesome/free-brands-svg-icons" "^5.10.0"
+    "@fortawesome/free-regular-svg-icons" "^5.10.0"
+    "@fortawesome/free-solid-svg-icons" "^5.10.0"
+    "@fortawesome/react-fontawesome" "^0.1.4"
+    "@onaio/connected-private-route" "^0.0.9"
+    "@onaio/connected-reducer-registry" "^0.0.1"
+    "@onaio/gatekeeper" "^0.0.14"
+    "@onaio/loaders" "^0.0.1"
+    "@onaio/pagination" "^0.0.3"
+    "@onaio/redux-reducer-registry" "^0.0.8"
+    "@onaio/session-reducer" "^0.0.10"
+    "@onaio/superset-connector" "^0.0.13"
+    "@types/bootstrap" "^4.3.1"
+    "@types/fetch-mock" "^7.3.1"
+    "@types/history" "^4.7.2"
+    "@types/jest" "^24.0.16"
+    "@types/lodash" "^4.14.136"
+    "@types/node" "^12.6.8"
+    "@types/react" "^16.8.23"
+    "@types/react-dom" "^16.8.5"
+    "@types/react-redux" "^7.1.1"
+    "@types/react-router" "^5.0.3"
+    "@types/react-router-dom" "^4.3.4"
+    "@types/reactstrap" "^8.0.1"
+    "@types/seamless-immutable" "^7.1.10"
+    bootstrap "^4.3.1"
+    classnames "^2.2.6"
+    client-oauth2 "^4.2.5"
+    connected-react-router "^6.5.2"
+    fetch-mock "^7.3.9"
+    history "^4.9.0"
+    jest-fetch-mock "^2.1.2"
+    lodash "^4.17.15"
+    prop-types "^15.7.2"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-redux "^7.1.0"
+    react-router "^5.0.1"
+    react-router-dom "^5.0.1"
+    react-scripts "^3.0.1"
+    reactstrap "^8.0.1"
+    redux "^4.0.4"
+    redux-thunk "^2.3.0"
+    seamless-immutable "^7.1.4"
+    snapshot-diff "^0.5.2"
+    typescript "^3.5.3"
 
 opn@^5.1.0:
   version "5.5.0"
