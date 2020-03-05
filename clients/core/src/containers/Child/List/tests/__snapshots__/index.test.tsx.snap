@@ -8,7 +8,7 @@ exports[`containers/child/List renders correctly 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
-          "client/search",
+          "undefined",
         ],
       ],
       "results": Array [
@@ -22,7 +22,7 @@ exports[`containers/child/List renders correctly 1`] = `
                     "clientType": "child",
                     "gender": "",
                     "pageNumber": "1",
-                    "pageSize": 50,
+                    "pageSize": undefined,
                     "searchText": "",
                   },
                 ],
@@ -160,7 +160,7 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
       [MockFunction] {
         "calls": Array [
           Array [
-            "client/search",
+            "undefined",
           ],
         ],
         "results": Array [
@@ -174,7 +174,7 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
                       "clientType": "child",
                       "gender": "",
                       "pageNumber": "1",
-                      "pageSize": 50,
+                      "pageSize": undefined,
                       "searchText": "",
                     },
                   ],
@@ -310,7 +310,7 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
         [MockFunction] {
           "calls": Array [
             Array [
-              "client/search",
+              "undefined",
             ],
           ],
           "results": Array [
@@ -324,7 +324,7 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
                         "clientType": "child",
                         "gender": "",
                         "pageNumber": "1",
-                        "pageSize": 50,
+                        "pageSize": undefined,
                         "searchText": "",
                       },
                     ],

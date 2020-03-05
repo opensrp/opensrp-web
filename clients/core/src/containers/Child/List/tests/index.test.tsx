@@ -6,8 +6,12 @@ import * as fixtures from '../../../../store/ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
 import store from '../../../../store';
-import { fetchChildList } from '../../../../store/ducks/child';
+import reducer, { fetchChildList, reducerName } from '../../../../store/ducks/child';
+import reducerRegistry from '@onaio/redux-reducer-registry';
 
+reducerRegistry.register(reducerName, reducer);
+
+jest.mock('../../../../configs/env');
 describe('containers/child/List', () => {
     let classMock: any;
     beforeEach(() => {
