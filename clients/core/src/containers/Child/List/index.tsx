@@ -92,7 +92,6 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         const { fetchChild, opensrpService, setTotalRecords, removeChild } = this.props;
         const clientService = new opensrpService(`${OPENSRP_CHILD_ENDPOINT}`);
         const response = await clientService.list(params);
-        console.log(response);
         removeChild();
         fetchChild(response.clients);
         setTotalRecords(response.total);

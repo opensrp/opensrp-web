@@ -9,8 +9,16 @@ import store from '../../../../store';
 import { fetchChildList } from '../../../../store/ducks/child';
 
 describe('containers/child/List', () => {
+    let classMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
+
+        const listMock = jest.fn(async () => {
+            return { clients: fixtures.childList, total: 3 };
+        });
+        classMock = jest.fn(() => ({
+            list: listMock,
+        }));
     });
 
     it('renders without crashing', () => {
@@ -20,11 +28,10 @@ describe('containers/child/List', () => {
 
     it('renders correctly', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props: ChildListProps = {
             childArray: [],
             fetchChild: mock,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
             removeChild: mock,
             totalRecords: 0,
             setTotalRecords: mock,
@@ -36,11 +43,10 @@ describe('containers/child/List', () => {
 
     it('renders correctly when childArray is an empty array', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props: ChildListProps = {
             childArray: [],
             fetchChild: mock,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
             removeChild: mock,
             totalRecords: 0,
             setTotalRecords: mock,
@@ -53,11 +59,10 @@ describe('containers/child/List', () => {
     it('works correctly with the redux store', () => {
         store.dispatch(fetchChildList(fixtures.childList));
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props: ChildListProps = {
             childArray: [],
             fetchChild: mock,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
             removeChild: mock,
             totalRecords: 0,
             setTotalRecords: mock,
@@ -70,5 +75,28 @@ describe('containers/child/List', () => {
         );
         expect(toJson(wrapper)).toMatchSnapshot();
         wrapper.unmount();
+    });
+
+    it(' should update the props after server call', async () => {
+        const mock: jest.Mock = jest.fn();
+        const props: ChildListProps = {
+            childArray: [],
+            fetchChild: mock,
+            opensrpService: classMock,
+            removeChild: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <ConnectedChildList {...props} />
+                );
+            </Provider>,
+        );
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
+
+        const foundProps = wrapper.find('ChildList').props() as any;
+        expect(foundProps.totalRecords as number).toBe(3);
     });
 });

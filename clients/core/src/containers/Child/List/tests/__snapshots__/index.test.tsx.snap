@@ -14,7 +14,27 @@ exports[`containers/child/List renders correctly 1`] = `
       "results": Array [
         Object {
           "type": "return",
-          "value": undefined,
+          "value": Object {
+            "list": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "clientType": "child",
+                    "gender": "",
+                    "pageNumber": "1",
+                    "pageSize": 50,
+                    "searchText": "",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+              ],
+            },
+          },
         },
       ],
     }
@@ -146,7 +166,27 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
         "results": Array [
           Object {
             "type": "return",
-            "value": undefined,
+            "value": Object {
+              "list": [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "clientType": "child",
+                      "gender": "",
+                      "pageNumber": "1",
+                      "pageSize": 50,
+                      "searchText": "",
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
           },
         ],
       }
@@ -163,6 +203,10 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
             "_rev": "v1",
             "addresses": Array [],
             "attributes": Object {
+              "dynamicProperties": Object {
+                "age_year_part": 2,
+                "last_contact_date": "2020-01-01T00:02:01",
+              },
               "residence": "6f7ca772-b368-4c3d-bd9c-011ra698203a",
             },
             "baseEntityId": "906fc91h-4cce-412a-8327-ca2315ekoeo9",
@@ -194,6 +238,10 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
             "_rev": "v1",
             "addresses": Array [],
             "attributes": Object {
+              "dynamicProperties": Object {
+                "age_year_part": 2,
+                "last_contact_date": "2020-01-01T00:02:01",
+              },
               "residence": "1f7ca772-b368-4c3d-bd9c-011ra698203a",
             },
             "baseEntityId": "406fc91h-4cce-412a-8327-ca2315ekoeo9",
@@ -225,6 +273,10 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
             "_rev": "v1",
             "addresses": Array [],
             "attributes": Object {
+              "dynamicProperties": Object {
+                "age_year_part": 2,
+                "last_contact_date": "2020-01-01T00:02:01",
+              },
               "residence": "9f7ca772-b368-4d39-bd9c-011ra698203a",
             },
             "baseEntityId": "306fc91h-4cce-41qa-9327-ca2315ekoeo9",
@@ -264,7 +316,27 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
           "results": Array [
             Object {
               "type": "return",
-              "value": undefined,
+              "value": Object {
+                "list": [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {
+                        "clientType": "child",
+                        "gender": "",
+                        "pageNumber": "1",
+                        "pageSize": 50,
+                        "searchText": "",
+                      },
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "type": "return",
+                      "value": Promise {},
+                    },
+                  ],
+                },
+              },
             },
           ],
         }
