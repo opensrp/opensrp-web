@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { ChildList, ChildListProps } from '..';
 import ConnectedChildList from '..';
 import * as fixtures from '../../../../store/ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
 import store from '../../../../store';
-import reducer, { fetchChildList, reducerName } from '../../../../store/ducks/child';
+import reducer, { fetchChildList, reducerName, removeChildList } from '../../../../store/ducks/child';
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { setTotalRecords } from '../../../../store/ducks/clients';
 
 reducerRegistry.register(reducerName, reducer);
 
@@ -26,7 +27,16 @@ describe('containers/child/List', () => {
     });
 
     it('renders without crashing', () => {
-        const wrapper = mount(<ChildList />);
+        const mock: jest.Mock = jest.fn();
+        const props: ChildListProps = {
+            childArray: [],
+            fetchChild: mock,
+            opensrpService: classMock,
+            removeChild: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
+        };
+        const wrapper = shallow(<ChildList {...props} />);
         expect(wrapper.length).toBe(1);
     });
 
@@ -82,14 +92,13 @@ describe('containers/child/List', () => {
     });
 
     it(' should update the props after server call', async () => {
-        const mock: jest.Mock = jest.fn();
         const props: ChildListProps = {
             childArray: [],
-            fetchChild: mock,
+            fetchChild: fetchChildList,
             opensrpService: classMock,
-            removeChild: mock,
+            removeChild: removeChildList,
             totalRecords: 0,
-            setTotalRecords: mock,
+            setTotalRecords: setTotalRecords,
         };
         const wrapper = mount(
             <Provider store={store}>
@@ -102,5 +111,6 @@ describe('containers/child/List', () => {
 
         const foundProps = wrapper.find('ChildList').props() as any;
         expect(foundProps.totalRecords as number).toBe(3);
+        wrapper.unmount();
     });
 });
