@@ -113,4 +113,28 @@ describe('containers/child/List', () => {
         expect(foundProps.totalRecords as number).toBe(3);
         wrapper.unmount();
     });
+
+    it(' should select gender correctly', async () => {
+        const props: ChildListProps = {
+            childArray: [],
+            fetchChild: fetchChildList,
+            opensrpService: classMock,
+            removeChild: removeChildList,
+            totalRecords: 0,
+            setTotalRecords: setTotalRecords,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <ConnectedChildList {...props} />
+                );
+            </Provider>,
+        );
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
+
+        (wrapper.find('Select').instance() as any).selectOption({ value: 'Male', label: 'Male' });
+        wrapper.update();
+        expect(wrapper.find('ChildList').state().selectedGender).toEqual({ value: 'Male', label: 'Male' });
+        wrapper.unmount();
+    });
 });
