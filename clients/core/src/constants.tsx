@@ -58,3 +58,13 @@ export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
+
+export const NEXT = 'Next';
+export type NEXT = typeof NEXT;
+export const START = 'Start';
+export type START = typeof START;
+export const LAST = 'Last';
+export type LAST = typeof LAST;
+export const PREVIOUS = 'Previous';
+export type PREVIOUS = typeof PREVIOUS;
+export const LOADING = 'Loading';
