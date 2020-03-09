@@ -27,9 +27,9 @@ import Loading from '../../../components/page/Loading';
 import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
 import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
-import { number } from 'prop-types';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import InfoCard from '../../../components/page/InfoCard';
 
 const options: Highcharts.Options = {
     title: {
@@ -126,23 +126,6 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         return childHealth;
     };
 
-    getInformation = () => {
-        return [
-            {
-                label: 'name',
-                value: 'tanvir',
-            },
-            {
-                label: 'name',
-                value: 'tanvir',
-            },
-            {
-                label: 'name',
-                value: 'tanvir',
-            },
-        ];
-    };
-
     render() {
         const { child } = this.props;
         if (!child) return <Loading />;
@@ -157,51 +140,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     </span>
                     <h3> Child </h3>
                 </div>
-                <div id="basic-info-container">
-                    <Row className="basic-info-header-bg">
-                        <Col className="basic-info-header">
-                            <span className="basic-info-title"> Basic Information</span>
-                            {/* <div className="float-right basic-info-edit">
-                                <a href={`${'#'}`}>Edit Profile</a>
-                            </div> */}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="basic-info-body">
-                            <Table className="basic-info-table" borderless={true}>
-                                {Array.from(Array(this.getInformation().length).keys())
-                                    .filter((i: number) => i % 2 == 1)
-                                    .map((i: number) => {
-                                        return (
-                                            <tbody key={i}>
-                                                <tr>
-                                                    <td className="basic-info-label">
-                                                        {' '}
-                                                        {this.getInformation()[i].label}{' '}
-                                                    </td>
-                                                    <td> {this.getInformation()[i].value} </td>
-                                                    <td className="basic-info-label">
-                                                        {this.getInformation()[i + 1]!.label}
-                                                    </td>
-                                                    <td>{this.getInformation()[i + 1]!.value}</td>
-                                                </tr>
-                                            </tbody>
-                                        );
-                                    })}
-                                {this.getInformation().length == 1 ? (
-                                    <tbody>
-                                        <tr>
-                                            <td className="basic-info-label"> {this.getInformation()[0].label} </td>
-                                            <td> {this.getInformation()[0].value} </td>
-                                            <td className="basic-info-label"></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                ) : null}
-                            </Table>
-                        </Col>
-                    </Row>
-                </div>
+                <InfoCard rowData={[]} title={'Basic Information'} link={'/child'} linkLable={'edit profile'} />
                 <div style={{ marginTop: '30px' }}></div>
                 <div id="members-list-container">
                     <Row>
