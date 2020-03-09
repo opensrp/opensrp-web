@@ -28,6 +28,20 @@ import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../config
 import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
 import { number } from 'prop-types';
+import * as Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+
+const options: Highcharts.Options = {
+    title: {
+        text: 'My chart',
+    },
+    series: [
+        {
+            type: 'line',
+            data: [1, 2, 3],
+        },
+    ],
+};
 
 /** register the child reducer */
 reducerRegistry.register(childReducerName, childReducer);
@@ -55,7 +69,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const opensrpService = new OpenSRPService(`/client/search`);
         const profileResponse = await opensrpService.list(params);
         fetchChild(profileResponse);
 
@@ -89,7 +103,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     }
 
                     if (
-                        countDaysBetweenDate(this.props.child.birthdate, vaccinationEvent.values[0]) <=
+                        countDaysBetweenDate(this.props.child!.birthdate, vaccinationEvent.values[0]) <=
                             configData.daysAfterBirthDue &&
                         vaccination.field_name === vaccinationEvent.formSubmissionField
                     ) {
@@ -111,6 +125,24 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
 
         return childHealth;
     };
+
+    getInformation = () => {
+        return [
+            {
+                label: 'name',
+                value: 'tanvir',
+            },
+            {
+                label: 'name',
+                value: 'tanvir',
+            },
+            {
+                label: 'name',
+                value: 'tanvir',
+            },
+        ];
+    };
+
     render() {
         const { child } = this.props;
         if (!child) return <Loading />;
@@ -137,46 +169,35 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     <Row>
                         <Col className="basic-info-body">
                             <Table className="basic-info-table" borderless={true}>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label"> Id number </td>
-                                        <td> {child.identifiers.opensrp_id} </td>
-                                        <td className="basic-info-label">Lowest level</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">First Name</td>
-                                        <td>{child.firstName}</td>
-                                        <td className="basic-info-label">Phone number</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">Last Name</td>
-                                        <td>{child.lastName}</td>
-                                        <td className="basic-info-label">Last contact date</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">Age</td>
-                                        <td>{calculateAge(child.birthdate)}</td>
-                                        <td className="basic-info-label">Provider</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">Gender</td>
-                                        <td>{child.gender}</td>
-                                        <td className="basic-info-label">Health Facility</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+                                {Array.from(Array(this.getInformation().length).keys())
+                                    .filter((i: number) => i % 2 == 1)
+                                    .map((i: number) => {
+                                        return (
+                                            <tbody key={i}>
+                                                <tr>
+                                                    <td className="basic-info-label">
+                                                        {' '}
+                                                        {this.getInformation()[i].label}{' '}
+                                                    </td>
+                                                    <td> {this.getInformation()[i].value} </td>
+                                                    <td className="basic-info-label">
+                                                        {this.getInformation()[i + 1]!.label}
+                                                    </td>
+                                                    <td>{this.getInformation()[i + 1]!.value}</td>
+                                                </tr>
+                                            </tbody>
+                                        );
+                                    })}
+                                {this.getInformation().length == 1 ? (
+                                    <tbody>
+                                        <tr>
+                                            <td className="basic-info-label"> {this.getInformation()[0].label} </td>
+                                            <td> {this.getInformation()[0].value} </td>
+                                            <td className="basic-info-label"></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                ) : null}
                             </Table>
                         </Col>
                     </Row>
@@ -265,6 +286,9 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                                 </TabPane>
                             </TabContent>
                         </Col>
+                    </Row>
+                    <Row>
+                        <HighchartsReact highcharts={Highcharts} options={options} />
                     </Row>
                 </div>
             </Container>
