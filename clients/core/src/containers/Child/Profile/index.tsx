@@ -45,7 +45,7 @@ const options: Highcharts.Options = {
                 <table>
                     <tbody>
                         <tr>
-                            <td style='padding-right: 20px'> weight </td>
+                            <td style='padding-right: 20px;font-size: 25px;'> weight </td>
                             <td> <b>68.6kg</b> </td>
                             <td style='color: lawngreen'> <b> &uarr; </b> </td>
                             <td style='color: lawngreen'> +23 </td>
