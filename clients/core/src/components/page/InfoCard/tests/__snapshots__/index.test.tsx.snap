@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/page/InfoCard renders without crashing 1`] = `ShallowWrapper {}`;
-
-exports[`components/page/Searchbox renders without crashing: SearchBox input 1`] = `null`;
-
-exports[`components/page/Searchbox renders without crashing: SearchBox ion 1`] = `null`;

@@ -126,9 +126,7 @@ describe('containers/child/profile/childProfile', () => {
                 );
             </Provider>,
         );
-        // expect().toMatchSnapshot();
         expect(wrapper.find('ChildProfile').length).toBe(1);
-        console.log(wrapper.debug());
         wrapper.unmount();
     });
 });
