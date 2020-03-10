@@ -35,6 +35,36 @@ const options: Highcharts.Options = {
     title: {
         text: 'My chart',
     },
+
+    tooltip: {
+        formatter(tooltip: Highcharts.TooltipOptions) {
+            return `
+            <div style='background-color: white;'>
+                <div> 12 vs 14 </div>
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style='padding-right: 20px'> weight </td>
+                            <td> <b>68.6kg</b> </td>
+                            <td style='color: lawngreen'> <b> &uarr; </b> </td>
+                            <td style='color: lawngreen'> +23 </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            `;
+        },
+        shared: true,
+        useHTML: true,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        borderRadius: 5,
+        style: {
+            fontSize: '15px',
+        },
+    },
     series: [
         {
             type: 'line',
