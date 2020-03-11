@@ -27,22 +27,6 @@ export interface URLParams {
 }
 /** params option type */
 declare type paramsType = URLParams | null;
-/** converts URL params object to string
- * @param {URLParams} obj - the object representing URL params
- * @returns {string} URL params as a string
- */
-export declare function getURLParams(obj: URLParams | {}): string;
-/** converts filter params object to string
- * @param {URLParams} obj - the object representing filter params
- * @returns {string} filter params as a string
- */
-export declare function getFilterParams(obj: URLParams | {}): string;
-/** Get URL
- * @param {string} url - the url
- * @param {paramType} params - the url params object
- * @returns {string} the final url
- */
-export declare function getURLFn(url: string, params?: paramsType): string;
 /** The OpenSRP service class
  *
  * Sample usage:
@@ -61,7 +45,6 @@ export declare class OpenSRPService {
     baseURL: string;
     endpoint: string;
     generalURL: string;
-    getURL: typeof getURLFn;
     getOptions: typeof getFetchOptions;
     signal: AbortSignal;
     /**
@@ -71,7 +54,18 @@ export declare class OpenSRPService {
      * @param getURL - a function to get the URL
      * @param getPayload - a function to get the payload
      */
-    constructor(baseURL: string | undefined, endpoint: string, getPayload?: typeof getFetchOptions, signal?: AbortSignal, getURL?: typeof getURLFn);
+    constructor(baseURL: string | undefined, endpoint: string, getPayload?: typeof getFetchOptions, signal?: AbortSignal);
+    /** appends any query params to the url as a querystring
+     * @param {string} url - the url
+     * @param {paramsType} params - the url params object
+     * @returns {string} the final url
+     */
+    static getURL(generalUrl: string, params: paramsType): string;
+    /** converts filter params object to string
+     * @param {URLParams} obj - the object representing filter params
+     * @returns {string} filter params as a string
+     */
+    static getFilterParams(obj: URLParams | {}): string;
     /** create method
      * Send a POST request to the general endpoint containing the new object data
      * Successful requests will result in a HTTP status 201 response with no body

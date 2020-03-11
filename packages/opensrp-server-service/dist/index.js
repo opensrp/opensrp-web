@@ -7,10 +7,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDefaultHeaders = getDefaultHeaders;
 exports.getFetchOptions = getFetchOptions;
-exports.getURLParams = getURLParams;
-exports.getFilterParams = getFilterParams;
-exports.getURLFn = getURLFn;
 exports.OpenSRPService = exports.OPENSRP_API_BASE_URL = void 0;
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -22,7 +21,7 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+var _querystring = _interopRequireDefault(require("querystring"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -50,49 +49,16 @@ function getFetchOptions(signal, method) {
   };
 }
 
-function getURLParams(obj) {
-  return Object.entries(obj).map(function (_ref) {
-    var _ref2 = (0, _slicedToArray2["default"])(_ref, 2),
-        key = _ref2[0],
-        val = _ref2[1];
-
-    return "".concat(key, "=").concat(val);
-  }).join('&');
-}
-
-function getFilterParams(obj) {
-  return Object.entries(obj).map(function (_ref3) {
-    var _ref4 = (0, _slicedToArray2["default"])(_ref3, 2),
-        key = _ref4[0],
-        val = _ref4[1];
-
-    return "".concat(key, ":").concat(val);
-  }).join(',');
-}
-
-function getURLFn(url) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var result = url;
-
-  if (params) {
-    result = "".concat(result, "?").concat(getURLParams(params));
-  }
-
-  return result;
-}
-
 var OpenSRPService = function () {
   function OpenSRPService() {
     var baseURL = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : OPENSRP_API_BASE_URL;
     var endpoint = arguments.length > 1 ? arguments[1] : undefined;
     var getPayload = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : getFetchOptions;
     var signal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new AbortController().signal;
-    var getURL = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : getURLFn;
     (0, _classCallCheck2["default"])(this, OpenSRPService);
     (0, _defineProperty2["default"])(this, "baseURL", void 0);
     (0, _defineProperty2["default"])(this, "endpoint", void 0);
     (0, _defineProperty2["default"])(this, "generalURL", void 0);
-    (0, _defineProperty2["default"])(this, "getURL", void 0);
     (0, _defineProperty2["default"])(this, "getOptions", void 0);
     (0, _defineProperty2["default"])(this, "signal", void 0);
     this.endpoint = endpoint;
@@ -100,7 +66,6 @@ var OpenSRPService = function () {
     this.signal = signal;
     this.baseURL = baseURL;
     this.generalURL = "".concat(this.baseURL).concat(this.endpoint);
-    this.getURL = getURL;
   }
 
   (0, _createClass2["default"])(OpenSRPService, [{
@@ -119,7 +84,7 @@ var OpenSRPService = function () {
               case 0:
                 params = _args.length > 1 && _args[1] !== undefined ? _args[1] : null;
                 method = _args.length > 2 && _args[2] !== undefined ? _args[2] : 'POST';
-                url = this.getURL(this.generalURL, params);
+                url = OpenSRPService.getURL(this.generalURL, params);
                 payload = _objectSpread({}, this.getOptions(this.signal, method), {
                   'Cache-Control': 'no-cache',
                   Pragma: 'no-cache',
@@ -170,7 +135,7 @@ var OpenSRPService = function () {
               case 0:
                 params = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : null;
                 method = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : 'GET';
-                url = this.getURL("".concat(this.generalURL, "/").concat(id), params);
+                url = OpenSRPService.getURL("".concat(this.generalURL, "/").concat(id), params);
                 _context2.next = 5;
                 return fetch(url, this.getOptions(this.signal, method));
 
@@ -221,7 +186,7 @@ var OpenSRPService = function () {
               case 0:
                 params = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : null;
                 method = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : 'PUT';
-                url = this.getURL(this.generalURL, params);
+                url = OpenSRPService.getURL(this.generalURL, params);
                 payload = _objectSpread({}, this.getOptions(this.signal, method), {
                   'Cache-Control': 'no-cache',
                   Pragma: 'no-cache',
@@ -272,7 +237,7 @@ var OpenSRPService = function () {
               case 0:
                 params = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : null;
                 method = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : 'GET';
-                url = this.getURL(this.generalURL, params);
+                url = OpenSRPService.getURL(this.generalURL, params);
                 _context4.next = 5;
                 return fetch(url, this.getOptions(this.signal, method));
 
@@ -322,7 +287,7 @@ var OpenSRPService = function () {
               case 0:
                 params = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : null;
                 method = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : 'DELETE';
-                url = this.getURL(this.generalURL, params);
+                url = OpenSRPService.getURL(this.generalURL, params);
                 _context5.next = 5;
                 return fetch(url, this.getOptions(this.signal, method));
 
@@ -353,6 +318,26 @@ var OpenSRPService = function () {
 
       return _delete;
     }()
+  }], [{
+    key: "getURL",
+    value: function getURL(generalUrl, params) {
+      if (params) {
+        return "".concat(generalUrl, "?").concat(_querystring["default"].stringify(params));
+      }
+
+      return generalUrl;
+    }
+  }, {
+    key: "getFilterParams",
+    value: function getFilterParams(obj) {
+      return Object.entries(obj).map(function (_ref) {
+        var _ref2 = (0, _slicedToArray2["default"])(_ref, 2),
+            key = _ref2[0],
+            val = _ref2[1];
+
+        return "".concat(key, ":").concat(val);
+      }).join(',');
+    }
   }]);
   return OpenSRPService;
 }();
