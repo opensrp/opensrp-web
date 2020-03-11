@@ -97,6 +97,26 @@ describe('services/OpenSRP', () => {
         ]);
     });
 
+    it('OpenSRPService delete method on solo endpoint', async () => {
+        fetch.mockResponseOnce(JSON.stringify({}));
+        const service = new OpenSRPService(OPENSRP_API_BASE_URL, 'practitioners/someId');
+        const result = await service.delete();
+        expect(result).toEqual({});
+        expect(fetch.mock.calls).toEqual([
+            [
+                'https://test.smartregister.org/opensrp/rest/practitioners/someId',
+                {
+                    headers: {
+                        accept: 'application/json',
+                        authorization: 'Bearer hunter2',
+                        'content-type': 'application/json;charset=UTF-8',
+                    },
+                    method: 'DELETE',
+                },
+            ],
+        ]);
+    });
+
     it('OpenSRPService delete method should handle http errors', async () => {
         fetch.mockResponseOnce(JSON.stringify({}), { status: 500 });
         const service = new OpenSRPService(OPENSRP_API_BASE_URL, 'practitioners');
