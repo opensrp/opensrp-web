@@ -46,16 +46,6 @@ export interface URLParams {
 /** params option type */
 type paramsType = URLParams | null;
 
-/** converts filter params object to string
- * @param {URLParams} obj - the object representing filter params
- * @returns {string} filter params as a string
- */
-export function getFilterParams(obj: URLParams | {}): string {
-    return Object.entries(obj)
-        .map(([key, val]) => `${key}:${val}`)
-        .join(',');
-}
-
 /** The OpenSRP service class
  *
  * Sample usage:
@@ -97,7 +87,7 @@ export class OpenSRPService {
         this.generalURL = `${this.baseURL}${this.endpoint}`;
     }
 
-    /** appends any filterParams to the url as a querystring
+    /** appends any query params to the url as a querystring
      * @param {string} url - the url
      * @param {paramsType} params - the url params object
      * @returns {string} the final url
@@ -107,6 +97,16 @@ export class OpenSRPService {
             return `${generalUrl}?${queryString.stringify(params)}`;
         }
         return generalUrl;
+    }
+
+    /** converts filter params object to string
+     * @param {URLParams} obj - the object representing filter params
+     * @returns {string} filter params as a string
+     */
+    public static getFilterParams(obj: URLParams | {}): string {
+        return Object.entries(obj)
+            .map(([key, val]) => `${key}:${val}`)
+            .join(',');
     }
 
     /** create method
