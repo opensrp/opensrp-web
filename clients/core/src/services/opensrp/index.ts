@@ -27,7 +27,7 @@ export function generateHeaders(
 /** describe options returned by generate options -> usually
  * to be passed as options in a fetch request
  */
-interface FetchOptions {
+export interface FetchOptions {
     headers: HeadersInit;
     method: HTTPMethod;
     signal: AbortSignal;
