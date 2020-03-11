@@ -1,4 +1,4 @@
-import { getDefaultHeaders, getFilterParams, getURLParams, OpenSRPService, OPENSRP_API_BASE_URL, getURLFn } from '..';
+import { getDefaultHeaders, OpenSRPService, OPENSRP_API_BASE_URL } from '..';
 import { createPlan, plansListResponse } from './fixtures/plans';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
@@ -7,11 +7,6 @@ describe('services/OpenSRP', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         fetch.resetMocks();
-    });
-
-    it('getUrlFn wors for no params', () => {
-        const localHost = 'http://localhost';
-        expect(getURLFn('http://localhost')).toEqual(localHost);
     });
 
     it('getDefaultHeaders works', async () => {
@@ -29,14 +24,11 @@ describe('services/OpenSRP', () => {
         expect(planService.generalURL).toEqual('https://test.smartregister.org/opensrp/rest/plans');
     });
 
-    it('getURLParams works', async () => {
-        expect(getURLParams({})).toEqual('');
-        expect(getURLParams({ foo: 'bar', leet: 1337, mosh: 'pitt' })).toEqual('foo=bar&leet=1337&mosh=pitt');
-    });
-
     it('getFilterParams works', async () => {
-        expect(getFilterParams({})).toEqual('');
-        expect(getFilterParams({ foo: 'bar', leet: 1337, mosh: 'pitt' })).toEqual('foo:bar,leet:1337,mosh:pitt');
+        expect(OpenSRPService.getFilterParams({})).toEqual('');
+        expect(OpenSRPService.getFilterParams({ foo: 'bar', leet: 1337, mosh: 'pitt' })).toEqual(
+            'foo:bar,leet:1337,mosh:pitt',
+        );
     });
 
     // list method
