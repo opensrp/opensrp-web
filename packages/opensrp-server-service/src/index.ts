@@ -1,5 +1,5 @@
 import { IncomingHttpHeaders } from 'http';
-
+import queryString from 'querystring';
 /** defaults */
 export const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
 
@@ -46,16 +46,6 @@ export interface URLParams {
 /** params option type */
 type paramsType = URLParams | null;
 
-/** converts URL params object to string
- * @param {URLParams} obj - the object representing URL params
- * @returns {string} URL params as a string
- */
-export function getURLParams(obj: URLParams | {}): string {
-    return Object.entries(obj)
-        .map(([key, val]) => `${key}=${val}`)
-        .join('&');
-}
-
 /** converts filter params object to string
  * @param {URLParams} obj - the object representing filter params
  * @returns {string} filter params as a string
@@ -64,19 +54,6 @@ export function getFilterParams(obj: URLParams | {}): string {
     return Object.entries(obj)
         .map(([key, val]) => `${key}:${val}`)
         .join(',');
-}
-
-/** Get URL
- * @param {string} url - the url
- * @param {paramType} params - the url params object
- * @returns {string} the final url
- */
-export function getURLFn(url: string, params: paramsType = null): string {
-    let result = url;
-    if (params) {
-        result = `${result}?${getURLParams(params)}`;
-    }
-    return result;
 }
 
 /** The OpenSRP service class
@@ -97,7 +74,6 @@ export class OpenSRPService {
     public baseURL: string;
     public endpoint: string;
     public generalURL: string;
-    public getURL: typeof getURLFn;
     public getOptions: typeof getFetchOptions;
     public signal: AbortSignal;
 
@@ -113,14 +89,24 @@ export class OpenSRPService {
         endpoint: string,
         getPayload: typeof getFetchOptions = getFetchOptions,
         signal: AbortSignal = new AbortController().signal,
-        getURL: typeof getURLFn = getURLFn,
     ) {
         this.endpoint = endpoint;
         this.getOptions = getPayload;
         this.signal = signal;
         this.baseURL = baseURL;
         this.generalURL = `${this.baseURL}${this.endpoint}`;
-        this.getURL = getURL;
+    }
+
+    /** appends any filterParams to the url as a querystring
+     * @param {string} url - the url
+     * @param {paramsType} params - the url params object
+     * @returns {string} the final url
+     */
+    public static getURL(generalUrl: string, params: paramsType): string {
+        if (params) {
+            return `${generalUrl}?${queryString.stringify(params)}`;
+        }
+        return generalUrl;
     }
 
     /** create method
@@ -132,7 +118,7 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async create<T>(data: T, params: paramsType = null, method: HTTPMethod = 'POST'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const payload = {
             ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
@@ -157,7 +143,7 @@ export class OpenSRPService {
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async read(id: string | number, params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
-        const url = this.getURL(`${this.generalURL}/${id}`, params);
+        const url = OpenSRPService.getURL(`${this.generalURL}/${id}`, params);
         const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
@@ -176,7 +162,7 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async update<T>(data: T, params: paramsType = null, method: HTTPMethod = 'PUT'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const payload = {
             ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
@@ -200,7 +186,7 @@ export class OpenSRPService {
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async list(params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
@@ -218,7 +204,7 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async delete<T>(params: paramsType = null, method: HTTPMethod = 'DELETE'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (response.ok || response.status === 204 || response.status === 200) {
