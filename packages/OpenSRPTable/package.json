@@ -30,6 +30,6 @@
         "react": "^16.8.6"
     },
     "dependencies": {
-        "react-table": "react-table@v7.0.0-rc.11"
+        "react-table": "react-table@v7.0.0"
     }
 }
