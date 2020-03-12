@@ -85,14 +85,14 @@
         "tslint-config-prettier": "^1.18.0",
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^4.0.0",
-        "typescript": "^3.7.2"
+        "typescript": "^3.7.2",
+        "istanbul-api": "^2.1.6"
     },
     "workspaces": [
         "clients/*",
         "packages/*"
     ],
     "dependencies": {
-        "istanbul-api": "^2.1.6",
         "opensrp-server-service": "file:packages/opensrp-server-service",
         "opensrp-table": "file:packages/OpenSRPTable",
         "opensrp-web": "file:clients/core"
