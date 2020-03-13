@@ -2,7 +2,7 @@
     "name": "@opensrp/opensrp-table",
     "version": "0.0.1",
     "types": "dist/types",
-    "description": "A grid component for displaying data",
+    "description": "A table component for displaying data",
     "main": "dist/index.js",
     "repository": "https://github.com/opensrp/opensrp-web",
     "author": "Ona Engineering",

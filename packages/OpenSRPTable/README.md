@@ -1,6 +1,6 @@
-# Opensrp Table
+# OpenSRP Table
 
-This provides a grid component that can be used to display data on a page.
+This provides an OpenSRPTable component that can be used to display data on a page.
 It adds an extra abstraction layer over [react-table](https://github.com/tannerlinsley/react-table#readme) that makes it much easier to use within the more limited scope of opensrp-web. Currently it only re-exposes the sorting api from react-table.
 
 ## Installation
