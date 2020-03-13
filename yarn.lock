@@ -2192,6 +2192,13 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
+"@opensrp/server-service@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@opensrp/server-service/-/server-service-0.0.1.tgz#4a66c991bfb61658af2db12961c9fde4e8a3c396"
+  integrity sha512-2E5rszxz7yiLp1RHsz1Cl6ppaPknpiUxtT2DSm+R7YeWepaKLQVM5A9Cp4ONkNXIDRweWOvJo8PUpLqaE2AlQg==
+  dependencies:
+    "@onaio/session-reducer" "^0.0.11"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -10059,12 +10066,6 @@ opencollective-postinstall@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
-
-"opensrp-server-service@file:packages/opensrp-server-service":
-  version "0.0.0"
-
-"opensrp-table@file:packages/OpenSRPTable":
-  version "0.0.1"
 
 opn@^5.5.0:
   version "5.5.0"

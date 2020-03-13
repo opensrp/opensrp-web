@@ -91,10 +91,5 @@
     "workspaces": [
         "clients/*",
         "packages/*"
-    ],
-    "dependencies": {
-        "opensrp-server-service": "file:packages/opensrp-server-service",
-        "opensrp-table": "file:packages/OpenSRPTable",
-        "opensrp-web": "file:clients/core"
-    }
+    ]
 }
