@@ -103,7 +103,8 @@ export type ImmutableObjectState<ObjectType> = ObjectState<ObjectType> &
     SeamlessImmutable.ImmutableObject<ObjectState<ObjectType>>;
 
 /** initial state */
-const initialState = SeamlessImmutable({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const initialState: ImmutableObjectState<any> = SeamlessImmutable({
     objectsById: {},
     totalRecords: 0,
 });
