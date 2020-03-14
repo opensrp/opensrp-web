@@ -93,6 +93,7 @@ export function setTotalRecordsFactory(reducerName: string) {
  */
 interface ObjectState<ObjectType> {
     objectsById: { [key: string]: ObjectType };
+    totalRecords: number;
 }
 
 /** Create an immutable object state
