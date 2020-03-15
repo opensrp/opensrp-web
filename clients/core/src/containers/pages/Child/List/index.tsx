@@ -5,7 +5,7 @@ import { Col, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { OPENSRP_CHILD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
+import { OPENSRP_CHILD_ENDPOINT, PAGINATION_SIZE } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import childReducer, {
     fetchChildList,

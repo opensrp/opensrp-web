@@ -2,17 +2,17 @@ import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import { ChildList, ChildListProps } from '..';
 import ConnectedChildList from '..';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
-import store from '../../../../store';
-import reducer, { fetchChildList, reducerName, removeChildList } from '../../../../store/ducks/child';
+import store from '../../../../../store';
+import reducer, { fetchChildList, reducerName, removeChildList } from '../../../../../store/ducks/child';
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { setTotalRecords } from '../../../../store/ducks/clients';
+import { setTotalRecords } from '../../../../../store/ducks/clients';
 
 reducerRegistry.register(reducerName, reducer);
 
-jest.mock('../../../../configs/env');
+jest.mock('../../../../../configs/env');
 describe('containers/child/List', () => {
     let classMock: any;
     beforeEach(() => {
