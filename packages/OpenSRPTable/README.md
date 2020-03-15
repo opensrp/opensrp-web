@@ -24,6 +24,9 @@ yarn add @opensrp/opensrp-table
 import React from 'react';
 import { OpenSRPTable } from '@opensrp-table';
 
+// To use default styling
+import '@opensrp/opensrp-table/src/index.css';
+
 export const useColumns = () => {
     return React.useMemo(() => [
         {
@@ -43,6 +46,6 @@ const data = [
 ];
 
 const CustomTable: React.FC<ANCTableProps> = () => {
-    return <ReactTable {...{ data, tableColumns: useColumns() }} />;
+    return <OpenSRPTable {...{ data, tableColumns: useColumns() }} />;
 };
 ```
