@@ -3,10 +3,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
-import SearchBox from '../../../components/page/SearchBox';
+import Loading from '../../../../components/page/Loading';
+import SearchBox from '../../../../components/page/SearchBox';
 import { OPENSRP_CHILD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
-import { OpenSRPService } from '../../../services/opensrp';
+import { OpenSRPService } from '@opensrp/server-service';
 import childReducer, {
     fetchChildList,
     getChildArray,
@@ -15,10 +15,12 @@ import childReducer, {
     setTotalRecords,
     getTotalRecords,
     Child,
-} from '../../../store/ducks/child';
+} from '../../../../store/ducks/child';
 import './childList.css';
 import Select from 'react-select';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
 import '../../../assets/styles/dropdown.css';
+import { useChildTableColumns } from './helpers/tableDefinition';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -159,44 +161,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                     </Row>
                     <Row>
                         <Col>
-                            <Table striped={true}>
-                                <thead>
-                                    <tr>
-                                        <th>Identifier</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Location</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
-                                        <th>Last contact date</th>
-                                        <th>Risk</th>
-                                        <th>Immunization status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {childArray.map((child: Child) => {
-                                        return (
-                                            <tr key={child.baseEntityId}>
-                                                <td>{child.identifiers.opensrp_id}</td>
-                                                <td>{child.firstName}</td>
-                                                <td>{child.lastName}</td>
-                                                <td></td>
-                                                <td>{child.attributes.dynamicProperties.age_year_part}</td>
-                                                <td>{child.gender}</td>
-                                                <td>
-                                                    {child.attributes.dynamicProperties.last_contact_date.split('T')[0]}
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <a href={`${'#'}`}> view </a>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
+                            <OpenSRPTable data={childArray} tableColumns={useChildTableColumns()} />
                         </Col>
                     </Row>
                 </div>
