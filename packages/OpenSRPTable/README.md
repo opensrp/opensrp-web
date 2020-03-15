@@ -28,16 +28,19 @@ import { OpenSRPTable } from '@opensrp-table';
 import '@opensrp/opensrp-table/src/index.css';
 
 export const useColumns = () => {
-    return React.useMemo(() => [
-        {
-            Header: 'First Name',
-            accessor: 'firstName',
-        },
-        {
-            Header: 'Last Name',
-            accessor: 'lastName',
-        },
-    ]);
+    return React.useMemo(
+        () => [
+            {
+                Header: 'First Name',
+                accessor: 'firstName',
+            },
+            {
+                Header: 'Last Name',
+                accessor: 'lastName',
+            },
+        ],
+        [],
+    );
 };
 
 const data = [
