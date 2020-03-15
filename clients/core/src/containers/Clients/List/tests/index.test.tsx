@@ -93,7 +93,7 @@ describe('containers/clients/list/ClientList', () => {
                 <ConnectedClientsList {...props} />
             </Provider>,
         );
-        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('client/search');
+        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('https://test.smartregister.org/opensrp/rest/');
         wrapper.unmount();
     });
 });

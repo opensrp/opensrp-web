@@ -279,7 +279,8 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
-          "client/search",
+          "https://test.smartregister.org/opensrp/rest/",
+          "client/searchByCriteria",
           [Function],
         ],
       ],
@@ -413,7 +414,8 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
       [MockFunction] {
         "calls": Array [
           Array [
-            "client/search",
+            "https://test.smartregister.org/opensrp/rest/",
+            "client/searchByCriteria",
             [Function],
           ],
         ],
@@ -706,7 +708,7 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
           "calls": Array [
             Array [
               "https://test.smartregister.org/opensrp/rest/",
-              "client/search",
+              "client/searchByCriteria",
               [Function],
             ],
           ],
