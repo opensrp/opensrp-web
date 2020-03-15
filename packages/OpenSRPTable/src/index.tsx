@@ -13,7 +13,6 @@ import {
     Row,
 } from 'react-table';
 import { PLEASE_DEFINE_SOME_COLUMNS } from './constants';
-import './index.css';
 
 /** props for the OpenSRPTable component */
 interface OpenSRPTableProps<T extends object> {
