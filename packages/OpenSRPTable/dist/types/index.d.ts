@@ -3,7 +3,6 @@
  */
 import * as React from 'react';
 import { Column } from 'react-table';
-import './index.css';
 /** props for the OpenSRPTable component */
 interface OpenSRPTableProps<T extends object> {
     /** a memoized list of columns  */

@@ -17,8 +17,6 @@ var _reactTable = require("react-table");
 
 var _constants = require("./constants");
 
-require("./index.css");
-
 var defaultOpenSRPTableProps = {
   data: [],
   tableColumns: [{
