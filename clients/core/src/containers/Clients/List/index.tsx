@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Table, Row, Col } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
-import { OpenSRPService } from '../../../services/opensrp';
+import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
+import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {
     Client,
     fetchClients,
@@ -20,6 +20,7 @@ import SearchBox from '../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../assets/styles/dropdown.css';
 import { PAGINATION_SIZE } from '../../../constants';
+import { generateOptions } from '../../../services/opensrp';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -80,7 +81,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         this.state = defaultClientListState;
     }
 
-    public componentDidMount() {
+    public async componentDidMount() {
         this.getDataFromServer();
     }
 
@@ -93,7 +94,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             searchText: this.state.searchText,
         };
         const { fetchClientsActionCreator, opensrpService, setTotalRecords, removeClients } = this.props;
-        const clientService = new opensrpService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
         const response = await clientService.list(params);
         removeClients();
         fetchClientsActionCreator(response.clients);

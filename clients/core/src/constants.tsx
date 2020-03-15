@@ -60,3 +60,12 @@ export type SIGN_OUT = typeof SIGN_OUT;
 // url constants
 export const PAGINATION_SIZE = 10;
 export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const NEXT = 'Next';
+export type NEXT = typeof NEXT;
+export const START = 'Start';
+export type START = typeof START;
+export const LAST = 'Last';
+export type LAST = typeof LAST;
+export const PREVIOUS = 'Previous';
+export type PREVIOUS = typeof PREVIOUS;
+export const LOADING = 'Loading';

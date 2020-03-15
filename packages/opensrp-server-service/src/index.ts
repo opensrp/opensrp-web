@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http';
-
+import queryString from 'querystring';
 /** defaults */
-const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
+export const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
 
 /** allowed http methods */
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -11,6 +11,7 @@ type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
  * @param {string} accept - the MIME type to accept
  * @param {string} authorizationType - the authorization type
  * @param {string} contentType - the content type
+ * @return {IncomingHttpHeaders} - the headers
  */
 export function getDefaultHeaders(
     accessToken = 'hunter2',
@@ -26,10 +27,11 @@ export function getDefaultHeaders(
 }
 
 /** get payload for fetch
+ * @param {AbortSignal} signal - signal object that allows you to communicate with a DOM request
  * @param {HTTPMethod} method - the HTTP method
  * @returns the payload
  */
-export function getPayloadFn(method: HTTPMethod): { headers: HeadersInit; method: HTTPMethod } {
+export function getFetchOptions(signal: AbortSignal, method: HTTPMethod): { headers: HeadersInit; method: HTTPMethod } {
     return {
         headers: getDefaultHeaders() as HeadersInit,
         method,
@@ -43,39 +45,6 @@ export interface URLParams {
 
 /** params option type */
 type paramsType = URLParams | null;
-
-/** converts URL params object to string
- * @param {URLParams} obj - the object representing URL params
- * @returns {string} URL params as a string
- */
-export function getURLParams(obj: URLParams | {}): string {
-    return Object.entries(obj)
-        .map(([key, val]) => `${key}=${val}`)
-        .join('&');
-}
-
-/** converts filter params object to string
- * @param {URLParams} obj - the object representing filter params
- * @returns {string} filter params as a string
- */
-export function getFilterParams(obj: URLParams | {}): string {
-    return Object.entries(obj)
-        .map(([key, val]) => `${key}:${val}`)
-        .join(',');
-}
-
-/** Get URL
- * @param {string} url - the url
- * @param {paramType} params - the url params object
- * @returns {string} the final url
- */
-export function getURLFn(url: string, params: paramsType = null): string {
-    let result = url;
-    if (params) {
-        result = `${result}?${getURLParams(params)}`;
-    }
-    return result;
-}
 
 /** The OpenSRP service class
  *
@@ -95,8 +64,8 @@ export class OpenSRPService {
     public baseURL: string;
     public endpoint: string;
     public generalURL: string;
-    public getURL: typeof getURLFn;
-    public getPayload: typeof getPayloadFn;
+    public getOptions: typeof getFetchOptions;
+    public signal: AbortSignal;
 
     /**
      * Constructor method
@@ -106,16 +75,38 @@ export class OpenSRPService {
      * @param getPayload - a function to get the payload
      */
     constructor(
-        endpoint: string,
         baseURL: string = OPENSRP_API_BASE_URL,
-        getURL: typeof getURLFn = getURLFn,
-        getPayload: typeof getPayloadFn = getPayloadFn,
+        endpoint: string,
+        getPayload: typeof getFetchOptions = getFetchOptions,
+        signal: AbortSignal = new AbortController().signal,
     ) {
         this.endpoint = endpoint;
+        this.getOptions = getPayload;
+        this.signal = signal;
         this.baseURL = baseURL;
         this.generalURL = `${this.baseURL}${this.endpoint}`;
-        this.getURL = getURL;
-        this.getPayload = getPayload;
+    }
+
+    /** appends any query params to the url as a querystring
+     * @param {string} url - the url
+     * @param {paramsType} params - the url params object
+     * @returns {string} the final url
+     */
+    public static getURL(generalUrl: string, params: paramsType): string {
+        if (params) {
+            return `${generalUrl}?${queryString.stringify(params)}`;
+        }
+        return generalUrl;
+    }
+
+    /** converts filter params object to string
+     * @param {URLParams} obj - the object representing filter params
+     * @returns {string} filter params as a string
+     */
+    public static getFilterParams(obj: URLParams | {}): string {
+        return Object.entries(obj)
+            .map(([key, val]) => `${key}:${val}`)
+            .join(',');
     }
 
     /** create method
@@ -127,9 +118,9 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async create<T>(data: T, params: paramsType = null, method: HTTPMethod = 'POST'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const payload = {
-            ...this.getPayload(method),
+            ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
             body: JSON.stringify(data),
@@ -152,8 +143,8 @@ export class OpenSRPService {
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async read(id: string | number, params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
-        const url = this.getURL(`${this.generalURL}/${id}`, params);
-        const response = await fetch(url, this.getPayload(method));
+        const url = OpenSRPService.getURL(`${this.generalURL}/${id}`, params);
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
             throw new Error(`OpenSRPService read on ${this.endpoint} failed, HTTP status ${response.status}`);
@@ -171,9 +162,9 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async update<T>(data: T, params: paramsType = null, method: HTTPMethod = 'PUT'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
+        const url = OpenSRPService.getURL(this.generalURL, params);
         const payload = {
-            ...this.getPayload(method),
+            ...this.getOptions(this.signal, method),
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
             body: JSON.stringify(data),
@@ -195,8 +186,8 @@ export class OpenSRPService {
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async list(params: paramsType = null, method: HTTPMethod = 'GET'): Promise<any> {
-        const url = this.getURL(this.generalURL, params);
-        const response = await fetch(url, this.getPayload(method));
+        const url = OpenSRPService.getURL(this.generalURL, params);
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (!response.ok) {
             throw new Error(`OpenSRPService list on ${this.endpoint} failed, HTTP status ${response.status}`);
@@ -213,8 +204,8 @@ export class OpenSRPService {
      * @returns the object returned by API
      */
     public async delete<T>(params: paramsType = null, method: HTTPMethod = 'DELETE'): Promise<{}> {
-        const url = this.getURL(this.generalURL, params);
-        const response = await fetch(url, this.getPayload(method));
+        const url = OpenSRPService.getURL(this.generalURL, params);
+        const response = await fetch(url, this.getOptions(this.signal, method));
 
         if (response.ok || response.status === 204 || response.status === 200) {
             return {};
