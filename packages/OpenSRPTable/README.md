@@ -22,7 +22,7 @@ yarn add @opensrp/opensrp-table
 
 ```typescript
 import React from 'react';
-import { OpenSRPTable } from '@opensrp-table';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
 
 // To use default styling
 import '@opensrp/opensrp-table/src/index.css';
