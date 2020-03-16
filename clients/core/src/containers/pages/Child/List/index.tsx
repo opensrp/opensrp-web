@@ -63,9 +63,9 @@ export interface ChildTableProps {
     tableData: Child[];
 }
 
-const ChildTable: React.FC<ChildTableProps> = props => {
+function ChildTable(props: ChildTableProps): React.ReactElement {
     return <OpenSRPTable {...{ data: props.tableData, tableColumns: useChildTableColumns() }} />;
-};
+}
 
 /** Display the client list  */
 class ChildList extends React.Component<ChildListProps, ChildListState> {
