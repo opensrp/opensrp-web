@@ -18,10 +18,6 @@ yarn add @opensrp/opensrp-table
     -   **required**
     -   an array of items to be displayed on the grid
 
-### Style
-
--   Need to copy the css file from `OpenSRPTable/src/index.css` to  `OpenSRPTable/dist/index.css`    
-
 #### an example
 
 ```typescript
