@@ -23,7 +23,7 @@ yarn add @opensrp/opensrp-table
 ```typescript
 import React from 'react';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import '@opensrp/opensrp-table/dist/index.css'
+import '@opensrp/opensrp-table/dist/index.css';
 
 export const useColumns = () => {
     return React.useMemo(() => [
