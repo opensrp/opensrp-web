@@ -93,6 +93,7 @@ export function setTotalRecordsFactory(reducerName: string) {
  */
 interface ObjectState<ObjectType> {
     objectsById: { [key: string]: ObjectType };
+    totalRecords: number;
 }
 
 /** Create an immutable object state
@@ -102,7 +103,8 @@ export type ImmutableObjectState<ObjectType> = ObjectState<ObjectType> &
     SeamlessImmutable.ImmutableObject<ObjectState<ObjectType>>;
 
 /** initial state */
-const initialState = SeamlessImmutable({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const initialState: ImmutableObjectState<any> = SeamlessImmutable({
     objectsById: {},
     totalRecords: 0,
 });
