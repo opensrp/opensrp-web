@@ -8,7 +8,9 @@ exports[`containers/child/List renders correctly 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
-          "undefined",
+          "https://test.smartregister.org/opensrp/rest/",
+          "client/search",
+          [Function],
         ],
       ],
       "results": Array [
@@ -160,7 +162,9 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
       [MockFunction] {
         "calls": Array [
           Array [
-            "undefined",
+            "https://test.smartregister.org/opensrp/rest/",
+            "client/search",
+            [Function],
           ],
         ],
         "results": Array [
@@ -310,7 +314,9 @@ exports[`containers/child/List works correctly with the redux store 1`] = `
         [MockFunction] {
           "calls": Array [
             Array [
-              "undefined",
+              "https://test.smartregister.org/opensrp/rest/",
+              "client/search",
+              [Function],
             ],
           ],
           "results": Array [
