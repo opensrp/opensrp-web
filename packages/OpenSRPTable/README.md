@@ -20,7 +20,7 @@ yarn add @opensrp/opensrp-table
 
 ### Style
 
--   In order to use the style need to copy the css file from `OpenSRPTable/src/index.css` to  `OpenSRPTable/dist/index.css`    
+-   Need to copy the css file from `OpenSRPTable/src/index.css` to  `OpenSRPTable/dist/index.css`    
 
 #### an example
 
