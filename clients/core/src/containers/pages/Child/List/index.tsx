@@ -5,7 +5,7 @@ import { Col, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { OPENSRP_CHILD_ENDPOINT, PAGINATION_SIZE } from '../../../../configs/env';
+import { PAGINATION_SIZE, OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import childReducer, {
     fetchChildList,
@@ -19,8 +19,9 @@ import childReducer, {
 import './childList.css';
 import Select from 'react-select';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import '../../../assets/styles/dropdown.css';
+import '../../../../assets/styles/dropdown.css';
 import { useChildTableColumns } from './helpers/tableDefinition';
+import { generateOptions } from '../../../../services/opensrp';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -92,7 +93,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
             searchText: this.state.searchText,
         };
         const { fetchChild, opensrpService, setTotalRecords, removeChild } = this.props;
-        const clientService = new opensrpService(`${OPENSRP_CHILD_ENDPOINT}`);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
         const response = await clientService.list(params);
         removeChild();
         fetchChild(response.clients);
