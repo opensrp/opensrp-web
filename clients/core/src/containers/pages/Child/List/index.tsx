@@ -1,7 +1,7 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Col, Row, Table } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
@@ -22,6 +22,8 @@ import { OpenSRPTable } from '@opensrp/opensrp-table';
 import '../../../../assets/styles/dropdown.css';
 import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
+import '@opensrp/opensrp-table/dist/index.css';
+import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -41,20 +43,6 @@ export interface ChildListState {
     searchText: string;
 }
 
-/** default options for genders */
-export const genderOptions: DropdownOption[] = [
-    { value: '', label: 'All' },
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
-    { value: 'Others', label: 'Others' },
-];
-
-/** interface for dropdown option */
-export interface DropdownOption {
-    value: string;
-    label: string;
-}
-
 /** default props for the clientList component */
 export const defaultChildListProps: ChildListProps = {
     opensrpService: OpenSRPService,
@@ -69,6 +57,14 @@ export const defaultChildState: ChildListState = {
     selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
+};
+
+export interface ChildTableProps {
+    tableData: Child[];
+}
+
+const ChildTable: React.FC<ChildTableProps> = props => {
+    return <OpenSRPTable {...{ data: props.tableData, tableColumns: useChildTableColumns() }} />;
 };
 
 /** Display the client list  */
@@ -162,7 +158,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                     </Row>
                     <Row>
                         <Col>
-                            <OpenSRPTable data={childArray} tableColumns={useChildTableColumns()} />
+                            <ChildTable tableData={childArray} />
                         </Col>
                     </Row>
                 </div>

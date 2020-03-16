@@ -9,23 +9,7 @@ export const useChildTableColumns = () => {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => (
-                    <>
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item">
-                                    <a href="#">Kenya</a>
-                                </li>
-                                <li className="breadcrumb-item">
-                                    <a href="#">Nairobi</a>
-                                </li>
-                                <li className="breadcrumb-item active" aria-current="page">
-                                    Kilimani
-                                </li>
-                            </ol>
-                        </nav>
-                    </>
-                ),
+                Header: () => <></>,
                 columns: [
                     { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
                     {
@@ -67,13 +51,13 @@ export const useChildTableColumns = () => {
                         accessor: '',
                         disableSortBy: true,
                     },
-                    {
-                        // eslint-disable-next-line react/display-name
-                        Cell: ({ row: { index } }) => <Link to="#">View</Link>,
-                        Header: 'Actions',
-                        accessor: '',
-                        disableSortBy: true,
-                    },
+                    // {
+                    //     // eslint-disable-next-line react/display-name
+                    //     Cell: ({ row: { index } }) => <Link to="#">View</Link>,
+                    //     Header: 'Actions',
+                    //     accessor: '',
+                    //     disableSortBy: true,
+                    // },
                 ],
                 id: 'tableCrumb',
             },
