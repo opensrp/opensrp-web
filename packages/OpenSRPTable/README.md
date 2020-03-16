@@ -18,11 +18,16 @@ yarn add @opensrp/opensrp-table
     -   **required**
     -   an array of items to be displayed on the grid
 
+### Style
+
+-   In order to use the style need to copy the css file from `OpenSRPTable/src/index.css` to  `OpenSRPTable/dist/index.css`    
+
 #### an example
 
 ```typescript
 import React from 'react';
-import { OpenSRPTable } from '@opensrp-table';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
+import '@opensrp/opensrp-table/dist/index.css'
 
 export const useColumns = () => {
     return React.useMemo(() => [
@@ -34,7 +39,7 @@ export const useColumns = () => {
             Header: 'Last Name',
             accessor: 'lastName',
         },
-    ]);
+    ],[]);
 };
 
 const data = [
@@ -43,6 +48,6 @@ const data = [
 ];
 
 const CustomTable: React.FC<ANCTableProps> = () => {
-    return <ReactTable {...{ data, tableColumns: useColumns() }} />;
+    return <OpenSRPTable {...{ data, tableColumns: useColumns() }} />;
 };
 ```
