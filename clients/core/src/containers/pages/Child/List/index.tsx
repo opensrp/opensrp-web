@@ -68,7 +68,7 @@ export interface ChildTableProps {
 }
 
 /**
- * generate data for child table, 
+ * generate data for child table,
  * based on the configuration given in useChildTableColumns
  * @param props
  */
