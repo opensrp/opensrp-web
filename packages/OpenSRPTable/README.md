@@ -22,7 +22,8 @@ yarn add @opensrp/opensrp-table
 
 ```typescript
 import React from 'react';
-import { OpenSRPTable } from '@opensrp-table';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
+import '@opensrp/opensrp-table/dist/index.css';
 
 export const useColumns = () => {
     return React.useMemo(() => [
@@ -34,7 +35,7 @@ export const useColumns = () => {
             Header: 'Last Name',
             accessor: 'lastName',
         },
-    ]);
+    ],[]);
 };
 
 const data = [
@@ -43,6 +44,6 @@ const data = [
 ];
 
 const CustomTable: React.FC<ANCTableProps> = () => {
-    return <ReactTable {...{ data, tableColumns: useColumns() }} />;
+    return <OpenSRPTable {...{ data, tableColumns: useColumns() }} />;
 };
 ```
