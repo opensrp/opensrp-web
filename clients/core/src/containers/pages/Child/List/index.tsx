@@ -24,10 +24,11 @@ import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
+import { CHILD_CLIENT_TYPE } from '../../../../constants';
 
 reducerRegistry.register(reducerName, childReducer);
 
-/** props Interface for the clientList component */
+/** props interface for the childList component */
 export interface ChildListProps {
     opensrpService: typeof OpenSRPService;
     childArray: Child[];
@@ -37,13 +38,14 @@ export interface ChildListProps {
     setTotalRecords: typeof setTotalRecords;
 }
 
+/** state interface for the childList component */
 export interface ChildListState {
     selectedGender: DropdownOption;
     loading: boolean;
     searchText: string;
 }
 
-/** default props for the clientList component */
+/** default props for the childList component */
 export const defaultChildListProps: ChildListProps = {
     opensrpService: OpenSRPService,
     childArray: [],
@@ -53,21 +55,28 @@ export const defaultChildListProps: ChildListProps = {
     totalRecords: 0,
 };
 
+/** default state for the childList component */
 export const defaultChildState: ChildListState = {
     selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
 };
 
+/** props interface for the child table */
 export interface ChildTableProps {
     tableData: Child[];
 }
 
+/**
+ * generate data for child table, 
+ * based on the configuration given in useChildTableColumns
+ * @param props
+ */
 function ChildTable(props: ChildTableProps): React.ReactElement {
     return <OpenSRPTable {...{ data: props.tableData, tableColumns: useChildTableColumns() }} />;
 }
 
-/** Display the client list  */
+/** Display the child list  */
 class ChildList extends React.Component<ChildListProps, ChildListState> {
     public static defaultProps: ChildListProps = defaultChildListProps;
 
@@ -82,7 +91,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
 
     getDataFromServer = async () => {
         const params = {
-            clientType: 'child',
+            clientType: CHILD_CLIENT_TYPE,
             pageNumber: '1',
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
@@ -126,14 +135,14 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
 
     public render() {
         const { childArray, totalRecords } = this.props;
-        /** render loader if there are no clients in state */
+        /** render loader if there are no child in state */
 
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
                 <div>
-                    <h3 className="household-title"> All Clients ({totalRecords})</h3>
+                    <h3 className="household-title"> All Child ({totalRecords})</h3>
                     <Row>
                         <Col md={{ size: 3, offset: 9 }}> Gender </Col>
                     </Row>
@@ -142,7 +151,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                             <div className="household-search-bar">
                                 <SearchBox
                                     searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
-                                    placeholder={`Search Client`}
+                                    placeholder={`Search Child`}
                                 />
                             </div>
                         </Col>
@@ -168,8 +177,6 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
 }
 
 export { ChildList };
-/** Maybe define default props */
-/** connect the component to the store */
 
 /** Interface to describe props from mapStateToProps */
 interface DispatchedStateProps {
@@ -193,7 +200,7 @@ const mapDispatchToProps = {
     setTotalRecords: setTotalRecords,
 };
 
-/** connect clientsList to the redux store */
+/** connect childList to the redux store */
 const ConnectedChildList = connect(mapStateToProps, mapDispatchToProps)(ChildList);
 
 export default ConnectedChildList;
