@@ -40,21 +40,6 @@ describe('containers/child/List', () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it('renders correctly', () => {
-        const mock: jest.Mock = jest.fn();
-        const props: ChildListProps = {
-            childArray: [],
-            fetchChild: mock,
-            opensrpService: classMock,
-            removeChild: mock,
-            totalRecords: 0,
-            setTotalRecords: mock,
-        };
-        const wrapper = mount(<ChildList {...props} />);
-        expect(toJson(wrapper)).toMatchSnapshot();
-        wrapper.unmount();
-    });
-
     it('renders correctly when childArray is an empty array', () => {
         const mock: jest.Mock = jest.fn();
         const props: ChildListProps = {
@@ -87,7 +72,8 @@ describe('containers/child/List', () => {
                 );
             </Provider>,
         );
-        expect(toJson(wrapper)).toMatchSnapshot();
+        const foundProps = wrapper.find('ChildList').props() as any;
+        expect(foundProps.childArray).toEqual(fixtures.childList);
         wrapper.unmount();
     });
 
