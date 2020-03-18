@@ -15,7 +15,7 @@ import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
-import ConnectedClientList from '../containers/Clients/List';
+import ConnectedClientList from '../containers/pages/Clients/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';

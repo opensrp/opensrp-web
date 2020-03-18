@@ -4,9 +4,9 @@ import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import ConnectedClientsList, { ClientList } from '..';
-import store from '../../../../store';
-import reducer, { fetchClients, reducerName } from '../../../../store/ducks/clients';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
+import store from '../../../../../store';
+import reducer, { fetchClients, reducerName } from '../../../../../store/ducks/clients';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 
 reducerRegistry.register(reducerName, reducer);
 

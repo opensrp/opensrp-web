@@ -3,8 +3,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Table, Row, Col } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
+import Loading from '../../../../components/page/Loading';
+import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {
     Client,
@@ -14,13 +14,13 @@ import clientsReducer, {
     setTotalRecords,
     getTotalRecords,
     removeClients,
-} from '../../../store/ducks/clients';
+} from '../../../../store/ducks/clients';
 import './clientList.css';
-import SearchBox from '../../../components/page/SearchBox';
+import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
-import '../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE } from '../../../constants';
-import { generateOptions } from '../../../services/opensrp';
+import '../../../../assets/styles/dropdown.css';
+import { PAGINATION_SIZE } from '../../../../constants';
+import { generateOptions } from '../../../../services/opensrp';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
