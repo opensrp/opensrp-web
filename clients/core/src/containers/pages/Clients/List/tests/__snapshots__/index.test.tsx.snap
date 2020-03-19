@@ -272,9 +272,7 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
       },
     ]
   }
-  fetchClientsActionCreator={[MockFunction]}
-  location={[MockFunction]}
-  match={[MockFunction]}
+  fetchClientsActionCreator={[Function]}
   opensrpService={
     [MockFunction] {
       "calls": Array [
@@ -287,13 +285,33 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
       "results": Array [
         Object {
           "type": "return",
-          "value": undefined,
+          "value": Object {
+            "list": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "clientType": "clients",
+                    "gender": "",
+                    "pageNumber": "1",
+                    "pageSize": 10,
+                    "searchText": "",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+              ],
+            },
+          },
         },
       ],
     }
   }
-  removeClients={[Function]}
-  setTotalRecords={[Function]}
+  removeClients={[MockFunction]}
+  setTotalRecords={[MockFunction]}
   totalRecords={0}
 >
   <Ripple
@@ -408,8 +426,6 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
 >
   <Connect(ClientList)
     fetchClientsActionCreator={[MockFunction]}
-    location={[MockFunction]}
-    match={[MockFunction]}
     opensrpService={
       [MockFunction] {
         "calls": Array [
@@ -422,11 +438,34 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
         "results": Array [
           Object {
             "type": "return",
-            "value": undefined,
+            "value": Object {
+              "list": [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "clientType": "clients",
+                      "gender": "",
+                      "pageNumber": "1",
+                      "pageSize": 10,
+                      "searchText": "",
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "type": "return",
+                    "value": Promise {},
+                  },
+                ],
+              },
+            },
           },
         ],
       }
     }
+    removeClients={[MockFunction]}
+    setTotalRecords={[MockFunction]}
+    totalRecords={0}
   >
     <ClientList
       clientsArray={
@@ -701,8 +740,6 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
       }
       fetchClientsActionCreator={[Function]}
       getTotalRecords={[Function]}
-      location={[MockFunction]}
-      match={[MockFunction]}
       opensrpService={
         [MockFunction] {
           "calls": Array [
@@ -715,7 +752,27 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
           "results": Array [
             Object {
               "type": "return",
-              "value": undefined,
+              "value": Object {
+                "list": [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      Object {
+                        "clientType": "clients",
+                        "gender": "",
+                        "pageNumber": "1",
+                        "pageSize": 10,
+                        "searchText": "",
+                      },
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "type": "return",
+                      "value": Promise {},
+                    },
+                  ],
+                },
+              },
             },
           ],
         }
