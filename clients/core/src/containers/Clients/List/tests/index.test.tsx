@@ -21,7 +21,7 @@ describe('containers/clients/list/ClientList', () => {
         const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             clientsArray: fixtures.clients,
-            fetchClientsActionCreator: mock,
+            fetchClientsActionCreator: fetchClients,
             location: mock,
             match: mock,
             opensrpService: opensrpServiceMock,
@@ -91,11 +91,9 @@ describe('containers/clients/list/ClientList', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <ConnectedClientsList {...props} />
-                );
             </Provider>,
         );
         expect(opensrpServiceMock.mock.calls[0][0]).toEqual('https://test.smartregister.org/opensrp/rest/');
-        expect(opensrpServiceMock.mock.calls[0][1]).toEqual('client/search');
         wrapper.unmount();
     });
 });
