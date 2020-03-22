@@ -1,10 +1,10 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
+import Loading from '../../../../components/page/Loading';
+import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {
     Client,
@@ -14,16 +14,28 @@ import clientsReducer, {
     setTotalRecords,
     getTotalRecords,
     removeClients,
-} from '../../../store/ducks/clients';
+} from '../../../../store/ducks/clients';
 import './clientList.css';
-import SearchBox from '../../../components/page/SearchBox';
+import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
-import '../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE } from '../../../constants';
-import { generateOptions } from '../../../services/opensrp';
+import '../../../../assets/styles/dropdown.css';
+import { PAGINATION_SIZE } from '../../../../constants';
+import { generateOptions } from '../../../../services/opensrp';
+import { useClientTableColumns } from './helpers/tableDefinition';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
+
+/** interface for clients table props */
+interface ClientTableProps {
+    tableData: Client[];
+}
+
+/** render the clients table using opensrp-table */
+const ClientTable: React.FC<ClientTableProps> = ({ tableData }: ClientTableProps) => (
+    <OpenSRPTable {...{ data: tableData, tableColumns: useClientTableColumns() }} />
+);
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
@@ -160,34 +172,11 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                             />
                         </Col>
                     </Row>
-                    <Table striped={true}>
-                        <thead>
-                            <tr>
-                                <th>Identifier</th>
-                                <th>First Name</th>
-                                <th>Middle Name</th>
-                                <th>Last Name</th>
-                                <th>Gender</th>
-                                <th>actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {clientsArray.map((client: Client) => {
-                                return (
-                                    <tr key={client.baseEntityId}>
-                                        <td>{client.identifiers.opensrp_id}</td>
-                                        <td>{client.firstName}</td>
-                                        <td>{client.middleName}</td>
-                                        <td>{client.lastName}</td>
-                                        <td>{client.gender}</td>
-                                        <td>
-                                            <a href={`${'#'}`}> view </a>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table>
+                    <Row>
+                        <Col>
+                            <ClientTable tableData={clientsArray} />
+                        </Col>
+                    </Row>
                 </div>
             );
         }

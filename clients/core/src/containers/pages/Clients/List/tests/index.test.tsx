@@ -4,39 +4,48 @@ import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import ConnectedClientsList, { ClientList } from '..';
-import store from '../../../../store';
-import reducer, { fetchClients, reducerName } from '../../../../store/ducks/clients';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
+import store from '../../../../../store';
+import reducer, { fetchClients, reducerName } from '../../../../../store/ducks/clients';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 
 reducerRegistry.register(reducerName, reducer);
 
-jest.mock('../../../../configs/env');
+jest.mock('../../../../../configs/env');
 describe('containers/clients/list/ClientList', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let opensrpServiceMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
+        const listMock = jest.fn(async () => {
+            return { clients: fixtures.clients, total: fixtures.clients.length };
+        });
+        opensrpServiceMock = jest.fn(() => ({
+            list: listMock,
+        }));
     });
 
     it('renders without crashing', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             clientsArray: fixtures.clients,
             fetchClientsActionCreator: fetchClients,
-            location: mock,
-            match: mock,
+            removeClients: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
             opensrpService: opensrpServiceMock,
         };
-        shallow(<ClientList {...props} />);
+        const wrapper = shallow(<ClientList {...props} />);
+        expect(wrapper.length).toBe(1);
     });
 
     it('renders correctly', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             clientsArray: fixtures.clients,
-            fetchClientsActionCreator: mock,
-            location: mock,
-            match: mock,
+            fetchClientsActionCreator: fetchClients,
+            removeClients: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
             opensrpService: opensrpServiceMock,
         };
         const wrapper = mount(<ClientList {...props} />);
@@ -46,12 +55,12 @@ describe('containers/clients/list/ClientList', () => {
 
     it('renders correctly when clientsArray is an empty array', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             clientsArray: [],
             fetchClientsActionCreator: mock,
-            location: mock,
-            match: mock,
+            removeClients: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
             opensrpService: opensrpServiceMock,
         };
         const wrapper = mount(<ClientList {...props} />);
@@ -62,11 +71,11 @@ describe('containers/clients/list/ClientList', () => {
     it('works correctly with the redux store', () => {
         store.dispatch(fetchClients(fixtures.clients));
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             fetchClientsActionCreator: mock,
-            location: mock,
-            match: mock,
+            removeClients: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
             opensrpService: opensrpServiceMock,
         };
         const wrapper = mount(
@@ -81,11 +90,11 @@ describe('containers/clients/list/ClientList', () => {
 
     it('calls openSRPService with the correct params', () => {
         const mock: jest.Mock = jest.fn();
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             fetchClientsActionCreator: mock,
-            location: mock,
-            match: mock,
+            removeClients: mock,
+            totalRecords: 0,
+            setTotalRecords: mock,
             opensrpService: opensrpServiceMock,
         };
         const wrapper = mount(
