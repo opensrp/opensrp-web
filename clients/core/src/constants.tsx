@@ -1,3 +1,7 @@
+// endpoints
+export const OPENSRP_CLIENT_ENDPOINT = 'client/search';
+export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+
 // internal urls
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;

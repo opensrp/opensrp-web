@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { PAGINATION_SIZE, OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT } from '../../../../configs/env';
+import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import childReducer, {
     fetchChildList,
@@ -24,7 +24,7 @@ import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
-import { CHILD_CLIENT_TYPE } from '../../../../constants';
+import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 
 reducerRegistry.register(reducerName, childReducer);
 
