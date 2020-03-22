@@ -9,6 +9,7 @@ import store from '../../../../../store';
 import reducer, { fetchChildList, reducerName, removeChildList } from '../../../../../store/ducks/child';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { setTotalRecords } from '../../../../../store/ducks/clients';
+import { MemoryRouter } from 'react-router';
 
 reducerRegistry.register(reducerName, reducer);
 
@@ -88,8 +89,9 @@ describe('containers/child/List', () => {
         };
         const wrapper = mount(
             <Provider store={store}>
-                <ConnectedChildList {...props} />
-                );
+                <MemoryRouter initialEntries={['/']} keyLength={0}>
+                    <ConnectedChildList {...props} />
+                </MemoryRouter>
             </Provider>,
         );
         await new Promise(resolve => setImmediate(resolve));
@@ -111,8 +113,9 @@ describe('containers/child/List', () => {
         };
         const wrapper = mount(
             <Provider store={store}>
-                <ConnectedChildList {...props} />
-                );
+                <MemoryRouter initialEntries={['/']} keyLength={0}>
+                    <ConnectedChildList {...props} />
+                </MemoryRouter>
             </Provider>,
         );
         await new Promise(resolve => setImmediate(resolve));

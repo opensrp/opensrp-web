@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { UseTableCellProps } from 'react-table';
+import { Child } from '../../../../../store/ducks/child';
+import { CHILD_PROFILE_URL, VIEW } from '../../../../../constants';
 // Child specific configurable table columns
 export const useChildTableColumns = () => {
     return useMemo(
@@ -51,13 +54,15 @@ export const useChildTableColumns = () => {
                         accessor: '',
                         disableSortBy: true,
                     },
-                    // {
-                    //     // eslint-disable-next-line react/display-name
-                    //     Cell: ({ row: { index } }) => <Link to="#">View</Link>,
-                    //     Header: 'Actions',
-                    //     accessor: '',
-                    //     disableSortBy: true,
-                    // },
+                    {
+                        // eslint-disable-next-line react/display-name
+                        Cell: ({ row: { values } }: UseTableCellProps<Child>): ReturnType<React.FC> => (
+                            <Link to={`${CHILD_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
+                        ),
+                        Header: 'Actions',
+                        accessor: '',
+                        disableSortBy: true,
+                    },
                 ],
                 id: 'tableCrumb',
             },
