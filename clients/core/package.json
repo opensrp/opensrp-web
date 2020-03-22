@@ -16,6 +16,7 @@
         "@onaio/redux-reducer-registry": "^0.0.8",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
+        "@opensrp/opensrp-table": "^0.0.2",
         "@opensrp/server-service": "^0.0.1",
         "@types/bootstrap": "^4.3.1",
         "@types/fetch-mock": "^7.3.1",
