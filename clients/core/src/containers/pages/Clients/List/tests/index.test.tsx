@@ -3,10 +3,11 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import ConnectedClientsList, { ClientList } from '..';
+import ConnectedClientsList, { ClientList, ClientListProps } from '..';
 import store from '../../../../../store';
-import reducer, { fetchClients, reducerName } from '../../../../../store/ducks/clients';
+import reducer, { fetchClients, reducerName, removeClients, setTotalRecords } from '../../../../../store/ducks/clients';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
+import { MemoryRouter } from 'react-router';
 
 reducerRegistry.register(reducerName, reducer);
 
@@ -103,6 +104,30 @@ describe('containers/clients/list/ClientList', () => {
             </Provider>,
         );
         expect(opensrpServiceMock.mock.calls[0][0]).toEqual('https://test.smartregister.org/opensrp/rest/');
+        wrapper.unmount();
+    });
+
+    it(' should update the props after server call', async () => {
+        const props: ClientListProps = {
+            clientsArray: [],
+            fetchClientsActionCreator: fetchClients,
+            removeClients: removeClients,
+            opensrpService: opensrpServiceMock,
+            totalRecords: 0,
+            setTotalRecords: setTotalRecords,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={['/']} keyLength={0}>
+                    <ConnectedClientsList {...props} />
+                </MemoryRouter>
+            </Provider>,
+        );
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
+
+        const foundProps = wrapper.find('ClientList').props() as any;
+        expect(foundProps.totalRecords as number).toBe(7);
         wrapper.unmount();
     });
 });

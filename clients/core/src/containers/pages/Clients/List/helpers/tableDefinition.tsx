@@ -1,13 +1,9 @@
 import React, { useMemo, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { FlexObject } from '../../../../../helpers/utils';
-
-const actionsCell = ({ row: { index } }: FlexObject): ReactElement => (
-    // TODO - modify the link to point to profile
-    <Link to="#" key={index}>
-        View
-    </Link>
-);
+import { UseTableCellProps } from 'react-table';
+import { Client } from '../../../../../store/ducks/clients';
+import { CLIENT_PROFILE_URL } from '../../../../../constants';
 
 // Client specific configurable table columns
 export const useClientTableColumns = () => {
@@ -49,7 +45,10 @@ export const useClientTableColumns = () => {
                         accessor: 'attributes.dynamicProperties.last_contact_date',
                     },
                     {
-                        Cell: actionsCell,
+                        // eslint-disable-next-line react/display-name
+                        Cell: ({ row: { values } }: UseTableCellProps<Client>): ReturnType<React.FC> => (
+                            <Link to={`${CLIENT_PROFILE_URL}/${values.baseEntityId}`}>view</Link>
+                        ),
                         Header: 'Actions',
                         accessor: '',
                         disableSortBy: true,
