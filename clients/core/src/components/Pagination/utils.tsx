@@ -1,3 +1,7 @@
+import { PaginationState } from '@onaio/pagination/dist/types';
+
+import { ExtendingOptions } from '.';
+
 /** creates a list of integers that fit in range subject to
  * range(x, y) <=> [x, y) ∈ Real numbers
  * @param {number} start - the lower bound number of the loop, if stop is not provided this is used as the upper bound
@@ -49,4 +53,9 @@ export const fetchPageNumbers = (
     const numberedPages: number[] = range(startPage, endPage);
 
     return numberedPages.map(number => number.toString(10));
+};
+
+const fetchPagesToDisplay = (state: PaginationState<ExtendingOptions>) => {
+    const { totalRecords, pageNeighbors, pageSize, currentPage } = state;
+    return fetchPageNumbers(totalRecords, pageNeighbors, pageSize, currentPage);
 };

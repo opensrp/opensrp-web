@@ -23,6 +23,10 @@ import { PAGINATION_SIZE } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
+import { ExtendingOptions, bootstrapReducer, fetchPagesToDisplay } from '../../../../components/Pagination';
+import { PaginationOptions } from '@onaio/pagination/dist/types';
+import { data } from 'jquery';
+import { fetchPageNumbers } from '../../../../components/Pagination/utils';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -143,6 +147,20 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
 
     public render() {
         const { clientsArray, totalRecords } = this.props;
+
+        const initialDisplayedPages = fetchPageNumbers(data.length, 3, PAGINATION_SIZE);
+
+        const options: PaginationOptions<ExtendingOptions> = {
+            initialState: {
+                fetchPagesToDisplay: fetchPagesToDisplay,
+                pageNeighbors: 3,
+                pagesToDisplay: initialDisplayedPages,
+            },
+            pageSize: PAGINATION_SIZE,
+            reducer: bootstrapReducer,
+            totalRecords: data.length,
+        };
+
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
