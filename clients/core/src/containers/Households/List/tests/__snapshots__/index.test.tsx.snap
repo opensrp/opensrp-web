@@ -22,7 +22,9 @@ exports[`containers/households/list/Householdlist render household-list containe
     [MockFunction] {
       "calls": Array [
         Array [
-          "undefined",
+          "https://test.smartregister.org/opensrp/rest/",
+          "client/search",
+          [Function],
         ],
       ],
       "results": Array [

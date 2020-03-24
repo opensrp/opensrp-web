@@ -103,8 +103,6 @@ describe('containers/households/list/Householdlist', () => {
 
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
-        const householdListContainer = wrapper.find('.household-title');
-        expect(householdListContainer.length).toBe(1);
         expect(toJson(wrapper)).toMatchSnapshot();
         wrapper.unmount();
     });

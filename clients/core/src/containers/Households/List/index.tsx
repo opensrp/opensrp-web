@@ -6,9 +6,9 @@ import { Col, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import SearchBox from '../../../components/page/SearchBox';
-import { OPENSRP_HOUSEHOLD_ENDPOINT, PAGINATION_SIZE } from '../../../configs/env';
+import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../configs/env';
 import { FlexObject } from '../../../helpers/utils';
-import { OpenSRPService } from '../../../services/opensrp';
+import { OpenSRPService } from '@opensrp/server-service';
 import householdsReducer, {
     fetchHouseholds,
     getHouseholdsArray,
@@ -19,7 +19,8 @@ import householdsReducer, {
     setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
-import { HOUSEHOLD_CLIENT_TYPE } from '../../../constants';
+import { HOUSEHOLD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../constants';
+import { generateOptions } from '../../../services/opensrp';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -153,8 +154,8 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
             removeHouseholdsActionCreator,
             opensrpService,
         } = this.props;
-        const hosueholdService = new opensrpService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
-        hosueholdService
+        const householdService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+        householdService
             .list(params)
             .then((response: FlexObject) => {
                 removeHouseholdsActionCreator();
