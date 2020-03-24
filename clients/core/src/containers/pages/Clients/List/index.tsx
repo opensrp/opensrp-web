@@ -145,6 +145,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         this.getDataFromServer();
     }
 
+    /** fetch data from server when any filter is applied */
     getDataFromServer = async () => {
         const params = {
             clientType: 'clients',
@@ -165,6 +166,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         });
     };
 
+    /** filter data using gender option */
     genderFilter = (selectedGender: DropdownOption) => {
         this.setState(
             {
@@ -177,6 +179,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         );
     };
 
+    /** filter data using first name or last name */
     searchTextfilter = (searchText: string) => {
         this.setState(
             {
@@ -189,6 +192,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         );
     };
 
+    /** fetch data from server with a specific page number */
     onPageChange = (currentPage: number, pageSize: number): void => {
         this.setState(
             {
@@ -201,6 +205,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         );
     };
 
+    /** it returns the required options for pagination component */
     getPaginationOptions = (): PaginationProps => {
         return {
             initialState: {
@@ -209,7 +214,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
             pageSize: PAGINATION_SIZE,
-            totalRecords: 90,
+            totalRecords: this.props.totalRecords,
         };
     };
 
