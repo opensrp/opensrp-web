@@ -21,6 +21,8 @@ import householdsReducer, {
 import './householdList.css';
 import { HOUSEHOLD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../constants';
 import { generateOptions } from '../../../services/opensrp';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
+import { useHouseholdTableColumns } from './helpers/tableDefinitions';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -61,6 +63,20 @@ export const defaultHouseholdListProps: HouseholdListProps = {
     totalRecordsCount: 0,
 };
 
+/** props interface for the household table */
+export interface HouseholdTableProps {
+    tableData: Household[];
+}
+
+/**
+ * generate data for household table,
+ * based on the configuration given in useChildTableColumns
+ * @param props
+ */
+function HouseholdTable(props: HouseholdTableProps): React.ReactElement {
+    return <OpenSRPTable {...{ data: props.tableData, tableColumns: useHouseholdTableColumns() }} />;
+}
+
 /** Display the Household list  */
 class HouseholdList extends React.Component<HouseholdListProps, HouseholdListState> {
     public static defaultProps: HouseholdListProps = defaultHouseholdListProps;
@@ -90,41 +106,8 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Table className="shadow-sm">
-                                <thead>
-                                    <tr>
-                                        <th>HH ID Number</th>
-                                        <th>Family Name</th>
-                                        <th>Head of Household</th>
-                                        <th>Phone</th>
-                                        <th>Registered Date</th>
-                                        <th>Members</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {householdsArray.map((household: Household) => {
-                                        return (
-                                            <tr key={household.baseEntityId}>
-                                                <td>{household.baseEntityId}</td>
-                                                <td>{household.lastName}</td>
-                                                <td>{household.attributes.dynamicProperties.family_head}</td>
-                                                <td>{household.attributes.dynamicProperties.phone_number}</td>
-                                                <td>{household.dateCreated}</td>
-                                                <td className="members-table-field">
-                                                    {household.attributes.dynamicProperties.member_count}
-                                                </td>
-                                                <td>
-                                                    <Link to={`/household/profile/${household.baseEntityId}/`}>
-                                                        View
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
+                        <Col md={12}>
+                            <HouseholdTable tableData={householdsArray} />
                         </Col>
                     </Row>
                 </div>
