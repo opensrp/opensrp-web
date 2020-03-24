@@ -292,7 +292,7 @@ exports[`containers/clients/list/ClientList renders correctly 1`] = `
                   Object {
                     "clientType": "clients",
                     "gender": "",
-                    "pageNumber": "1",
+                    "pageNumber": 1,
                     "pageSize": 10,
                     "searchText": "",
                   },
@@ -445,7 +445,7 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
                     Object {
                       "clientType": "clients",
                       "gender": "",
-                      "pageNumber": "1",
+                      "pageNumber": 1,
                       "pageSize": 10,
                       "searchText": "",
                     },
@@ -759,7 +759,7 @@ exports[`containers/clients/list/ClientList works correctly with the redux store
                       Object {
                         "clientType": "clients",
                         "gender": "",
-                        "pageNumber": "1",
+                        "pageNumber": 1,
                         "pageSize": 10,
                         "searchText": "",
                       },
