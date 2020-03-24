@@ -91,6 +91,15 @@ exports[`containers/households/list/Householdlist render household-list containe
     </h3>
     <Row
       tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
     >
       <div
         className="row"
@@ -182,6 +191,15 @@ exports[`containers/households/list/Householdlist render household-list containe
     </Row>
     <Row
       tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
     >
       <div
         className="row"

@@ -34,6 +34,7 @@ export interface HouseholdListProps {
     removeHouseholdsActionCreator: typeof removeHouseholds;
 }
 
+/** interface for household-list component */
 export interface HouseholdListState {
     loading: boolean;
     pageNumber: number;
@@ -41,6 +42,7 @@ export interface HouseholdListState {
     clientType: HOUSEHOLD_CLIENT_TYPE;
 }
 
+/** default state for household-list component */
 export const defaultHouseholdListState: HouseholdListState = {
     loading: true,
     pageNumber: 1,
@@ -167,7 +169,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                     },
                 );
             })
-            .catch(error => {});
+            .catch(error => error);
     }
 }
 
