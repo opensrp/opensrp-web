@@ -19,10 +19,13 @@ import './clientList.css';
 import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE } from '../../../../constants';
+import { PAGINATION_SIZE, PAGINATION_NEIGBOURS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
+import { BootstrapJSX } from '../../../../components/Pagination/JSX';
+import { usePagination } from '@onaio/pagination';
+import { fetchPageNumbers } from '../../../../components/Pagination/utils';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -36,6 +39,49 @@ interface ClientTableProps {
 const ClientTable: React.FC<ClientTableProps> = ({ tableData }: ClientTableProps) => (
     <OpenSRPTable {...{ data: tableData, tableColumns: useClientTableColumns() }} />
 );
+
+/** interface for the pagination props */
+interface PaginationProps {
+    initialState: any;
+    totalRecords: number;
+    onPageChangeHandler(currentPage: number, pageSize: number): void;
+    pageNeighbors: number;
+    pageSize: number;
+}
+
+const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
+    console.log(props);
+    const { onPageChangeHandler } = props;
+    const {
+        paginationState,
+        nextPage,
+        firstPage,
+        lastPage,
+        goToPage,
+        previousPage,
+        canNextPage,
+        canPreviousPage,
+    } = usePagination(props);
+
+    React.useEffect(() => {
+        onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
+    }, [paginationState.currentPage]);
+
+    return (
+        <BootstrapJSX
+            {...{
+                paginationState,
+                nextPage,
+                firstPage,
+                lastPage,
+                goToPage,
+                previousPage,
+                canNextPage,
+                canPreviousPage,
+            }}
+        />
+    );
+};
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
@@ -66,6 +112,7 @@ export interface ClientListState {
     selectedGender: DropdownOption;
     loading: boolean;
     searchText: string;
+    currentPage: number;
 }
 
 /** default props for the clientList component */
@@ -83,6 +130,7 @@ export const defaultClientListState: ClientListState = {
     selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
+    currentPage: 1,
 };
 
 /** Display the client list  */
@@ -100,7 +148,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     getDataFromServer = async () => {
         const params = {
             clientType: 'clients',
-            pageNumber: '1',
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
@@ -141,6 +189,30 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         );
     };
 
+    onPageChange = (currentPage: number, pageSize: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    getPaginationOptions = (): PaginationProps => {
+        return {
+            initialState: {
+                pagesToDisplay: fetchPageNumbers(this.props.totalRecords, PAGINATION_NEIGBOURS, PAGINATION_SIZE),
+            },
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: 90,
+        };
+    };
+
     public render() {
         const { clientsArray, totalRecords } = this.props;
         /** render loader if there are no clients in state */
@@ -175,6 +247,9 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                     <Row>
                         <Col>
                             <ClientTable tableData={clientsArray} />
+                        </Col>
+                        <Col>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>

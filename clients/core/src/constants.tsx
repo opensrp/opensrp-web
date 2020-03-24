@@ -62,6 +62,8 @@ export type SIGN_OUT = typeof SIGN_OUT;
 // url constants
 export const PAGINATION_SIZE = 10;
 export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGBOURS = 3;
+export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
 export const START = 'Start';
