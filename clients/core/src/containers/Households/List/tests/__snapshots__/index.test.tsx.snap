@@ -8,8 +8,15 @@ exports[`containers/households/list/Householdlist render household-list containe
         Array [
           undefined,
         ],
+        Array [
+          undefined,
+        ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -26,6 +33,11 @@ exports[`containers/households/list/Householdlist render household-list containe
           "client/searchByCriteria",
           [Function],
         ],
+        Array [
+          "https://test.smartregister.org/opensrp/rest/",
+          "client/searchByCriteria",
+          [Function],
+        ],
       ],
       "results": Array [
         Object {
@@ -37,11 +49,55 @@ exports[`containers/households/list/Householdlist render household-list containe
                   Object {
                     "clientType": "ec_family",
                     "pageNumber": 1,
-                    "pageSize": undefined,
+                    "pageSize": 10,
+                  },
+                ],
+                Array [
+                  Object {
+                    "clientType": "ec_family",
+                    "pageNumber": 1,
+                    "pageSize": 10,
                   },
                 ],
               ],
               "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "type": "return",
+          "value": Object {
+            "list": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "clientType": "ec_family",
+                    "pageNumber": 1,
+                    "pageSize": 10,
+                  },
+                ],
+                Array [
+                  Object {
+                    "clientType": "ec_family",
+                    "pageNumber": 1,
+                    "pageSize": 10,
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
                 Object {
                   "type": "return",
                   "value": Promise {},
@@ -57,8 +113,13 @@ exports[`containers/households/list/Householdlist render household-list containe
     [MockFunction] {
       "calls": Array [
         Array [],
+        Array [],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -72,8 +133,15 @@ exports[`containers/households/list/Householdlist render household-list containe
         Array [
           undefined,
         ],
+        Array [
+          undefined,
+        ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -207,7 +275,6 @@ exports[`containers/households/list/Householdlist render household-list containe
         className="row"
       >
         <Col
-          md={12}
           tag="div"
           widths={
             Array [
@@ -220,7 +287,7 @@ exports[`containers/households/list/Householdlist render household-list containe
           }
         >
           <div
-            className="col-md-12"
+            className="col"
           >
             <HouseholdTable
               tableData={Array []}
@@ -19240,6 +19307,208 @@ exports[`containers/households/list/Householdlist render household-list containe
                 </div>
               </OpenSRPTable>
             </HouseholdTable>
+          </div>
+        </Col>
+        <Col
+          md={
+            Object {
+              "offset": 3,
+              "size": 3,
+            }
+          }
+          tag="div"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <div
+            className="col-md-3 offset-md-3"
+          >
+            <Pagination
+              onPageChangeHandler={[Function]}
+              pageNeighbors={2}
+              pageSize={10}
+              totalRecords={0}
+            >
+              <BootstrapJSX
+                canNextPage={false}
+                canPreviousPage={false}
+                firstPage={[Function]}
+                goToPage={[Function]}
+                lastPage={[Function]}
+                nextPage={[Function]}
+                paginationState={
+                  Object {
+                    "currentPage": 1,
+                    "fetchPagesToDisplay": [Function],
+                    "pageNeighbors": 2,
+                    "pageSize": 10,
+                    "pagesToDisplay": Array [],
+                    "totalPages": 0,
+                    "totalRecords": 0,
+                  }
+                }
+                previousPage={[Function]}
+              >
+                <Pagination
+                  aria-label="pagination"
+                  listTag="ul"
+                  size="md"
+                  tag="nav"
+                >
+                  <nav
+                    aria-label="pagination"
+                    className=""
+                  >
+                    <ul
+                      className="pagination pagination-md"
+                    >
+                      <PaginationItem
+                        className="page-item disabled"
+                        tag="li"
+                      >
+                        <li
+                          className="page-item disabled page-item"
+                        >
+                          <PaginationLink
+                            aria-label="Start"
+                            className="page-link"
+                            href="#"
+                            onClick={[Function]}
+                            tag="a"
+                          >
+                            <a
+                              aria-label="Start"
+                              className="page-link page-link"
+                              href="#"
+                              onClick={[Function]}
+                            >
+                              <span
+                                aria-hidden="true"
+                              >
+                                Start
+                              </span>
+                              <span
+                                className="sr-only"
+                              >
+                                Start
+                              </span>
+                            </a>
+                          </PaginationLink>
+                        </li>
+                      </PaginationItem>
+                      <PaginationItem
+                        className="page-item disabled"
+                        tag="li"
+                      >
+                        <li
+                          className="page-item disabled page-item"
+                        >
+                          <PaginationLink
+                            aria-label="Previous"
+                            className="page-link"
+                            href="#"
+                            onClick={[Function]}
+                            tag="a"
+                          >
+                            <a
+                              aria-label="Previous"
+                              className="page-link page-link"
+                              href="#"
+                              onClick={[Function]}
+                            >
+                              <span
+                                aria-hidden="true"
+                              >
+                                Previous
+                              </span>
+                              <span
+                                className="sr-only"
+                              >
+                                Previous
+                              </span>
+                            </a>
+                          </PaginationLink>
+                        </li>
+                      </PaginationItem>
+                      <PaginationItem
+                        className="page-item  disabled"
+                        tag="li"
+                      >
+                        <li
+                          className="page-item  disabled page-item"
+                        >
+                          <PaginationLink
+                            aria-label="Next"
+                            className="page-link"
+                            href="#"
+                            onClick={[Function]}
+                            tag="a"
+                          >
+                            <a
+                              aria-label="Next"
+                              className="page-link page-link"
+                              href="#"
+                              onClick={[Function]}
+                            >
+                              <span
+                                aria-hidden="true"
+                              >
+                                Next
+                              </span>
+                              <span
+                                className="sr-only"
+                              >
+                                Next
+                              </span>
+                            </a>
+                          </PaginationLink>
+                        </li>
+                      </PaginationItem>
+                      <PaginationItem
+                        className="page-item disabled"
+                        tag="li"
+                      >
+                        <li
+                          className="page-item disabled page-item"
+                        >
+                          <PaginationLink
+                            aria-label="Last"
+                            href="#"
+                            onClick={[Function]}
+                            tag="a"
+                          >
+                            <a
+                              aria-label="Last"
+                              className="page-link"
+                              href="#"
+                              onClick={[Function]}
+                            >
+                              <span
+                                aria-hidden="true"
+                              >
+                                Last
+                              </span>
+                              <span
+                                className="sr-only"
+                              >
+                                Last
+                              </span>
+                            </a>
+                          </PaginationLink>
+                        </li>
+                      </PaginationItem>
+                    </ul>
+                  </nav>
+                </Pagination>
+              </BootstrapJSX>
+            </Pagination>
           </div>
         </Col>
       </div>

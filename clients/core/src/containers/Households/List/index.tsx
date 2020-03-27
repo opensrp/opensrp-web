@@ -1,12 +1,11 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Col, Row, Table } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import SearchBox from '../../../components/page/SearchBox';
-import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../configs/env';
+import { OPENSRP_API_BASE_URL } from '../../../configs/env';
 import { FlexObject } from '../../../helpers/utils';
 import { OpenSRPService } from '@opensrp/server-service';
 import householdsReducer, {
@@ -19,10 +18,16 @@ import householdsReducer, {
     setTotalRecords,
 } from '../../../store/ducks/households';
 import './householdList.css';
-import { HOUSEHOLD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../constants';
+import {
+    HOUSEHOLD_CLIENT_TYPE,
+    OPENSRP_CLIENT_ENDPOINT,
+    PAGINATION_NEIGBOURS,
+    PAGINATION_SIZE,
+} from '../../../constants';
 import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useHouseholdTableColumns } from './helpers/tableDefinitions';
+import { Pagination } from '../../../components/Pagination';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -40,7 +45,7 @@ export interface HouseholdListProps {
 /** interface for household-list component */
 export interface HouseholdListState {
     loading: boolean;
-    pageNumber: number;
+    currentPage: number;
     searchPlaceholder: string;
     clientType: HOUSEHOLD_CLIENT_TYPE;
 }
@@ -48,7 +53,7 @@ export interface HouseholdListState {
 /** default state for household-list component */
 export const defaultHouseholdListState: HouseholdListState = {
     loading: true,
-    pageNumber: 1,
+    currentPage: 1,
     searchPlaceholder: 'Search Household',
     clientType: HOUSEHOLD_CLIENT_TYPE,
 };
@@ -89,6 +94,30 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         this.getHouseholdList();
     }
 
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number, pageSize: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getHouseholdList();
+            },
+        );
+    };
+
+    /** it returns the required options for pagination component */
+    getPaginationOptions = () => {
+        console.log('total records', this.props.totalRecordsCount);
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecordsCount,
+        };
+    };
+
     public render() {
         /** render loader if there are no households in state */
         const { householdsArray, totalRecordsCount } = this.props;
@@ -106,8 +135,11 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={12}>
+                        <Col>
                             <HouseholdTable tableData={householdsArray} />
+                        </Col>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>
@@ -127,7 +159,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         const clientType = this.state.clientType;
         const params = {
             clientType,
-            pageNumber: this.state.pageNumber,
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             ...extraParams,
         };
