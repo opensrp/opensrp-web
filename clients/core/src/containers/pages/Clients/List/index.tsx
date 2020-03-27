@@ -23,9 +23,7 @@ import { PAGINATION_SIZE, PAGINATION_NEIGBOURS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import { BootstrapJSX } from '../../../../components/Pagination/JSX';
-import { usePagination } from '@onaio/pagination';
-import { fetchPageNumbers } from '../../../../components/Pagination/utils';
+import { Pagination } from '../../../../components/Pagination';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -39,49 +37,6 @@ interface ClientTableProps {
 const ClientTable: React.FC<ClientTableProps> = ({ tableData }: ClientTableProps) => (
     <OpenSRPTable {...{ data: tableData, tableColumns: useClientTableColumns() }} />
 );
-
-/** interface for the pagination props */
-interface PaginationProps {
-    initialState: any;
-    totalRecords: number;
-    onPageChangeHandler(currentPage: number, pageSize: number): void;
-    pageNeighbors: number;
-    pageSize: number;
-}
-
-const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
-    console.log(props);
-    const { onPageChangeHandler } = props;
-    const {
-        paginationState,
-        nextPage,
-        firstPage,
-        lastPage,
-        goToPage,
-        previousPage,
-        canNextPage,
-        canPreviousPage,
-    } = usePagination(props);
-
-    React.useEffect(() => {
-        onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
-    }, [paginationState.currentPage]);
-
-    return (
-        <BootstrapJSX
-            {...{
-                paginationState,
-                nextPage,
-                firstPage,
-                lastPage,
-                goToPage,
-                previousPage,
-                canNextPage,
-                canPreviousPage,
-            }}
-        />
-    );
-};
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
@@ -206,11 +161,8 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = (): PaginationProps => {
+    getPaginationOptions = () => {
         return {
-            initialState: {
-                pagesToDisplay: fetchPageNumbers(this.props.totalRecords, PAGINATION_NEIGBOURS, PAGINATION_SIZE),
-            },
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
             pageSize: PAGINATION_SIZE,
@@ -253,7 +205,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         <Col>
                             <ClientTable tableData={clientsArray} />
                         </Col>
-                        <Col>
+                        <Col md={{ size: 3, offset: 3 }}>
                             <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
