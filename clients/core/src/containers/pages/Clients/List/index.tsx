@@ -24,6 +24,7 @@ import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination } from '../../../../components/Pagination';
+import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -46,20 +47,6 @@ export interface ClientListProps {
     totalRecords: number;
     removeClients: typeof removeClients;
     setTotalRecords: typeof setTotalRecords;
-}
-
-/** default options for genders */
-export const genderOptions: DropdownOption[] = [
-    { value: '', label: 'All' },
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
-    { value: 'Others', label: 'Others' },
-];
-
-/** interface for dropdown option */
-export interface DropdownOption {
-    value: string;
-    label: string;
 }
 
 /** interface for client state */
