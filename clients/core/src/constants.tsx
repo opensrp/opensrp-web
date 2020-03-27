@@ -1,5 +1,5 @@
 // endpoints
-export const OPENSRP_CLIENT_ENDPOINT = 'client/search';
+export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
 // internal urls
@@ -13,8 +13,10 @@ export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 export const HOUSEHOLD_URL = '/404';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
-export const ANC_URL = '/404';
+export const ANC_URL = '/anc';
 export type ANC_URL = typeof ANC_URL;
+export const ANC_PROFILE_URL = '/anc-profile';
+export type ANC_PROFILE_URL = typeof ANC_PROFILE_URL;
 export const CHILD_URL = '/child';
 export type CHILD_URL = typeof CHILD_URL;
 export const CHILD_PROFILE_URL = '/child-profile';
@@ -64,6 +66,8 @@ export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
+export const ANC_CLIENT_TYPE = 'anc';
+export type ANC_CLIENT_TYPE = typeof ANC_CLIENT_TYPE;
 
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
