@@ -17,13 +17,10 @@ import ANCReducer, {
     ANCClientType as ANC,
 } from '../../../../store/ducks/anc';
 import './anc.css';
-import Select from 'react-select';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import '../../../../assets/styles/dropdown.css';
 import { useANCTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 
 reducerRegistry.register(reducerName, ANCReducer);
@@ -40,7 +37,6 @@ export interface ANCProps {
 
 /** state interface for the ancList component */
 export interface ANCState {
-    selectedGender: DropdownOption;
     loading: boolean;
     searchText: string;
 }
@@ -57,7 +53,6 @@ export const defaultANCProps: ANCProps = {
 
 /** default state for the ancList component */
 export const defaultANCState: ANCState = {
-    selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
 };
@@ -94,7 +89,6 @@ class ANCList extends React.Component<ANCProps, ANCState> {
             clientType: ANC_CLIENT_TYPE,
             pageNumber: '1',
             pageSize: PAGINATION_SIZE,
-            gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
         };
         const { fetchANC, opensrpService, setTotalRecords, removeANC } = this.props;
@@ -129,7 +123,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
             return <Loading />;
         } else {
             return (
-                <div>
+                <div style={{ fontSize: '14px' }}>
                     <h3 className="household-title"> All ANC ({totalRecords})</h3>
                     <Row>
                         <Col md={9} className="filter-row">
