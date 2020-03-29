@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import ANCReducer, {
     fetchANC,
@@ -21,7 +21,8 @@ import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useANCTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
+import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGBOURS, PAGINATION_SIZE } from '../../../../constants';
+import { Pagination } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, ANCReducer);
 
@@ -39,6 +40,7 @@ export interface ANCProps {
 export interface ANCState {
     loading: boolean;
     searchText: string;
+    currentPage: number;
 }
 
 /** default props for the ancList component */
@@ -55,6 +57,7 @@ export const defaultANCProps: ANCProps = {
 export const defaultANCState: ANCState = {
     loading: true,
     searchText: '',
+    currentPage: 1,
 };
 
 /** props interface for the anc table */
@@ -84,6 +87,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         this.getDataFromServer();
     }
 
+    /** fetch data from the server. it gets invoked when any filter changes */
     getDataFromServer = async () => {
         const params = {
             clientType: ANC_CLIENT_TYPE,
@@ -115,6 +119,29 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         );
     };
 
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number, pageSize: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    /** it returns the required options for pagination component */
+    getPaginationOptions = () => {
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecords,
+        };
+    };
+
     public render() {
         const { ancArray, totalRecords } = this.props;
         /** render loader if there are no anc in state */
@@ -138,6 +165,9 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                     <Row>
                         <Col>
                             <ANCTable tableData={ancArray} />
+                        </Col>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>
