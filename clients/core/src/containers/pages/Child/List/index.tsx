@@ -110,7 +110,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         const response = await clientService.list(params);
         removeChild();
         fetchChild(response.clients);
-        setTotalRecords(response.total);
+        if (response.total > 0) setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
