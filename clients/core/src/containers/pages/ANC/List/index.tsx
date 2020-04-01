@@ -100,7 +100,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         const response = await clientService.list(params);
         removeANC();
         fetchANC(response.clients);
-        setTotalRecords(response.total);
+        if (response.total > 0) setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
