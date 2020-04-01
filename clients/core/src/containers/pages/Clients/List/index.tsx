@@ -101,7 +101,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         const response = await clientService.list(params);
         removeClients();
         fetchClientsActionCreator(response.clients);
-        setTotalRecords(response.total);
+        if (response.total > 0) setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
