@@ -127,28 +127,7 @@ exports[`containers/households/list/Householdlist render household-list containe
       ],
     }
   }
-  setTotalRecordsActionCreator={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          undefined,
-        ],
-        Array [
-          undefined,
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
+  setTotalRecordsActionCreator={[MockFunction]}
   totalRecordsCount={0}
 >
   <div>
