@@ -820,6 +820,10 @@ export const child1: Child = {
     addresses: [],
     attributes: {
         residence: '6f7ca772-b368-4c3d-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'zysan',
     middleName: '',
@@ -848,6 +852,10 @@ export const child2: Child = {
     addresses: [],
     attributes: {
         residence: '1f7ca772-b368-4c3d-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'zysan',
     middleName: '',
@@ -876,6 +884,10 @@ export const child3: Child = {
     addresses: [],
     attributes: {
         residence: '9f7ca772-b368-4d39-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'tanvir',
     middleName: '',
