@@ -1,0 +1,105 @@
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    max-width: 340px;
+    font-size: 14px;
+}
+
+.title {
+    margin: 10px 0px;
+}
+
+.box {
+    width: 100%;
+    border: 1px solid gray;
+    margin: 0;
+    height: 40px;
+}
+
+.locations {
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    margin: 8px 2px 0px 8px;
+    vertical-align: middle;
+}
+
+.locations span {
+    color: #3d6897;
+}
+
+.drop-down {
+    content: '';
+    margin: 2px;
+    position: relative;
+    top: 11px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #3d6897 transparent transparent transparent;
+}
+
+select {
+    background: none;
+    border: none;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #f8f9fa;
+    color: #2a2525;
+    border-radius: 6px;
+    padding: 8px 0px 8px 6px;
+    position: absolute;
+    z-index: 1;
+    left: -200%;
+    margin-left: -80px;
+    top: 130%;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 90%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
