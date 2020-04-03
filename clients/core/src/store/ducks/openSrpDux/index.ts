@@ -53,10 +53,10 @@ const initialState: ImmutableLocSettingState = SeamlessImmutable({
     settingsByLocId: {},
 });
 
-/** Create type for Plan reducer actions */
+/** Create type for Settings reducer actions */
 export type LocSettingsTypes = FetchLocSettingsAction | RemoveLocSettingsAction | AnyAction;
 
-/** the Plan reducer function */
+/** the Settings reducer function */
 export default function reducer(
     state = initialState,
     action: LocSettingsTypes,
