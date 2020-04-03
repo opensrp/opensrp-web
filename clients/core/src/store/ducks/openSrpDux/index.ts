@@ -98,7 +98,7 @@ export const fetchLocSettings = (settings: Setting[] = [], locId: string): Fetch
     type: LOC_SETTINGS_FETCHED,
 });
 
-/** getPlansById - get plansById
+/** getLocSettings - get get location settings
  * @param {Partial<Store>} state - the redux store
  * @param {locId} string - the location id
  * @returns {[Setting]} array of Setting
