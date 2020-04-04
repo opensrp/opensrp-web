@@ -10,12 +10,20 @@ export const LOC_FETCHED = 'location/LOC_FETCHED';
 /** REMOVE_LOC action_type */
 export const REMOVE_LOC = 'location/REMOVE_LOC';
 
-/** location node interface */
+/** parent location  interface*/
+interface ParentLocation {
+    locationId: string;
+    name: string;
+    voided: boolean;
+}
 
+/** location node interface */
 export interface LocNode {
     locationId: string;
     name: string;
-    tags: Array<string>;
+    tags?: Array<string>;
+    parentLocation?: ParentLocation;
+    voided: boolean;
 }
 
 /** location children interface */
