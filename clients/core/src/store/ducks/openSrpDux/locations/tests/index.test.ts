@@ -1,5 +1,4 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { keyBy } from 'lodash';
 import { FlushThunks } from 'redux-testkit';
 import store from '../../../..';
 import { locHierarchy } from './fixtures';

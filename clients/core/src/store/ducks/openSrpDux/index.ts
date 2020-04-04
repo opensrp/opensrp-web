@@ -18,10 +18,11 @@ export interface Setting {
     key: string;
     type: string;
     identifier: string;
-    team_Id: string;
+    team_id: string;
     team: string;
     provider_id: string;
     locationId: string;
+    editing?: boolean;
 }
 
 export interface SettingStorage {
@@ -32,6 +33,7 @@ export interface SettingStorage {
 export interface FetchLocSettingsAction extends AnyAction {
     settingsByLocId: { [key: string]: SettingStorage };
     type: typeof LOC_SETTINGS_FETCHED;
+    locId: string;
 }
 
 /** removeLocSettingsAction interface for REMOVE_LOC_SETTINGS */
@@ -57,13 +59,10 @@ const initialState: ImmutableLocSettingState = SeamlessImmutable({
 export type LocSettingsTypes = FetchLocSettingsAction | RemoveLocSettingsAction | AnyAction;
 
 /** the Settings reducer function */
-export default function reducer(
-    state = initialState,
-    action: LocSettingsTypes,
-    locId: string,
-): ImmutableLocSettingState {
+export default function reducer(state = initialState, action: LocSettingsTypes): ImmutableLocSettingState {
     switch (action.type) {
         case LOC_SETTINGS_FETCHED:
+            const locId: string = action.locId;
             return SeamlessImmutable({
                 ...state,
                 settingsByLocId: {
@@ -91,11 +90,15 @@ export const removeLocSettingAction: RemoveLocSettingsAction = {
 export const fetchLocSettings = (settings: Setting[] = [], locId: string): FetchLocSettingsAction => ({
     settingsByLocId: {
         [locId]: keyBy(
-            settings.map((set: Setting) => set),
-            setting => setting.identifier,
+            settings.map((set: Setting) => {
+                set['editing'] = set['editing'] ? set['editing'] : false;
+                return set;
+            }),
+            setting => setting.key,
         ),
     },
     type: LOC_SETTINGS_FETCHED,
+    locId,
 });
 
 /** getLocSettings - get get location settings
@@ -103,7 +106,8 @@ export const fetchLocSettings = (settings: Setting[] = [], locId: string): Fetch
  * @param {locId} string - the location id
  * @returns {[Setting]} array of Setting
  */
-export function getLocSettings(state: Partial<Store>, locId: string): [Setting] {
+export function getLocSettings(state: Partial<Store>, locId: string): Setting[] | [] {
     const allLocSettings = (state as any)[reducerName].settingsByLocId[locId];
+    if (!allLocSettings) return [];
     return Object.keys(allLocSettings).map((key: string) => allLocSettings[key]) as [Setting];
 }
