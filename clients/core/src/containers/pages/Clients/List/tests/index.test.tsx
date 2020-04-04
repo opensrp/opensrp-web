@@ -1,133 +1,102 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import ConnectedClientsList, { ClientList, ClientListProps } from '..';
+import ConnectedClientsList, { ClientList } from '..';
 import store from '../../../../../store';
-import reducer, { fetchClients, reducerName, removeClients, setTotalRecords } from '../../../../../store/ducks/clients';
+import reducer, { reducerName, removeClients } from '../../../../../store/ducks/clients';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
-import { MemoryRouter } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 reducerRegistry.register(reducerName, reducer);
 
 jest.mock('../../../../../configs/env');
+
+const apiEmptyResponse = {
+    clients: [],
+    total: 0,
+};
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fetch = require('jest-fetch-mock');
+
 describe('containers/clients/list/ClientList', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let opensrpServiceMock: any;
+    let openSRPServiceMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
+        store.dispatch(removeClients());
         const listMock = jest.fn(async () => {
             return { clients: fixtures.clients, total: fixtures.clients.length };
         });
-        opensrpServiceMock = jest.fn(() => ({
+        openSRPServiceMock = jest.fn(() => ({
             list: listMock,
         }));
     });
 
     it('renders without crashing', () => {
-        const mock: jest.Mock = jest.fn();
         const props = {
-            clientsArray: fixtures.clients,
-            fetchClientsActionCreator: fetchClients,
-            removeClients: mock,
+            clientsArray: [],
             totalRecords: 0,
-            setTotalRecords: mock,
-            opensrpService: opensrpServiceMock,
+            service: openSRPServiceMock,
         };
-        const wrapper = shallow(<ClientList {...props} />);
-        expect(wrapper.length).toBe(1);
+        shallow(<ClientList {...props} />);
     });
 
     it('renders correctly', () => {
-        const mock: jest.Mock = jest.fn();
         const props = {
             clientsArray: fixtures.clients,
-            fetchClientsActionCreator: fetchClients,
-            removeClients: mock,
-            totalRecords: 0,
-            setTotalRecords: mock,
-            opensrpService: opensrpServiceMock,
+            totalRecords: fixtures.clients.length,
+            service: openSRPServiceMock,
         };
         const wrapper = mount(<ClientList {...props} />);
-        expect(toJson(wrapper)).toMatchSnapshot();
+        // page title
+        expect(wrapper.find('.household-title').text()).toMatchInlineSnapshot();
+        // html document title
+        const helmet = Helmet.peek();
+        expect(helmet.title).toEqual('ALL Clients PAge');
+
+        expect(wrapper.find('ClientTable').text()).toMatchSnapshot('Clients Table');
         wrapper.unmount();
     });
 
-    it('renders correctly when clientsArray is an empty array', () => {
-        const mock: jest.Mock = jest.fn();
-        const props = {
-            clientsArray: [],
-            fetchClientsActionCreator: mock,
-            removeClients: mock,
-            totalRecords: 0,
-            setTotalRecords: mock,
-            opensrpService: opensrpServiceMock,
-        };
-        const wrapper = mount(<ClientList {...props} />);
-        expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
+    it('renders correctly when clientsArray is an empty array', async () => {
+        fetch.once(JSON.stringify(apiEmptyResponse));
+        const wrapper = mount(<ClientList />);
+        await new Promise(resolve => setImmediate(resolve));
+        const rippleWrapper = wrapper.find('Ripple');
+        expect(rippleWrapper.length).toEqual(1);
         wrapper.unmount();
     });
 
-    it('works correctly with the redux store', () => {
-        store.dispatch(fetchClients(fixtures.clients));
-        const mock: jest.Mock = jest.fn();
-        const props = {
-            fetchClientsActionCreator: mock,
-            removeClients: mock,
-            totalRecords: 0,
-            setTotalRecords: mock,
-            opensrpService: opensrpServiceMock,
-        };
+    it('works correctly with the redux store', async () => {
+        const apiResponse = { clients: fixtures.clients, total: fixtures.clients.length };
+        fetch.once(JSON.stringify(apiResponse));
         const wrapper = mount(
             <Provider store={store}>
-                <ConnectedClientsList {...props} />
-                );
+                <ConnectedClientsList />
             </Provider>,
         );
-        expect(toJson(wrapper)).toMatchSnapshot();
+
+        await new Promise(resolve => setImmediate(resolve));
+
+        const passedProps = wrapper.find('ClientList').props() as any;
+        expect(passedProps.clientsArray).toEqual(fixtures.clients);
+        expect(passedProps.totalRecords).toEqual(fixtures.clients.length);
+
         wrapper.unmount();
     });
 
-    it('calls openSRPService with the correct params', () => {
-        const mock: jest.Mock = jest.fn();
-        const props = {
-            fetchClientsActionCreator: mock,
-            removeClients: mock,
-            totalRecords: 0,
-            setTotalRecords: mock,
-            opensrpService: opensrpServiceMock,
-        };
+    it('calls openSRPService with the correct params', async () => {
+        fetch.once(JSON.stringify(apiEmptyResponse));
         const wrapper = mount(
             <Provider store={store}>
-                <ConnectedClientsList {...props} />
-            </Provider>,
-        );
-        expect(opensrpServiceMock.mock.calls[0][0]).toEqual('https://test.smartregister.org/opensrp/rest/');
-        wrapper.unmount();
-    });
-
-    it(' should update the props after server call', async () => {
-        const props: ClientListProps = {
-            clientsArray: [],
-            fetchClientsActionCreator: fetchClients,
-            removeClients: removeClients,
-            opensrpService: opensrpServiceMock,
-            totalRecords: 0,
-            setTotalRecords: setTotalRecords,
-        };
-        const wrapper = mount(
-            <Provider store={store}>
-                <MemoryRouter initialEntries={['/']} keyLength={0}>
-                    <ConnectedClientsList {...props} />
-                </MemoryRouter>
+                <ConnectedClientsList />
             </Provider>,
         );
         await new Promise(resolve => setImmediate(resolve));
-        wrapper.update();
+        expect(fetch.mock.calls).toEqual([]);
 
-        const foundProps = wrapper.find('ClientList').props() as any;
-        expect(foundProps.totalRecords as number).toBe(7);
         wrapper.unmount();
     });
 });
