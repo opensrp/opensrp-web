@@ -68,7 +68,7 @@ export async function generalGet(urlParams: UrlParameters, accessToken: string, 
     const response = await fetch(url, getPayload(method, accessToken));
 
     if (response.status !== 200) {
-        throw new Error(`OpenSRPService read on ${url} failed, HTTP status ${response.status}`);
+        throw new Error(`${url} failed, HTTP status ${response.status}`);
     }
 
     return await response.json();
@@ -82,15 +82,15 @@ export async function generalGet(urlParams: UrlParameters, accessToken: string, 
  * @param {HTTPMethod} method - the HTTP method
  * @returns the object returned by API
  */
-export async function update<T>(data: T, url: string, accessToken: string, method: HTTPMethod = 'PUT') {
+export async function settingsUpdate<T>(data: T, url: string, accessToken: string, method: HTTPMethod = 'PUT') {
     const payload = {
         ...getPayload(method, accessToken),
         body: JSON.stringify(data),
     };
     const response = await fetch(url, payload);
 
-    if (response.status === 200) {
-        throw new Error(`OpenSRPService update on ${url} failed, HTTP status ${response.status}`);
+    if (response.status !== 200) {
+        throw new Error(`${url} failed, HTTP status ${response.status}`);
     }
 
     return response.json();
