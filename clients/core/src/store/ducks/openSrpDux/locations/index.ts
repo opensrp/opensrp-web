@@ -96,7 +96,7 @@ export default function reducer(state = initialState, action: LocTypes): Immutab
         case LOC_FETCHED:
             return SeamlessImmutable({
                 ...state,
-                locations: { ...state.locations },
+                locations: { ...state.locations, ...action.locations },
             });
         case REMOVE_LOC:
             return SeamlessImmutable({
@@ -108,7 +108,7 @@ export default function reducer(state = initialState, action: LocTypes): Immutab
     }
 }
 
-/** removeLocSettingAction */
+/** removeLocAction */
 export const removeLocAction: RemoveLocAction = {
     locations: {
         map: {},
@@ -117,8 +117,8 @@ export const removeLocAction: RemoveLocAction = {
     type: REMOVE_LOC,
 };
 
-/** fetchLocSettings */
-export const fetchLocSettings = (locs: LocPayload): FetchLocAction => {
+/** fetchLocs */
+export const fetchLocs = (locs: LocPayload): FetchLocAction => {
     const map = locs.locationsHierarchy.map;
     const parentChildren = locs.locationsHierarchy.parentChildren;
     return {
