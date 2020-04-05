@@ -19,13 +19,14 @@ import './clientList.css';
 import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE, PAGINATION_NEIGBOURS } from '../../../../constants';
+import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination } from '../../../../components/Pagination';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
+import { Helmet } from 'react-helmet';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -98,11 +99,11 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             searchText: this.state.searchText,
         };
         const { fetchClientsCreator, service, removeClientsCreator, setTotalRecordsCreator } = this.props;
-        const clientService = new service(OPENSRP_API_BASE_URL, 'client/search', generateOptions);
-        const response = await clientService.list();
+        const clientService = new service(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+        const response = await clientService.list(params);
         removeClientsCreator();
-        fetchClientsCreator(response);
-        if (response.total > 0) setTotalRecordsCreator(response.total);
+        fetchClientsCreator(response.clients);
+        setTotalRecordsCreator(response.total);
         this.setState({
             ...this.state,
             loading: false,
@@ -110,7 +111,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using gender option */
-    genderFilter = (selectedGender: DropdownOption) => {
+    genderFilter = (selectedGender: DropdownOption): void => {
         this.setState(
             {
                 ...this.state,
@@ -123,7 +124,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using first name or last name */
-    searchTextfilter = (searchText: string) => {
+    searchTextFilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -136,36 +137,39 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
                 currentPage,
             },
             () => {
+                console.log(currentPage, this.state);
                 this.getDataFromServer();
             },
         );
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
-        return {
-            onPageChangeHandler: this.onPageChange,
-            pageNeighbors: PAGINATION_NEIGBOURS,
-            pageSize: PAGINATION_SIZE,
-            totalRecords: this.props.totalRecords,
-        };
-    };
-
     public render() {
         const { clientsArray, totalRecords } = this.props;
+
+        /** prop options for the pagination component */
+        const paginationProps = {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGHBORS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: totalRecords,
+        };
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
                 <div>
+                    <Helmet>
+                        <title>{ALL_CLIENTS}</title>
+                    </Helmet>
                     <h3 className="household-title"> All Clients ({totalRecords})</h3>
                     <Row>
                         <Col md={{ size: 3, offset: 9 }}> Gender </Col>
@@ -174,7 +178,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string) => this.searchTextFilter(searchText)}
                                     placeholder={`Search Client`}
                                 />
                             </div>
@@ -194,7 +198,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                             <ClientTable tableData={clientsArray} />
                         </Col>
                         <Col md={{ size: 3, offset: 3 }}>
-                            <Pagination {...this.getPaginationOptions()} />
+                            <Pagination {...paginationProps} />
                         </Col>
                     </Row>
                 </div>
