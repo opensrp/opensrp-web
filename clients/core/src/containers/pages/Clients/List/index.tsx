@@ -2,7 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
-import { Store } from 'redux';
+import { Store, ActionCreator } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
@@ -19,12 +19,14 @@ import './clientList.css';
 import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE, PAGINATION_NEIGBOURS } from '../../../../constants';
+import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination } from '../../../../components/Pagination';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
+import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
+import { Helmet } from 'react-helmet';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -41,12 +43,12 @@ const ClientTable: React.FC<ClientTableProps> = ({ tableData }: ClientTableProps
 
 /** props Interface for the clientList component */
 export interface ClientListProps {
-    opensrpService: typeof OpenSRPService;
+    service: typeof OpenSRPService;
     clientsArray: Client[];
-    fetchClientsActionCreator: typeof fetchClients;
+    fetchClientsCreator: ActionCreator<FetchAction<Client>>;
     totalRecords: number;
-    removeClients: typeof removeClients;
-    setTotalRecords: typeof setTotalRecords;
+    removeClientsCreator: ActionCreator<RemoveAction>;
+    setTotalRecordsCreator: ActionCreator<SetTotalRecordsAction>;
 }
 
 /** interface for client state */
@@ -60,11 +62,11 @@ export interface ClientListState {
 /** default props for the clientList component */
 export const defaultClientListProps: ClientListProps = {
     clientsArray: [],
-    fetchClientsActionCreator: fetchClients,
-    removeClients: removeClients,
-    opensrpService: OpenSRPService,
+    fetchClientsCreator: fetchClients,
+    removeClientsCreator: removeClients,
+    service: OpenSRPService,
     totalRecords: 0,
-    setTotalRecords,
+    setTotalRecordsCreator: setTotalRecords,
 };
 
 /** default values for client state */
@@ -96,12 +98,12 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
         };
-        const { fetchClientsActionCreator, opensrpService, setTotalRecords, removeClients } = this.props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+        const { fetchClientsCreator, service, removeClientsCreator, setTotalRecordsCreator } = this.props;
+        const clientService = new service(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
         const response = await clientService.list(params);
-        removeClients();
-        fetchClientsActionCreator(response.clients);
-        if (response.total > 0) setTotalRecords(response.total);
+        removeClientsCreator();
+        fetchClientsCreator(response.clients);
+        setTotalRecordsCreator(response.total);
         this.setState({
             ...this.state,
             loading: false,
@@ -109,7 +111,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using gender option */
-    genderFilter = (selectedGender: DropdownOption) => {
+    genderFilter = (selectedGender: DropdownOption): void => {
         this.setState(
             {
                 ...this.state,
@@ -122,7 +124,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using first name or last name */
-    searchTextfilter = (searchText: string) => {
+    searchTextFilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -135,36 +137,39 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
                 currentPage,
             },
             () => {
+                console.log(currentPage, this.state);
                 this.getDataFromServer();
             },
         );
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
-        return {
-            onPageChangeHandler: this.onPageChange,
-            pageNeighbors: PAGINATION_NEIGBOURS,
-            pageSize: PAGINATION_SIZE,
-            totalRecords: this.props.totalRecords,
-        };
-    };
-
     public render() {
         const { clientsArray, totalRecords } = this.props;
+
+        /** prop options for the pagination component */
+        const paginationProps = {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGHBORS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: totalRecords,
+        };
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
                 <div>
+                    <Helmet>
+                        <title>{ALL_CLIENTS}</title>
+                    </Helmet>
                     <h3 className="household-title"> All Clients ({totalRecords})</h3>
                     <Row>
                         <Col md={{ size: 3, offset: 9 }}> Gender </Col>
@@ -173,7 +178,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string) => this.searchTextFilter(searchText)}
                                     placeholder={`Search Client`}
                                 />
                             </div>
@@ -193,7 +198,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                             <ClientTable tableData={clientsArray} />
                         </Col>
                         <Col md={{ size: 3, offset: 3 }}>
-                            <Pagination {...this.getPaginationOptions()} />
+                            <Pagination {...paginationProps} />
                         </Col>
                     </Row>
                 </div>
@@ -203,13 +208,16 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
 }
 
 export { ClientList };
-/** Maybe define default props */
+
 /** connect the component to the store */
 
-/** Interface to describe props from mapStateToProps */
-interface DispatchedStateProps {
-    clientsArray: Client[];
-}
+/** describe props from mapStateToProps */
+type DispatchedStateProps = Pick<ClientListProps, 'clientsArray' | 'totalRecords'>;
+/** describe mapped action creators */
+type MapDispatchToProps = Pick<
+    ClientListProps,
+    'fetchClientsCreator' | 'removeClientsCreator' | 'setTotalRecordsCreator'
+>;
 
 /** Map props to state  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
@@ -221,7 +229,11 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 };
 
 /** map props to actions */
-const mapDispatchToProps = { fetchClientsActionCreator: fetchClients, removeClients, setTotalRecords, getTotalRecords };
+const mapDispatchToProps: MapDispatchToProps = {
+    fetchClientsCreator: fetchClients,
+    removeClientsCreator: removeClients,
+    setTotalRecordsCreator: setTotalRecords,
+};
 
 /** connect clientsList to the redux store */
 const ConnectedClientList = connect(mapStateToProps, mapDispatchToProps)(ClientList);
