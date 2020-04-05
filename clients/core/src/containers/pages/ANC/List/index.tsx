@@ -91,7 +91,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
     getDataFromServer = async () => {
         const params = {
             clientType: ANC_CLIENT_TYPE,
-            pageNumber: '1',
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             searchText: this.state.searchText,
         };
