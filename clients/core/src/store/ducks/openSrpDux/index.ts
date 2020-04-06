@@ -22,11 +22,12 @@ export interface Setting {
     team: string;
     provider_id: string;
     locationId: string;
+    inherited_from?: string;
     editing?: boolean;
 }
 
 export interface SettingStorage {
-    [key: string]: Setting;
+    [key: string]: Setting | {};
 }
 
 /** FetchLocSettingsAction interface for LOC_SETTINGS_FETCHED */
@@ -44,7 +45,7 @@ interface RemoveLocSettingsAction extends AnyAction {
 
 /** interface for settings state */
 export interface LocSettingState {
-    settingsByLocId: { [key: string]: SettingStorage };
+    settingsByLocId: { [key: string]: SettingStorage } | {};
 }
 
 /** immutable location settings state */
@@ -67,7 +68,7 @@ export default function reducer(state = initialState, action: LocSettingsTypes):
                 ...state,
                 settingsByLocId: {
                     ...state.settingsByLocId,
-                    [locId]: { ...state.settingsByLocId[locId], ...action.settingsByLocId[locId] },
+                    [locId]: { ...(state.settingsByLocId as any)[locId], ...action.settingsByLocId[locId] },
                 },
             });
         case REMOVE_LOC_SETTINGS:

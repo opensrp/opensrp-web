@@ -45,6 +45,31 @@ select {
     border: none;
 }
 
+.inherit-from {
+    border-top: 1px solid grey;
+    padding-top: 2px;
+    cursor: default !important;
+}
+
+.inherit-from span {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.check {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 10px;
+    width: 5px;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    margin-right: 5px;
+}
+
+.empty-check {
+    margin-right: 13px !important;
+}
+
 /* Popup container - can be anything you want */
 .popup {
     position: relative;
@@ -58,12 +83,17 @@ select {
     background-color: #f8f9fa;
     color: #2a2525;
     border-radius: 6px;
-    padding: 8px 0px 8px 6px;
+    padding: 8px 6px;
     position: absolute;
     z-index: 1;
     left: -200%;
     margin-left: -80px;
     top: 130%;
+    border: 1px solid grey;
+}
+
+.popuptext div {
+    cursor: pointer;
 }
 
 /* Popup arrow */

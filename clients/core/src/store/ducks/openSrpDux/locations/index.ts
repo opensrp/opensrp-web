@@ -47,8 +47,8 @@ export interface LocMap {
 
 /** crurrent Location interface */
 export interface CurrentLoc {
-    map: LocMap;
-    parentChildren: ParentChildren;
+    map: LocMap | {};
+    parentChildren: ParentChildren | {};
 }
 
 /** location payload interface */

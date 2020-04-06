@@ -12,6 +12,7 @@ export const allSettings = [
         team: 'test team',
         provider_id: '8980-5cc5b97479d3',
         locationId: '9900-555e6e5e5557',
+        inherited_from: 'Malawi',
     },
     {
         description:
