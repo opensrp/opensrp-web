@@ -126,7 +126,7 @@ describe('containers/clients/list/ClientList', () => {
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
 
-        const foundProps = wrapper.find('ClientList').props() as any;
+        const foundProps = wrapper.find('ClientList').props() as ClientListProps;
         expect(foundProps.totalRecords as number).toBe(7);
         wrapper.unmount();
     });

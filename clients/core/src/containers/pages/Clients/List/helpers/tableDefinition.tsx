@@ -1,11 +1,11 @@
-import React, { useMemo, ReactElement } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { FlexObject } from '../../../../../helpers/utils';
 import { UseTableCellProps } from 'react-table';
 import { Client } from '../../../../../store/ducks/clients';
 import { CLIENT_PROFILE_URL } from '../../../../../constants';
 
 // Client specific configurable table columns
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useClientTableColumns = () => {
     return useMemo(
         () => [
@@ -13,7 +13,7 @@ export const useClientTableColumns = () => {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => <></>,
+                Header: (): ReturnType<React.FC> => <></>,
                 columns: [
                     { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
                     {

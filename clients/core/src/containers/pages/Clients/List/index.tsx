@@ -23,7 +23,7 @@ import { PAGINATION_SIZE, PAGINATION_NEIGBOURS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import { Pagination } from '../../../../components/Pagination';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 
 /** register the clients reducer */
@@ -83,12 +83,12 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         this.state = defaultClientListState;
     }
 
-    public async componentDidMount() {
+    public async componentDidMount(): Promise<void> {
         this.getDataFromServer();
     }
 
     /** fetch data from server when any filter is applied */
-    getDataFromServer = async () => {
+    getDataFromServer = async (): Promise<void> => {
         const params = {
             clientType: 'clients',
             pageNumber: this.state.currentPage,
@@ -109,7 +109,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using gender option */
-    genderFilter = (selectedGender: DropdownOption) => {
+    genderFilter = (selectedGender: DropdownOption): void => {
         this.setState(
             {
                 ...this.state,
@@ -122,7 +122,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using first name or last name */
-    searchTextfilter = (searchText: string) => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -135,7 +135,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
@@ -148,7 +148,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
+    getPaginationOptions = (): PaginationProps => {
         return {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
@@ -157,7 +157,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         };
     };
 
-    public render() {
+    public render(): ReturnType<React.FC> {
         const { clientsArray, totalRecords } = this.props;
         /** render loader if there are no clients in state */
         if (this.state.loading) {
@@ -173,7 +173,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search Client`}
                                 />
                             </div>
@@ -183,7 +183,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                                 value={this.state.selectedGender}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e: any) => this.genderFilter(e as DropdownOption)}
+                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
                                 options={genderOptions}
                             />
                         </Col>
