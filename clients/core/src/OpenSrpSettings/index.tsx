@@ -125,18 +125,21 @@ const EditSetings = (props: DefaultProps) => {
     const locationMenu = [];
     if (selectedLocations.length && Object.keys(locationDetails).length) {
         let locDetails = { ...(locationDetails as LocChildren) };
+        let isLast = selectedLocations.length === 1;
         let LocMenuProps = {
             locationDetails: locDetails,
             activeLocationId,
             showLocPopUp,
             popLocPopup,
             loadLocsettings,
+            isLast,
         };
         locationMenu.push(<LocationMenu key={locDetails.id} {...LocMenuProps} />);
         for (let i = 1; i < selectedLocations.length; i++) {
             if (locDetails.children) {
+                isLast = i === selectedLocations.length - 1;
                 locDetails = locDetails.children[selectedLocations[i]];
-                LocMenuProps = { ...LocMenuProps, locationDetails: locDetails };
+                LocMenuProps = { ...LocMenuProps, locationDetails: locDetails, isLast };
                 locationMenu.push(<LocationMenu key={locDetails.id} {...LocMenuProps} />);
             }
         }

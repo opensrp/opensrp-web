@@ -7,10 +7,11 @@ interface DefaultProps {
     showLocPopUp: string;
     popLocPopup: (e: MouseEvent, id: string) => any;
     loadLocsettings: (e: MouseEvent, activeLocId: string) => any;
+    isLast: boolean;
 }
 
 export const LocationMenu = (props: DefaultProps) => {
-    const { locationDetails, activeLocationId, showLocPopUp, popLocPopup, loadLocsettings } = props;
+    const { locationDetails, activeLocationId, showLocPopUp, popLocPopup, loadLocsettings, isLast } = props;
 
     const locDetails = { ...locationDetails };
     const isActiveLocId = activeLocationId === locDetails.id;
@@ -23,7 +24,8 @@ export const LocationMenu = (props: DefaultProps) => {
                 className={`locations ${isActiveLocId ? 'active-loc' : ''}`}
                 onClick={e => popLocPopup(e, locDetails.id)}
             >
-                <span>{locDetails.label}</span> <span className="drop-down" />/
+                <span>{locDetails.label}</span> <span className="drop-down" />
+                {isLast ? null : '/'}
             </a>
             <div className="popup">
                 <div className={`popuptext loc-popup ${showLocPopUp === locDetails.id ? 'show' : ''}`}>
