@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { UseTableCellProps } from 'react-table';
+import { UseTableCellProps, CellProps } from 'react-table';
 import { ANCClientType } from '../../../../../store/ducks/anc';
 import { ANC_PROFILE_URL, VIEW } from '../../../../../constants';
 import { readableDate } from '../../../../../helpers/utils';
@@ -40,20 +40,20 @@ export const useANCTableColumns = (): any => {
                         Header: 'EDD',
                         accessor: 'attributes.dynamicProperties.edd',
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ cell: { value } }: any): string => readableDate(value),
+                        Cell: ({ cell: { value } }: CellProps<object>): string => readableDate(value),
                     },
                     {
                         Header: 'Gestational age',
                         accessor: 'attributes.dynamicProperties.gestational_age',
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ cell: { value } }: any): string => readableDate(value),
+                        Cell: ({ cell: { value } }: CellProps<object>): string => readableDate(value),
                     },
 
                     {
                         Header: 'Last Contact',
                         accessor: 'attributes.dynamicProperties.last_contact_date',
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ cell: { value } }: any): string => readableDate(value),
+                        Cell: ({ cell: { value } }: CellProps<object>): string => readableDate(value),
                     },
                     {
                         Header: 'Risk Category',
