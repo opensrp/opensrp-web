@@ -24,20 +24,21 @@ export const LocationMenu = (props: DefaultProps) => {
                 className={`locations ${isActiveLocId ? 'active-loc' : ''}`}
                 onClick={e => popLocPopup(e, locDetails.id)}
             >
-                <span>{locDetails.label}</span> <span className="drop-down" />
+                <span>{locDetails.label}</span>
+                {childrenKeys.length ? <span className="drop-down" /> : null}
                 {isLast ? null : '/'}
             </a>
-            <div className="popup">
-                <div className={`popuptext loc-popup ${showLocPopUp === locDetails.id ? 'show' : ''}`}>
-                    {childrenKeys.length
-                        ? childrenKeys.map(key => (
-                              <div key={children[key].id} onClick={e => loadLocsettings(e, children[key].id)}>
-                                  {children[key].label}
-                              </div>
-                          ))
-                        : null}
+            {childrenKeys.length ? (
+                <div className="popup">
+                    <div className={`popuptext loc-popup ${showLocPopUp === locDetails.id ? 'show' : ''}`}>
+                        {childrenKeys.map(key => (
+                            <div key={children[key].id} onClick={e => loadLocsettings(e, children[key].id)}>
+                                {children[key].label}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            ) : null}
         </div>
     );
 };

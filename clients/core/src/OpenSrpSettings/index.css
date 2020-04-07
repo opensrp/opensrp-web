@@ -113,7 +113,7 @@ select {
 
 /* overide .popuptext for location popup */
 .loc-popup {
-    left: 25px !important;
+    left: 30px !important;
     top: 12px !important;
     padding: 0px 10px !important;
 }
