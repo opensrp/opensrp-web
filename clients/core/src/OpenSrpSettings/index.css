@@ -65,6 +65,18 @@ select {
     margin-top: 3px;
 }
 
+.searchTerm {
+    width: 40%;
+    margin: 15px 0;
+    padding: 5px;
+    border-radius: 5px;
+    height: 36px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid grey;
+    outline: none;
+}
+
 .check {
     display: inline-block;
     transform: rotate(45deg);

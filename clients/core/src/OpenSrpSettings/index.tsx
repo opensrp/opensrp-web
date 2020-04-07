@@ -1,5 +1,5 @@
 import ListView from '@onaio/list-view';
-import React, { useEffect, MouseEvent, useState } from 'react';
+import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
 import './index.css';
 import { Store } from 'redux';
 import settingsReducer, {
@@ -30,7 +30,7 @@ reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
 
 interface DefaultProps {
-    locSettings: Setting[];
+    locationSettings: Setting[];
     fetchSettings: typeof fetchLocSettings;
     fetchLocations: typeof fetchLocs;
     activeLocationId: string;
@@ -45,7 +45,7 @@ const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
 
 const EditSetings = (props: DefaultProps) => {
     const {
-        locSettings,
+        locationSettings,
         fetchSettings,
         fetchLocations,
         activeLocationId,
@@ -57,6 +57,8 @@ const EditSetings = (props: DefaultProps) => {
     } = props;
 
     const [showLocPopUp, changeLocPopup] = useState('');
+    const [locSettings, changelocSettings] = useState(locationSettings);
+    const [searchInput, changeSearchInput] = useState('');
 
     function FetchLocSettings(currentLocId: string, update = false) {
         if ((!locSettings.length && currentLocId) || update) {
@@ -76,7 +78,26 @@ const EditSetings = (props: DefaultProps) => {
 
     useEffect(() => {
         getLocations();
-    }, []);
+        changelocSettings(props.locationSettings);
+    }, [props.locationSettings]);
+
+    // handle search input
+    const handleSearchInput = (e: ChangeEvent) => {
+        e.preventDefault();
+        let input = (e.target as any).value;
+        input = input.replace(/\s+/g, ' ').trimStart();
+        changeSearchInput(input);
+        if (!input) {
+            changelocSettings(locationSettings);
+            return false;
+        }
+        if (locationSettings.length) {
+            input = input.toUpperCase();
+            const results = locationSettings.filter((seting: Setting) => seting.label.toUpperCase().includes(input));
+            changelocSettings(results);
+            return true;
+        }
+    };
 
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
@@ -108,7 +129,6 @@ const EditSetings = (props: DefaultProps) => {
             const index = selectedLocations.indexOf(id);
             let selectedLocs = [...selectedLocations];
             selectedLocs = selectedLocs.slice(0, index + 1);
-            console.log('selectedLocs', selectedLocs);
             const data: LocPayload = {
                 locationsHierarchy: {
                     map: {},
@@ -203,6 +223,15 @@ const EditSetings = (props: DefaultProps) => {
         <div>
             <div className="title">
                 <h4>Server Settings ({currentLocName})</h4>
+                <input
+                    className="searchTerm"
+                    type="text"
+                    value={searchInput}
+                    placeholder="Search settings"
+                    onChange={e => {
+                        handleSearchInput(e);
+                    }}
+                />
             </div>
             <div className="box">{locationMenu}</div>
             <ListView {...listViewProps} />
@@ -222,19 +251,19 @@ const mapStateToProps = (state: Partial<Store>) => {
     const selectedLocations: string[] = getSelectedLocs(state);
     const defaultLocId = getDefaultLocId(state);
     let locationDetails: LocChildren | {} = {};
-    let locSettings: Setting[] | [] = [];
+    let locationSettings: Setting[] | [] = [];
     let currentLocName = '';
     if (defaultLocId && activeLocationId && selectedLocations.length) {
         locationDetails = getLocDetails(state, [defaultLocId]);
         currentLocName = getLocDetails(state, selectedLocations).label;
-        locSettings = getLocSettings(state, activeLocationId);
+        locationSettings = getLocSettings(state, activeLocationId);
     }
 
     return {
         activeLocationId,
         selectedLocations,
         locationDetails,
-        locSettings,
+        locationSettings,
         state,
         defaultLocId,
         currentLocName,
