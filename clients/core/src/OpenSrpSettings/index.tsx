@@ -8,8 +8,7 @@ import settingsReducer, {
     reducerName as settingsReducerName,
     fetchLocSettings,
 } from '../store/ducks/openSrpDux';
-import { connect, useDispatch } from 'react-redux';
-import { allSettings } from '../store/ducks/openSrpDux/tests/fixtures';
+import { connect } from 'react-redux';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import locationReducer, {
     fetchLocs,
@@ -21,8 +20,11 @@ import locationReducer, {
     LocPayload,
     getDefaultLocId,
 } from '../store/ducks/openSrpDux/locations';
-import { locHierarchy } from '../store/ducks/openSrpDux/locations/tests/fixtures';
 import { LocationMenu } from './helpers/LocationsMenu';
+
+// static data for testing: to be removed to use data from server
+import { locHierarchy } from '../store/ducks/openSrpDux/locations/tests/fixtures';
+import { allSettings } from '../store/ducks/openSrpDux/tests/fixtures';
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
@@ -30,12 +32,13 @@ reducerRegistry.register(LocsReducerName, locationReducer);
 interface DefaultProps {
     locSettings: Setting[];
     fetchSettings: typeof fetchLocSettings;
-    fetchLococations: typeof fetchLocs;
+    fetchLocations: typeof fetchLocs;
     activeLocationId: string;
     selectedLocations: string[];
     locationDetails: LocChildren | {};
     state: Partial<Store>;
     defaultLocId: string;
+    currentLocName: string;
 }
 
 const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
@@ -44,12 +47,13 @@ const EditSetings = (props: DefaultProps) => {
     const {
         locSettings,
         fetchSettings,
-        fetchLococations,
+        fetchLocations,
         activeLocationId,
         selectedLocations,
         locationDetails,
         defaultLocId,
         state,
+        currentLocName,
     } = props;
 
     const [showLocPopUp, changeLocPopup] = useState('');
@@ -61,26 +65,26 @@ const EditSetings = (props: DefaultProps) => {
         }
     }
 
-    function checkLocations() {
+    function getLocations() {
         if (!activeLocationId && !Object.keys(locationDetails).length) {
             // code block to fetch locations from Api should enter here then dispatch the line below
-            fetchLococations(locHierarchy);
+            fetchLocations(locHierarchy);
             return FetchLocSettings(locId);
         }
         FetchLocSettings(locId);
     }
 
     useEffect(() => {
-        checkLocations();
+        getLocations();
     }, []);
 
-    const currentLoc = 'Malawi';
-
+    // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
         fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
     };
 
+    // update setting
     const changeSetting = (e: MouseEvent, row: any, value: boolean) => {
         e.preventDefault();
         if (value === row.value) {
@@ -93,10 +97,28 @@ const EditSetings = (props: DefaultProps) => {
     // update active location
     const popLocPopup = (e: MouseEvent, id: string) => {
         e.preventDefault();
-        if (showLocPopUp === id) {
+        const isClossing = showLocPopUp === id;
+        if (isClossing) {
             changeLocPopup('');
         } else {
             changeLocPopup(id);
+        }
+        const lastSelectedloc = [...selectedLocations].pop();
+        if (lastSelectedloc !== id && selectedLocations.includes(id) && !isClossing) {
+            const index = selectedLocations.indexOf(id);
+            let selectedLocs = [...selectedLocations];
+            selectedLocs = selectedLocs.slice(0, index + 1);
+            console.log('selectedLocs', selectedLocs);
+            const data: LocPayload = {
+                locationsHierarchy: {
+                    map: {},
+                    parentChildren: {},
+                    activeLocId: id,
+                    selectedLocs,
+                    defaultLocId: defaultLocId,
+                },
+            };
+            fetchLocations(data);
         }
     };
 
@@ -117,7 +139,7 @@ const EditSetings = (props: DefaultProps) => {
                 defaultLocId: defaultLocId,
             },
         };
-        fetchLococations(data);
+        fetchLocations(data);
         changeLocPopup('');
     };
 
@@ -180,7 +202,7 @@ const EditSetings = (props: DefaultProps) => {
     return (
         <div>
             <div className="title">
-                <h4>Server Settings ({currentLoc})</h4>
+                <h4>Server Settings ({currentLocName})</h4>
             </div>
             <div className="box">{locationMenu}</div>
             <ListView {...listViewProps} />
@@ -191,7 +213,7 @@ const EditSetings = (props: DefaultProps) => {
 /** map dispatch to props */
 const mapDispatchToProps = {
     fetchSettings: fetchLocSettings,
-    fetchLococations: fetchLocs,
+    fetchLocations: fetchLocs,
 };
 
 /** Connected EditSetings component */
@@ -201,10 +223,10 @@ const mapStateToProps = (state: Partial<Store>) => {
     const defaultLocId = getDefaultLocId(state);
     let locationDetails: LocChildren | {} = {};
     let locSettings: Setting[] | [] = [];
-    if (defaultLocId) {
+    let currentLocName = '';
+    if (defaultLocId && activeLocationId && selectedLocations.length) {
         locationDetails = getLocDetails(state, [defaultLocId]);
-    }
-    if (activeLocationId) {
+        currentLocName = getLocDetails(state, selectedLocations).label;
         locSettings = getLocSettings(state, activeLocationId);
     }
 
@@ -215,6 +237,7 @@ const mapStateToProps = (state: Partial<Store>) => {
         locSettings,
         state,
         defaultLocId,
+        currentLocName,
     };
 };
 
