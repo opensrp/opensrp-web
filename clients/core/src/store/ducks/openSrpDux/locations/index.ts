@@ -49,14 +49,14 @@ export interface LocMap {
 export interface CurrentLoc {
     map: LocMap | {};
     parentChildren: ParentChildren | {};
+    activeLocId?: string | null;
+    selectedLocs?: string[];
+    defaultLocId?: string;
 }
 
 /** location payload interface */
 export interface LocPayload {
-    locationsHierarchy: {
-        map: LocMap;
-        parentChildren: ParentChildren;
-    };
+    locationsHierarchy: CurrentLoc;
 }
 
 /** interface for FetchLocAction action */
@@ -84,6 +84,7 @@ const initialState: ImmutableLocState = SeamlessImmutable({
     locations: {
         map: {},
         parentChildren: {},
+        activeLocId: null,
     },
 });
 
@@ -96,7 +97,12 @@ export default function reducer(state = initialState, action: LocTypes): Immutab
         case LOC_FETCHED:
             return SeamlessImmutable({
                 ...state,
-                locations: { ...state.locations, ...action.locations },
+                locations: {
+                    ...state.locations,
+                    ...action.locations,
+                    map: { ...state.locations.map, ...action.locations.map },
+                    parentChildren: { ...state.locations.parentChildren, ...action.locations.parentChildren },
+                },
             });
         case REMOVE_LOC:
             return SeamlessImmutable({
@@ -121,10 +127,21 @@ export const removeLocAction: RemoveLocAction = {
 export const fetchLocs = (locs: LocPayload): FetchLocAction => {
     const map = locs.locationsHierarchy.map;
     const parentChildren = locs.locationsHierarchy.parentChildren;
+    const defaultLoc: string = map && Object.keys(map)[0];
+    const activeLocId = locs.locationsHierarchy.activeLocId || defaultLoc;
+    const defaultLocId = locs.locationsHierarchy.defaultLocId || defaultLoc;
+    let selectedLocs = locs.locationsHierarchy.selectedLocs;
+    if (!selectedLocs) {
+        selectedLocs = activeLocId ? [activeLocId] : [];
+    }
+
     return {
         locations: {
             map,
             parentChildren,
+            activeLocId,
+            selectedLocs,
+            defaultLocId,
         },
         type: LOC_FETCHED,
     };
@@ -135,8 +152,32 @@ export const fetchLocs = (locs: LocPayload): FetchLocAction => {
  * @param {locId} string - the location id
  * @returns {parentChildren } locId children locactions
  */
-export function getLocChildren(state: Partial<Store>, locId: string): Array<string> {
-    return (state as any)[reducerName].locations.parentChildren[locId];
+export function getLocChildren(state: Partial<Store>, locId: string): string[] {
+    return (state as any)[reducerName].locations.parentChildren[locId] || [];
+}
+
+/** getLocChildren - get parentChildren of locId
+ * @param {Partial<Store>} state - the redux store
+ * @returns {activeLocId } active location id
+ */
+export function getActiveLocId(state: Partial<Store>): string {
+    return (state as any)[reducerName].locations.activeLocId || null;
+}
+
+/** getLocChildren - get parentChildren of locId
+ * @param {Partial<Store>} state - the redux store
+ * @returns {defaultLocId } default location id
+ */
+export function getDefaultLocId(state: Partial<Store>): string {
+    return (state as any)[reducerName].locations.defaultLocId || null;
+}
+
+/** getLocChildren - get parentChildren of locId
+ * @param {Partial<Store>} state - the redux store
+ * @returns {selectedLocs } selected locactions
+ */
+export function getSelectedLocs(state: Partial<Store>): string[] {
+    return (state as any)[reducerName].locations.selectedLocs || [];
 }
 
 /**  getLocDetails - get location details of locId
@@ -144,10 +185,10 @@ export function getLocChildren(state: Partial<Store>, locId: string): Array<stri
  * @param {locIds}  - the location ids
  * @returns { locationDetails } locId children locactions
  */
-export function getLocDetails(state: Partial<Store>, locIds: Array<string>): LocChildren {
+export function getLocDetails(state: Partial<Store>, locIds: string[]): LocChildren {
     let locDetails = (state as any)[reducerName].locations.map[locIds[0]];
     if (locIds.length === 1) {
-        return locDetails;
+        return locDetails || {};
     } else {
         for (let i = 1; i < locIds.length; i++) {
             locDetails = locDetails.children[locIds[i]];

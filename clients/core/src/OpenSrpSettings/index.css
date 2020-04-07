@@ -15,24 +15,33 @@
     width: 100%;
     border: 1px solid gray;
     margin: 0;
-    height: 40px;
+    height: 30px;
 }
 
-.locations {
+.locations-menu {
     display: inline-block;
+}
+
+.locations,
+.active-loc {
     align-items: center;
     cursor: pointer;
-    margin: 8px 2px 0px 8px;
+    margin: 4px 2px 0px 8px;
     vertical-align: middle;
 }
 
 .locations span {
     color: #3d6897;
+    border-color: #3d6897 transparent transparent transparent;
+}
+
+.active-loc span {
+    color: #000;
+    border-color: #000 transparent transparent transparent;
 }
 
 .drop-down {
     content: '';
-    margin: 2px;
     position: relative;
     top: 11px;
     border-width: 5px;
@@ -83,7 +92,7 @@ select {
     background-color: #f8f9fa;
     color: #2a2525;
     border-radius: 6px;
-    padding: 8px 6px;
+    padding: 8px 10px;
     position: absolute;
     z-index: 1;
     left: -200%;
@@ -92,10 +101,22 @@ select {
     border: 1px solid grey;
 }
 
+/* make cursor div in pointer */
 .popuptext div {
     cursor: pointer;
 }
 
+/* make cursor a in pointer */
+.popuptext a {
+    cursor: pointer;
+}
+
+/* overide .popuptext for location popup */
+.loc-popup {
+    left: 25px !important;
+    top: 12px !important;
+    padding: 0px 10px !important;
+}
 /* Popup arrow */
 .popup .popuptext::after {
     content: '';

@@ -2,7 +2,15 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { FlushThunks } from 'redux-testkit';
 import store from '../../../..';
 import { locHierarchy } from './fixtures';
-import reducer, { fetchLocs, getLocChildren, getLocDetails, reducerName } from '..';
+import reducer, {
+    fetchLocs,
+    getLocChildren,
+    getLocDetails,
+    reducerName,
+    getActiveLocId,
+    getSelectedLocs,
+    getDefaultLocId,
+} from '..';
 
 reducerRegistry.register(reducerName, reducer);
 
@@ -14,8 +22,10 @@ describe('reducers/goals', () => {
 
     it('should have initial state', () => {
         const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
-        expect(getLocChildren(store.getState(), locId)).toEqual(undefined);
-        expect(getLocDetails(store.getState(), [locId])).toEqual(undefined);
+        expect(getLocChildren(store.getState(), locId)).toEqual([]);
+        expect(getLocDetails(store.getState(), [locId])).toEqual({});
+        expect(getSelectedLocs(store.getState())).toEqual([]);
+        expect(getActiveLocId(store.getState())).toEqual(null);
     });
 
     it('should fetch locations', () => {
@@ -29,5 +39,11 @@ describe('reducers/goals', () => {
         expect(getLocChildren(store.getState(), locId)).toEqual(parentChildren[locId]);
         // get location details
         expect(getLocDetails(store.getState(), LocIds)).toEqual(map[locId].children[searchId]);
+        // get active location id
+        expect(getActiveLocId(store.getState())).toEqual(locId);
+        // get selected location ids
+        expect(getSelectedLocs(store.getState())).toEqual([locId]);
+        // get default location id
+        expect(getDefaultLocId(store.getState())).toEqual(locId);
     });
 });
