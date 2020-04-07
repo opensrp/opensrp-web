@@ -147,9 +147,6 @@ describe('containers/clients/list/ClientList', () => {
                 },
             ],
         ]);
-
-        const foundProps = wrapper.find('ClientList').props() as ClientListProps;
-        expect(foundProps.totalRecords as number).toBe(7);
         wrapper.unmount();
     });
 });
