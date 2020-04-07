@@ -5,14 +5,15 @@ import { ANCClientType } from '../../../../../store/ducks/anc';
 import { ANC_PROFILE_URL, VIEW } from '../../../../../constants';
 import { readableDate } from '../../../../../helpers/utils';
 // ANC specific configurable table columns
-export const useANCTableColumns = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useANCTableColumns = (): any => {
     return useMemo(
         () => [
             {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => <></>,
+                Header: (): ReturnType<React.FC> => <></>,
                 columns: [
                     { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
                     {

@@ -22,7 +22,7 @@ import { useANCTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGBOURS, PAGINATION_SIZE } from '../../../../constants';
-import { Pagination } from '../../../../components/Pagination';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, ANCReducer);
 
@@ -83,12 +83,12 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         this.state = defaultANCState;
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         this.getDataFromServer();
     }
 
     /** fetch data from the server. it gets invoked when any filter changes */
-    getDataFromServer = async () => {
+    getDataFromServer = async (): Promise<void> => {
         const params = {
             clientType: ANC_CLIENT_TYPE,
             pageNumber: this.state.currentPage,
@@ -107,7 +107,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         });
     };
 
-    searchTextfilter = (searchText: string) => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -120,7 +120,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
     };
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
@@ -133,7 +133,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
+    getPaginationOptions = (): PaginationProps => {
         return {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
@@ -142,7 +142,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         };
     };
 
-    public render() {
+    public render(): ReturnType<React.FC> {
         const { ancArray, totalRecords } = this.props;
         /** render loader if there are no anc in state */
 
@@ -156,7 +156,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search ANC`}
                                 />
                             </div>

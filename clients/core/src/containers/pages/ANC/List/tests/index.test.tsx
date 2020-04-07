@@ -14,6 +14,7 @@ reducerRegistry.register(reducerName, reducer);
 
 jest.mock('../../../../../configs/env');
 describe('containers/anc/List', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let classMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
@@ -27,7 +28,6 @@ describe('containers/anc/List', () => {
     });
 
     it('renders without crashing', () => {
-        const mock: jest.Mock = jest.fn();
         const props: ANCProps = {
             opensrpService: classMock,
             ancArray: [],
@@ -41,7 +41,6 @@ describe('containers/anc/List', () => {
     });
 
     it('renders correctly when ancArray is an empty array', () => {
-        const mock: jest.Mock = jest.fn();
         const props: ANCProps = {
             opensrpService: classMock,
             ancArray: [],
@@ -57,7 +56,6 @@ describe('containers/anc/List', () => {
 
     it('works correctly with the redux store', () => {
         store.dispatch(fetchANC(fixtures.ancList));
-        const mock: jest.Mock = jest.fn();
         const props: ANCProps = {
             opensrpService: classMock,
             ancArray: [],
@@ -72,7 +70,7 @@ describe('containers/anc/List', () => {
                 );
             </Provider>,
         );
-        const foundProps = wrapper.find('ANCList').props() as any;
+        const foundProps = wrapper.find('ANCList').props() as ANCProps;
         expect(foundProps.ancArray).toEqual(fixtures.ancList);
         wrapper.unmount();
     });
@@ -96,7 +94,7 @@ describe('containers/anc/List', () => {
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
 
-        const foundProps = wrapper.find('ANCList').props() as any;
+        const foundProps = wrapper.find('ANCList').props() as ANCProps;
         expect(foundProps.totalRecords as number).toBe(3);
         wrapper.unmount();
     });
