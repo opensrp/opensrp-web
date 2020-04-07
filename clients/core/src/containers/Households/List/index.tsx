@@ -27,7 +27,7 @@ import {
 import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useHouseholdTableColumns } from './helpers/tableDefinitions';
-import { Pagination } from '../../../components/Pagination';
+import { Pagination, Props as PaginationProps } from '../../../components/Pagination';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -90,12 +90,12 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         super(props);
         this.state = defaultHouseholdListState;
     }
-    public async componentDidMount() {
+    public async componentDidMount(): Promise<void> {
         this.getHouseholdList();
     }
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
@@ -108,7 +108,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
+    getPaginationOptions = (): PaginationProps => {
         console.log('total records', this.props.totalRecordsCount);
         return {
             onPageChangeHandler: this.onPageChange,
@@ -118,7 +118,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         };
     };
 
-    public render() {
+    public render(): ReturnType<React.FC> {
         /** render loader if there are no households in state */
         const { householdsArray, totalRecordsCount } = this.props;
         if (this.state.loading) {
@@ -147,7 +147,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         }
     }
 
-    private search = (searchText: string) => {
+    private search = (searchText: string): void => {
         this.getHouseholdList({ searchText });
     };
 
@@ -155,7 +155,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
      * it can contain searchText or level or both
      * @param extraParams
      */
-    private getHouseholdList(extraParams: FlexObject = {}) {
+    private getHouseholdList(extraParams: FlexObject = {}): void {
         const clientType = this.state.clientType;
         const params = {
             clientType,

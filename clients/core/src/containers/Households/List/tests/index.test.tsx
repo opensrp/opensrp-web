@@ -20,6 +20,7 @@ reducerRegistry.register(householdsReducerName, householdsReducer);
 
 jest.mock('../../../../configs/env');
 describe('containers/households/list/Householdlist', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let classMock: any;
 
     beforeEach(() => {
@@ -70,7 +71,7 @@ describe('containers/households/list/Householdlist', () => {
                 <ConnectedHouseholdList {...props} />
             </Provider>,
         );
-        let foundProps = wrapper.find('HouseholdList').props() as any;
+        let foundProps = wrapper.find('HouseholdList').props() as HouseholdListProps;
         expect(foundProps.householdsArray).toEqual([fixtures.household1]);
         expect(foundProps.totalRecordsCount).toEqual(23);
 
@@ -80,7 +81,7 @@ describe('containers/households/list/Householdlist', () => {
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
 
-        foundProps = wrapper.find('HouseholdList').props() as any;
+        foundProps = wrapper.find('HouseholdList').props() as HouseholdListProps;
         expect(foundProps.householdsArray).toEqual([]);
         wrapper.unmount();
     });

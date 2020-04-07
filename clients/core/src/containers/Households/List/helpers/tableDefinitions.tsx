@@ -6,14 +6,15 @@ import { Household } from '../../../../store/ducks/households';
 import { VIEW, HOUSEHOLD_PROFILE_URL } from '../../../../constants';
 
 // Household specific configurable table columns
-export const useHouseholdTableColumns = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useHouseholdTableColumns = (): any => {
     return useMemo(
         () => [
             {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => <></>,
+                Header: (): ReturnType<React.FC> => <></>,
                 columns: [
                     { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
                     {
