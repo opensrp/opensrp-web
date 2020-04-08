@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { OPENSRP_API_BASE_URL, PAGINATION_NEIGBOURS, PAGINATION_SIZE } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import ANCReducer, {
     fetchANC,
@@ -21,7 +21,7 @@ import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useANCTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGBOURS, PAGINATION_SIZE } from '../../../../constants';
+import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, ANCReducer);

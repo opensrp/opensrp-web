@@ -80,9 +80,3 @@ export type PREVIOUS = typeof PREVIOUS;
 export const LOADING = 'Loading';
 export const VIEW = 'View';
 export type VIEW = typeof VIEW;
-
-/** pagination constants */
-export const PAGINATION_SIZE = 10;
-export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
-export const PAGINATION_NEIGBOURS = 2;
-export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;

@@ -117,5 +117,8 @@ export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 export const OPENSRP_CHILD_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/searchByCriteria';
 export type OPENSRP_CHILD_ENDPOINT = typeof OPENSRP_CHILD_ENDPOINT;
 
-/** page size for every list of */
-export const PAGINATION_SIZE = 50;
+/** pagination constants */
+export const PAGINATION_SIZE = 10;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGBOURS = 2;
+export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;
