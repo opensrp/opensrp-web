@@ -1,6 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from '../../../../store';
