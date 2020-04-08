@@ -3,7 +3,6 @@ import { mount, shallow } from 'enzyme';
 import { ANCList, ANCProps } from '..';
 import ConnectedANCList from '..';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
-import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
 import store from '../../../../../store';
 import reducer, { fetchANC, reducerName, removeANCAction, setTotalANCRecords } from '../../../../../store/ducks/anc';
