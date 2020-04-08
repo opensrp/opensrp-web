@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { mount, shallow } from 'enzyme';
-import { LocationList, LocationListState, LocationListProps } from '..';
-import ConnectedLocationList from '..';
+import { shallow } from 'enzyme';
+import { LocationList, LocationListProps } from '..';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
-import reducer, { fetchChildList, reducerName, removeChildList } from '../../../../../store/ducks/child';
+import reducer, { reducerName } from '../../../../../store/ducks/adminLocation';
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { setTotalRecords } from '../../../../../store/ducks/clients';
-import { MemoryRouter } from 'react-router';
 
 reducerRegistry.register(reducerName, reducer);
 
 jest.mock('../../../../../configs/env');
 describe('containers/child/List', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let classMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
@@ -37,5 +35,4 @@ describe('containers/child/List', () => {
         const wrapper = shallow(<LocationList {...props} />);
         expect(wrapper.length).toBe(1);
     });
-
 });

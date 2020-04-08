@@ -93,22 +93,22 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
     }
 
     getDataFromServer = async (): Promise<void> => {
-        // const params = {
-        //     clientType: '',
-        //     pageNumber: this.state.currentPage,
-        //     pageSize: PAGINATION_SIZE,
-        //     searchText: this.state.searchText,
-        // };
-        // const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
-        // const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_ADMIN_ENDPOINT, generateOptions);
-        // const response = await clientService.list(params);
-        // removeLocation();
-        // fetchLocation(response.clients);
-        // setTotalRecords(response.total);
-        // this.setState({
-        //     ...this.state,
-        //     loading: false,
-        // });
+        const params = {
+            clientType: '',
+            pageNumber: this.state.currentPage,
+            pageSize: PAGINATION_SIZE,
+            searchText: this.state.searchText,
+        };
+        const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_ADMIN_ENDPOINT, generateOptions);
+        const response = await clientService.list(params);
+        removeLocation();
+        fetchLocation(response.clients);
+        setTotalRecords(response.total);
+        this.setState({
+            ...this.state,
+            loading: false,
+        });
     };
 
     searchTextfilter = (searchText: string): void => {
@@ -145,7 +145,9 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
                                 value={this.state.selectedProvince}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e: any): void => e}
+                                onChange={(e): void => {
+                                    e;
+                                }}
                             />
                         </Col>
                         <Col md={{ size: 5, offset: 4 }} className="filter-row">
