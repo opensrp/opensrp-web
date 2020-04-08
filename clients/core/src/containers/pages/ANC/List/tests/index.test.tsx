@@ -50,7 +50,7 @@ describe('containers/anc/List', () => {
             totalRecords: 0,
         };
         const wrapper = mount(<ANCList {...props} />);
-        expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
+        expect(wrapper.find('Ripple').length).toBe(1);
         wrapper.unmount();
     });
 
