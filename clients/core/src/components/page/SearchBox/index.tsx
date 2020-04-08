@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import * as React from 'react';
 import { Input, InputGroup } from 'reactstrap';
 import './index.css';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fas);
 
 /** props interface for SearchBox */
 export interface SearchBoxProps {

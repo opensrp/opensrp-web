@@ -23,6 +23,9 @@ import { useLocationTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { OPENSRP_ADMIN_ENDPOINT } from '../../../../constants';
+import Select from 'react-select';
+import { DropdownOption } from '../../../../helpers/Dropdown';
+import { Link } from 'react-router-dom';
 
 reducerRegistry.register(reducerName, locationreducer);
 
@@ -38,6 +41,7 @@ export interface LocationListProps {
 
 /** state interface for the locationList component */
 export interface LocationListState {
+    selectedProvince: DropdownOption;
     loading: boolean;
     searchText: string;
     currentPage: number;
@@ -55,7 +59,8 @@ export const defaultLocationListProps: LocationListProps = {
 
 /** default state for the locationList component */
 export const defaultLocationState: LocationListState = {
-    loading: true,
+    selectedProvince: { value: '', label: 'All' },
+    loading: false,
     searchText: '',
     currentPage: 1,
 };
@@ -83,30 +88,30 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         this.state = defaultLocationState;
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         this.getDataFromServer();
     }
 
-    getDataFromServer = async () => {
-        const params = {
-            clientType: '',
-            pageNumber: this.state.currentPage,
-            pageSize: PAGINATION_SIZE,
-            searchText: this.state.searchText,
-        };
-        const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_ADMIN_ENDPOINT, generateOptions);
-        const response = await clientService.list(params);
-        removeLocation();
-        fetchLocation(response.clients);
-        setTotalRecords(response.total);
-        this.setState({
-            ...this.state,
-            loading: false,
-        });
+    getDataFromServer = async (): Promise<void> => {
+        // const params = {
+        //     clientType: '',
+        //     pageNumber: this.state.currentPage,
+        //     pageSize: PAGINATION_SIZE,
+        //     searchText: this.state.searchText,
+        // };
+        // const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
+        // const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_ADMIN_ENDPOINT, generateOptions);
+        // const response = await clientService.list(params);
+        // removeLocation();
+        // fetchLocation(response.clients);
+        // setTotalRecords(response.total);
+        // this.setState({
+        //     ...this.state,
+        //     loading: false,
+        // });
     };
 
-    searchTextfilter = (searchText: string) => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -118,23 +123,34 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         );
     };
 
-    public render() {
-        const { locationArray, totalRecords } = this.props;
-        /** render loader if there are no child in state */
+    public render(): ReturnType<React.FC> {
+        const { locationArray } = this.props;
+        /** render loader if there are no location in state */
 
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
-                <div>
-                    <h3 className="household-title"> Location ({totalRecords})</h3>
+                <div style={{ fontSize: '14px' }}>
+                    <h3 className="location-title"> Locations - Provinces</h3>
                     <Row>
-                        <Col md={9} className="filter-row">
-                            <div className="household-search-bar">
-                                <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
-                                    placeholder={`Search Location`}
-                                />
+                        <Col md={12} className="new-province">
+                            <Link to="/"> + Add new province </Link>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={1}>Level: </Col>
+                        <Col md={2} className="province-dropdown">
+                            <Select
+                                value={this.state.selectedProvince}
+                                classNamePrefix="select"
+                                className="basic-single"
+                                onChange={(e: any): void => e}
+                            />
+                        </Col>
+                        <Col md={{ size: 5, offset: 4 }} className="filter-row">
+                            <div className="location-search-bar">
+                                <SearchBox searchCallBack={this.searchTextfilter} placeholder={`Search Provinces`} />
                             </div>
                         </Col>
                     </Row>
@@ -168,12 +184,12 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 
 /** map props to actions */
 const mapDispatchToProps = {
-    fetchChild: fetchLocationList,
-    removeChild: removeLocationList,
+    fetchLocation: fetchLocationList,
+    removeLocation: removeLocationList,
     setTotalRecords: setTotalRecords,
 };
 
-/** connect childList to the redux store */
-const ConnectedChildList = connect(mapStateToProps, mapDispatchToProps)(LocationList);
+/** connect locationList to the redux store */
+const ConnectedLocationList = connect(mapStateToProps, mapDispatchToProps)(LocationList);
 
-export default ConnectedChildList;
+export default ConnectedLocationList;

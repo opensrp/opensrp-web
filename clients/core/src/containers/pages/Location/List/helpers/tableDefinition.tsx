@@ -5,6 +5,7 @@ import { UseTableCellProps } from 'react-table';
 // import { Child } from '../../../../../store/ducks/child';
 import { LOCATIONS_URL } from '../../../../../constants';
 // Location specific configurable table columns
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useLocationTableColumns = () => {
     return useMemo(
         () => [
@@ -12,45 +13,30 @@ export const useLocationTableColumns = () => {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => <></>,
+                Header: (): ReturnType<React.FC> => <></>,
                 columns: [
-                    { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
                     {
-                        Header: 'First Name',
+                        // eslint-disable-next-line react/display-name
+                        Cell: ({ row: { values } }: UseTableCellProps<any>): ReturnType<React.FC> => (
+                            <Link to={`/${values.baseEntityId}`}>{LOCATIONS_URL}</Link>
+                        ),
+                        Header: 'Province',
+                        accessor: '',
+                        disableSortBy: true,
+                    },
+                    {
+                        Header: 'Identifier',
                         accessor: 'firstName',
                         disableSortBy: true,
                     },
                     {
-                        Header: 'Last Name',
+                        Header: 'Tag',
                         accessor: 'lastName',
                         disableSortBy: true,
                     },
 
                     {
-                        Header: 'Location',
-                        accessor: '',
-                        disableSortBy: true,
-                    },
-                    {
-                        Header: 'Age',
-                        accessor: 'attributes.dynamicProperties.age_year_part',
-                    },
-                    {
-                        Header: 'Gender',
-                        accessor: 'gender',
-                    },
-                    {
-                        Header: 'Last Contact Date',
-                        accessor: 'attributes.dynamicProperties.last_contact_date',
-                    },
-
-                    {
-                        Header: 'Risk',
-                        accessor: '',
-                        disableSortBy: true,
-                    },
-                    {
-                        Header: 'Immunization status',
+                        Header: 'Parent Location',
                         accessor: '',
                         disableSortBy: true,
                     },
