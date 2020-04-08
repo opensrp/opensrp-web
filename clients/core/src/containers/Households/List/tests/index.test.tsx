@@ -104,7 +104,8 @@ describe('containers/households/list/Householdlist', () => {
 
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
-        expect(toJson(wrapper)).toMatchSnapshot();
+        const householdTable = wrapper.find('HouseholdTable');
+        expect(householdTable.length).toBe(1);
         wrapper.unmount();
     });
 
