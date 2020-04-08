@@ -30,7 +30,7 @@ import {
     PAGINATION_NEIGBOURS,
     PAGINATION_SIZE,
 } from '../../../../constants';
-import { Pagination } from '../../../../components/Pagination';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -93,14 +93,14 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         this.state = defaultChildState;
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         this.getDataFromServer();
     }
 
-    getDataFromServer = async () => {
+    getDataFromServer = async (): Promise<void> => {
         const params = {
             clientType: CHILD_CLIENT_TYPE,
-            pageNumber: '1',
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
@@ -117,7 +117,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         });
     };
 
-    genderFilter = (selectedGender: DropdownOption) => {
+    genderFilter = (selectedGender: DropdownOption): void => {
         this.setState(
             {
                 ...this.state,
@@ -129,7 +129,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         );
     };
 
-    searchTextfilter = (searchText: string) => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -142,7 +142,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
     };
 
     /** fetch data from server with a specific page number */
-    onPageChange = (currentPage: number, pageSize: number): void => {
+    onPageChange = (currentPage: number): void => {
         this.setState(
             {
                 ...this.state,
@@ -155,7 +155,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
     };
 
     /** it returns the required options for pagination component */
-    getPaginationOptions = () => {
+    getPaginationOptions = (): PaginationProps => {
         return {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
@@ -164,7 +164,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         };
     };
 
-    public render() {
+    public render(): ReturnType<React.FC> {
         const { childArray, totalRecords } = this.props;
         /** render loader if there are no child in state */
 
@@ -181,7 +181,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search Child`}
                                 />
                             </div>
@@ -191,7 +191,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                                 value={this.state.selectedGender}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e: any) => this.genderFilter(e as DropdownOption)}
+                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
                                 options={genderOptions}
                             />
                         </Col>
