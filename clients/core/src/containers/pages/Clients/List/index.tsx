@@ -19,7 +19,7 @@ import './clientList.css';
 import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE, PAGINATION_NEIGBOURS, ALL_CLIENTS } from '../../../../constants';
+import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
@@ -103,7 +103,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         const response = await clientService.list(params);
         removeClientsCreator();
         fetchClientsCreator(response.clients);
-        setTotalRecordsCreator(response.total);
+        if (response.total > 0) setTotalRecordsCreator(response.total);
         this.setState({
             ...this.state,
             loading: false,
@@ -154,20 +154,20 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     getPaginationOptions = (): PaginationProps => {
         return {
             onPageChangeHandler: this.onPageChange,
-            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageNeighbors: PAGINATION_NEIGHBORS,
             pageSize: PAGINATION_SIZE,
             totalRecords: this.props.totalRecords,
         };
     };
 
-    public render(): ReturnType<React.FC> {
+    public render(): React.ReactNode {
         const { clientsArray, totalRecords } = this.props;
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
-                <div>
+                <div className="client-page">
                     <Helmet>
                         <title>{ALL_CLIENTS}</title>
                     </Helmet>
