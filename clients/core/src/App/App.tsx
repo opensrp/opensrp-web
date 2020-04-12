@@ -20,6 +20,7 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import { LocationForm } from '../containers/pages/Location/Form';
 
 library.add(faUser, faChartLine, faCog);
 
@@ -52,6 +53,13 @@ class App extends Component {
                                 exact={true}
                                 path={CHILD_URL}
                                 component={ConnectedChildList}
+                            />
+
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`/location-form`}
+                                component={LocationForm}
                             />
 
                             <Route
