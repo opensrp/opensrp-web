@@ -109,7 +109,6 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
 
     /** it returns the required options for pagination component */
     getPaginationOptions = (): PaginationProps => {
-        console.log('total records', this.props.totalRecordsCount);
         return {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGBOURS,
@@ -118,7 +117,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         };
     };
 
-    public render(): ReturnType<React.FC> {
+    public render(): React.ReactNode {
         /** render loader if there are no households in state */
         const { householdsArray, totalRecordsCount } = this.props;
         if (this.state.loading) {
@@ -152,7 +151,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     };
 
     /**
-     * it can contain searchText or level or both
+     * it contains searchText value
      * @param extraParams
      */
     private getHouseholdList(extraParams: FlexObject = {}): void {
