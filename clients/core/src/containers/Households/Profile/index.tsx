@@ -6,13 +6,9 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import {
-    OPENSRP_CLIENT_ENDPOINT,
-    OPENSRP_EVENT_ENDPOINT,
-    OPENSRP_HOUSEHOLD_ENDPOINT,
-} from '../../../configs/env';
-import { HOUSEHOLD_URL } from '../../../constants';
-import { OpenSRPService } from '../../../services/opensrp';
+import { HOUSEHOLD_URL, OPENSRP_CLIENT_ENDPOINT, OPENSRP_EVENT_ENDPOINT } from '../../../constants';
+import { OpenSRPService } from '@opensrp/server-service';
+
 import clientReducer, {
     Client,
     fetchClients,
@@ -33,6 +29,8 @@ import householdsReducer, {
     reducerName as householdReducerName,
 } from '../../../store/ducks/households';
 import './householdProfile.css';
+import { OPENSRP_API_BASE_URL } from '../../../configs/env';
+import { generateOptions } from '../../../services/opensrp';
 
 /** register the event reducer */
 reducerRegistry.register(eventReducerName, eventReducer);
@@ -53,39 +51,32 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
     household: Household | null;
     events: Event[];
     members: Client[];
-    fetchClientActionCreator: typeof fetchHouseholds;
-    fetchMembersActionCreator: typeof fetchClients;
-    fetchEventsActionCreator: typeof fetchEvents;
-    removeMembersActionCreator: typeof removeClients;
-    opensrpService: typeof OpenSRPService;
+    fetchClient: typeof fetchHouseholds;
+    fetchMembers: typeof fetchClients;
+    fetchEvents: typeof fetchEvents;
+    removeMembers: typeof removeClients;
 }
 
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     public async componentDidMount() {
-        const {
-            fetchClientActionCreator,
-            fetchMembersActionCreator,
-            fetchEventsActionCreator,
-            match,
-            removeMembersActionCreator,
-        } = this.props;
+        const { fetchClient, fetchMembers, fetchEvents, match, removeMembers } = this.props;
         const householdId = match.params.id || '';
         const params = { identifier: householdId };
-        const clientService = new OpenSRPService(`${OPENSRP_CLIENT_ENDPOINT}`);
+        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
         const clientResponse = await clientService.list(params);
         if (clientResponse[0]) {
-            fetchClientActionCreator(clientResponse);
-            const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
+            fetchClient(clientResponse);
+            const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
             const eventsResponse = await eventService.list(params);
-            fetchEventsActionCreator(eventsResponse);
+            fetchEvents(eventsResponse);
             const memberParams = {
                 baseEntityId: householdId,
                 clientType: 'householdMember',
             };
-            const memberService = new OpenSRPService(`${OPENSRP_HOUSEHOLD_ENDPOINT}`);
+            const memberService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
             const membersResponse = await memberService.list(memberParams);
-            removeMembersActionCreator();
-            fetchMembersActionCreator(membersResponse.clients);
+            removeMembers();
+            fetchMembers(membersResponse.clients);
         }
     }
     public render() {
@@ -216,11 +207,6 @@ const mapDispatchToProps = {
     removeMembersActionCreator: removeClients,
 };
 
-const ConnectedHouseholdProfile = withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(HouseholdProfile)
-);
+const ConnectedHouseholdProfile = withRouter(connect(mapStateToProps, mapDispatchToProps)(HouseholdProfile));
 
 export default ConnectedHouseholdProfile;
