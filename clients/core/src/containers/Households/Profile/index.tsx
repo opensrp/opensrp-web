@@ -31,6 +31,8 @@ import householdsReducer, {
 import './householdProfile.css';
 import { OPENSRP_API_BASE_URL } from '../../../configs/env';
 import { generateOptions } from '../../../services/opensrp';
+import { OpenSRPTable } from '@opensrp/opensrp-table';
+import { useMemberTableColumns } from './helpers/tableDefinition';
 
 /** register the event reducer */
 reducerRegistry.register(eventReducerName, eventReducer);
@@ -46,6 +48,19 @@ interface HouseholdProfileURLParams {
     id: string;
 }
 
+interface MemberListProps {
+    tableData: Client[];
+}
+
+/**
+ * generate data for child table,
+ * based on the configuration given in useMemberTableColumns
+ * @param props
+ */
+function MemberTable(props: MemberListProps): React.ReactElement {
+    return <OpenSRPTable {...{ data: props.tableData, tableColumns: useMemberTableColumns() }} />;
+}
+
 /** interface for HouseholdProfileProps */
 export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
     household: Household | null;
@@ -58,11 +73,11 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
 }
 
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
-    public async componentDidMount() {
+    public async componentDidMount(): Promise<void> {
         const { fetchClient, fetchMembers, fetchEvents, match, removeMembers } = this.props;
-        const householdId = match.params.id || '';
+        const householdId = match.params.id || 'ea0edc48-4752-4ad0-a834-f1f68c7ae310';
         const params = { identifier: householdId };
-        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const clientResponse = await clientService.list(params);
         if (clientResponse[0]) {
             fetchClient(clientResponse);
@@ -79,7 +94,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
             fetchMembers(membersResponse.clients);
         }
     }
-    public render() {
+    public render(): React.ReactNode {
         const { household, events, members } = this.props;
         if (!household) {
             return <Loading />;
@@ -142,36 +157,8 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="members-list-body">
-                            <Table striped={true}>
-                                <thead>
-                                    <tr>
-                                        <td>First Name</td>
-                                        <td>Last Name</td>
-                                        <td>Age</td>
-                                        <td>Register Status</td>
-                                        <td>Actions</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {members.map((member: Client) => {
-                                        return (
-                                            <tr key={member.baseEntityId}>
-                                                <td>{member.firstName}</td>
-                                                <td>{member.lastName}</td>
-                                                <td>{member.attributes.age_year_part}</td>
-                                                <td>{member.attributes.registration_status}</td>
-                                                <td>
-                                                    <a href={`${'#'}`}> View </a>
-                                                    <a href={`${'#'}`} className="remove-btn">
-                                                        Remove
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
+                        <Col md={12}>
+                            <MemberTable tableData={members} />
                         </Col>
                     </Row>
                 </div>
@@ -201,10 +188,10 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 
 /** map props to actions */
 const mapDispatchToProps = {
-    fetchClientActionCreator: fetchHouseholds,
-    fetchEventsActionCreator: fetchEvents,
-    fetchMembersActionCreator: fetchClients,
-    removeMembersActionCreator: removeClients,
+    fetchClient: fetchHouseholds,
+    fetchEvents: fetchEvents,
+    fetchMembers: fetchClients,
+    removeMembers: removeClients,
 };
 
 const ConnectedHouseholdProfile = withRouter(connect(mapStateToProps, mapDispatchToProps)(HouseholdProfile));
