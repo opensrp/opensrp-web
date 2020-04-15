@@ -1,3 +1,7 @@
+// endpoints
+export const OPENSRP_CLIENT_ENDPOINT = 'client/search';
+export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+
 // internal urls
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
@@ -11,8 +15,10 @@ export const HOUSEHOLD_URL = '/404';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
 export const ANC_URL = '/404';
 export type ANC_URL = typeof ANC_URL;
-export const CHILD_URL = '/404';
+export const CHILD_URL = '/child';
 export type CHILD_URL = typeof CHILD_URL;
+export const CHILD_PROFILE_URL = '/child-profile';
+export type CHILD_PROFILE_URL = typeof CHILD_PROFILE_URL;
 export const USER_URL = '/404';
 export type USER_URL = typeof USER_URL;
 export const ROLE_URL = '/404';
@@ -56,3 +62,17 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const CHILD_CLIENT_TYPE = 'child';
+export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
+
+export const NEXT = 'Next';
+export type NEXT = typeof NEXT;
+export const START = 'Start';
+export type START = typeof START;
+export const LAST = 'Last';
+export type LAST = typeof LAST;
+export const PREVIOUS = 'Previous';
+export type PREVIOUS = typeof PREVIOUS;
+export const LOADING = 'Loading';
+export const VIEW = 'View';
+export type VIEW = typeof VIEW;

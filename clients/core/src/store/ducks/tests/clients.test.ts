@@ -7,7 +7,7 @@ import clientReducer, {
     getClientsArray,
     getClientsById,
     reducerName as clientReducerName,
-    removeClientsAction,
+    removeClients,
 } from '../clients';
 import * as fixtures from '../tests/fixtures';
 
@@ -16,7 +16,7 @@ reducerRegistry.register(clientReducerName, clientReducer);
 describe('reducers/clients', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-        store.dispatch(removeClientsAction);
+        store.dispatch(removeClients());
     });
 
     it('selectors work for empty initialState', () => {
@@ -40,13 +40,13 @@ describe('reducers/clients', () => {
         let numberOfClients = getClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(2);
 
-        store.dispatch(removeClientsAction);
+        store.dispatch(removeClients());
         numberOfClients = getClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(0);
     });
 
     it('Adds new clients to store instead of overwriting existing ones', () => {
-        store.dispatch(removeClientsAction);
+        store.dispatch(removeClients());
         store.dispatch(fetchClients([fixtures.client1]));
         let numberOfClients = getClientsArray(store.getState()).length;
         expect(numberOfClients).toEqual(1);

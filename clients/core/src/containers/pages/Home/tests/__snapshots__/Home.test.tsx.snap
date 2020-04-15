@@ -30,6 +30,15 @@ exports[`containers/pages/Home renders Home correctly 1`] = `
       <Row
         className="welcome-box"
         tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
       >
         <div
           className="welcome-box row"

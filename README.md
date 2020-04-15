@@ -58,8 +58,6 @@ The configurations are located in the `configs` directory and are split into two
 - **env.ts**: this module reads configurations from environment variables
 - **settings.ts**: this module holds more complicated configurations
 
-## Creating a new package/
-
 ## Contributing/Collaboration
 
 See [contribution guidelines](https://github.com/OpenSRP/opensrp-web/blob/docs/docs/contributing.md).
