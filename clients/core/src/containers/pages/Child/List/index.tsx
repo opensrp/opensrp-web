@@ -164,7 +164,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         };
     };
 
-    public render(): ReturnType<React.FC> {
+    public render(): React.ReactNode {
         const { childArray, totalRecords } = this.props;
         /** render loader if there are no child in state */
 
