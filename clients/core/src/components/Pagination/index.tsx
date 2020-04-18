@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import { PaginationOptions, usePagination } from './ss';
+import { PaginationOptions, usePagination } from '@onaio/pagination';
 import { fetchPageNumbers } from './utils';
 import { BootstrapJSX } from './JSX';
 
