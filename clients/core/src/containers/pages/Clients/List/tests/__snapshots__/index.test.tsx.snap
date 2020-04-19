@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/clients/list/ClientList renders correctly: Clients Table 1`] = `"IdentifierFirst NameLast NameAge   ↕GenderLocationLast Contact   ↕Actions"`;

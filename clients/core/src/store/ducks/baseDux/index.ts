@@ -26,14 +26,14 @@ export interface FetchAction<ObjectType> extends AnyAction {
 }
 
 /** Interface for removeAction */
-interface RemoveAction extends AnyAction {
+export interface RemoveAction extends AnyAction {
     objectsById: {};
     type: typeof REMOVE;
     reducerName: string;
 }
 
 /** Interface for setTotalRecordsAction */
-interface SetTotalRecordsAction extends AnyAction {
+export interface SetTotalRecordsAction extends AnyAction {
     totalRecords: number;
     type: typeof SET_TOTAL_RECORDS;
     reducerName: string;

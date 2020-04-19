@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faCog, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -15,14 +15,14 @@ import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
-import ConnectedClientList from '../containers/Clients/List';
+import ConnectedClientList from '../containers/pages/Clients/List';
 import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import { LocationForm } from '../containers/pages/Location/Form';
 
-library.add(faUser, faChartLine, faCog);
+library.add(faUser, faChartLine, faCog, faSearch);
 
 /** Main App component */
 class App extends Component {
