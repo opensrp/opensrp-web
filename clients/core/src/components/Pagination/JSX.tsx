@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { PaginationState } from '@onaio/pagination';
-import { ExtendingOptions } from '.';
 import { START, PREVIOUS, NEXT, LAST } from '../../constants';
 
 /** describe the helper functions that add domain logic to the dispatch function */
@@ -10,9 +9,11 @@ interface ActionCreatorsWrapperFn {
     (): void;
 }
 
+type CustomPaginationState = PaginationState<{}> & { pagesToDisplay: string[] };
+
 /** describes props that bootstrapJSX will receive */
 export interface Props {
-    paginationState: PaginationState<ExtendingOptions>;
+    paginationState: CustomPaginationState;
     nextPage: ActionCreatorsWrapperFn;
     firstPage: ActionCreatorsWrapperFn;
     lastPage: ActionCreatorsWrapperFn;
