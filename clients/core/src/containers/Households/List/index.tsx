@@ -180,7 +180,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                     },
                     () => {
                         fetchHouseholdsActionCreator(response.clients);
-                        if (!(response.clients.length > 0 && response.total == 0)) {
+                        if (response.total > 0) {
                             setTotalRecordsActionCreator(response.total);
                         }
                     },
