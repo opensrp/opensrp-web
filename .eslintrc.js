@@ -14,7 +14,7 @@ module.exports =  {
     },
   },
   rules:  {
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-inferrable-types': 'warn',
   },
   settings:  {
