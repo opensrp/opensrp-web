@@ -146,7 +146,6 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                 currentPage,
             },
             () => {
-                console.log(currentPage, this.state);
                 this.getDataFromServer();
             },
         );
