@@ -47,6 +47,8 @@ export function usePagination({ totalRecords = 0, pageSize = 1 }: PaginationOpti
     const paginationState = {
         ...state,
         currentPage,
+        totalRecords,
+        pageSize,
     };
 
     useEffect(() => {
