@@ -68,10 +68,6 @@ export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
 
 // url constants
-export const PAGINATION_SIZE = 10;
-export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
-export const PAGINATION_NEIGHBORS = 3;
-export type PAGINATION_NEIGHBORS = typeof PAGINATION_NEIGHBORS;
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
 export const START = 'Start';
