@@ -5,6 +5,7 @@ import { VIEW } from '../../../../constants';
 import { UseTableCellProps } from 'react-table';
 import { Client } from '../../../../store/ducks/clients';
 // Child specific configurable table columns
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useMemberTableColumns = () => {
     return useMemo(
         () => [
@@ -12,7 +13,7 @@ export const useMemberTableColumns = () => {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: () => <></>,
+                Header: (): React.ReactNode => <></>,
                 columns: [
                     {
                         Header: 'First Name',
@@ -38,7 +39,7 @@ export const useMemberTableColumns = () => {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Client>): ReturnType<React.FC> => (
                             <>
-                                <Link to={`#`}>{VIEW}</Link>{' '}
+                                <Link to={`${values.baseEntityId}`}>{VIEW}</Link>{' '}
                                 <Link className="remove-action" to={`#`}>
                                     Remove
                                 </Link>
