@@ -5,35 +5,6 @@
   border-bottom: 1px solid #DFE3E8;
 }
 
-#basic-info-container{
-  background-color: #FFFFFF;
-  border: 1px solid #DADCE0;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px 0 #D7D7E0;
-  margin-top: 25px;
-
-}
-
-.basic-info-header{
-  margin: 15px !important;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #DADCE0;
-  color: #3A484F;
-}
-
-.basic-info-body{
-  margin: 0px 8px;
-}
-
-.basic-info-edit{
-  margin-left: 5px;
-  font-size: 14px;
-}
-
-.basic-info-label{
-  color: #7C7C7C;
-}
-
 #members-list-container{
   margin-top: 25px;
   background-color: #FFFFFF;
@@ -46,15 +17,13 @@
   margin: 15px !important;
   color: #3A484F;
 }
-.table {
-  border: none;
-}
-
-.react-table thead tr:first-child {
-  display: none;
-}
 
 a.remove-action {
   padding-left: 10px;
   color:red;
+}
+
+.react-table {
+  box-shadow: none;
+  margin-top: -16px;
 }

@@ -3,7 +3,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Col, Container, Row, Table } from 'reactstrap';
+import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
 import { HOUSEHOLD_URL, OPENSRP_CLIENT_ENDPOINT, OPENSRP_EVENT_ENDPOINT } from '../../../constants';
@@ -33,6 +33,7 @@ import { OPENSRP_API_BASE_URL } from '../../../configs/env';
 import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useMemberTableColumns } from './helpers/tableDefinition';
+import InfoCard from '../../../components/page/InfoCard';
 
 /** register the event reducer */
 reducerRegistry.register(eventReducerName, eventReducer);
@@ -110,58 +111,42 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
                     </span>
                     <h3> {household.lastName} </h3>
                 </div>
-                <div id="basic-info-container">
-                    <Row className="basic-info-header-bg">
-                        <Col className="basic-info-header">
-                            <span className="basic-info-title"> Basic Information</span>
-                            <div className="float-right basic-info-edit">
-                                <a href={`${'#'}`}>Edit Profile</a>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="basic-info-body">
-                            <Table className="basic-info-table" borderless={true}>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">HHID Number</td>
-                                        <td>{household.baseEntityId}</td>
-                                        <td className="basic-info-label">Phone</td>
-                                        <td>{household.attributes.phoneNumber || ''}</td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">Family Name</td>
-                                        <td>{household.lastName}</td>
-                                        <td className="basic-info-label">Provider</td>
-                                        <td>{events[0] ? events[0].providerId : ''}</td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className="basic-info-label">Head of Household</td>
-                                        <td>{household.firstName}</td>
-                                        <td className="basic-info-label">Register date</td>
-                                        <td>{household.dateCreated || ''}</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </Col>
-                    </Row>
-                </div>
-                <div id="members-list-container">
-                    <Row>
-                        <Col className="members-list-header">
-                            <span> Members List</span>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <MemberTable tableData={members} />
-                        </Col>
-                    </Row>
-                </div>
+                <InfoCard title="Basic information">
+                    <Col className="info-body">
+                        <Table className="info-table" borderless={true}>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">HHID Number</td>
+                                    <td>{household.baseEntityId}</td>
+                                    <td className="info-label">Phone</td>
+                                    <td>{household.attributes.phoneNumber || ''}</td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Family Name</td>
+                                    <td>{household.lastName}</td>
+                                    <td className="info-label">Provider</td>
+                                    <td>{events[0] ? events[0].providerId : ''}</td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Head of Household</td>
+                                    <td>{household.firstName}</td>
+                                    <td className="info-label">Register date</td>
+                                    <td>{household.dateCreated || ''}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Col>
+                </InfoCard>
+
+                <InfoCard title="Member List">
+                    <Col md={12}>
+                        <MemberTable tableData={members} />
+                    </Col>
+                </InfoCard>
             </Container>
         );
     }
