@@ -11,6 +11,8 @@ export const HOME_URL = '/';
 export type HOME_URL = typeof HOME_URL;
 export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
+export const CLIENT_PROFILE_URL = '/client-profile';
+export type CLIENT_PROFILE_URL = typeof CLIENT_PROFILE_URL;
 export const HOUSEHOLD_URL = '/households';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
 export const ANC_URL = '/404';
@@ -69,6 +71,11 @@ export type HOUSEHOLD_CLIENT_TYPE = typeof HOUSEHOLD_CLIENT_TYPE;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
 
+// url constants
+export const PAGINATION_SIZE = 10;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGHBORS = 3;
+export type PAGINATION_NEIGHBORS = typeof PAGINATION_NEIGHBORS;
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
 export const START = 'Start';
