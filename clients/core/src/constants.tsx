@@ -1,6 +1,8 @@
 // endpoints
 export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+export const OPENSRP_SINGLE_CLIENT_ENDPOINT = 'client/search';
+export type OPENSRP_SINGLE_CLIENT_ENDPOINT = typeof OPENSRP_SINGLE_CLIENT_ENDPOINT;
 export const OPENSRP_EVENT_ENDPOINT = 'event/search';
 export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 

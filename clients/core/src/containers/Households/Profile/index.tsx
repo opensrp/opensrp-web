@@ -2,11 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter, match } from 'react-router-dom';
 import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
-import { HOUSEHOLD_URL, OPENSRP_CLIENT_ENDPOINT, OPENSRP_EVENT_ENDPOINT } from '../../../constants';
+import {
+    HOUSEHOLD_URL,
+    OPENSRP_CLIENT_ENDPOINT,
+    OPENSRP_EVENT_ENDPOINT,
+    OPENSRP_SINGLE_CLIENT_ENDPOINT,
+} from '../../../constants';
 import { OpenSRPService } from '@opensrp/server-service';
 
 import clientReducer, {
@@ -34,6 +39,7 @@ import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useMemberTableColumns } from './helpers/tableDefinition';
 import InfoCard from '../../../components/page/InfoCard';
+import { createMemoryHistory, createLocation } from 'history';
 
 /** register the event reducer */
 reducerRegistry.register(eventReducerName, eventReducer);
@@ -71,25 +77,49 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
     fetchMembers: typeof fetchClients;
     fetchEvents: typeof fetchEvents;
     removeMembers: typeof removeClients;
+    opensrpService: typeof OpenSRPService;
 }
 
+const matchVariable: match<{ id: string }> = {
+    isExact: false,
+    params: { id: '1' },
+    path: '/household/profile/:id/',
+    url: `/household/profile/${1}/`,
+};
+
+export const defaultProfileProps: HouseholdProfileProps = {
+    household: null,
+    events: [],
+    members: [],
+    fetchClient: fetchHouseholds,
+    fetchMembers: fetchClients,
+    fetchEvents: fetchEvents,
+    removeMembers: removeClients,
+    opensrpService: OpenSRPService,
+    history: createMemoryHistory(),
+    location: createLocation(matchVariable.url),
+    match: matchVariable,
+};
+
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
+    public static defaultProps: HouseholdProfileProps = defaultProfileProps;
+
     public async componentDidMount(): Promise<void> {
-        const { fetchClient, fetchMembers, fetchEvents, match, removeMembers } = this.props;
+        const { fetchClient, fetchMembers, fetchEvents, match, removeMembers, opensrpService } = this.props;
         const householdId = match.params.id || 'ea0edc48-4752-4ad0-a834-f1f68c7ae310';
         const params = { identifier: householdId };
-        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_SINGLE_CLIENT_ENDPOINT, generateOptions);
         const clientResponse = await clientService.list(params);
         if (clientResponse[0]) {
             fetchClient(clientResponse);
-            const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
+            const eventService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
             const eventsResponse = await eventService.list(params);
             fetchEvents(eventsResponse);
             const memberParams = {
                 baseEntityId: householdId,
                 clientType: 'householdMember',
             };
-            const memberService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+            const memberService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
             const membersResponse = await memberService.list(memberParams);
             removeMembers();
             fetchMembers(membersResponse.clients);
@@ -101,7 +131,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
             return <Loading />;
         }
         return (
-            <Container id="householdProfile">
+            <Container id="household-profile">
                 <div className="page-title">
                     <span className="back-btn-bg">
                         <Link to={`${HOUSEHOLD_URL}`}>
