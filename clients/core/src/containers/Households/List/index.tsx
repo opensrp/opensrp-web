@@ -21,7 +21,7 @@ import './householdList.css';
 import {
     HOUSEHOLD_CLIENT_TYPE,
     OPENSRP_CLIENT_ENDPOINT,
-    PAGINATION_NEIGBOURS,
+    PAGINATION_NEIGHBORS,
     PAGINATION_SIZE,
 } from '../../../constants';
 import { generateOptions } from '../../../services/opensrp';
@@ -111,7 +111,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     getPaginationOptions = (): PaginationProps => {
         return {
             onPageChangeHandler: this.onPageChange,
-            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageNeighbors: PAGINATION_NEIGHBORS,
             pageSize: PAGINATION_SIZE,
             totalRecords: this.props.totalRecordsCount,
         };
@@ -180,7 +180,9 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                     },
                     () => {
                         fetchHouseholdsActionCreator(response.clients);
-                        if (response.total > 0) setTotalRecordsActionCreator(response.total);
+                        if (!(response.clients.length > 0 && response.total == 0)) {
+                            setTotalRecordsActionCreator(response.total);
+                        }
                     },
                 );
             })
