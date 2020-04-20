@@ -1,0 +1,29 @@
+#householdProfile {
+  font-size: 14px;
+}
+.page-title{
+  border-bottom: 1px solid #DFE3E8;
+}
+
+#members-list-container{
+  margin-top: 25px;
+  background-color: #FFFFFF;
+  border: 1px solid #DADCE0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #D7D7E0;
+}
+
+.members-list-header{
+  margin: 15px;
+  color: #3A484F;
+}
+
+a.remove-action {
+  padding-left: 10px;
+  color:red;
+}
+
+.react-table {
+  box-shadow: none;
+  margin-top: -16px;
+}

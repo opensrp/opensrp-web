@@ -1,6 +1,10 @@
 // endpoints
 export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+export const OPENSRP_SINGLE_CLIENT_ENDPOINT = 'client/search';
+export type OPENSRP_SINGLE_CLIENT_ENDPOINT = typeof OPENSRP_SINGLE_CLIENT_ENDPOINT;
+export const OPENSRP_EVENT_ENDPOINT = 'event/search';
+export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
 // internal urls
 export const LOGIN_URL = '/login';
@@ -16,6 +20,8 @@ export type CLIENT_PROFILE_URL = typeof CLIENT_PROFILE_URL;
 export const HOUSEHOLD_URL = '/households';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
 export const ANC_URL = '/anc';
+export const HOUSEHOLD_PROFILE_URL = '/household-profile/:id';
+export type HOUSEHOLD_PROFILE_URL = typeof HOUSEHOLD_PROFILE_URL;
 export type ANC_URL = typeof ANC_URL;
 export const ANC_PROFILE_URL = '/anc-profile';
 export type ANC_PROFILE_URL = typeof ANC_PROFILE_URL;
@@ -23,8 +29,6 @@ export const CHILD_URL = '/child';
 export type CHILD_URL = typeof CHILD_URL;
 export const CHILD_PROFILE_URL = '/child-profile';
 export type CHILD_PROFILE_URL = typeof CHILD_PROFILE_URL;
-export const HOUSEHOLD_PROFILE_URL = '/household-profile';
-export type HOUSEHOLD_PROFILE_URL = typeof HOUSEHOLD_PROFILE_URL;
 export const USER_URL = '/404';
 export type USER_URL = typeof USER_URL;
 export const ROLE_URL = '/404';
