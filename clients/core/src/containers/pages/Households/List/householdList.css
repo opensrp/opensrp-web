@@ -1,5 +1,5 @@
 .household-search-bar{
-  margin: 24px 0px 24px 0px;
+  margin: 0px 0px 24px 0px;
 }
 
 .table {
@@ -26,6 +26,7 @@ tbody {
 
 .household-title{
   color: #3A484F;
+  margin-bottom: 24px;
 }
 
 .back-btn-bg{

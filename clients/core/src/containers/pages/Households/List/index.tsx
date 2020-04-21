@@ -126,7 +126,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
             return (
                 <div>
                     <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
-                    <Row>
+                    <Row className="filter-row">
                         <Col md={5}>
                             <div className="household-search-bar">
                                 <SearchBox searchCallBack={this.search} placeholder={this.state.searchPlaceholder} />
