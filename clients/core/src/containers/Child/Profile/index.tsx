@@ -29,12 +29,13 @@ import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import InfoCard from '../../../components/page/InfoCardV1';
+// import InfoCard from '../../../components/page/InfoCardV1';
 import { generateOptions } from '../../../services/opensrp';
+import InfoCard from '../../../components/page/InfoCard';
 
 const options: Highcharts.Options = {
     title: {
-        text: 'My chart',
+        text: 'Child weight for age growth chart',
     },
 
     tooltip: {
@@ -171,7 +172,36 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     </span>
                     <h3> Child </h3>
                 </div>
-                <InfoCard rowData={[]} title={'Basic Information'} link={'/child'} linkLable={'edit profile'} />
+                <InfoCard title="Basic information">
+                    <Col className="info-body">
+                        <Table className="info-table" borderless={true}>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">HHID Number</td>
+                                    <td>{child.baseEntityId}</td>
+                                    <td className="info-label">Phone</td>
+                                    <td>{child.attributes.phoneNumber || ''}</td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Family Name</td>
+                                    <td>{child.lastName}</td>
+                                    <td className="info-label">Provider</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Head of Household</td>
+                                    <td>{child.firstName}</td>
+                                    <td className="info-label">Register date</td>
+                                    <td>{child.dateCreated || ''}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Col>
+                </InfoCard>
                 <div style={{ marginTop: '30px' }}></div>
                 <div id="members-list-container">
                     <Row>
@@ -257,8 +287,12 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                             </TabContent>
                         </Col>
                     </Row>
+                </div>
+                <div id="members-list-container">
                     <Row>
-                        <HighchartsReact highcharts={Highcharts} options={options} />
+                        <div className="chart-div">
+                            <HighchartsReact highcharts={Highcharts} options={options} />
+                        </div>
                     </Row>
                 </div>
             </Container>

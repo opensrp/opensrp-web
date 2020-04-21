@@ -75,3 +75,7 @@
   .table {
     border: 0px outset #f2f2f2;
 }
+
+.chart-div {
+  margin-left: 50px;
+}
