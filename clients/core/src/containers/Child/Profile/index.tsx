@@ -29,7 +29,7 @@ import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import InfoCard from '../../../components/page/InfoCard';
+import InfoCard from '../../../components/page/InfoCardV1';
 
 const options: Highcharts.Options = {
     title: {
