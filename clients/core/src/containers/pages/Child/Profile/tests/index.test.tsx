@@ -3,21 +3,21 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import store from '../../../../store';
+import store from '../../../../../store';
 import childReducer, {
     Child,
     fetchChildList,
     reducerName as childReducerName,
     removeChildList,
-} from '../../../../store/ducks/child';
+} from '../../../../../store/ducks/child';
 import eventReducer, {
     fetchEvents,
     reducerName as eventReducerName,
     removeEvents,
-} from '../../../../store/ducks/events';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
+} from '../../../../../store/ducks/events';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 import ConnectedChildProfile, { ChildProfile } from '../index';
-import { CHILD } from '../../../../constants';
+import { CHILD } from '../../../../../constants';
 import { createHashHistory, createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';

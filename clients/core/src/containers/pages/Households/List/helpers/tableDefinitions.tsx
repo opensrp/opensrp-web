@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { UseTableCellProps } from 'react-table';
-import { Household } from '../../../../store/ducks/households';
-import { VIEW, HOUSEHOLD_PROFILE_URL } from '../../../../constants';
+import { Household } from '../../../../../store/ducks/households';
+import { VIEW, HOUSEHOLD_PROFILE_URL } from '../../../../../constants';
 
 // Household specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

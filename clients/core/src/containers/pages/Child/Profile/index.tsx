@@ -15,23 +15,23 @@ import childReducer, {
     reducerName as childReducerName,
     getChildArray,
     Child,
-} from '../../../store/ducks/child';
+} from '../../../../store/ducks/child';
 import eventReducer, {
     Event,
     fetchEvents,
     removeEvents,
     reducerName as eventReducerName,
     getEventsArray,
-} from '../../../store/ducks/events';
-import Loading from '../../../components/page/Loading';
-import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
+} from '../../../../store/ducks/events';
+import Loading from '../../../../components/page/Loading';
+import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import SeamlessImmutable from 'seamless-immutable';
-import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
+import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 // import InfoCard from '../../../components/page/InfoCardV1';
-import { generateOptions } from '../../../services/opensrp';
-import InfoCard from '../../../components/page/InfoCard';
+import { generateOptions } from '../../../../services/opensrp';
+import InfoCard from '../../../../components/page/InfoCard';
 
 const options: Highcharts.Options = {
     title: {

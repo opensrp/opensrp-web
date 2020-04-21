@@ -29,9 +29,9 @@ import ConnectedANCList from '../containers/pages/ANC/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
-import ConnectedHouseholdList from '../containers/Households/List';
-import ConnectedHouseholdProfile from '../containers/Households/Profile';
-import ChildProfile from '../containers/Child/Profile';
+import ConnectedHouseholdList from '../containers/pages/Households/List';
+import ConnectedHouseholdProfile from '../containers/pages/Households/Profile';
+import ChildProfile from '../containers/pages/Child/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 

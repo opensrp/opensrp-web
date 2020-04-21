@@ -2,17 +2,17 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import store from '../../../../store';
+import store from '../../../../../store';
 import householdsReducer, {
     reducerName as householdsReducerName,
     fetchHouseholds,
     setTotalRecords,
     removeHouseholds,
-} from '../../../../store/ducks/households';
+} from '../../../../../store/ducks/households';
 import ConnectedHouseholdList, { HouseholdList, HouseholdListProps } from '../index';
-import * as fixtures from '../../../../store/ducks/tests/fixtures';
-import * as householdDucks from '../../../../store/ducks/households';
-import { HOUSEHOLD_URL } from '../../../../constants';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
+import * as householdDucks from '../../../../../store/ducks/households';
+import { HOUSEHOLD_URL } from '../../../../../constants';
 import { createBrowserHistory } from 'history';
 
 reducerRegistry.register(householdsReducerName, householdsReducer);

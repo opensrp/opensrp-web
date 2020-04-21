@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter, match } from 'react-router-dom';
 import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
-import Loading from '../../../components/page/Loading';
+import Loading from '../../../../components/page/Loading';
 import {
     HOUSEHOLD_URL,
     OPENSRP_CLIENT_ENDPOINT,
     OPENSRP_EVENT_ENDPOINT,
     OPENSRP_SINGLE_CLIENT_ENDPOINT,
-} from '../../../constants';
+} from '../../../../constants';
 import { OpenSRPService } from '@opensrp/server-service';
 
 import clientReducer, {
@@ -20,25 +20,25 @@ import clientReducer, {
     getClientsArray,
     reducerName as clientsReducer,
     removeClients,
-} from '../../../store/ducks/clients';
+} from '../../../../store/ducks/clients';
 import eventReducer, {
     Event,
     fetchEvents,
     getEventsArray,
     reducerName as eventReducerName,
-} from '../../../store/ducks/events';
+} from '../../../../store/ducks/events';
 import householdsReducer, {
     fetchHouseholds,
     getHouseholdsArray,
     Household,
     reducerName as householdReducerName,
-} from '../../../store/ducks/households';
+} from '../../../../store/ducks/households';
 import './householdProfile.css';
-import { OPENSRP_API_BASE_URL } from '../../../configs/env';
-import { generateOptions } from '../../../services/opensrp';
+import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { generateOptions } from '../../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useMemberTableColumns } from './helpers/tableDefinition';
-import InfoCard from '../../../components/page/InfoCard';
+import InfoCard from '../../../../components/page/InfoCard';
 import { createMemoryHistory, createLocation } from 'history';
 
 /** register the event reducer */

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { VIEW } from '../../../../constants';
+import { VIEW } from '../../../../../constants';
 import { UseTableCellProps } from 'react-table';
-import { Client } from '../../../../store/ducks/clients';
+import { Client } from '../../../../../store/ducks/clients';
 // Child specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useMemberTableColumns = () => {
