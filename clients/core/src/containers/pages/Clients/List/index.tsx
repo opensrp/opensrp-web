@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { Store, ActionCreator } from 'redux';
 import Loading from '../../../../components/page/Loading';
-import { OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {
     Client,
@@ -19,7 +19,7 @@ import './clientList.css';
 import SearchBox from '../../../../components/page/SearchBox';
 import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
-import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS } from '../../../../constants';
+import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
