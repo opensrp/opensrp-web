@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { Store } from 'redux';
-import { OpenSRPService } from '../../../services/opensrp';
+import { OpenSRPService } from '@opensrp/server-service';
 import './childProfile.css';
 import vaccinationConfig from './utils/vaccinationConfig';
 import classnames from 'classnames';
@@ -24,12 +24,13 @@ import eventReducer, {
     getEventsArray,
 } from '../../../store/ducks/events';
 import Loading from '../../../components/page/Loading';
-import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../configs/env';
+import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../configs/env';
 import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import InfoCard from '../../../components/page/InfoCardV1';
+import { generateOptions } from '../../../services/opensrp';
 
 const options: Highcharts.Options = {
     title: {
@@ -99,11 +100,11 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(`/client/search`);
+        const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `/client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
         fetchChild(profileResponse);
 
-        const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
+        const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
     }
