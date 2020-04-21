@@ -27,9 +27,9 @@ describe('reducers/clients', () => {
         // also how reducer handles actions on empty state.
         store.dispatch(fetchEvents(fixtures.events));
         expect(getEventsById(store.getState())).toEqual({
-            [fixtures.event1.baseEntityId]: fixtures.event1,
-            [fixtures.event2.baseEntityId]: fixtures.event2,
-            [fixtures.event3.baseEntityId]: fixtures.event3,
+            [fixtures.event1.formSubmissionId]: fixtures.event1,
+            [fixtures.event2.formSubmissionId]: fixtures.event2,
+            [fixtures.event3.formSubmissionId]: fixtures.event3,
         });
         expect(getEventsArray(store.getState())).toEqual(fixtures.events);
     });
@@ -53,8 +53,8 @@ describe('reducers/clients', () => {
     it('remove events action works', () => {
         store.dispatch(fetchEvents([fixtures.event1, fixtures.event2]));
         expect(getEventsById(store.getState())).toEqual({
-            '5e8b72c5-0b36-9d7d-829f-279d1482c96a': fixtures.event2,
-            '6e8b72c5-0b36-4e46-829f-8ujd1482c96a': fixtures.event1,
+            'f5e0c01d-1d1a-4667-911e-ebc3ac075093': fixtures.event2,
+            'f6e0c01d-1d1a-4462-ab56-a83eac075093': fixtures.event1,
         });
         store.dispatch(removeEvents());
         expect(getEventsArray(store.getState())).toEqual([]);

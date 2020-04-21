@@ -32,3 +32,17 @@ export function readableDate(date: number | string): string {
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     return `${month} ${day}, ${year}`;
 }
+export function calculateAge(dob: number) {
+    const date = new Date(dob);
+    return Math.abs(date.getUTCFullYear() - new Date().getFullYear());
+}
+
+/**
+ *
+ * @param startDate = yyyy-MM-DD
+ * @param endDate = yyyy-MM-DD
+ */
+export function countDaysBetweenDate(startDate: number, endDate: number) {
+    const timeDiff = (new Date(endDate) as any) - (new Date(startDate) as any);
+    return timeDiff / (1000 * 60 * 60 * 24);
+}
