@@ -106,10 +106,13 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
 
     public async componentDidMount(): Promise<void> {
         const { fetchClient, fetchMembers, fetchEvents, match, removeMembers, opensrpService } = this.props;
-        const householdId = match.params.id || 'ea0edc48-4752-4ad0-a834-f1f68c7ae310';
+        const householdId = match.params.id;
+
+        console.log('paramsId --->', match.params.id);
         const params = { identifier: householdId };
         const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_SINGLE_CLIENT_ENDPOINT, generateOptions);
         const clientResponse = await clientService.list(params);
+
         if (clientResponse[0]) {
             fetchClient(clientResponse);
             const eventService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);

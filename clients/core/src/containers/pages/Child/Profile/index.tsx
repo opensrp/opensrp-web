@@ -35,7 +35,7 @@ import InfoCard from '../../../../components/page/InfoCard';
 
 const options: Highcharts.Options = {
     title: {
-        text: 'Child weight for age growth chart',
+        text: 'Child Weight for age growth chart',
     },
 
     tooltip: {
@@ -47,7 +47,7 @@ const options: Highcharts.Options = {
                 <table>
                     <tbody>
                         <tr>
-                            <td style='padding-right: 20px;font-size: 25px;'> weight </td>
+                            <td style='padding-right: 20px;font-size: 20px;'> weight </td>
                             <td> <b>68.6kg</b> </td>
                             <td style='color: lawngreen'> <b> &uarr; </b> </td>
                             <td style='color: lawngreen'> +23 </td>
@@ -289,6 +289,11 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     </Row>
                 </div>
                 <div id="members-list-container">
+                    <Row>
+                        <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
+                            <h5> Weight for age growth chart: </h5>
+                        </Col>
+                    </Row>
                     <Row>
                         <div className="chart-div">
                             <HighchartsReact highcharts={Highcharts} options={options} />
