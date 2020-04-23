@@ -18,29 +18,18 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
         className="nav nav-link side-nav-item"
       >
         <FontAwesomeIcon
-          border={false}
-          className=""
-          fixedWidth={false}
-          flip={null}
           icon={
             Array [
               "far",
               "user",
             ]
           }
-          inverse={false}
-          listItem={false}
-          mask={null}
-          pull={null}
-          pulse={false}
-          rotation={null}
           size="lg"
-          spin={false}
-          swapOpacity={false}
-          symbol={false}
-          title=""
-          transform={null}
-        />
+        >
+          <i
+            className="fa"
+          />
+        </FontAwesomeIcon>
         <span
           className="collapse-menu-title"
         >
@@ -85,7 +74,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -249,11 +249,11 @@
+@@ -238,11 +238,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -98,7 +87,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -265,11 +265,11 @@
+@@ -254,11 +254,11 @@
                       >
                         <Transition
                           appear={false}
@@ -111,7 +100,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -277,12 +277,16 @@
+@@ -266,12 +266,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
