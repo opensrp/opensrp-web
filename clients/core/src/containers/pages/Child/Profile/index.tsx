@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { Store } from 'redux';
-import { OpenSRPService } from '../../../../services/opensrp';
+import { OpenSRPService } from '@opensrp/server-service';
 import './childProfile.css';
 import vaccinationConfig from './utils/vaccinationConfig';
 import classnames from 'classnames';
@@ -24,16 +24,18 @@ import eventReducer, {
     getEventsArray,
 } from '../../../../store/ducks/events';
 import Loading from '../../../../components/page/Loading';
-import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT } from '../../../../configs/env';
+import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import SeamlessImmutable from 'seamless-immutable';
 import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import InfoCard from '../../../../components/page/InfoCardV1';
+// import InfoCard from '../../../components/page/InfoCardV1';
+import { generateOptions } from '../../../../services/opensrp';
+import InfoCard from '../../../../components/page/InfoCard';
 
 const options: Highcharts.Options = {
     title: {
-        text: 'My chart',
+        text: 'Child Weight for age growth chart',
     },
 
     tooltip: {
@@ -45,7 +47,7 @@ const options: Highcharts.Options = {
                 <table>
                     <tbody>
                         <tr>
-                            <td style='padding-right: 20px;font-size: 25px;'> weight </td>
+                            <td style='padding-right: 20px;font-size: 20px;'> weight </td>
                             <td> <b>68.6kg</b> </td>
                             <td style='color: lawngreen'> <b> &uarr; </b> </td>
                             <td style='color: lawngreen'> +23 </td>
@@ -99,11 +101,11 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(`/client/search`);
+        const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `/client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
         fetchChild(profileResponse);
 
-        const eventService = new OpenSRPService(`${OPENSRP_EVENT_ENDPOINT}`);
+        const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
     }
@@ -170,7 +172,36 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     </span>
                     <h3> Child </h3>
                 </div>
-                <InfoCard rowData={[]} title={'Basic Information'} link={'/child'} linkLable={'edit profile'} />
+                <InfoCard title="Basic information">
+                    <Col className="info-body">
+                        <Table className="info-table" borderless={true}>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">HHID Number</td>
+                                    <td>{child.baseEntityId}</td>
+                                    <td className="info-label">Phone</td>
+                                    <td>{child.attributes.phoneNumber || ''}</td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Family Name</td>
+                                    <td>{child.lastName}</td>
+                                    <td className="info-label">Provider</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Head of Household</td>
+                                    <td>{child.firstName}</td>
+                                    <td className="info-label">Register date</td>
+                                    <td>{child.dateCreated || ''}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Col>
+                </InfoCard>
                 <div style={{ marginTop: '30px' }}></div>
                 <div id="members-list-container">
                     <Row>
@@ -256,8 +287,17 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                             </TabContent>
                         </Col>
                     </Row>
+                </div>
+                <div id="members-list-container">
                     <Row>
-                        <HighchartsReact highcharts={Highcharts} options={options} />
+                        <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
+                            <h5> Weight for age growth chart: </h5>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <div className="chart-div">
+                            <HighchartsReact highcharts={Highcharts} options={options} />
+                        </div>
                     </Row>
                 </div>
             </Container>
