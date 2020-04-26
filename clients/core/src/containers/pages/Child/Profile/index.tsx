@@ -3,12 +3,11 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
 import { OpenSRPService } from '@opensrp/server-service';
 import './childProfile.css';
-import vaccinationConfig from './utils/vaccinationConfig';
-import classnames from 'classnames';
+
 import childReducer, {
     fetchChildList,
     removeChildList,
@@ -24,12 +23,10 @@ import eventReducer, {
     getEventsArray,
 } from '../../../../store/ducks/events';
 import Loading from '../../../../components/page/Loading';
-import { OPENSRP_EVENT_ENDPOINT, OPENSRP_CLIENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
-import SeamlessImmutable from 'seamless-immutable';
-import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
+import { OPENSRP_EVENT_ENDPOINT, OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { countDaysBetweenDate } from '../../../../helpers/utils';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-// import InfoCard from '../../../components/page/InfoCardV1';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
@@ -40,7 +37,7 @@ const options: Highcharts.Options = {
     },
 
     tooltip: {
-        formatter(tooltip: Highcharts.TooltipOptions) {
+        formatter() {
             return `
             <div style='background-color: white;'>
                 <div> 12 vs 14 </div>
@@ -139,7 +136,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `/client/search`, generateOptions);
+        const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
         removeChild();
         fetchChild(profileResponse);
@@ -151,9 +148,11 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
     }
 
     getRegisterData = (): RegisterPanelData[] => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let registerData: any = {};
 
-        const getProperty = (vaccineTakenDate: any): string => {
+        const getProperty = (vaccineTakenDate: number): string => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const days = countDaysBetweenDate(this.props.child!.birthdate, vaccineTakenDate);
             if (days % 7 === 0) return days / 7 + '_weeks ';
             else {
@@ -162,7 +161,8 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         };
 
         this.props.events
-            .filter((d: any) => d.eventType === 'Vaccination')
+            .filter((d: Event) => d.eventType === 'Vaccination')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .map((data: any) => {
                 const timeProperty: string = getProperty(data.obs[0].values[0]);
                 registerData = {
@@ -176,8 +176,8 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                 };
             });
         return Object.keys(registerData)
-            .filter((k: any) => k !== 'takenDate' && k !== 'providerId')
-            .map((k: any) => {
+            .filter((k: string) => k !== 'takenDate' && k !== 'providerId')
+            .map((k: string) => {
                 return {
                     report: k,
                     message: registerData[k],

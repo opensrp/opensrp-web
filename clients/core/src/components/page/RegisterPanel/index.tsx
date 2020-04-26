@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Table } from 'reactstrap';
 import './index.css';
 import classnames from 'classnames';
-import { Client } from '../../../store/ducks/clients';
+
 import { ChildBasicInfo } from '../../../containers/pages/Child/Profile';
 
 export interface RegisterPanelData {
@@ -14,6 +14,7 @@ export interface RegisterPanelData {
 
 export interface RegisterPanelProps {
     registerData: RegisterPanelData[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     client: any;
     tabs: string[];
 }
