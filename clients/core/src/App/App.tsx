@@ -20,7 +20,7 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
-import ChildProfile from '../containers/Child/Profile';
+import ChildProfile from '../containers/pages/Child/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
