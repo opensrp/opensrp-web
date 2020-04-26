@@ -37,7 +37,7 @@ const matchVariable: match<{ id: string }> = {
 
 const location = createLocation(matchVariable.url);
 
-jest.mock('../../../../configs/env');
+jest.mock('../../../../../configs/env');
 describe('containers/child/profile/childProfile', () => {
     beforeEach(() => {
         jest.resetAllMocks();
