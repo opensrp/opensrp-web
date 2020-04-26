@@ -41,7 +41,7 @@ describe('helpers/utils', () => {
     });
 
     it('should calculate age correctly', () => {
-        const timestamp: number = 1265068800000;
+        const timestamp = 1265068800000;
         expect(calculateAge(timestamp)).toBe(10);
     });
 

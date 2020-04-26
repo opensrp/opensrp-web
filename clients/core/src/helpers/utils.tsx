@@ -36,6 +36,7 @@ export function calculateAge(dob: number) {
  * @param endDate = yyyy-MM-DD
  */
 export function countDaysBetweenDate(startDate: number, endDate: number) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const timeDiff = (new Date(endDate) as any) - (new Date(startDate) as any);
     return timeDiff / (1000 * 60 * 60 * 24);
 }
