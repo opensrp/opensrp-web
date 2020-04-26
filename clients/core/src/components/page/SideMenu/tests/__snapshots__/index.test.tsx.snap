@@ -18,29 +18,18 @@ exports[`components/page/SideMenu renders side menu correctly 1`] = `
         className="nav nav-link side-nav-item"
       >
         <FontAwesomeIcon
-          border={false}
-          className=""
-          fixedWidth={false}
-          flip={null}
           icon={
             Array [
               "far",
               "user",
             ]
           }
-          inverse={false}
-          listItem={false}
-          mask={null}
-          pull={null}
-          pulse={false}
-          rotation={null}
           size="lg"
-          spin={false}
-          swapOpacity={false}
-          symbol={false}
-          title=""
-          transform={null}
-        />
+        >
+          <i
+            className="fa"
+          />
+        </FontAwesomeIcon>
         <span
           className="collapse-menu-title"
         >
@@ -59,7 +48,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
 - First value
 + Second value
 
-@@ -103,11 +103,11 @@
+@@ -112,11 +112,11 @@
                         \\"label\\": \\"All clients\\",
                         \\"url\\": \\"/clients\\",
                       },
@@ -72,7 +61,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                     Object {
                       \\"icon\\": Array [
                         \\"far\\",
-@@ -125,11 +125,11 @@
+@@ -134,11 +134,11 @@
                           \\"label\\": \\"All clients\\",
                           \\"url\\": \\"/clients\\",
                         },
@@ -85,7 +74,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         \\"action\\": \\"POP\\",
                         \\"block\\": [Function block],
                         \\"createHref\\": [Function createHref],
-@@ -240,11 +240,11 @@
+@@ -238,11 +238,11 @@
                       <Collapse
                         appear={false}
                         enter={true}
@@ -98,7 +87,7 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                         onEntered={[Function noop]}
                         onEntering={[Function noop]}
                         onExit={[Function noop]}
-@@ -256,11 +256,11 @@
+@@ -254,11 +254,11 @@
                       >
                         <Transition
                           appear={false}
@@ -111,16 +100,14 @@ exports[`components/page/SideMenu sets the collapsedModuleLabel correctly from c
                           onEntered={[Function bound onEntered]}
                           onEntering={[Function bound onEntering]}
                           onExit={[Function bound onExit]}
-@@ -268,13 +268,17 @@
+@@ -266,12 +266,16 @@
                           onExiting={[Function bound onExiting]}
                           timeout={350}
                           unmountOnExit={false}
                         >
                           <div
--                           aria-expanded=\\"false\\"
 -                           className=\\"collapse\\"
 -                           style={Object {}}
-+                           aria-expanded=\\"true\\"
 +                           className=\\"collapsing\\"
 +                           style={
 +                             Object {

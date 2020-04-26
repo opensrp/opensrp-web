@@ -15,28 +15,7 @@ exports[`components/page/Searchbox renders without crashing: SearchBox ion 1`] =
   className="input-group-btn search-bar-icon"
 >
   <FontAwesomeIcon
-    border={false}
-    className=""
-    fixedWidth={false}
-    flip={null}
-    icon={
-      Array [
-        "fas",
-        "search",
-      ]
-    }
-    inverse={false}
-    listItem={false}
-    mask={null}
-    pull={null}
-    pulse={false}
-    rotation={null}
-    size={null}
-    spin={false}
-    swapOpacity={false}
-    symbol={false}
-    title=""
-    transform={null}
+    icon="search"
   />
 </span>
 `;

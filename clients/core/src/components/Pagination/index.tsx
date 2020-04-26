@@ -1,45 +1,8 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import { ActionTypes, PaginationOptions, PaginationState, usePagination } from '@onaio/pagination';
+import { PaginationOptions, usePagination } from './onaioPagination';
 import { fetchPageNumbers } from './utils';
 import { BootstrapJSX } from './JSX';
-import { AnyAction } from 'redux';
-
-/** a util function that takes in the usePagination state
- * and uses some of its properties to calculate the pagination pages
- * to be displayed based on the currently selected page
- */
-export const fetchPagesToDisplay = (state: PaginationState<ExtendingOptions>): string[] => {
-    const { totalRecords, pageNeighbors, pageSize, currentPage } = state;
-    return fetchPageNumbers(totalRecords, pageNeighbors, pageSize, currentPage);
-};
-
-/** describes the properties that we are going to add to the usePagination hook's state */
-export interface ExtendingOptions {
-    fetchPagesToDisplay: typeof fetchPagesToDisplay;
-    pageNeighbors: number;
-    pagesToDisplay: string[];
-}
-
-/** custom reducer: adds some properties to state specific to bootstrap ie.
- *  adds the property `pagesToDisplay` to the state so that we can have a limited
- * number of pagination items displayed by the pagination component at any one time
- */
-export function bootstrapReducer(
-    state: PaginationState<ExtendingOptions>,
-    action: ActionTypes<ExtendingOptions, AnyAction>,
-): PaginationState<ExtendingOptions> {
-    switch (action.type) {
-        case 'TO_PAGE':
-            const pagesToDisplay = action.changes.fetchPagesToDisplay(action.changes);
-            return {
-                ...action.changes,
-                pagesToDisplay,
-            };
-        default:
-            return state;
-    }
-}
 
 /** describes props object to the Pagination component */
 export interface Props {
@@ -61,17 +24,8 @@ const Pagination: React.FC<Props> = props => {
     const { onPageChangeHandler, pageNeighbors, pageSize, totalRecords } = props;
 
     const initialPageSize = pageSize;
-    const initialDisplayedPages = fetchPageNumbers(totalRecords, pageNeighbors, initialPageSize);
-
-    const options: PaginationOptions<ExtendingOptions> = {
-        initialState: {
-            fetchPagesToDisplay,
-            pageNeighbors,
-            pagesToDisplay: initialDisplayedPages,
-        },
+    const options: PaginationOptions = {
         pageSize: initialPageSize,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        reducer: bootstrapReducer as any,
         totalRecords: totalRecords,
     };
 
@@ -86,6 +40,12 @@ const Pagination: React.FC<Props> = props => {
         canPreviousPage,
     } = usePagination(options);
 
+    const pagesToDisplay = fetchPageNumbers(totalRecords, pageNeighbors, pageSize, paginationState.currentPage);
+    const customPaginationState = {
+        ...paginationState,
+        pagesToDisplay,
+    };
+
     React.useEffect(() => {
         onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
     }, [paginationState.currentPage]);
@@ -93,7 +53,7 @@ const Pagination: React.FC<Props> = props => {
     return (
         <BootstrapJSX
             {...{
-                paginationState,
+                paginationState: customPaginationState,
                 nextPage,
                 firstPage,
                 lastPage,

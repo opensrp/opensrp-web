@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faChartLine, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faCog, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConnectedPrivateRoute from '@onaio/connected-private-route';
 import { ConnectedLogout, ConnectedOauthCallback, OauthLogin } from '@onaio/gatekeeper';
 import React, { Component } from 'react';
@@ -10,18 +10,19 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_PROFILE_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, CHILD_PROFILE_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
-import ConnectedClientList from '../containers/Clients/List';
+import ConnectedClientList from '../containers/pages/Clients/List';
+import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import ChildProfile from '../containers/Child/Profile';
 
-library.add(faUser, faChartLine, faCog);
+library.add(faUser, faChartLine, faCog, faSearch);
 
 /** Main App component */
 class App extends Component {
@@ -52,6 +53,12 @@ class App extends Component {
                                 exact={true}
                                 path={CLIENT_URL}
                                 component={ConnectedClientList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={CHILD_URL}
+                                component={ConnectedChildList}
                             />
 
                             <Route
