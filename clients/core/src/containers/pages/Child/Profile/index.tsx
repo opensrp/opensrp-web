@@ -99,7 +99,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         const { fetchChild, fetchEvents } = this.props;
         const { match } = this.props;
         const params = {
-            identifier: match.params.id,
+            identifier: `189148d5-61ed-4607-b398-6eceb2203c8d`,
         };
         const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `/client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
