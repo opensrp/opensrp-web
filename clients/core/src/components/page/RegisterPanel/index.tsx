@@ -3,6 +3,7 @@ import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Table } from 'rea
 import './index.css';
 import classnames from 'classnames';
 import { Client } from '../../../store/ducks/clients';
+import { ChildBasicInfo } from '../../../containers/pages/Child/Profile';
 
 export interface RegisterPanelData {
     report: string;
@@ -13,7 +14,7 @@ export interface RegisterPanelData {
 
 export interface RegisterPanelProps {
     registerData: RegisterPanelData[];
-    client: Client;
+    client: any;
     tabs: string[];
 }
 
@@ -36,87 +37,56 @@ class RegisterPanel extends React.Component<RegisterPanelProps, RegisterPanelSta
 
     render() {
         const { client, registerData, tabs } = this.props;
+        const { activeTab } = this.state;
         return (
-            <div id="members-list-container">
-                <Row>
-                    <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
-                        <h5> RegisterPanels: </h5>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md="12">
-                        <Nav style={{ marginLeft: '2.5%' }} tabs>
-                            {tabs.map((tabName: string, index: number) => {
+            <>
+                <Col md="12">
+                    <Nav style={{ marginLeft: '2.5%' }} tabs>
+                        {tabs.map((tabName: string, index: number) => {
+                            return (
                                 <NavItem key={index} onClick={() => this.changeTab(tabName)}>
-                                    <NavLink className={classnames({ active: this.state.activeTab === tabName })}>
+                                    <NavLink className={classnames({ active: activeTab === tabName })}>
                                         {tabName}
                                     </NavLink>
-                                </NavItem>;
-                            })}
-                        </Nav>
-                        <TabContent activeTab={'1'}>
-                            <TabPane tabId="1">
-                                <Row>
-                                    <Col className="basic-info-body">
-                                        <Table className="basic-info-table" borderless={true}>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="basic-info-label">HHID Number</td>
-                                                    <td></td>
-                                                    <td className="basic-info-label">Phone</td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="basic-info-label">Family Name</td>
-                                                    <td></td>
-                                                    <td className="basic-info-label">Provider</td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="basic-info-label">Head of Household</td>
-                                                    <td></td>
-                                                    <td className="basic-info-label">RegisterPanel date</td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </Table>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className="members-list-body" style={{ padding: '30px' }}>
-                                        <Table style={{ border: '2px solid #e8e8e9' }}>
-                                            <thead style={{ backgroundColor: '#f5f5f5' }}>
-                                                <tr>
-                                                    <td>Report</td>
-                                                    <td>Date</td>
-                                                    <td>Reporter</td>
-                                                    <td style={{ width: '50%' }}>Message</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {registerData.map((data: RegisterPanelData, index: number) => {
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td>{data.report}</td>
-                                                            <td> {data.date} </td>
-                                                            <td>{data.reporter}</td>
-                                                            <td>{data.message}</td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </Table>
-                                    </Col>
-                                </Row>
-                            </TabPane>
-                        </TabContent>
-                    </Col>
-                </Row>
-            </div>
+                                </NavItem>
+                            );
+                        })}
+                    </Nav>
+                    <TabContent activeTab={'1'}>
+                        <TabPane tabId="1">
+                            <Row>
+                                <ChildBasicInfo child={client} />
+                            </Row>
+                            <Row>
+                                <Col className="members-list-body" style={{ padding: '30px' }}>
+                                    <Table style={{ border: '2px solid #e8e8e9' }}>
+                                        <thead style={{ backgroundColor: '#f5f5f5' }}>
+                                            <tr>
+                                                <td>Report</td>
+                                                <td>Date</td>
+                                                <td>Reporter</td>
+                                                <td style={{ width: '50%' }}>Message</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {registerData.map((data: RegisterPanelData, index: number) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{data.report}</td>
+                                                        <td> {data.date} </td>
+                                                        <td>{data.reporter}</td>
+                                                        <td>{data.message}</td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </TabPane>
+                    </TabContent>
+                </Col>
+            </>
         );
     }
 }
