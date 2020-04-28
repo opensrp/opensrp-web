@@ -327,7 +327,7 @@ exports[`components/RegisterPanel renders the InfoCard component 1`] = `
                   className="row"
                 >
                   <Col
-                    className="members-list-body"
+                    className="register-section"
                     style={
                       Object {
                         "padding": "30px",
@@ -345,7 +345,7 @@ exports[`components/RegisterPanel renders the InfoCard component 1`] = `
                     }
                   >
                     <div
-                      className="members-list-body col"
+                      className="register-section col"
                       style={
                         Object {
                           "padding": "30px",

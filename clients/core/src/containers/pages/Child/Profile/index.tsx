@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter, match } from 'react-router-dom';
 import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
 import { OpenSRPService } from '@opensrp/server-service';
@@ -30,6 +30,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
+import { createMemoryHistory, createLocation } from 'history';
 
 const options: Highcharts.Options = {
     title: {
@@ -88,13 +89,34 @@ export interface ChildProfileProps extends RouteComponentProps<ChildProfileParam
     removeChild: typeof removeChildList;
     fetchEvents: typeof fetchEvents;
     removeEvents: typeof removeEvents;
-    child: Child | undefined;
+    opensrpService: typeof OpenSRPService;
+    child: Child | null;
     events: Event[];
 }
 
 export interface ChildBasicInfo {
     child: Child;
 }
+
+const matchVariable: match<{ id: string }> = {
+    isExact: false,
+    params: { id: '1' },
+    path: '/household-profile/:id',
+    url: `/household-profile/${1}`,
+};
+
+export const defaultProps: ChildProfileProps = {
+    history: createMemoryHistory(),
+    location: createLocation(matchVariable.url),
+    match: matchVariable,
+    opensrpService: OpenSRPService,
+    fetchChild: fetchChildList,
+    removeChild: removeChildList,
+    fetchEvents: fetchEvents,
+    removeEvents: removeEvents,
+    child: null,
+    events: [],
+};
 
 export function ChildBasicInfo(props: ChildBasicInfo): React.ReactElement {
     return (
@@ -130,18 +152,19 @@ export function ChildBasicInfo(props: ChildBasicInfo): React.ReactElement {
 }
 
 export class ChildProfile extends React.Component<ChildProfileProps> {
+    public static defaultProps = defaultProps;
     public async componentDidMount() {
-        const { fetchChild, fetchEvents, removeEvents, removeChild } = this.props;
+        const { fetchChild, fetchEvents, removeEvents, removeChild, opensrpService } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
         };
-        const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
-        const profileResponse = await opensrpService.list(params);
+        const profileService = new opensrpService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
+        const profileResponse = await profileService.list(params);
         removeChild();
         fetchChild(profileResponse);
 
-        const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
+        const eventService = new opensrpService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
         removeEvents();
         fetchEvents(eventResponse);
@@ -185,46 +208,6 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     date: registerData.takenDate,
                 };
             });
-
-        // const vaccinationEeventList = this.props.events
-        //     .filter(d => d.eventType === 'Vaccination')
-        //     .map((d: any) => {
-        //         return {
-        //             ...d.obs[0],
-        //             providerId: d.providerId,
-        //         };
-        //     });
-        // const childHealth = SeamlessImmutable(vaccinationConfig).asMutable();
-        // childHealth.forEach((configData: any) => {
-        //     let flag = false,
-        //         provider = '',
-        //         date = '';
-        //     configData.vaccines.forEach((vaccination: any) => {
-        //         vaccinationEeventList.forEach((vaccinationEvent: any) => {
-        //             if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
-        //                 date = vaccinationEvent.values[0];
-        //                 provider = vaccinationEvent.providerId;
-        //             }
-        //             if (
-        //                 countDaysBetweenDate(this.props.child!.birthdate, vaccinationEvent.values[0]) <=
-        //                     configData.daysAfterBirthDue &&
-        //                 vaccination.field_name === vaccinationEvent.formSubmissionField
-        //             ) {
-        //                 flag = true;
-        //             }
-        //         });
-        //         vaccination = {
-        //             ...vaccination,
-        //             given: flag ? 'Yes' : 'No',
-        //         };
-        //         configData = {
-        //             ...configData,
-        //             provider,
-        //             givenDate: date,
-        //         };
-        //     });
-        // });
-        // return childHealth;
     };
 
     getRegisterConfig = (): RegisterPanelProps => {

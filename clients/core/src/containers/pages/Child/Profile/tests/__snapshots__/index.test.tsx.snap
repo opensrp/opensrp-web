@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/child/profile/childProfile calls the server and then render basic-info and current register correctly 1`] = `2`;
+
 exports[`containers/child/profile/childProfile renders correctly when clientsArray is an empty array: Ripple Loader 1`] = `
 <Ripple
   borderColor="#ff5d00"

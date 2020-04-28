@@ -37,12 +37,28 @@ const location = createLocation(matchVariable.url);
 
 jest.mock('../../../../../configs/env');
 describe('containers/child/profile/childProfile', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let classMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
+
+        const childMock = jest.fn(async () => {
+            return fixtures.childList;
+        });
+
+        const eventMock = jest.fn(async () => {
+            return fixtures.events;
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        classMock = jest.fn((a, b, c) => {
+            return {
+                list: b === 'client/search' ? childMock : eventMock,
+            };
+        });
     });
 
     it('renders without crashing', () => {
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             child: fixtures.child1,
             events: fixtures.events,
@@ -53,13 +69,12 @@ describe('containers/child/profile/childProfile', () => {
             location,
             match: matchVariable,
             history,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
         };
         shallow(<ChildProfile {...props} />);
     });
 
     it('renders correctly', () => {
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             child: fixtures.child1,
             events: fixtures.events,
@@ -70,7 +85,7 @@ describe('containers/child/profile/childProfile', () => {
             location,
             match: matchVariable,
             history,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
         };
         const wrapper = mount(
             <Router>
@@ -82,7 +97,6 @@ describe('containers/child/profile/childProfile', () => {
     });
 
     it('renders correctly when clientsArray is an empty array', () => {
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             child: undefined,
             events: fixtures.events,
@@ -93,7 +107,7 @@ describe('containers/child/profile/childProfile', () => {
             location,
             match: matchVariable,
             history,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
         };
         const wrapper = mount(<ChildProfile {...props} />);
         expect(toJson(wrapper.find('Ripple'))).toMatchSnapshot('Ripple Loader');
@@ -102,8 +116,6 @@ describe('containers/child/profile/childProfile', () => {
 
     it('works correctly with the redux store', () => {
         store.dispatch(fetchChildList(fixtures.childList));
-
-        const opensrpServiceMock: jest.Mock = jest.fn();
         const props = {
             child: fixtures.child3,
             events: fixtures.events,
@@ -114,7 +126,7 @@ describe('containers/child/profile/childProfile', () => {
             location,
             match: matchVariable,
             history,
-            opensrpService: opensrpServiceMock,
+            opensrpService: classMock,
         };
         const wrapper = mount(
             <Provider store={store}>
@@ -125,6 +137,33 @@ describe('containers/child/profile/childProfile', () => {
             </Provider>,
         );
         expect(wrapper.find('ChildProfile').length).toBe(1);
+        wrapper.unmount();
+    });
+
+    it('calls the server and then render basic-info and current register correctly', async () => {
+        const props = {
+            child: [],
+            events: [],
+            fetchChild: fetchChildList,
+            removeChild: removeChildList,
+            fetchEvents,
+            removeEvents,
+            location,
+            match: matchVariable,
+            history,
+            opensrpService: classMock,
+        };
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <ConnectedChildProfile {...props} />
+                </Router>
+                );
+            </Provider>,
+        );
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
+        expect(wrapper.find('.register-section').length).toMatchSnapshot();
         wrapper.unmount();
     });
 });

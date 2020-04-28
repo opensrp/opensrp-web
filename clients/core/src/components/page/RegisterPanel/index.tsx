@@ -59,7 +59,7 @@ class RegisterPanel extends React.Component<RegisterPanelProps, RegisterPanelSta
                                 <ChildBasicInfo child={client} />
                             </Row>
                             <Row>
-                                <Col className="members-list-body" style={{ padding: '30px' }}>
+                                <Col className="register-section" style={{ padding: '30px' }}>
                                     <Table style={{ border: '2px solid #e8e8e9' }}>
                                         <thead style={{ backgroundColor: '#f5f5f5' }}>
                                             <tr>
