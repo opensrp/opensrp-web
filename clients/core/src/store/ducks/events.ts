@@ -28,8 +28,9 @@ export interface Event {
     team: string;
     _id: string;
     _rev: string;
-    isSendToOpenMRS: string;
+    isSendToOpenMRS?: string;
     type: string;
+    childLocationId?: string;
 }
 
 /** The reducer name */

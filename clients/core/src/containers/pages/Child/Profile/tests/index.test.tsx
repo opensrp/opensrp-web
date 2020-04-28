@@ -47,7 +47,7 @@ describe('containers/child/profile/childProfile', () => {
         });
 
         const eventMock = jest.fn(async () => {
-            return fixtures.events;
+            return [fixtures.event4, fixtures.event5];
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
