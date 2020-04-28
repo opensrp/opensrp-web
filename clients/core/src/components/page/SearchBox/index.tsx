@@ -40,7 +40,7 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
             <div id="custom-search-input">
                 <InputGroup className="shadow-sm">
                     <span className="input-group-btn search-bar-icon">
-                        <FontAwesomeIcon icon={['fas', 'search']} />
+                        <FontAwesomeIcon icon="search" />
                     </span>
                     <Input
                         placeholder={this.props.placeholder}
