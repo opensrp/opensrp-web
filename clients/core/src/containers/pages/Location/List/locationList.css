@@ -1,13 +1,15 @@
 .filter-row {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
+
 .location-search-bar{
-    margin: 0px 0px 24px 0px;
+  margin: 0px 0px 24px 0px;
 }
+
 .province-dropdown {
-    padding-left: 0px;
-    margin-left: -10px;
+  margin-left: -10px;
 }
+
 .new-province {
-    padding: 1px 12px 25px 12px;
+  padding: 1px  12px  25px  12px;
 }
