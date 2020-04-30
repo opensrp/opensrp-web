@@ -22,7 +22,6 @@ import '../../../../assets/styles/dropdown.css';
 import { useLocationTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { OPENSRP_ADMIN_ENDPOINT } from '../../../../constants';
 import Select from 'react-select';
 import { DropdownOption } from '../../../../helpers/Dropdown';
 import { Link } from 'react-router-dom';
@@ -94,15 +93,15 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
 
     getDataFromServer = async (): Promise<void> => {
         const params = {
-            pageSize: 10,
-            pageNumber: 1,
+            pageSize: PAGINATION_SIZE,
+            pageNumber: this.state.currentPage,
         };
         const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, 'location/search-by-tag', generateOptions);
-        const response = await clientService.list(params);
-        // removeLocation();
-        // fetchLocation(response.clients);
-        // setTotalRecords(response.total);
+        const locationService = new opensrpService(OPENSRP_API_BASE_URL, 'location/search-by-tag', generateOptions);
+        const response = await locationService.list(params);
+        removeLocation();
+        fetchLocation(response.locations);
+        setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,

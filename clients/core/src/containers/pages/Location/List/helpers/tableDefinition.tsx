@@ -3,7 +3,8 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { UseTableCellProps } from 'react-table';
 // import { Child } from '../../../../../store/ducks/child';
-import { LOCATIONS_URL } from '../../../../../constants';
+import { LOCATIONS_URL, VIEW } from '../../../../../constants';
+import { Location } from '../../../../../store/ducks/adminLocation';
 // Location specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useLocationTableColumns = () => {
@@ -17,33 +18,33 @@ export const useLocationTableColumns = () => {
                 columns: [
                     {
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ row: { values } }: UseTableCellProps<any>): ReturnType<React.FC> => (
-                            <Link to={`/${values.baseEntityId}`}>{LOCATIONS_URL}</Link>
+                        Cell: ({ row: { values } }: UseTableCellProps<Location>): ReturnType<React.FC> => (
+                            <Link to={`/${LOCATIONS_URL}/${values.id}`}>{values['properties.name']}</Link>
                         ),
-                        Header: 'Province',
-                        accessor: '',
+                        Header: 'Location',
+                        accessor: 'properties.name',
                         disableSortBy: true,
                     },
                     {
                         Header: 'Identifier',
-                        accessor: 'firstName',
+                        accessor: 'id',
                         disableSortBy: true,
                     },
                     {
                         Header: 'Tag',
-                        accessor: 'lastName',
+                        accessor: 'properties.tagName',
                         disableSortBy: true,
                     },
 
                     {
                         Header: 'Parent Location',
-                        accessor: '',
+                        accessor: 'properties.parentName',
                         disableSortBy: true,
                     },
                     {
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ row: { values } }: UseTableCellProps<any>): ReturnType<React.FC> => (
-                            <Link to={`/${values.baseEntityId}`}>{LOCATIONS_URL}</Link>
+                        Cell: ({ row: { values } }: UseTableCellProps<Location>): ReturnType<React.FC> => (
+                            <Link to={`/${values.baseEntityId}`}>{VIEW}</Link>
                         ),
                         Header: 'Actions',
                         accessor: '',

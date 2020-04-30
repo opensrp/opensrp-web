@@ -118,4 +118,4 @@ export const OPENSRP_CHILD_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPO
 export type OPENSRP_CHILD_ENDPOINT = typeof OPENSRP_CHILD_ENDPOINT;
 
 /** page size for every list of */
-export const PAGINATION_SIZE = 50;
+export const PAGINATION_SIZE = 10;
