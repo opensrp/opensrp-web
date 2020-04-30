@@ -13,16 +13,37 @@ import {
 export const reducerName = 'opensrp-web/admin/location';
 
 /** Interface for Location object */
-export interface Location {
-    baseEntityId: string;
+
+export interface LocationTag {
+    id: number;
+    active: boolean;
     name: string;
+    description: string;
+}
+export interface Location {
+    type: string;
+    id: number | string;
+    properties: {
+        uid: string;
+        type: string;
+        status: string;
+        parentId: string;
+        name: string;
+        geographicLevel: number;
+        effectiveStartDate: string;
+        version: number;
+        parentName: string;
+        tagName: string;
+    };
+    serverVersion: 1586159649653;
+    locationTags: LocationTag[];
 }
 
 /** Client Reducer */
 const reducer = reducerFactory<Location>(reducerName);
 
 // action creators
-export const fetchLocationList = fetchActionCreatorFactory<Location>(reducerName, 'baseEntityId');
+export const fetchLocationList = fetchActionCreatorFactory<Location>(reducerName, 'id');
 export const removeLocationList = removeActionCreatorFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 

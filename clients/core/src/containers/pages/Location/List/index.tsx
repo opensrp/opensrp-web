@@ -94,17 +94,15 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
 
     getDataFromServer = async (): Promise<void> => {
         const params = {
-            clientType: '',
-            pageNumber: this.state.currentPage,
-            pageSize: PAGINATION_SIZE,
-            searchText: this.state.searchText,
+            pageSize: 10,
+            pageNumber: 1,
         };
         const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_ADMIN_ENDPOINT, generateOptions);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, 'location/search-by-tag', generateOptions);
         const response = await clientService.list(params);
-        removeLocation();
-        fetchLocation(response.clients);
-        setTotalRecords(response.total);
+        // removeLocation();
+        // fetchLocation(response.clients);
+        // setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
@@ -146,7 +144,7 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
                                 classNamePrefix="select"
                                 className="basic-single"
                                 onChange={(e): void => {
-                                    e;
+                                    console.log(e);
                                 }}
                             />
                         </Col>
