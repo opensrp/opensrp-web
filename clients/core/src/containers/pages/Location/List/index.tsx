@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { PAGINATION_SIZE, OPENSRP_API_BASE_URL, OPENSRP_LOCATION_ENDPOINT } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import locationreducer, {
     fetchLocationList,
@@ -91,13 +91,13 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         this.getDataFromServer();
     }
 
-    getDataFromServer = async (): Promise<void> => {
+    getDataFromServer = async () => {
         const params = {
             pageSize: PAGINATION_SIZE,
             pageNumber: this.state.currentPage,
         };
         const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
-        const locationService = new opensrpService(OPENSRP_API_BASE_URL, 'location/search-by-tag', generateOptions);
+        const locationService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_LOCATION_ENDPOINT, generateOptions);
         const response = await locationService.list(params);
         removeLocation();
         fetchLocation(response.locations);
@@ -120,7 +120,7 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         );
     };
 
-    public render(): ReturnType<React.FC> {
+    public render() {
         const { locationArray } = this.props;
         /** render loader if there are no location in state */
 

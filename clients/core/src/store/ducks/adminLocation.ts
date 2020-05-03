@@ -35,7 +35,7 @@ export interface Location {
         parentName: string;
         tagName: string;
     };
-    serverVersion: 1586159649653;
+    serverVersion: number;
     locationTags: LocationTag[];
 }
 

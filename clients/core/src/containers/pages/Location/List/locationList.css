@@ -2,8 +2,8 @@
   margin-bottom: 20px;
 }
 
-.location-search-bar{
-  margin: 0px 0px 24px 0px;
+.location-search-bar {
+  margin-bottom: 24px;
 }
 
 .province-dropdown {
@@ -11,5 +11,5 @@
 }
 
 .new-province {
-  padding: 1px  12px  25px  12px;
+  padding: 1px 12px 25px 12px;
 }
