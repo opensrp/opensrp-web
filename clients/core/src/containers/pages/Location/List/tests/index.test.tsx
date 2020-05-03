@@ -60,7 +60,7 @@ describe('containers/location/List', () => {
                 </MemoryRouter>
             </Provider>,
         );
-        await new Promise(resolve => setImmediate(resolve));
+        await new Promise((resolve) => setImmediate(resolve));
         wrapper.update();
         expect(wrapper.find('LocationTable').length).toBe(1);
         wrapper.unmount();
