@@ -58,7 +58,7 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path={HOUSEHOLD_PROFILE_URL}
+                                path={`${HOUSEHOLD_PROFILE_URL}/:id`}
                                 component={ConnectedHouseholdProfile}
                             />
 

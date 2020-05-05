@@ -13,7 +13,7 @@ export const useMemberTableColumns = () => {
                 /** placeholder for location table crumb */
                 // TODO - the location tableCrumb will be a render prop
                 // eslint-disable-next-line react/display-name
-                Header: (): React.ReactNode => <></>,
+                Header: '',
                 columns: [
                     {
                         Header: 'First Name',

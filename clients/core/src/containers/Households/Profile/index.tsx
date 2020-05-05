@@ -3,6 +3,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter, match } from 'react-router-dom';
+import { matchPath } from 'react-router';
 import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../components/page/Loading';
@@ -11,8 +12,10 @@ import {
     OPENSRP_CLIENT_ENDPOINT,
     OPENSRP_EVENT_ENDPOINT,
     OPENSRP_SINGLE_CLIENT_ENDPOINT,
+    HOUSEHOLD_PROFILE_URL,
 } from '../../../constants';
 import { OpenSRPService } from '@opensrp/server-service';
+import { FlexObject } from '../../../helpers/utils';
 
 import clientReducer, {
     Client,
@@ -29,9 +32,9 @@ import eventReducer, {
 } from '../../../store/ducks/events';
 import householdsReducer, {
     fetchHouseholds,
-    getHouseholdsArray,
     Household,
     reducerName as householdReducerName,
+    getHouseholdById,
 } from '../../../store/ducks/households';
 import './householdProfile.css';
 import { OPENSRP_API_BASE_URL } from '../../../configs/env';
@@ -73,7 +76,7 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
     household: Household | null;
     events: Event[];
     members: Client[];
-    fetchClient: typeof fetchHouseholds;
+    fetchHousehold: typeof fetchHouseholds;
     fetchMembers: typeof fetchClients;
     fetchEvents: typeof fetchEvents;
     removeMembers: typeof removeClients;
@@ -91,7 +94,7 @@ export const defaultProfileProps: HouseholdProfileProps = {
     household: null,
     events: [],
     members: [],
-    fetchClient: fetchHouseholds,
+    fetchHousehold: fetchHouseholds,
     fetchMembers: fetchClients,
     fetchEvents: fetchEvents,
     removeMembers: removeClients,
@@ -105,25 +108,25 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     public static defaultProps: HouseholdProfileProps = defaultProfileProps;
 
     public async componentDidMount(): Promise<void> {
-        const { fetchClient, fetchMembers, fetchEvents, match, removeMembers, opensrpService } = this.props;
-        const householdId = match.params.id || 'ea0edc48-4752-4ad0-a834-f1f68c7ae310';
+        const { fetchHousehold, fetchMembers, fetchEvents, match, removeMembers, opensrpService } = this.props;
+        const householdId = match.params.id;
         const params = { identifier: householdId };
+
         const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_SINGLE_CLIENT_ENDPOINT, generateOptions);
-        const clientResponse = await clientService.list(params);
-        if (clientResponse[0]) {
-            fetchClient(clientResponse);
-            const eventService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
-            const eventsResponse = await eventService.list(params);
-            fetchEvents(eventsResponse);
-            const memberParams = {
-                baseEntityId: householdId,
-                clientType: 'householdMember',
-            };
-            const memberService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
-            const membersResponse = await memberService.list(memberParams);
+        clientService.list(params).then((clientResponse: Client[]) => fetchHousehold(clientResponse));
+
+        const eventService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
+        eventService.list(params).then((eventResponse: Event[]) => fetchEvents(eventResponse));
+
+        const memberParams = {
+            baseEntityId: householdId,
+            clientType: 'householdMember',
+        };
+        const memberService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
+        memberService.list(memberParams).then((membersResponse: FlexObject) => {
             removeMembers();
             fetchMembers(membersResponse.clients);
-        }
+        });
     }
     public render(): React.ReactNode {
         const { household, events, members } = this.props;
@@ -193,9 +196,15 @@ interface DispatchedStateProps {
 
 /** Map props to state  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const match: any = matchPath(window.location.pathname, {
+        path: `${HOUSEHOLD_PROFILE_URL}/:id`,
+    });
+    const householdId = match !== null ? match.params.id : '';
+
     const result = {
         events: getEventsArray(state),
-        household: getHouseholdsArray(state).length > 0 ? getHouseholdsArray(state)[0] : null,
+        household: getHouseholdById(state, householdId),
         members: getClientsArray(state),
     };
     return result;
@@ -203,7 +212,7 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 
 /** map props to actions */
 const mapDispatchToProps = {
-    fetchClient: fetchHouseholds,
+    fetchHousehold: fetchHouseholds,
     fetchEvents: fetchEvents,
     fetchMembers: fetchClients,
     removeMembers: removeClients,

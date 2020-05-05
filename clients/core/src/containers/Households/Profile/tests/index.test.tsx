@@ -12,13 +12,13 @@ import { Provider } from 'react-redux';
 import store from '../../../../store';
 
 const history = createMemoryHistory();
-const path = `/household/profile/:id/`;
+const path = `/household-profile/:id/`;
 
 const matchVariable: match<{ id: string }> = {
     isExact: false,
-    params: { id: '1' },
+    params: { id: fixtures.household1.baseEntityId },
     path,
-    url: path.replace(':id', '1'),
+    url: path.replace(':id', fixtures.household1.baseEntityId),
 };
 
 const location = createLocation(matchVariable.url);
@@ -35,7 +35,7 @@ describe('containers/households/Profile', () => {
         });
 
         const clientMock = jest.fn(async () => {
-            return fixtures.clients;
+            return fixtures.households;
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -89,6 +89,6 @@ describe('containers/households/Profile', () => {
 
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
-        expect(wrapper.find('.info-body').length).toBe(2);
+        expect(wrapper).toMatchSnapshot();
     });
 });
