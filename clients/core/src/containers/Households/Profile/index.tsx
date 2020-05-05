@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps, withRouter, match } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import { Col, Container, Table } from 'reactstrap';
 import { Store } from 'redux';
@@ -42,7 +42,6 @@ import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useMemberTableColumns } from './helpers/tableDefinition';
 import InfoCard from '../../../components/page/InfoCard';
-import { createMemoryHistory, createLocation } from 'history';
 
 /** register the event reducer */
 reducerRegistry.register(eventReducerName, eventReducer);
@@ -72,7 +71,7 @@ function MemberTable(props: MemberListProps): React.ReactElement {
 }
 
 /** interface for HouseholdProfileProps */
-export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProfileURLParams> {
+export interface HouseholdProfileProps {
     household: Household | null;
     events: Event[];
     members: Client[];
@@ -83,12 +82,7 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
     opensrpService: typeof OpenSRPService;
 }
 
-const matchVariable: match<{ id: string }> = {
-    isExact: false,
-    params: { id: '1' },
-    path: '/household/profile/:id/',
-    url: `/household/profile/${1}/`,
-};
+export type ProfileWithRoutesProps = HouseholdProfileProps & RouteComponentProps<HouseholdProfileURLParams>;
 
 export const defaultProfileProps: HouseholdProfileProps = {
     household: null,
@@ -99,12 +93,9 @@ export const defaultProfileProps: HouseholdProfileProps = {
     fetchEvents: fetchEvents,
     removeMembers: removeClients,
     opensrpService: OpenSRPService,
-    history: createMemoryHistory(),
-    location: createLocation(matchVariable.url),
-    match: matchVariable,
 };
 
-class HouseholdProfile extends React.Component<HouseholdProfileProps> {
+class HouseholdProfile extends React.Component<ProfileWithRoutesProps> {
     public static defaultProps: HouseholdProfileProps = defaultProfileProps;
 
     public async componentDidMount(): Promise<void> {
