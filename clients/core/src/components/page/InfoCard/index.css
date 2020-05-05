@@ -1,5 +1,5 @@
 #info-container {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #dadce0;
   border-radius: 5px;
   box-shadow: 0 1px 3px 0 #d7d7e0;
@@ -14,7 +14,7 @@
 }
 
 .info-body {
-  margin: 0px 8px;
+  margin-right: 8px;
 }
 
 .table {
