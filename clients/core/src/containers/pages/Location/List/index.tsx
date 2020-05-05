@@ -25,7 +25,8 @@ import '@opensrp/opensrp-table/dist/index.css';
 import Select from 'react-select';
 import { DropdownOption } from '../../../../helpers/Dropdown';
 import { Link } from 'react-router-dom';
-
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
+import { PAGINATION_NEIGHBORS } from '../../../../constants';
 reducerRegistry.register(reducerName, locationreducer);
 
 /** props interface for the locationList component */
@@ -95,6 +96,7 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         const params = {
             pageSize: PAGINATION_SIZE,
             pageNumber: this.state.currentPage,
+            name: this.state.searchText,
         };
         const { fetchLocation, opensrpService, setTotalRecords, removeLocation } = this.props;
         const locationService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_LOCATION_ENDPOINT, generateOptions);
@@ -118,6 +120,28 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
                 this.getDataFromServer();
             },
         );
+    };
+
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    getPaginationOptions = (): PaginationProps => {
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGHBORS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecords,
+        };
     };
 
     public render() {
@@ -156,6 +180,11 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
                     <Row>
                         <Col>
                             <LocationTable tableData={locationArray} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>
