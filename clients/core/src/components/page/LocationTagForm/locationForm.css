@@ -1,27 +1,27 @@
 .form-background {
-  background-color: #FFFFFF;
-  box-shadow: 0 2px 4px 0 #D7D7E0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 #d7d7e0;
   width: 1050px;
   height: 569px;
   padding: 45px;
 }
 
 .field-row {
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 .input-field {
-  border: 1px solid #DADCE0;
+  border: 1px solid #dadce0;
   border-radius: 2px;
   width: 404px;
   height: 48px;
 }
 
 .btn-bg {
-  background-color: #0292D3;
+  background-color: #0292d3;
   width: 404px;
   height: 48px;
-  color: #FFFFFF;
+  color: #fff;
   border: 1px solid #DADCE0;
   margin-top: 10px;
 }
