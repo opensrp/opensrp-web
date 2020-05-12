@@ -9,7 +9,7 @@ import {
 
 /** Interface for location tag object as received from LocationTagServices */
 export interface LocationTag {
-    id: string;
+    id: number | string;
     name: string;
     description: string;
     active: boolean;
