@@ -30,6 +30,8 @@ export type TEAM_URL = typeof TEAM_URL;
 export const LOCATIONS_URL = '/404';
 export type LOCATION_URL = typeof LOCATIONS_URL;
 export const REPORTS_URL = '/404';
+export const LOCATION_TAG_CREATE_URL = '/create-location-tag';
+export type LOCATION_TAG_CREATE_URL = typeof LOCATION_TAG_CREATE_URL;
 export type REPORTS_URL = typeof REPORTS_URL;
 
 // string literals
