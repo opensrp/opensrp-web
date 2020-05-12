@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, LOCATION_TAG_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -20,6 +20,7 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import ConnectedLocationTagList from '../containers/pages/LocationTag';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -52,6 +53,13 @@ class App extends Component {
                                 exact={true}
                                 path={CHILD_URL}
                                 component={ConnectedChildList}
+                            />
+
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOCATION_TAG_URL}
+                                component={ConnectedLocationTagList}
                             />
 
                             <Route
