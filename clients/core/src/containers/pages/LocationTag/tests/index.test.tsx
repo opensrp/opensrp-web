@@ -70,7 +70,8 @@ describe('containers/child/List', () => {
                 </MemoryRouter>
             </Provider>,
         );
-        await new Promise(resolve => setImmediate(resolve));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await new Promise((resolve: any) => setImmediate(resolve));
         wrapper.update();
 
         const foundProps = wrapper.find('LocationTagList').props() as LocationtagProps;
