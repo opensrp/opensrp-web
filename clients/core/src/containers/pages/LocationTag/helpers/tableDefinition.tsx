@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
 import { LocationTag } from '../../../../store/ducks/locationTag';
-import { Link } from 'react-router-dom';
 import { UseTableCellProps } from 'react-table';
 // Child specific configurable table columns
 export const useLocationTagTableColumns = () => {
