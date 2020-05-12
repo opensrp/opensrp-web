@@ -24,4 +24,17 @@ describe('components/Location-tag-form', () => {
         expect(toJson(wrapper)).toMatchSnapshot();
         wrapper.unmount();
     });
+
+    it('submit the form with values', async () => {
+        const props: LocationTagForm = {
+            name: 'District',
+            description: 'level 1',
+            active: true,
+        };
+        const wrapper = mount(<LocationTagForm {...props} />);
+        const submitBtn = wrapper.find('.submit-btn-bg');
+        expect(submitBtn.length).toEqual(1);
+
+        submitBtn.simulate('click');
+    });
 });

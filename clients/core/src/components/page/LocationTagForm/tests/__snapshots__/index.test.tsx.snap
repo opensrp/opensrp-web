@@ -167,7 +167,7 @@ exports[`components/Location-tag-form renders the Loading component 1`] = `
               className="row"
             >
               <button
-                className="btn-bg"
+                className="submit-btn-bg"
                 type="submit"
               >
                 Submit

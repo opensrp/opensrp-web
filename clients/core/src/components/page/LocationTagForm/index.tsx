@@ -31,10 +31,7 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
             OPENSRP_LOCATION_TAG_CREATE_ENDPOINT,
             generateOptions,
         );
-
-        const response = await clientService.create(payload);
-
-        console.log({ response });
+        await clientService.create(payload);
     };
 
     return (
@@ -75,10 +72,10 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
                                         value={formik.values.description}
                                         name="description"
                                     />
-                                    {formik.errors.name && <div id="feedback">{formik.errors.name}</div>}
+                                    {formik.errors.description && <div id="feedback">{formik.errors.description}</div>}
                                 </Row>
                                 <Row>
-                                    <button type="submit" className="btn-bg">
+                                    <button type="submit" className="submit-btn-bg">
                                         Submit
                                     </button>
                                 </Row>
