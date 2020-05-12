@@ -4,7 +4,7 @@ import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPService } from '@opensrp/server-service';
 import '@opensrp/opensrp-table/dist/index.css';
 import './locationForm.css';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { OPENSRP_API_BASE_URL, OPENSRP_LOCATION_TAG_CREATE_ENDPOINT } from '../../../configs/env';
 
 interface LocationTagForm {
@@ -36,7 +36,8 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
 
     return (
         <Formik initialValues={props} onSubmit={onSubmit}>
-            {formik => {
+            {// eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (formik: any) => {
                 return (
                     <div>
                         <Row>
