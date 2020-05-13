@@ -19,6 +19,53 @@ const defaultProps: LocationTagForm = {
     active: false,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const FormikForm = (formik: any) => {
+    return (
+        <div>
+            <Row>
+                <Col>
+                    <h3>New Location Tag</h3>
+                </Col>
+            </Row>
+            <div className="form-background">
+                <form onSubmit={formik.handleSubmit}>
+                    <Row>
+                        <label>Name</label>
+                    </Row>
+                    <Row>
+                        <input
+                            type="text"
+                            className="input-field"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.name}
+                            name="name"
+                        />
+                    </Row>
+                    <Row className="input-row">
+                        <label>Description</label>
+                    </Row>
+                    <Row>
+                        <input
+                            type="text"
+                            className="input-field"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.description}
+                            name="description"
+                        />
+                    </Row>
+                    <Row>
+                        <button type="submit" className="submit-btn-bg">
+                            Submit
+                        </button>
+                    </Row>
+                </form>
+            </div>
+        </div>
+    );
+};
 const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
     const onSubmit = async (values: LocationTagForm) => {
         const payload = {
@@ -36,53 +83,7 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
 
     return (
         <Formik initialValues={props} onSubmit={onSubmit}>
-            {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (formik: any) => {
-                return (
-                    <div>
-                        <Row>
-                            <Col>
-                                <h3>New Location Tag</h3>
-                            </Col>
-                        </Row>
-                        <div className="form-background">
-                            <form onSubmit={formik.handleSubmit}>
-                                <Row>
-                                    <label>Name</label>
-                                </Row>
-                                <Row>
-                                    <input
-                                        type="text"
-                                        className="input-field"
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.name}
-                                        name="name"
-                                    />
-                                </Row>
-                                <Row className="input-row">
-                                    <label>Description</label>
-                                </Row>
-                                <Row>
-                                    <input
-                                        type="text"
-                                        className="input-field"
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.description}
-                                        name="description"
-                                    />
-                                </Row>
-                                <Row>
-                                    <button type="submit" className="submit-btn-bg">
-                                        Submit
-                                    </button>
-                                </Row>
-                            </form>
-                        </div>
-                    </div>
-                );
-            }}
+            {FormikForm}
         </Formik>
     );
 };
