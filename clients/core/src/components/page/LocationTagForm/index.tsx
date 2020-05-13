@@ -4,7 +4,7 @@ import { generateOptions } from '../../../services/opensrp';
 import { OpenSRPService } from '@opensrp/server-service';
 import '@opensrp/opensrp-table/dist/index.css';
 import './locationForm.css';
-import { Formik, FormikProps } from 'formik';
+import { Formik } from 'formik';
 import { OPENSRP_API_BASE_URL, OPENSRP_LOCATION_TAG_CREATE_ENDPOINT } from '../../../configs/env';
 
 interface LocationTagForm {
@@ -59,7 +59,6 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
                                         value={formik.values.name}
                                         name="name"
                                     />
-                                    {formik.errors.name && <div id="feedback">{formik.errors.name}</div>}
                                 </Row>
                                 <Row className="input-row">
                                     <label>Description</label>
@@ -73,7 +72,6 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
                                         value={formik.values.description}
                                         name="description"
                                     />
-                                    {formik.errors.description && <div id="feedback">{formik.errors.description}</div>}
                                 </Row>
                                 <Row>
                                     <button type="submit" className="submit-btn-bg">
