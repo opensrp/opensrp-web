@@ -116,3 +116,11 @@ export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 /** the clients endpoint NOTE: does not end with / */
 export const OPENSRP_EVENT_ENDPOINT = process.env.REACT_APP_OPENSRP_EVENT_ENDPOINT || 'event/search';
 export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_EVENT_ENDPOINT;
+export const OPENSRP_CHILD_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/searchByCriteria';
+export type OPENSRP_CHILD_ENDPOINT = typeof OPENSRP_CHILD_ENDPOINT;
+
+export const OPENSRP_LOCATION_TAG_CREATE_ENDPOINT = process.env.OPENSRP_LOCATION_TAG_CREATE_ENDPOINT || 'location-tag';
+export type OPENSRP_LOCATION_TAG_CREATE_ENDPOINT = typeof OPENSRP_LOCATION_TAG_CREATE_ENDPOINT;
+
+/** page size for every list of */
+export const PAGINATION_SIZE = 50;

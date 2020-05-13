@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/server-service",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Wrapper around OpenSRP Server REST API",
     "main": "dist/index.js",
     "types": "dist/types",
@@ -17,7 +17,7 @@
         "test:watch": "cd ../../ && jest test  packages/opensrp-server-service --verbose --watch && cd packages/opensrp-server-service",
         "tsc": "tsc",
         "lint": "eslint './**/*.{js,jsx,ts,tsx}'",
-        "transpile": "babel . -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
+        "transpile": "babel src -d dist --root-mode upward --extensions '.ts,.tsx' --ignore '**/*.test.ts,**/*.test.tsx,**/tests,**/__tests__'"
     },
     "jest": {
         "automock": false,
@@ -30,8 +30,5 @@
     },
     "author": "Ona Engineering",
     "license": "Apache-2.0",
-    "private": false,
-    "dependencies": {
-        "@onaio/session-reducer": "^0.0.11"
-    }
+    "private": false
 }

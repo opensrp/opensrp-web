@@ -8,7 +8,7 @@
 export const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
 export type OPENSRP_API_BASE_URL = typeof OPENSRP_API_BASE_URL;
 /** the clients endpoint NOTE: does not end with / */
-export const OPENSRP_CLIENT_ENDPOINT = 'client/search';
+export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
 /** The website name */

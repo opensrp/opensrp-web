@@ -1,6 +1,5 @@
 module.exports = {
-    collectCoverage: true,
-    coverageReporters: ['json'],
+    coverageReporters: ['lcov', 'json', 'html'],
     collectCoverageFrom: [
         'clients/core/src/**/*.{js,jsx,ts,tsx}',
         'packages/**/*.{js,jsx,ts,tsx}',

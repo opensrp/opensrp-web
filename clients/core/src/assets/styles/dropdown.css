@@ -1,0 +1,21 @@
+.basic-single .select__control {
+    background-color: #ffffff;
+    border: 0.5px solid #bababa;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px 1px rgba(127, 131, 155, 0.15), 0 1px 2px 0 rgba(127, 131, 155, 0.3);
+    color: #676767;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 10px;
+    text-align: left;
+    min-height: 0px;
+    height: 32px;
+}
+
+.select__value-container {
+    margin-bottom: 3px;
+}
+
+.select__indicator-separator {
+    display: none;
+}

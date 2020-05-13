@@ -1,7 +1,6 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
-import { LocationHierarchy } from '../locations';
 import { Event } from '../events';
 import { Child } from '../child';
 /* eslint-disable @typescript-eslint/camelcase */
@@ -706,120 +705,6 @@ export const rawANCClientsPage2 = {
         },
     ],
 };
-export const location: LocationHierarchy = {
-    locationsHierarchy: {
-        map: {
-            'c768ef20-01fe-4877-b670-9b6570be17be': {
-                id: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                label: 'BANGLADESH',
-                node: {
-                    locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                    name: 'BANGLADESH',
-                    tags: ['Country'],
-                    voided: false,
-                },
-                children: {
-                    'e380918b-c409-40c0-a426-58ccc4411d53': {
-                        id: 'e380918b-c409-40c0-a426-58ccc4411d53',
-                        label: 'DHAKA',
-                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                        node: {
-                            locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
-                            name: 'DHAKA',
-                            parentLocation: {
-                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                                name: 'BANGLADESH',
-                                voided: false,
-                            },
-                            tags: ['Clinic'],
-                            voided: false,
-                        },
-                    },
-                    'a821918b-c401-5ac0-b526-58clp4310b31': {
-                        id: 'a821918b-c401-5ac0-b526-58clp4310b31',
-                        label: 'Khulna',
-                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                        node: {
-                            locationId: 'a821918b-c401-5ac0-b526-58clp4310b31',
-                            name: 'DHAKA',
-                            parentLocation: {
-                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                                name: 'BANGLADESH',
-                                voided: false,
-                            },
-                            tags: ['Clinic'],
-                            voided: false,
-                        },
-                    },
-                },
-            },
-        },
-        parentChildren: {
-            'c768ef20-01fe-4877-b670-9b6570be17be': [
-                'e380918b-c409-40c0-a426-58ccc4411d53',
-                'a821918b-c401-5ac0-b526-58clp4310b31',
-            ],
-        },
-    },
-};
-
-export const location2: LocationHierarchy = {
-    locationsHierarchy: {
-        map: {
-            'c918d34j-02fe-4837-b670-9b6570be17be': {
-                id: 'c918d34j-02fe-4837-b670-9b6570be17be',
-                label: 'BANGLADESH',
-                node: {
-                    locationId: 'd768ef20-01fe-40911-b670-9b6570be17be',
-                    name: 'BANGLADESH',
-                    tags: ['Country'],
-                    voided: false,
-                },
-                children: {
-                    'e380918b-c409-40c0-a426-58ckjad353': {
-                        id: 'e380918b-c409-40c0-a426-58ccc4411d53',
-                        label: 'Jessore',
-                        parent: 'c918d34j-02fe-4837-b670-9b6570be17be',
-                        node: {
-                            locationId: 'e380918b-c409-40c0-a426-58ccc4411d53',
-                            name: 'Jessore',
-                            parentLocation: {
-                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                                name: 'BANGLADESH',
-                                voided: true,
-                            },
-                            tags: ['Hospital'],
-                            voided: false,
-                        },
-                    },
-                    'a821718b-c401-5ac0-b526-58clp4310b31': {
-                        id: 'a821918b-c401-5ac0-b526-58clp4310b31',
-                        label: 'Khulna',
-                        parent: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                        node: {
-                            locationId: 'a821918b-c401-5ac0-b526-58clp4310b31',
-                            name: 'DHAKA',
-                            parentLocation: {
-                                locationId: 'c768ef20-01fe-4877-b670-9b6570be17be',
-                                name: 'BANGLADESH',
-                                voided: false,
-                            },
-                            tags: ['Clinic'],
-                            voided: false,
-                        },
-                    },
-                },
-            },
-        },
-        parentChildren: {
-            'c918d34j-02fe-4837-b670-9b6570be17be': [
-                'e380918b-c409-40c0-a426-58ckjad353',
-                'a821718b-c401-5ac0-b526-58clp4310b31',
-            ],
-        },
-    },
-};
-
 export const event1: Event = {
     _id: '28d5cf94-15ee-4462-ab56-a83eb4c42f73',
     _rev: 'v1',
@@ -935,6 +820,10 @@ export const child1: Child = {
     addresses: [],
     attributes: {
         residence: '6f7ca772-b368-4c3d-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'zysan',
     middleName: '',
@@ -963,6 +852,10 @@ export const child2: Child = {
     addresses: [],
     attributes: {
         residence: '1f7ca772-b368-4c3d-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'zysan',
     middleName: '',
@@ -991,6 +884,10 @@ export const child3: Child = {
     addresses: [],
     attributes: {
         residence: '9f7ca772-b368-4d39-bd9c-011ra698203a',
+        dynamicProperties: {
+            last_contact_date: '2020-01-01T00:02:01',
+            age_year_part: 2,
+        },
     },
     firstName: 'tanvir',
     middleName: '',
