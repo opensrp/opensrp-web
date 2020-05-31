@@ -5,6 +5,7 @@ import { TeamForm, TeamFormProps } from '..';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 
 describe('components/TeamForm', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let classMock: any;
     beforeEach(() => {
         jest.resetAllMocks();
