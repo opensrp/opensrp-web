@@ -31,7 +31,7 @@ describe('components/TeamForm', () => {
         shallow(<TeamForm {...props} />);
     });
 
-    it('renders the Loading component', () => {
+    it('renders the component', () => {
         const props: TeamFormProps = {
             id: 0,
             identifier: '',
@@ -42,7 +42,7 @@ describe('components/TeamForm', () => {
             opensrpService: classMock,
         };
         const wrapper = mount(<TeamForm {...props} />);
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper.find('TeamForm').length).toBe(1);
         wrapper.unmount();
     });
 
