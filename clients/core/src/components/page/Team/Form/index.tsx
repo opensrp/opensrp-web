@@ -58,7 +58,6 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                 label: t.name,
             };
         });
-        console.log(teamList);
         setTeamOption(teamDropdownOptions);
     };
 
