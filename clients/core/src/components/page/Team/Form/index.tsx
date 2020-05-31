@@ -18,6 +18,7 @@ export interface TeamFormProps {
     active: boolean;
     name: string;
     partOf: DropdownOption;
+    opensrpService: typeof OpenSRPService;
 }
 
 export const defaultTeamProps: TeamFormProps = {
@@ -27,6 +28,7 @@ export const defaultTeamProps: TeamFormProps = {
     active: true,
     name: '',
     partOf: { label: '', value: '' },
+    opensrpService: OpenSRPService,
 };
 
 /** Display the team form  */
@@ -41,12 +43,14 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
             active: values.active,
             identifier: values.identifier,
         };
-        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
+        const { opensrpService } = props;
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         await clientService.create(payload);
     };
 
     const getTeamList = async () => {
-        const teamService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
+        const { opensrpService } = props;
+        const teamService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         const teamList = await teamService.list();
         const teamDropdownOptions = teamList.map((t: TeamFormProps) => {
             return {

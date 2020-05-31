@@ -2,8 +2,21 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import React from 'react';
 import { TeamForm, TeamFormProps } from '..';
+import * as fixtures from '../../../../../store/ducks/tests/fixtures';
 
 describe('components/TeamForm', () => {
+    let classMock: any;
+    beforeEach(() => {
+        jest.resetAllMocks();
+
+        const listMock = jest.fn(async () => {
+            return fixtures.teamList;
+        });
+        classMock = jest.fn(() => ({
+            list: listMock,
+        }));
+    });
+
     it('renders without crashing', () => {
         const props: TeamFormProps = {
             id: 0,
@@ -12,6 +25,7 @@ describe('components/TeamForm', () => {
             active: true,
             name: '',
             partOf: { label: '', value: '' },
+            opensrpService: classMock,
         };
         shallow(<TeamForm {...props} />);
     });
@@ -24,6 +38,7 @@ describe('components/TeamForm', () => {
             active: true,
             name: '',
             partOf: { label: '', value: '' },
+            opensrpService: classMock,
         };
         const wrapper = mount(<TeamForm {...props} />);
         expect(toJson(wrapper)).toMatchSnapshot();
@@ -38,11 +53,14 @@ describe('components/TeamForm', () => {
             active: true,
             name: '',
             partOf: { label: '', value: '' },
+            opensrpService: classMock,
         };
         const wrapper = mount(<TeamForm {...props} />);
         const submitBtn = wrapper.find('.submit-btn-bg');
         expect(submitBtn.length).toEqual(1);
 
         submitBtn.simulate('click');
+        await new Promise(resolve => setImmediate(resolve));
+        wrapper.update();
     });
 });

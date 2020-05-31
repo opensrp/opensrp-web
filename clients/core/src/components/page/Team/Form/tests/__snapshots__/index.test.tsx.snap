@@ -7,6 +7,35 @@ exports[`components/TeamForm renders the Loading component 1`] = `
   id={0}
   identifier=""
   name=""
+  opensrpService={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "http://192.168.19.165:8080/nahid/rest/",
+          "organization",
+          [Function],
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": Object {
+            "list": [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": Promise {},
+                },
+              ],
+            },
+          },
+        },
+      ],
+    }
+  }
   partOf={
     Object {
       "label": "",
@@ -22,6 +51,33 @@ exports[`components/TeamForm renders the Loading component 1`] = `
         "id": 0,
         "identifier": "",
         "name": "",
+        "opensrpService": [MockFunction] {
+          "calls": Array [
+            Array [
+              "http://192.168.19.165:8080/nahid/rest/",
+              "organization",
+              [Function],
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": Object {
+                "list": [MockFunction] {
+                  "calls": Array [
+                    Array [],
+                  ],
+                  "results": Array [
+                    Object {
+                      "type": "return",
+                      "value": Promise {},
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
         "partOf": Object {
           "label": "",
           "value": "",

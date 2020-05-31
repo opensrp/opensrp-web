@@ -903,7 +903,58 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
+export const team1 = {
+    id: 2,
+    identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce4',
+    active: true,
+    name: 'B Team',
+    type: {
+        coding: [
+            {
+                system: 'http://terminology.hl7.org/CodeSystem/organization-type',
+                code: 'team',
+                display: 'Team',
+            },
+        ],
+    },
+};
+
+export const team2 = {
+    id: 3,
+    identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce5',
+    active: true,
+    name: 'C Team',
+    partOf: 2,
+    type: {
+        coding: [
+            {
+                system: 'http://terminology.hl7.org/CodeSystem/organization-type',
+                code: 'team',
+                display: 'Team',
+            },
+        ],
+    },
+};
+
+export const team3 = {
+    id: 4,
+    identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce7',
+    active: true,
+    name: 'DTeam',
+    partOf: 2,
+    type: {
+        coding: [
+            {
+                system: 'http://terminology.hl7.org/CodeSystem/organization-type',
+                code: 'team',
+                display: 'Team',
+            },
+        ],
+    },
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
+export const teamList = [team1, team2, team3];
