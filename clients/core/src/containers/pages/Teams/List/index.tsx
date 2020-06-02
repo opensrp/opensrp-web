@@ -145,6 +145,8 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
 
     public render(): React.ReactNode {
         const { teamsArray, totalRecords } = this.props;
+
+        console.log(' -----> teams array: ', teamsArray);
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
@@ -187,7 +189,7 @@ export { TeamList };
 /** Map props to state  */
 const mapStateToProps = (state: Partial<Store>) => {
     const result = {
-        clientsArray: getTeamsArray(state),
+        teamsArray: getTeamsArray(state),
         totalRecords: getTotalRecords(state),
     };
     return result;
@@ -195,12 +197,12 @@ const mapStateToProps = (state: Partial<Store>) => {
 
 /** map props to actions */
 const mapDispatchToProps = {
-    fetchClientsCreator: fetchTeams,
-    removeClientsCreator: removeTeams,
+    fetchTeamsCreator: fetchTeams,
+    removeTeamsCreator: removeTeams,
     setTotalRecordsCreator: setTotalRecords,
 };
 
-/** connect clientsList to the redux store */
-const ConnectedClientList = connect(mapStateToProps, mapDispatchToProps)(TeamList);
+/** connect teamList to the redux store */
+const ConnectedTeamList = connect(mapStateToProps, mapDispatchToProps)(TeamList);
 
-export default ConnectedClientList;
+export default ConnectedTeamList;

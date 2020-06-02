@@ -16,6 +16,7 @@ export interface Team {
     identifier: string;
     active: boolean;
     name: string;
+    partOf?: number;
     type: {
         [key: string]: FlexObject[];
     };

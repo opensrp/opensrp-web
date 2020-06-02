@@ -117,7 +117,7 @@ export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 export const OPENSRP_CHILD_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/searchByCriteria';
 export type OPENSRP_CHILD_ENDPOINT = typeof OPENSRP_CHILD_ENDPOINT;
 
-export const OPENSRP_TEAM_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'organization';
+export const OPENSRP_TEAM_ENDPOINT = process.env.REACT_APP_OPENSRP_TEAM_ENDPOINT || 'organization';
 export type OPENSRP_TEAM_ENDPOINT = typeof OPENSRP_TEAM_ENDPOINT;
 
 /** page size for every list of */
