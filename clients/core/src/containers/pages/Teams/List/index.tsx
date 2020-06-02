@@ -17,14 +17,13 @@ import teamsReducer, {
 } from '../../../../store/ducks/teams';
 import './teams.css';
 import SearchBox from '../../../../components/page/SearchBox';
-import Select from 'react-select';
 import '../../../../assets/styles/dropdown.css';
 import { PAGINATION_SIZE, PAGINATION_NEIGHBORS } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import { useTeamTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
-import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
+import { DropdownOption } from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
 
@@ -120,28 +119,28 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
         );
     };
 
-    // /** fetch data from server with a specific page number */
-    // onPageChange = (currentPage: number): void => {
-    //     this.setState(
-    //         {
-    //             ...this.state,
-    //             currentPage,
-    //         },
-    //         () => {
-    //             this.getDataFromServer();
-    //         },
-    //     );
-    // };
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
 
-    // /** it returns the required options for pagination component */
-    // getPaginationOptions = (): PaginationProps => {
-    //     return {
-    //         onPageChangeHandler: this.onPageChange,
-    //         pageNeighbors: PAGINATION_NEIGHBORS,
-    //         pageSize: PAGINATION_SIZE,
-    //         totalRecords: this.props.totalRecords,
-    //     };
-    // };
+    /** it returns the required options for pagination component */
+    getPaginationOptions = (): PaginationProps => {
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGHBORS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecords,
+        };
+    };
 
     public render(): React.ReactNode {
         const { teamsArray, totalRecords } = this.props;
@@ -172,9 +171,9 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
                         <Col>
                             <TeamTable tableData={teamsArray} />
                         </Col>
-                        {/* <Col md={{ size: 3, offset: 3 }}>
+                        <Col md={{ size: 3, offset: 3 }}>
                             <Pagination {...this.getPaginationOptions()} />
-                        </Col> */}
+                        </Col>
                     </Row>
                 </div>
             );

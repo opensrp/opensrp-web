@@ -58,7 +58,8 @@ describe('containers/teams/list/TeamList', () => {
                 <TeamList {...props} />
             </Router>,
         );
-        await new Promise(resolve => setImmediate(resolve));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await new Promise((resolve: any) => setImmediate(resolve));
         wrapper.update();
 
         expect(wrapper.find('TeamTable').text()).toMatchSnapshot('TeamTable');
@@ -74,7 +75,8 @@ describe('containers/teams/list/TeamList', () => {
         );
         const rippleWrapper = wrapper.find('Ripple');
         expect(rippleWrapper.length).toEqual(1);
-        await new Promise(resolve => setImmediate(resolve));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await new Promise((resolve: any) => setImmediate(resolve));
         wrapper.update();
         expect(wrapper.find('Ripple').length).toEqual(0);
         wrapper.unmount();
@@ -91,7 +93,8 @@ describe('containers/teams/list/TeamList', () => {
             </Provider>,
         );
 
-        await new Promise(resolve => setImmediate(resolve));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await new Promise((resolve: any) => setImmediate(resolve));
         wrapper.update();
 
         const passedProps = wrapper.find('TeamList').props() as TeamListProps;
