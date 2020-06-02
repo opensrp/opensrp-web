@@ -145,8 +145,6 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
 
     public render(): React.ReactNode {
         const { teamsArray, totalRecords } = this.props;
-
-        console.log(' -----> teams array: ', teamsArray);
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
