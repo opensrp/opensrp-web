@@ -10,3 +10,10 @@ export const OpenSRPAPIResponse = {
     roles: ['Provider'],
     userName: 'superset-user',
 };
+
+export const sampleErrorObj = {
+    message: 'The server encountered an error processing the request.',
+    status: '500 INTERNAL_SERVER_ERROR',
+    data: null,
+    success: false,
+};
