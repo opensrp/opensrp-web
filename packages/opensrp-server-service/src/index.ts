@@ -1,5 +1,6 @@
 import { IncomingHttpHeaders } from 'http';
 import queryString from 'querystring';
+import { Succcess, Failure } from '@onaio/utils';
 /** defaults */
 export const OPENSRP_API_BASE_URL = 'https://test.smartregister.org/opensrp/rest/';
 
@@ -127,11 +128,11 @@ export class OpenSRPService {
         };
         const response = await fetch(url, payload);
 
-        if (!response.ok || response.status !== 201) {
-            throw new Error(`OpenSRPService create on ${this.endpoint} failed, HTTP status ${response.status}`);
+        if (response.ok || response.status === 201) {
+            return {};
         }
 
-        return {};
+        throw new Error(`OpenSRPService create on ${this.endpoint} failed, HTTP status ${response.status}`);
     }
 
     /** read method
