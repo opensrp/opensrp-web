@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`containers/clients/list/ClientList Integration: Pagination works as expected: One record for page 1 of pagination 1`] = `" All Clients (15) Gender AllIdentifierFirst NameLast NameAge   ↕GenderLocationLast Contact   ↕Actions71ad460c-bf76-414e-9be1-0d1b2cb1bce8KhumpaiFamilyMaleviewStartStartPreviousPrevious12NextNextLastLast"`;
-
-exports[`containers/clients/list/ClientList Integration: Pagination works as expected: One record for page 2 of pagination 1`] = `" All Clients (15) Gender AllIdentifierFirst NameLast NameAge   ↕GenderLocationLast Contact   ↕Actions71ad460c-bf76-414e-9be1-0d1b2cb1bce8KhumpaiFamilyMaleviewStartStartPreviousPrevious12NextNextLastLast"`;
-
 exports[`containers/clients/list/ClientList renders correctly: Clients Table 1`] = `"IdentifierFirst NameLast NameAge   ↕GenderLocationLast Contact   ↕Actions"`;

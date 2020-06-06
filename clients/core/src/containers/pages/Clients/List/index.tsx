@@ -23,7 +23,7 @@ import { PAGINATION_SIZE, PAGINATION_NEIGHBORS, ALL_CLIENTS } from '../../../../
 import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
-import { Pagination } from '../../../../components/Pagination';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
@@ -85,12 +85,12 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         this.state = defaultClientListState;
     }
 
-    public async componentDidMount() {
+    public async componentDidMount(): Promise<void> {
         this.getDataFromServer();
     }
 
     /** fetch data from server when any filter is applied */
-    getDataFromServer = async () => {
+    getDataFromServer = async (): Promise<void> => {
         const params = {
             clientType: 'clients',
             pageNumber: this.state.currentPage,
@@ -103,7 +103,9 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         const response = await clientService.list(params);
         removeClientsCreator();
         fetchClientsCreator(response.clients);
-        setTotalRecordsCreator(response.total);
+        if (!(response.clients.length > 0 && response.total == 0)) {
+            setTotalRecordsCreator(response.total);
+        }
         this.setState({
             ...this.state,
             loading: false,
@@ -124,7 +126,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
     };
 
     /** filter data using first name or last name */
-    searchTextFilter = (searchText: string): void => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -144,29 +146,29 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                 currentPage,
             },
             () => {
-                console.log(currentPage, this.state);
                 this.getDataFromServer();
             },
         );
     };
 
     /** it returns the required options for pagination component */
-    public render() {
-        const { clientsArray, totalRecords } = this.props;
-
-        /** prop options for the pagination component */
-        const paginationProps = {
+    getPaginationOptions = (): PaginationProps => {
+        return {
             onPageChangeHandler: this.onPageChange,
             pageNeighbors: PAGINATION_NEIGHBORS,
             pageSize: PAGINATION_SIZE,
-            totalRecords: totalRecords,
+            totalRecords: this.props.totalRecords,
         };
+    };
+
+    public render(): React.ReactNode {
+        const { clientsArray, totalRecords } = this.props;
         /** render loader if there are no clients in state */
         if (this.state.loading) {
             return <Loading />;
         } else {
             return (
-                <div>
+                <div className="client-page">
                     <Helmet>
                         <title>{ALL_CLIENTS}</title>
                     </Helmet>
@@ -178,7 +180,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextFilter(searchText)}
+                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search Client`}
                                 />
                             </div>
@@ -188,7 +190,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                                 value={this.state.selectedGender}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e: any) => this.genderFilter(e as DropdownOption)}
+                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
                                 options={genderOptions}
                             />
                         </Col>
@@ -198,7 +200,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                             <ClientTable tableData={clientsArray} />
                         </Col>
                         <Col md={{ size: 3, offset: 3 }}>
-                            <Pagination {...paginationProps} />
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>

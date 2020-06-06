@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import { PaginationOptions, usePagination } from '@onaio/pagination';
+import { PaginationOptions, usePagination } from './onaioPagination';
 import { fetchPageNumbers } from './utils';
 import { BootstrapJSX } from './JSX';
 
@@ -24,7 +24,7 @@ const Pagination: React.FC<Props> = props => {
     const { onPageChangeHandler, pageNeighbors, pageSize, totalRecords } = props;
 
     const initialPageSize = pageSize;
-    const options: PaginationOptions<{}> = {
+    const options: PaginationOptions = {
         pageSize: initialPageSize,
         totalRecords: totalRecords,
     };
@@ -48,7 +48,7 @@ const Pagination: React.FC<Props> = props => {
 
     React.useEffect(() => {
         onPageChangeHandler && onPageChangeHandler(paginationState.currentPage, paginationState.pageSize);
-    }, [paginationState.currentPage, totalRecords]);
+    }, [paginationState.currentPage]);
 
     return (
         <BootstrapJSX

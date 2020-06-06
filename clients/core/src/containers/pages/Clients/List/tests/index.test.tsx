@@ -2,7 +2,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import ConnectedClientsList, { ClientList } from '..';
+import ConnectedClientsList, { ClientList, ClientListProps } from '..';
 import store from '../../../../../store';
 import reducer, { reducerName, removeClients } from '../../../../../store/ducks/clients';
 import * as fixtures from '../../../../../store/ducks/tests/fixtures';
@@ -103,7 +103,7 @@ describe('containers/clients/list/ClientList', () => {
         await new Promise(resolve => setImmediate(resolve));
         wrapper.update();
 
-        const passedProps = wrapper.find('ClientList').props() as any;
+        const passedProps = wrapper.find('ClientList').props() as ClientListProps;
         expect(passedProps.clientsArray).toEqual(fixtures.clients);
         expect(passedProps.totalRecords).toEqual(fixtures.clients.length);
 
@@ -147,7 +147,6 @@ describe('containers/clients/list/ClientList', () => {
                 },
             ],
         ]);
-
         wrapper.unmount();
     });
 });
