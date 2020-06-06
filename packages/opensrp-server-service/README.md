@@ -34,8 +34,6 @@ yarn add @opensrp/server-service
 
 ### Code example
 
-Here is a [code sandbox](https://codesandbox.io/s/bootstrap-pagination-component-jxtbt) showing how this hook could be used to create a bootstrap-powered pagination component
-
 ```typescript
 import OpenSRPService from '@opensrp/server-service';
 
@@ -49,8 +47,8 @@ function getFetchOptions(signal: AbortSignal, method: HTTPMethod): { headers: He
     };
 }
 
-const loadclients = async () => {
-    const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, getFetchOptions);
+const loadClients = async () => {
+    const clientService = new openSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, getFetchOptions);
     return await clientService.list();
 };
 ```
