@@ -30,5 +30,8 @@
     },
     "author": "Ona Engineering",
     "license": "Apache-2.0",
-    "private": false
+    "private": false,
+    "dependencies": {
+        "@onaio/utils": "^0.0.1"
+    }
 }
