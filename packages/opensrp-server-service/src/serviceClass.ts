@@ -53,7 +53,6 @@ export const customFetch: CustomFetch = async (...rest) => {
     try {
         return await fetch(...rest);
     } catch (err) {
-        console.log('&&&&&&&&&&&&&&&&&', err);
         throwNetworkError(err);
     }
 };
