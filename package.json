@@ -91,5 +91,9 @@
     "workspaces": [
         "clients/*",
         "packages/*"
-    ]
+    ],
+    "dependencies": {
+        "react-codemod": "^5.2.0",
+        "react-helmet": "^6.0.0"
+    }
 }

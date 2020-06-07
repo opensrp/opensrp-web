@@ -26,6 +26,7 @@
         "@types/node": "^12.6.8",
         "@types/react": "^16.8.23",
         "@types/react-dom": "^16.8.5",
+        "@types/react-helmet": "^6.0.0",
         "@types/react-redux": "^7.1.1",
         "@types/react-router": "^5.0.3",
         "@types/react-router-dom": "^4.3.4",
@@ -44,7 +45,7 @@
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
-        "react-helmet": "^5.2.1",
+        "react-helmet": "^6.0.0",
         "react-redux": "^7.1.0",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
@@ -109,7 +110,6 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "@types/react-helmet": "^5.0.15",
         "@types/react-select": "^3.0.10"
     }
 }
