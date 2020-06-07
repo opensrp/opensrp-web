@@ -32,6 +32,22 @@ yarn add @opensrp/server-service
     -   optional
     -   A function thats given the signal and method to use. Used to add custom options that you might want to pass on tho the fetch request
 
+### Errors
+
+OpenSRP exposes 2 additional error classes:
+
+#### HTTPError
+
+This is thrown when the statusCode is not within the allowed success range for any respective operation.
+
+The response from the api is attached to the error as the value of `description`.
+
+Also attaches the following fields from the response to the thrown error object: - statusCode - statusText - url
+
+#### NetworkError
+
+This is thrown when the fetch error cannot go through due to a failed internet connection.
+
 ### Code example
 
 ```typescript
