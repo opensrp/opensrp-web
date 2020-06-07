@@ -1,6 +1,7 @@
 import { getDefaultHeaders, OpenSRPService, OPENSRP_API_BASE_URL } from '..';
 import { createPlan, plansListResponse } from './fixtures/plans';
 import { sampleErrorObj } from './fixtures/session';
+import { throwNetworkError } from '../errors';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -294,7 +295,7 @@ describe('services/OpenSRP', () => {
     it('OpenSRPService attaches a non successful apiResponse correctly', async () => {
         // json apiResponse object
         const statusText = 'something happened';
-        fetch.mockResponseOnce(JSON.stringify(sampleErrorObj), { status: 500, statusText });
+        fetch.mockResponseOnce(JSON.stringify('Some error happened'), { status: 500, statusText });
         const planService = new OpenSRPService(OPENSRP_API_BASE_URL, 'plans');
         let error;
         try {
@@ -303,8 +304,30 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService update on plans failed, HTTP status 500'));
-        expect(error.description).toEqual(sampleErrorObj);
+        expect(error.description).toEqual('Some error happened');
         expect(error.statusText).toEqual('something happened');
         expect(error.statusCode).toEqual(500);
+    });
+});
+
+describe('src/errors', () => {
+    it('does not create a network error', () => {
+        /// increase test coverage.
+        try {
+            const error = new SyntaxError();
+            throwNetworkError(error);
+        } catch (err) {
+            expect(err.name).toEqual('SyntaxError');
+        }
+    });
+
+    it('creates a network error', () => {
+        /// increase test coverage.
+        try {
+            const error = new TypeError();
+            throwNetworkError(error);
+        } catch (err) {
+            expect(err.name).toEqual('NetworkError');
+        }
     });
 });

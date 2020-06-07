@@ -29,7 +29,7 @@ export class HTTPError extends BaseError {
 }
 
 /** Used to return an error arising from a failed network request */
-export class NetworkError extends TypeError {
+export class NetworkError extends BaseError {
     constructor() {
         super();
     }
