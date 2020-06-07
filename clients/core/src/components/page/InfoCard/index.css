@@ -20,7 +20,3 @@
 .table {
   border: none;
 }
-
-.react-table thead tr:first-child {
-  display: none;
-}
