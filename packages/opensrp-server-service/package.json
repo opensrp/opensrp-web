@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/server-service",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Wrapper around OpenSRP Server REST API",
     "main": "dist/index.js",
     "types": "dist/types",
@@ -30,5 +30,6 @@
     },
     "author": "Ona Engineering",
     "license": "Apache-2.0",
-    "private": false
+    "private": false,
+    "gitHead": "9c508904d29edca33bd370cb548247cc87a9697d"
 }
