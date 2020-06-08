@@ -40,7 +40,7 @@ OpenSRP exposes 2 additional error classes:
 
 This is thrown when the statusCode is not within the allowed success range for any respective operation.
 
-The response from the api is attached to the error as the value of `description`.
+The fetch.response.text() value from the api is attached to the error as the value of `description`.
 
 Also attaches the following fields from the response to the thrown error object: - statusCode - statusText - url
 
