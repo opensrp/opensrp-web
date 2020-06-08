@@ -69,8 +69,8 @@ var HTTPError = function (_BaseError) {
 
 exports.HTTPError = HTTPError;
 
-var NetworkError = function (_TypeError) {
-  (0, _inherits2["default"])(NetworkError, _TypeError);
+var NetworkError = function (_BaseError2) {
+  (0, _inherits2["default"])(NetworkError, _BaseError2);
 
   function NetworkError() {
     (0, _classCallCheck2["default"])(this, NetworkError);
@@ -78,32 +78,24 @@ var NetworkError = function (_TypeError) {
   }
 
   return NetworkError;
-}((0, _wrapNativeSuper2["default"])(TypeError));
+}(BaseError);
 
 exports.NetworkError = NetworkError;
 
 var throwHTTPError = function () {
   var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee(response, customMessage) {
-    var responseClone1, responseClone2;
+    var responseClone1;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             responseClone1 = response.clone();
-            responseClone2 = response.clone();
-            _context.next = 4;
-            return responseClone1.json().then(function (apiErrRes) {
+            _context.next = 3;
+            return responseClone1.text().then(function (apiErrRes) {
               throw new HTTPError(response, apiErrRes, customMessage);
-            })["catch"](function (err) {
-              if (err.name === 'SyntaxError') {
-                var apiErrorText = responseClone2.text();
-                throw new HTTPError(response, apiErrorText, customMessage);
-              }
-
-              throw err;
             });
 
-          case 4:
+          case 3:
           case "end":
             return _context.stop();
         }

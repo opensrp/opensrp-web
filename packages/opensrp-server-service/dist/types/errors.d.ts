@@ -1,4 +1,3 @@
-import { Dictionary } from '@onaio/utils';
 /** Modifies the name field for our custom Error classes */
 declare class BaseError extends Error {
     constructor();
@@ -11,11 +10,11 @@ export declare class HTTPError extends BaseError {
     statusCode: number;
     statusText: string;
     url: string;
-    description: Dictionary | string;
-    constructor(response: Response, object: Dictionary | string, serviceDescription?: string);
+    description: string;
+    constructor(response: Response, object: string, serviceDescription?: string);
 }
 /** Used to return an error arising from a failed network request */
-export declare class NetworkError extends TypeError {
+export declare class NetworkError extends BaseError {
     constructor();
 }
 /** helper function that reads a non-200 response and creates
