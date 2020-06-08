@@ -1,4 +1,3 @@
-import { Dictionary } from '@onaio/utils';
 /** Modifies the name field for our custom Error classes */
 class BaseError extends Error {
     constructor() {
@@ -15,8 +14,8 @@ export class HTTPError extends BaseError {
     public statusCode: number;
     public statusText: string;
     public url: string;
-    public description: Dictionary | string;
-    constructor(response: Response, object: Dictionary | string, serviceDescription?: string) {
+    public description: string;
+    constructor(response: Response, object: string, serviceDescription?: string) {
         super();
         this.statusCode = response.status;
         this.statusText = response.statusText;
@@ -40,22 +39,10 @@ export class NetworkError extends BaseError {
  */
 export const throwHTTPError = async (response: Response, customMessage?: string) => {
     const responseClone1 = response.clone();
-    const responseClone2 = response.clone();
 
-    // first try extracting json
-    await responseClone1
-        .json()
-        .then(apiErrRes => {
-            throw new HTTPError(response, apiErrRes, customMessage);
-        })
-        .catch(err => {
-            // if err is of Syntax Error then its because the response was not Json parseable
-            if (err.name === 'SyntaxError') {
-                const apiErrorText = responseClone2.text();
-                throw new HTTPError(response, apiErrorText, customMessage);
-            }
-            throw err;
-        });
+    await responseClone1.text().then(apiErrRes => {
+        throw new HTTPError(response, apiErrRes, customMessage);
+    });
 };
 
 /** a helper to create NetworkError objects, logic is a bit fuzzy since

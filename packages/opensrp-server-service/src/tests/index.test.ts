@@ -1,7 +1,7 @@
 import { getDefaultHeaders, OpenSRPService, OPENSRP_API_BASE_URL } from '..';
 import { createPlan, plansListResponse } from './fixtures/plans';
 import { sampleErrorObj } from './fixtures/session';
-import { throwNetworkError } from '../errors';
+import { throwNetworkError, throwHTTPError } from '../errors';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -134,7 +134,7 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService delete on practitioners failed, HTTP status 500'));
-        expect(error.description).toEqual(sampleErrorObj);
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
         expect(error.statusText).toEqual('something happened');
         expect(error.statusCode).toEqual(500);
     });
@@ -189,7 +189,7 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService read on plans failed, HTTP status 500'));
-        expect(error.description).toEqual(sampleErrorObj);
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
         expect(error.statusText).toEqual('something happened');
         expect(error.statusCode).toEqual(500);
     });
@@ -238,7 +238,7 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService create on plans failed, HTTP status 500'));
-        expect(error.description).toEqual(sampleErrorObj);
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
         expect(error.statusText).toEqual('something happened');
         expect(error.statusCode).toEqual(500);
     });
@@ -304,7 +304,7 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService update on plans failed, HTTP status 500'));
-        expect(error.description).toEqual('Some error happened');
+        expect(error.description).toEqual('"Some error happened"');
         expect(error.statusText).toEqual('something happened');
         expect(error.statusCode).toEqual(500);
     });
@@ -326,6 +326,15 @@ describe('src/errors', () => {
         try {
             const error = new TypeError();
             throwNetworkError(error);
+        } catch (err) {
+            expect(err.name).toEqual('NetworkError');
+        }
+    });
+
+    it('throws HTTPErrors', () => {
+        try {
+            const sampleResponse = new Response(JSON.stringify({}), { status: 500, statusText: 'Nothing' });
+            throwHTTPError(sampleResponse);
         } catch (err) {
             expect(err.name).toEqual('NetworkError');
         }
