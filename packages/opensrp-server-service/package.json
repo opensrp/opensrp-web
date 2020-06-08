@@ -30,6 +30,5 @@
     },
     "author": "Ona Engineering",
     "license": "Apache-2.0",
-    "private": false,
-    "dependencies": {}
+    "private": false
 }

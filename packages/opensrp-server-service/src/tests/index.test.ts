@@ -75,7 +75,6 @@ describe('services/OpenSRP', () => {
         } catch (e) {
             error = e;
         }
-        await new Promise(resolve => setImmediate(resolve));
         expect(error).toEqual(new Error('OpenSRPService list on plans failed, HTTP status 500'));
         expect(error.name).toEqual('HTTPError');
         expect(error.statusCode).toEqual(500);
