@@ -330,12 +330,12 @@ describe('src/errors', () => {
         }
     });
 
-    it('throws HTTPErrors', () => {
+    it('throws HTTPErrors', async () => {
         try {
             const sampleResponse = new Response(JSON.stringify({}), { status: 500, statusText: 'Nothing' });
-            throwHTTPError(sampleResponse);
+            await throwHTTPError(sampleResponse);
         } catch (err) {
-            expect(err.name).toEqual('NetworkError');
+            expect(err.name).toEqual('HTTPError');
         }
     });
 });
