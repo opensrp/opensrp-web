@@ -40,7 +40,7 @@ export class NetworkError extends BaseError {
 export const throwHTTPError = async (response: Response, customMessage?: string) => {
     const responseClone1 = response.clone();
 
-    await responseClone1.text().then(apiErrRes => {
+    await responseClone1.text().then((apiErrRes: string) => {
         throw new HTTPError(response, apiErrRes, customMessage);
     });
 };
