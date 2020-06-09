@@ -77,7 +77,7 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
     public componentDidMount() {
         console.log('i am here');
         const { fetchTeam, fetchMembers, match, removeMembers, opensrpService } = this.props;
-        const teamId = match.params.id || '801874c0-d963-11e9-8a34-2a2ae2dbcce5';
+        const teamId = match.params.id;
         const teamService = new opensrpService(
             OPENSRP_API_BASE_URL,
             `${OPENSRP_TEAM_ENDPOINT}/${teamId}`,
@@ -97,11 +97,12 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
     }
     public render(): React.ReactNode {
         const { team, members } = this.props;
+        console.log('--> team: ', team, '   members: ', members);
         if (!team) {
             return <Loading />;
         }
         return (
-            <Container id="household-profile">
+            <Container id="teamProfile">
                 <div className="page-title">
                     <span className="back-btn-bg">
                         <Link to={`${TEAM_URL}`}>
@@ -115,16 +116,18 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
                         <Table className="info-table" borderless={true}>
                             <tbody>
                                 <tr>
-                                    <td className="info-label">Identifier</td>
+                                    <td className="info-label">Identifier:</td>
                                     <td>{team.identifier}</td>
-                                    <td className="info-label">Active</td>
+                                    <td className="info-label">Active:</td>
                                     <td>{team.active ? 'active' : 'deactive'}</td>
                                 </tr>
                             </tbody>
                             <tbody>
                                 <tr>
-                                    <td className="info-label">Name</td>
+                                    <td className="info-label">Name:</td>
                                     <td>{team.name}</td>
+                                    <td className="info-label">Description:</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </Table>

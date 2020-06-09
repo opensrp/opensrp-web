@@ -33,7 +33,7 @@ export const useTeamTableColumns = () => {
                     {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
-                            <Link to={TEAM_PROFILE_URL}>view</Link>
+                            <Link to={`${TEAM_PROFILE_URL}/${values.identifier}`}>view</Link>
                         ),
                         Header: 'View',
                         accessor: 'id',

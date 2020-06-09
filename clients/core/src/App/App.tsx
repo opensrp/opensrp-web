@@ -64,8 +64,8 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path={TEAM_PROFILE_URL}
-                                component={ConnectedClientList}
+                                path={`${TEAM_PROFILE_URL}/:id`}
+                                component={ConnectedTeamProfile}
                             />
 
                             <Route
