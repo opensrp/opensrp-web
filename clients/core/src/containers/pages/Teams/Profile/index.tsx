@@ -75,7 +75,6 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
     public static defaultProps: TeamProfileProps = defaultProfileProps;
 
     public componentDidMount() {
-        console.log('i am here');
         const { fetchTeam, fetchMembers, match, removeMembers, opensrpService } = this.props;
         const teamId = match.params.id;
         const teamService = new opensrpService(
@@ -97,7 +96,6 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
     }
     public render(): React.ReactNode {
         const { team, members } = this.props;
-        console.log('--> team: ', team, '   members: ', members);
         if (!team) {
             return <Loading />;
         }
