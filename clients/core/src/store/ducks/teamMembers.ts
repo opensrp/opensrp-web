@@ -1,4 +1,3 @@
-import { FlexObject } from '../../helpers/utils';
 import {
     fetchActionCreatorFactory,
     removeActionCreatorFactory,

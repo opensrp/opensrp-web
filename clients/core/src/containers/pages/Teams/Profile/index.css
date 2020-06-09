@@ -1,11 +1,11 @@
 #teamProfile {
   font-size: 14px;
 }
-  
+
 .page-title {
   border-bottom: 1px solid #dfe3e8;
 }
-  
+
 #members-list-container {
   margin-top: 25px;
   background-color: #fff;
@@ -13,17 +13,17 @@
   border-radius: 5px;
   box-shadow: 0 1px 3px 0 #d7d7e0;
 }
-  
+
 .members-list-header {
   margin: 15px;
   color: #3a484f;
 }
-  
+
 a.remove-action {
   padding-left: 10px;
   color: red;
 }
-  
+
 .react-table {
   box-shadow: none;
   margin-top: -16px;
