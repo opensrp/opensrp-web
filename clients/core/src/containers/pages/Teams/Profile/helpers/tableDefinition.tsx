@@ -1,12 +1,10 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { UseTableCellProps } from 'react-table';
 import { Team } from '../../../../../store/ducks/teams';
-import { TEAM_PROFILE_URL } from '../../../../../constants';
 
 // Client specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useTeamTableColumns = () => {
+export const useTeamMemberTableColumns = () => {
     return useMemo(
         () => [
             {
@@ -15,7 +13,7 @@ export const useTeamTableColumns = () => {
                 // eslint-disable-next-line react/display-name
                 Header: '',
                 columns: [
-                    { Header: 'Identifier', accessor: 'identifier', disableSortBy: true },
+                    { Header: 'Username', accessor: 'username', disableSortBy: true },
                     {
                         Header: 'Name',
                         accessor: 'name',
@@ -30,17 +28,8 @@ export const useTeamTableColumns = () => {
                         accessor: 'active',
                         disableSortBy: true,
                     },
-                    {
-                        // eslint-disable-next-line react/display-name
-                        Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
-                            <Link to={TEAM_PROFILE_URL}>view</Link>
-                        ),
-                        Header: 'View',
-                        accessor: 'id',
-                        disableSortBy: true,
-                    },
                 ],
-                id: 'teamtableCrumb',
+                id: 'teamMembertableCrumb',
             },
         ],
         [],

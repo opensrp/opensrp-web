@@ -20,7 +20,7 @@ export interface TeamMember {
 }
 
 /** The reducer name */
-export const reducerName = 'opensrp-web/admin/teams';
+export const reducerName = 'opensrp-web/admin/team-members';
 
 /** TeamMember Reducer */
 const reducer = reducerFactory<TeamMember>(reducerName);
@@ -32,8 +32,8 @@ export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
 // Selectors
 export const getTeamMembersById = getItemsByIdFactory<TeamMember>(reducerName);
-export const getTeamsArray = getItemsArrayFactory<TeamMember>(reducerName);
-export const getTeamById = getItemByIdFactory<TeamMember>(reducerName);
+export const getTeamMembersArray = getItemsArrayFactory<TeamMember>(reducerName);
+export const getTeamMemberById = getItemByIdFactory<TeamMember>(reducerName);
 export const getTotalRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;

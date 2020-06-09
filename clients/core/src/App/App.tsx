@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL, TEAM_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, TEAM_URL, TEAM_PROFILE_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -21,6 +21,7 @@ import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import ConnectedTeamList from '../containers/pages/Teams/List';
+import ConnectedTeamProfile from '../containers/pages/Teams/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -59,6 +60,12 @@ class App extends Component {
                                 exact={true}
                                 path={TEAM_URL}
                                 component={ConnectedTeamList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={TEAM_PROFILE_URL}
+                                component={ConnectedClientList}
                             />
 
                             <Route
