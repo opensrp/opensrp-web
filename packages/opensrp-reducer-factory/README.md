@@ -57,7 +57,7 @@ Glad you asked; The above example should have given you some clue, but am all to
 `reducerFactory` - this a factory method that returns a function that can be used as the reducer.
 currently it supports 3 action types: - adding items - removing items - setting total records
 
-**for action creators:**
+### for action creators:
 
 `fetchActionCreatorFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store. The argument is a key - which must be unique in the data set,
 
@@ -65,7 +65,7 @@ currently it supports 3 action types: - adding items - removing items - setting 
 
 `setTotalRecordsFactory` - This will create an action creator that adds the total number of records to specific slice of the store
 
-**for the selectors:**
+### for the selectors:
 
 `getItemsByIdFactory` which returns a selector that gets all items from a store slice as an object
 
