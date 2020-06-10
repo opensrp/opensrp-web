@@ -8,6 +8,14 @@ I think the biggest win with me, is that there is reduced boilerplate when it co
 
 Currently , the only opinionated part about me is how i structure the stored data, basically it requires that my action creators are given data as list of objects, where each object bears a property akin to a `primary_key` i.e. this one single field should have unique values that are of type `string| number`.
 
+## Installation
+
+```node
+yarn add @opensrp/reducer-factory
+```
+
+## Code example
+
 ```typescript
 import {
     fetchActionCreatorFactory,
@@ -19,25 +27,25 @@ import {
     getItemByIdFactory,
     getTotalRecordsFactory,
     BaseDux,
-} from './baseDux';
+} from '@opensrp/reducer-factory';
 
-/** reducer name for the ANC module */
-export const reducerName = 'opensrp-web/client-type/ANC';
+/** reducer name for the Item module */
+export const reducerName = '<preferred reducer name>';
 
-/** ANC Reducer */
-const reducer = reducerFactory<ANCClientType>(reducerName);
+/** Item Reducer */
+const reducer = reducerFactory<DataType>(reducerName);
 
 // action
-/** actionCreator returns action to to add anc records to store */
-export const fetchANC = fetchActionCreatorFactory<ANCClientType>(reducerName, 'baseEntityId');
-export const removeANCAction = removeActionCreatorFactory(reducerName);
-export const setTotalANCRecords = setTotalRecordsFactory(reducerName);
+/** actionCreator returns action to to add Item records to store */
+export const fetchItem = fetchActionCreatorFactory<DataType>(reducerName, 'uniqueKey');
+export const removeItemAction = removeActionCreatorFactory(reducerName);
+export const setTotalItemRecords = setTotalRecordsFactory(reducerName);
 
 // selectors
-export const getAllANCById = getItemsByIdFactory<ANCClientType>(reducerName);
-export const getANCById = getItemByIdFactory<ANCClientType>(reducerName);
-export const getAllANCArray = getItemsArrayFactory<ANCClientType>(reducerName);
-export const getTotalANCRecords = getTotalRecordsFactory(reducerName);
+export const getAllItemById = getItemsByIdFactory<DataType>(reducerName);
+export const getItemById = getItemByIdFactory<DataType>(reducerName);
+export const getAllItemArray = getItemsArrayFactory<DataType>(reducerName);
+export const getTotalItemRecords = getTotalRecordsFactory(reducerName);
 
 export default reducer;
 ```
@@ -51,7 +59,7 @@ currently it supports 3 action types: - adding items - removing items - setting 
 
 **for action creators:**
 
-`fetchActionCreatorFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store,
+`fetchActionCreatorFactory` - Use this to create action creators that you can use to create actions that when dispatched will add the data to a slice of the store. The argument is a key - which must be unique in the data set,
 
 `removeActionCreatorFactory` - Use this to create action creators that return actions to remove all items from a slice of the store
 
