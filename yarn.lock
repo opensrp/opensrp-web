@@ -2220,19 +2220,27 @@
   dependencies:
     "@onaio/redux-reducer-registry" "^0.0.8"
 
-"@onaio/gatekeeper@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.14.tgz#bdffeb5056cbb6ecc322178792fb40d3c87bbd6e"
-  integrity sha512-znVkg3ss+pIEsbHtdg1inwN6rQcANtpwgfayswL2635jHg0nrmKYwMaOar47rqu5BZH8L8C93W4U2zszreu74w==
+"@onaio/drill-down-table@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@onaio/drill-down-table/-/drill-down-table-1.0.1.tgz#774ad27deffc559aca2e41c5f423931fa393ba96"
+  integrity sha512-83anCl5L64KbFM5r5UYV5FFsL6tYxJXAXCoHdG23bTNMW+QnCOhO3UVBWMfwBQP6HfDf/EdHb/CDqzQIMrv/Kg==
   dependencies:
-    "@onaio/session-reducer" "^0.0.10"
-    client-oauth2 "^4.2.3"
-    query-string "^6.4.2"
+    react-table "^7.0.6"
+    reactstrap "^8.4.1"
 
 "@onaio/gatekeeper@^0.0.16":
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.16.tgz#e4873a32d70f0491c00afee772d70ffd1da06885"
   integrity sha512-coEZ9cFetovWr62p85v1aXLW3DjEihbZohMelGiA4+BdzQw6pB0oN3fCT9uH0vBMt3Qnc9vqTd7FsTSthb8Rvw==
+  dependencies:
+    "@onaio/session-reducer" "^0.0.11"
+    client-oauth2 "^4.2.3"
+    query-string "^6.4.2"
+
+"@onaio/gatekeeper@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.21.tgz#ebf445833330ebc09548999b85a9da253b7ebd1a"
+  integrity sha512-0kN42NehnehGnPn8rMQnUvQOGstU8xkR6GEpeTPHqt0G/8pcWULUSzDZOZyADO1oZOpyz+dzC70NuvTw8jHt1w==
   dependencies:
     "@onaio/session-reducer" "^0.0.11"
     client-oauth2 "^4.2.3"
@@ -2287,6 +2295,11 @@
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@scarf/scarf/-/scarf-0.1.5.tgz#fc4cc88294eca336eed9a91549180346de5e6946"
   integrity sha512-Fx6atDc7JM1r0WkPCDhNetVZNp+DO21q/HGlomAKBG+k8vb1B8fg8Yige4oCf1P9OWTZWm5tM5i3jlXhrSbNOg==
+
+"@scarf/scarf@^1.0.4":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@scarf/scarf/-/scarf-1.0.6.tgz#52011dfb19187b53b75b7b6eac20da0810ddd88f"
+  integrity sha512-y4+DuXrAd1W5UIY3zTcsosi/1GyYT8k5jGnZ/wG7UUHVrU+MHlH4Mp87KK2/lvMW4+H7HVcdB+aJhqywgXksjA==
 
 "@servie/events@^1.0.0":
   version "1.0.0"
@@ -3025,6 +3038,11 @@ acorn@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 address@1.1.2, address@^1.0.1:
   version "1.1.2"
@@ -12033,6 +12051,13 @@ react-table@^7.0.0:
   dependencies:
     "@scarf/scarf" "^0.1.5"
 
+react-table@^7.0.6:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.2.0.tgz#a2d8a84efa610be541103b3c714cacbb15df9d1a"
+  integrity sha512-hcBwPimjwOKQZoaeoQnUYyQNCg3NhjA1xAhKmuxam03sKsxE5NfI4GZ1qJcBQ8CJVj78e1o/lOKCh1AGuPmcnQ==
+  dependencies:
+    "@scarf/scarf" "^1.0.4"
+
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.13.0.tgz#39ba3bf72cedc8210c3f81983f0bb061b14a3014"
@@ -12072,7 +12097,7 @@ react@^16.12.0, react@^16.8.6:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
-reactstrap@^8.0.1:
+reactstrap@^8.0.1, reactstrap@^8.4.1:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-8.4.1.tgz#c7f63b9057f58b52833061711ebe235b9ec4e3e5"
   integrity sha512-oAjp9PYYUGKl7SLXwrQ1oRIrYw0MqfO2mUqYgGapFKHG2uwjEtLip5rYxtMujkGx3COjH5FX1WtcfNU4oqpH0Q==
@@ -12279,7 +12304,7 @@ redux-thunk@*, redux-thunk@^2.3.0:
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
-redux@*, redux@^4.0.0, redux@^4.0.1, redux@^4.0.4:
+redux@*, redux@^4.0.0, redux@^4.0.1, redux@^4.0.4, redux@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
@@ -14907,3 +14932,8 @@ yargs@^14.2.2:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^15.0.0"
+
+yarn@^1.22.4:
+  version "1.22.4"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.4.tgz#01c1197ca5b27f21edc8bc472cd4c8ce0e5a470e"
+  integrity sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA==
