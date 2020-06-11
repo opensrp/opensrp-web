@@ -24,3 +24,18 @@ export function oAuthUserInfoGetter(apiResponse: FlexObject): SessionState | voi
         }
     }
 }
+
+export function calculateAge(dob: number) {
+    const date = new Date(dob);
+    return Math.abs(date.getUTCFullYear() - new Date().getFullYear());
+}
+
+/**
+ *
+ * @param startDate = yyyy-MM-DD
+ * @param endDate = yyyy-MM-DD
+ */
+export function countDaysBetweenDate(startDate: number, endDate: number) {
+    const timeDiff = (new Date(endDate) as any) - (new Date(startDate) as any);
+    return timeDiff / (1000 * 60 * 60 * 24);
+}

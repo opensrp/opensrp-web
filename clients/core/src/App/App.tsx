@@ -10,16 +10,18 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, LOCATION_TAG_CREATE_URL, CHILD_PROFILE_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
 import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/pages/Clients/List';
 import ConnectedChildList from '../containers/pages/Child/List';
+import LocationTagForm from '../components/page/LocationTagForm';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import ChildProfile from '../containers/Child/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -44,6 +46,12 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
+                                path={`${CHILD_PROFILE_URL}/:id`}
+                                component={ChildProfile}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
                                 path={CLIENT_URL}
                                 component={ConnectedClientList}
                             />
@@ -54,11 +62,19 @@ class App extends Component {
                                 component={ConnectedChildList}
                             />
 
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOCATION_TAG_CREATE_URL}
+                                component={LocationTagForm}
+                            />
+
                             <Route
                                 exact={true}
                                 path={LOGIN_URL}
                                 render={routeProps => <OauthLogin providers={providers} {...routeProps} />}
                             />
+
                             <Route
                                 exact={true}
                                 path="/oauth/callback/:id"

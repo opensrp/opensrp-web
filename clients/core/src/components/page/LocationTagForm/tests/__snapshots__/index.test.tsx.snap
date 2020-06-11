@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Location-tag-form renders the Loading component 1`] = `
+<LocationTagForm
+  active={false}
+  description=""
+  name=""
+>
+  <Formik
+    initialValues={
+      Object {
+        "active": false,
+        "description": "",
+        "name": "",
+      }
+    }
+    onSubmit={[Function]}
+  >
+    <div>
+      <Row
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <div
+          className="row"
+        >
+          <Col
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="col"
+            >
+              <h3>
+                New Location Tag
+              </h3>
+            </div>
+          </Col>
+        </div>
+      </Row>
+      <div
+        className="form-background"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <Row
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="row"
+            >
+              <label>
+                Name
+              </label>
+            </div>
+          </Row>
+          <Row
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="row"
+            >
+              <input
+                className="input-field"
+                name="name"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+          </Row>
+          <Row
+            className="input-row"
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="input-row row"
+            >
+              <label>
+                Description
+              </label>
+            </div>
+          </Row>
+          <Row
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="row"
+            >
+              <input
+                className="input-field"
+                name="description"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+          </Row>
+          <Row
+            tag="div"
+            widths={
+              Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ]
+            }
+          >
+            <div
+              className="row"
+            >
+              <button
+                className="submit-btn-bg"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </Row>
+        </form>
+      </div>
+    </div>
+  </Formik>
+</LocationTagForm>
+`;
