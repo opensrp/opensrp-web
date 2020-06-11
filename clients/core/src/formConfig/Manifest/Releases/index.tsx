@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, getFetchOptions } from '@opensrp/server-service';
+import { DrillDownTable } from '@onaio/drill-down-table';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
-import releasesReducer, { fetchManifestReleases, reducerName } from '../../ducks/manifestReleases';
+import releasesReducer, {
+    fetchManifestReleases,
+    reducerName,
+    getAllManifestReleasesArray,
+    ManifestReleasesTypes,
+} from '../../ducks/manifestReleases';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
@@ -11,6 +17,7 @@ reducerRegistry.register(reducerName, releasesReducer);
 /** default props */
 interface DefaultProps {
     fetchReleases: typeof fetchManifestReleases;
+    data: ManifestReleasesTypes[];
 }
 
 /**ManifestReleases props */
@@ -18,22 +25,18 @@ export interface ManifestReleasesProps extends DefaultProps {
     baseURL: string;
     endpoint: string;
     getPayload: typeof getFetchOptions;
-    LoadingComponent?: React.ElementType<any>;
 }
+
 /** view all manifest pages */
 const ManifestReleases = (props: ManifestReleasesProps) => {
-    const { baseURL, endpoint, getPayload, LoadingComponent, fetchReleases } = props;
+    const { baseURL, endpoint, getPayload, fetchReleases, data } = props;
 
-    const [loading, setLoading] = useState(true);
-
+    /** get manifest releases from store */
     const getManifests = async () => {
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
             .list()
-            .then(res => {
-                fetchReleases(res);
-                console.log(res);
-            })
+            .then((res: ManifestReleasesTypes[]) => fetchReleases(res))
             .catch(error => console.log(error));
     };
 
@@ -41,30 +44,69 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
         getManifests();
     }, []);
 
-    if (loading && LoadingComponent) {
-        // const LoadingComp = loadingComponent;
-        // /@typescript-eslint/no-unused-expressions
-        // <LoadingComponent />
-    }
+    const formatedData = data.map((obj: ManifestReleasesTypes) => {
+        return {
+            ...obj,
+            appVersion: `V${obj.appVersion}`,
+            identifier: `V${obj.identifier}`,
+            link: <a href="#">View Files</a>,
+        };
+    });
 
-    return <div>Manifest releases</div>;
+    const columns = [
+        {
+            Header: 'Identifier',
+            accessor: 'identifier',
+        },
+        {
+            Header: 'APP Id',
+            accessor: 'appId',
+        },
+        {
+            Header: 'appVersion',
+            accessor: 'appVersion',
+        },
+        {
+            Header: '',
+            accessor: 'link',
+        },
+    ];
+
+    const DrillDownTableProps = {
+        columns,
+        data: formatedData,
+        linkerField: 'appId',
+        useDrillDown: false,
+    };
+
+    return <DrillDownTable {...DrillDownTableProps} />;
 };
 
 /** declear default props */
 const defaultProps: DefaultProps = {
     fetchReleases: fetchManifestReleases,
+    data: [],
 };
 
+/** Connect the component to the store */
+
+/** interface to describe props from mapStateToProps */
+interface DispatchedStateProps {
+    data: ManifestReleasesTypes[];
+}
+
+/** pass default props to component */
 ManifestReleases.defaultProps = defaultProps;
 export { defaultProps };
 
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
- * @param {any} ownprops - components props
  */
-const mapStateToProps = (state: Partial<Store>, ownProps: ManifestReleasesProps) => {
-    // const plan = getPlanById(state, ownProps.match.params.id);
-    return {};
+const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
+    const data = getAllManifestReleasesArray(state);
+    return {
+        data,
+    };
 };
 
 /** map dispatch to props */
