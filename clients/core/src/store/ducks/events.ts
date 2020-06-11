@@ -28,8 +28,9 @@ export interface Event {
     team: string;
     _id: string;
     _rev: string;
-    isSendToOpenMRS: string;
+    isSendToOpenMRS?: string;
     type: string;
+    childLocationId?: string;
 }
 
 /** The reducer name */
@@ -39,7 +40,7 @@ export const reducerName = 'opensrp-web/events';
 const reducer = reducerFactory<Event>(reducerName);
 
 // action creators
-export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'baseEntityId');
+export const fetchEvents = fetchActionCreatorFactory<Event>(reducerName, 'formSubmissionId');
 export const removeEvents = removeActionCreatorFactory(reducerName);
 
 // selectors

@@ -3,6 +3,7 @@ import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
 import { Event } from '../events';
 import { Child } from '../child';
+import { RegisterPanelData } from '../../../components/page/RegisterPanel';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -716,7 +717,7 @@ export const event1: Event = {
     entityType: 'ec_household',
     eventDate: 358560000000,
     eventType: 'Household Registration',
-    formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+    formSubmissionId: 'f6e0c01d-1d1a-4462-ab56-a83eac075093',
     identifiers: {
         id: '1d-1d1a-4667',
     },
@@ -784,7 +785,7 @@ export const event3: Event = {
     entityType: 'ec_household',
     eventDate: 358560009256,
     eventType: 'Household Registration',
-    formSubmissionId: 'f5e0c01d-1d1a-4667-911e-ebc3ac075093',
+    formSubmissionId: 'f5e0101d-1d1a-4667-911e-ebc1ac075003',
     identifiers: {
         id: '2d-9d1a-4667',
     },
@@ -805,6 +806,100 @@ export const event3: Event = {
     teamId: '',
     type: 'Event',
     version: 29787303842,
+};
+
+export const event4: Event = {
+    type: 'Event',
+    dateCreated: 1573969470524,
+    serverVersion: 1573969470430,
+    clientApplicationVersion: 9,
+    clientDatabaseVersion: 12,
+    identifiers: {},
+    baseEntityId: '189148d5-61ed-4607-b398-6eceb2203c8d',
+    locationId: 'e3170b23-bb22-42a4-875d-35c7f32c28ae',
+    eventDate: 1550620800000,
+    eventType: 'Vaccination',
+    formSubmissionId: '1c62b86a-b8e0-404f-bd87-d75666c87b66',
+    providerId: 'tanvir',
+    duration: 0,
+    obs: [
+        {
+            fieldType: 'concept',
+            fieldDataType: 'date',
+            fieldCode: '1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            parentCode: '1422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            values: ['2019-02-20'],
+            comments: null,
+            formSubmissionField: 'ipv',
+            effectiveDatetime: null,
+            humanReadableValues: [],
+        },
+        {
+            fieldType: 'concept',
+            fieldDataType: 'calculate',
+            fieldCode: '1418AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            parentCode: '1422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            values: ['0'],
+            comments: null,
+            formSubmissionField: 'ipv_dose',
+            effectiveDatetime: null,
+            humanReadableValues: [],
+        },
+    ],
+    entityType: 'vaccination',
+    version: 1573825390063,
+    teamId: '3def4192-61ec-440d-af0b-d16ee1ecc262',
+    team: 'mPower',
+    childLocationId: 'CHA3',
+    _id: '43146741-b28d-41a4-9cb1-ba948a979d7f',
+    _rev: 'v1',
+};
+
+export const event5: Event = {
+    type: 'Event',
+    dateCreated: 1573969470522,
+    serverVersion: 1573969470430,
+    clientApplicationVersion: 9,
+    clientDatabaseVersion: 12,
+    identifiers: {},
+    baseEntityId: '189148d5-61ed-4607-b398-6eceb2203c8d',
+    locationId: 'e3170b23-bb22-42a4-875d-35c7f32c28ae',
+    eventDate: 1565740800000,
+    eventType: 'Vaccination',
+    formSubmissionId: '6191ae52-a24d-461c-b463-83cb153981ef',
+    providerId: 'tanvir',
+    duration: 0,
+    obs: [
+        {
+            fieldType: 'concept',
+            fieldDataType: 'date',
+            fieldCode: '1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            parentCode: '79409AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            values: ['2019-08-14'],
+            comments: null,
+            formSubmissionField: 'mcv_1',
+            effectiveDatetime: null,
+            humanReadableValues: [],
+        },
+        {
+            fieldType: 'concept',
+            fieldDataType: 'calculate',
+            fieldCode: '1418AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            parentCode: '79409AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            values: ['1'],
+            comments: null,
+            formSubmissionField: 'mcv_1_dose',
+            effectiveDatetime: null,
+            humanReadableValues: [],
+        },
+    ],
+    entityType: 'vaccination',
+    version: 1573825390002,
+    teamId: '3def4192-61ec-440d-af0b-d16ee1ecc262',
+    team: 'mPower',
+    childLocationId: 'CHA3',
+    _id: 'c028be5a-d068-47a5-ac26-f35ac30b93cc',
+    _rev: 'v1',
 };
 
 export const child1: Child = {
@@ -903,7 +998,29 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
+export const report1: RegisterPanelData = {
+    report: '0 weeks',
+    date: '20-03-2020',
+    reporter: 'tanvir',
+    message: 'opv1',
+};
+
+export const report2: RegisterPanelData = {
+    report: '4 weeks',
+    date: '20-04-2020',
+    reporter: 'tanvir',
+    message: 'bcg',
+};
+
+export const report3: RegisterPanelData = {
+    report: '6 weeks',
+    date: '20-05-2020',
+    reporter: 'tanvir',
+    message: 'cpv',
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
+export const registerData: RegisterPanelData[] = [report1, report2, report3];

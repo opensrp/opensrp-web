@@ -114,8 +114,13 @@ export const OPENSRP_CLIENT_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDP
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
 /** the clients endpoint NOTE: does not end with / */
+export const OPENSRP_EVENT_ENDPOINT = process.env.REACT_APP_OPENSRP_EVENT_ENDPOINT || 'event/search';
+export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_EVENT_ENDPOINT;
 export const OPENSRP_CHILD_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/searchByCriteria';
 export type OPENSRP_CHILD_ENDPOINT = typeof OPENSRP_CHILD_ENDPOINT;
 
-/** page size for every list of */
-export const PAGINATION_SIZE = 50;
+/** pagination constants */
+export const PAGINATION_SIZE = (process.env.PAGINATION_SIZE || 10) as number;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGBOURS = (process.env.PAGINATION_NEIGBOURS || 2) as number;
+export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;

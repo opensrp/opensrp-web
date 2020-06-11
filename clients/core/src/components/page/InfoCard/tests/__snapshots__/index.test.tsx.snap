@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/InfoCard renders the InfoCard component 1`] = `
+<InfoCard
+  title="Basic information"
+>
+  <div
+    id="info-container"
+  >
+    <Row
+      className="info-header-bg"
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <div
+        className="info-header-bg row"
+      >
+        <Col
+          className="info-header"
+          tag="div"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <div
+            className="info-header col"
+          >
+            <span
+              className="info-title"
+            >
+              <b>
+                <h5>
+                  Basic information
+                </h5>
+              </b>
+            </span>
+          </div>
+        </Col>
+      </div>
+    </Row>
+    <Row
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <div
+        className="row"
+      />
+    </Row>
+  </div>
+</InfoCard>
+`;
