@@ -69,6 +69,7 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
         {
             Header: '',
             accessor: 'link',
+            disableSortBy: true,
         },
     ];
 
