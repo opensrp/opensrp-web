@@ -10,7 +10,8 @@
         "@fortawesome/react-fontawesome": "^0.1.4",
         "@onaio/connected-private-route": "^0.0.9",
         "@onaio/connected-reducer-registry": "^0.0.1",
-        "@onaio/gatekeeper": "^0.0.14",
+        "@onaio/drill-down-table": "^1.0.1",
+        "@onaio/gatekeeper": "^0.0.21",
         "@onaio/loaders": "^0.0.1",
         "@onaio/pagination": "^0.0.3",
         "@onaio/redux-reducer-registry": "^0.0.8",
@@ -32,6 +33,7 @@
         "@types/react-select": "^3.0.10",
         "@types/reactstrap": "^8.0.1",
         "@types/seamless-immutable": "^7.1.10",
+        "add": "^2.0.6",
         "bootstrap": "^4.3.1",
         "classnames": "^2.2.6",
         "client-oauth2": "^4.2.5",
@@ -54,7 +56,8 @@
         "redux-thunk": "^2.3.0",
         "seamless-immutable": "^7.1.4",
         "snapshot-diff": "^0.5.2",
-        "typescript": "^3.5.3"
+        "typescript": "^3.5.3",
+        "yarn": "^1.22.4"
     },
     "scripts": {
         "start": "react-scripts start",
