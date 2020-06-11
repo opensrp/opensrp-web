@@ -31,6 +31,12 @@ export const LOCATIONS_URL = '/404';
 export type LOCATION_URL = typeof LOCATIONS_URL;
 export const REPORTS_URL = '/404';
 export type REPORTS_URL = typeof REPORTS_URL;
+export const VIEW_RELEASE_PAGE_URL = '/manifest/releases';
+export type VIEW_RELEASE_PAGE_URL = typeof VIEW_RELEASE_PAGE_URL;
+export const VIEW_DRAFT_FILES_PAGE_URL = '/files/draft';
+export type VIEW_DRAFT_FILES_PAGE_URL = typeof VIEW_DRAFT_FILES_PAGE_URL;
+export const VIEW_JSON_VALIDATORS_PAGE_URL = '/json-validators';
+export type VIEW_JSON_VALIDATORS_PAGE_URL = typeof VIEW_JSON_VALIDATORS_PAGE_URL;
 
 // string literals
 
@@ -66,6 +72,12 @@ export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
+export const VIEW_RELEASE = 'View Release';
+export type VIEW_RELEASE = typeof VIEW_RELEASE;
+export const VIEW_JSON_VALIDATORS = 'View JSON Validators';
+export type VIEW_JSON_VALIDATORS = typeof CHILD_CLIENT_TYPE;
+export const VIEW_DRAFT_FILES = 'View Draft Files';
+export type VIEW_DRAFT_FILES = typeof VIEW_DRAFT_FILES;
 
 // url constants
 export const PAGINATION_SIZE = 10;
