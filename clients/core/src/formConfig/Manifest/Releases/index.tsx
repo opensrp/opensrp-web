@@ -76,7 +76,7 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
         setStateData(data);
     }, [data]);
 
-    const test = (obj: ManifestReleasesTypes) => {
+    const linkToFiles = (obj: ManifestReleasesTypes) => {
         return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
     };
 
@@ -95,7 +95,7 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
         },
         {
             Header: ' ',
-            accessor: (obj: ManifestReleasesTypes) => test(obj),
+            accessor: (obj: ManifestReleasesTypes) => linkToFiles(obj),
             disableSortBy: true,
         },
     ];
