@@ -43,7 +43,6 @@ import {
     ENABLE_VIEW_JSON_VALIDATORS_PAGE,
     ENABLE_VIEW_DRAFT_FILES_PAGE,
 } from './env';
-import { url } from 'inspector';
 
 // Page links
 
@@ -157,8 +156,8 @@ const ENABLE_ADMIN_MODULE =
     ENABLE_TEAM_PAGE ||
     ENABLE_LOCATION_PAGE ||
     ENABLE_VIEW_RELEASE_PAGE ||
-    ENABLE_VIEW_JSON_VALIDATORS_PAGE ||
-    ENABLE_VIEW_DRAFT_FILES_PAGE;
+    ENABLE_VIEW_DRAFT_FILES_PAGE ||
+    ENABLE_VIEW_JSON_VALIDATORS_PAGE;
 type ENABLE_ADMIN_MODULE = typeof ENABLE_ADMIN_MODULE;
 
 export const sideMenuProps: SideMenuProps = {

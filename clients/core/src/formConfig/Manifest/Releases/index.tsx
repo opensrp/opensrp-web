@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, getFetchOptions } from '@opensrp/server-service';
 import { DrillDownTable } from '@onaio/drill-down-table';
@@ -10,6 +10,8 @@ import releasesReducer, {
     getAllManifestReleasesArray,
     ManifestReleasesTypes,
 } from '../../ducks/manifestReleases';
+import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import { Link } from 'react-router-dom';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
@@ -20,7 +22,7 @@ interface TableData extends ManifestReleasesTypes {
 }
 
 /** default props interface */
-interface DefaultProps {
+interface DefaultProps extends SearchBarDefaultProps {
     fetchReleases: typeof fetchManifestReleases;
     data: ManifestReleasesTypes[];
 }
@@ -28,6 +30,7 @@ interface DefaultProps {
 /**ManifestReleases props interface*/
 export interface ManifestReleasesProps extends DefaultProps {
     baseURL: string;
+    currentUrl: string;
     endpoint: string;
     getPayload: typeof getFetchOptions;
     LoadingComponent?: JSX.Element;
@@ -35,10 +38,20 @@ export interface ManifestReleasesProps extends DefaultProps {
 
 /** view all manifest pages */
 const ManifestReleases = (props: ManifestReleasesProps) => {
-    const { baseURL, endpoint, getPayload, fetchReleases, data, LoadingComponent } = props;
+    const {
+        baseURL,
+        endpoint,
+        getPayload,
+        fetchReleases,
+        data,
+        LoadingComponent,
+        debounceTime,
+        placeholder,
+        currentUrl,
+    } = props;
 
     const [loading, setLoading] = useState(false);
-    const [formatedData, setFormatedData] = useState<TableData[]>([]);
+    const [stateData, setStateData] = useState<ManifestReleasesTypes[]>(data);
 
     /** get manifest releases from store */
     const getManifests = async () => {
@@ -60,39 +73,54 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
     }, []);
 
     useEffect(() => {
-        const formatData = data.map((obj: ManifestReleasesTypes) => ({
-            ...obj,
-            appVersion: `V${obj.appVersion}`,
-            identifier: `V${obj.identifier}`,
-            link: <a href="#">View Files</a>,
-        }));
-        setFormatedData(formatData);
+        setStateData(data);
     }, [data]);
+
+    const test = (obj: ManifestReleasesTypes) => {
+        return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
+    };
 
     const columns = [
         {
             Header: 'Identifier',
-            accessor: 'identifier',
+            accessor: (obj: ManifestReleasesTypes) => `V${obj.identifier}`,
         },
         {
             Header: 'APP Id',
             accessor: 'appId',
         },
         {
-            Header: 'appVersion',
-            accessor: 'appVersion',
+            Header: 'App Version',
+            accessor: (obj: ManifestReleasesTypes) => `V${obj.appVersion}`,
         },
         {
-            Header: '',
-            accessor: 'link',
+            Header: ' ',
+            accessor: (obj: ManifestReleasesTypes) => test(obj),
             disableSortBy: true,
         },
     ];
 
     const DrillDownTableProps = {
         columns,
-        data: formatedData,
+        data: stateData,
         useDrillDown: false,
+    };
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value.toUpperCase();
+        const searchResult = data.filter(
+            dt =>
+                dt.appId.toUpperCase().includes(input) ||
+                dt.appVersion.toUpperCase().includes(input) ||
+                dt.identifier.toUpperCase().includes(input),
+        );
+        setStateData(searchResult);
+    };
+
+    const searchBarProps = {
+        debounceTime,
+        onChangeHandler,
+        placeholder,
     };
 
     if (LoadingComponent && loading) {
@@ -101,6 +129,7 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
 
     return (
         <div>
+            <SearchBar {...searchBarProps} />
             <DrillDownTable {...DrillDownTableProps} />
         </div>
     );
@@ -108,8 +137,10 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
 
 /** declear default props */
 const defaultProps: DefaultProps = {
-    fetchReleases: fetchManifestReleases,
     data: [],
+    debounceTime: 1000,
+    fetchReleases: fetchManifestReleases,
+    placeholder: 'Find Release',
 };
 
 /** Connect the component to the store */
