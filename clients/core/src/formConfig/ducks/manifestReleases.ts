@@ -20,7 +20,7 @@ export interface ManifestReleasesTypes {
     appVersion: string;
     createdAt: string;
     identifier: string;
-    json: ManifestJsonFieldType;
+    json: string;
     updatedAt: string;
 }
 

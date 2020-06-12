@@ -21,6 +21,7 @@ import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import { ManifestReleasesPage } from '../containers/pages/manifest/releases';
+import ConnectedManifestFiles from '../containers/pages/manifest/filesList';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -59,6 +60,12 @@ class App extends Component {
                                 exact={true}
                                 path={VIEW_RELEASE_PAGE_URL}
                                 component={ManifestReleasesPage}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`${VIEW_RELEASE_PAGE_URL}/:id`}
+                                component={ConnectedManifestFiles}
                             />
                             <Route
                                 exact={true}

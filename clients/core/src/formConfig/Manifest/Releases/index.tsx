@@ -1,6 +1,6 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
-import { OpenSRPService, getFetchOptions } from '@opensrp/server-service';
+import { OpenSRPService } from '@opensrp/server-service';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
@@ -12,6 +12,8 @@ import releasesReducer, {
 } from '../../ducks/manifestReleases';
 import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
+import { FormConfigProps } from '../../helpers/types';
+import { object } from 'prop-types';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
@@ -22,17 +24,8 @@ interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestReleasesTypes[];
 }
 
-/**ManifestReleases props interface*/
-export interface ManifestReleasesProps extends DefaultProps {
-    baseURL: string;
-    currentUrl: string;
-    endpoint: string;
-    getPayload: typeof getFetchOptions;
-    LoadingComponent?: JSX.Element;
-}
-
 /** view all manifest pages */
-const ManifestReleases = (props: ManifestReleasesProps) => {
+const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
     const {
         baseURL,
         endpoint,
@@ -48,7 +41,7 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
     const [loading, setLoading] = useState(false);
     const [stateData, setStateData] = useState<ManifestReleasesTypes[]>(data);
 
-    /** get manifest releases from store */
+    /** get manifest releases */
     const getManifests = async () => {
         setLoading(data.length < 1);
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
@@ -76,7 +69,14 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
      * @param {ManifestReleasesTypes} obj
      */
     const linkToFiles = (obj: ManifestReleasesTypes) => {
-        return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
+        let link = null;
+        try {
+            const jsonData = JSON.parse(obj.json).forms_version;
+            link = <Link to={`${currentUrl}/${jsonData}`}>View Files</Link>;
+        } catch {
+            link = <span>View Files</span>;
+        }
+        return link;
     };
 
     const columns = [
@@ -142,16 +142,16 @@ const defaultProps: DefaultProps = {
     placeholder: 'Find Release',
 };
 
+/** pass default props to component */
+ManifestReleases.defaultProps = defaultProps;
+export { ManifestReleases };
+
 /** Connect the component to the store */
 
 /** interface to describe props from mapStateToProps */
 interface DispatchedStateProps {
     data: ManifestReleasesTypes[];
 }
-
-/** pass default props to component */
-ManifestReleases.defaultProps = defaultProps;
-export { defaultProps };
 
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
@@ -166,7 +166,7 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 /** map dispatch to props */
 const mapDispatchToProps = { fetchReleases: fetchManifestReleases };
 
-/** Connected ActiveFI component */
+/** Connected ManifestReleases component */
 const ConnectedManifestReleases = connect(mapStateToProps, mapDispatchToProps)(ManifestReleases);
 
 export default ConnectedManifestReleases;
