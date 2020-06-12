@@ -13,7 +13,6 @@ import releasesReducer, {
 import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
 import { FormConfigProps } from '../../helpers/types';
-import { object } from 'prop-types';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);

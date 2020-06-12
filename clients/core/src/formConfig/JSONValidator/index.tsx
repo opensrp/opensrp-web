@@ -1,30 +1,25 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { OpenSRPService } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps } from '../helpers/types';
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     data: string[];
 }
 
-/** manifest files list props interface */
-interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
-    formVersion: string;
-}
-
-/** view manifest forms */
-const ManifestFilesList = (props: ManifestFilesListProps) => {
+/** view JSON validator forms */
+const JSONValidator = (props: DefaultProps & FormConfigProps) => {
     const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder } = props;
 
     const [loading, setLoading] = useState(false);
     const [stateData, setStateData] = useState<string[]>(data);
 
-    /** get manifest files */
-    const getManifestFiles = async () => {
+    /** get JSON validator files */
+    const getValidatorFiles = async () => {
         setLoading(data.length < 1);
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
@@ -40,7 +35,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     };
 
     useEffect(() => {
-        getManifestFiles();
+        getValidatorFiles();
     }, []);
 
     useEffect(() => {
@@ -95,17 +90,17 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
-    placeholder: 'Find Release Files',
+    placeholder: 'Find JSON Validator',
 };
 
 /** pass default props to component */
-ManifestFilesList.defaultProps = defaultProps;
-export { ManifestFilesList };
+JSONValidator.defaultProps = defaultProps;
+export { JSONValidator };
 
 /** Connect the component to the store */
 
 /** interface to describe props from mapStateToProps */
-interface DispatchedStateProps extends SearchBarDefaultProps {
+interface DispatchedStateProps {
     data: string[];
 }
 
@@ -116,12 +111,10 @@ const mapStateToProps = (_: Partial<Store>): DispatchedStateProps => {
     const data: string[] = [];
     return {
         data,
-        debounceTime: 1000,
-        placeholder: 'Find Release Files',
     };
 };
 
-/** Connected ManifestFilesList component */
-const ConnectedManifestFilesList = connect(mapStateToProps)(ManifestFilesList);
+/** Connected JSONValidator component */
+const ConnectedManifestFilesList = connect(mapStateToProps)(JSONValidator);
 
 export default ConnectedManifestFilesList;
