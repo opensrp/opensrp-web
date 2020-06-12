@@ -1,7 +1,6 @@
 import {
     fetchActionCreatorFactory,
     removeActionCreatorFactory,
-    setTotalRecordsFactory,
     reducerFactory,
     getItemsByIdFactory,
     getItemsArrayFactory,

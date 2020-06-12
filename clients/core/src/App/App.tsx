@@ -20,7 +20,6 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
-import ConnectedManifestReleases from '../formConfig/Manifest/Releases';
 import { ManifestReleasesPage } from '../containers/pages/manifest/releases';
 
 library.add(faUser, faChartLine, faCog, faSearch);

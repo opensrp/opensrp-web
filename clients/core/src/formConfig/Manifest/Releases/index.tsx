@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, getFetchOptions } from '@opensrp/server-service';
 import { DrillDownTable } from '@onaio/drill-down-table';
@@ -14,44 +14,60 @@ import releasesReducer, {
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
 
-/** default props */
+/** table data interface */
+interface TableData extends ManifestReleasesTypes {
+    link: JSX.Element;
+}
+
+/** default props interface */
 interface DefaultProps {
     fetchReleases: typeof fetchManifestReleases;
     data: ManifestReleasesTypes[];
 }
 
-/**ManifestReleases props */
+/**ManifestReleases props interface*/
 export interface ManifestReleasesProps extends DefaultProps {
     baseURL: string;
     endpoint: string;
     getPayload: typeof getFetchOptions;
+    LoadingComponent?: JSX.Element;
 }
 
 /** view all manifest pages */
 const ManifestReleases = (props: ManifestReleasesProps) => {
-    const { baseURL, endpoint, getPayload, fetchReleases, data } = props;
+    const { baseURL, endpoint, getPayload, fetchReleases, data, LoadingComponent } = props;
+
+    const [loading, setLoading] = useState(false);
+    const [formatedData, setFormatedData] = useState<TableData[]>([]);
 
     /** get manifest releases from store */
     const getManifests = async () => {
+        setLoading(data.length < 1);
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
             .list()
             .then((res: ManifestReleasesTypes[]) => fetchReleases(res))
-            .catch(error => console.log(error));
+            .catch(() => {
+                // to handle error
+            })
+            .finally(() => setLoading(false));
     };
 
     useEffect(() => {
-        getManifests();
+        if (!data.length) {
+            getManifests();
+        }
     }, []);
 
-    const formatedData = data.map((obj: ManifestReleasesTypes) => {
-        return {
+    useEffect(() => {
+        const formatData = data.map((obj: ManifestReleasesTypes) => ({
             ...obj,
             appVersion: `V${obj.appVersion}`,
             identifier: `V${obj.identifier}`,
             link: <a href="#">View Files</a>,
-        };
-    });
+        }));
+        setFormatedData(formatData);
+    }, [data]);
 
     const columns = [
         {
@@ -76,11 +92,18 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
     const DrillDownTableProps = {
         columns,
         data: formatedData,
-        linkerField: 'appId',
         useDrillDown: false,
     };
 
-    return <DrillDownTable {...DrillDownTableProps} />;
+    if (LoadingComponent && loading) {
+        return <div>{LoadingComponent}</div>;
+    }
+
+    return (
+        <div>
+            <DrillDownTable {...DrillDownTableProps} />
+        </div>
+    );
 };
 
 /** declear default props */

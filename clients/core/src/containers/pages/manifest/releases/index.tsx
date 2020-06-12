@@ -10,6 +10,7 @@ export const ManifestReleasesPage = () => {
         baseURL: OPENSRP_API_BASE_URL,
         endpoint: OPENSRP_MANIFEST_ENDPOINT,
         getPayload: generateOptions,
+        LoadingComponent: <Loading />,
     };
     return <ConnectedManifestReleases {...manifestReleasesProps} />;
 };
