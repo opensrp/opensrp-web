@@ -16,11 +16,6 @@ import { Link } from 'react-router-dom';
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
 
-/** table data interface */
-interface TableData extends ManifestReleasesTypes {
-    link: JSX.Element;
-}
-
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     fetchReleases: typeof fetchManifestReleases;
@@ -76,6 +71,10 @@ const ManifestReleases = (props: ManifestReleasesProps) => {
         setStateData(data);
     }, [data]);
 
+    /**
+     * create link to manifest files
+     * @param {ManifestReleasesTypes} obj
+     */
     const linkToFiles = (obj: ManifestReleasesTypes) => {
         return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
     };
