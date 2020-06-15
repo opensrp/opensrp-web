@@ -79,6 +79,11 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         setStateData(data);
     }, [data]);
 
+    /**
+     *
+     * @param {string} name name of file
+     * @param {URLParams} params url params
+     */
     const downloadFile = async (name: string, params: URLParams) => {
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
@@ -132,19 +137,6 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     const linkToEditFile = (obj: TableData) => {
         return <Link to={`${fileUploadUrl}/${obj.manifestId}/${obj.identifier}`}>Upload Edit</Link>;
     };
-
-    /**
-     * create download link
-     * @param {TableData} obj table row data
-     */
-    const downLoadLink = (obj: TableData) => {
-        return (
-            <a href="#" onClick={e => onDownloadClick(e, obj)}>
-                Download
-            </a>
-        );
-    };
-
     const columns = [
         {
             Header: 'Identifier',
@@ -161,6 +153,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         {
             Header: 'Module',
             accessor: (obj: TableData) => (() => <span>{obj.module || '_'}</span>)(),
+            disableSortBy: true,
         },
         {
             Header: 'Edit',

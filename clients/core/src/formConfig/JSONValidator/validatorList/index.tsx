@@ -1,14 +1,16 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
-import { OpenSRPService } from '@opensrp/server-service';
+import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
+import { OpenSRPService, URLParams } from '@opensrp/server-service';
 import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
+import { Link } from 'react-router-dom';
+import { handleDownload } from '../../helpers/fileDownload';
 
 /** table data interface */
 
-interface Tabledata {
+interface TableData {
     filename: string;
     fileVersion: string;
     identifier: string;
@@ -20,7 +22,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 
 /** view JSON validator forms */
 const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
-    const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder } = props;
+    const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder, currentUrl } = props;
 
     const [loading, setLoading] = useState(false);
     const [stateData, setStateData] = useState<string[]>(data);
@@ -49,6 +51,46 @@ const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
         setStateData(data);
     }, [data]);
 
+    /**
+     *
+     * @param {string} name name of file
+     * @param {URLParams} params url params
+     */
+    const downloadFile = async (name: string, params: URLParams) => {
+        setLoading(true);
+        const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
+        await clientService
+            .list(params)
+            .then(res => {
+                const fileType = name.split('.').pop();
+                if (fileType === 'json') {
+                    const content = JSON.parse(res.clientForm.json);
+                    const blob = new Blob([content], { type: 'application/json' });
+                    handleDownload(blob, name);
+                }
+            })
+            .catch(() => {
+                // to handle error
+            })
+            .finally(() => setLoading(false));
+    };
+
+    /**
+     * called when download link is clicked
+     * @param {MouseEvent} e
+     * @param {TableData} obj table row data
+     */
+    const onDownloadClick = (e: MouseEvent, obj: TableData) => {
+        e.preventDefault();
+        const { identifier } = obj;
+        const params = {
+            form_identifier: identifier, // eslint-disable-line @typescript-eslint/camelcase
+            form_version: obj.fileVersion, // eslint-disable-line @typescript-eslint/camelcase
+        };
+
+        downloadFile('blood_screening.json', params);
+    };
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value.toUpperCase();
         // const searchResult = data.filter(
@@ -60,12 +102,49 @@ const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
         // setStateData(searchResult);
     };
 
-    const testData = [{ identifier: 12 }];
+    /**
+     * create edit upload link
+     * @param {TableData} obj table row data
+     */
+    const linkToEditFile = (_: TableData) => {
+        return <Link to={currentUrl}>Upload Edit</Link>;
+    };
+
+    const testData = [
+        {
+            filename: 'testData.json',
+            fileVersion: '1.0.1',
+            identifier: '12',
+        },
+    ];
 
     const columns = [
         {
             Header: 'Identifier',
             accessor: `identifier`,
+        },
+        {
+            Header: 'File Name',
+            accessor: `filename`,
+        },
+        {
+            Header: 'File Version',
+            accessor: `fileVersion`,
+        },
+        {
+            Header: 'Edit',
+            accessor: (obj: TableData) => linkToEditFile(obj),
+            disableSortBy: true,
+        },
+        {
+            Header: ' ',
+            accessor: (obj: TableData) =>
+                (() => (
+                    <a href="#" onClick={e => onDownloadClick(e, obj)}>
+                        Download
+                    </a>
+                ))(),
+            disableSortBy: true,
         },
     ];
 
