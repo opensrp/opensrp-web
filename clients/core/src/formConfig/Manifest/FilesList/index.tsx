@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
-import { OpenSRPService } from '@opensrp/server-service';
+import { OpenSRPService, URLParams } from '@opensrp/server-service';
 import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
@@ -11,7 +11,7 @@ import {
     ManifestReleasesTypes,
     ManifestJsonFieldType,
 } from '../../ducks/manifestReleases';
-import { handleDownload } from '../../helpers/serviceHook';
+import { handleDownload } from '../../helpers/fileDownload';
 import { Link } from 'react-router-dom';
 
 /** table data interface */
@@ -79,13 +79,32 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         setStateData(data);
     }, [data]);
 
+    const downloadFile = async (name: string, params: URLParams) => {
+        setLoading(true);
+        const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
+        await clientService
+            .list(params)
+            .then(res => {
+                const fileType = name.split('.').pop();
+                if (fileType === 'json') {
+                    const content = JSON.parse(res.clientForm.json);
+                    const blob = new Blob([content], { type: 'application/json' });
+                    handleDownload(blob, name);
+                }
+            })
+            .catch(() => {
+                // to handle error
+            })
+            .finally(() => setLoading(false));
+    };
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value.toUpperCase();
         const searchResult = data.filter(
             dt =>
                 dt.fileName.toUpperCase().includes(input) ||
                 dt.identifier.toUpperCase().includes(input) ||
-                dt.module.toUpperCase().includes(input),
+                (dt.module && dt.module.toUpperCase().includes(input)),
         );
         setStateData(searchResult);
     };
@@ -102,7 +121,8 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             form_identifier: identifier, // eslint-disable-line @typescript-eslint/camelcase
             form_version: obj.fileVersion, // eslint-disable-line @typescript-eslint/camelcase
         };
-        handleDownload(baseURL, endpoint, getPayload, identifier, params);
+
+        downloadFile('blood_screening.json', params);
     };
 
     /**
@@ -140,7 +160,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         },
         {
             Header: 'Module',
-            accessor: `module`,
+            accessor: (obj: TableData) => (() => <span>{obj.module || '_'}</span>)(),
         },
         {
             Header: 'Edit',
@@ -149,7 +169,12 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         },
         {
             Header: ' ',
-            accessor: (obj: TableData) => downLoadLink(obj),
+            accessor: (obj: TableData) =>
+                (() => (
+                    <a href="#" onClick={e => onDownloadClick(e, obj)}>
+                        Download
+                    </a>
+                ))(),
             disableSortBy: true,
         },
     ];

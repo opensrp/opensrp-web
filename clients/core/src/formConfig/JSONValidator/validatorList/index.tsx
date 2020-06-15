@@ -6,6 +6,13 @@ import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 
+/** table data interface */
+
+interface Tabledata {
+    filename: string;
+    fileVersion: string;
+    identifier: string;
+}
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     data: string[];
