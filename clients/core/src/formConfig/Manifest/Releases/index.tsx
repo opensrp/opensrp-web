@@ -19,8 +19,8 @@ reducerRegistry.register(reducerName, releasesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
-    fetchReleases: typeof fetchManifestReleases;
     data: ManifestReleasesTypes[];
+    fetchReleases: typeof fetchManifestReleases;
 }
 
 /** view all manifest pages */
@@ -70,8 +70,8 @@ const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
     const linkToFiles = (obj: ManifestReleasesTypes) => {
         let link = null;
         try {
-            const jsonData = JSON.parse(obj.json).forms_version;
-            link = <Link to={`${currentUrl}/${jsonData}`}>View Files</Link>;
+            JSON.parse(obj.json);
+            link = <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
         } catch {
             link = <span>View Files</span>;
         }
@@ -101,8 +101,8 @@ const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        useDrillDown: false,
         paginate: false,
+        useDrillDown: false,
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

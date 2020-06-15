@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import Loading from '../../../../../components/page/Loading';
-import { VIEW_RELEASE_PAGE_URL, OPENSRP_FORMS_ENDPOINT } from '../../../../../constants';
-import { ManifestFilesList } from '../../../../../formConfig/Manifest/FilesList';
+import {
+    VIEW_RELEASE_PAGE_URL,
+    OPENSRP_FORMS_ENDPOINT,
+    OPENSRP_MANIFEST_ENDPOINT,
+    MANIFEST_FILE_UPLOAD,
+} from '../../../../../constants';
+import ConnectedManifestFilesList from '../../../../../formConfig/Manifest/FilesList';
 import { generateOptions } from '../../../../../services/opensrp';
 
 /**manifest files props interface */
@@ -21,17 +26,20 @@ const ManifestFiles = (props: ManifestFilesProps) => {
         baseURL: OPENSRP_API_BASE_URL,
         currentUrl: VIEW_RELEASE_PAGE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
+        fileUploadUrl: MANIFEST_FILE_UPLOAD,
+        formVersion,
         getPayload: generateOptions,
         LoadingComponent: <Loading />,
-        formVersion,
+        manifestEndPoint: OPENSRP_MANIFEST_ENDPOINT,
     };
 
-    return <ManifestFilesList {...ManifestFilesListProps} />;
+    return <ConnectedManifestFilesList {...ManifestFilesListProps} />;
 };
 
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapStateToProps = (_: Partial<Store>, ownProps: RouteComponentProps<any>): ManifestFilesProps => {
     const formVersion = ownProps.match.params.id;
     return {

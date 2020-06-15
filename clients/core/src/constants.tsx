@@ -41,6 +41,8 @@ export const VIEW_DRAFT_FILES_PAGE_URL = '/files/draft';
 export type VIEW_DRAFT_FILES_PAGE_URL = typeof VIEW_DRAFT_FILES_PAGE_URL;
 export const VIEW_JSON_VALIDATORS_PAGE_URL = '/json-validators';
 export type VIEW_JSON_VALIDATORS_PAGE_URL = typeof VIEW_JSON_VALIDATORS_PAGE_URL;
+export const MANIFEST_FILE_UPLOAD = '/manifest/file';
+export type MANIFEST_FILE_UPLOAD = typeof MANIFEST_FILE_UPLOAD;
 
 // string literals
 
