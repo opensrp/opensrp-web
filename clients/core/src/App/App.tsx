@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL, VIEW_RELEASE_PAGE_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, VIEW_RELEASE_PAGE_URL, VIEW_JSON_VALIDATORS_PAGE_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -20,8 +20,9 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
-import { ManifestReleasesPage } from '../containers/pages/manifest/releases';
-import ConnectedManifestFiles from '../containers/pages/manifest/filesList';
+import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/releases';
+import ConnectedManifestFiles from '../containers/pages/FormConfig/manifest/filesList';
+import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators/ValidatorList';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -66,6 +67,12 @@ class App extends Component {
                                 exact={true}
                                 path={`${VIEW_RELEASE_PAGE_URL}/:id`}
                                 component={ConnectedManifestFiles}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={VIEW_JSON_VALIDATORS_PAGE_URL}
+                                component={JSONValidatorListPage}
                             />
                             <Route
                                 exact={true}

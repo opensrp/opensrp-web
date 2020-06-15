@@ -2,11 +2,11 @@ import React from 'react';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
-import Loading from '../../../../components/page/Loading';
-import { VIEW_RELEASE_PAGE_URL, OPENSRP_FORMS_ENDPOINT } from '../../../../constants';
-import { ManifestFilesList } from '../../../../formConfig/Manifest/FilesList';
-import { generateOptions } from '../../../../services/opensrp';
+import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
+import Loading from '../../../../../components/page/Loading';
+import { VIEW_RELEASE_PAGE_URL, OPENSRP_FORMS_ENDPOINT } from '../../../../../constants';
+import { ManifestFilesList } from '../../../../../formConfig/Manifest/FilesList';
+import { generateOptions } from '../../../../../services/opensrp';
 
 /**manifest files props interface */
 

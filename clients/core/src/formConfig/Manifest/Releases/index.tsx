@@ -102,6 +102,7 @@ const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
         columns,
         data: stateData,
         useDrillDown: false,
+        paginate: false,
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

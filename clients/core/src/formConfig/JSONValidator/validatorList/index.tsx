@@ -1,10 +1,10 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { OpenSRPService } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
+import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../helpers/types';
+import { FormConfigProps } from '../../helpers/types';
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
@@ -12,7 +12,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 }
 
 /** view JSON validator forms */
-const JSONValidator = (props: DefaultProps & FormConfigProps) => {
+const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
     const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder } = props;
 
     const [loading, setLoading] = useState(false);
@@ -94,8 +94,8 @@ const defaultProps: DefaultProps = {
 };
 
 /** pass default props to component */
-JSONValidator.defaultProps = defaultProps;
-export { JSONValidator };
+JSONValidatorList.defaultProps = defaultProps;
+export { JSONValidatorList };
 
 /** Connect the component to the store */
 
@@ -114,7 +114,7 @@ const mapStateToProps = (_: Partial<Store>): DispatchedStateProps => {
     };
 };
 
-/** Connected JSONValidator component */
-const ConnectedManifestFilesList = connect(mapStateToProps)(JSONValidator);
+/** Connected JSONValidatorList component */
+const ConnectedJSONValidatorList = connect(mapStateToProps)(JSONValidatorList);
 
-export default ConnectedManifestFilesList;
+export default ConnectedJSONValidatorList;
