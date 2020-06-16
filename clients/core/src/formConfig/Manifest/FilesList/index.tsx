@@ -90,12 +90,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         await clientService
             .list(params)
             .then(res => {
-                const fileType = name.split('.').pop();
-                if (fileType === 'json') {
-                    const content = JSON.parse(res.clientForm.json);
-                    const blob = new Blob([content], { type: 'application/json' });
-                    handleDownload(blob, name);
-                }
+                handleDownload(res.clientForm.json, name);
             })
             .catch(() => {
                 // to handle error

@@ -10,7 +10,14 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL, VIEW_RELEASE_PAGE_URL, VIEW_JSON_VALIDATORS_PAGE_URL } from '../constants';
+import {
+    LOGIN_URL,
+    LOGOUT_URL,
+    CHILD_URL,
+    VIEW_RELEASE_PAGE_URL,
+    VIEW_JSON_VALIDATORS_PAGE_URL,
+    MANIFEST_FILE_UPLOAD,
+} from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -23,6 +30,7 @@ import './App.css';
 import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/releases';
 import ConnectedManifestFiles from '../containers/pages/FormConfig/manifest/filesList';
 import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators/ValidatorList';
+import ConnectedUploadFilePage from '../containers/pages/FormConfig/manifest/uploadFile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -73,6 +81,12 @@ class App extends Component {
                                 exact={true}
                                 path={VIEW_JSON_VALIDATORS_PAGE_URL}
                                 component={JSONValidatorListPage}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={MANIFEST_FILE_UPLOAD}
+                                component={ConnectedUploadFilePage}
                             />
                             <Route
                                 exact={true}

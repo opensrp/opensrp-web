@@ -12,6 +12,7 @@ import releasesReducer, {
 } from '../../ducks/manifestReleases';
 import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
+import { Col, Row } from 'reactstrap';
 import { FormConfigProps } from '../../helpers/types';
 
 /** Register reducer */
@@ -21,6 +22,7 @@ reducerRegistry.register(reducerName, releasesReducer);
 interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestReleasesTypes[];
     fetchReleases: typeof fetchManifestReleases;
+    formUploadUrl: string;
 }
 
 /** view all manifest pages */
@@ -35,6 +37,7 @@ const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
         debounceTime,
         placeholder,
         currentUrl,
+        formUploadUrl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -128,7 +131,16 @@ const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
 
     return (
         <div>
-            <SearchBar {...searchBarProps} />
+            <Row>
+                <Col xs="8">
+                    <SearchBar {...searchBarProps} />
+                </Col>
+                <Col xs="4">
+                    <Link className="btn btn-secondary float-right" to={formUploadUrl}>
+                        Upload New File
+                    </Link>
+                </Col>
+            </Row>
             <DrillDownTable {...DrillDownTableProps} />
         </div>
     );
@@ -139,6 +151,7 @@ const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
     fetchReleases: fetchManifestReleases,
+    formUploadUrl: '',
     placeholder: 'Find Release',
 };
 

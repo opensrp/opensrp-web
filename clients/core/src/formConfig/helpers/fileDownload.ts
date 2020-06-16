@@ -1,9 +1,10 @@
 /**
- * Handles file downloads from server
- * @param {typeof Blob} file a blob file
- * @param {string} Filename file name
+ * Download files
+ * @param {typeOf Blob} file
+ * @param {string} fileName
  */
-export const handleDownload = async (file: any, fileName: string) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DownloadFile = (file: any, fileName: string) => {
     const url = window.URL.createObjectURL(file);
     const a = document.createElement('a');
     document.body.appendChild(a);
@@ -11,4 +12,19 @@ export const handleDownload = async (file: any, fileName: string) => {
     a.download = fileName;
     a.click();
     window.URL.revokeObjectURL(url);
+};
+
+/**
+ * Handles file downloads from server
+ * @param {string} data a blob file
+ * @param {string} fileName file name
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const handleDownload = async (data: any, fileName: string) => {
+    const fileType = fileName.split('.').pop();
+    if (fileType === 'json') {
+        const content = JSON.parse(data);
+        const blob = new Blob([content], { type: 'application/json' });
+        DownloadFile(blob, fileName);
+    }
 };

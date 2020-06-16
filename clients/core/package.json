@@ -33,12 +33,14 @@
         "@types/react-select": "^3.0.10",
         "@types/reactstrap": "^8.0.1",
         "@types/seamless-immutable": "^7.1.10",
+        "@types/yup": "^0.29.3",
         "add": "^2.0.6",
         "bootstrap": "^4.3.1",
         "classnames": "^2.2.6",
         "client-oauth2": "^4.2.5",
         "connected-react-router": "^6.5.2",
         "fetch-mock": "^7.3.9",
+        "formik": "^2.1.4",
         "history": "^4.9.0",
         "jest-fetch-mock": "^2.1.2",
         "lodash": "^4.17.15",
@@ -57,7 +59,8 @@
         "seamless-immutable": "^7.1.4",
         "snapshot-diff": "^0.5.2",
         "typescript": "^3.5.3",
-        "yarn": "^1.22.4"
+        "yarn": "^1.22.4",
+        "yup": "^0.29.1"
     },
     "scripts": {
         "start": "react-scripts start",
