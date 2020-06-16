@@ -6,6 +6,7 @@ import { Child } from '../child';
 import { Team } from '../teams';
 import { TeamMember } from '../teamMembers';
 import { Location } from '../adminLocation';
+import { LocationTag } from '../locationTag';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -1097,6 +1098,27 @@ export const location3: Location = {
         },
     ],
 };
+
+export const locationTag1: LocationTag = {
+    id: '1',
+    name: 'District',
+    active: true,
+    description: 'level 2',
+};
+
+export const locationTag2: LocationTag = {
+    id: '2',
+    name: 'division',
+    active: true,
+    description: 'level 1',
+};
+
+export const locationTag3: LocationTag = {
+    id: '3',
+    name: 'upazila',
+    active: true,
+    description: 'level 3',
+};
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
@@ -1105,3 +1127,4 @@ export const ancList: ANC[] = [ANCClient1, ANCClient2, ANCClient3];
 export const teamList: Team[] = [team1, team2, team3];
 export const teamMemberList: TeamMember[] = [teamMember1, teamMember2, teamMember3];
 export const locations: Location[] = [location1, location2, location3];
+export const locationTagList: LocationTag[] = [locationTag1, locationTag2, locationTag3];

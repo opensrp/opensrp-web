@@ -46,6 +46,8 @@ export const LOCATION_CREATE_URL = 'location-create';
 export type LOCATION_CREATE_URL = typeof LOCATION_CREATE_URL;
 export const LOCATIONS_URL = '/locations';
 export type LOCATION_URL = typeof LOCATIONS_URL;
+export const LOCATION_TAG_URL = '/location-tags';
+export type LOCATOIN_TAG_URL = typeof LOCATION_TAG_URL;
 export const REPORTS_URL = '/404';
 export type REPORTS_URL = typeof REPORTS_URL;
 
