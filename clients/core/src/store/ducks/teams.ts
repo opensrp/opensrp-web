@@ -29,7 +29,7 @@ export const reducerName = 'opensrp-web/admin/teams';
 const reducer = reducerFactory<Team>(reducerName);
 
 // action creators
-export const fetchTeams = fetchActionCreatorFactory<Team>(reducerName, 'id');
+export const fetchTeams = fetchActionCreatorFactory<Team>(reducerName, 'identifier');
 export const removeTeams = removeActionCreatorFactory(reducerName);
 export const setTotalRecords = setTotalRecordsFactory(reducerName);
 
