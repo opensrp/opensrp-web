@@ -22,6 +22,7 @@ import {
     TEAM_FORM_URL,
     TEAM_PROFILE_URL,
     LOCATIONS_URL,
+    LOCATION_CREATE_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -40,6 +41,7 @@ import ChildProfile from '../containers/pages/Child/Profile';
 import ConnectedTeamList from '../containers/pages/Teams/List';
 import ConnectedTeamProfile from '../containers/pages/Teams/Profile';
 import { TeamForm } from '../components/page/Team/Form';
+import { LocationForm } from '../components/page/Location/Form';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -122,6 +124,13 @@ class App extends Component {
                                 exact={true}
                                 path={LOCATIONS_URL}
                                 component={ConnectedLocationList}
+                            />
+
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOCATION_CREATE_URL}
+                                component={LocationForm}
                             />
 
                             <Route
