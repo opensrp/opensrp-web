@@ -6,9 +6,9 @@ import { Button, Form, FormGroup, Input, Label, Row, Col, Container } from 'reac
 /* eslint-disable @typescript-eslint/camelcase */
 const uploadValidationSchema = Yup.object().shape({
     form: Yup.mixed().required(),
-    form_identifier: Yup.string().required(),
-    form_name: Yup.string().required(),
-    form_version: Yup.string().required(),
+    form_identifier: Yup.string().required('Field Required'),
+    form_name: Yup.string().required('Field Required'),
+    form_version: Yup.string().required('Field Required'),
     module: Yup.string(),
 });
 
@@ -36,7 +36,7 @@ const UploadFile = () => {
                     data.append('form', selectedFile);
                 }}
             >
-                {({ setFieldValue, handleChange, handleSubmit, isSubmitting }) => (
+                {({ setFieldValue, handleChange, handleSubmit, errors, isSubmitting }) => (
                     <Form onSubmit={handleSubmit} data-enctype="multipart/form-data">
                         <Row>
                             <Col md={6}>
@@ -44,9 +44,13 @@ const UploadFile = () => {
                                     <div>
                                         <Label for="form_name">Form Name *</Label>
                                     </div>
-                                    {/* <div style={{ display: 'inline-block', width: '90%' }}> */}
                                     <Input type="text" name="form_name" id="form-name-id" onChange={handleChange} />
-                                    {/* </div> */}
+                                    {errors.form_name && (
+                                        <small className="form-text text-danger jurisdictions-error">
+                                            {errors.form_name}
+                                            {console.log(errors)}
+                                        </small>
+                                    )}
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
@@ -54,14 +58,17 @@ const UploadFile = () => {
                                     <div>
                                         <Label for="form_version">Form version*</Label>
                                     </div>
-                                    {/* <div style={{ display: 'inline-block', width: '90%' }}> */}
                                     <Input
                                         type="text"
                                         name="form_version"
                                         id="form-version-id"
                                         onChange={handleChange}
                                     />
-                                    {/* </div> */}
+                                    {errors.form_version && (
+                                        <small className="form-text text-danger jurisdictions-error">
+                                            {errors.form_version}
+                                        </small>
+                                    )}
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -71,14 +78,17 @@ const UploadFile = () => {
                                     <div>
                                         <Label for="form_identifier">Form Identifier *</Label>
                                     </div>
-                                    {/* <div style={{ display: 'inline-block', width: '90%' }}> */}
                                     <Input
                                         type="text"
                                         name="form_identifier"
                                         id="form-identifier-id"
                                         onChange={handleChange}
                                     />
-                                    {/* </div> */}
+                                    {errors.form_identifier && (
+                                        <small className="form-text text-danger jurisdictions-error">
+                                            {errors.form_identifier}
+                                        </small>
+                                    )}
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
@@ -86,9 +96,12 @@ const UploadFile = () => {
                                     <div>
                                         <Label for="module">Module</Label>
                                     </div>
-                                    {/* <div style={{ display: 'inline-block', width: '90%' }}> */}
                                     <Input type="text" name="module" id="module-id" onChange={handleChange} />
-                                    {/* </div> */}
+                                    {errors.module && (
+                                        <small className="form-text text-danger jurisdictions-error">
+                                            {errors.module}
+                                        </small>
+                                    )}
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -106,6 +119,9 @@ const UploadFile = () => {
                                     );
                                 }}
                             />
+                            {errors.form && (
+                                <small className="form-text text-danger jurisdictions-error">{errors.form}</small>
+                            )}
                         </FormGroup>
                         <div>
                             <Button
