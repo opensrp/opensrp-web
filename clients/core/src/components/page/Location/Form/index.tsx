@@ -9,6 +9,8 @@ import './locationForm.css';
 import { OPENSRP_API_BASE_URL, OPENSRP_LOCATION_CREATE_ENDPOINT } from '../../../../configs/env';
 import { Formik } from 'formik';
 import { OpenSRPService } from '@opensrp/server-service';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const locationOption: DropdownOption[] = [{ value: '', label: 'All' }];
 
@@ -30,6 +32,17 @@ export const defaultLocationProps: LocationFormProps = {
 const FormikForm = (formik: any): React.ReactNode => {
     return (
         <div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Row>
                 <Col>
                     <h3>Add New Location</h3>
@@ -82,7 +95,7 @@ const FormikForm = (formik: any): React.ReactNode => {
 /** Display the location form  */
 const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onSubmit = async (values: any) => {
+    const onSubmit = async (values: any, { resetForm }: any) => {
         const payload = {
             name: values.name,
             description: values.description,
@@ -92,7 +105,13 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
             OPENSRP_LOCATION_CREATE_ENDPOINT,
             generateOptions,
         );
-        await clientService.create(payload);
+        clientService
+            .create(payload)
+            .then((r: any) => {
+                toast.success('Saved sucessfully');
+                resetForm();
+            })
+            .catch((err: any) => toast.error('Server error'));
     };
 
     return (

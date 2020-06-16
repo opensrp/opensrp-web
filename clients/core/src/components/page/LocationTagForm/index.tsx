@@ -6,6 +6,8 @@ import '@opensrp/opensrp-table/dist/index.css';
 import './locationForm.css';
 import { Formik } from 'formik';
 import { OPENSRP_API_BASE_URL, OPENSRP_LOCATION_TAG_CREATE_ENDPOINT } from '../../../configs/env';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface LocationTagForm {
     name: string;
@@ -23,6 +25,17 @@ const defaultProps: LocationTagForm = {
 const FormikForm = (formik: any): React.ReactNode => {
     return (
         <div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Row>
                 <Col>
                     <h3>New Location Tag</h3>
@@ -67,7 +80,7 @@ const FormikForm = (formik: any): React.ReactNode => {
     );
 };
 const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
-    const onSubmit = async (values: LocationTagForm) => {
+    const onSubmit = async (values: LocationTagForm, { resetForm }: any) => {
         const payload = {
             name: values.name,
             description: values.description,
@@ -78,7 +91,13 @@ const LocationTagForm: React.FC<LocationTagForm> = (props: LocationTagForm) => {
             OPENSRP_LOCATION_TAG_CREATE_ENDPOINT,
             generateOptions,
         );
-        await clientService.create(payload);
+        clientService
+            .create(payload)
+            .then((r: any) => {
+                toast.success('Saved sucessfully');
+                resetForm();
+            })
+            .catch((err: any) => toast.error('Server error'));
     };
 
     return (

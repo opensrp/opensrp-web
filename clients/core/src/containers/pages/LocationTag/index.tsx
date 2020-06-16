@@ -18,8 +18,6 @@ import { generateOptions } from '../../../services/opensrp';
 import { useLocationTagTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Helmet } from 'react-helmet';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 /** register the location-tag reducer */
 reducerRegistry.register(locationTagReducerName, locationTagReducer);
@@ -93,17 +91,6 @@ class LocationTagList extends React.Component<LocationtagProps, LocationTagState
         // } else {
         return (
             <div className="client-page">
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
                 <Helmet>
                     <title>Location Tags</title>
                 </Helmet>
@@ -112,7 +99,6 @@ class LocationTagList extends React.Component<LocationtagProps, LocationTagState
                     <Col>
                         <LocationTagTable tableData={locationTagArray} />
                     </Col>
-                    <button onClick={() => toast('good')}>Notify !</button>
                 </Row>
             </div>
         );
