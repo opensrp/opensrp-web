@@ -24,6 +24,9 @@ export type ENABLE_ANC_PAGE = typeof ENABLE_ANC_PAGE;
 export const ENABLE_CHILD_PAGE = process.env.REACT_APP_ENABLE_CHILD_PAGE === 'true' || false;
 export type ENABLE_CHILD_PAGE = typeof ENABLE_CHILD_PAGE;
 
+export const ENABLE_LOCATION_TAG_PAGE = process.env.REACT_APP_ENABLE_LOCATION_TAG_PAGE === 'true' || true;
+export type ENABLE_LOCATION_TAG_PAGE = typeof ENABLE_LOCATION_TAG_PAGE;
+
 /** Do you want to enable the Reports Module? */
 export const ENABLE_REPORT_MODULE = process.env.REACT_APP_ENABLE_REPORT_MODULE === 'true' || false;
 export type ENABLE_REPORT_MODULE = typeof ENABLE_REPORT_MODULE;

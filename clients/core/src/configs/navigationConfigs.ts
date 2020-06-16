@@ -22,6 +22,8 @@ import {
     TEAMS,
     USER_URL,
     USERS,
+    LOCATION_TAG_URL,
+    LOCATION_TAGS,
 } from '../constants';
 import {
     ENABLE_ANC_PAGE,
@@ -33,6 +35,7 @@ import {
     ENABLE_ROLE_PAGE,
     ENABLE_TEAM_PAGE,
     ENABLE_USER_PAGE,
+    ENABLE_LOCATION_TAG_PAGE,
 } from './env';
 
 // Page links
@@ -69,6 +72,10 @@ const TEAMS_PAGE_NAVIGATION: PageLink = {
 const LOCATIONS_PAGE_NAVIGATION: PageLink = {
     label: LOCATIONS,
     url: LOCATIONS_URL,
+};
+const LOCATION_TAG_PAGE_NAVIGATION: PageLink = {
+    label: LOCATION_TAGS,
+    url: LOCATION_TAG_URL,
 };
 
 // icons
@@ -112,6 +119,7 @@ const ADMIN_NAVIGATION_MODULE: NavigationModule = {
         ENABLE_ROLE_PAGE && ROLES_PAGE_NAVIGATION,
         ENABLE_TEAM_PAGE && TEAMS_PAGE_NAVIGATION,
         ENABLE_LOCATION_PAGE && LOCATIONS_PAGE_NAVIGATION,
+        ENABLE_LOCATION_TAG_PAGE && LOCATION_TAG_PAGE_NAVIGATION,
     ].filter<PageLink>((childNav: PageLink | boolean): childNav is PageLink => typeof childNav !== 'boolean'),
     parentNav: ADMIN_MODULE_PARENT_NAV,
 };
