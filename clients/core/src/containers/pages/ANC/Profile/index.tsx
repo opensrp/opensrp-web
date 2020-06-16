@@ -90,8 +90,7 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
                     }
 
                     if (
-                        countDaysBetweenDate(this.props.anc!.birthdate, vaccinationEvent.values[0]) <=
-                            configData.daysAfterBirthDue &&
+                        countDaysBetweenDate(0, vaccinationEvent.values[0]) <= configData.daysAfterBirthDue &&
                         vaccination.field_name === vaccinationEvent.formSubmissionField
                     ) {
                         flag = true;

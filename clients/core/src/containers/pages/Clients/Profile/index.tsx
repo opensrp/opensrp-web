@@ -93,7 +93,7 @@ export interface ClientProfileProps extends RouteComponentProps<ClientProfilePar
     events: Event[];
 }
 
-export class Clientrofile extends React.Component<ClientProfileProps> {
+export class ClientProfile extends React.Component<ClientProfileProps> {
     public async componentDidMount() {
         const { fetchClient, fetchEvents } = this.props;
         const { match } = this.props;
