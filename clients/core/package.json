@@ -37,7 +37,7 @@
         "client-oauth2": "^4.2.5",
         "connected-react-router": "^6.5.2",
         "fetch-mock": "^7.3.9",
-        "highcharts": "^8.0.3",
+        "highcharts": "^8.1.1",
         "highcharts-react-official": "^3.0.0",
         "history": "^4.9.0",
         "jest-fetch-mock": "^2.1.2",
