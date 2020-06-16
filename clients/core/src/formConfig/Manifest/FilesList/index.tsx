@@ -130,7 +130,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
      * @param {TableData} obj table row data
      */
     const linkToEditFile = (obj: TableData) => {
-        return <Link to={`${fileUploadUrl}/${obj.manifestId}/${obj.identifier}`}>Upload Edit</Link>;
+        return <Link to={`${fileUploadUrl}/${obj.manifestId}`}>Upload Edit</Link>;
     };
     const columns = [
         {

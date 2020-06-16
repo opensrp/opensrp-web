@@ -14,5 +14,10 @@ export const ManifestReleasesPage = () => {
         getPayload: generateOptions,
         LoadingComponent: <Loading />,
     };
-    return <ConnectedManifestReleases {...manifestReleasesProps} />;
+    return (
+        <div>
+            <h4 style={{ marginBottom: '30px' }}>Releases</h4>
+            <ConnectedManifestReleases {...manifestReleasesProps} />;
+        </div>
+    );
 };

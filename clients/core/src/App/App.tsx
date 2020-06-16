@@ -30,7 +30,7 @@ import './App.css';
 import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/releases';
 import ConnectedManifestFiles from '../containers/pages/FormConfig/manifest/filesList';
 import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators/ValidatorList';
-import ConnectedUploadFilePage from '../containers/pages/FormConfig/manifest/uploadFile';
+import ConnectedUploadConfigFilePage from '../containers/pages/FormConfig/manifest/uploadFile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -86,7 +86,13 @@ class App extends Component {
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={MANIFEST_FILE_UPLOAD}
-                                component={ConnectedUploadFilePage}
+                                component={ConnectedUploadConfigFilePage}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`${MANIFEST_FILE_UPLOAD}/:id`}
+                                component={ConnectedUploadConfigFilePage}
                             />
                             <Route
                                 exact={true}

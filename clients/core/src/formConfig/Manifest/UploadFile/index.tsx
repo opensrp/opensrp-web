@@ -1,54 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { Button, Form, FormGroup, Input, Label, Row, Col, Container } from 'reactstrap';
-/** Yup client upload validation schema */
-/* eslint-disable @typescript-eslint/camelcase */
-const uploadValidationSchema = Yup.object().shape({
-    form: Yup.mixed().required(),
-    form_identifier: Yup.string().required('Field Required'),
-    form_name: Yup.string().required('Field Required'),
-    form_version: Yup.string().required('Field Required'),
-    module: Yup.string(),
-});
+import { uploadValidationSchema, defaultInitialValues, InitialValuesTypes } from './helpers';
+import { Redirect } from 'react-router';
+import { FormConfigProps } from '../../helpers/types';
+import { Store } from 'redux';
+import { connect } from 'react-redux';
 
-const defaultInitialValues = {
-    form: null,
-    form_identifier: '',
-    form_name: '',
-    form_version: '',
-    module: '',
-};
+/** default props interface */
+export interface DefaultProps {
+    formInitialValues: InitialValuesTypes;
+}
 
-const UploadFile = () => {
+/** UploadConfigFile interface */
+export interface UploadConfigFileProps extends FormConfigProps {
+    draftFilesUrl: string;
+    formVersion: string | null;
+}
+
+const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
+    const { formVersion, draftFilesUrl, formInitialValues } = props;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [selectedFile, setSelectedFile] = useState<any>(null);
+    const [ifDoneHere, setIfDoneHere] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    useEffect(() => {
+        if (formVersion) {
+            setIsEditMode(true);
+        }
+    }, [formVersion]);
+
+    if (ifDoneHere) {
+        return <Redirect to={draftFilesUrl} />;
+    }
+
+    const setStateIfDone = () => {
+        setIfDoneHere(true);
+    };
 
     return (
         <Container>
             <Formik
-                initialValues={defaultInitialValues}
+                initialValues={formInitialValues}
                 validationSchema={uploadValidationSchema}
                 // tslint:disable-next-line: jsx-no-lambda
                 onSubmit={(values, { setSubmitting }) => {
                     setSubmitting(false);
                     const data = new FormData();
                     data.append('form', selectedFile);
+                    setStateIfDone();
                 }}
             >
-                {({ setFieldValue, handleChange, handleSubmit, errors, isSubmitting }) => (
+                {({ values, setFieldValue, handleChange, handleSubmit, errors, touched, isSubmitting }) => (
                     <Form onSubmit={handleSubmit} data-enctype="multipart/form-data">
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
                                     <div>
-                                        <Label for="form_name">Form Name *</Label>
+                                        <Label for="form_name">Form Name</Label>
                                     </div>
-                                    <Input type="text" name="form_name" id="form-name-id" onChange={handleChange} />
-                                    {errors.form_name && (
+                                    <Input
+                                        type="text"
+                                        name="form_name"
+                                        disabled={isEditMode}
+                                        value={values.form_name}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.form_name && touched.form_name && (
                                         <small className="form-text text-danger jurisdictions-error">
                                             {errors.form_name}
-                                            {console.log(errors)}
                                         </small>
                                     )}
                                 </FormGroup>
@@ -56,17 +78,21 @@ const UploadFile = () => {
                             <Col md={6}>
                                 <FormGroup>
                                     <div>
-                                        <Label for="form_version">Form version*</Label>
+                                        <Label for="is_json_validator">JSON Validator</Label>
                                     </div>
                                     <Input
-                                        type="text"
-                                        name="form_version"
-                                        id="form-version-id"
+                                        type="select"
+                                        name="is_json_validator"
+                                        disabled={isEditMode}
+                                        value={values.is_json_validator}
                                         onChange={handleChange}
-                                    />
-                                    {errors.form_version && (
+                                    >
+                                        <option>false</option>
+                                        <option>true</option>
+                                    </Input>
+                                    {errors.is_json_validator && touched.is_json_validator && (
                                         <small className="form-text text-danger jurisdictions-error">
-                                            {errors.form_version}
+                                            {errors.is_json_validator}
                                         </small>
                                     )}
                                 </FormGroup>
@@ -76,15 +102,16 @@ const UploadFile = () => {
                             <Col md={6}>
                                 <FormGroup>
                                     <div>
-                                        <Label for="form_identifier">Form Identifier *</Label>
+                                        <Label for="form_identifier">Form Identifier</Label>
                                     </div>
                                     <Input
                                         type="text"
                                         name="form_identifier"
-                                        id="form-identifier-id"
+                                        disabled={isEditMode}
+                                        value={values.form_identifier}
                                         onChange={handleChange}
                                     />
-                                    {errors.form_identifier && (
+                                    {errors.form_identifier && touched.form_identifier && (
                                         <small className="form-text text-danger jurisdictions-error">
                                             {errors.form_identifier}
                                         </small>
@@ -96,8 +123,14 @@ const UploadFile = () => {
                                     <div>
                                         <Label for="module">Module</Label>
                                     </div>
-                                    <Input type="text" name="module" id="module-id" onChange={handleChange} />
-                                    {errors.module && (
+                                    <Input
+                                        type="text"
+                                        name="module"
+                                        disabled={isEditMode}
+                                        value={values.module}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.module && touched.module && (
                                         <small className="form-text text-danger jurisdictions-error">
                                             {errors.module}
                                         </small>
@@ -106,7 +139,7 @@ const UploadFile = () => {
                             </Col>
                         </Row>
                         <FormGroup>
-                            <Label for="upload-file">Upload file *</Label>
+                            <Label for="upload-file">Upload file</Label>
                             <Input
                                 type="file"
                                 name="form"
@@ -119,7 +152,7 @@ const UploadFile = () => {
                                     );
                                 }}
                             />
-                            {errors.form && (
+                            {errors.form && touched.form && (
                                 <small className="form-text text-danger jurisdictions-error">{errors.form}</small>
                             )}
                         </FormGroup>
@@ -141,4 +174,37 @@ const UploadFile = () => {
     );
 };
 
-export default UploadFile;
+/**default props */
+const defaultProp: DefaultProps = {
+    formInitialValues: defaultInitialValues,
+};
+
+UploadConfigFile.defaultProp = defaultProp;
+export { UploadConfigFile };
+
+/** Map props to state
+ * @param {Partial<Store>} -  the  redux store
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+const mapStateToProps = (_: Partial<Store>, ownProps: UploadConfigFileProps) => {
+    const formVersion = ownProps.formVersion;
+    let formInitialValues: InitialValuesTypes = defaultInitialValues;
+    if (formVersion) {
+        /* eslint-disable @typescript-eslint/camelcase */
+        formInitialValues = {
+            form: null,
+            form_identifier: 'identifier',
+            form_name: 'name',
+            is_json_validator: 'false',
+            module: 'opd',
+        };
+    }
+    return {
+        formInitialValues,
+    };
+};
+
+/** Connected UploadConfigFile component */
+const ConnectedUploadConfigFile = connect(mapStateToProps)(UploadConfigFile);
+
+export default ConnectedUploadConfigFile;

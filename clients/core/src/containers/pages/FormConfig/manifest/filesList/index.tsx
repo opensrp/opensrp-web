@@ -33,7 +33,12 @@ const ManifestFiles = (props: ManifestFilesProps) => {
         manifestEndPoint: OPENSRP_MANIFEST_ENDPOINT,
     };
 
-    return <ConnectedManifestFilesList {...ManifestFilesListProps} />;
+    return (
+        <div>
+            <h4 style={{ marginBottom: '30px' }}> Release Files</h4>
+            <ConnectedManifestFilesList {...ManifestFilesListProps} />
+        </div>
+    );
 };
 
 /** Map props to state

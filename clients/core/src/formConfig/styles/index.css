@@ -5,3 +5,7 @@
     display: inline-block;
     margin-right: 20px;
 }
+
+.jumbotron {
+    text-align: center;
+}

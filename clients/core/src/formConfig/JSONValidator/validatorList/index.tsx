@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { handleDownload } from '../../helpers/fileDownload';
 
 /** table data interface */
-
 interface TableData {
     filename: string;
     fileVersion: string;
@@ -20,9 +19,14 @@ interface DefaultProps extends SearchBarDefaultProps {
     data: string[];
 }
 
+/**JSONValidatorList props interface*/
+interface JSONValidatorListProps extends FormConfigProps {
+    fileUploadUrl: string;
+}
+
 /** view JSON validator forms */
-const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
-    const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder, currentUrl } = props;
+const JSONValidatorList = (props: JSONValidatorListProps & DefaultProps) => {
+    const { baseURL, endpoint, getPayload, LoadingComponent, data, debounceTime, placeholder, fileUploadUrl } = props;
 
     const [loading, setLoading] = useState(false);
     const [stateData, setStateData] = useState<string[]>(data);
@@ -101,8 +105,8 @@ const JSONValidatorList = (props: DefaultProps & FormConfigProps) => {
      * create edit upload link
      * @param {TableData} obj table row data
      */
-    const linkToEditFile = (_: TableData) => {
-        return <Link to={currentUrl}>Upload Edit</Link>;
+    const linkToEditFile = (obj: TableData) => {
+        return <Link to={`${fileUploadUrl}/${obj.identifier}`}>Upload Edit</Link>;
     };
 
     const testData = [
