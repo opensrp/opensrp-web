@@ -95,11 +95,14 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
             pageSize: PAGINATION_SIZE,
             // searchText: this.state.searchText,
         };
-        const { fetchTeamsCreator, service, removeTeamsCreator } = this.props;
+        const { fetchTeamsCreator, service, removeTeamsCreator, setTotalRecordsCreator } = this.props;
         const teamService = new service(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         const response = await teamService.list(params);
         removeTeamsCreator();
-        fetchTeamsCreator(response);
+        fetchTeamsCreator(response.organizations);
+        if (!(response.organizations.length > 0 && response.total == 0)) {
+            setTotalRecordsCreator(response.total);
+        }
         this.setState({
             ...this.state,
             loading: false,
@@ -168,10 +171,12 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col md={12}>
                             <TeamTable tableData={teamsArray} />
                         </Col>
-                        <Col md={{ size: 3, offset: 3 }}>
+                    </Row>
+                    <Row>
+                        <Col md={{ size: 9, offset: 3 }}>
                             <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>

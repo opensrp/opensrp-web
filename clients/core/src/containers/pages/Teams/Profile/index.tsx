@@ -19,7 +19,11 @@ import teamMember, {
     removeTeamMembers,
 } from '../../../../store/ducks/teamMembers';
 
-import { OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, OPENSRP_TEAM_MEMBER_ENDPOINT } from '../../../../configs/env';
+import {
+    OPENSRP_API_BASE_URL,
+    OPENSRP_TEAM_PROFILE_ENDPOINT,
+    OPENSRP_TEAM_MEMBER_ENDPOINT,
+} from '../../../../configs/env';
 import { generateOptions } from '../../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useTeamMemberTableColumns } from './helpers/tableDefinition';
@@ -79,7 +83,7 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
         const teamId = match.params.id;
         const teamService = new opensrpService(
             OPENSRP_API_BASE_URL,
-            `${OPENSRP_TEAM_ENDPOINT}/${teamId}`,
+            `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${teamId}`,
             generateOptions,
         );
         teamService.list().then((teamResponse: Team) => fetchTeam([teamResponse]));

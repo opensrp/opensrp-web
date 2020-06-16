@@ -124,8 +124,11 @@ export const PAGINATION_NEIGBOURS = (process.env.PAGINATION_NEIGBOURS || 2) as n
 export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;
 export const OPENSRP_EVENT_ENDPOINT = process.env.REACT_APP_OPENSRP_EVENT_ENDPOINT || 'event/search';
 export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_EVENT_ENDPOINT;
-export const OPENSRP_TEAM_ENDPOINT = process.env.REACT_APP_OPENSRP_TEAM_ENDPOINT || 'organization';
+export const OPENSRP_TEAM_ENDPOINT = process.env.REACT_APP_OPENSRP_TEAM_ENDPOINT || 'organization/search';
 export type OPENSRP_TEAM_ENDPOINT = typeof OPENSRP_TEAM_ENDPOINT;
+
+export const OPENSRP_TEAM_PROFILE_ENDPOINT = process.env.REACT_APP_OPENSRP_TEAM_PROFILE_ENDPOINT || 'organization';
+export type OPENSRP_TEAM_PROFILE_ENDPOINT = typeof OPENSRP_TEAM_PROFILE_ENDPOINT;
 
 export const OPENSRP_TEAM_MEMBER_ENDPOINT =
     process.env.REACT_APP_OPENSRP_TEAM_MEMBER_ENDPOINT || 'organization/practitioner';
