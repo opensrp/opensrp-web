@@ -130,3 +130,4 @@ export type OPENSRP_TEAM_ENDPOINT = typeof OPENSRP_TEAM_ENDPOINT;
 export const OPENSRP_TEAM_MEMBER_ENDPOINT =
     process.env.REACT_APP_OPENSRP_TEAM_MEMBER_ENDPOINT || 'organization/practitioner';
 export type OPENSRP_TEAM_MEMBER_ENDPOINT = typeof OPENSRP_TEAM_MEMBER_ENDPOINT;
+export const OPENSRP_LOCATION_ENDPOINT = process.env.REACT_APP_OPENSRP_LOCATION_ENDPOINT || 'location/search-by-tag';

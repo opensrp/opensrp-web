@@ -6,6 +6,9 @@ export type OPENSRP_SINGLE_CLIENT_ENDPOINT = typeof OPENSRP_SINGLE_CLIENT_ENDPOI
 export const OPENSRP_EVENT_ENDPOINT = 'event/search';
 export type OPENSRP_EVENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
+export const OPENSRP_ADMIN_ENDPOINT = 'admin/location';
+export type OPENSRP_ADMIN_ENDPOINT = typeof OPENSRP_ADMIN_ENDPOINT;
+
 // internal urls
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
@@ -36,10 +39,10 @@ export type ROLE_URL = typeof ROLE_URL;
 export const TEAM_URL = '/teams';
 export type TEAM_URL = typeof TEAM_URL;
 export const TEAM_FORM_URL = '/team-form';
-export type TEAM_FORM_URL = typeof TEAM_FORM_URL
+export type TEAM_FORM_URL = typeof TEAM_FORM_URL;
 export const TEAM_PROFILE_URL = '/team-profile';
 export type TEAM_PROFILE_URL = typeof TEAM_PROFILE_URL;
-export const LOCATIONS_URL = '/404';
+export const LOCATIONS_URL = '/locations';
 export type LOCATION_URL = typeof LOCATIONS_URL;
 export const REPORTS_URL = '/404';
 export type REPORTS_URL = typeof REPORTS_URL;

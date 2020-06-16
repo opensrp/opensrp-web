@@ -18,8 +18,10 @@ import {
     HOUSEHOLD_PROFILE_URL,
     ANC_URL,
     CHILD_PROFILE_URL,
+    TEAM_URL,
     TEAM_FORM_URL,
     TEAM_PROFILE_URL,
+    LOCATIONS_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -28,6 +30,7 @@ import { CLIENT_URL } from '../constants';
 import ConnectedClientList from '../containers/pages/Clients/List';
 import ConnectedChildList from '../containers/pages/Child/List';
 import ConnectedANCList from '../containers/pages/ANC/List';
+import ConnectedLocationList from '../containers/pages/Location/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -106,13 +109,19 @@ class App extends Component {
                                 exact={true}
                                 path={`${TEAM_PROFILE_URL}/:id`}
                                 component={ConnectedTeamProfile}
-                                
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path={TEAM_URL}
+                                path={TEAM_FORM_URL}
                                 component={TeamForm}
+                            />
+
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOCATIONS_URL}
+                                component={ConnectedLocationList}
                             />
 
                             <Route
