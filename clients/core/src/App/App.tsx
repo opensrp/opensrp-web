@@ -24,6 +24,7 @@ import {
     LOCATIONS_URL,
     LOCATION_CREATE_URL,
     LOCATION_TAG_URL,
+    LOCATION_TAG_CREATE_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -33,6 +34,7 @@ import ConnectedClientList from '../containers/pages/Clients/List';
 import ConnectedChildList from '../containers/pages/Child/List';
 import ConnectedANCList from '../containers/pages/ANC/List';
 import ConnectedLocationList from '../containers/pages/Location/List';
+import LocationTagForm from '../components/page/LocationTagForm';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
@@ -140,6 +142,13 @@ class App extends Component {
                                 exact={true}
                                 path={LOCATION_TAG_URL}
                                 component={ConnectedLocationTagList}
+                            />
+
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={LOCATION_TAG_CREATE_URL}
+                                component={LocationTagForm}
                             />
 
                             <Route
