@@ -29,7 +29,7 @@ import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/releases';
 import ConnectedManifestFiles from '../containers/pages/FormConfig/manifest/filesList';
-import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators/ValidatorList';
+import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators';
 import ConnectedUploadConfigFilePage from '../containers/pages/FormConfig/manifest/uploadFile';
 
 library.add(faUser, faChartLine, faCog, faSearch);

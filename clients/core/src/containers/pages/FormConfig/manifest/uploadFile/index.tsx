@@ -17,7 +17,6 @@ const UploadConfigFilePage = (props: Pageprops) => {
 
     const uploadConfigFileProps = {
         baseURL: OPENSRP_API_BASE_URL,
-        currentUrl: MANIFEST_FILE_UPLOAD,
         draftFilesUrl: VIEW_DRAFT_FILES_PAGE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
         formVersion,

@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import Loading from '../../../../../components/page/Loading';
-import {
-    VIEW_RELEASE_PAGE_URL,
-    OPENSRP_FORMS_ENDPOINT,
-    OPENSRP_MANIFEST_ENDPOINT,
-    MANIFEST_FILE_UPLOAD,
-} from '../../../../../constants';
+import { OPENSRP_FORMS_ENDPOINT, MANIFEST_FILE_UPLOAD } from '../../../../../constants';
 import ConnectedManifestFilesList from '../../../../../formConfig/Manifest/FilesList';
 import { generateOptions } from '../../../../../services/opensrp';
 
@@ -24,13 +19,12 @@ const ManifestFiles = (props: ManifestFilesProps) => {
     const { formVersion } = props;
     const ManifestFilesListProps = {
         baseURL: OPENSRP_API_BASE_URL,
-        currentUrl: VIEW_RELEASE_PAGE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         formVersion,
         getPayload: generateOptions,
+        isJsonValidator: false,
         LoadingComponent: <Loading />,
-        manifestEndPoint: OPENSRP_MANIFEST_ENDPOINT,
     };
 
     return (

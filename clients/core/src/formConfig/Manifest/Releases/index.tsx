@@ -25,8 +25,13 @@ interface DefaultProps extends SearchBarDefaultProps {
     formUploadUrl: string;
 }
 
+/** ManifestReleases props interface */
+interface ManifestReleasesProps extends FormConfigProps {
+    currentUrl: string;
+}
+
 /** view all manifest pages */
-const ManifestReleases = (props: FormConfigProps & DefaultProps) => {
+const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
     const {
         baseURL,
         endpoint,
