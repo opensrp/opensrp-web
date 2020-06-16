@@ -18,6 +18,8 @@ import { generateOptions } from '../../../services/opensrp';
 import { useLocationTagTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Helmet } from 'react-helmet';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /** register the location-tag reducer */
 reducerRegistry.register(locationTagReducerName, locationTagReducer);
@@ -86,23 +88,35 @@ class LocationTagList extends React.Component<LocationtagProps, LocationTagState
     public render(): React.ReactNode {
         const { locationTagArray } = this.props;
         /** render loader if there are no location-tag in state */
-        if (this.state.loading) {
-            return <Loading />;
-        } else {
-            return (
-                <div className="client-page">
-                    <Helmet>
-                        <title>Location Tags</title>
-                    </Helmet>
-                    <h3 className="household-title"> Location Tags </h3>
-                    <Row>
-                        <Col>
-                            <LocationTagTable tableData={locationTagArray} />
-                        </Col>
-                    </Row>
-                </div>
-            );
-        }
+        // if (this.state.loading) {
+        //     return <Loading />;
+        // } else {
+        return (
+            <div className="client-page">
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                <Helmet>
+                    <title>Location Tags</title>
+                </Helmet>
+                <h3 className="household-title"> Location Tags </h3>
+                <Row>
+                    <Col>
+                        <LocationTagTable tableData={locationTagArray} />
+                    </Col>
+                    <button onClick={() => toast('good')}>Notify !</button>
+                </Row>
+            </div>
+        );
+        // }
     }
 }
 
