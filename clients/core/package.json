@@ -39,6 +39,7 @@
         "fetch-mock": "^7.3.9",
         "highcharts": "^8.1.1",
         "highcharts-react-official": "^3.0.0",
+        "formik": "^2.1.4",
         "history": "^4.9.0",
         "jest-fetch-mock": "^2.1.2",
         "lodash": "^4.17.15",

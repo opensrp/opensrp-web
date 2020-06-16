@@ -18,7 +18,7 @@ import {
     HOUSEHOLD_PROFILE_URL,
     ANC_URL,
     CHILD_PROFILE_URL,
-    TEAM_URL,
+    TEAM_FORM_URL,
     TEAM_PROFILE_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
@@ -36,6 +36,7 @@ import ConnectedHouseholdProfile from '../containers/pages/Households/Profile';
 import ChildProfile from '../containers/pages/Child/Profile';
 import ConnectedTeamList from '../containers/pages/Teams/List';
 import ConnectedTeamProfile from '../containers/pages/Teams/Profile';
+import { TeamForm } from '../components/page/Team/Form';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -105,6 +106,13 @@ class App extends Component {
                                 exact={true}
                                 path={`${TEAM_PROFILE_URL}/:id`}
                                 component={ConnectedTeamProfile}
+                                
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={TEAM_URL}
+                                component={TeamForm}
                             />
 
                             <Route

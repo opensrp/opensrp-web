@@ -1,0 +1,32 @@
+.field-row {
+  margin-bottom: 10px;
+}
+  
+.input-field,
+.basic-single .select__control {
+  border: 1px solid #dadce0;
+  border-radius: 2px;
+  width: 404px;
+  height: 48px;
+}
+  
+.basic-single .select__control {
+  box-shadow: none;
+}
+  
+.form-background {
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 #d7d7d0;
+  width: 1050px;
+  height: 569px;
+  padding: 45px;
+}
+
+.submit-btn-bg {
+  background-color: #0292d3;
+  width: 404px;
+  height: 48px;
+  color: #fff;
+  border: 1px solid #dadce0;
+  margin-top: 10px;
+}

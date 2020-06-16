@@ -945,7 +945,7 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
-export const team1: Team = {
+export const team1 = {
     id: 2,
     identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce4',
     active: true,
@@ -961,7 +961,7 @@ export const team1: Team = {
     },
 };
 
-export const team2: Team = {
+export const team2 = {
     id: 3,
     identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce5',
     active: true,
@@ -978,7 +978,7 @@ export const team2: Team = {
     },
 };
 
-export const team3: Team = {
+export const team3 = {
     id: 4,
     identifier: '801874c0-d963-11e9-8a34-2a2ae2dbcce7',
     active: true,
