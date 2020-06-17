@@ -9,3 +9,10 @@
 .jumbotron {
     text-align: center;
 }
+
+.cancel-icon {
+    border-radius: 50%;
+    color: red;
+    border: 1.5px solid red;
+    text-decoration: none !important;
+}
