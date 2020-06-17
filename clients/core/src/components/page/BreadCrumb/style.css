@@ -1,0 +1,11 @@
+ 
+   .custom-breadcrumb .breadcrumb {
+    background-color: white;
+    border: 1px grey;
+    margin-bottom: 0px;
+    padding: 8px;
+  }
+
+  .app-breadcrumb {
+    font-size: 12px;
+  }

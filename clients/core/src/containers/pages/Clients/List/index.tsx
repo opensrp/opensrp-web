@@ -24,9 +24,11 @@ import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
-import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
+import { DropdownOption, genderOptions, getLocationDropdownOption } from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
+import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
+import sampleData from '../../../../components/page/BreadCrumb/sample-data';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);
@@ -57,6 +59,7 @@ export interface ClientListState {
     loading: boolean;
     searchText: string;
     currentPage: number;
+    locationId: DropdownOption;
 }
 
 /** default props for the clientList component */
@@ -75,6 +78,7 @@ export const defaultClientListState: ClientListState = {
     loading: true,
     searchText: '',
     currentPage: 1,
+    locationId: { value: '', label: '' },
 };
 
 /** Display the client list  */
@@ -97,6 +101,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
+            locationId: this.state.locationId.value,
         };
         const { fetchClientsCreator, service, removeClientsCreator, setTotalRecordsCreator } = this.props;
         const clientService = new service(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);
@@ -161,51 +166,82 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
         };
     };
 
+    locationFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
     public render(): React.ReactNode {
         const { clientsArray, totalRecords } = this.props;
         /** render loader if there are no clients in state */
-        if (this.state.loading) {
-            return <Loading />;
-        } else {
-            return (
-                <div className="client-page">
-                    <Helmet>
-                        <title>{ALL_CLIENTS}</title>
-                    </Helmet>
-                    <h3 className="household-title"> All Clients ({totalRecords})</h3>
-                    <Row>
-                        <Col md={{ size: 3, offset: 9 }}> Gender </Col>
-                    </Row>
-                    <Row>
-                        <Col md={9} className="filter-row">
-                            <div className="household-search-bar">
-                                <SearchBox
-                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
-                                    placeholder={`Search Client`}
-                                />
-                            </div>
-                        </Col>
-                        <Col md={3}>
+        // if (this.state.loading) {
+        //     return <Loading />;
+        // } else {
+        return (
+            <div className="client-page">
+                <Helmet>
+                    <title>{ALL_CLIENTS}</title>
+                </Helmet>
+                <h3 className="household-title"> All Clients ({totalRecords})</h3>
+                <Row>
+                    <Col md={{ size: 3, offset: 6 }}> Location </Col>
+                    <Col md={3}> Gender </Col>
+                </Row>
+                <Row>
+                    <Col md={5} className="filter-row">
+                        <div className="household-search-bar">
+                            <SearchBox
+                                searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
+                                placeholder={`Search Client`}
+                            />
+                        </div>
+                    </Col>
+                    <Col md={{ size: 3, offset: 1 }}>
+                        <div className="household-search-bar">
                             <Select
-                                value={this.state.selectedGender}
+                                value={this.state.locationId}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
-                                options={genderOptions}
+                                onChange={(e): void => this.locationFilter(e as DropdownOption)}
+                                options={getLocationDropdownOption()}
                             />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <ClientTable tableData={clientsArray} />
-                        </Col>
-                        <Col md={{ size: 3, offset: 3 }}>
-                            <Pagination {...this.getPaginationOptions()} />
-                        </Col>
-                    </Row>
-                </div>
-            );
-        }
+                        </div>
+                    </Col>
+                    <Col md={3}>
+                        <Select
+                            value={this.state.selectedGender}
+                            classNamePrefix="select"
+                            className="basic-single"
+                            onChange={(e): void => this.genderFilter(e as DropdownOption)}
+                            options={genderOptions}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <LocationBreadcrumb />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <ClientTable tableData={clientsArray} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={{ size: 3, offset: 4 }}>
+                        <Pagination {...this.getPaginationOptions()} />
+                    </Col>
+                </Row>
+            </div>
+        );
+        // }
     }
 }
 
