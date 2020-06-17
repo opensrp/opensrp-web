@@ -18,6 +18,7 @@ import { generateOptions } from '../../../services/opensrp';
 import { useLocationTagTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 /** register the location-tag reducer */
 reducerRegistry.register(locationTagReducerName, locationTagReducer);
@@ -95,6 +96,11 @@ class LocationTagList extends React.Component<LocationtagProps, LocationTagState
                     <title>Location Tags</title>
                 </Helmet>
                 <h3 className="household-title"> Location Tags </h3>
+                <Row>
+                    <Col md={12} className="new-province">
+                        <Link to="/create-location-tag"> + Add new Tag </Link>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
                         <LocationTagTable tableData={locationTagArray} />

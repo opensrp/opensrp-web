@@ -6,7 +6,7 @@ import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption } from '../../../../helpers/Dropdown';
 import Select from 'react-select';
 import './teamForm.css';
-import { OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT } from '../../../../configs/env';
+import { OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, OPENSRP_TEAM_PROFILE_ENDPOINT } from '../../../../configs/env';
 import { Formik } from 'formik';
 import { OpenSRPService } from '@opensrp/server-service';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
             identifier: values.identifier,
         };
         const { opensrpService } = props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
+        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_PROFILE_ENDPOINT, generateOptions);
         clientService
             .create(payload)
             .then((r: any) => {
@@ -60,7 +60,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
         const { opensrpService } = props;
         const teamService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         const teamList = await teamService.list();
-        const teamDropdownOptions = teamList.map((t: TeamFormProps) => {
+        const teamDropdownOptions = teamList.organizations.map((t: TeamFormProps) => {
             return {
                 value: t.id,
                 label: t.name,

@@ -6,8 +6,9 @@
 .basic-single .select__control {
   border: 1px solid #dadce0;
   border-radius: 2px;
-  width: 404px;
-  height: 48px;
+  width: 200px;
+  height: 35px;
+  padding: 3px;
 }
 
 .basic-single .select__control {

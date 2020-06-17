@@ -153,10 +153,10 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         } else {
             return (
                 <div style={{ fontSize: '14px' }}>
-                    <h3 className="location-title"> Locations - Provinces</h3>
+                    <h3 className="location-title"> Locations</h3>
                     <Row>
                         <Col md={12} className="new-province">
-                            <Link to="/"> + Add new province </Link>
+                            <Link to="/location-create"> + Add new Location </Link>
                         </Col>
                     </Row>
                     <Row>

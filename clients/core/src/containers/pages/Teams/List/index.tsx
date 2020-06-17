@@ -26,6 +26,7 @@ import { Pagination, Props as PaginationProps } from '../../../../components/Pag
 import { DropdownOption } from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 /** register the teams reducer */
 reducerRegistry.register(teamsReducerName, teamsReducer);
@@ -157,9 +158,11 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
                         <title>Teams</title>
                     </Helmet>
                     <h3 className="household-title"> All Teams ({totalRecords})</h3>
-                    {/* <Row>
-                        <Col md={{ size: 3, offset: 9 }}> Gender </Col>
-                    </Row> */}
+                    <Row>
+                        <Col md={12} className="new-province">
+                            <Link to="/team-form"> + Add New Team </Link>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
