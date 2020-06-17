@@ -17,7 +17,7 @@ interface ManifestFilesProps {
 /**simple wrapper for manifest file lists component */
 const ManifestFiles = (props: ManifestFilesProps) => {
     const { formVersion } = props;
-    const ManifestFilesListProps = {
+    const manifestFilesListProps = {
         baseURL: OPENSRP_API_BASE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
@@ -30,7 +30,7 @@ const ManifestFiles = (props: ManifestFilesProps) => {
     return (
         <div>
             <h4 style={{ marginBottom: '30px' }}> Release Files</h4>
-            <ConnectedManifestFilesList {...ManifestFilesListProps} />
+            <ConnectedManifestFilesList {...manifestFilesListProps} />
         </div>
     );
 };

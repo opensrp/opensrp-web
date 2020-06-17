@@ -15,18 +15,12 @@ import DraftFilesReducer, {
 } from '../../ducks/manifestDraftFiles';
 import { Button } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
+import { growl } from '../../helpers/toast';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, DraftFilesReducer);
-
-/** table data interface */
-interface TableData {
-    fileName: string;
-    fileVersion: string;
-    identifier: string;
-    manifestId: string;
-    module: string;
-}
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
@@ -66,8 +60,8 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             .then((res: ManifestFilesTypes[]) => {
                 fetchDraftFiles(res);
             })
-            .catch(() => {
-                // to handle error
+            .catch(error => {
+                growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -95,8 +89,8 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             .then(res => {
                 handleDownload(res.clientForm.json, name);
             })
-            .catch(() => {
-                // to handle error
+            .catch(error => {
+                growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -142,8 +136,8 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             .then(() => {
                 clearDraftFiles();
             })
-            .catch(() => {
-                // to handle error
+            .catch(error => {
+                growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -214,7 +208,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                     Make Release
                 </Button>
             )}
-            @typescript-eslint/camelcase
+            <ToastContainer />
         </div>
     );
 };

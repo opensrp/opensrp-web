@@ -12,7 +12,7 @@
 
 .cancel-icon {
     border-radius: 50%;
-    color: red;
-    border: 1.5px solid red;
+    color: #ff0000;
+    border: 1.5px solid #ff0000;
     text-decoration: none !important;
 }
