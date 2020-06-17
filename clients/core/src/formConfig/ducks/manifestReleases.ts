@@ -6,7 +6,7 @@ import {
     getItemsArrayFactory,
     getItemByIdFactory,
     getTotalRecordsFactory,
-} from '../../store/ducks/baseDux';
+} from '@opensrp/reducer-factory';
 
 /** json field interface */
 export interface ManifestJsonFieldType {

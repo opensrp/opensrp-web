@@ -5,7 +5,7 @@ import {
     getItemsByIdFactory,
     getItemsArrayFactory,
     getItemByIdFactory,
-} from '../../store/ducks/baseDux';
+} from '@opensrp/reducer-factory';
 import { ManifestFilesTypes } from './manifestFiles';
 
 /** reducer name */

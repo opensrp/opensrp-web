@@ -2227,10 +2227,10 @@
   dependencies:
     "@onaio/redux-reducer-registry" "^0.0.8"
 
-"@onaio/drill-down-table@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@onaio/drill-down-table/-/drill-down-table-1.0.1.tgz#774ad27deffc559aca2e41c5f423931fa393ba96"
-  integrity sha512-83anCl5L64KbFM5r5UYV5FFsL6tYxJXAXCoHdG23bTNMW+QnCOhO3UVBWMfwBQP6HfDf/EdHb/CDqzQIMrv/Kg==
+"@onaio/drill-down-table@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@onaio/drill-down-table/-/drill-down-table-1.0.2.tgz#5585a51407f3bb9e88d3e99964b64a9d1af1acec"
+  integrity sha512-o19tX8rSI3DknY7clSbt44g+8YZppecEyPkEN9ezzTau3E0cB5BlBU3gJWaP4cUOpZv92s/xaIxyFAHHXgTL+w==
   dependencies:
     react-table "^7.0.6"
     reactstrap "^8.4.1"
@@ -2290,6 +2290,15 @@
   dependencies:
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
+
+"@opensrp/reducer-factory@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@opensrp/reducer-factory/-/reducer-factory-0.0.1.tgz#4a544e6ec29d97a7d8ba2d07f3a63a21ec49e723"
+  integrity sha512-aCOpVbl+giAvydaAnuy2zGca2fqrwuJqsfk3S9+nLI4DNT0IZWbwk1uFY2UgKvDNkSM2M1G+hSqUShBIkm80SA==
+  dependencies:
+    lodash "^4.17.15"
+    redux "^4.0.5"
+    seamless-immutable "^7.1.4"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"

@@ -1,10 +1,8 @@
 # Form Config
 
-## Introduction
-
 These are bunch of components that support creation and manuplation of [OpenSRP](https://smartregister.atlassian.net/wiki/spaces/Documentation/pages/1507000340/OpenSRP+Document+Configurability) configuration files.
 
-These files include:
+The configuration files include:
 
 1. JSON widget validator - JSON file that holds a list of fields that cannot be removed in a certain JSON form.
 2. Manifest - A combination of properties that help bundle up all the files uploaded.
@@ -55,7 +53,7 @@ const ManifestReleasesPage = () => {
 };
 ```
 
-### JSON validators and config files
+### List JSON validators and config forms
 
 ```typescript
 import ConnectedManifestFilesList from '@opensrp/form-config'
@@ -75,7 +73,7 @@ const ManifestReleasesPage = () => {
 };
 ```
 
-### Draft files
+### List Draft files
 
 ```typescript
 import ManifestDraftFiles from '@opensrp/form-config'
