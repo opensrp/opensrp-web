@@ -28,6 +28,8 @@ import { generateOptions } from '../../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useHouseholdTableColumns } from './helpers/tableDefinitions';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
+import Select from 'react-select';
+import { getLocationDropdownOption, DropdownOption } from '../../../../helpers/Dropdown';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -48,6 +50,7 @@ export interface HouseholdListState {
     currentPage: number;
     searchPlaceholder: string;
     clientType: HOUSEHOLD_CLIENT_TYPE;
+    locationId: DropdownOption;
 }
 
 /** default state for household-list component */
@@ -56,6 +59,7 @@ export const defaultHouseholdListState: HouseholdListState = {
     currentPage: 1,
     searchPlaceholder: 'Search Household',
     clientType: HOUSEHOLD_CLIENT_TYPE,
+    locationId: { value: '', label: '' },
 };
 
 /** default props for the householdList component */
@@ -94,6 +98,18 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         this.getHouseholdList();
     }
 
+    locationFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+            },
+            () => {
+                this.getHouseholdList();
+            },
+        );
+    };
+
     /** fetch data from server with a specific page number */
     onPageChange = (currentPage: number): void => {
         this.setState(
@@ -120,30 +136,44 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     public render(): React.ReactNode {
         /** render loader if there are no households in state */
         const { householdsArray, totalRecordsCount } = this.props;
-        if (this.state.loading) {
-            return <Loading />;
-        } else {
-            return (
-                <div>
-                    <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
-                    <Row className="filter-row">
-                        <Col md={5}>
-                            <div className="household-search-bar">
-                                <SearchBox searchCallBack={this.search} placeholder={this.state.searchPlaceholder} />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <HouseholdTable tableData={householdsArray} />
-                        </Col>
-                        <Col md={{ size: 3, offset: 3 }}>
-                            <Pagination {...this.getPaginationOptions()} />
-                        </Col>
-                    </Row>
-                </div>
-            );
-        }
+        // if (this.state.loading) {
+        //     return <Loading />;
+        // } else {
+        return (
+            <div>
+                <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
+                <Row>
+                    <Col md={{ size: 3, offset: 9 }}> Location </Col>
+                </Row>
+                <Row className="filter-row">
+                    <Col md={8}>
+                        <div className="household-search-bar">
+                            <SearchBox searchCallBack={this.search} placeholder={this.state.searchPlaceholder} />
+                        </div>
+                    </Col>
+                    <Col md={{ size: 3, offset: 1 }}>
+                        <div className="household-search-bar">
+                            <Select
+                                value={this.state.locationId}
+                                classNamePrefix="select"
+                                className="basic-single"
+                                onChange={(e): void => this.locationFilter(e as DropdownOption)}
+                                options={getLocationDropdownOption()}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <HouseholdTable tableData={householdsArray} />
+                    </Col>
+                    <Col md={{ size: 3, offset: 3 }}>
+                        <Pagination {...this.getPaginationOptions()} />
+                    </Col>
+                </Row>
+            </div>
+        );
+        // }
     }
 
     private search = (searchText: string): void => {
@@ -160,6 +190,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
             clientType,
             pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
+            locationId: this.state.locationId.value,
             ...extraParams,
         };
         const {

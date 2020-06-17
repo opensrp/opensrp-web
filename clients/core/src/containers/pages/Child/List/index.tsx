@@ -23,7 +23,7 @@ import '../../../../assets/styles/dropdown.css';
 import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
+import { DropdownOption, genderOptions, getLocationDropdownOption } from '../../../../helpers/Dropdown';
 import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGHBORS } from '../../../../constants';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
@@ -45,6 +45,7 @@ export interface ChildListState {
     loading: boolean;
     searchText: string;
     currentPage: number;
+    locationId: DropdownOption;
 }
 
 /** default props for the childList component */
@@ -63,6 +64,7 @@ export const defaultChildState: ChildListState = {
     loading: true,
     searchText: '',
     currentPage: 1,
+    locationId: { value: '', label: '' },
 };
 
 /** props interface for the child table */
@@ -136,6 +138,18 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         );
     };
 
+    locationFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
     /** fetch data from server with a specific page number */
     onPageChange = (currentPage: number): void => {
         this.setState(
@@ -170,14 +184,26 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                 <div>
                     <h3 className="household-title"> All Child ({totalRecords})</h3>
                     <Row>
-                        <Col md={{ size: 3, offset: 9 }}> Gender </Col>
+                        <Col md={{ size: 3, offset: 6 }}> Location </Col>
+                        <Col md={3}> Gender </Col>
                     </Row>
                     <Row>
-                        <Col md={9} className="filter-row">
+                        <Col md={5} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
                                     searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
                                     placeholder={`Search Child`}
+                                />
+                            </div>
+                        </Col>
+                        <Col md={{ size: 3, offset: 1 }}>
+                            <div className="household-search-bar">
+                                <Select
+                                    value={this.state.locationId}
+                                    classNamePrefix="select"
+                                    className="basic-single"
+                                    onChange={(e): void => this.locationFilter(e as DropdownOption)}
+                                    options={getLocationDropdownOption()}
                                 />
                             </div>
                         </Col>

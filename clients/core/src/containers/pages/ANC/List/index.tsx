@@ -23,6 +23,8 @@ import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
+import Select from 'react-select';
+import { DropdownOption, getLocationDropdownOption } from '../../../../helpers/Dropdown';
 
 reducerRegistry.register(reducerName, ANCReducer);
 
@@ -41,6 +43,7 @@ export interface ANCState {
     loading: boolean;
     searchText: string;
     currentPage: number;
+    locationId: DropdownOption;
 }
 
 /** default props for the ancList component */
@@ -58,6 +61,7 @@ export const defaultANCState: ANCState = {
     loading: true,
     searchText: '',
     currentPage: 1,
+    locationId: { value: '', label: '' },
 };
 
 /** props interface for the anc table */
@@ -107,6 +111,18 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         });
     };
 
+    locationFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
     searchTextfilter = (searchText: string): void => {
         this.setState(
             {
@@ -153,11 +169,25 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                 <div style={{ fontSize: '14px' }}>
                     <h3 className="household-title"> All ANC ({totalRecords})</h3>
                     <Row>
-                        <Col md={9} className="filter-row">
+                        <Col md={{ size: 3, offset: 9 }}> Location </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
                                     searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search ANC`}
+                                />
+                            </div>
+                        </Col>
+                        <Col md={{ size: 3, offset: 1 }}>
+                            <div className="household-search-bar">
+                                <Select
+                                    value={this.state.locationId}
+                                    classNamePrefix="select"
+                                    className="basic-single"
+                                    onChange={(e): void => this.locationFilter(e as DropdownOption)}
+                                    options={getLocationDropdownOption()}
                                 />
                             </div>
                         </Col>
