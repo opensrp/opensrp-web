@@ -33,46 +33,50 @@ import HighchartsReact from 'highcharts-react-official';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 
-const options: Highcharts.Options = {
-    title: {
-        text: 'Child Weight for age growth chart',
-    },
+const getChartOptions = (growthData: any) => {
+    console.log('growth data', growthData);
+    const options: Highcharts.Options = {
+        title: {
+            text: 'Child Weight for age growth chart',
+        },
 
-    tooltip: {
-        formatter(tooltip: Highcharts.TooltipOptions) {
-            return `
-            <div style='background-color: white;'>
-                <div> 12 vs 14 </div>
-                <hr>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style='padding-right: 20px;font-size: 20px;'> weight </td>
-                            <td> <b>68.6kg</b> </td>
-                            <td style='color: lawngreen'> <b> &uarr; </b> </td>
-                            <td style='color: lawngreen'> +23 </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-            `;
+        tooltip: {
+            formatter(tooltip: Highcharts.TooltipOptions) {
+                return `
+                <div style='background-color: white;'>
+                    <div> 12 vs 14 </div>
+                    <hr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style='padding-right: 20px;font-size: 20px;'> weight </td>
+                                <td> <b>68.6kg</b> </td>
+                                <td style='color: lawngreen'> <b> &uarr; </b> </td>
+                                <td style='color: lawngreen'> +23 </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                `;
+            },
+            shared: true,
+            useHTML: true,
+            backgroundColor: 'white',
+            borderColor: 'white',
+            borderRadius: 5,
+            style: {
+                fontSize: '15px',
+            },
         },
-        shared: true,
-        useHTML: true,
-        backgroundColor: 'white',
-        borderColor: 'white',
-        borderRadius: 5,
-        style: {
-            fontSize: '15px',
-        },
-    },
-    series: [
-        {
-            type: 'line',
-            data: [1, 2, 3],
-        },
-    ],
+        series: [
+            {
+                type: 'line',
+                data: growthData,
+            },
+        ],
+    };
+    return options;
 };
 
 /** register the child reducer */
@@ -96,19 +100,33 @@ export interface ChildProfileProps extends RouteComponentProps<ChildProfileParam
 
 export class ChildProfile extends React.Component<ChildProfileProps> {
     public async componentDidMount() {
-        const { fetchChild, fetchEvents } = this.props;
+        const { fetchChild, fetchEvents, removeChild } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
         };
         const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
+        removeChild();
         fetchChild(profileResponse);
 
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
     }
+
+    getGrowthData = () => {
+        const { events } = this.props;
+
+        const data = events
+            .filter((e: Event) => e.eventType === 'Growth Monitoring')
+            .map((e: Event) => {
+                const ob = e.obs[0] || { values: [0] };
+                return ob.values !== null ? parseInt(ob.values[0]) : null;
+            });
+
+        return data;
+    };
 
     getRegister = () => {
         const vaccinationEeventList = this.props.events
@@ -296,7 +314,14 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     </Row>
                     <Row>
                         <div className="chart-div">
-                            <HighchartsReact highcharts={Highcharts} options={options} />
+                            {/* {this.getGrowthData().length > 0 ? (
+                                <HighchartsReact
+                                    highcharts={Highcharts}
+                                    options={getChartOptions(this.getGrowthData())}
+                                />
+                            ) : null} */}
+
+                            <HighchartsReact highcharts={Highcharts} options={getChartOptions(this.getGrowthData())} />
                         </div>
                     </Row>
                 </div>

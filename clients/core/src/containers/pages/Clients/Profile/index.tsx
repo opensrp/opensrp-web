@@ -95,13 +95,14 @@ export interface ClientProfileProps extends RouteComponentProps<ClientProfilePar
 
 export class ClientProfile extends React.Component<ClientProfileProps> {
     public async componentDidMount() {
-        const { fetchClient, fetchEvents } = this.props;
+        const { fetchClient, fetchEvents, removeClient } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
         };
         const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
+        removeClient();
         fetchClient(profileResponse);
 
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);

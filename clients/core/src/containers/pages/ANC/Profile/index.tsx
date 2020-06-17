@@ -51,13 +51,14 @@ export interface ANCProfileProps extends RouteComponentProps<ANCProfileParams> {
 
 export class ANCProfile extends React.Component<ANCProfileProps> {
     public async componentDidMount() {
-        const { fetchANC, fetchEvents } = this.props;
+        const { fetchANC, fetchEvents, removeANC } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
         };
         const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
+        removeANC();
         fetchANC(profileResponse);
 
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
@@ -124,7 +125,7 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
                             <span className="back-btn"> Back to Household </span>
                         </Link>
                     </span>
-                    <h3> ANC </h3>
+                    <h3> Client </h3>
                 </div>
                 <InfoCard title="Basic information">
                     <Col className="info-body">
@@ -256,7 +257,7 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
 
 const mapStateToProps = (state: Partial<Store>) => {
     return {
-        client: getAllANCArray(state)[0],
+        anc: getAllANCArray(state)[0],
         events: getEventsArray(state),
     };
 };
@@ -269,6 +270,6 @@ const mapDispatchToProps = {
     removeEvents,
 };
 
-const ConnectedClientProfile = withRouter(connect(mapStateToProps, mapDispatchToProps)(ANCProfile));
+const ConnectedANCProfile = withRouter(connect(mapStateToProps, mapDispatchToProps)(ANCProfile));
 
-export default ConnectedClientProfile;
+export default ConnectedANCProfile;

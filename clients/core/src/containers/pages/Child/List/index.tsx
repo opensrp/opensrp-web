@@ -24,7 +24,8 @@ import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
-import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
+import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGHBORS } from '../../../../constants';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -43,6 +44,7 @@ export interface ChildListState {
     selectedGender: DropdownOption;
     loading: boolean;
     searchText: string;
+    currentPage: number;
 }
 
 /** default props for the childList component */
@@ -60,6 +62,7 @@ export const defaultChildState: ChildListState = {
     selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
+    currentPage: 1,
 };
 
 /** props interface for the child table */
@@ -92,7 +95,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
     getDataFromServer = async () => {
         const params = {
             clientType: CHILD_CLIENT_TYPE,
-            pageNumber: '1',
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
@@ -133,6 +136,29 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         );
     };
 
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    /** it returns the required options for pagination component */
+    getPaginationOptions = (): PaginationProps => {
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGHBORS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecords,
+        };
+    };
+
     public render() {
         const { childArray, totalRecords } = this.props;
         /** render loader if there are no child in state */
@@ -168,6 +194,11 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                     <Row>
                         <Col>
                             <ChildTable tableData={childArray} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>

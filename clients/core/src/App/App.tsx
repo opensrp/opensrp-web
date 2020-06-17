@@ -25,6 +25,7 @@ import {
     LOCATION_CREATE_URL,
     LOCATION_TAG_URL,
     LOCATION_TAG_CREATE_URL,
+    CLIENT_PROFILE_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -46,6 +47,7 @@ import ConnectedTeamProfile from '../containers/pages/Teams/Profile';
 import { TeamForm } from '../components/page/Team/Form';
 import { LocationForm } from '../components/page/Location/Form';
 import ConnectedLocationTagList from '../containers/pages/LocationTag';
+import ConnectedClientProfile from '../containers/pages/Clients/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -78,6 +80,12 @@ class App extends Component {
                                 exact={true}
                                 path={CLIENT_URL}
                                 component={ConnectedClientList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`${CLIENT_PROFILE_URL}/:id`}
+                                component={ConnectedClientProfile}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
