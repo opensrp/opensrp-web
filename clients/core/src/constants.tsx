@@ -45,7 +45,7 @@ export const VIEW_DRAFT_FILES_PAGE_URL = '/files/draft';
 export type VIEW_DRAFT_FILES_PAGE_URL = typeof VIEW_DRAFT_FILES_PAGE_URL;
 export const VIEW_JSON_VALIDATORS_PAGE_URL = '/json-validators';
 export type VIEW_JSON_VALIDATORS_PAGE_URL = typeof VIEW_JSON_VALIDATORS_PAGE_URL;
-export const MANIFEST_FILE_UPLOAD = '/manifest/file';
+export const MANIFEST_FILE_UPLOAD = '/manifest';
 export type MANIFEST_FILE_UPLOAD = typeof MANIFEST_FILE_UPLOAD;
 
 // string literals
@@ -88,6 +88,10 @@ export const VIEW_JSON_VALIDATORS = 'View JSON Validators';
 export type VIEW_JSON_VALIDATORS = typeof CHILD_CLIENT_TYPE;
 export const VIEW_DRAFT_FILES = 'View Draft Files';
 export type VIEW_DRAFT_FILES = typeof VIEW_DRAFT_FILES;
+export const FILE_UPLOAD_TYPE = 'file-upload';
+export type FILE_UPLOAD_TYPE = typeof FILE_UPLOAD_TYPE;
+export const VALIDATOR_UPLOAD_TYPE = 'validator_upload';
+export type VALIDATOR_UPLOAD_TYPE = typeof VALIDATOR_UPLOAD_TYPE;
 
 // url constants
 export const PAGINATION_SIZE = 10;

@@ -10,6 +10,7 @@ import {
 /** manifest files interface */
 export interface ManifestFilesTypes {
     createdAt: string;
+    form_relation: string;
     id: string;
     identifier: string;
     isDraft: boolean;

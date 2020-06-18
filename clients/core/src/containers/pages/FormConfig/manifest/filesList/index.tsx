@@ -8,6 +8,7 @@ import {
     MANIFEST_FILE_UPLOAD,
     OPENSRP_MANIFEST_FORMS_ENDPOINT,
     OPENSRP_FORMS_ENDPOINT,
+    FILE_UPLOAD_TYPE,
 } from '../../../../../constants';
 import ConnectedManifestFilesList from '../../../../../formConfig/Manifest/FilesList';
 import { generateOptions } from '../../../../../services/opensrp';
@@ -30,6 +31,7 @@ const ManifestFiles = (props: ManifestFilesProps) => {
         getPayload: generateOptions,
         isJsonValidator: false,
         LoadingComponent: <Loading />,
+        uploadTypeUrl: FILE_UPLOAD_TYPE,
     };
 
     return (

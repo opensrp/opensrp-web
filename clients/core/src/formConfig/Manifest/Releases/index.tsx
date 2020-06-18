@@ -28,6 +28,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 /** ManifestReleases props interface */
 interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
+    uploadTypeUrl: string;
 }
 
 /** view all manifest pages */
@@ -44,6 +45,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         currentUrl,
         formUploadUrl,
         growl,
+        uploadTypeUrl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -57,7 +59,6 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
             .list()
             .then((res: ManifestReleasesTypes[]) => fetchReleases(res))
             .catch(error => {
-                console.log(error);
                 growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
@@ -143,7 +144,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
                     <SearchBar {...searchBarProps} />
                 </Col>
                 <Col xs="4">
-                    <Link className="btn btn-secondary float-right" to={formUploadUrl}>
+                    <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
                         Upload New File
                     </Link>
                 </Col>

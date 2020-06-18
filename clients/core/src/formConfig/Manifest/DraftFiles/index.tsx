@@ -54,7 +54,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
     const getManifestForms = async () => {
         setLoading(data.length < 1);
         /* eslint-disable-next-line @typescript-eslint/camelcase */
-        const params = { is_draft: true };
+        const params = null; //{ is_draft: false };
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
             .list(params)
@@ -83,7 +83,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
      * @param {URLParams} params url params
      */
     const downloadFile = async (name: string, params: URLParams) => {
-        setLoading(true);
         const clientService = new OpenSRPService(baseURL, downloadEndPoint, getPayload);
         await clientService
             .list(params)
@@ -92,8 +91,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             })
             .catch(error => {
                 growl && growl(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+            });
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -238,6 +236,7 @@ interface DispatchedStateProps {
  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
     const data: ManifestFilesTypes[] = getAllManifestDraftFilesArray(state);
+    data.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
     return {
         data,
     };

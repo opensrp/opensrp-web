@@ -33,6 +33,7 @@ interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
     formVersion: string | null;
     fileUploadUrl: string;
     isJsonValidator: boolean;
+    uploadTypeUrl: string;
 }
 
 /** view manifest forms */
@@ -52,6 +53,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         formVersion,
         downloadEndPoint,
         removeFiles,
+        uploadTypeUrl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -61,9 +63,9 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     const getManifestForms = async () => {
         setLoading(true);
         let params = null;
-        if (formVersion) {
-            params = { identifier: formVersion };
-        }
+        // if form version is available -  means request is to get manifest files else get json validator files
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
+        params = formVersion ? { identifier: formVersion } : { is_json_validator: true };
         removeFiles();
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
@@ -91,7 +93,6 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
      * @param {URLParams} params url params
      */
     const downloadFile = async (name: string, params: URLParams) => {
-        setLoading(true);
         const clientService = new OpenSRPService(baseURL, downloadEndPoint, getPayload);
         await clientService
             .list(params)
@@ -100,8 +101,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             })
             .catch(error => {
                 growl && growl(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+            });
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -136,7 +136,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
      * @param {TableData} obj table row data
      */
     const linkToEditFile = (obj: ManifestFilesTypes) => {
-        return <Link to={`${fileUploadUrl}/${obj.id}`}>Upload Edit</Link>;
+        return <Link to={`${fileUploadUrl}/${uploadTypeUrl}/${obj.id}`}>Upload Edit</Link>;
     };
     let columns = [
         {
@@ -202,7 +202,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 </Col>
                 <Col xs="4">
                     {isJsonValidator && (
-                        <Link className="btn btn-secondary float-right" to={fileUploadUrl}>
+                        <Link className="btn btn-secondary float-right" to={`${fileUploadUrl}/${uploadTypeUrl}`}>
                             Upload New File
                         </Link>
                     )}
@@ -238,6 +238,7 @@ interface DispatchedStateProps {
  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
     const data: ManifestFilesTypes[] = getAllManifestFilesArray(state);
+    data.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
     return {
         data,
     };

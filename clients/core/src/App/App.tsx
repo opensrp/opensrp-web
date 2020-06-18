@@ -87,13 +87,13 @@ class App extends Component {
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path={MANIFEST_FILE_UPLOAD}
+                                path={`${MANIFEST_FILE_UPLOAD}/:type`}
                                 component={ConnectedUploadConfigFilePage}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
-                                path={`${MANIFEST_FILE_UPLOAD}/:id`}
+                                path={`${MANIFEST_FILE_UPLOAD}/:type/:id`}
                                 component={ConnectedUploadConfigFilePage}
                             />
                             <ConnectedPrivateRoute
