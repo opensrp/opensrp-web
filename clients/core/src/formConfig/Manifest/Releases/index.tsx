@@ -14,9 +14,6 @@ import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { FormConfigProps } from '../../helpers/types';
-import { growl } from '../../helpers/toast';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, releasesReducer);
@@ -46,6 +43,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         placeholder,
         currentUrl,
         formUploadUrl,
+        growl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -59,7 +57,8 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
             .list()
             .then((res: ManifestReleasesTypes[]) => fetchReleases(res))
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                console.log(error);
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -150,7 +149,6 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
                 </Col>
             </Row>
             <DrillDownTable {...DrillDownTableProps} />
-            <ToastContainer />
         </div>
     );
 };

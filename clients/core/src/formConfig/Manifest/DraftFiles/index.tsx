@@ -7,7 +7,6 @@ import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
-import { Link } from 'react-router-dom';
 import DraftFilesReducer, {
     fetchManifestDraftFiles,
     reducerName,
@@ -15,9 +14,6 @@ import DraftFilesReducer, {
 } from '../../ducks/manifestDraftFiles';
 import { Button } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
-import { growl } from '../../helpers/toast';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, DraftFilesReducer);
@@ -46,6 +42,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         placeholder,
         fetchDraftFiles,
         clearDraftFiles,
+        growl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -61,7 +58,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 fetchDraftFiles(res);
             })
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -90,7 +87,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 handleDownload(res.clientForm.json, name);
             })
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -137,7 +134,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 clearDraftFiles();
             })
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -208,7 +205,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                     Make Release
                 </Button>
             )}
-            <ToastContainer />
         </div>
     );
 };

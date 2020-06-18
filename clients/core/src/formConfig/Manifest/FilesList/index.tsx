@@ -15,9 +15,6 @@ import FilesReducer, {
     getAllManifestFilesArray,
 } from '../../ducks/manifestFiles';
 import { Row, Col } from 'reactstrap';
-import { growl } from '../../helpers/toast';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, FilesReducer);
@@ -57,6 +54,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         fetchFiles,
         fileUploadUrl,
         isJsonValidator,
+        growl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -72,7 +70,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 fetchFiles(res);
             })
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -101,7 +99,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 handleDownload(res.clientForm.json, name);
             })
             .catch(error => {
-                growl(String(error), { type: 'error' });
+                growl && growl(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -211,7 +209,6 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 </Col>
             </Row>
             <DrillDownTable {...DrillDownTableProps} />
-            <ToastContainer />
         </div>
     );
 };
