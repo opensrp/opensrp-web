@@ -5,6 +5,10 @@ export const OPENSRP_MANIFEST_ENDPOINT = 'manifest';
 export type OPENSRP_MANIFEST_ENDPOINT = typeof OPENSRP_MANIFEST_ENDPOINT;
 export const OPENSRP_FORMS_ENDPOINT = 'clientForm';
 export type OPENSRP_FORMS_ENDPOINT = typeof OPENSRP_FORMS_ENDPOINT;
+export const OPENSRP_MANIFEST_FORMS_ENDPOINT = 'clientForm/release-related-files';
+export type OPENSRP_MANIFEST_FORMS_ENDPOINT = typeof OPENSRP_MANIFEST_FORMS_ENDPOINT;
+export const OPENSRP_FORM_METADATA = 'clientForm/metadata';
+export type OPENSRP_FORM_METADATA = typeof OPENSRP_FORM_METADATA;
 
 // internal urls
 export const LOGIN_URL = '/login';

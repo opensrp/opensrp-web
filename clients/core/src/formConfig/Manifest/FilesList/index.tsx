@@ -13,29 +13,23 @@ import FilesReducer, {
     reducerName,
     ManifestFilesTypes,
     getAllManifestFilesArray,
+    removeManifestFiles,
 } from '../../ducks/manifestFiles';
 import { Row, Col } from 'reactstrap';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, FilesReducer);
 
-/** table data interface */
-interface TableData {
-    fileName: string;
-    fileVersion: string;
-    identifier: string;
-    manifestId: string;
-    module: string;
-}
-
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestFilesTypes[];
     fetchFiles: typeof fetchManifestFiles;
+    removeFiles: typeof removeManifestFiles;
 }
 
 /** manifest files list props interface */
 interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
+    downloadEndPoint: string;
     formVersion: string | null;
     fileUploadUrl: string;
     isJsonValidator: boolean;
@@ -55,6 +49,9 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         fileUploadUrl,
         isJsonValidator,
         growl,
+        formVersion,
+        downloadEndPoint,
+        removeFiles,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -62,10 +59,15 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 
     /** get manifest files */
     const getManifestForms = async () => {
-        setLoading(data.length < 1);
+        setLoading(true);
+        let params = null;
+        if (formVersion) {
+            params = { identifier: formVersion };
+        }
+        removeFiles();
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
-            .list()
+            .list(params)
             .then((res: ManifestFilesTypes[]) => {
                 fetchFiles(res);
             })
@@ -76,9 +78,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     };
 
     useEffect(() => {
-        if (!data.length) {
-            getManifestForms();
-        }
+        getManifestForms();
     }, []);
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
      */
     const downloadFile = async (name: string, params: URLParams) => {
         setLoading(true);
-        const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
+        const clientService = new OpenSRPService(baseURL, downloadEndPoint, getPayload);
         await clientService
             .list(params)
             .then(res => {
@@ -128,7 +128,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             form_version: obj.version, // eslint-disable-line @typescript-eslint/camelcase
         };
 
-        downloadFile('blood_screening.json', params);
+        downloadFile(identifier, params);
     };
 
     /**
@@ -145,11 +145,11 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         },
         {
             Header: 'File Name',
-            accessor: `fileName`,
+            accessor: `label`,
         },
         {
             Header: 'File Version',
-            accessor: `fileVersion`,
+            accessor: `version`,
         },
         {
             Header: 'Module',
@@ -219,6 +219,7 @@ const defaultProps: DefaultProps = {
     debounceTime: 1000,
     fetchFiles: fetchManifestFiles,
     placeholder: 'Find Release Files',
+    removeFiles: removeManifestFiles,
 };
 
 /** pass default props to component */
@@ -235,20 +236,18 @@ interface DispatchedStateProps {
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
  */
-const mapStateToProps = (state: Partial<Store>, ownProps: ManifestFilesListProps): DispatchedStateProps => {
-    let data: ManifestFilesTypes[] = getAllManifestFilesArray(state);
-    if (ownProps.isJsonValidator) {
-        data = data.filter(file => file.is_json_validator);
-    } else {
-        data = data.filter(file => !file.is_json_validator);
-    }
+const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
+    const data: ManifestFilesTypes[] = getAllManifestFilesArray(state);
     return {
         data,
     };
 };
 
 /** map dispatch to props */
-const mapDispatchToProps = { fetchFiles: fetchManifestFiles };
+const mapDispatchToProps = {
+    fetchFiles: fetchManifestFiles,
+    removeFiles: removeManifestFiles,
+};
 
 /** Connected ManifestFilesList component */
 const ConnectedManifestFilesList = connect(mapStateToProps, mapDispatchToProps)(ManifestFilesList);

@@ -9,11 +9,11 @@ import {
 
 /** manifest files interface */
 export interface ManifestFilesTypes {
-    created_at: string;
+    createdAt: string;
     id: string;
     identifier: string;
-    is_draft: boolean;
-    is_json_validator: boolean;
+    isDraft: boolean;
+    isJsonValidator: boolean;
     jursdiction: string;
     label: string;
     module: string;

@@ -27,6 +27,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 
 /** manifest Draft files props interface */
 interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
+    downloadEndPoint: string;
     releasesUrl: string;
 }
 
@@ -43,6 +44,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         fetchDraftFiles,
         clearDraftFiles,
         growl,
+        downloadEndPoint,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -51,9 +53,11 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
     /** get manifest Draftfiles */
     const getManifestForms = async () => {
         setLoading(data.length < 1);
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
+        const params = { is_draft: true };
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
-            .list()
+            .list(params)
             .then((res: ManifestFilesTypes[]) => {
                 fetchDraftFiles(res);
             })
@@ -80,7 +84,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
      */
     const downloadFile = async (name: string, params: URLParams) => {
         setLoading(true);
-        const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
+        const clientService = new OpenSRPService(baseURL, downloadEndPoint, getPayload);
         await clientService
             .list(params)
             .then(res => {
@@ -116,7 +120,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             form_version: obj.version, // eslint-disable-line @typescript-eslint/camelcase
         };
 
-        downloadFile('blood_screening.json', params);
+        downloadFile(identifier, params);
     };
 
     /**
@@ -233,21 +237,7 @@ interface DispatchedStateProps {
  * @param {Partial<Store>} -  the  redux store
  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
-    let data: ManifestFilesTypes[] = getAllManifestDraftFilesArray(state);
-    /* eslint-disable @typescript-eslint/camelcase */
-    data = [
-        {
-            created_at: '123',
-            id: 'id',
-            identifier: 'identifier',
-            is_draft: true,
-            is_json_validator: false,
-            jursdiction: 'jursdiction',
-            label: 'test example',
-            module: 'module',
-            version: '123',
-        },
-    ];
+    const data: ManifestFilesTypes[] = getAllManifestDraftFilesArray(state);
     return {
         data,
     };

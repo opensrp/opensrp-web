@@ -1,7 +1,12 @@
 import React from 'react';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import Loading from '../../../../../components/page/Loading';
-import { OPENSRP_FORMS_ENDPOINT, MANIFEST_FILE_UPLOAD, VIEW_RELEASE_PAGE_URL } from '../../../../../constants';
+import {
+    MANIFEST_FILE_UPLOAD,
+    VIEW_RELEASE_PAGE_URL,
+    OPENSRP_FORM_METADATA,
+    OPENSRP_FORMS_ENDPOINT,
+} from '../../../../../constants';
 import ConnectedManifestDraftFiles from '../../../../../formConfig/Manifest/DraftFiles';
 import { generateOptions } from '../../../../../services/opensrp';
 
@@ -9,7 +14,8 @@ import { generateOptions } from '../../../../../services/opensrp';
 export const ManifestDraftFiles = () => {
     const ManifestFilesListProps = {
         baseURL: OPENSRP_API_BASE_URL,
-        endpoint: OPENSRP_FORMS_ENDPOINT,
+        endpoint: OPENSRP_FORM_METADATA,
+        downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         getPayload: generateOptions,
         LoadingComponent: <Loading />,

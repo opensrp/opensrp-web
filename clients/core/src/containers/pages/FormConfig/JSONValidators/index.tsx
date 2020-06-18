@@ -8,6 +8,7 @@ import ConnectedManifestFilesList from '../../../../formConfig/Manifest/FilesLis
 export const JSONValidatorListPage = () => {
     const JSONValidatorList = {
         baseURL: OPENSRP_API_BASE_URL,
+        downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
         endpoint: OPENSRP_FORMS_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         formVersion: null,
