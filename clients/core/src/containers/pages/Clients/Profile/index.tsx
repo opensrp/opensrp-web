@@ -32,46 +32,50 @@ import HighchartsReact from 'highcharts-react-official';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 
-const options: Highcharts.Options = {
-    title: {
-        text: 'Weight for age growth chart',
-    },
+const getChartOptions = (growthData: any) => {
+    console.log('growth data', growthData);
+    const options: Highcharts.Options = {
+        title: {
+            text: 'Child Weight for age growth chart',
+        },
 
-    tooltip: {
-        formatter(tooltip: Highcharts.TooltipOptions) {
-            return `
-            <div style='background-color: white;'>
-                <div> 12 vs 14 </div>
-                <hr>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style='padding-right: 20px;font-size: 20px;'> weight </td>
-                            <td> <b>68.6kg</b> </td>
-                            <td style='color: lawngreen'> <b> &uarr; </b> </td>
-                            <td style='color: lawngreen'> +23 </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-            `;
+        tooltip: {
+            formatter(tooltip: Highcharts.TooltipOptions) {
+                return `
+                <div style='background-color: white;'>
+                    <div> 12 vs 14 </div>
+                    <hr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style='padding-right: 20px;font-size: 20px;'> weight </td>
+                                <td> <b>68.6kg</b> </td>
+                                <td style='color: lawngreen'> <b> &uarr; </b> </td>
+                                <td style='color: lawngreen'> +23 </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                `;
+            },
+            shared: true,
+            useHTML: true,
+            backgroundColor: 'white',
+            borderColor: 'white',
+            borderRadius: 5,
+            style: {
+                fontSize: '15px',
+            },
         },
-        shared: true,
-        useHTML: true,
-        backgroundColor: 'white',
-        borderColor: 'white',
-        borderRadius: 5,
-        style: {
-            fontSize: '15px',
-        },
-    },
-    series: [
-        {
-            type: 'line',
-            data: [1, 2, 3],
-        },
-    ],
+        series: [
+            {
+                type: 'line',
+                data: growthData,
+            },
+        ],
+    };
+    return options;
 };
 
 /** register the client reducer */
@@ -109,6 +113,19 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
     }
+
+    getGrowthData = () => {
+        const { events } = this.props;
+
+        const data = events
+            .filter((e: Event) => e.eventType === 'Growth Monitoring')
+            .map((e: Event) => {
+                const ob = e.obs[0] || { values: [0] };
+                return ob.values !== null ? parseInt(ob.values[0]) : null;
+            });
+
+        return data;
+    };
 
     getRegister = () => {
         const vaccinationEeventList = this.props.events
@@ -296,7 +313,7 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
                     </Row>
                     <Row>
                         <div className="chart-div">
-                            <HighchartsReact highcharts={Highcharts} options={options} />
+                            <HighchartsReact highcharts={Highcharts} options={getChartOptions(this.getGrowthData())} />
                         </div>
                     </Row>
                 </div>
