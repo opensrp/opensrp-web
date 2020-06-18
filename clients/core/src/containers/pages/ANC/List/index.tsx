@@ -98,6 +98,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
             pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             searchText: this.state.searchText,
+            locationId: this.state.locationId.value,
         };
         const { fetchANC, opensrpService, setTotalRecords, removeANC } = this.props;
         const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);

@@ -1,4 +1,4 @@
-const treeData = {
+const data = {
     locations: {
         locationsHierarchy: {
             map: {
@@ -501,4 +501,3 @@ const treeData = {
         voided: false,
     },
 };
-export default treeData;

@@ -101,6 +101,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
+            locationId: this.state.locationId.value,
         };
         const { fetchChild, opensrpService, setTotalRecords, removeChild } = this.props;
         const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, generateOptions);

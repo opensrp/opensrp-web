@@ -18,7 +18,7 @@ export const getLocationDropdownOption = () => {
     const locations = [];
 
     const rootMap = sampleData.locations.locationsHierarchy.map;
-    const rootLocation = rootMap['c768ef20-01fe-4877-b670-9b6570be17be'];
+    const rootLocation = rootMap['592608f9-b885-4eed-97ec-b2e77ccb2e4c'];
     locations.push({
         parentHistory: '',
         name: rootLocation.label,

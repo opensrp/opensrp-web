@@ -103,7 +103,9 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
         const response = await locationService.list(params);
         removeLocation();
         fetchLocation(response.locations);
-        setTotalRecords(response.total);
+        if (!(response.locations.length > 0 && response.total == 0)) {
+            setTotalRecords(response.total);
+        }
         this.setState({
             ...this.state,
             loading: false,
@@ -160,18 +162,7 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={1}>Level: </Col>
-                        <Col md={2} className="province-dropdown">
-                            <Select
-                                value={this.state.selectedProvince}
-                                classNamePrefix="select"
-                                className="basic-single"
-                                onChange={(e): void => {
-                                    console.log(e);
-                                }}
-                            />
-                        </Col>
-                        <Col md={{ size: 5, offset: 4 }} className="filter-row">
+                        <Col md={{ size: 5 }} className="filter-row">
                             <div className="location-search-bar">
                                 <SearchBox searchCallBack={this.searchTextfilter} placeholder={`Search Provinces`} />
                             </div>
