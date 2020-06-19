@@ -15,7 +15,7 @@ export function generateHeaders(
     accessToken = getAccessToken(store.getState()),
     accept = 'application/json',
     authorizationType = 'Bearer',
-    contentType = 'multipart/form-data',
+    contentType = 'application/json;charset=UTF-8',
 ): IncomingHttpHeaders {
     return {
         accept,
