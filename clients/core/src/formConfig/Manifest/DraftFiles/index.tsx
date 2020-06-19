@@ -14,6 +14,7 @@ import DraftFilesReducer, {
 } from '../../ducks/manifestDraftFiles';
 import { Button } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
+import { Redirect } from 'react-router';
 
 /** Register reducer */
 reducerRegistry.register(reducerName, DraftFilesReducer);
@@ -28,6 +29,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 /** manifest Draft files props interface */
 interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
     downloadEndPoint: string;
+    manifestEndPoint: string;
     releasesUrl: string;
 }
 
@@ -45,16 +47,19 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         clearDraftFiles,
         growl,
         downloadEndPoint,
+        releasesUrl,
+        manifestEndPoint,
     } = props;
 
     const [loading, setLoading] = useState(false);
     const [stateData, setStateData] = useState<ManifestFilesTypes[]>(data);
+    const [ifDoneHere, setIfDoneHere] = useState(false);
 
     /** get manifest Draftfiles */
     const getManifestForms = async () => {
         setLoading(data.length < 1);
         /* eslint-disable-next-line @typescript-eslint/camelcase */
-        const params = null; //{ is_draft: false };
+        const params = { is_draft: true };
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
         await clientService
             .list(params)
@@ -68,14 +73,45 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
     };
 
     useEffect(() => {
-        if (!data.length) {
-            getManifestForms();
-        }
+        getManifestForms();
     }, []);
 
     useEffect(() => {
         setStateData(data);
     }, [data]);
+
+    /**
+     * create a manifest file
+     * @param {MouseEvent} e
+     */
+    const onMakeReleaseClick = async (e: MouseEvent) => {
+        e.preventDefault();
+        const { headers } = getPayload(new AbortController().signal, 'POST');
+        const identifiers = data.map(form => form.identifier);
+        const json = {
+            /* eslint-disable-next-line @typescript-eslint/camelcase */
+            forms_version: data[0].version,
+            identifiers,
+        };
+        const postdata = JSON.stringify({ json: JSON.stringify(json) });
+        const response = await fetch(`${baseURL}${manifestEndPoint}`, {
+            body: postdata,
+            headers: {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                Authorization: (headers as any).authorization || (headers as any).Authorization,
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+        });
+        if (response) {
+            if (response.status == 201 || response.ok) {
+                return setIfDoneHere(true);
+            } else {
+                const defaultMessage = `OpenSRPService create on ${manifestEndPoint} failed, HTTP status ${response?.status}`;
+                growl && growl(defaultMessage, { type: 'error' });
+            }
+        }
+    };
 
     /**
      *
@@ -121,12 +157,14 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         downloadFile(identifier, params);
     };
 
+    // start of delete functionality
+    // this functionality is left un used because it's implemented on API for now
     /**
      * called when download link is clicked
      * @param {MouseEvent} e
      * @param {ManifestDraftFilesTypes} obj table row data
      */
-    const onDeleteClick = async (e: MouseEvent, obj: ManifestFilesTypes) => {
+    const onDeleteClick = async (e: MouseEvent) => {
         e.preventDefault();
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
@@ -140,6 +178,18 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             })
             .finally(() => setLoading(false));
     };
+    /** eslint-disable-line @typescript-eslint/no-unused-vars */
+    const deleteColumn = {
+        Header: ' delete ',
+        accessor: (_: ManifestFilesTypes) =>
+            (() => (
+                <Button color="link" className="cancel-icon" href="#" onClick={e => onDeleteClick(e)}>
+                    <span style={{ margin: '3px' }}>X</span>
+                </Button>
+            ))(),
+        disableSortBy: true,
+    };
+    // end of delete functionality
 
     const columns = [
         {
@@ -169,16 +219,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 ))(),
             disableSortBy: true,
         },
-        {
-            Header: '   ',
-            accessor: (obj: ManifestFilesTypes) =>
-                (() => (
-                    <a className="cancel-icon" href="#" onClick={e => onDeleteClick(e, obj)}>
-                        <span style={{ margin: '3px' }}>X</span>
-                    </a>
-                ))(),
-            disableSortBy: true,
-        },
     ];
 
     const DrillDownTableProps = {
@@ -198,12 +238,16 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         return <div>{LoadingComponent}</div>;
     }
 
+    if (ifDoneHere) {
+        return <Redirect to={releasesUrl} />;
+    }
+
     return (
         <div>
             <SearchBar {...searchBarProps} />
             <DrillDownTable {...DrillDownTableProps} />
-            {data.length && (
-                <Button className="btn btn-md btn btn-primary float-right" color="primary">
+            {data.length > 0 && (
+                <Button className="btn btn-md btn btn-primary float-right" color="primary" onClick={onMakeReleaseClick}>
                     Make Release
                 </Button>
             )}

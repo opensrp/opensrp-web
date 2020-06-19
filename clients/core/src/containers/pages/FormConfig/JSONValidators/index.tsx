@@ -5,7 +5,7 @@ import {
     MANIFEST_FILE_UPLOAD,
     OPENSRP_FORMS_ENDPOINT,
     VALIDATOR_UPLOAD_TYPE,
-    OPENSRP_FORM_METADATA,
+    OPENSRP_FORM_METADATA_ENDPOINT,
 } from '../../../../constants';
 import { generateOptions } from '../../../../services/opensrp';
 import ConnectedManifestFilesList from '../../../../formConfig/Manifest/FilesList';
@@ -14,7 +14,7 @@ export const JSONValidatorListPage = () => {
     const JSONValidatorList = {
         baseURL: OPENSRP_API_BASE_URL,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
-        endpoint: OPENSRP_FORM_METADATA,
+        endpoint: OPENSRP_FORM_METADATA_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         formVersion: null,
         getPayload: generateOptions,

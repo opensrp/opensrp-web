@@ -65,9 +65,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
     };
 
     useEffect(() => {
-        if (!data.length) {
-            getManifests();
-        }
+        getManifests();
     }, []);
 
     useEffect(() => {
@@ -79,14 +77,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
      * @param {ManifestReleasesTypes} obj
      */
     const linkToFiles = (obj: ManifestReleasesTypes) => {
-        let link = null;
-        try {
-            JSON.parse(obj.json);
-            link = <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
-        } catch {
-            link = <span>View Files</span>;
-        }
-        return link;
+        return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
     };
 
     const columns = [
@@ -179,6 +170,7 @@ interface DispatchedStateProps {
  */
 const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
     const data = getAllManifestReleasesArray(state);
+    data.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
     return {
         data,
     };

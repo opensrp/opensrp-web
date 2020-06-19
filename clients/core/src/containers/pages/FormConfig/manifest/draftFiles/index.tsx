@@ -4,8 +4,9 @@ import Loading from '../../../../../components/page/Loading';
 import {
     MANIFEST_FILE_UPLOAD,
     VIEW_RELEASE_PAGE_URL,
-    OPENSRP_FORM_METADATA,
+    OPENSRP_FORM_METADATA_ENDPOINT,
     OPENSRP_FORMS_ENDPOINT,
+    OPENSRP_MANIFEST_ENDPOINT,
 } from '../../../../../constants';
 import ConnectedManifestDraftFiles from '../../../../../formConfig/Manifest/DraftFiles';
 import { generateOptions } from '../../../../../services/opensrp';
@@ -14,11 +15,12 @@ import { generateOptions } from '../../../../../services/opensrp';
 export const ManifestDraftFiles = () => {
     const ManifestFilesListProps = {
         baseURL: OPENSRP_API_BASE_URL,
-        endpoint: OPENSRP_FORM_METADATA,
+        endpoint: OPENSRP_FORM_METADATA_ENDPOINT,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         getPayload: generateOptions,
         LoadingComponent: <Loading />,
+        manifestEndPoint: OPENSRP_MANIFEST_ENDPOINT,
         releasesUrl: VIEW_RELEASE_PAGE_URL,
     };
 

@@ -46,12 +46,15 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         }
     }, [formId]);
 
-    type SetSubmitting = (val: boolean) => void;
-
-    const uploadData = async (data: InitialValuesTypes, setSubmitting: SetSubmitting) => {
+    /**
+     * upload form
+     * @param {InitialValuesTypes} data
+     */
+    const uploadData = async (data: InitialValuesTypes) => {
         const { headers } = getPayload(new AbortController().signal, 'POST');
         const postData = new FormData();
         Object.keys(data).forEach(dt => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             postData.append(dt, (data as any)[dt]);
         });
         if (isJsonValidator) {
@@ -60,26 +63,23 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         const response = await fetch(`${baseURL}${endpoint}`, {
             body: postData,
             headers: {
-                Authorization: (headers as any).authorization,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                Authorization: (headers as any).authorization || (headers as any).Authorization,
             },
             method: 'POST',
         });
-        if (response.status == 201) {
-            console.log('done ghere ');
-            return setIfDoneHere(true);
-        }
-        if (response.status === 400) {
-            response.text().then(text => {
-                text.length ? growl && growl(text, { type: 'error' }) : setIfDoneHere(true);
-                return true;
-            });
-        }
-        try {
-            const json = await response.json();
-            json.error ? growl && growl(json.error, { type: 'error' }) : setIfDoneHere(true);
-        } catch {
-            growl && growl('Please try again', { type: 'error' });
-            // to remove this try block when the response from server is in json format
+        if (response) {
+            if (response.status == 201 || response.ok) {
+                return setIfDoneHere(true);
+            } else if (response.status === 400) {
+                response.text().then(text => {
+                    text.length ? growl && growl(text, { type: 'error' }) : setIfDoneHere(true);
+                    return true;
+                });
+            } else {
+                const defaultMessage = `OpenSRPService create on ${endpoint} failed, HTTP status ${response?.status}`;
+                growl && growl(defaultMessage, { type: 'error' });
+            }
         }
     };
 
@@ -92,8 +92,8 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
             initialValues={formInitialValues}
             validationSchema={uploadValidationSchema}
             // tslint:disable-next-line: jsx-no-lambda
-            onSubmit={async (values, { setSubmitting }) => {
-                uploadData(values, setSubmitting);
+            onSubmit={values => {
+                uploadData(values);
             }}
         >
             {({ values, setFieldValue, handleChange, handleSubmit, errors, touched, isSubmitting }) => (

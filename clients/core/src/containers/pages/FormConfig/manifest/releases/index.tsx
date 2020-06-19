@@ -23,7 +23,7 @@ export const ManifestReleasesPage = () => {
     return (
         <div>
             <h4 style={{ marginBottom: '30px' }}>Releases</h4>
-            <ConnectedManifestReleases {...manifestReleasesProps} />;
+            <ConnectedManifestReleases {...manifestReleasesProps} />
         </div>
     );
 };
