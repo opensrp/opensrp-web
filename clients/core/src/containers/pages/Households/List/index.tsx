@@ -139,41 +139,41 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
         if (this.state.loading) {
             return <Loading />;
         } else {
-        return (
-            <div>
-                <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
-                <Row>
-                    <Col md={{ size: 3, offset: 9 }}> Location </Col>
-                </Row>
-                <Row className="filter-row">
-                    <Col md={8}>
-                        <div className="household-search-bar">
-                            <SearchBox searchCallBack={this.search} placeholder={this.state.searchPlaceholder} />
-                        </div>
-                    </Col>
-                    <Col md={{ size: 3, offset: 1 }}>
-                        <div className="household-search-bar">
-                            <Select
-                                value={this.state.locationId}
-                                classNamePrefix="select"
-                                className="basic-single"
-                                onChange={(e): void => this.locationFilter(e as DropdownOption)}
-                                options={getLocationDropdownOption()}
-                            />
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <HouseholdTable tableData={householdsArray} />
-                    </Col>
-                    <Col md={{ size: 3, offset: 3 }}>
-                        <Pagination {...this.getPaginationOptions()} />
-                    </Col>
-                </Row>
-            </div>
-        );
-        // }
+            return (
+                <div>
+                    <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
+                    <Row>
+                        <Col md={{ size: 3, offset: 9 }}> Location </Col>
+                    </Row>
+                    <Row className="filter-row">
+                        <Col md={8}>
+                            <div className="household-search-bar">
+                                <SearchBox searchCallBack={this.search} placeholder={this.state.searchPlaceholder} />
+                            </div>
+                        </Col>
+                        <Col md={{ size: 3, offset: 1 }}>
+                            <div className="household-search-bar">
+                                <Select
+                                    value={this.state.locationId}
+                                    classNamePrefix="select"
+                                    className="basic-single"
+                                    onChange={(e): void => this.locationFilter(e as DropdownOption)}
+                                    options={getLocationDropdownOption()}
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <HouseholdTable tableData={householdsArray} />
+                        </Col>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
+                        </Col>
+                    </Row>
+                </div>
+            );
+        }
     }
 
     private search = (searchText: string): void => {

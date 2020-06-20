@@ -182,7 +182,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                             </div>
                         </Col>
                         <Col md={{ size: 3, offset: 1 }}>
-                            <div className="household-search-bar">
+                            <div className="anc-location-search">
                                 <Select
                                     value={this.state.locationId}
                                     classNamePrefix="select"
