@@ -136,9 +136,9 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     public render(): React.ReactNode {
         /** render loader if there are no households in state */
         const { householdsArray, totalRecordsCount } = this.props;
-        // if (this.state.loading) {
-        //     return <Loading />;
-        // } else {
+        if (this.state.loading) {
+            return <Loading />;
+        } else {
         return (
             <div>
                 <h3 className="household-title"> Household ({totalRecordsCount}) </h3>
