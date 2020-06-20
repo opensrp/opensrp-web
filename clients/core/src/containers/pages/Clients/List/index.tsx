@@ -24,7 +24,12 @@ import { generateOptions } from '../../../../services/opensrp';
 import { useClientTableColumns } from './helpers/tableDefinition';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
-import { DropdownOption, genderOptions, getLocationDropdownOption } from '../../../../helpers/Dropdown';
+import {
+    DropdownOption,
+    genderOptions,
+    getLocationDropdownOption,
+    getNodeChildLocation,
+} from '../../../../helpers/Dropdown';
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
 import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
@@ -228,7 +233,11 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                     </Row>
                     <Row>
                         <Col>
-                            <LocationBreadcrumb />
+                            <LocationBreadcrumb
+                                itemChanged={(location: any) =>
+                                    console.log('location changed: ', getNodeChildLocation(location, location.id))
+                                }
+                            />
                         </Col>
                     </Row>
                     <Row>

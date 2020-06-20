@@ -68,6 +68,27 @@ const treeData = {
                                             },
                                             parent: '2b2f89bc-125c-48b7-9468-638a60fc2c5c',
                                         },
+                                        '5jkh3487-23c1-4803-807b-5cc259b6f734': {
+                                            id: '5jkh3487-23c1-4803-807b-5cc259b6f734',
+                                            label: 'CHA5',
+                                            node: {
+                                                locationId: '5jkh3487-23c1-4803-807b-5cc259b6f734',
+                                                name: 'CHA5',
+                                                parentLocation: {
+                                                    locationId: '2b2f89bc-125c-48b7-9468-638a60fc2c5c',
+                                                    name: 'CHSS 2',
+                                                    parentLocation: {
+                                                        locationId: '9c41b940-61a4-485d-a9f3-ab09721a3d27',
+                                                        name: 'Clinic B',
+                                                        voided: false,
+                                                    },
+                                                    voided: false,
+                                                },
+                                                tags: ['CHA'],
+                                                voided: false,
+                                            },
+                                            parent: '2b2f89bc-125c-48b7-9468-638a60fc2c5c',
+                                        },
                                     },
                                     parent: '9c41b940-61a4-485d-a9f3-ab09721a3d27',
                                 },

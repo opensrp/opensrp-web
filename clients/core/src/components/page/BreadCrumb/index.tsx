@@ -83,8 +83,12 @@ const initialState = {
     breadcrumItems: [],
 };
 
-class LocationBreadcrumb extends React.Component<any, any> {
-    constructor(props: {}) {
+interface LocationBreadcrumbProps {
+    itemChanged(loc: Location): void;
+}
+
+class LocationBreadcrumb extends React.Component<LocationBreadcrumbProps, any> {
+    constructor(props: any) {
         super(props);
         this.state = initialState;
     }
@@ -101,6 +105,7 @@ class LocationBreadcrumb extends React.Component<any, any> {
             ...this.state,
             breadcrumItems: [...this.state.breadcrumItems.splice(0, ++position), item],
         });
+        this.props.itemChanged(item);
     };
 
     getChildren = (ob: Location) => {
