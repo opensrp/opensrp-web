@@ -26,6 +26,7 @@ import {
     LOCATION_TAG_URL,
     LOCATION_TAG_CREATE_URL,
     CLIENT_PROFILE_URL,
+    ANC_PROFILE_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -48,6 +49,7 @@ import { TeamForm } from '../components/page/Team/Form';
 import { LocationForm } from '../components/page/Location/Form';
 import ConnectedLocationTagList from '../containers/pages/LocationTag';
 import ConnectedClientProfile from '../containers/pages/Clients/Profile';
+import ConnectedANCProfile from '../containers/pages/ANC/Profile';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -104,6 +106,12 @@ class App extends Component {
                                 exact={true}
                                 path={ANC_URL}
                                 component={ConnectedANCList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`${ANC_PROFILE_URL}/:id`}
+                                component={ConnectedANCProfile}
                             />
 
                             <ConnectedPrivateRoute

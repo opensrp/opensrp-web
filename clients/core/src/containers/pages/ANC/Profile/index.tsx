@@ -29,7 +29,6 @@ import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
 // import InfoCard from '../../../components/page/InfoCardV1';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
-
 /** register the anc reducer */
 reducerRegistry.register(ancReducerName, ANCReducer);
 
@@ -60,7 +59,6 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
         const profileResponse = await opensrpService.list(params);
         removeANC();
         fetchANC(profileResponse);
-
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
         fetchEvents(eventResponse);
@@ -122,10 +120,10 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
                     <span className="back-btn-bg">
                         <Link to="#">
                             <FontAwesomeIcon icon="arrow-left" />
-                            <span className="back-btn"> Back to Household </span>
+                            <span className="back-btn"> Back to ANC </span>
                         </Link>
                     </span>
-                    <h3> Client </h3>
+                    <h3> ANC </h3>
                 </div>
                 <InfoCard title="Basic information">
                     <Col className="info-body">
@@ -240,13 +238,6 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
                                     </Row>
                                 </TabPane>
                             </TabContent>
-                        </Col>
-                    </Row>
-                </div>
-                <div id="members-list-container">
-                    <Row>
-                        <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
-                            <h5> Weight for age growth chart: </h5>
                         </Col>
                     </Row>
                 </div>
