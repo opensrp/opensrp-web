@@ -191,20 +191,20 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                     </Helmet>
                     <h3 className="household-title"> All Clients ({totalRecords})</h3>
                     <Row>
-                        <Col md={{ size: 3, offset: 6 }}> Location </Col>
-                        <Col md={3}> Gender </Col>
+                        <Col sm={{ size: 3, offset: 6 }}> Location </Col>
+                        <Col sm={3}> Gender </Col>
                     </Row>
                     <Row>
-                        <Col md={5} className="filter-row">
-                            <div className="household-search-bar">
+                        <Col sm={5} className="filter-row">
+                            <div className="client-dropdown-search-bar">
                                 <SearchBox
                                     searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search Client`}
                                 />
                             </div>
                         </Col>
-                        <Col md={{ size: 3, offset: 1 }}>
-                            <div className="household-search-bar">
+                        <Col sm={{ size: 3, offset: 1 }}>
+                            <div className="client-dropdown-search-bar">
                                 <Select
                                     value={this.state.locationId}
                                     classNamePrefix="select"
@@ -214,14 +214,16 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                                 />
                             </div>
                         </Col>
-                        <Col md={3}>
-                            <Select
-                                value={this.state.selectedGender}
-                                classNamePrefix="select"
-                                className="basic-single"
-                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
-                                options={genderOptions}
-                            />
+                        <Col sm={3}>
+                            <div className="client-dropdown-search-bar">
+                                <Select
+                                    value={this.state.selectedGender}
+                                    classNamePrefix="select"
+                                    className="basic-single"
+                                    onChange={(e): void => this.genderFilter(e as DropdownOption)}
+                                    options={genderOptions}
+                                />
+                            </div>
                         </Col>
                     </Row>
                     <Row>
@@ -235,7 +237,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={{ size: 3, offset: 4 }}>
+                        <Col sm={{ size: 3, offset: 4 }}>
                             <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>

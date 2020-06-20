@@ -18,3 +18,11 @@ th .form-control {
 .client-page {
   font-size: 14px;
 }
+
+.basic-single {
+  box-shadow: 0 1px 3px #d7d7e0;
+}
+
+.client-dropdown-search-bar {
+  width: 80%;
+}

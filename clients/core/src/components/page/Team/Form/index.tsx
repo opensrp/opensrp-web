@@ -92,7 +92,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                         />
                         <Row>
                             <Col>
-                                <h3>Add New Location</h3>
+                                <h3>Add New Team</h3>
                             </Col>
                         </Row>
                         <form className="form-background" onSubmit={formik.handleSubmit}>
