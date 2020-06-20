@@ -7,6 +7,7 @@ import { Team } from '../teams';
 import { TeamMember } from '../teamMembers';
 import { Location } from '../adminLocation';
 import { LocationTag } from '../locationTag';
+import { RegisterPanelData } from '../../../components/page/RegisterPanel';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -1119,6 +1120,28 @@ export const locationTag3: LocationTag = {
     active: true,
     description: 'level 3',
 };
+
+export const report1: RegisterPanelData = {
+    report: '0 weeks',
+    date: '20-03-2020',
+    reporter: 'tanvir',
+    message: 'opv1',
+};
+
+export const report2: RegisterPanelData = {
+    report: '4 weeks',
+    date: '20-04-2020',
+    reporter: 'tanvir',
+    message: 'bcg',
+};
+
+export const report3: RegisterPanelData = {
+    report: '6 weeks',
+    date: '20-05-2020',
+    reporter: 'tanvir',
+    message: 'cpv',
+};
+
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
@@ -1128,3 +1151,4 @@ export const teamList: Team[] = [team1, team2, team3];
 export const teamMemberList: TeamMember[] = [teamMember1, teamMember2, teamMember3];
 export const locations: Location[] = [location1, location2, location3];
 export const locationTagList: LocationTag[] = [locationTag1, locationTag2, locationTag3];
+export const registerData: RegisterPanelData[] = [report1, report2, report3];
