@@ -26,3 +26,7 @@ th .form-control {
 .client-dropdown-search-bar {
   width: 80%;
 }
+
+.react-table thead tr:first-child {
+  display: none;
+}

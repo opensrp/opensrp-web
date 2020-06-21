@@ -40,7 +40,7 @@ export const getLocationDropdownOption = () => {
                 name: ob.children[i].label,
             });
             // going deep down to find its child
-            goDeep(ob.children[i], `${parent}, ${ob.children[i].id}`);
+            goDeep(ob.children[i], `${parent},${ob.children[i].id}`);
         }
     }
     goDeep(rootLocation, rootLocation.id);
@@ -48,7 +48,7 @@ export const getLocationDropdownOption = () => {
     console.log('locations in a single level: --> ', locations);
     return locations.map((l: any) => {
         return {
-            value: l.parentHistory,
+            value: `${l.id},${l.parentHistory}`,
             label: l.name,
         };
     });
@@ -59,7 +59,7 @@ export const getNodeChildLocation = (ob: any, childIds: string) => {
     if (ob.children === undefined) return childIds;
     const childList = Object.keys(ob.children);
     for (const i of childList) {
-        childIds = ob.children[i].id + ', ' + getNodeChildLocation(ob.children[i], childIds);
+        childIds = ob.children[i].id + ',' + getNodeChildLocation(ob.children[i], childIds);
     }
     return childIds;
 };

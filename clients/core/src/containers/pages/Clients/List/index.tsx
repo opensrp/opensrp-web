@@ -65,6 +65,7 @@ export interface ClientListState {
     searchText: string;
     currentPage: number;
     locationId: DropdownOption;
+    resetBreadcrumb: boolean;
 }
 
 /** default props for the clientList component */
@@ -84,6 +85,7 @@ export const defaultClientListState: ClientListState = {
     searchText: '',
     currentPage: 1,
     locationId: { value: '', label: '' },
+    resetBreadcrumb: true,
 };
 
 /** Display the client list  */
@@ -176,6 +178,20 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             {
                 ...this.state,
                 locationId,
+                resetBreadcrumb: true,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    locationBreadcrumbFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+                resetBreadcrumb: false,
             },
             () => {
                 this.getDataFromServer();
@@ -231,12 +247,16 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                             </div>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{ marginBottom: 10 }}>
                         <Col>
                             <LocationBreadcrumb
-                                itemChanged={(location: any) =>
-                                    console.log('location changed: ', getNodeChildLocation(location, location.id))
-                                }
+                                reset={this.state.resetBreadcrumb}
+                                itemChanged={(location: any) => {
+                                    this.locationBreadcrumbFilter({
+                                        label: '',
+                                        value: getNodeChildLocation(location, location.id),
+                                    });
+                                }}
                             />
                         </Col>
                     </Row>

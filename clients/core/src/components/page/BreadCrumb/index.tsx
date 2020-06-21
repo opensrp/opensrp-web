@@ -85,6 +85,7 @@ const initialState = {
 
 interface LocationBreadcrumbProps {
     itemChanged(loc: Location): void;
+    reset: boolean;
 }
 
 class LocationBreadcrumb extends React.Component<LocationBreadcrumbProps, any> {
@@ -98,6 +99,13 @@ class LocationBreadcrumb extends React.Component<LocationBreadcrumbProps, any> {
         this.setState({
             breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
         });
+    }
+    componentDidUpdate(prevProps: LocationBreadcrumbProps) {
+        if (this.props.reset === true && prevProps.reset === false) {
+            this.setState({
+                breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
+            });
+        }
     }
 
     addBreadcrumItem = (position: number, item: Location): void => {
