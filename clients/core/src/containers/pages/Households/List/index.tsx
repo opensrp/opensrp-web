@@ -29,7 +29,8 @@ import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useHouseholdTableColumns } from './helpers/tableDefinitions';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 import Select from 'react-select';
-import { getLocationDropdownOption, DropdownOption } from '../../../../helpers/Dropdown';
+import { getLocationDropdownOption, DropdownOption, getNodeChildLocation } from '../../../../helpers/Dropdown';
+import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
 
 /** register the households reducer */
 reducerRegistry.register(householdsReducerName, householdsReducer);
@@ -51,6 +52,7 @@ export interface HouseholdListState {
     searchPlaceholder: string;
     clientType: HOUSEHOLD_CLIENT_TYPE;
     locationId: DropdownOption;
+    resetBreadcrumb: boolean;
 }
 
 /** default state for household-list component */
@@ -60,6 +62,7 @@ export const defaultHouseholdListState: HouseholdListState = {
     searchPlaceholder: 'Search Household',
     clientType: HOUSEHOLD_CLIENT_TYPE,
     locationId: { value: '', label: '' },
+    resetBreadcrumb: true,
 };
 
 /** default props for the householdList component */
@@ -103,6 +106,20 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
             {
                 ...this.state,
                 locationId,
+                resetBreadcrumb: true,
+            },
+            () => {
+                this.getHouseholdList();
+            },
+        );
+    };
+
+    locationBreadcrumbFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+                resetBreadcrumb: false,
             },
             () => {
                 this.getHouseholdList();
@@ -163,6 +180,19 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                             </div>
                         </Col>
                     </Row>
+                    <Row style={{ marginBottom: 10 }}>
+                        <Col>
+                            <LocationBreadcrumb
+                                reset={this.state.resetBreadcrumb}
+                                itemChanged={(location: any) => {
+                                    this.locationBreadcrumbFilter({
+                                        label: '',
+                                        value: getNodeChildLocation(location, location.id),
+                                    });
+                                }}
+                            />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col>
                             <HouseholdTable tableData={householdsArray} />
@@ -211,7 +241,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                     },
                     () => {
                         fetchHouseholdsActionCreator(response.clients);
-                        if (response.total > 0) {
+                        if (!(response.clients.length > 0 && response.total == 0)) {
                             setTotalRecordsActionCreator(response.total);
                         }
                     },

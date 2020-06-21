@@ -46,12 +46,15 @@ export const getLocationDropdownOption = () => {
     goDeep(rootLocation, rootLocation.id);
 
     console.log('locations in a single level: --> ', locations);
-    return locations.map((l: any) => {
+    const locationOptions = locations.map((l: any) => {
         return {
             value: `${l.id},${l.parentHistory}`,
             label: l.name,
         };
     });
+
+    locationOptions.splice(0, 0, { value: '', label: 'All' });
+    return locationOptions;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
