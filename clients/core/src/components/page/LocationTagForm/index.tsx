@@ -8,6 +8,8 @@ import { Formik } from 'formik';
 import { OPENSRP_API_BASE_URL, OPENSRP_LOCATION_TAG_CREATE_ENDPOINT } from '../../../configs/env';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface LocationTagForm {
     name: string;
@@ -38,6 +40,12 @@ const FormikForm = (formik: any): React.ReactNode => {
             />
             <Row>
                 <Col>
+                    <span className="back-btn-bg">
+                        <Link to="/location-tags">
+                            <FontAwesomeIcon icon="arrow-left" />
+                            <span className="back-btn"> Back to Location Tags </span>
+                        </Link>
+                    </span>
                     <h3>New Location Tag</h3>
                 </Col>
             </Row>

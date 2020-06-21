@@ -13,6 +13,8 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUUID } from '../../../../helpers/utils';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface TeamFormProps {
     id: number;
@@ -93,6 +95,12 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                         />
                         <Row>
                             <Col>
+                                <span className="back-btn-bg">
+                                    <Link to="/teams">
+                                        <FontAwesomeIcon icon="arrow-left" />
+                                        <span className="back-btn"> Back to Teams </span>
+                                    </Link>
+                                </span>
                                 <h3>Add New Team</h3>
                             </Col>
                         </Row>
