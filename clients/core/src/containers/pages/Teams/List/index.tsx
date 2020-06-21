@@ -90,11 +90,11 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
     }
 
     /** fetch data from server when any filter is applied */
-    getDataFromServer = async (): Promise<void> => {
+    getDataFromServer = async (extraParams?: any): Promise<void> => {
         const params = {
             pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
-            // searchText: this.state.searchText,
+            ...extraParams,
         };
         const { fetchTeamsCreator, service, removeTeamsCreator, setTotalRecordsCreator } = this.props;
         const teamService = new service(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
@@ -118,7 +118,7 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
                 searchText,
             },
             () => {
-                this.getDataFromServer();
+                this.getDataFromServer( searchText === '' ? {} : { name: searchText });
             },
         );
     };

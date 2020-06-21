@@ -23,9 +23,15 @@ import '../../../../assets/styles/dropdown.css';
 import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
-import { DropdownOption, genderOptions, getLocationDropdownOption } from '../../../../helpers/Dropdown';
+import {
+    DropdownOption,
+    genderOptions,
+    getLocationDropdownOption,
+    getNodeChildLocation,
+} from '../../../../helpers/Dropdown';
 import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT, PAGINATION_NEIGHBORS } from '../../../../constants';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
+import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -46,6 +52,7 @@ export interface ChildListState {
     searchText: string;
     currentPage: number;
     locationId: DropdownOption;
+    resetBreadcrumb: boolean;
 }
 
 /** default props for the childList component */
@@ -65,6 +72,7 @@ export const defaultChildState: ChildListState = {
     searchText: '',
     currentPage: 1,
     locationId: { value: '', label: '' },
+    resetBreadcrumb: true,
 };
 
 /** props interface for the child table */
@@ -144,6 +152,20 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
             {
                 ...this.state,
                 locationId,
+                resetBreadcrumb: true,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    locationBreadcrumbFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+                resetBreadcrumb: false,
             },
             () => {
                 this.getDataFromServer();
@@ -215,6 +237,19 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                                 className="basic-single"
                                 onChange={(e: any) => this.genderFilter(e as DropdownOption)}
                                 options={genderOptions}
+                            />
+                        </Col>
+                    </Row>
+                    <Row style={{ marginBottom: 10 }}>
+                        <Col>
+                            <LocationBreadcrumb
+                                reset={this.state.resetBreadcrumb}
+                                itemChanged={(location: any) => {
+                                    this.locationBreadcrumbFilter({
+                                        label: '',
+                                        value: getNodeChildLocation(location, location.id),
+                                    });
+                                }}
                             />
                         </Col>
                     </Row>
