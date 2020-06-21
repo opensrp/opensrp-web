@@ -24,7 +24,8 @@ import '@opensrp/opensrp-table/dist/index.css';
 import { ANC_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
 import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 import Select from 'react-select';
-import { DropdownOption, getLocationDropdownOption } from '../../../../helpers/Dropdown';
+import { DropdownOption, getLocationDropdownOption, getNodeChildLocation } from '../../../../helpers/Dropdown';
+import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
 
 reducerRegistry.register(reducerName, ANCReducer);
 
@@ -44,6 +45,7 @@ export interface ANCState {
     searchText: string;
     currentPage: number;
     locationId: DropdownOption;
+    resetBreadcrumb: boolean;
 }
 
 /** default props for the ancList component */
@@ -62,6 +64,7 @@ export const defaultANCState: ANCState = {
     searchText: '',
     currentPage: 1,
     locationId: { value: '', label: '' },
+    resetBreadcrumb: true,
 };
 
 /** props interface for the anc table */
@@ -105,7 +108,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
         const response = await clientService.list(params);
         removeANC();
         fetchANC(response.clients);
-        if (response.total > 0) setTotalRecords(response.total);
+        if (!(response.clients.length > 0 && response.total == 0)) setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
@@ -117,6 +120,20 @@ class ANCList extends React.Component<ANCProps, ANCState> {
             {
                 ...this.state,
                 locationId,
+                resetBreadcrumb: true,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    locationBreadcrumbFilter = (locationId: DropdownOption) => {
+        this.setState(
+            {
+                ...this.state,
+                locationId,
+                resetBreadcrumb: false,
             },
             () => {
                 this.getDataFromServer();
@@ -191,6 +208,19 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                                     options={getLocationDropdownOption()}
                                 />
                             </div>
+                        </Col>
+                    </Row>
+                    <Row style={{ marginBottom: 10 }}>
+                        <Col>
+                            <LocationBreadcrumb
+                                reset={this.state.resetBreadcrumb}
+                                itemChanged={(location: any) => {
+                                    this.locationBreadcrumbFilter({
+                                        label: '',
+                                        value: getNodeChildLocation(location, location.id),
+                                    });
+                                }}
+                            />
                         </Col>
                     </Row>
                     <Row>
