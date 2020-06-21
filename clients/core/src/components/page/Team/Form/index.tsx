@@ -140,7 +140,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                                 <Select
                                     value={formik.values.partOf}
                                     classNamePrefix="select"
-                                    className="basic-single"
+                                    className="form-select"
                                     onChange={e => formik.setFieldValue('partOf', e)}
                                     options={teamOption}
                                     name="partOf"

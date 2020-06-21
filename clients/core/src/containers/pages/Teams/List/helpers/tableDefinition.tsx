@@ -26,7 +26,7 @@ export const useTeamTableColumns = () => {
                         Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
                             <p>{values.active ? 'active' : 'deactive'}</p>
                         ),
-                        Header: 'Active',
+                        Header: 'Status',
                         accessor: 'active',
                         disableSortBy: true,
                     },

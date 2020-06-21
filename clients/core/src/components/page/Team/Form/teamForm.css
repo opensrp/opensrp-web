@@ -2,8 +2,7 @@
   margin-bottom: 10px;
 }
   
-.input-field,
-.basic-single .select__control {
+.form-select .select__control {
   border: 1px solid #dadce0;
   border-radius: 2px;
   width: 404px;
@@ -29,4 +28,11 @@
   color: #fff;
   border: 1px solid #dadce0;
   margin-top: 10px;
+}
+
+.input-field {
+  border: 1px solid #DADCE0;
+  border-radius: 2px;
+  width: 404px;
+  height: 48px;
 }

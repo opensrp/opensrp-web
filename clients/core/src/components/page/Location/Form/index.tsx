@@ -173,7 +173,7 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                                 <Select
                                     value={formik.values.locationTag}
                                     classNamePrefix="select"
-                                    className="basic-single"
+                                    className="form-select"
                                     onChange={e => formik.setFieldValue('locationTag', e)}
                                     options={tagOption}
                                     name="locationTag"
@@ -184,7 +184,7 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                                 <Select
                                     value={formik.values.parentLocation}
                                     classNamePrefix="select"
-                                    className="basic-single"
+                                    className="form-select"
                                     onChange={e => formik.setFieldValue('parentLocation', e)}
                                     options={locationOption}
                                     name="parentLocation"

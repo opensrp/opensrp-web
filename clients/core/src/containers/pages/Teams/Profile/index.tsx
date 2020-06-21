@@ -120,7 +120,7 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
                                 <tr>
                                     <td className="info-label">Identifier:</td>
                                     <td>{team.identifier}</td>
-                                    <td className="info-label">Active:</td>
+                                    <td className="info-label">Status:</td>
                                     <td>{team.active ? 'active' : 'deactive'}</td>
                                 </tr>
                             </tbody>
