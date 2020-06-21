@@ -17,6 +17,7 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import { createUUID } from '../../../../helpers/utils';
 
 export interface LocationFormProps {
     parentLocation: DropdownOption;
@@ -43,19 +44,26 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = async (values: any, { resetForm }: any) => {
         const payload = {
-            id: 10,
+            id: values.identifier,
             properties: {
-                name: 'Uttara sector 10',
-                parentId: 29,
+                name: values.name,
+                parentId: parseInt(values.parentLocation.value),
+                version: 0,
+                type: 'Residential Structure',
+                status: 'Pending Review',
+                uid: createUUID(),
+                parentName: values.parentLocation.label,
+                tagName: values.locationTag.label,
             },
             locationTags: [
                 {
                     active: true,
-                    name: 'Ward',
-                    description: 'Ward',
-                    id: 10,
+                    name: values.locationTag.label,
+                    description: values.locationTag.label,
+                    id: parseInt(values.locationTag.value),
                 },
             ],
+            type: 'Feature',
         };
         const clientService = new OpenSRPService(
             OPENSRP_API_BASE_URL,
@@ -166,7 +174,7 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                                     value={formik.values.locationTag}
                                     classNamePrefix="select"
                                     className="basic-single"
-                                    onChange={formik.handleChange}
+                                    onChange={e => formik.setFieldValue('locationTag', e)}
                                     options={tagOption}
                                     name="locationTag"
                                 />
@@ -177,7 +185,7 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                                     value={formik.values.parentLocation}
                                     classNamePrefix="select"
                                     className="basic-single"
-                                    onChange={formik.handleChange}
+                                    onChange={e => formik.setFieldValue('parentLocation', e)}
                                     options={locationOption}
                                     name="parentLocation"
                                 />
