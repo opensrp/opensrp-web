@@ -139,7 +139,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
                     <span className="back-btn-bg">
                         <Link to={`${HOUSEHOLD_URL}`}>
                             <FontAwesomeIcon icon="arrow-left" />
-                            <span className="back-btn"> Back to Household </span>
+                            <span className="back-btn"> Back to Households </span>
                         </Link>
                     </span>
                     <h3> {household.lastName} </h3>

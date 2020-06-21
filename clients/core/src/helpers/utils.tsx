@@ -42,7 +42,8 @@ export function calculateAge(dob: number) {
  * @param startDate = yyyy-MM-DD
  * @param endDate = yyyy-MM-DD
  */
-export function countDaysBetweenDate(startDate: number, endDate: number) {
+export function countDaysBetweenDate(startDate: any, endDate: any) {
+    console.log('start date: ', startDate, '   end date: ', endDate);
     const timeDiff = (new Date(endDate) as any) - (new Date(startDate) as any);
     return timeDiff / (1000 * 60 * 60 * 24);
 }

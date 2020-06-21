@@ -35,7 +35,7 @@ const getChartOptions = (growthData: any) => {
     console.log('growth data', growthData);
     const options: Highcharts.Options = {
         title: {
-            text: 'Child Weight for age growth chart',
+            text: 'Client Weight for age growth chart',
         },
 
         tooltip: {
@@ -168,12 +168,12 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let registerData: any = {};
 
-        const getProperty = (vaccineTakenDate: number): string => {
+        const getProperty = (vaccineTakenDate: any): string => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const days = countDaysBetweenDate(this.props.client!.birthdate, vaccineTakenDate);
-            if (days % 7 === 0) return days / 7 + '_weeks ';
+            if (days % 7 === 0) return (days / 7).toFixed(0) + '_weeks ';
             else {
-                return `${days / 7}_weeks_${Math.abs(days - 7)}_days`;
+                return `${(days / 7).toFixed(0)}_weeks_${Math.abs(days - 7)}_days`;
             }
         };
 
@@ -221,7 +221,7 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
                     <span className="back-btn-bg">
                         <Link to="#">
                             <FontAwesomeIcon icon="arrow-left" />
-                            <span className="back-btn"> Back to Household </span>
+                            <span className="back-btn"> Back to Clients </span>
                         </Link>
                     </span>
                     <h3> Client </h3>

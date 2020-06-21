@@ -29,6 +29,7 @@ import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
 // import InfoCard from '../../../components/page/InfoCardV1';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
+import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
 /** register the anc reducer */
 reducerRegistry.register(ancReducerName, ANCReducer);
 
@@ -48,6 +49,43 @@ export interface ANCProfileProps extends RouteComponentProps<ANCProfileParams> {
     events: Event[];
 }
 
+export interface ANCBasicInfo {
+    anc: ANC;
+}
+
+export function ANCBasicInfo(props: ANCBasicInfo): React.ReactElement {
+    return (
+        <Col className="info-body">
+            <Table className="info-table" borderless={true}>
+                <tbody>
+                    <tr>
+                        <td className="info-label">HHID Number</td>
+                        <td>{props.anc.baseEntityId}</td>
+                        <td className="info-label">Phone</td>
+                        <td>{props.anc.attributes.phoneNumber || ''}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className="info-label">Family Name</td>
+                        <td>{props.anc.lastName}</td>
+                        <td className="info-label">Provider</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className="info-label">Head of Household</td>
+                        <td>{props.anc.firstName}</td>
+                        <td className="info-label">Register date</td>
+                        <td>{props.anc.dateCreated || ''}</td>
+                    </tr>
+                </tbody>
+            </Table>
+        </Col>
+    );
+}
+
 export class ANCProfile extends React.Component<ANCProfileProps> {
     public async componentDidMount() {
         const { fetchANC, fetchEvents, removeANC } = this.props;
@@ -64,51 +102,52 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
         fetchEvents(eventResponse);
     }
 
-    getRegister = () => {
-        const vaccinationEeventList = this.props.events
-            .filter(d => d.eventType === 'Vaccination')
-            .map((d: any) => {
+    getRegisterData = (): RegisterPanelData[] => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let registerData: any = {};
+
+        const getProperty = (vaccineTakenDate: any): string => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const days = countDaysBetweenDate(this.props.anc!.birthdate, vaccineTakenDate);
+            if (days % 7 === 0) return (days / 7).toFixed(0) + '_weeks ';
+            else {
+                return `${(days / 7).toFixed(0)}_weeks_${Math.abs(days - 7)}_days`;
+            }
+        };
+
+        this.props.events
+            .filter((d: Event) => d.eventType === 'Vaccination')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .map((data: any) => {
+                const timeProperty: string = getProperty(data.obs[0].values[0]);
+                registerData = {
+                    ...registerData,
+                    takenDate: data.obs[0].values[0],
+                    providerId: data.providerId,
+                    [timeProperty]:
+                        registerData[timeProperty] === undefined
+                            ? data.obs[0].formSubmissionField
+                            : `${registerData[timeProperty]}, ${data.obs[0].formSubmissionField}`,
+                };
+            });
+        return Object.keys(registerData)
+            .filter((k: string) => k !== 'takenDate' && k !== 'providerId')
+            .map((k: string) => {
                 return {
-                    ...d.obs[0],
-                    providerId: d.providerId,
+                    report: k,
+                    message: registerData[k],
+                    reporter: registerData.providerId,
+                    date: registerData.takenDate,
                 };
             });
+    };
 
-        const ancHealth = SeamlessImmutable(vaccinationConfig).asMutable();
-
-        ancHealth.forEach((configData: any) => {
-            let flag = false,
-                provider = '',
-                date = '';
-
-            configData.vaccines.forEach((vaccination: any) => {
-                vaccinationEeventList.forEach((vaccinationEvent: any) => {
-                    if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
-                        date = vaccinationEvent.values[0];
-                        provider = vaccinationEvent.providerId;
-                    }
-
-                    if (
-                        countDaysBetweenDate(0, vaccinationEvent.values[0]) <= configData.daysAfterBirthDue &&
-                        vaccination.field_name === vaccinationEvent.formSubmissionField
-                    ) {
-                        flag = true;
-                    }
-                });
-                vaccination = {
-                    ...vaccination,
-                    given: flag ? 'Yes' : 'No',
-                };
-
-                configData = {
-                    ...configData,
-                    provider,
-                    givenDate: date,
-                };
-            });
-        });
-
-        return ancHealth;
+    getRegisterConfig = (): RegisterPanelProps => {
+        return {
+            registerData: this.getRegisterData(),
+            client: this.props.anc,
+            tabs: ['ANC health'],
+        };
     };
 
     render() {
@@ -120,127 +159,18 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
                     <span className="back-btn-bg">
                         <Link to="#">
                             <FontAwesomeIcon icon="arrow-left" />
-                            <span className="back-btn"> Back to ANC </span>
+                            <span className="back-btn"> Back to ANC List </span>
                         </Link>
                     </span>
                     <h3> ANC </h3>
                 </div>
                 <InfoCard title="Basic information">
-                    <Col className="info-body">
-                        <Table className="info-table" borderless={true}>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">HHID Number</td>
-                                    <td>{anc.baseEntityId}</td>
-                                    <td className="info-label">Phone</td>
-                                    <td>{anc.attributes.phoneNumber || ''}</td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">Family Name</td>
-                                    <td>{anc.lastName}</td>
-                                    <td className="info-label">Provider</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">Head of Household</td>
-                                    <td>{anc.firstName}</td>
-                                    <td className="info-label">Register date</td>
-                                    <td>{anc.dateCreated || ''}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
+                    <ANCBasicInfo anc={anc} />
                 </InfoCard>
                 <div style={{ marginTop: '30px' }}></div>
-                <div id="members-list-container">
-                    <Row>
-                        <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
-                            <h5> Current Registers: </h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="12">
-                            <Nav style={{ marginLeft: '2.5%' }} tabs>
-                                <NavItem>
-                                    <NavLink className={classnames({ active: '1' === '1' })}>Child health</NavLink>
-                                </NavItem>
-                            </Nav>
-                            <TabContent activeTab={'1'}>
-                                <TabPane tabId="1">
-                                    <Row>
-                                        <Col className="basic-info-body">
-                                            <Table className="basic-info-table" borderless={true}>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">HHID Number</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Phone</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">Family Name</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Provider</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">Head of Household</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Register date</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="members-list-body" style={{ padding: '30px' }}>
-                                            <Table style={{ border: '2px solid #e8e8e9' }}>
-                                                <thead style={{ backgroundColor: '#f5f5f5' }}>
-                                                    <tr>
-                                                        <td>Report</td>
-                                                        <td>Date</td>
-                                                        <td>Reporter</td>
-                                                        <td style={{ width: '50%' }}>Message</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.getRegister().map((vaccination: any, index: number) => {
-                                                        return (
-                                                            <tr key={index}>
-                                                                <td>{vaccination.name}</td>
-                                                                <td> {vaccination.givenDate} </td>
-                                                                <td>{vaccination.provider}</td>
-                                                                <td>
-                                                                    {vaccination.vaccines.map((vaccination: any) => {
-                                                                        return (
-                                                                            vaccination.name +
-                                                                            ' ' +
-                                                                            vaccination.given +
-                                                                            ', '
-                                                                        );
-                                                                    })}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </Table>
-                                        </Col>
-                                    </Row>
-                                </TabPane>
-                            </TabContent>
-                        </Col>
-                    </Row>
-                </div>
+                <InfoCard title="Current Registers">
+                    <RegisterPanel {...this.getRegisterConfig()} />
+                </InfoCard>
             </Container>
         );
     }

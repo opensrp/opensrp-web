@@ -23,7 +23,7 @@ export interface ANCClientType {
     attributes: FlexObject;
     firstName: string;
     lastName: string;
-    birthdate: string;
+    birthdate: number;
     middleName?: string;
     birthdateApprox: boolean;
     deathdateApprox: boolean;

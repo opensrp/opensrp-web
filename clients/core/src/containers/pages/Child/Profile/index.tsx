@@ -135,7 +135,7 @@ export function ChildBasicInfo(props: ChildBasicInfo): React.ReactElement {
 
 export class ChildProfile extends React.Component<ChildProfileProps> {
     public async componentDidMount() {
-        const { fetchChild, fetchEvents, removeChild } = this.props;
+        const { fetchChild, fetchEvents, removeChild, removeEvents } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
@@ -147,6 +147,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
 
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
+        removeEvents();
         fetchEvents(eventResponse);
     }
 
@@ -167,12 +168,12 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let registerData: any = {};
 
-        const getProperty = (vaccineTakenDate: number): string => {
+        const getProperty = (vaccineTakenDate: any): string => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const days = countDaysBetweenDate(this.props.child!.birthdate, vaccineTakenDate);
-            if (days % 7 === 0) return days / 7 + '_weeks ';
+            if (days % 7 === 0) return (days / 7).toFixed(0) + '_weeks ';
             else {
-                return `${days / 7}_weeks_${Math.abs(days - 7)}_days`;
+                return `${(days / 7).toFixed(0)}_weeks_${Math.abs(days - 7)}_days`;
             }
         };
 
@@ -220,7 +221,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
                     <span className="back-btn-bg">
                         <Link to="#">
                             <FontAwesomeIcon icon="arrow-left" />
-                            <span className="back-btn"> Back to Household </span>
+                            <span className="back-btn"> Back to Child List </span>
                         </Link>
                     </span>
                     <h3> Child </h3>
