@@ -6,8 +6,6 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { Store } from 'redux';
 import { OpenSRPService } from '@opensrp/server-service';
-import vaccinationConfig from './utils/vaccinationConfig';
-import classnames from 'classnames';
 import clientsReducer, {
     Client,
     fetchClients,
@@ -31,6 +29,7 @@ import HighchartsReact from 'highcharts-react-official';
 // import InfoCard from '../../../components/page/InfoCardV1';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
+import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
 
 const getChartOptions = (growthData: any) => {
     console.log('growth data', growthData);
@@ -97,9 +96,46 @@ export interface ClientProfileProps extends RouteComponentProps<ClientProfilePar
     events: Event[];
 }
 
+export interface ClientBasicInfo {
+    client: Client;
+}
+
+export function ClientBasicInfo(props: ClientBasicInfo): React.ReactElement {
+    return (
+        <Col className="info-body">
+            <Table className="info-table" borderless={true}>
+                <tbody>
+                    <tr>
+                        <td className="info-label">HHID Number</td>
+                        <td>{props.client.baseEntityId}</td>
+                        <td className="info-label">Phone</td>
+                        <td>{props.client.attributes.phoneNumber || ''}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className="info-label">Family Name</td>
+                        <td>{props.client.lastName}</td>
+                        <td className="info-label">Provider</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className="info-label">Head of Household</td>
+                        <td>{props.client.firstName}</td>
+                        <td className="info-label">Register date</td>
+                        <td>{props.client.dateCreated || ''}</td>
+                    </tr>
+                </tbody>
+            </Table>
+        </Col>
+    );
+}
+
 export class ClientProfile extends React.Component<ClientProfileProps> {
     public async componentDidMount() {
-        const { fetchClient, fetchEvents, removeClient } = this.props;
+        const { fetchClient, fetchEvents, removeClient, removeEvents } = this.props;
         const { match } = this.props;
         const params = {
             identifier: match.params.id,
@@ -111,6 +147,7 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
 
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);
         const eventResponse = await eventService.list(params);
+        removeEvents();
         fetchEvents(eventResponse);
     }
 
@@ -127,52 +164,52 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
         return data;
     };
 
-    getRegister = () => {
-        const vaccinationEeventList = this.props.events
-            .filter(d => d.eventType === 'Vaccination')
-            .map((d: any) => {
+    getRegisterData = (): RegisterPanelData[] => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let registerData: any = {};
+
+        const getProperty = (vaccineTakenDate: number): string => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const days = countDaysBetweenDate(this.props.client!.birthdate, vaccineTakenDate);
+            if (days % 7 === 0) return days / 7 + '_weeks ';
+            else {
+                return `${days / 7}_weeks_${Math.abs(days - 7)}_days`;
+            }
+        };
+
+        this.props.events
+            .filter((d: Event) => d.eventType === 'Vaccination')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .map((data: any) => {
+                const timeProperty: string = getProperty(data.obs[0].values[0]);
+                registerData = {
+                    ...registerData,
+                    takenDate: data.obs[0].values[0],
+                    providerId: data.providerId,
+                    [timeProperty]:
+                        registerData[timeProperty] === undefined
+                            ? data.obs[0].formSubmissionField
+                            : `${registerData[timeProperty]}, ${data.obs[0].formSubmissionField}`,
+                };
+            });
+        return Object.keys(registerData)
+            .filter((k: string) => k !== 'takenDate' && k !== 'providerId')
+            .map((k: string) => {
                 return {
-                    ...d.obs[0],
-                    providerId: d.providerId,
+                    report: k,
+                    message: registerData[k],
+                    reporter: registerData.providerId,
+                    date: registerData.takenDate,
                 };
             });
+    };
 
-        const clientHealth = SeamlessImmutable(vaccinationConfig).asMutable();
-
-        clientHealth.forEach((configData: any) => {
-            let flag = false,
-                provider = '',
-                date = '';
-
-            configData.vaccines.forEach((vaccination: any) => {
-                vaccinationEeventList.forEach((vaccinationEvent: any) => {
-                    if (vaccination.fieldName === vaccinationEvent.formSubmissionField) {
-                        date = vaccinationEvent.values[0];
-                        provider = vaccinationEvent.providerId;
-                    }
-
-                    if (
-                        countDaysBetweenDate(this.props.client!.birthdate, vaccinationEvent.values[0]) <=
-                            configData.daysAfterBirthDue &&
-                        vaccination.field_name === vaccinationEvent.formSubmissionField
-                    ) {
-                        flag = true;
-                    }
-                });
-                vaccination = {
-                    ...vaccination,
-                    given: flag ? 'Yes' : 'No',
-                };
-
-                configData = {
-                    ...configData,
-                    provider,
-                    givenDate: date,
-                };
-            });
-        });
-
-        return clientHealth;
+    getRegisterConfig = (): RegisterPanelProps => {
+        return {
+            registerData: this.getRegisterData(),
+            client: this.props.client,
+            tabs: ['client health'],
+        };
     };
 
     render() {
@@ -190,121 +227,12 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
                     <h3> Client </h3>
                 </div>
                 <InfoCard title="Basic information">
-                    <Col className="info-body">
-                        <Table className="info-table" borderless={true}>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">HHID Number</td>
-                                    <td>{client.baseEntityId}</td>
-                                    <td className="info-label">Phone</td>
-                                    <td>{client.attributes.phoneNumber || ''}</td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">Family Name</td>
-                                    <td>{client.lastName}</td>
-                                    <td className="info-label">Provider</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td className="info-label">Head of Household</td>
-                                    <td>{client.firstName}</td>
-                                    <td className="info-label">Register date</td>
-                                    <td>{client.dateCreated || ''}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
+                    <ClientBasicInfo client={client} />
                 </InfoCard>
                 <div style={{ marginTop: '30px' }}></div>
-                <div id="members-list-container">
-                    <Row>
-                        <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>
-                            <h5> Current Registers: </h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="12">
-                            <Nav style={{ marginLeft: '2.5%' }} tabs>
-                                <NavItem>
-                                    <NavLink className={classnames({ active: '1' === '1' })}>Child health</NavLink>
-                                </NavItem>
-                            </Nav>
-                            <TabContent activeTab={'1'}>
-                                <TabPane tabId="1">
-                                    <Row>
-                                        <Col className="basic-info-body">
-                                            <Table className="basic-info-table" borderless={true}>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">HHID Number</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Phone</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">Family Name</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Provider</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="basic-info-label">Head of Household</td>
-                                                        <td></td>
-                                                        <td className="basic-info-label">Register date</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="members-list-body" style={{ padding: '30px' }}>
-                                            <Table style={{ border: '2px solid #e8e8e9' }}>
-                                                <thead style={{ backgroundColor: '#f5f5f5' }}>
-                                                    <tr>
-                                                        <td>Report</td>
-                                                        <td>Date</td>
-                                                        <td>Reporter</td>
-                                                        <td style={{ width: '50%' }}>Message</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.getRegister().map((vaccination: any, index: number) => {
-                                                        return (
-                                                            <tr key={index}>
-                                                                <td>{vaccination.name}</td>
-                                                                <td> {vaccination.givenDate} </td>
-                                                                <td>{vaccination.provider}</td>
-                                                                <td>
-                                                                    {vaccination.vaccines.map((vaccination: any) => {
-                                                                        return (
-                                                                            vaccination.name +
-                                                                            ' ' +
-                                                                            vaccination.given +
-                                                                            ', '
-                                                                        );
-                                                                    })}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </Table>
-                                        </Col>
-                                    </Row>
-                                </TabPane>
-                            </TabContent>
-                        </Col>
-                    </Row>
-                </div>
+                <InfoCard title="Current Registers">
+                    <RegisterPanel {...this.getRegisterConfig()} />
+                </InfoCard>
                 <div id="members-list-container">
                     <Row>
                         <Col className="members-list-header" style={{ borderBottom: '1px solid #e8e8e9' }}>

@@ -12,6 +12,7 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createUUID } from '../../../../helpers/utils';
 
 export interface TeamFormProps {
     id: number;
@@ -25,7 +26,7 @@ export interface TeamFormProps {
 
 export const defaultTeamProps: TeamFormProps = {
     id: 0,
-    identifier: '',
+    identifier: createUUID(),
     description: '',
     active: true,
     name: '',
