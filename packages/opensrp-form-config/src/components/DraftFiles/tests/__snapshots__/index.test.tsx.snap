@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/manifestFiles renders without crashing when connected to store 1`] = `
+exports[`components/ManifestReleases renders without crashing when connected to store 1`] = `
 Object {
   "CellComponent": [Function],
   "columns": Array [
@@ -17,7 +17,7 @@ Object {
       "accessor": "version",
     },
     Object {
-      "Header": "Edit",
+      "Header": "Module",
       "accessor": [Function],
       "disableSortBy": true,
     },
@@ -65,4 +65,13 @@ Object {
   "rootParentId": null,
   "useDrillDown": false,
 }
+`;
+
+exports[`components/ManifestReleases renders without crashing when connected to store 2`] = `
+<a
+  href="#"
+  onClick={[Function]}
+>
+  Download
+</a>
 `;

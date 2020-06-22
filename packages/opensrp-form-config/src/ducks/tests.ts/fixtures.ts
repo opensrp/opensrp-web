@@ -63,3 +63,9 @@ export const FixManifestDraftFiles = [
         isDraft: false,
     },
 ];
+
+export const downloadFile = {
+    clientForm: {
+        json: JSON.stringify(fixManifestFiles[0]),
+    },
+};

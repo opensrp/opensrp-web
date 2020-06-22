@@ -9,6 +9,7 @@ import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import reducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
 import { fixManifestFiles } from '../../../ducks/tests.ts/fixtures';
+import toJson from 'enzyme-to-json';
 
 /** register the reducers */
 reducerRegistry.register(filesReducerName, reducer);
