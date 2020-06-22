@@ -27,7 +27,7 @@ var _reactRedux = require("react-redux");
 
 var _manifestReleases = _interopRequireWildcard(require("../../ducks/manifestReleases"));
 
-var _searchBar = _interopRequireDefault(require("../../SearchBar/searchBar"));
+var _searchBar = _interopRequireDefault(require("../SearchBar/searchBar"));
 
 var _reactRouterDom = require("react-router-dom");
 

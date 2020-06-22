@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { fetchManifestReleases, ManifestReleasesTypes } from '../../ducks/manifestReleases';
-import { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { FormConfigProps } from '../../helpers/types';
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {

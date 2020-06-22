@@ -21,7 +21,7 @@ var _reduxReducerRegistry = _interopRequireDefault(require("@onaio/redux-reducer
 
 var _serverService = require("@opensrp/server-service");
 
-var _searchBar = _interopRequireDefault(require("../../SearchBar/searchBar"));
+var _searchBar = _interopRequireDefault(require("../SearchBar/searchBar"));
 
 var _drillDownTable = require("@onaio/drill-down-table");
 
@@ -222,60 +222,6 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     downloadFile(identifier, params);
   };
 
-  var onDeleteClick = function () {
-    var _ref4 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee4(e) {
-      var clientService;
-      return _regenerator["default"].wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              e.preventDefault();
-              setLoading(true);
-              clientService = new _serverService.OpenSRPService(baseURL, endpoint, getPayload);
-              _context4.next = 5;
-              return clientService["delete"]().then(function () {
-                clearDraftFiles();
-              })["catch"](function (error) {
-                growl && growl(String(error), {
-                  type: 'error'
-                });
-              })["finally"](function () {
-                return setLoading(false);
-              });
-
-            case 5:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    return function onDeleteClick(_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
-  var deleteColumn = {
-    Header: ' delete ',
-    accessor: function accessor(_) {
-      return function () {
-        return _react["default"].createElement(_reactstrap.Button, {
-          color: "link",
-          className: "cancel-icon",
-          href: "#",
-          onClick: function onClick(e) {
-            return onDeleteClick(e);
-          }
-        }, _react["default"].createElement("span", {
-          style: {
-            margin: '3px'
-          }
-        }, "X"));
-      }();
-    },
-    disableSortBy: true
-  };
   var columns = [{
     Header: 'Identifier',
     accessor: "identifier"

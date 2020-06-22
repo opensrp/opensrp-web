@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, URLParams } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
@@ -156,40 +156,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 
         downloadFile(identifier, params);
     };
-
-    // start of delete functionality
-    // this functionality is left un used because it's implemented on API for now
-    /**
-     * called when download link is clicked
-     * @param {MouseEvent} e
-     * @param {ManifestDraftFilesTypes} obj table row data
-     */
-    const onDeleteClick = async (e: MouseEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        const clientService = new OpenSRPService(baseURL, endpoint, getPayload);
-        await clientService
-            .delete()
-            .then(() => {
-                clearDraftFiles();
-            })
-            .catch(error => {
-                growl && growl(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
-    };
-    /** eslint-disable-line @typescript-eslint/no-unused-vars */
-    const deleteColumn = {
-        Header: ' delete ',
-        accessor: (_: ManifestFilesTypes) =>
-            (() => (
-                <Button color="link" className="cancel-icon" href="#" onClick={e => onDeleteClick(e)}>
-                    <span style={{ margin: '3px' }}>X</span>
-                </Button>
-            ))(),
-        disableSortBy: true,
-    };
-    // end of delete functionality
 
     const columns = [
         {

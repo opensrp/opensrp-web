@@ -101,7 +101,7 @@ Object.keys(_manifestReleases).forEach(function (key) {
   });
 });
 
-var _searchBar = require("./SearchBar/searchBar");
+var _searchBar = require("./components/SearchBar/searchBar");
 
 Object.keys(_searchBar).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;

@@ -10,7 +10,7 @@ import releasesReducer, {
     getAllManifestReleasesArray,
     ManifestReleasesTypes,
 } from '../../ducks/manifestReleases';
-import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { FormConfigProps } from '../../helpers/types';

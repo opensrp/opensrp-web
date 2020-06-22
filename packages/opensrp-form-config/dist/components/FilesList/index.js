@@ -21,7 +21,7 @@ var _reduxReducerRegistry = _interopRequireDefault(require("@onaio/redux-reducer
 
 var _serverService = require("@opensrp/server-service");
 
-var _searchBar = _interopRequireDefault(require("../../SearchBar/searchBar"));
+var _searchBar = _interopRequireDefault(require("../SearchBar/searchBar"));
 
 var _drillDownTable = require("@onaio/drill-down-table");
 

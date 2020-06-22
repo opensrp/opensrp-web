@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, URLParams } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';

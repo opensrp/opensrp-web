@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { SearchBarDefaultProps } from '../../SearchBar/searchBar';
+import { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { FormConfigProps } from '../../helpers/types';
 import { fetchManifestDraftFiles } from '../../ducks/manifestDraftFiles';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
