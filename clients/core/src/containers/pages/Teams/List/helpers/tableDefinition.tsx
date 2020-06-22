@@ -22,6 +22,11 @@ export const useTeamTableColumns = () => {
                         disableSortBy: true,
                     },
                     {
+                        Header: 'Members',
+                        accessor: 'memberCount',
+                        disableSortBy: true,
+                    },
+                    {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
                             <p>{values.active ? 'active' : 'deactive'}</p>

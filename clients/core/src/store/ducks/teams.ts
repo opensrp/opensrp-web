@@ -17,6 +17,7 @@ export interface Team {
     active: boolean;
     name: string;
     partOf?: number;
+    memberCount?: number;
     type: {
         [key: string]: FlexObject[];
     };
