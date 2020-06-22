@@ -23,6 +23,11 @@ a.remove-action {
   color:red;
 }
 
+a.edit-action {
+  padding-left: 10px;
+  color: green;
+}
+
 .react-table {
   box-shadow: none;
   margin-top: -16px;

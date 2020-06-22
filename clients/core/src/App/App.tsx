@@ -45,7 +45,7 @@ import ConnectedHouseholdProfile from '../containers/pages/Households/Profile';
 import ChildProfile from '../containers/pages/Child/Profile';
 import ConnectedTeamList from '../containers/pages/Teams/List';
 import ConnectedTeamProfile from '../containers/pages/Teams/Profile';
-import { TeamForm } from '../components/page/Team/Form';
+import TeamForm from '../components/page/Team/Form';
 import { LocationForm } from '../components/page/Location/Form';
 import ConnectedLocationTagList from '../containers/pages/LocationTag';
 import ConnectedClientProfile from '../containers/pages/Clients/Profile';
@@ -136,6 +136,12 @@ class App extends Component {
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={TEAM_FORM_URL}
+                                component={TeamForm}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={`${TEAM_FORM_URL}/:id`}
                                 component={TeamForm}
                             />
 

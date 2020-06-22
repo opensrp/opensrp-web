@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { UseTableCellProps } from 'react-table';
 import { Team } from '../../../../../store/ducks/teams';
-import { TEAM_PROFILE_URL } from '../../../../../constants';
+import { TEAM_PROFILE_URL, TEAM_FORM_URL } from '../../../../../constants';
 
 // Client specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -38,9 +38,14 @@ export const useTeamTableColumns = () => {
                     {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
-                            <Link to={`${TEAM_PROFILE_URL}/${values.identifier}`}>view</Link>
+                            <>
+                                <Link to={`${TEAM_PROFILE_URL}/${values.identifier}`}>view</Link>{' '}
+                                <Link className="edit-action" to={`${TEAM_FORM_URL}/${values.identifier}`}>
+                                    edit
+                                </Link>
+                            </>
                         ),
-                        Header: 'View',
+                        Header: 'Actions',
                         accessor: 'id',
                         disableSortBy: true,
                     },

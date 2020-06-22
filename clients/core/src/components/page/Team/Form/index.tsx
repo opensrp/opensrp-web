@@ -6,15 +6,22 @@ import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption } from '../../../../helpers/Dropdown';
 import Select from 'react-select';
 import './teamForm.css';
-import { OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, OPENSRP_TEAM_PROFILE_ENDPOINT } from '../../../../configs/env';
+import {
+    OPENSRP_API_BASE_URL,
+    OPENSRP_TEAM_ENDPOINT,
+    OPENSRP_TEAM_PROFILE_ENDPOINT,
+    OPENSRP_LOCATION_ENDPOINT,
+} from '../../../../configs/env';
 import { Formik } from 'formik';
 import { OpenSRPService } from '@opensrp/server-service';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUUID } from '../../../../helpers/utils';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, match, RouteComponentProps } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Location } from '../../../../store/ducks/adminLocation';
+import { identifier } from '@babel/types';
 
 export interface TeamFormProps {
     id: number;
@@ -24,23 +31,33 @@ export interface TeamFormProps {
     name: string;
     partOf: DropdownOption;
     opensrpService: typeof OpenSRPService;
+    location: DropdownOption;
+}
+
+interface TeamFormURLParams {
+    id: string;
 }
 
 export const defaultTeamProps: TeamFormProps = {
     id: 0,
-    identifier: createUUID(),
+    identifier: '',
     description: '',
     active: true,
     name: '',
     partOf: { label: '', value: '' },
     opensrpService: OpenSRPService,
+    location: { label: '', value: '' },
 };
 
+export type ProfileWithRoutesProps = TeamFormProps & RouteComponentProps<TeamFormURLParams>;
+
 /** Display the team form  */
-const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
+const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProps) => {
     const [teamOption, setTeamOption] = useState([]);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onSubmit = async (values: any, { resetForm }: any) => {
+    const [locationOption, setLocationOption] = useState([]);
+    const [teamOb, setTeamOb] = useState(defaultTeamProps);
+
+    const createTeam = async (values: any, resetForm: any) => {
         const payload = {
             name: values.name,
             description: values.description,
@@ -48,8 +65,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
             active: values.active,
             identifier: values.identifier,
         };
-        const { opensrpService } = props;
-        const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_PROFILE_ENDPOINT, generateOptions);
+        const clientService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_PROFILE_ENDPOINT, generateOptions);
         clientService
             .create(payload)
             .then((r: any) => {
@@ -58,10 +74,45 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
             })
             .catch((err: any) => toast.error('Server error'));
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onSubmit = async (values: any, { resetForm }: any) => {
+        if (props.match.params.id === undefined) createTeam(values, resetForm);
+        else {
+            const assignLocation = new OpenSRPService(
+                OPENSRP_API_BASE_URL,
+                'organization/assignLocationsAndPlans',
+                generateOptions,
+            );
+
+            assignLocation
+                .create([{ organization: values.identifier, jurisdiction: values.location.value }])
+                .then((response: any) => toast.success('Saved Location sucessfully'))
+                .catch((err: any) => toast.success('Saved Location sucessfully'));
+
+            const payload = {
+                name: values.name,
+                description: values.description,
+                partOf: values.partOf.value,
+                active: values.active,
+                identifier: values.identifier,
+            };
+            const clientService = new OpenSRPService(
+                OPENSRP_API_BASE_URL,
+                `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${values.identifier}`,
+                generateOptions,
+            );
+            clientService
+                .update(payload)
+                .then((r: any) => {
+                    toast.success('Update sucessful');
+                    resetForm();
+                })
+                .catch((err: any) => toast.error('Server error'));
+        }
+    };
 
     const getTeamList = async () => {
-        const { opensrpService } = props;
-        const teamService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
+        const teamService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         const teamList = await teamService.list();
         const teamDropdownOptions = teamList.organizations.map((t: TeamFormProps) => {
             return {
@@ -70,14 +121,56 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
             };
         });
         setTeamOption(teamDropdownOptions);
+
+        const teamId = props.match.params.id;
+        console.log('teamId == ', teamId);
+        if (teamId !== null && teamId !== undefined) {
+            const teamService = new OpenSRPService(
+                OPENSRP_API_BASE_URL,
+                `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${teamId}`,
+                generateOptions,
+            );
+            const teamResponse = await teamService.list();
+            console.log(' team --> ', teamResponse, teamOption);
+            const parentTeam: any = teamDropdownOptions.filter((t: any) => t.value == parseInt(teamResponse.partOf))[0];
+            console.log({ parentTeam });
+            const team: any = {
+                id: teamResponse.id,
+                identifier: teamResponse.identifier,
+                description: '',
+                active: teamResponse.active,
+                name: teamResponse.name,
+                partOf: parentTeam,
+                location: { label: '', value: '' },
+            };
+            setTeamOb(team);
+        } else {
+            defaultTeamProps.identifier = createUUID();
+            setTeamOb(defaultTeamProps);
+        }
+    };
+
+    const getLocationList = async () => {
+        const locationService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_LOCATION_ENDPOINT, generateOptions);
+        const response = await locationService.list();
+        console.log('location list in team-form ', response);
+        const locationOption = response.locations.map((t: Location) => {
+            return {
+                value: t.id,
+                label: t.properties.name,
+            };
+        });
+        setLocationOption(locationOption);
     };
 
     React.useEffect(() => {
+        console.log('id to edit: ', props.match.params.id);
         getTeamList();
+        getLocationList();
     }, []);
 
     return (
-        <Formik initialValues={props} onSubmit={onSubmit}>
+        <Formik initialValues={teamOb} onSubmit={onSubmit} enableReinitialize>
             {// eslint-disable-next-line @typescript-eslint/no-explicit-any
             (formik: any): React.ReactNode => {
                 return (
@@ -101,7 +194,8 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                                         <span className="back-btn"> Back to Teams </span>
                                     </Link>
                                 </span>
-                                <h3>Add New Team</h3>
+
+                                <h3>{props.match.params.id === undefined ? 'Add New Team' : 'Edit Team'}</h3>
                             </Col>
                         </Row>
                         <form className="form-background" onSubmit={formik.handleSubmit}>
@@ -113,6 +207,7 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                                     value={formik.values.identifier}
                                     onChange={formik.handleChange}
                                     name="identifier"
+                                    disabled
                                 />
                             </Row>
                             <Row>Name</Row>
@@ -146,6 +241,17 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
                                     name="partOf"
                                 />
                             </Row>
+                            <Row>Location</Row>
+                            <Row className="field-row">
+                                <Select
+                                    value={formik.values.location}
+                                    classNamePrefix="select"
+                                    className="form-select"
+                                    onChange={e => formik.setFieldValue('location', e)}
+                                    options={locationOption}
+                                    name="location"
+                                />
+                            </Row>
                             <Row>
                                 <button type="submit" className="submit-btn-bg">
                                     Submit
@@ -159,5 +265,4 @@ const TeamForm: React.FC<TeamFormProps> = (props: TeamFormProps) => {
     );
 };
 
-TeamForm.defaultProps = defaultTeamProps;
-export { TeamForm };
+export default withRouter(TeamForm);
