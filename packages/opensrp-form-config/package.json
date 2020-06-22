@@ -39,6 +39,7 @@
         "@fortawesome/free-solid-svg-icons": "^5.10.0",
         "@fortawesome/react-fontawesome": "^0.1.4",
         "@onaio/drill-down-table": "^1.0.2",
+        "@onaio/redux-reducer-registry": "^0.0.8",
         "@opensrp/reducer-factory": "^0.0.1",
         "@opensrp/server-service": "^0.0.2",
         "formik": "^2.1.4",

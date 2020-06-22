@@ -5,7 +5,6 @@ import {
     getItemsByIdFactory,
     getItemsArrayFactory,
     getItemByIdFactory,
-    getTotalRecordsFactory,
 } from '@opensrp/reducer-factory';
 
 /** json field interface */
@@ -44,6 +43,5 @@ export const removeManifestReleases = removeActionCreatorFactory(releasesReducer
 export const getAllManifestReleasesById = getItemsByIdFactory<ManifestReleasesTypes>(releasesReducerName);
 export const getManifestReleasesById = getItemByIdFactory<ManifestReleasesTypes>(releasesReducerName);
 export const getAllManifestReleasesArray = getItemsArrayFactory<ManifestReleasesTypes>(releasesReducerName);
-export const getTotalManifestReleasesRecords = getTotalRecordsFactory(releasesReducerName);
 
 export default reducer;
