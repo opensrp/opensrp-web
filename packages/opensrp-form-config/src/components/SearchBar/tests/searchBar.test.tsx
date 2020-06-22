@@ -13,7 +13,7 @@ const history = createBrowserHistory();
 
 jest.useFakeTimers();
 
-describe('src/components/SearchForm', () => {
+describe('components/SearchBar', () => {
     afterAll(() => {
         _.debounce = actualDebounce;
     });
