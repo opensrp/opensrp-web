@@ -2,15 +2,13 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { createBrowserHistory } from 'history';
 import ConnectedUploadConfigFile, { UploadConfigFile } from '../index';
-import { getFetchOptions, OpenSRPService } from '@opensrp/server-service';
+import { getFetchOptions } from '@opensrp/server-service';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import reducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
 import { fixManifestFiles } from '../../../ducks/tests.ts/fixtures';
-import * as helpers from '../../../helpers/fileDownload';
-import toJson from 'enzyme-to-json';
 import sampleFile from './sampleFile.json';
 
 /** register the reducers */
@@ -29,7 +27,7 @@ const props = {
     validatorsUrl: '/validators',
 };
 
-describe('components/ManifestReleases', () => {
+describe('components/UploadFile', () => {
     it('renders without crashing', () => {
         shallow(<UploadConfigFile {...props} />);
     });
