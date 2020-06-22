@@ -7,8 +7,9 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import reducer, { releasesReducerName } from '../../../ducks/manifestReleases';
+import reducer, { fetchManifestReleases, releasesReducerName } from '../../../ducks/manifestReleases';
 import { fixManifestReleases } from '../../../ducks/tests.ts/fixtures';
+import toJson from 'enzyme-to-json';
 
 /** register the reducers */
 reducerRegistry.register(releasesReducerName, reducer);
@@ -33,6 +34,7 @@ describe('components/ClientUpload', () => {
     });
 
     it('renders without crashing when connected to store', async () => {
+        store.dispatch(fetchManifestReleases(fixManifestReleases));
         const mockList = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList.mockReturnValueOnce(Promise.resolve(fixManifestReleases));
@@ -55,5 +57,15 @@ describe('components/ClientUpload', () => {
                 .at(1)
                 .text(),
         ).toEqual('Upload New File');
+
+        expect(wrapper.find('.tbody .tr').length).toEqual(fixManifestReleases.length);
+        const viewFiledCell = wrapper
+            .find('.tbody .tr')
+            .at(0)
+            .find('.td')
+            .at(3)
+            .find('a');
+        expect(toJson(viewFiledCell)).toMatchSnapshot();
+        expect(viewFiledCell.text()).toEqual('View Files');
     });
 });

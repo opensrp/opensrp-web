@@ -61,3 +61,12 @@ Object {
   "useDrillDown": false,
 }
 `;
+
+exports[`components/ClientUpload renders without crashing when connected to store 2`] = `
+<a
+  href="/releases/1.0.16"
+  onClick={[Function]}
+>
+  View Files
+</a>
+`;
