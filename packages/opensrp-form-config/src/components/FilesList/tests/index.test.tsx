@@ -8,8 +8,10 @@ import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import reducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
-import { fixManifestFiles } from '../../../ducks/tests.ts/fixtures';
+import { fixManifestFiles, downloadFile } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
+import * as helpers from '../../../helpers/fileDownload';
+import _ from 'lodash';
 
 /** register the reducers */
 reducerRegistry.register(filesReducerName, reducer);
@@ -29,7 +31,18 @@ const props = {
     uploadTypeUrl: 'manifest-file',
 };
 
+const actualDebounce = _.debounce;
+const customDebounce = (callback: any) => callback;
+_.debounce = customDebounce;
+
+(global as any).URL.createObjectURL = jest.fn();
+(global as any).URL.revokeObjectURL = jest.fn();
+
 describe('components/manifestFiles', () => {
+    afterAll(() => {
+        _.debounce = actualDebounce;
+    });
+
     it('renders without crashing', () => {
         shallow(<ManifestFilesList {...props} />);
     });
@@ -58,8 +71,47 @@ describe('components/manifestFiles', () => {
                 .at(1)
                 .text(),
         ).toEqual('Upload New File');
+    });
 
-        // to figure out why table is not being loaded
-        // expect(wrapper.find('.tbody .tr').length).toEqual(fixManifestFiles.length);
+    it('download files correctly', async () => {
+        store.dispatch(fetchManifestFiles(fixManifestFiles));
+        const downloadSpy = jest.spyOn(helpers, 'handleDownload');
+        const mockList = jest.fn();
+        OpenSRPService.prototype.list = mockList;
+        mockList
+            .mockReturnValueOnce(Promise.resolve(fixManifestFiles))
+            .mockReturnValueOnce(Promise.resolve(downloadFile));
+
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router history={history}>
+                    <ConnectedManifestFilesList {...props} />
+                </Router>
+            </Provider>,
+        );
+
+        await flushPromises();
+        wrapper.update();
+
+        expect(wrapper.find('.tbody .tr').length).toEqual(fixManifestFiles.length);
+
+        // search
+        const search = wrapper.find('SearchBar input');
+        search.simulate('input', { target: { value: 'reveal-test' } });
+        wrapper.update();
+        expect(wrapper.find('.tbody .tr').length).toEqual(1);
+
+        const downloadFiledCell = wrapper
+            .find('.tbody .tr')
+            .at(0)
+            .find('.td')
+            .at(4)
+            .find('a');
+        expect(downloadFiledCell.text()).toEqual('Download');
+        expect(toJson(downloadFiledCell)).toMatchSnapshot();
+
+        downloadFiledCell.simulate('click');
+        await flushPromises();
+        expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
     });
 });

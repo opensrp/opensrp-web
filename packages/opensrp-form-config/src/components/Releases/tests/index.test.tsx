@@ -10,6 +10,7 @@ import flushPromises from 'flush-promises';
 import reducer, { fetchManifestReleases, releasesReducerName } from '../../../ducks/manifestReleases';
 import { fixManifestReleases } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
+import _ from 'lodash';
 
 /** register the reducers */
 reducerRegistry.register(releasesReducerName, reducer);
@@ -28,7 +29,15 @@ const props = {
     uploadTypeUrl: 'file',
 };
 
+const actualDebounce = _.debounce;
+const customDebounce = (callback: any) => callback;
+_.debounce = customDebounce;
+
 describe('components/ManifestReleases', () => {
+    afterAll(() => {
+        _.debounce = actualDebounce;
+    });
+
     it('renders without crashing', () => {
         shallow(<ManifestReleases {...props} />);
     });
@@ -59,6 +68,7 @@ describe('components/ManifestReleases', () => {
         ).toEqual('Upload New File');
 
         expect(wrapper.find('.tbody .tr').length).toEqual(fixManifestReleases.length);
+
         const viewFiledCell = wrapper
             .find('.tbody .tr')
             .at(0)
@@ -67,5 +77,27 @@ describe('components/ManifestReleases', () => {
             .find('a');
         expect(toJson(viewFiledCell)).toMatchSnapshot();
         expect(viewFiledCell.text()).toEqual('View Files');
+    });
+
+    it('test search', async () => {
+        const mockList = jest.fn();
+        OpenSRPService.prototype.list = mockList;
+        mockList.mockReturnValueOnce(Promise.resolve(fixManifestReleases));
+
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router history={history}>
+                    <ConnectedManifestReleases {...props} />
+                </Router>
+            </Provider>,
+        );
+        await flushPromises();
+        wrapper.update();
+
+        // search
+        const search = wrapper.find('SearchBar input');
+        search.simulate('input', { target: { value: '1.0.12' } });
+        wrapper.update();
+        expect(wrapper.find('.tbody .tr').length).toEqual(1);
     });
 });

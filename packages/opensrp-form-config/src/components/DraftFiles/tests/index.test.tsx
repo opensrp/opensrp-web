@@ -11,6 +11,7 @@ import reducer, { fetchManifestDraftFiles, draftReducerName } from '../../../duc
 import { FixManifestDraftFiles, downloadFile } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
+import _ from 'lodash';
 
 /** register the reducers */
 reducerRegistry.register(draftReducerName, reducer);
@@ -30,10 +31,18 @@ const props = {
     releasesUrl: '/manifest/releases',
 };
 
+const actualDebounce = _.debounce;
+const customDebounce = (callback: any) => callback;
+_.debounce = customDebounce;
+
 (global as any).URL.createObjectURL = jest.fn();
 (global as any).URL.revokeObjectURL = jest.fn();
 
 describe('components/ManifestReleases', () => {
+    afterAll(() => {
+        _.debounce = actualDebounce;
+    });
+
     it('renders without crashing', () => {
         shallow(<ManifestDraftFiles {...props} />);
     });
@@ -73,6 +82,12 @@ describe('components/ManifestReleases', () => {
         downloadFiledCell.simulate('click');
         await flushPromises();
         expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
+
+        // search
+        const search = wrapper.find('SearchBar input');
+        search.simulate('input', { target: { value: 'test form' } });
+        wrapper.update();
+        expect(wrapper.find('.tbody .tr').length).toEqual(1);
 
         // test creating manifest file
         wrapper.find('Button').simulate('click');

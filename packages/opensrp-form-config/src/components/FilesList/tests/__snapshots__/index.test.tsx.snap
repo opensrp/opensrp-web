@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/manifestFiles download files correctly 1`] = `
+<a
+  href="#"
+  onClick={[Function]}
+>
+  Download
+</a>
+`;
+
 exports[`components/manifestFiles renders without crashing when connected to store 1`] = `
 Object {
   "CellComponent": [Function],
