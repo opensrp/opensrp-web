@@ -1,0 +1,425 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/manifestFiles renders without crashing when connected to store 1`] = `
+Object {
+  "CellComponent": [Function],
+  "columns": Array [
+    Object {
+      "Header": "Identifier",
+      "accessor": "identifier",
+    },
+    Object {
+      "Header": "File Name",
+      "accessor": "label",
+    },
+    Object {
+      "Header": "File Version",
+      "accessor": "version",
+    },
+    Object {
+      "Header": "Edit",
+      "accessor": [Function],
+      "disableSortBy": true,
+    },
+    Object {
+      "Header": " ",
+      "accessor": [Function],
+      "disableSortBy": true,
+    },
+  ],
+  "data": Array [
+    Object {
+      "createdAt": "Jun 19, 2020, 4:23:22 PM",
+      "form_relation": "",
+      "id": "53",
+      "identifier": "reveal-test-file.json",
+      "isDraft": false,
+      "isJsonValidator": false,
+      "jursdiction": "",
+      "label": "test publish",
+      "module": "",
+      "version": "1.0.27",
+    },
+    Object {
+      "createdAt": "Jun 19, 2020, 12:31:37 PM",
+      "form_relation": "",
+      "id": "52",
+      "identifier": "test-form-1.json",
+      "isDraft": false,
+      "isJsonValidator": false,
+      "jursdiction": "",
+      "label": "test form",
+      "module": "",
+      "version": "1.0.26",
+    },
+  ],
+  "hasChildren": [Function],
+  "identifierField": "id",
+  "linkerField": "id",
+  "loading": false,
+  "loadingComponent": [Function],
+  "paginate": false,
+  "parentIdentifierField": "parent_id",
+  "renderNullDataComponent": [Function],
+  "resize": true,
+  "rootParentId": null,
+  "useDrillDown": false,
+}
+`;
+
+exports[`components/manifestFiles renders without crashing when connected to store 2`] = `
+<DrillDownTable
+  CellComponent={[Function]}
+  columns={
+    Array [
+      Object {
+        "Header": "Identifier",
+        "accessor": "identifier",
+      },
+      Object {
+        "Header": "File Name",
+        "accessor": "label",
+      },
+      Object {
+        "Header": "File Version",
+        "accessor": "version",
+      },
+      Object {
+        "Header": "Edit",
+        "accessor": [Function],
+        "disableSortBy": true,
+      },
+      Object {
+        "Header": " ",
+        "accessor": [Function],
+        "disableSortBy": true,
+      },
+    ]
+  }
+  data={
+    Array [
+      Object {
+        "createdAt": "Jun 19, 2020, 4:23:22 PM",
+        "form_relation": "",
+        "id": "53",
+        "identifier": "reveal-test-file.json",
+        "isDraft": false,
+        "isJsonValidator": false,
+        "jursdiction": "",
+        "label": "test publish",
+        "module": "",
+        "version": "1.0.27",
+      },
+      Object {
+        "createdAt": "Jun 19, 2020, 12:31:37 PM",
+        "form_relation": "",
+        "id": "52",
+        "identifier": "test-form-1.json",
+        "isDraft": false,
+        "isJsonValidator": false,
+        "jursdiction": "",
+        "label": "test form",
+        "module": "",
+        "version": "1.0.26",
+      },
+    ]
+  }
+  hasChildren={[Function]}
+  identifierField="id"
+  linkerField="id"
+  loading={false}
+  loadingComponent={[Function]}
+  paginate={false}
+  parentIdentifierField="parent_id"
+  renderNullDataComponent={[Function]}
+  resize={true}
+  rootParentId={null}
+  useDrillDown={false}
+>
+  <Table
+    CellComponent={[Function]}
+    columns={
+      Array [
+        Object {
+          "Header": "Identifier",
+          "accessor": "identifier",
+        },
+        Object {
+          "Header": "File Name",
+          "accessor": "label",
+        },
+        Object {
+          "Header": "File Version",
+          "accessor": "version",
+        },
+        Object {
+          "Header": "Edit",
+          "accessor": [Function],
+          "disableSortBy": true,
+        },
+        Object {
+          "Header": " ",
+          "accessor": [Function],
+          "disableSortBy": true,
+        },
+      ]
+    }
+    data={Array []}
+    fetchData={[Function]}
+    hasChildren={[Function]}
+    identifierField="id"
+    linkerField="id"
+    loading={false}
+    loadingComponent={[Function]}
+    paginate={false}
+    parentIdentifierField="parent_id"
+    parentNodes={
+      Array [
+        undefined,
+        undefined,
+      ]
+    }
+    renderNullDataComponent={[Function]}
+    resize={true}
+    rootParentId={null}
+    useDrillDown={false}
+  >
+    <div
+      className="table-container mb-3"
+    >
+      <div
+        className="table div-table"
+        role="table"
+        style={
+          Object {
+            "minWidth": "750px",
+          }
+        }
+      >
+        <div
+          className="thead"
+        >
+          <div
+            className="tr"
+            key="headerGroup_0"
+            role="row"
+            style={
+              Object {
+                "display": "flex",
+                "flex": "1 0 auto",
+                "minWidth": "250px",
+              }
+            }
+          >
+            <div
+              className="th"
+              colSpan={1}
+              key="thead-th-0"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "boxSizing": "border-box",
+                  "cursor": "pointer",
+                  "flex": "150 0 auto",
+                  "minWidth": "50px",
+                  "position": "relative",
+                  "width": "150px",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Identifier
+              <SortIcon
+                isSorted={false}
+              >
+                <div
+                  className="icon-wrapper"
+                >
+                  <div
+                    className="previous-next-filled  icon"
+                  />
+                </div>
+              </SortIcon>
+              <div
+                className="resizer "
+                draggable={false}
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="separator"
+                style={
+                  Object {
+                    "cursor": "ew-resize",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="th"
+              colSpan={1}
+              key="thead-th-1"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "boxSizing": "border-box",
+                  "cursor": "pointer",
+                  "flex": "150 0 auto",
+                  "minWidth": "50px",
+                  "position": "relative",
+                  "width": "150px",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              File Name
+              <SortIcon
+                isSorted={false}
+              >
+                <div
+                  className="icon-wrapper"
+                >
+                  <div
+                    className="previous-next-filled  icon"
+                  />
+                </div>
+              </SortIcon>
+              <div
+                className="resizer "
+                draggable={false}
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="separator"
+                style={
+                  Object {
+                    "cursor": "ew-resize",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="th"
+              colSpan={1}
+              key="thead-th-2"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "boxSizing": "border-box",
+                  "cursor": "pointer",
+                  "flex": "150 0 auto",
+                  "minWidth": "50px",
+                  "position": "relative",
+                  "width": "150px",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              File Version
+              <SortIcon
+                isSorted={false}
+              >
+                <div
+                  className="icon-wrapper"
+                >
+                  <div
+                    className="previous-next-filled  icon"
+                  />
+                </div>
+              </SortIcon>
+              <div
+                className="resizer "
+                draggable={false}
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="separator"
+                style={
+                  Object {
+                    "cursor": "ew-resize",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="th"
+              colSpan={1}
+              key="thead-th-3"
+              role="columnheader"
+              style={
+                Object {
+                  "boxSizing": "border-box",
+                  "cursor": undefined,
+                  "flex": "150 0 auto",
+                  "minWidth": "50px",
+                  "position": "relative",
+                  "width": "150px",
+                }
+              }
+            >
+              Edit
+              <div
+                className="resizer "
+                draggable={false}
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="separator"
+                style={
+                  Object {
+                    "cursor": "ew-resize",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="th"
+              colSpan={1}
+              key="thead-th-4"
+              role="columnheader"
+              style={
+                Object {
+                  "boxSizing": "border-box",
+                  "cursor": undefined,
+                  "flex": "150 0 auto",
+                  "minWidth": "50px",
+                  "position": "relative",
+                  "width": "150px",
+                }
+              }
+            >
+               
+              <div
+                className="resizer "
+                draggable={false}
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="separator"
+                style={
+                  Object {
+                    "cursor": "ew-resize",
+                  }
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="tbody"
+          role="rowgroup"
+        />
+      </div>
+      <div
+        className="jumbotron"
+      >
+        <p>
+          No Data Found
+        </p>
+      </div>
+    </div>
+  </Table>
+</DrillDownTable>
+`;
