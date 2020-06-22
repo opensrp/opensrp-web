@@ -5,8 +5,8 @@ import reducer, {
     getManifestReleasesById,
     getAllManifestReleasesArray,
     releasesReducerName,
+    ManifestReleasesTypes,
 } from '../manifestReleases';
-import { ManifestReleasesTypes } from '../../../dist/types/ducks/manifestReleases.d';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { fixManifestReleases } from './fixtures';
 

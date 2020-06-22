@@ -44,7 +44,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         debounceTime,
         placeholder,
         fetchDraftFiles,
-        clearDraftFiles,
         growl,
         downloadEndPoint,
         releasesUrl,
