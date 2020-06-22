@@ -52,3 +52,14 @@ export const fixManifestFiles = [
         version: '1.0.27',
     },
 ];
+
+export const FixManifestDraftFiles = [
+    {
+        ...fixManifestFiles[0],
+        isDraft: false,
+    },
+    {
+        ...fixManifestFiles[1],
+        isDraft: false,
+    },
+];
