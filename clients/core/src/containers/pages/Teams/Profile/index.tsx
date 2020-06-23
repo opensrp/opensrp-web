@@ -23,11 +23,14 @@ import {
     OPENSRP_API_BASE_URL,
     OPENSRP_TEAM_PROFILE_ENDPOINT,
     OPENSRP_TEAM_MEMBER_ENDPOINT,
+    OPENSRP_LOCATION_ENDPOINT,
+    OPENSRP_TEAM_ENDPOINT,
 } from '../../../../configs/env';
 import { generateOptions } from '../../../../services/opensrp';
 import { OpenSRPTable } from '@opensrp/opensrp-table';
 import { useTeamMemberTableColumns } from './helpers/tableDefinition';
 import InfoCard from '../../../../components/page/InfoCard';
+import { Location } from '../../../../store/ducks/adminLocation';
 // import InfoCard from '../../../../../components/page/InfoCard';
 
 // /** register the team reducer */
@@ -64,6 +67,11 @@ export interface TeamProfileProps {
     opensrpService: typeof OpenSRPService;
 }
 
+export interface TeamProfileState {
+    location: Location | null;
+    supervisor: Team | null;
+}
+
 export type ProfileWithRoutesProps = TeamProfileProps & RouteComponentProps<TeamProfileURLParams>;
 
 export const defaultProfileProps: TeamProfileProps = {
@@ -75,18 +83,27 @@ export const defaultProfileProps: TeamProfileProps = {
     opensrpService: OpenSRPService,
 };
 
-class TeamProfile extends React.Component<ProfileWithRoutesProps> {
+class TeamProfile extends React.Component<ProfileWithRoutesProps, TeamProfileState> {
     public static defaultProps: TeamProfileProps = defaultProfileProps;
 
-    public componentDidMount() {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            location: null,
+            supervisor: null,
+        };
+    }
+
+    public componentDidMount = async () => {
         const { fetchTeam, fetchMembers, match, removeMembers, opensrpService } = this.props;
         const teamId = match.params.id;
-        const teamService = new opensrpService(
+        let teamService = new opensrpService(
             OPENSRP_API_BASE_URL,
             `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${teamId}`,
             generateOptions,
         );
-        teamService.list().then((teamResponse: Team) => fetchTeam([teamResponse]));
+        const team = await teamService.list();
+        fetchTeam([team]);
 
         const teamMemberService = new opensrpService(
             OPENSRP_API_BASE_URL,
@@ -97,9 +114,58 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
             removeMembers();
             fetchMembers(membersResponse);
         });
-    }
+
+        /**
+         * Fetch assigned locations
+         */
+        const fetchAssignedLocations = new opensrpService(
+            OPENSRP_API_BASE_URL,
+            `organization/assignedLocationsAndPlans/${team.identifier}`,
+            generateOptions,
+        );
+        const assignedLocations = await fetchAssignedLocations.list();
+
+        if (assignedLocations.length > 0) {
+            /**
+             * Finding locations
+             */
+            const locationService = new opensrpService(
+                OPENSRP_API_BASE_URL,
+                OPENSRP_LOCATION_ENDPOINT,
+                generateOptions,
+            );
+            const locationRes = await locationService.list();
+            const location = locationRes.locations.filter(
+                (l: Location) => l.id === assignedLocations[assignedLocations.length - 1].jurisdictionId,
+            )[0];
+
+            console.log('team location -->', location);
+            this.setState({
+                ...this.state,
+                location,
+            });
+        }
+
+        /**
+         * Fetch supervisior
+         */
+        if (team.partOf !== null && team.partOf !== undefined) {
+            teamService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
+            const teamList = await teamService.list();
+            const supervisor = teamList.organizations.filter((t: any) => t.id == team.partOf)[0];
+            console.log(' team supervisor ', supervisor);
+
+            this.setState({
+                ...this.state,
+                supervisor,
+            });
+        }
+    };
     public render(): React.ReactNode {
         const { team, members } = this.props;
+        const { location, supervisor } = this.state;
+        console.log('location ', location, ', supervisor ', supervisor);
+        console.log(' state ', this.state);
         if (!team) {
             return <Loading />;
         }
@@ -130,6 +196,14 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps> {
                                     <td>{team.name}</td>
                                     <td className="info-label">Description:</td>
                                     <td></td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td className="info-label">Location:</td>
+                                    <td>{location === null ? '' : location.properties.name}</td>
+                                    <td className="info-label">Supervisor:</td>
+                                    <td>{supervisor === null ? '' : supervisor.name}</td>
                                 </tr>
                             </tbody>
                         </Table>
