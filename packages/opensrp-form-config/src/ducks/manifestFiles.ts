@@ -25,7 +25,7 @@ export interface ManifestFilesTypes {
 export const filesReducerName = 'manifestFiles';
 
 /** manifest files Reducer */
-export const filesReducer = reducerFactory<ManifestFilesTypes>(filesReducerName);
+const filesReducer = reducerFactory<ManifestFilesTypes>(filesReducerName);
 
 // action
 /** fetch manifest files to store action */
@@ -38,3 +38,5 @@ export const removeManifestFiles = removeActionCreatorFactory(filesReducerName);
 export const getAllManifestFilesById = getItemsByIdFactory<ManifestFilesTypes>(filesReducerName);
 export const getManifestFilesById = getItemByIdFactory<ManifestFilesTypes>(filesReducerName);
 export const getAllManifestFilesArray = getItemsArrayFactory<ManifestFilesTypes>(filesReducerName);
+
+export default filesReducer;

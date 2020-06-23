@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import { releasesReducer, fetchManifestReleases, releasesReducerName } from '../../../ducks/manifestReleases';
+import releasesReducer, { fetchManifestReleases, releasesReducerName } from '../../../ducks/manifestReleases';
 import { fixManifestReleases } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
 import _ from 'lodash';

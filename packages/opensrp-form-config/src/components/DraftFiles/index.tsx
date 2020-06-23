@@ -7,8 +7,7 @@ import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
-import {
-    draftReducer as DraftFilesReducer,
+import DraftFilesReducer, {
     fetchManifestDraftFiles,
     draftReducerName,
     getAllManifestDraftFilesArray,

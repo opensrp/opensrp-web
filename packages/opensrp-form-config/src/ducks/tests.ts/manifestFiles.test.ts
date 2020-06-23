@@ -1,5 +1,4 @@
-import {
-    filesReducer,
+import filesReducer, {
     fetchManifestFiles,
     removeManifestFiles,
     getAllManifestFilesById,

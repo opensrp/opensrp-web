@@ -4,8 +4,7 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
-import {
-    releasesReducer,
+import releasesReducer, {
     fetchManifestReleases,
     releasesReducerName,
     getAllManifestReleasesArray,

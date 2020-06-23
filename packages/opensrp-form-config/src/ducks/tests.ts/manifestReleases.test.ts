@@ -1,5 +1,4 @@
-import {
-    releasesReducer,
+import releasesReducer, {
     fetchManifestReleases,
     removeManifestReleases,
     getAllManifestReleasesById,

@@ -1,5 +1,4 @@
-import {
-    draftReducer,
+import draftReducer, {
     fetchManifestDraftFiles,
     removeManifestDraftFiles,
     getAllManifestDraftFilesById,

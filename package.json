@@ -67,6 +67,7 @@
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-prettier": "^3.1.1",
         "eslint-plugin-react": "^7.17.0",
+        "flush-promises": "^1.0.2",
         "husky": "^3.0.2",
         "istanbul-api": "^2.1.6",
         "jest": "^24.9.0",

@@ -27,7 +27,7 @@ export interface ManifestReleasesTypes {
 export const releasesReducerName = 'manifestReleases';
 
 /** manifest releases Reducer */
-export const releasesReducer = reducerFactory<ManifestReleasesTypes>(releasesReducerName);
+const releasesReducer = reducerFactory<ManifestReleasesTypes>(releasesReducerName);
 
 // action
 /** fetch manifest releases to store action */
@@ -43,3 +43,5 @@ export const removeManifestReleases = removeActionCreatorFactory(releasesReducer
 export const getAllManifestReleasesById = getItemsByIdFactory<ManifestReleasesTypes>(releasesReducerName);
 export const getManifestReleasesById = getItemByIdFactory<ManifestReleasesTypes>(releasesReducerName);
 export const getAllManifestReleasesArray = getItemsArrayFactory<ManifestReleasesTypes>(releasesReducerName);
+
+export default releasesReducer;

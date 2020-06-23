@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import { draftReducer, fetchManifestDraftFiles, draftReducerName } from '../../../ducks/manifestDraftFiles';
+import draftReducer, { fetchManifestDraftFiles, draftReducerName } from '../../../ducks/manifestDraftFiles';
 import { FixManifestDraftFiles, downloadFile } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';

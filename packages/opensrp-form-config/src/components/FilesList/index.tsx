@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import { Link } from 'react-router-dom';
-import {
-    filesReducer,
+import filesReducer, {
     fetchManifestFiles,
     filesReducerName,
     ManifestFilesTypes,
