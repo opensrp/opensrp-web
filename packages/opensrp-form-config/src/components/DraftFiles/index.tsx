@@ -15,6 +15,13 @@ import DraftFilesReducer, {
 import { Button } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 import { Redirect } from 'react-router';
+import {
+    MAKE_RELEASE_LABEL,
+    FILE_NAME_LABEL,
+    FILE_VERSION_LABEL,
+    IDENTIFIER_LABEL,
+    MODULE_LABEL,
+} from 'opensrp-form-config/src/constants';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
@@ -24,6 +31,11 @@ interface DefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof fetchManifestDraftFiles;
     data: ManifestFilesTypes[];
     fetchDraftFiles: typeof fetchManifestDraftFiles;
+    fileNameLabel: string;
+    fileVersionLabel: string;
+    identifierLabel: string;
+    makeReleaseLabel: string;
+    moduleLabel: string;
 }
 
 /** manifest Draft files props interface */
@@ -48,6 +60,11 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         downloadEndPoint,
         releasesUrl,
         manifestEndPoint,
+        makeReleaseLabel,
+        identifierLabel,
+        fileNameLabel,
+        fileVersionLabel,
+        moduleLabel,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -158,19 +175,19 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 
     const columns = [
         {
-            Header: 'Identifier',
+            Header: identifierLabel,
             accessor: `identifier`,
         },
         {
-            Header: 'File Name',
+            Header: fileNameLabel,
             accessor: `label`,
         },
         {
-            Header: 'File Version',
+            Header: fileVersionLabel,
             accessor: `version`,
         },
         {
-            Header: 'Module',
+            Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
         },
@@ -213,7 +230,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             <DrillDownTable {...DrillDownTableProps} />
             {data.length > 0 && (
                 <Button className="btn btn-md btn btn-primary float-right" color="primary" onClick={onMakeReleaseClick}>
-                    Make Release
+                    {makeReleaseLabel}
                 </Button>
             )}
         </div>
@@ -226,6 +243,11 @@ const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
     fetchDraftFiles: fetchManifestDraftFiles,
+    fileNameLabel: FILE_NAME_LABEL,
+    fileVersionLabel: FILE_VERSION_LABEL,
+    identifierLabel: IDENTIFIER_LABEL,
+    makeReleaseLabel: MAKE_RELEASE_LABEL,
+    moduleLabel: MODULE_LABEL,
     placeholder: 'Find Draft Files',
 };
 
