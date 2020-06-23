@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import _ from 'lodash';
 import React from 'react';
 import { Router } from 'react-router';
-import { SearchBar } from '../searchBar';
+import { SearchBar } from '..';
 
 const actualDebounce = _.debounce;
 const customDebounce = (callback: any) => callback;
