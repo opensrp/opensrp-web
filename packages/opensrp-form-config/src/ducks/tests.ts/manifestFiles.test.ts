@@ -1,4 +1,5 @@
-import reducer, {
+import {
+    filesReducer,
     fetchManifestFiles,
     removeManifestFiles,
     getAllManifestFilesById,
@@ -10,7 +11,7 @@ import reducer, {
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { fixManifestFiles } from './fixtures';
 
-reducerRegistry.register(filesReducerName, reducer);
+reducerRegistry.register(filesReducerName, filesReducer);
 describe('ducks/manifestFiles', () => {
     it('selectors work for empty initialState', () => {
         expect(getAllManifestFilesById(store.getState())).toEqual({});

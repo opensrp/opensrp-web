@@ -1,13 +1,14 @@
 import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, URLParams } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../SearchBar';
+import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
-import DraftFilesReducer, {
+import {
+    draftReducer as DraftFilesReducer,
     fetchManifestDraftFiles,
     draftReducerName,
     getAllManifestDraftFilesArray,
@@ -257,7 +258,6 @@ const defaultProps: DefaultProps = {
 
 /** pass default props to component */
 ManifestDraftFiles.defaultProps = defaultProps;
-export { ManifestDraftFiles };
 
 /** Connect the component to the store */
 
@@ -286,4 +286,4 @@ const mapDispatchToProps = {
 /** Connected ManifestDraftFiles component */
 const ConnectedManifestDraftFiles = connect(mapStateToProps, mapDispatchToProps)(ManifestDraftFiles);
 
-export default ConnectedManifestDraftFiles;
+export { ManifestDraftFiles, ConnectedManifestDraftFiles };

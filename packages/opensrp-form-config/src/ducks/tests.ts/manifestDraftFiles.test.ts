@@ -1,4 +1,5 @@
-import reducer, {
+import {
+    draftReducer,
     fetchManifestDraftFiles,
     removeManifestDraftFiles,
     getAllManifestDraftFilesById,
@@ -10,7 +11,7 @@ import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { FixManifestDraftFiles } from './fixtures';
 import { ManifestFilesTypes } from '../manifestFiles';
 
-reducerRegistry.register(draftReducerName, reducer);
+reducerRegistry.register(draftReducerName, draftReducer);
 describe('ducks/manifestDraftFiles', () => {
     it('selectors work for empty initialState', () => {
         expect(getAllManifestDraftFilesById(store.getState())).toEqual({});

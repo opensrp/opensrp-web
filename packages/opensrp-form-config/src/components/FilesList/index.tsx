@@ -1,14 +1,15 @@
 import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import { OpenSRPService, URLParams } from '@opensrp/server-service';
-import SearchBar, { SearchBarDefaultProps } from '../SearchBar';
+import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
 import { FormConfigProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import { Link } from 'react-router-dom';
-import FilesReducer, {
+import {
+    filesReducer,
     fetchManifestFiles,
     filesReducerName,
     ManifestFilesTypes,
@@ -28,7 +29,7 @@ import {
 } from '../../constants';
 
 /** Register reducer */
-reducerRegistry.register(filesReducerName, FilesReducer);
+reducerRegistry.register(filesReducerName, filesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
@@ -259,7 +260,6 @@ const defaultProps: DefaultProps = {
 
 /** pass default props to component */
 ManifestFilesList.defaultProps = defaultProps;
-export { ManifestFilesList };
 
 /** Connect the component to the store */
 
@@ -288,4 +288,4 @@ const mapDispatchToProps = {
 /** Connected ManifestFilesList component */
 const ConnectedManifestFilesList = connect(mapStateToProps, mapDispatchToProps)(ManifestFilesList);
 
-export default ConnectedManifestFilesList;
+export { ManifestFilesList, ConnectedManifestFilesList };

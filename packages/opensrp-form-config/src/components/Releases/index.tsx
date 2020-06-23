@@ -4,13 +4,14 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
-import releasesReducer, {
+import {
+    releasesReducer,
     fetchManifestReleases,
     releasesReducerName,
     getAllManifestReleasesArray,
     ManifestReleasesTypes,
 } from '../../ducks/manifestReleases';
-import SearchBar, { SearchBarDefaultProps } from '../SearchBar';
+import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { FormConfigProps } from '../../helpers/types';
@@ -178,7 +179,6 @@ const defaultProps: DefaultProps = {
 
 /** pass default props to component */
 ManifestReleases.defaultProps = defaultProps;
-export { ManifestReleases };
 
 /** Connect the component to the store */
 
@@ -204,4 +204,4 @@ const mapDispatchToProps = { fetchReleases: fetchManifestReleases };
 /** Connected ManifestReleases component */
 const ConnectedManifestReleases = connect(mapStateToProps, mapDispatchToProps)(ManifestReleases);
 
-export default ConnectedManifestReleases;
+export { ManifestReleases, ConnectedManifestReleases };

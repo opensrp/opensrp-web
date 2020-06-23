@@ -1,4 +1,5 @@
-import reducer, {
+import {
+    releasesReducer,
     fetchManifestReleases,
     removeManifestReleases,
     getAllManifestReleasesById,
@@ -10,7 +11,7 @@ import reducer, {
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { fixManifestReleases } from './fixtures';
 
-reducerRegistry.register(releasesReducerName, reducer);
+reducerRegistry.register(releasesReducerName, releasesReducer);
 describe('ducks/manifestReleases', () => {
     it('selectors work for empty initialState', () => {
         expect(getAllManifestReleasesById(store.getState())).toEqual({});

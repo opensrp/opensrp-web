@@ -225,8 +225,6 @@ const defaultProp: DefaultProps = {
 };
 
 UploadConfigFile.defaultProp = defaultProp;
-export { UploadConfigFile };
-
 interface MapStateToProps {
     formData: ManifestFilesTypes | null;
     formInitialValues: InitialValuesTypes;
@@ -265,4 +263,4 @@ const mapDispatchToProps = {};
 /** Connected UploadConfigFile component */
 const ConnectedUploadConfigFile = connect(mapStateToProps, mapDispatchToProps)(UploadConfigFile);
 
-export default ConnectedUploadConfigFile;
+export { UploadConfigFile, ConnectedUploadConfigFile };

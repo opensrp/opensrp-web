@@ -60,4 +60,4 @@ const defaultProps: SearchBarDefaultProps = {
 
 SearchBar.defaultProps = defaultProps;
 
-export default SearchBar;
+export { SearchBar };

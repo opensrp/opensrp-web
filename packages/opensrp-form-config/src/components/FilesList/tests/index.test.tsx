@@ -1,20 +1,20 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { createBrowserHistory } from 'history';
-import ConnectedManifestFilesList, { ManifestFilesList } from '../index';
+import { ManifestFilesList, ConnectedManifestFilesList } from '../index';
 import { getFetchOptions, OpenSRPService } from '@opensrp/server-service';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import reducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
+import { filesReducer, fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
 import { fixManifestFiles, downloadFile } from '../../../ducks/tests.ts/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
 import _ from 'lodash';
 
 /** register the reducers */
-reducerRegistry.register(filesReducerName, reducer);
+reducerRegistry.register(filesReducerName, filesReducer);
 
 const history = createBrowserHistory();
 

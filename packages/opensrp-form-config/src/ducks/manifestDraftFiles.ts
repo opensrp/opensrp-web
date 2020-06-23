@@ -12,7 +12,7 @@ import { ManifestFilesTypes } from './manifestFiles';
 export const draftReducerName = 'manifestDraftFiles';
 
 /** manifest draft files Reducer */
-const reducer = reducerFactory<ManifestFilesTypes>(draftReducerName);
+export const draftReducer = reducerFactory<ManifestFilesTypes>(draftReducerName);
 
 // action
 /** fetch manifest draft files to store action */
@@ -25,5 +25,3 @@ export const removeManifestDraftFiles = removeActionCreatorFactory(draftReducerN
 export const getAllManifestDraftFilesById = getItemsByIdFactory<ManifestFilesTypes>(draftReducerName);
 export const getManifestDraftFilesById = getItemByIdFactory<ManifestFilesTypes>(draftReducerName);
 export const getAllManifestDraftFilesArray = getItemsArrayFactory<ManifestFilesTypes>(draftReducerName);
-
-export default reducer;
