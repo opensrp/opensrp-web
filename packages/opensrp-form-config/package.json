@@ -1,7 +1,7 @@
 {
     "name": "@opensrp/form-config",
     "version": "0.0.0",
-    "description": "Wrapper around OpenSRP Server REST API",
+    "description": "OpenSrp form configuration components",
     "main": "dist/index.js",
     "types": "dist/types",
     "files": [

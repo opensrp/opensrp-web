@@ -9,15 +9,3 @@ export * from './components/UploadFile/helpers';
 export * from './components/Releases';
 export * from './components/FilesList';
 export * from './components/DraftFiles';
-
-import ConnectedManifestReleases from './components/Releases';
-import ConnectedManifestFilesList from './components/FilesList';
-import ConnectedUploadConfigFile from './components/UploadFile';
-import ConnectedManifestDraftFiles from './components/DraftFiles';
-
-export {
-    ConnectedManifestDraftFiles,
-    ConnectedManifestFilesList,
-    ConnectedManifestReleases,
-    ConnectedUploadConfigFile,
-};
