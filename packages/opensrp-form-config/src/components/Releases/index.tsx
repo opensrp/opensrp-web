@@ -56,7 +56,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         placeholder,
         currentUrl,
         formUploadUrl,
-        growl,
+        customAlert,
         uploadTypeUrl,
         appVersionLabel,
         appIdLabel,
@@ -76,7 +76,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
             .list()
             .then((res: ManifestReleasesTypes[]) => fetchReleases(res))
             .catch(error => {
-                growl && growl(String(error), { type: 'error' });
+                customAlert && customAlert(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };

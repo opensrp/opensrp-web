@@ -68,7 +68,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         fetchFiles,
         fileUploadUrl,
         isJsonValidator,
-        growl,
+        customAlert,
         formVersion,
         downloadEndPoint,
         removeFiles,
@@ -101,7 +101,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 fetchFiles(res);
             })
             .catch(error => {
-                growl && growl(String(error), { type: 'error' });
+                customAlert && customAlert(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -127,7 +127,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 handleDownload(res.clientForm.json, name);
             })
             .catch(error => {
-                growl && growl(String(error), { type: 'error' });
+                customAlert && customAlert(String(error), { type: 'error' });
             });
     };
 

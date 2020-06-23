@@ -58,7 +58,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         debounceTime,
         placeholder,
         fetchDraftFiles,
-        growl,
+        customAlert,
         downloadEndPoint,
         releasesUrl,
         manifestEndPoint,
@@ -86,7 +86,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 fetchDraftFiles(res);
             })
             .catch(error => {
-                growl && growl(String(error), { type: 'error' });
+                customAlert && customAlert(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
     };
@@ -127,7 +127,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 return setIfDoneHere(true);
             } else {
                 const defaultMessage = `OpenSRPService create on ${manifestEndPoint} failed, HTTP status ${response?.status}`;
-                growl && growl(defaultMessage, { type: 'error' });
+                customAlert && customAlert(defaultMessage, { type: 'error' });
             }
         }
     };
@@ -145,7 +145,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                 handleDownload(res.clientForm.json, name);
             })
             .catch(error => {
-                growl && growl(String(error), { type: 'error' });
+                customAlert && customAlert(String(error), { type: 'error' });
             });
     };
 

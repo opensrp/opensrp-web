@@ -45,7 +45,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         endpoint,
         getPayload,
         baseURL,
-        growl,
+        customAlert,
         validatorsUrl,
         fileNameLabel,
         moduleLabel,
@@ -93,12 +93,12 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                 return setIfDoneHere(true);
             } else if (response.status === 400) {
                 response.text().then(text => {
-                    text.length ? growl && growl(text, { type: 'error' }) : setIfDoneHere(true);
+                    text.length ? customAlert && customAlert(text, { type: 'error' }) : setIfDoneHere(true);
                     return true;
                 });
             } else {
                 const defaultMessage = `OpenSRPService create on ${endpoint} failed, HTTP status ${response?.status}`;
-                growl && growl(defaultMessage, { type: 'error' });
+                customAlert && customAlert(defaultMessage, { type: 'error' });
             }
         }
     };
