@@ -11,8 +11,8 @@ export interface InitialValuesTypes {
 /** Yup client upload validation schema */
 /* eslint-disable @typescript-eslint/camelcase */
 export const uploadValidationSchema = Yup.object().shape({
-    form: Yup.mixed().required('Form is required'),
-    form_name: Yup.string().required('Form name is required'),
+    form: Yup.mixed().required(),
+    form_name: Yup.string().required(),
     form_relation: Yup.string(),
     module: Yup.string(),
 });

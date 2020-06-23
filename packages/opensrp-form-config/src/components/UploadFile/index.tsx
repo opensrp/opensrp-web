@@ -7,7 +7,14 @@ import { FormConfigProps } from '../../helpers/types';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
 import { ManifestFilesTypes, getManifestFilesById } from '../../ducks/manifestFiles';
-import { MODULE_LABEL, RELATED_TO_LABEL, FILE_NAME_LABEL, FILE_UPLOAD_LABEL } from '../../constants';
+import {
+    MODULE_LABEL,
+    RELATED_TO_LABEL,
+    FILE_NAME_LABEL,
+    FILE_UPLOAD_LABEL,
+    FORM_REQUIRED_LABEL,
+    FORM_NAME_REQUIRED_LABEL,
+} from '../../constants';
 
 /** default props interface */
 export interface DefaultProps {
@@ -15,6 +22,8 @@ export interface DefaultProps {
     fileUploadLabel: string;
     formData: ManifestFilesTypes | null;
     formInitialValues: InitialValuesTypes;
+    formNameRequiredLable: string;
+    formRequiredLabel: string;
     moduleLabel: string;
     relatedToLabel: string;
 }
@@ -42,6 +51,8 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         moduleLabel,
         fileUploadLabel,
         relatedToLabel,
+        formNameRequiredLable,
+        formRequiredLabel,
     } = props;
 
     const [ifDoneHere, setIfDoneHere] = useState(false);
@@ -122,7 +133,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                                 />
                                 {errors.form_name && touched.form_name && (
                                     <small className="form-text text-danger jurisdictions-error">
-                                        {errors.form_name}
+                                        {formNameRequiredLable}
                                     </small>
                                 )}
                             </FormGroup>
@@ -181,7 +192,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                             }}
                         />
                         {errors.form && touched.form && (
-                            <small className="form-text text-danger jurisdictions-error">{errors.form}</small>
+                            <small className="form-text text-danger jurisdictions-error">{formRequiredLabel}</small>
                         )}
                     </FormGroup>
                     <div>
@@ -207,6 +218,8 @@ const defaultProp: DefaultProps = {
     fileUploadLabel: FILE_UPLOAD_LABEL,
     formData: null,
     formInitialValues: defaultInitialValues,
+    formNameRequiredLable: FORM_NAME_REQUIRED_LABEL,
+    formRequiredLabel: FORM_REQUIRED_LABEL,
     moduleLabel: MODULE_LABEL,
     relatedToLabel: RELATED_TO_LABEL,
 };
@@ -214,11 +227,16 @@ const defaultProp: DefaultProps = {
 UploadConfigFile.defaultProp = defaultProp;
 export { UploadConfigFile };
 
+interface MapStateToProps {
+    formData: ManifestFilesTypes | null;
+    formInitialValues: InitialValuesTypes;
+}
+
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-const mapStateToProps = (state: Partial<Store>, ownProps: UploadConfigFileProps): DefaultProps => {
+const mapStateToProps = (state: Partial<Store>, ownProps: UploadConfigFileProps): MapStateToProps => {
     const formId = ownProps.formId;
     let formInitialValues: InitialValuesTypes = defaultInitialValues;
     let formData: ManifestFilesTypes | null = null;

@@ -12,3 +12,5 @@ export const APP_ID_LABEL = 'App Id';
 export const APP_VERSION_LABEL = 'App Version';
 export const RELATED_TO_LABEL = 'Related to';
 export const FILE_UPLOAD_LABEL = 'Upload File';
+export const FORM_REQUIRED_LABEL = 'Form is required';
+export const FORM_NAME_REQUIRED_LABEL = 'Form name is required';
