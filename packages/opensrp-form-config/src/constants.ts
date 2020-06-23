@@ -10,3 +10,5 @@ export const UPOL0AD_FILE_LABEL = 'Upload New File';
 export const VIEW_FILES_LABEL = 'View Files';
 export const APP_ID_LABEL = 'App Id';
 export const APP_VERSION_LABEL = 'App Version';
+export const RELATED_TO_LABEL = 'Related to';
+export const FILE_UPLOAD_LABEL = 'Upload File';

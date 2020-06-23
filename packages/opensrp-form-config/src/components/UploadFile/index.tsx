@@ -7,11 +7,16 @@ import { FormConfigProps } from '../../helpers/types';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
 import { ManifestFilesTypes, getManifestFilesById } from '../../ducks/manifestFiles';
+import { MODULE_LABEL, RELATED_TO_LABEL, FILE_NAME_LABEL, FILE_UPLOAD_LABEL } from '../../constants';
 
 /** default props interface */
 export interface DefaultProps {
+    fileNameLabel: string;
+    fileUploadLabel: string;
     formData: ManifestFilesTypes | null;
     formInitialValues: InitialValuesTypes;
+    moduleLabel: string;
+    relatedToLabel: string;
 }
 
 /** UploadConfigFile interface */
@@ -33,6 +38,10 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         baseURL,
         growl,
         validatorsUrl,
+        fileNameLabel,
+        moduleLabel,
+        fileUploadLabel,
+        relatedToLabel,
     } = props;
 
     const [ifDoneHere, setIfDoneHere] = useState(false);
@@ -102,7 +111,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                         <Col md={6}>
                             <FormGroup>
                                 <div>
-                                    <Label for="form_name">File Name *</Label>
+                                    <Label for="form_name">{fileNameLabel} *</Label>
                                 </div>
                                 <Input
                                     type="text"
@@ -121,7 +130,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                         <Col md={6}>
                             <FormGroup>
                                 <div>
-                                    <Label for="module">Module</Label>
+                                    <Label for="module">{moduleLabel}</Label>
                                 </div>
                                 <Input
                                     type="text"
@@ -140,7 +149,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                         <Col md={6}>
                             <FormGroup>
                                 <div>
-                                    <Label for="form_relation">Related to</Label>
+                                    <Label for="form_relation">{relatedToLabel}</Label>
                                 </div>
                                 <Input
                                     type="text"
@@ -159,7 +168,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                         <Col md={6}></Col>
                     </Row>
                     <FormGroup>
-                        <Label for="upload-file">Upload file *</Label>
+                        <Label for="upload-file">{fileUploadLabel} *</Label>
                         <Input
                             type="file"
                             name="form"
@@ -183,7 +192,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
                             color="primary"
                             disabled={isSubmitting}
                         >
-                            Upload file
+                            {fileUploadLabel}
                         </Button>
                     </div>
                 </Form>
@@ -194,8 +203,12 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
 
 /**default props */
 const defaultProp: DefaultProps = {
+    fileNameLabel: FILE_NAME_LABEL,
+    fileUploadLabel: FILE_UPLOAD_LABEL,
     formData: null,
     formInitialValues: defaultInitialValues,
+    moduleLabel: MODULE_LABEL,
+    relatedToLabel: RELATED_TO_LABEL,
 };
 
 UploadConfigFile.defaultProp = defaultProp;
