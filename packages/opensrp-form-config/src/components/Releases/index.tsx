@@ -14,15 +14,27 @@ import SearchBar, { SearchBarDefaultProps } from '../SearchBar/searchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { FormConfigProps } from '../../helpers/types';
+import {
+    APP_ID_LABEL,
+    APP_VERSION_LABEL,
+    VIEW_FILES_LABEL,
+    UPOL0AD_FILE_LABEL,
+    IDENTIFIER_LABEL,
+} from 'opensrp-form-config/src/constants';
 
 /** Register reducer */
 reducerRegistry.register(releasesReducerName, releasesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
+    appIdLabel: string;
+    appVersionLabel: string;
     data: ManifestReleasesTypes[];
     fetchReleases: typeof fetchManifestReleases;
+    identifierLabel: string;
     formUploadUrl: string;
+    uploadFileLabel: string;
+    viewFilesLabel: string;
 }
 
 /** ManifestReleases props interface */
@@ -46,6 +58,11 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         formUploadUrl,
         growl,
         uploadTypeUrl,
+        appVersionLabel,
+        appIdLabel,
+        viewFilesLabel,
+        uploadFileLabel,
+        identifierLabel,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -77,20 +94,20 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
      * @param {ManifestReleasesTypes} obj
      */
     const linkToFiles = (obj: ManifestReleasesTypes) => {
-        return <Link to={`${currentUrl}/${obj.identifier}`}>View Files</Link>;
+        return <Link to={`${currentUrl}/${obj.identifier}`}>{viewFilesLabel}</Link>;
     };
 
     const columns = [
         {
-            Header: 'Identifier',
+            Header: identifierLabel,
             accessor: (obj: ManifestReleasesTypes) => `V${obj.identifier}`,
         },
         {
-            Header: 'APP Id',
+            Header: appIdLabel,
             accessor: 'appId',
         },
         {
-            Header: 'App Version',
+            Header: appVersionLabel,
             accessor: (obj: ManifestReleasesTypes) => `V${obj.appVersion}`,
         },
         {
@@ -136,7 +153,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
                 </Col>
                 <Col xs="4">
                     <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
-                        Upload New File
+                        {uploadFileLabel}
                     </Link>
                 </Col>
             </Row>
@@ -147,11 +164,16 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
 
 /** declear default props */
 const defaultProps: DefaultProps = {
+    appIdLabel: APP_ID_LABEL,
+    appVersionLabel: APP_VERSION_LABEL,
     data: [],
     debounceTime: 1000,
     fetchReleases: fetchManifestReleases,
     formUploadUrl: '',
+    identifierLabel: IDENTIFIER_LABEL,
     placeholder: 'Find Release',
+    uploadFileLabel: UPOL0AD_FILE_LABEL,
+    viewFilesLabel: VIEW_FILES_LABEL,
 };
 
 /** pass default props to component */

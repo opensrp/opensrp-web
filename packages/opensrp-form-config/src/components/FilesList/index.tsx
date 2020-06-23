@@ -23,6 +23,7 @@ import {
     FILE_VERSION_LABEL,
     IDENTIFIER_LABEL,
     UPLOAD_EDIT_LABEL,
+    UPOL0AD_FILE_LABEL,
 } from 'opensrp-form-config/src/constants';
 import { MODULE_LABEL } from '../../constants';
 
@@ -41,6 +42,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     moduleLabel: string;
     removeFiles: typeof removeManifestFiles;
     uploadEditLabel: string;
+    uploadFileLabel: string;
 }
 
 /** manifest files list props interface */
@@ -78,6 +80,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         editLabel,
         uploadEditLabel,
         downloadLabel,
+        uploadFileLabel,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -227,7 +230,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                 <Col xs="4">
                     {isJsonValidator && (
                         <Link className="btn btn-secondary float-right" to={`${fileUploadUrl}/${uploadTypeUrl}`}>
-                            Upload New File
+                            {uploadFileLabel}
                         </Link>
                     )}
                 </Col>
@@ -251,6 +254,7 @@ const defaultProps: DefaultProps = {
     placeholder: 'Find Release Files',
     removeFiles: removeManifestFiles,
     uploadEditLabel: UPLOAD_EDIT_LABEL,
+    uploadFileLabel: UPOL0AD_FILE_LABEL,
 };
 
 /** pass default props to component */

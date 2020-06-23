@@ -6,3 +6,7 @@ export const MODULE_LABEL = 'Module';
 export const EDIT_LABEL = 'Edit';
 export const DOWNLOAD_LABEL = 'Download';
 export const UPLOAD_EDIT_LABEL = 'Upload edit';
+export const UPOL0AD_FILE_LABEL = 'Upload New File';
+export const VIEW_FILES_LABEL = 'View Files';
+export const APP_ID_LABEL = 'App Id';
+export const APP_VERSION_LABEL = 'App Version';
