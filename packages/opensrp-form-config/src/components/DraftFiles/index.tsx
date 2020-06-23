@@ -22,7 +22,7 @@ import {
     IDENTIFIER_LABEL,
     MODULE_LABEL,
     DOWNLOAD_LABEL,
-} from 'opensrp-form-config/src/constants';
+} from '../../constants';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);

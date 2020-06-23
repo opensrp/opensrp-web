@@ -48,7 +48,6 @@ describe('components/UploadFile', () => {
         expect(wrapper.find('Button').text()).toEqual('Upload file');
         wrapper.find('Button').simulate('submit');
         await new Promise<any>(resolve => setImmediate(resolve));
-        await flushPromises();
         wrapper.update();
         // we have errors
         expect(

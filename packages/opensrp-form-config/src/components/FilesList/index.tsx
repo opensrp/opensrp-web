@@ -24,8 +24,8 @@ import {
     IDENTIFIER_LABEL,
     UPLOAD_EDIT_LABEL,
     UPOL0AD_FILE_LABEL,
-} from 'opensrp-form-config/src/constants';
-import { MODULE_LABEL } from '../../constants';
+    MODULE_LABEL,
+} from '../../constants';
 
 /** Register reducer */
 reducerRegistry.register(filesReducerName, FilesReducer);

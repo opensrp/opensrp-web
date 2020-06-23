@@ -20,7 +20,7 @@ import {
     VIEW_FILES_LABEL,
     UPOL0AD_FILE_LABEL,
     IDENTIFIER_LABEL,
-} from 'opensrp-form-config/src/constants';
+} from '../../constants';
 
 /** Register reducer */
 reducerRegistry.register(releasesReducerName, releasesReducer);

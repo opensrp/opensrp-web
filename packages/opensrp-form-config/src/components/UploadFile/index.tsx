@@ -236,7 +236,7 @@ interface MapStateToProps {
  * @param {Partial<Store>} -  the  redux store
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-const mapStateToProps = (state: Partial<Store>, ownProps: UploadConfigFileProps): MapStateToProps => {
+const mapStateToProps = (state: Partial<Store>, ownProps: any): DefaultProps => {
     const formId = ownProps.formId;
     let formInitialValues: InitialValuesTypes = defaultInitialValues;
     let formData: ManifestFilesTypes | null = null;
@@ -253,12 +253,16 @@ const mapStateToProps = (state: Partial<Store>, ownProps: UploadConfigFileProps)
         };
     }
     return {
+        ...defaultProp,
         formData,
         formInitialValues,
     };
 };
 
+/** map dispatch to props */
+const mapDispatchToProps = {};
+
 /** Connected UploadConfigFile component */
-const ConnectedUploadConfigFile = connect(mapStateToProps)(UploadConfigFile);
+const ConnectedUploadConfigFile = connect(mapStateToProps, mapDispatchToProps)(UploadConfigFile);
 
 export default ConnectedUploadConfigFile;
