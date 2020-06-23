@@ -12,6 +12,8 @@ import { FixManifestDraftFiles, downloadFile } from '../../../ducks/tests.ts/fix
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
 import _ from 'lodash';
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const fetch = require('jest-fetch-mock');
 
 /** register the reducers */
 reducerRegistry.register(draftReducerName, draftReducer);
@@ -92,11 +94,17 @@ describe('components/ManifestReleases', () => {
         // test creating manifest file
         wrapper.find('Button').simulate('click');
         const postData = {
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
             body:
                 '{"json":"{\\"forms_version\\":\\"1.0.27\\",\\"identifiers\\":[\\"reveal-test-file.json\\",\\"test-form-1.json\\"]}"}',
-            headers: { Authorization: 'Bearer hunter2', 'Content-Type': 'application/json' },
+            headers: {
+                accept: 'application/json',
+                authorization: 'Bearer hunter2',
+                'content-type': 'application/json;charset=UTF-8',
+            },
             method: 'POST',
         };
-        expect((global as any).fetch).toHaveBeenCalledWith('https://test-example.com/rest/manifest', postData);
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/manifest', postData);
     });
 });

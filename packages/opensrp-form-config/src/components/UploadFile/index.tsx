@@ -15,6 +15,7 @@ import {
     FORM_REQUIRED_LABEL,
     FORM_NAME_REQUIRED_LABEL,
 } from '../../constants';
+import { OpenSRPServiceExtend } from '../../helpers/services';
 
 /** default props interface */
 export interface DefaultProps {
@@ -66,12 +67,13 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         }
     }, [formId]);
 
+    type SetSubmitting = (isSubmitting: boolean) => void;
+
     /**
      * upload form
      * @param {InitialValuesTypes} data
      */
-    const uploadData = async (data: InitialValuesTypes) => {
-        const { headers } = getPayload(new AbortController().signal, 'POST');
+    const uploadData = async (data: InitialValuesTypes, setSubmitting: SetSubmitting) => {
         const postData = new FormData();
         Object.keys(data).forEach(dt => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,27 +82,15 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
         if (isJsonValidator) {
             postData.append('is_json_validator', 'true');
         }
-        const response = await fetch(`${baseURL}${endpoint}`, {
-            body: postData,
-            headers: {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                Authorization: (headers as any).authorization || (headers as any).Authorization,
-            },
-            method: 'POST',
-        });
-        if (response) {
-            if (response.status == 201 || response.ok) {
-                return setIfDoneHere(true);
-            } else if (response.status === 400) {
-                response.text().then(text => {
-                    text.length ? customAlert && customAlert(text, { type: 'error' }) : setIfDoneHere(true);
-                    return true;
-                });
-            } else {
-                const defaultMessage = `OpenSRPService create on ${endpoint} failed, HTTP status ${response?.status}`;
-                customAlert && customAlert(defaultMessage, { type: 'error' });
-            }
-        }
+
+        const clientService = new OpenSRPServiceExtend(baseURL, endpoint, getPayload);
+        await clientService
+            .postData(postData)
+            .then(() => setIfDoneHere(true))
+            .catch(err => {
+                customAlert && customAlert(String(err), { type: 'error' });
+                setSubmitting(false);
+            });
     };
 
     if (ifDoneHere) {
@@ -112,8 +102,8 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
             initialValues={formInitialValues}
             validationSchema={uploadValidationSchema}
             // tslint:disable-next-line: jsx-no-lambda
-            onSubmit={values => {
-                uploadData(values);
+            onSubmit={(values, { setSubmitting }) => {
+                uploadData(values, setSubmitting);
             }}
         >
             {({ values, setFieldValue, handleChange, handleSubmit, errors, touched, isSubmitting }) => (

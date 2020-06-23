@@ -23,6 +23,7 @@ import {
     MODULE_LABEL,
     DOWNLOAD_LABEL,
 } from '../../constants';
+import { OpenSRPServiceExtend } from '../../helpers/services';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
@@ -112,24 +113,13 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             forms_version: data[0].version,
             identifiers,
         };
-        const postdata = JSON.stringify({ json: JSON.stringify(json) });
-        const response = await fetch(`${baseURL}${manifestEndPoint}`, {
-            body: postdata,
-            headers: {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                Authorization: (headers as any).authorization || (headers as any).Authorization,
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-        });
-        if (response) {
-            if (response.status == 201 || response.ok) {
-                return setIfDoneHere(true);
-            } else {
-                const defaultMessage = `OpenSRPService create on ${manifestEndPoint} failed, HTTP status ${response?.status}`;
-                customAlert && customAlert(defaultMessage, { type: 'error' });
-            }
-        }
+        const clientService = new OpenSRPService(baseURL, manifestEndPoint, getPayload);
+        await clientService
+            .create({ json: JSON.stringify(json) })
+            .then(() => setIfDoneHere(true))
+            .catch(err => {
+                customAlert && customAlert(String(err), { type: 'error' });
+            });
     };
 
     /**
