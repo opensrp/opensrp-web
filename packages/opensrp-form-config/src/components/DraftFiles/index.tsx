@@ -21,6 +21,7 @@ import {
     FILE_VERSION_LABEL,
     IDENTIFIER_LABEL,
     MODULE_LABEL,
+    DOWNLOAD_LABEL,
 } from 'opensrp-form-config/src/constants';
 
 /** Register reducer */
@@ -30,6 +31,7 @@ reducerRegistry.register(draftReducerName, DraftFilesReducer);
 interface DefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof fetchManifestDraftFiles;
     data: ManifestFilesTypes[];
+    downloadLabel: string;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
     fileNameLabel: string;
     fileVersionLabel: string;
@@ -65,6 +67,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         fileNameLabel,
         fileVersionLabel,
         moduleLabel,
+        downloadLabel,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -196,7 +199,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             accessor: (obj: ManifestFilesTypes) =>
                 (() => (
                     <a href="#" onClick={e => onDownloadClick(e, obj)}>
-                        Download
+                        {downloadLabel}
                     </a>
                 ))(),
             disableSortBy: true,
@@ -242,6 +245,7 @@ const defaultProps: DefaultProps = {
     clearDraftFiles: fetchManifestDraftFiles,
     data: [],
     debounceTime: 1000,
+    downloadLabel: DOWNLOAD_LABEL,
     fetchDraftFiles: fetchManifestDraftFiles,
     fileNameLabel: FILE_NAME_LABEL,
     fileVersionLabel: FILE_VERSION_LABEL,

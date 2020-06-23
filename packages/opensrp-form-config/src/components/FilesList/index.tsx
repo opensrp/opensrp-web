@@ -16,6 +16,15 @@ import FilesReducer, {
     removeManifestFiles,
 } from '../../ducks/manifestFiles';
 import { Row, Col } from 'reactstrap';
+import {
+    DOWNLOAD_LABEL,
+    EDIT_LABEL,
+    FILE_NAME_LABEL,
+    FILE_VERSION_LABEL,
+    IDENTIFIER_LABEL,
+    UPLOAD_EDIT_LABEL,
+} from 'opensrp-form-config/src/constants';
+import { MODULE_LABEL } from '../../constants';
 
 /** Register reducer */
 reducerRegistry.register(filesReducerName, FilesReducer);
@@ -23,11 +32,19 @@ reducerRegistry.register(filesReducerName, FilesReducer);
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestFilesTypes[];
+    downloadLabel: string;
+    editLabel: string;
     fetchFiles: typeof fetchManifestFiles;
+    fileNameLabel: string;
+    fileVersionLabel: string;
+    identifierLabel: string;
+    moduleLabel: string;
     removeFiles: typeof removeManifestFiles;
+    uploadEditLabel: string;
 }
 
 /** manifest files list props interface */
+
 interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formVersion: string | null;
@@ -54,6 +71,13 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         downloadEndPoint,
         removeFiles,
         uploadTypeUrl,
+        identifierLabel,
+        fileNameLabel,
+        fileVersionLabel,
+        moduleLabel,
+        editLabel,
+        uploadEditLabel,
+        downloadLabel,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -136,28 +160,28 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
      * @param {TableData} obj table row data
      */
     const linkToEditFile = (obj: ManifestFilesTypes) => {
-        return <Link to={`${fileUploadUrl}/${uploadTypeUrl}/${obj.id}`}>Upload Edit</Link>;
+        return <Link to={`${fileUploadUrl}/${uploadTypeUrl}/${obj.id}`}>{uploadEditLabel}</Link>;
     };
     let columns = [
         {
-            Header: 'Identifier',
+            Header: identifierLabel,
             accessor: `identifier`,
         },
         {
-            Header: 'File Name',
+            Header: fileNameLabel,
             accessor: `label`,
         },
         {
-            Header: 'File Version',
+            Header: fileVersionLabel,
             accessor: `version`,
         },
         {
-            Header: 'Module',
+            Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
         },
         {
-            Header: 'Edit',
+            Header: editLabel,
             accessor: (obj: ManifestFilesTypes) => linkToEditFile(obj),
             disableSortBy: true,
         },
@@ -166,7 +190,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             accessor: (obj: ManifestFilesTypes) =>
                 (() => (
                     <a href="#" onClick={e => onDownloadClick(e, obj)}>
-                        Download
+                        {downloadLabel}
                     </a>
                 ))(),
             disableSortBy: true,
@@ -217,9 +241,16 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
+    downloadLabel: DOWNLOAD_LABEL,
+    editLabel: EDIT_LABEL,
     fetchFiles: fetchManifestFiles,
+    fileNameLabel: FILE_NAME_LABEL,
+    fileVersionLabel: FILE_VERSION_LABEL,
+    identifierLabel: IDENTIFIER_LABEL,
+    moduleLabel: MODULE_LABEL,
     placeholder: 'Find Release Files',
     removeFiles: removeManifestFiles,
+    uploadEditLabel: UPLOAD_EDIT_LABEL,
 };
 
 /** pass default props to component */
