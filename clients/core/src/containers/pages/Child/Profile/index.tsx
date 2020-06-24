@@ -40,17 +40,26 @@ const getChartOptions = (growthData: any) => {
 
         tooltip: {
             formatter(tooltip: Highcharts.TooltipOptions) {
+                let title, diff;
+                if (this.x == 0) {
+                    title = this.y;
+                    diff = 0;
+                } else {
+                    const prevData = growthData[growthData.indexOf(this.y) - 1];
+                    title = `${prevData} VS ${this.y}`;
+                    diff = this.y - prevData;
+                }
                 return `
                 <div style='background-color: white;'>
-                    <div> 12 vs 14 </div>
+                    <div> ${title} </div>
                     <hr>
                     <table>
                         <tbody>
                             <tr>
                                 <td style='padding-right: 20px;font-size: 20px;'> weight </td>
-                                <td> <b>68.6kg</b> </td>
+                                <td> <b>${this.y}kg</b> </td>
                                 <td style='color: lawngreen'> <b> &uarr; </b> </td>
-                                <td style='color: lawngreen'> +23 </td>
+                                <td style='color: lawngreen'> ${diff} </td>
                             </tr>
                             
                         </tbody>
