@@ -15,6 +15,8 @@ var _reactFontawesome = require("@fortawesome/react-fontawesome");
 
 require("../../styles/index.css");
 
+var _constants = require("../../constants");
+
 var SearchBar = function SearchBar(props) {
   var placeholder = props.placeholder,
       debounceTime = props.debounceTime,
@@ -52,7 +54,7 @@ var SearchBar = function SearchBar(props) {
 
 exports.SearchBar = exports.SearchBar = SearchBar;
 var defaultProps = {
-  placeholder: 'Search',
+  placeholder: _constants.SEARCH_LABEL,
   debounceTime: 1000
 };
 SearchBar.defaultProps = defaultProps;

@@ -256,7 +256,7 @@ var defaultProps = {
   fileVersionLabel: _constants.FILE_VERSION_LABEL,
   identifierLabel: _constants.IDENTIFIER_LABEL,
   moduleLabel: _constants.MODULE_LABEL,
-  placeholder: 'Find Release Files',
+  placeholder: _constants.FIND_FILES_LABEL,
   removeFiles: _manifestFiles.removeManifestFiles,
   uploadEditLabel: _constants.UPLOAD_EDIT_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL

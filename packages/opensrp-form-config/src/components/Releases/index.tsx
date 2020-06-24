@@ -20,6 +20,7 @@ import {
     VIEW_FILES_LABEL,
     UPOL0AD_FILE_LABEL,
     IDENTIFIER_LABEL,
+    FIND_RELEASES_LABEL,
 } from '../../constants';
 
 /** Register reducer */
@@ -171,7 +172,7 @@ const defaultProps: DefaultProps = {
     fetchReleases: fetchManifestReleases,
     formUploadUrl: '',
     identifierLabel: IDENTIFIER_LABEL,
-    placeholder: 'Find Release',
+    placeholder: FIND_RELEASES_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,
     viewFilesLabel: VIEW_FILES_LABEL,
 };

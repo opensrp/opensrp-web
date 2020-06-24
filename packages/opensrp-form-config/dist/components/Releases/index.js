@@ -176,7 +176,7 @@ var defaultProps = {
   fetchReleases: _manifestReleases.fetchManifestReleases,
   formUploadUrl: '',
   identifierLabel: _constants.IDENTIFIER_LABEL,
-  placeholder: 'Find Release',
+  placeholder: _constants.FIND_RELEASES_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL,
   viewFilesLabel: _constants.VIEW_FILES_LABEL
 };

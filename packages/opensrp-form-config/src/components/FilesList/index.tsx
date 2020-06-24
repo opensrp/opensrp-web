@@ -25,6 +25,7 @@ import {
     UPLOAD_EDIT_LABEL,
     UPOL0AD_FILE_LABEL,
     MODULE_LABEL,
+    FIND_FILES_LABEL,
 } from '../../constants';
 
 /** Register reducer */
@@ -251,7 +252,7 @@ const defaultProps: DefaultProps = {
     fileVersionLabel: FILE_VERSION_LABEL,
     identifierLabel: IDENTIFIER_LABEL,
     moduleLabel: MODULE_LABEL,
-    placeholder: 'Find Release Files',
+    placeholder: FIND_FILES_LABEL,
     removeFiles: removeManifestFiles,
     uploadEditLabel: UPLOAD_EDIT_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,

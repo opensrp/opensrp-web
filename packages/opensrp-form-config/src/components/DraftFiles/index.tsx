@@ -22,8 +22,8 @@ import {
     IDENTIFIER_LABEL,
     MODULE_LABEL,
     DOWNLOAD_LABEL,
+    FIND_DRAFT_RELEASES_LABEL,
 } from '../../constants';
-import { OpenSRPServiceExtend } from '../../helpers/services';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
@@ -242,7 +242,7 @@ const defaultProps: DefaultProps = {
     identifierLabel: IDENTIFIER_LABEL,
     makeReleaseLabel: MAKE_RELEASE_LABEL,
     moduleLabel: MODULE_LABEL,
-    placeholder: 'Find Draft Files',
+    placeholder: FIND_DRAFT_RELEASES_LABEL,
 };
 
 /** pass default props to component */

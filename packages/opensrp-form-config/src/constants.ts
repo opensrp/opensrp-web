@@ -14,3 +14,7 @@ export const RELATED_TO_LABEL = 'Related to';
 export const FILE_UPLOAD_LABEL = 'Upload file';
 export const FORM_REQUIRED_LABEL = 'Form is required';
 export const FORM_NAME_REQUIRED_LABEL = 'Form name is required';
+export const FIND_DRAFT_RELEASES_LABEL = 'Find Draft Files';
+export const FIND_FILES_LABEL = 'Find Files';
+export const FIND_RELEASES_LABEL = 'Find Release';
+export const SEARCH_LABEL = 'Search';

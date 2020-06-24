@@ -279,7 +279,7 @@ var defaultProps = {
   identifierLabel: _constants.IDENTIFIER_LABEL,
   makeReleaseLabel: _constants.MAKE_RELEASE_LABEL,
   moduleLabel: _constants.MODULE_LABEL,
-  placeholder: 'Find Draft Files'
+  placeholder: _constants.FIND_DRAFT_RELEASES_LABEL
 };
 ManifestDraftFiles.defaultProps = defaultProps;
 

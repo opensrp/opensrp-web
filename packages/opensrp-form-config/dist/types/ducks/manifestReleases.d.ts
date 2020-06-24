@@ -4,7 +4,7 @@ export interface ManifestJsonFieldType {
     forms_version: string;
     identifiers: string[];
 }
-/** manifest releses interface */
+/** manifest releases interface */
 export interface ManifestReleasesTypes {
     appId: string;
     appVersion: string;
