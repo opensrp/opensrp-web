@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/opensrp-table",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "types": "dist/types",
     "description": "A table component for displaying data",
     "main": "dist/index.js",

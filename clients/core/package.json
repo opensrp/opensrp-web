@@ -1,6 +1,6 @@
 {
     "name": "opensrp-web",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.20",
@@ -16,8 +16,8 @@
         "@onaio/redux-reducer-registry": "^0.0.8",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
-        "@opensrp/opensrp-table": "^0.0.2",
-        "@opensrp/server-service": "^0.0.1",
+        "@opensrp/opensrp-table": "^0.0.3",
+        "@opensrp/server-service": "^0.0.2",
         "@types/bootstrap": "^4.3.1",
         "@types/fetch-mock": "^7.3.1",
         "@types/history": "^4.7.2",
