@@ -107,6 +107,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                 ...this.state,
                 locationId,
                 resetBreadcrumb: true,
+                currentPage: 1,
             },
             () => {
                 this.getHouseholdList();
@@ -120,6 +121,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
                 ...this.state,
                 locationId,
                 resetBreadcrumb: false,
+                currentPage: 1,
             },
             () => {
                 this.getHouseholdList();
@@ -207,7 +209,7 @@ class HouseholdList extends React.Component<HouseholdListProps, HouseholdListSta
     }
 
     private search = (searchText: string): void => {
-        this.getHouseholdList({ searchText });
+        this.getHouseholdList({ searchText, currentPage: 1 });
     };
 
     /**

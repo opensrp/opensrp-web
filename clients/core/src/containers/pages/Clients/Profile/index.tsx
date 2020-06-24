@@ -3,7 +3,7 @@ import reducerRegistry from '@onaio/redux-reducer-registry';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Col, Container, Row, Table, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import { Col, Container, Row, Table } from 'reactstrap';
 import { Store } from 'redux';
 import { OpenSRPService } from '@opensrp/server-service';
 import clientsReducer, {

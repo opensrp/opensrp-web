@@ -85,7 +85,13 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
             );
 
             assignLocation
-                .create([{ organization: values.identifier, jurisdiction: values.location.value }])
+                .create([
+                    {
+                        organization: values.identifier,
+                        jurisdiction: values.location.value,
+                        fromDate: '2020-06-22',
+                    },
+                ])
                 .then((response: any) => toast.success('Saved Location sucessfully'))
                 .catch((err: any) => toast.success('Saved Location sucessfully'));
 

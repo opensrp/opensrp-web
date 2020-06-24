@@ -130,6 +130,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             {
                 ...this.state,
                 selectedGender,
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();
@@ -143,6 +144,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
             {
                 ...this.state,
                 searchText,
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();
@@ -179,6 +181,8 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: true,
+                searchText: '',
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();
@@ -192,6 +196,8 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: false,
+                searchText: '',
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();

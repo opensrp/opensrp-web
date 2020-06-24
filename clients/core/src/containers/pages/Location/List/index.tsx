@@ -117,6 +117,7 @@ class LocationList extends React.Component<LocationListProps, LocationListState>
             {
                 ...this.state,
                 searchText,
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();

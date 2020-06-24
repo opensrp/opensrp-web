@@ -121,6 +121,8 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: true,
+                currentPage: 1,
+                searchText: '',
             },
             () => {
                 this.getDataFromServer();
@@ -134,6 +136,8 @@ class ANCList extends React.Component<ANCProps, ANCState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: false,
+                currentPage: 1,
+                searchText: '',
             },
             () => {
                 this.getDataFromServer();
@@ -146,6 +150,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
             {
                 ...this.state,
                 searchText,
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();

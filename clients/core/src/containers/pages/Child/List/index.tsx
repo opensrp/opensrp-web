@@ -128,6 +128,8 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
             {
                 ...this.state,
                 selectedGender,
+                currentPage: 1,
+                searchText: '',
             },
             () => {
                 this.getDataFromServer();
@@ -140,6 +142,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
             {
                 ...this.state,
                 searchText,
+                currentPage: 1,
             },
             () => {
                 this.getDataFromServer();
@@ -153,6 +156,8 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: true,
+                currentPage: 1,
+                searchText: '',
             },
             () => {
                 this.getDataFromServer();
@@ -166,6 +171,8 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                 ...this.state,
                 locationId,
                 resetBreadcrumb: false,
+                currentPage: 1,
+                searchText: '',
             },
             () => {
                 this.getDataFromServer();

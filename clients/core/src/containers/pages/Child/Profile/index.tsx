@@ -219,7 +219,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
             <Container id="householdProfile">
                 <div className="page-title">
                     <span className="back-btn-bg">
-                        <Link to="#">
+                        <Link to="/child">
                             <FontAwesomeIcon icon="arrow-left" />
                             <span className="back-btn"> Back to Child List </span>
                         </Link>

@@ -116,9 +116,10 @@ class TeamList extends React.Component<TeamListProps, TeamListState> {
             {
                 ...this.state,
                 searchText,
+                currentPage: 1,
             },
             () => {
-                this.getDataFromServer( searchText === '' ? {} : { name: searchText });
+                this.getDataFromServer(searchText === '' ? {} : { name: searchText });
             },
         );
     };
