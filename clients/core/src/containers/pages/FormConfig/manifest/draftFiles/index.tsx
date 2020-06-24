@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConnectedManifestDraftFiles } from '@opensrp/form-config';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import Loading from '../../../../../components/page/Loading';
 import {
@@ -7,8 +8,8 @@ import {
     OPENSRP_FORM_METADATA_ENDPOINT,
     OPENSRP_FORMS_ENDPOINT,
     OPENSRP_MANIFEST_ENDPOINT,
+    DRAFT_FILE_LABEL,
 } from '../../../../../constants';
-import ConnectedManifestDraftFiles from '../../../../../formConfig/Manifest/DraftFiles';
 import { generateOptions } from '../../../../../services/opensrp';
 
 /**simple wrapper for manifest file lists component */
@@ -26,7 +27,7 @@ export const ManifestDraftFiles = () => {
 
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}> Draft Files</h4>
+            <h4 style={{ marginBottom: '30px' }}>{DRAFT_FILE_LABEL}</h4>
             <ConnectedManifestDraftFiles {...ManifestFilesListProps} />
         </div>
     );

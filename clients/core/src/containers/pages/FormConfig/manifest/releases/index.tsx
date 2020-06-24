@@ -1,5 +1,5 @@
 import React from 'react';
-import ConnectedManifestReleases from '../../../../../formConfig/Manifest/Releases';
+import { ConnectedManifestReleases } from '@opensrp/form-config';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import Loading from '../../../../../components/page/Loading';
 import {
@@ -7,6 +7,7 @@ import {
     VIEW_RELEASE_PAGE_URL,
     MANIFEST_FILE_UPLOAD,
     FILE_UPLOAD_TYPE,
+    RELEASES_LABEL,
 } from '../../../../../constants';
 import { generateOptions } from '../../../../../services/opensrp';
 
@@ -22,7 +23,7 @@ export const ManifestReleasesPage = () => {
     };
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>Releases</h4>
+            <h4 style={{ marginBottom: '30px' }}>{RELEASES_LABEL}</h4>
             <ConnectedManifestReleases {...manifestReleasesProps} />
         </div>
     );

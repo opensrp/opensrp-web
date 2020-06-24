@@ -1,5 +1,5 @@
 import React from 'react';
-import ConnectedUploadConfigFile from '../../../../../formConfig/Manifest/UploadFile';
+import { ConnectedUploadConfigFile } from '@opensrp/form-config';
 import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
 import { generateOptions } from '../../../../../services/opensrp';
 import Loading from '../../../../../components/page/Loading';
@@ -8,6 +8,8 @@ import {
     VIEW_DRAFT_FILES_PAGE_URL,
     VALIDATOR_UPLOAD_TYPE,
     VIEW_JSON_VALIDATORS_PAGE_URL,
+    EDIT_FILE_LABEL,
+    UPLOAD_FILE_LABLE,
 } from '../../../../../constants';
 import { connect } from 'react-redux';
 import { Store } from 'redux';
@@ -32,10 +34,10 @@ const UploadConfigFilePage = (props: Pageprops) => {
         validatorsUrl: VIEW_JSON_VALIDATORS_PAGE_URL,
     };
 
-    const titleAction = formId ? 'Edit' : 'Upload';
+    const titleAction = formId ? EDIT_FILE_LABEL : UPLOAD_FILE_LABLE;
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{titleAction} File</h4>
+            <h4 style={{ marginBottom: '30px' }}>{titleAction}</h4>
             <ConnectedUploadConfigFile {...uploadConfigFileProps} />
         </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConnectedManifestFilesList } from '@opensrp/form-config';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
@@ -9,12 +10,11 @@ import {
     OPENSRP_MANIFEST_FORMS_ENDPOINT,
     OPENSRP_FORMS_ENDPOINT,
     FILE_UPLOAD_TYPE,
+    RELEASE_FILE_LABEL,
 } from '../../../../../constants';
-import ConnectedManifestFilesList from '../../../../../formConfig/Manifest/FilesList';
 import { generateOptions } from '../../../../../services/opensrp';
 
 /**manifest files props interface */
-
 interface ManifestFilesProps {
     formVersion: string;
 }
@@ -36,7 +36,7 @@ const ManifestFiles = (props: ManifestFilesProps) => {
 
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}> Release Files</h4>
+            <h4 style={{ marginBottom: '30px' }}>{RELEASE_FILE_LABEL}</h4>
             <ConnectedManifestFilesList {...manifestFilesListProps} />
         </div>
     );

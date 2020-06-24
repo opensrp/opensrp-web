@@ -92,6 +92,20 @@ export const FILE_UPLOAD_TYPE = 'file-upload';
 export type FILE_UPLOAD_TYPE = typeof FILE_UPLOAD_TYPE;
 export const VALIDATOR_UPLOAD_TYPE = 'validator_upload';
 export type VALIDATOR_UPLOAD_TYPE = typeof VALIDATOR_UPLOAD_TYPE;
+export const FIND_VALIDATOR_FILE = 'Find Validator File';
+export type FIND_VALIDATOR_FILE = typeof FIND_VALIDATOR_FILE;
+export const JSON_VALIDATOR_LABLE = 'JSON Validators';
+export type JSON_VALIDATOR_LABLE = typeof JSON_VALIDATOR_LABLE;
+export const DRAFT_FILE_LABEL = 'Draft Files';
+export type DRAFT_FILE_LABEL = typeof DRAFT_FILE_LABEL;
+export const RELEASE_FILE_LABEL = 'Release Files';
+export type RELEASE_FILE_LABEL = typeof RELEASE_FILE_LABEL;
+export const RELEASES_LABEL = 'Releases';
+export type RELEASES_LABEL = typeof RELEASES_LABEL;
+export const EDIT_FILE_LABEL = 'Edit File';
+export type EDIT_FILE_LABEL = typeof EDIT_FILE_LABEL;
+export const UPLOAD_FILE_LABLE = 'Upload File';
+export type UPLOAD_FILE_LABLE = typeof UPLOAD_FILE_LABLE;
 
 // url constants
 export const PAGINATION_SIZE = 10;
