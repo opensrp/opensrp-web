@@ -1,0 +1,16 @@
+export declare const MAKE_RELEASE_LABEL = "Make Release";
+export declare const FILE_NAME_LABEL = "File Name";
+export declare const FILE_VERSION_LABEL = "File Version";
+export declare const IDENTIFIER_LABEL = "Identifier";
+export declare const MODULE_LABEL = "Module";
+export declare const EDIT_LABEL = "Edit";
+export declare const DOWNLOAD_LABEL = "Download";
+export declare const UPLOAD_EDIT_LABEL = "Upload edit";
+export declare const UPOL0AD_FILE_LABEL = "Upload New File";
+export declare const VIEW_FILES_LABEL = "View Files";
+export declare const APP_ID_LABEL = "APP Id";
+export declare const APP_VERSION_LABEL = "App Version";
+export declare const RELATED_TO_LABEL = "Related to";
+export declare const FILE_UPLOAD_LABEL = "Upload file";
+export declare const FORM_REQUIRED_LABEL = "Form is required";
+export declare const FORM_NAME_REQUIRED_LABEL = "Form name is required";

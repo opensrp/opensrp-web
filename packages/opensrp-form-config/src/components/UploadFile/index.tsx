@@ -203,7 +203,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
 };
 
 /**default props */
-const defaultProp: DefaultProps = {
+const defaultProps: DefaultProps = {
     fileNameLabel: FILE_NAME_LABEL,
     fileUploadLabel: FILE_UPLOAD_LABEL,
     formData: null,
@@ -214,11 +214,7 @@ const defaultProp: DefaultProps = {
     relatedToLabel: RELATED_TO_LABEL,
 };
 
-UploadConfigFile.defaultProp = defaultProp;
-interface MapStateToProps {
-    formData: ManifestFilesTypes | null;
-    formInitialValues: InitialValuesTypes;
-}
+UploadConfigFile.defaultProps = defaultProps;
 
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
@@ -241,7 +237,8 @@ const mapStateToProps = (state: Partial<Store>, ownProps: any): DefaultProps => 
         };
     }
     return {
-        ...defaultProp,
+        ...defaultProps,
+        ...ownProps,
         formData,
         formInitialValues,
     };
