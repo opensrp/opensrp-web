@@ -13,15 +13,11 @@ import {
     RELEASE_FILE_LABEL,
 } from '../../../../../constants';
 import { generateOptions } from '../../../../../services/opensrp';
-
-/**manifest files props interface */
-interface ManifestFilesProps {
-    formVersion: string;
-}
+import { RouteParams } from '../../../../../helpers/utils';
 
 /**simple wrapper for manifest file lists component */
-const ManifestFiles = (props: ManifestFilesProps) => {
-    const { formVersion } = props;
+export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
+    const formVersion = props.match.params.id || '';
     const manifestFilesListProps = {
         baseURL: OPENSRP_API_BASE_URL,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
@@ -41,19 +37,3 @@ const ManifestFiles = (props: ManifestFilesProps) => {
         </div>
     );
 };
-
-/** Map props to state
- * @param {Partial<Store>} -  the  redux store
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mapStateToProps = (_: Partial<Store>, ownProps: RouteComponentProps<any>): ManifestFilesProps => {
-    const formVersion = ownProps.match.params.id;
-    return {
-        formVersion,
-    };
-};
-
-/** Connected ManifestFiles component */
-const ConnectedManifestFiles = connect(mapStateToProps)(ManifestFiles);
-
-export default ConnectedManifestFiles;

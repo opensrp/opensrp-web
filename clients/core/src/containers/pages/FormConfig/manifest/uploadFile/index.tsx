@@ -11,17 +11,12 @@ import {
     EDIT_FILE_LABEL,
     UPLOAD_FILE_LABLE,
 } from '../../../../../constants';
-import { connect } from 'react-redux';
-import { Store } from 'redux';
 import { RouteComponentProps } from 'react-router';
+import { RouteParams } from '../../../../../helpers/utils';
 
-interface Pageprops {
-    formId: string | null;
-    isJsonValidator: boolean;
-}
-
-const UploadConfigFilePage = (props: Pageprops) => {
-    const { formId, isJsonValidator } = props;
+export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) => {
+    const formId = props.match.params.id || null;
+    const isJsonValidator = props.match.params.type === VALIDATOR_UPLOAD_TYPE;
 
     const uploadConfigFileProps = {
         baseURL: OPENSRP_API_BASE_URL,
@@ -42,21 +37,3 @@ const UploadConfigFilePage = (props: Pageprops) => {
         </div>
     );
 };
-
-/** Map props to state
- * @param {Partial<Store>} -  the  redux store
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mapStateToProps = (_: Partial<Store>, ownProps: RouteComponentProps<any>): Pageprops => {
-    const formId = ownProps.match.params.id || null;
-    const isJsonValidator = ownProps.match.params.type === VALIDATOR_UPLOAD_TYPE;
-    return {
-        formId,
-        isJsonValidator,
-    };
-};
-
-/** Connected UploadConfigFilePage component */
-const ConnectedUploadConfigFilePage = connect(mapStateToProps)(UploadConfigFilePage);
-
-export default ConnectedUploadConfigFilePage;

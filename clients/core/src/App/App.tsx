@@ -29,9 +29,9 @@ import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
 import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/releases';
-import ConnectedManifestFiles from '../containers/pages/FormConfig/manifest/filesList';
+import { ManifestFiles } from '../containers/pages/FormConfig/manifest/filesList';
 import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators';
-import ConnectedUploadConfigFilePage from '../containers/pages/FormConfig/manifest/uploadFile';
+import { UploadConfigFilePage } from '../containers/pages/FormConfig/manifest/uploadFile';
 import { ManifestDraftFiles } from '../containers/pages/FormConfig/manifest/draftFiles';
 
 library.add(faUser, faChartLine, faCog, faSearch);
@@ -76,7 +76,7 @@ class App extends Component {
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={`${VIEW_RELEASE_PAGE_URL}/:id`}
-                                component={ConnectedManifestFiles}
+                                component={ManifestFiles}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
@@ -88,13 +88,13 @@ class App extends Component {
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={`${MANIFEST_FILE_UPLOAD}/:type`}
-                                component={ConnectedUploadConfigFilePage}
+                                component={UploadConfigFilePage}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={`${MANIFEST_FILE_UPLOAD}/:type/:id`}
-                                component={ConnectedUploadConfigFilePage}
+                                component={UploadConfigFilePage}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
