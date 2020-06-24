@@ -8,8 +8,10 @@ import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import filesReducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
-import { fixManifestFiles } from '../../../ducks/tests.ts/fixtures';
+import { fixManifestFiles } from '../../../ducks/tests/fixtures';
 import sampleFile from './sampleFile.json';
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const fetch = require('jest-fetch-mock');
 
 /** register the reducers */
 reducerRegistry.register(filesReducerName, filesReducer);
@@ -73,10 +75,7 @@ describe('components/UploadFile', () => {
         await flushPromises();
         wrapper.update();
 
-        expect((global as any).fetch).toHaveBeenCalledWith(
-            'https://test-example.com/rest/forms/upload',
-            expect.any(Object),
-        );
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/forms/upload', expect.any(Object));
     });
 
     it('edits form correctly', async () => {
@@ -109,9 +108,6 @@ describe('components/UploadFile', () => {
         await flushPromises();
         wrapper.update();
 
-        expect((global as any).fetch).toHaveBeenCalledWith(
-            'https://test-example.com/rest/forms/upload',
-            expect.any(Object),
-        );
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/forms/upload', expect.any(Object));
     });
 });

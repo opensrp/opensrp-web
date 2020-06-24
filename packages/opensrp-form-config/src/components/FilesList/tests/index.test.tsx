@@ -8,7 +8,7 @@ import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import filesReducer, { fetchManifestFiles, filesReducerName } from '../../../ducks/manifestFiles';
-import { fixManifestFiles, downloadFile } from '../../../ducks/tests.ts/fixtures';
+import { fixManifestFiles, downloadFile } from '../../../ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
 import _ from 'lodash';
