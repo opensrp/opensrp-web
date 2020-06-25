@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { VIEW } from '../../../../../constants';
+import { VIEW, CHILD_URL, CHILD_PROFILE_URL, CLIENT_PROFILE_URL } from '../../../../../constants';
 import { UseTableCellProps } from 'react-table';
 import { Client } from '../../../../../store/ducks/clients';
+import { calculateAgeFromBirthdate } from '../../../../../helpers/utils';
 // Child specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useMemberTableColumns = () => {
@@ -26,8 +27,12 @@ export const useMemberTableColumns = () => {
                         disableSortBy: true,
                     },
                     {
+                        // eslint-disable-next-line react/display-name
+                        Cell: ({ row: { values } }: UseTableCellProps<Client>): ReturnType<React.FC> => (
+                            <>{calculateAgeFromBirthdate(values.birthdate)}</>
+                        ),
                         Header: 'Age',
-                        accessor: 'attributes.dynamicProperties.age_year_part',
+                        accessor: 'birthdate',
                     },
 
                     {
@@ -39,14 +44,16 @@ export const useMemberTableColumns = () => {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Client>): ReturnType<React.FC> => (
                             <>
-                                <Link to={`${values.baseEntityId}`}>{VIEW}</Link>{' '}
-                                <Link className="remove-action" to={`#`}>
-                                    Remove
-                                </Link>
+                                {console.log({ values })}
+                                {calculateAgeFromBirthdate(values.birthdate) < 6 ? (
+                                    <Link to={`${CHILD_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
+                                ) : (
+                                    <Link to={`${CLIENT_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
+                                )}
                             </>
                         ),
                         Header: 'Actions',
-                        accessor: '',
+                        accessor: 'baseEntityId',
                         disableSortBy: true,
                     },
                 ],

@@ -37,6 +37,11 @@ export function calculateAge(dob: number) {
     return Math.abs(date.getUTCFullYear() - new Date().getFullYear());
 }
 
+export function calculateAgeFromBirthdate(dob: string) {
+    if (dob === null || dob === undefined || dob === '') return 6;
+    return calculateAge(new Date(dob).getTime());
+}
+
 /**
  *
  * @param startDate = yyyy-MM-DD
