@@ -23,6 +23,8 @@ import {
     FIND_RELEASES_LABEL,
     UPDATED_AT_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
 
 /** Register reducer */
 reducerRegistry.register(releasesReducerName, releasesReducer);
@@ -117,6 +119,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         {
             Header: updatedAt,
             accessor: 'updatedAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
         },
         {
             Header: ' ',

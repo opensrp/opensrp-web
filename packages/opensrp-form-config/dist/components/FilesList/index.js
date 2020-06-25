@@ -37,6 +37,8 @@ var _reactstrap = require("reactstrap");
 
 var _constants = require("../../constants");
 
+var _utils = require("../../helpers/utils");
+
 _reduxReducerRegistry["default"].register(_manifestFiles.filesReducerName, _manifestFiles["default"]);
 
 var ManifestFilesList = function ManifestFilesList(props) {
@@ -63,7 +65,7 @@ var ManifestFilesList = function ManifestFilesList(props) {
       uploadEditLabel = props.uploadEditLabel,
       downloadLabel = props.downloadLabel,
       uploadFileLabel = props.uploadFileLabel,
-      updatedAt = props.updatedAt;
+      createdAt = props.createdAt;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -184,10 +186,18 @@ var ManifestFilesList = function ManifestFilesList(props) {
     accessor: "label"
   }, {
     Header: fileVersionLabel,
-    accessor: "version"
+    accessor: "version",
+    maxWidth: 100
   }, {
-    Header: updatedAt,
-    accessor: 'updatedAt'
+    Header: createdAt,
+    accessor: 'createdAt',
+    Cell: function Cell(_ref3) {
+      var value = _ref3.value;
+      return function () {
+        return _react["default"].createElement("span", null, (0, _utils.formatDate)(value));
+      }();
+    },
+    maxWidth: 100
   }, {
     Header: moduleLabel,
     accessor: function accessor(obj) {
@@ -195,13 +205,15 @@ var ManifestFilesList = function ManifestFilesList(props) {
         return _react["default"].createElement("span", null, obj.module || '_');
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 100
   }, {
     Header: editLabel,
     accessor: function accessor(obj) {
       return linkToEditFile(obj);
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }, {
     Header: ' ',
     accessor: function accessor(obj) {
@@ -214,7 +226,8 @@ var ManifestFilesList = function ManifestFilesList(props) {
         }, downloadLabel);
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }];
 
   if (isJsonValidator) {
@@ -251,6 +264,7 @@ var ManifestFilesList = function ManifestFilesList(props) {
 
 exports.ManifestFilesList = ManifestFilesList;
 var defaultProps = {
+  createdAt: _constants.CREATED_AT_LABEL,
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,
@@ -262,7 +276,6 @@ var defaultProps = {
   moduleLabel: _constants.MODULE_LABEL,
   placeholder: _constants.FIND_FILES_LABEL,
   removeFiles: _manifestFiles.removeManifestFiles,
-  updatedAt: _constants.UPDATED_AT_LABEL,
   uploadEditLabel: _constants.UPLOAD_EDIT_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL
 };

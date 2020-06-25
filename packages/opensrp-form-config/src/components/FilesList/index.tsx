@@ -26,14 +26,17 @@ import {
     UPOL0AD_FILE_LABEL,
     MODULE_LABEL,
     FIND_FILES_LABEL,
-    UPDATED_AT_LABEL,
+    CREATED_AT_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
 
 /** Register reducer */
 reducerRegistry.register(filesReducerName, filesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
     editLabel: string;
@@ -43,7 +46,6 @@ interface DefaultProps extends SearchBarDefaultProps {
     identifierLabel: string;
     moduleLabel: string;
     removeFiles: typeof removeManifestFiles;
-    updatedAt: string;
     uploadEditLabel: string;
     uploadFileLabel: string;
 }
@@ -84,7 +86,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         uploadEditLabel,
         downloadLabel,
         uploadFileLabel,
-        updatedAt,
+        createdAt,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -181,20 +183,25 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         {
             Header: fileVersionLabel,
             accessor: `version`,
+            maxWidth: 100,
         },
         {
-            Header: updatedAt,
-            accessor: 'updatedAt',
+            Header: createdAt,
+            accessor: 'createdAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
+            maxWidth: 100,
         },
         {
             Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
+            maxWidth: 100,
         },
         {
             Header: editLabel,
             accessor: (obj: ManifestFilesTypes) => linkToEditFile(obj),
             disableSortBy: true,
+            maxWidth: 80,
         },
         {
             Header: ' ',
@@ -205,6 +212,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                     </a>
                 ))(),
             disableSortBy: true,
+            maxWidth: 80,
         },
     ];
 
@@ -250,6 +258,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 
 /** declear default props */
 const defaultProps: DefaultProps = {
+    createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
@@ -261,7 +270,6 @@ const defaultProps: DefaultProps = {
     moduleLabel: MODULE_LABEL,
     placeholder: FIND_FILES_LABEL,
     removeFiles: removeManifestFiles,
-    updatedAt: UPDATED_AT_LABEL,
     uploadEditLabel: UPLOAD_EDIT_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,
 };

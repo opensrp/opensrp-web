@@ -25,6 +25,8 @@ import {
     FIND_DRAFT_RELEASES_LABEL,
     CREATED_AT_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
@@ -109,7 +111,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
      */
     const onMakeReleaseClick = async (e: MouseEvent) => {
         e.preventDefault();
-        const { headers } = getPayload(new AbortController().signal, 'POST');
         const identifiers = data.map(form => form.identifier);
         const json = {
             /* eslint-disable-next-line @typescript-eslint/camelcase */
@@ -185,11 +186,14 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         {
             Header: createdAt,
             accessor: 'createdAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
+            maxWidth: 100,
         },
         {
             Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
+            maxWidth: 80,
         },
         {
             Header: ' ',
@@ -200,6 +204,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                     </a>
                 ))(),
             disableSortBy: true,
+            maxWidth: 80,
         },
     ];
 

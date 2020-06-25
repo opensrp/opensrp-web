@@ -35,6 +35,8 @@ var _reactstrap = require("reactstrap");
 
 var _constants = require("../../constants");
 
+var _utils = require("../../helpers/utils");
+
 _reduxReducerRegistry["default"].register(_manifestReleases.releasesReducerName, _manifestReleases["default"]);
 
 var ManifestReleases = function ManifestReleases(props) {
@@ -128,7 +130,13 @@ var ManifestReleases = function ManifestReleases(props) {
     }
   }, {
     Header: updatedAt,
-    accessor: 'updatedAt'
+    accessor: 'updatedAt',
+    Cell: function Cell(_ref2) {
+      var value = _ref2.value;
+      return function () {
+        return _react["default"].createElement("span", null, (0, _utils.formatDate)(value));
+      }();
+    }
   }, {
     Header: ' ',
     accessor: function accessor(obj) {

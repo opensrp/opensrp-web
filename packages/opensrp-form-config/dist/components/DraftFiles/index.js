@@ -37,6 +37,8 @@ var _reactRouter = require("react-router");
 
 var _constants = require("../../constants");
 
+var _utils = require("../../helpers/utils");
+
 _reduxReducerRegistry["default"].register(_manifestDraftFiles.draftReducerName, _manifestDraftFiles["default"]);
 
 var ManifestDraftFiles = function ManifestDraftFiles(props) {
@@ -219,7 +221,14 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     accessor: "version"
   }, {
     Header: createdAt,
-    accessor: 'createdAt'
+    accessor: 'createdAt',
+    Cell: function Cell(_ref4) {
+      var value = _ref4.value;
+      return function () {
+        return _react["default"].createElement("span", null, (0, _utils.formatDate)(value));
+      }();
+    },
+    maxWidth: 100
   }, {
     Header: moduleLabel,
     accessor: function accessor(obj) {
@@ -227,7 +236,8 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
         return _react["default"].createElement("span", null, obj.module || '_');
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }, {
     Header: ' ',
     accessor: function accessor(obj) {
@@ -240,7 +250,8 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
         }, downloadLabel);
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }];
   var DrillDownTableProps = {
     columns: columns,
