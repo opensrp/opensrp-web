@@ -59,6 +59,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         debounceTime,
         placeholder,
         fetchDraftFiles,
+        clearDraftFiles,
         customAlert,
         downloadEndPoint,
         releasesUrl,
@@ -106,7 +107,6 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
      */
     const onMakeReleaseClick = async (e: MouseEvent) => {
         e.preventDefault();
-        const { headers } = getPayload(new AbortController().signal, 'POST');
         const identifiers = data.map(form => form.identifier);
         const json = {
             /* eslint-disable-next-line @typescript-eslint/camelcase */
@@ -116,7 +116,10 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         const clientService = new OpenSRPService(baseURL, manifestEndPoint, getPayload);
         await clientService
             .create({ json: JSON.stringify(json) })
-            .then(() => setIfDoneHere(true))
+            .then(() => {
+                clearDraftFiles();
+                setIfDoneHere(true);
+            })
             .catch(err => {
                 customAlert && customAlert(String(err), { type: 'error' });
             });
