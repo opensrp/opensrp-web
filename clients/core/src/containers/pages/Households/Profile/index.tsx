@@ -31,6 +31,7 @@ import householdsReducer, {
     fetchHouseholds,
     getHouseholdsArray,
     Household,
+    removeHouseholds,
     reducerName as householdReducerName,
 } from '../../../../store/ducks/households';
 import './householdProfile.css';
@@ -78,6 +79,7 @@ export interface HouseholdProfileProps extends RouteComponentProps<HouseholdProf
     fetchEvents: typeof fetchEvents;
     removeMembers: typeof removeClients;
     opensrpService: typeof OpenSRPService;
+    removeClient: typeof removeHouseholds;
 }
 
 const matchVariable: match<{ id: string }> = {
@@ -99,13 +101,22 @@ export const defaultProfileProps: HouseholdProfileProps = {
     history: createMemoryHistory(),
     location: createLocation(matchVariable.url),
     match: matchVariable,
+    removeClient: removeHouseholds,
 };
 
 class HouseholdProfile extends React.Component<HouseholdProfileProps> {
     public static defaultProps: HouseholdProfileProps = defaultProfileProps;
 
     public async componentDidMount(): Promise<void> {
-        const { fetchClient, fetchMembers, fetchEvents, match, removeMembers, opensrpService } = this.props;
+        const {
+            fetchClient,
+            fetchMembers,
+            fetchEvents,
+            match,
+            removeMembers,
+            opensrpService,
+            removeClient,
+        } = this.props;
         const householdId = match.params.id;
 
         console.log('paramsId --->', match.params.id);
@@ -114,6 +125,7 @@ class HouseholdProfile extends React.Component<HouseholdProfileProps> {
         const clientResponse = await clientService.list(params);
 
         if (clientResponse[0]) {
+            removeClient();
             fetchClient(clientResponse);
             const eventService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_EVENT_ENDPOINT, generateOptions);
             const eventsResponse = await eventService.list(params);
@@ -210,6 +222,7 @@ const mapDispatchToProps = {
     fetchEvents: fetchEvents,
     fetchMembers: fetchClients,
     removeMembers: removeClients,
+    removeClient: removeHouseholds,
 };
 
 const ConnectedHouseholdProfile = withRouter(connect(mapStateToProps, mapDispatchToProps)(HouseholdProfile));
