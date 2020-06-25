@@ -7,7 +7,11 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import draftReducer, { fetchManifestDraftFiles, draftReducerName } from '../../../ducks/manifestDraftFiles';
+import draftReducer, {
+    fetchManifestDraftFiles,
+    draftReducerName,
+    getAllManifestDraftFilesArray,
+} from '../../../ducks/manifestDraftFiles';
 import { FixManifestDraftFiles, downloadFile } from '../../../ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
@@ -98,6 +102,7 @@ describe('components/ManifestReleases', () => {
 
         // test creating manifest file
         wrapper.find('Button').simulate('click');
+        await flushPromises();
         const postData = {
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
@@ -111,5 +116,7 @@ describe('components/ManifestReleases', () => {
             method: 'POST',
         };
         expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/manifest', postData);
+        // should clear drafts in store on publish
+        expect(getAllManifestDraftFilesArray(store.getState())).toEqual([]);
     });
 });
