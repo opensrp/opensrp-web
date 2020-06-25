@@ -73,7 +73,7 @@ describe('components/ManifestReleases', () => {
             .find('.tbody .tr')
             .at(0)
             .find('.td')
-            .at(3)
+            .at(4)
             .find('a');
         expect(toJson(viewFiledCell)).toMatchSnapshot();
         expect(viewFiledCell.text()).toEqual('View Files');

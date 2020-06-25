@@ -17,6 +17,11 @@ Object {
       "accessor": [Function],
     },
     Object {
+      "Cell": [Function],
+      "Header": "Updated at",
+      "accessor": "updatedAt",
+    },
+    Object {
       "Header": " ",
       "accessor": [Function],
       "disableSortBy": true,

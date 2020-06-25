@@ -105,7 +105,7 @@ describe('components/manifestFiles', () => {
             .find('.tbody .tr')
             .at(0)
             .find('.td')
-            .at(4)
+            .at(5)
             .find('a');
         expect(downloadFiledCell.text()).toEqual('Download');
         expect(toJson(downloadFiledCell)).toMatchSnapshot();

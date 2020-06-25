@@ -17,14 +17,22 @@ Object {
       "accessor": "version",
     },
     Object {
+      "Cell": [Function],
+      "Header": "Created at",
+      "accessor": "createdAt",
+      "maxWidth": 100,
+    },
+    Object {
       "Header": "Module",
       "accessor": [Function],
       "disableSortBy": true,
+      "maxWidth": 80,
     },
     Object {
       "Header": " ",
       "accessor": [Function],
       "disableSortBy": true,
+      "maxWidth": 80,
     },
   ],
   "data": Array [
