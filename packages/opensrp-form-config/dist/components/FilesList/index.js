@@ -62,7 +62,8 @@ var ManifestFilesList = function ManifestFilesList(props) {
       editLabel = props.editLabel,
       uploadEditLabel = props.uploadEditLabel,
       downloadLabel = props.downloadLabel,
-      uploadFileLabel = props.uploadFileLabel;
+      uploadFileLabel = props.uploadFileLabel,
+      updatedAt = props.updatedAt;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -185,6 +186,9 @@ var ManifestFilesList = function ManifestFilesList(props) {
     Header: fileVersionLabel,
     accessor: "version"
   }, {
+    Header: updatedAt,
+    accessor: 'updatedAt'
+  }, {
     Header: moduleLabel,
     accessor: function accessor(obj) {
       return function () {
@@ -258,6 +262,7 @@ var defaultProps = {
   moduleLabel: _constants.MODULE_LABEL,
   placeholder: _constants.FIND_FILES_LABEL,
   removeFiles: _manifestFiles.removeManifestFiles,
+  updatedAt: _constants.UPDATED_AT_LABEL,
   uploadEditLabel: _constants.UPLOAD_EDIT_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL
 };

@@ -23,6 +23,7 @@ import {
     MODULE_LABEL,
     DOWNLOAD_LABEL,
     FIND_DRAFT_RELEASES_LABEL,
+    CREATED_AT_LABEL,
 } from '../../constants';
 
 /** Register reducer */
@@ -31,6 +32,7 @@ reducerRegistry.register(draftReducerName, DraftFilesReducer);
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof fetchManifestDraftFiles;
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
@@ -69,6 +71,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         fileVersionLabel,
         moduleLabel,
         downloadLabel,
+        createdAt,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -180,6 +183,10 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             accessor: `version`,
         },
         {
+            Header: createdAt,
+            accessor: 'createdAt',
+        },
+        {
             Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
@@ -233,6 +240,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 /** declear default props */
 const defaultProps: DefaultProps = {
     clearDraftFiles: fetchManifestDraftFiles,
+    createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,

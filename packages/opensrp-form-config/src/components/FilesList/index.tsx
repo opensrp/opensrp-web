@@ -26,6 +26,7 @@ import {
     UPOL0AD_FILE_LABEL,
     MODULE_LABEL,
     FIND_FILES_LABEL,
+    UPDATED_AT_LABEL,
 } from '../../constants';
 
 /** Register reducer */
@@ -42,6 +43,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     identifierLabel: string;
     moduleLabel: string;
     removeFiles: typeof removeManifestFiles;
+    updatedAt: string;
     uploadEditLabel: string;
     uploadFileLabel: string;
 }
@@ -82,6 +84,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         uploadEditLabel,
         downloadLabel,
         uploadFileLabel,
+        updatedAt,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -180,6 +183,10 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             accessor: `version`,
         },
         {
+            Header: updatedAt,
+            accessor: 'updatedAt',
+        },
+        {
             Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
@@ -254,6 +261,7 @@ const defaultProps: DefaultProps = {
     moduleLabel: MODULE_LABEL,
     placeholder: FIND_FILES_LABEL,
     removeFiles: removeManifestFiles,
+    updatedAt: UPDATED_AT_LABEL,
     uploadEditLabel: UPLOAD_EDIT_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,
 };

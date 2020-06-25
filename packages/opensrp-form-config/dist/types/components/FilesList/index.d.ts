@@ -13,6 +13,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     identifierLabel: string;
     moduleLabel: string;
     removeFiles: typeof removeManifestFiles;
+    updatedAt: string;
     uploadEditLabel: string;
     uploadFileLabel: string;
 }
@@ -35,5 +36,5 @@ declare const ConnectedManifestFilesList: import("react-redux").ConnectedCompone
     (props: ManifestFilesListProps): JSX.Element;
     /** pass default props to component */
     defaultProps: DefaultProps;
-}, Pick<ManifestFilesListProps, "isJsonValidator" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
+}, Pick<ManifestFilesListProps, "isJsonValidator" | "updatedAt" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
 export { ManifestFilesList, ConnectedManifestFilesList };

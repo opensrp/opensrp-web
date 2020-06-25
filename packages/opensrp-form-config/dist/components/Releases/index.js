@@ -54,7 +54,8 @@ var ManifestReleases = function ManifestReleases(props) {
       appIdLabel = props.appIdLabel,
       viewFilesLabel = props.viewFilesLabel,
       uploadFileLabel = props.uploadFileLabel,
-      identifierLabel = props.identifierLabel;
+      identifierLabel = props.identifierLabel,
+      updatedAt = props.updatedAt;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -126,6 +127,9 @@ var ManifestReleases = function ManifestReleases(props) {
       return "V".concat(obj.appVersion);
     }
   }, {
+    Header: updatedAt,
+    accessor: 'updatedAt'
+  }, {
     Header: ' ',
     accessor: function accessor(obj) {
       return linkToFiles(obj);
@@ -177,6 +181,7 @@ var defaultProps = {
   formUploadUrl: '',
   identifierLabel: _constants.IDENTIFIER_LABEL,
   placeholder: _constants.FIND_RELEASES_LABEL,
+  updatedAt: _constants.UPDATED_AT_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL,
   viewFilesLabel: _constants.VIEW_FILES_LABEL
 };

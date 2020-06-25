@@ -18,3 +18,5 @@ export declare const FIND_DRAFT_RELEASES_LABEL = "Find Draft Files";
 export declare const FIND_FILES_LABEL = "Find Files";
 export declare const FIND_RELEASES_LABEL = "Find Release";
 export declare const SEARCH_LABEL = "Search";
+export declare const CREATED_AT_LABEL = "Created at";
+export declare const UPDATED_AT_LABEL = "Updated at";

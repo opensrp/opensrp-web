@@ -21,6 +21,7 @@ import {
     UPOL0AD_FILE_LABEL,
     IDENTIFIER_LABEL,
     FIND_RELEASES_LABEL,
+    UPDATED_AT_LABEL,
 } from '../../constants';
 
 /** Register reducer */
@@ -34,6 +35,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
     formUploadUrl: string;
+    updatedAt: string;
     uploadFileLabel: string;
     viewFilesLabel: string;
 }
@@ -64,6 +66,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         viewFilesLabel,
         uploadFileLabel,
         identifierLabel,
+        updatedAt,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -110,6 +113,10 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         {
             Header: appVersionLabel,
             accessor: (obj: ManifestReleasesTypes) => `V${obj.appVersion}`,
+        },
+        {
+            Header: updatedAt,
+            accessor: 'updatedAt',
         },
         {
             Header: ' ',
@@ -173,6 +180,7 @@ const defaultProps: DefaultProps = {
     formUploadUrl: '',
     identifierLabel: IDENTIFIER_LABEL,
     placeholder: FIND_RELEASES_LABEL,
+    updatedAt: UPDATED_AT_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,
     viewFilesLabel: VIEW_FILES_LABEL,
 };

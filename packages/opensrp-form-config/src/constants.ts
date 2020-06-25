@@ -18,3 +18,5 @@ export const FIND_DRAFT_RELEASES_LABEL = 'Find Draft Files';
 export const FIND_FILES_LABEL = 'Find Files';
 export const FIND_RELEASES_LABEL = 'Find Release';
 export const SEARCH_LABEL = 'Search';
+export const CREATED_AT_LABEL = 'Created at';
+export const UPDATED_AT_LABEL = 'Updated at';

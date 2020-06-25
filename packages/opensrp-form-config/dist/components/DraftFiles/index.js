@@ -57,7 +57,8 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
       fileNameLabel = props.fileNameLabel,
       fileVersionLabel = props.fileVersionLabel,
       moduleLabel = props.moduleLabel,
-      downloadLabel = props.downloadLabel;
+      downloadLabel = props.downloadLabel,
+      createdAt = props.createdAt;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -217,6 +218,9 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     Header: fileVersionLabel,
     accessor: "version"
   }, {
+    Header: createdAt,
+    accessor: 'createdAt'
+  }, {
     Header: moduleLabel,
     accessor: function accessor(obj) {
       return function () {
@@ -270,6 +274,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 exports.ManifestDraftFiles = ManifestDraftFiles;
 var defaultProps = {
   clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  createdAt: _constants.CREATED_AT_LABEL,
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,

@@ -6,6 +6,7 @@ import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof fetchManifestDraftFiles;
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
@@ -32,5 +33,5 @@ declare const ConnectedManifestDraftFiles: import("react-redux").ConnectedCompon
     (props: ManifestDraftFilesProps): JSX.Element;
     /** pass default props to component */
     defaultProps: DefaultProps;
-}, Pick<ManifestDraftFilesProps, "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "downloadLabel" | "fileVersionLabel" | "downloadEndPoint" | "makeReleaseLabel" | "manifestEndPoint" | "releasesUrl">>;
+}, Pick<ManifestDraftFilesProps, "createdAt" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "downloadLabel" | "fileVersionLabel" | "downloadEndPoint" | "makeReleaseLabel" | "manifestEndPoint" | "releasesUrl">>;
 export { ManifestDraftFiles, ConnectedManifestDraftFiles };
