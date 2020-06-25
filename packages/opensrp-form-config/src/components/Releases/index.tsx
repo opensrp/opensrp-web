@@ -36,7 +36,6 @@ interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestReleasesTypes[];
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
-    formUploadUrl: string;
     updatedAt: string;
     uploadFileLabel: string;
     viewFilesLabel: string;
@@ -45,6 +44,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 /** ManifestReleases props interface */
 interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
+    formUploadUrl: string;
     uploadTypeUrl: string;
 }
 
@@ -180,7 +180,6 @@ const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
     fetchReleases: fetchManifestReleases,
-    formUploadUrl: '',
     identifierLabel: IDENTIFIER_LABEL,
     placeholder: FIND_RELEASES_LABEL,
     updatedAt: UPDATED_AT_LABEL,

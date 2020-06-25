@@ -26,11 +26,12 @@ const props = {
     baseURL,
     endpoint,
     downloadEndPoint: 'formDownload',
-    fileUploadUrl: '/manifest',
+    formUploadUrl: '/manifest',
     getPayload: getFetchOptions,
     LoadingComponent: <div>Loading</div>,
     manifestEndPoint: 'manifest',
     releasesUrl: '/manifest/releases',
+    uploadTypeUrl: 'file-upload',
 };
 
 const actualDebounce = _.debounce;
@@ -107,5 +108,12 @@ describe('components/ManifestReleases', () => {
             method: 'POST',
         };
         expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/manifest', postData);
+
+        // upload file button test
+        const uploadBtn = wrapper.find('Col Link');
+        expect(uploadBtn.text()).toEqual('Upload New File');
+        uploadBtn.simulate('click');
+        await flushPromises();
+        expect(window.location.pathname).toEqual('/manifest/releases');
     });
 });

@@ -9,7 +9,6 @@ interface DefaultProps extends SearchBarDefaultProps {
     data: ManifestReleasesTypes[];
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
-    formUploadUrl: string;
     updatedAt: string;
     uploadFileLabel: string;
     viewFilesLabel: string;
@@ -17,6 +16,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 /** ManifestReleases props interface */
 interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
+    formUploadUrl: string;
     uploadTypeUrl: string;
 }
 /** view all manifest pages */
@@ -30,5 +30,5 @@ declare const ConnectedManifestReleases: import("react-redux").ConnectedComponen
     (props: ManifestReleasesProps & DefaultProps): JSX.Element;
     /** pass default props to component */
     defaultProps: DefaultProps;
-}, Pick<ManifestReleasesProps & DefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "identifierLabel" | "formUploadUrl" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "uploadTypeUrl">>;
+}, Pick<ManifestReleasesProps & DefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "identifierLabel" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "formUploadUrl" | "uploadTypeUrl">>;
 export { ManifestReleases, ConnectedManifestReleases };

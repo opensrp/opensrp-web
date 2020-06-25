@@ -12,7 +12,7 @@ import DraftFilesReducer, {
     draftReducerName,
     getAllManifestDraftFilesArray,
 } from '../../ducks/manifestDraftFiles';
-import { Button } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 import { Redirect } from 'react-router';
 import {
@@ -24,9 +24,11 @@ import {
     DOWNLOAD_LABEL,
     FIND_DRAFT_RELEASES_LABEL,
     CREATED_AT_LABEL,
+    UPOL0AD_FILE_LABEL,
 } from '../../constants';
 import { Cell } from 'react-table';
 import { formatDate } from '../../helpers/utils';
+import { Link } from 'react-router-dom';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
@@ -43,13 +45,16 @@ interface DefaultProps extends SearchBarDefaultProps {
     identifierLabel: string;
     makeReleaseLabel: string;
     moduleLabel: string;
+    uploadFileLabel: string;
 }
 
 /** manifest Draft files props interface */
 interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
     downloadEndPoint: string;
+    formUploadUrl: string;
     manifestEndPoint: string;
     releasesUrl: string;
+    uploadTypeUrl: string;
 }
 
 /** view manifest forms */
@@ -74,6 +79,9 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         moduleLabel,
         downloadLabel,
         createdAt,
+        uploadFileLabel,
+        formUploadUrl,
+        uploadTypeUrl,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -231,7 +239,16 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 
     return (
         <div>
-            <SearchBar {...searchBarProps} />
+            <Row>
+                <Col xs="8">
+                    <SearchBar {...searchBarProps} />
+                </Col>
+                <Col xs="4">
+                    <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
+                        {uploadFileLabel}
+                    </Link>
+                </Col>
+            </Row>
             <DrillDownTable {...DrillDownTableProps} />
             {data.length > 0 && (
                 <Button className="btn btn-md btn btn-primary float-right" color="primary" onClick={onMakeReleaseClick}>
@@ -256,6 +273,7 @@ const defaultProps: DefaultProps = {
     makeReleaseLabel: MAKE_RELEASE_LABEL,
     moduleLabel: MODULE_LABEL,
     placeholder: FIND_DRAFT_RELEASES_LABEL,
+    uploadFileLabel: UPOL0AD_FILE_LABEL,
 };
 
 /** pass default props to component */

@@ -39,6 +39,8 @@ var _constants = require("../../constants");
 
 var _utils = require("../../helpers/utils");
 
+var _reactRouterDom = require("react-router-dom");
+
 _reduxReducerRegistry["default"].register(_manifestDraftFiles.draftReducerName, _manifestDraftFiles["default"]);
 
 var ManifestDraftFiles = function ManifestDraftFiles(props) {
@@ -60,7 +62,10 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
       fileVersionLabel = props.fileVersionLabel,
       moduleLabel = props.moduleLabel,
       downloadLabel = props.downloadLabel,
-      createdAt = props.createdAt;
+      createdAt = props.createdAt,
+      uploadFileLabel = props.uploadFileLabel,
+      formUploadUrl = props.formUploadUrl,
+      uploadTypeUrl = props.uploadTypeUrl;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -122,14 +127,12 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 
   var onMakeReleaseClick = function () {
     var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2(e) {
-      var _getPayload, headers, identifiers, json, clientService;
-
+      var identifiers, json, clientService;
       return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              _getPayload = getPayload(new AbortController().signal, 'POST'), headers = _getPayload.headers;
               identifiers = data.map(function (form) {
                 return form.identifier;
               });
@@ -138,7 +141,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
                 identifiers: identifiers
               };
               clientService = new _serverService.OpenSRPService(baseURL, manifestEndPoint, getPayload);
-              _context2.next = 7;
+              _context2.next = 6;
               return clientService.create({
                 json: JSON.stringify(json)
               }).then(function () {
@@ -149,7 +152,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
                 });
               });
 
-            case 7:
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -275,7 +278,14 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     });
   }
 
-  return _react["default"].createElement("div", null, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps), data.length > 0 && _react["default"].createElement(_reactstrap.Button, {
+  return _react["default"].createElement("div", null, _react["default"].createElement(_reactstrap.Row, null, _react["default"].createElement(_reactstrap.Col, {
+    xs: "8"
+  }, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps)), _react["default"].createElement(_reactstrap.Col, {
+    xs: "4"
+  }, _react["default"].createElement(_reactRouterDom.Link, {
+    className: "btn btn-secondary float-right",
+    to: "".concat(formUploadUrl, "/").concat(uploadTypeUrl)
+  }, uploadFileLabel))), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps), data.length > 0 && _react["default"].createElement(_reactstrap.Button, {
     className: "btn btn-md btn btn-primary float-right",
     color: "primary",
     onClick: onMakeReleaseClick
@@ -295,7 +305,8 @@ var defaultProps = {
   identifierLabel: _constants.IDENTIFIER_LABEL,
   makeReleaseLabel: _constants.MAKE_RELEASE_LABEL,
   moduleLabel: _constants.MODULE_LABEL,
-  placeholder: _constants.FIND_DRAFT_RELEASES_LABEL
+  placeholder: _constants.FIND_DRAFT_RELEASES_LABEL,
+  uploadFileLabel: _constants.UPOL0AD_FILE_LABEL
 };
 ManifestDraftFiles.defaultProps = defaultProps;
 

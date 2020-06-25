@@ -186,7 +186,6 @@ var defaultProps = {
   data: [],
   debounceTime: 1000,
   fetchReleases: _manifestReleases.fetchManifestReleases,
-  formUploadUrl: '',
   identifierLabel: _constants.IDENTIFIER_LABEL,
   placeholder: _constants.FIND_RELEASES_LABEL,
   updatedAt: _constants.UPDATED_AT_LABEL,
