@@ -30,6 +30,7 @@ import { countDaysBetweenDate, calculateAge } from '../../../../helpers/utils';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
+import { ANC_URL } from '../../../../constants';
 /** register the anc reducer */
 reducerRegistry.register(ancReducerName, ANCReducer);
 
@@ -157,7 +158,7 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
             <Container id="householdProfile">
                 <div className="page-title">
                     <span className="back-btn-bg">
-                        <Link to="#">
+                        <Link to={ANC_URL}>
                             <FontAwesomeIcon icon="arrow-left" />
                             <span className="back-btn"> Back to ANC List </span>
                         </Link>

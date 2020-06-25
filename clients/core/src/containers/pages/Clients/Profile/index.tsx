@@ -30,6 +30,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { generateOptions } from '../../../../services/opensrp';
 import InfoCard from '../../../../components/page/InfoCard';
 import RegisterPanel, { RegisterPanelData, RegisterPanelProps } from '../../../../components/page/RegisterPanel';
+import { CLIENT_URL } from '../../../../constants';
 
 const getChartOptions = (growthData: any) => {
     console.log('growth data', growthData);
@@ -219,7 +220,7 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
             <Container id="householdProfile">
                 <div className="page-title">
                     <span className="back-btn-bg">
-                        <Link to="#">
+                        <Link to={CLIENT_URL}>
                             <FontAwesomeIcon icon="arrow-left" />
                             <span className="back-btn"> Back to Clients </span>
                         </Link>
