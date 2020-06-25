@@ -48,6 +48,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
       debounceTime = props.debounceTime,
       placeholder = props.placeholder,
       fetchDraftFiles = props.fetchDraftFiles,
+      clearDraftFiles = props.clearDraftFiles,
       customAlert = props.customAlert,
       downloadEndPoint = props.downloadEndPoint,
       releasesUrl = props.releasesUrl,
@@ -119,14 +120,12 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 
   var onMakeReleaseClick = function () {
     var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2(e) {
-      var _getPayload, headers, identifiers, json, clientService;
-
+      var identifiers, json, clientService;
       return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              _getPayload = getPayload(new AbortController().signal, 'POST'), headers = _getPayload.headers;
               identifiers = data.map(function (form) {
                 return form.identifier;
               });
@@ -135,18 +134,19 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
                 identifiers: identifiers
               };
               clientService = new _serverService.OpenSRPService(baseURL, manifestEndPoint, getPayload);
-              _context2.next = 7;
+              _context2.next = 6;
               return clientService.create({
                 json: JSON.stringify(json)
               }).then(function () {
-                return setIfDoneHere(true);
+                clearDraftFiles();
+                setIfDoneHere(true);
               })["catch"](function (err) {
                 customAlert && customAlert(String(err), {
                   type: 'error'
                 });
               });
 
-            case 7:
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -269,7 +269,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 
 exports.ManifestDraftFiles = ManifestDraftFiles;
 var defaultProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,
@@ -294,7 +294,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   fetchDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles
 };
 var ConnectedManifestDraftFiles = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ManifestDraftFiles);

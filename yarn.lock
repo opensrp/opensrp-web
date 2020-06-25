@@ -2273,6 +2273,13 @@
   dependencies:
     redux "^4.0.1"
 
+"@onaio/redux-reducer-registry@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@onaio/redux-reducer-registry/-/redux-reducer-registry-0.0.9.tgz#513bac5c9838ca3bcf60f0963a6824a88b9694b7"
+  integrity sha512-XNBLsWFjDijEr/0ejzi5AzsKvUiJBt4xrmRpWHMWUPkY9Lfo+pfLCxLB8n4qDO30Dt/UYuHOSX1dgXAlsvcuPg==
+  dependencies:
+    redux "^4.0.1"
+
 "@onaio/session-reducer@^0.0.10":
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/@onaio/session-reducer/-/session-reducer-0.0.10.tgz#ba245827b0d52355bf0b921ff139fc56f9e80e7f"
@@ -2290,6 +2297,13 @@
   dependencies:
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
+
+"@opensrp/opensrp-table@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@opensrp/opensrp-table/-/opensrp-table-0.0.3.tgz#58656667957cd57f091ee6002f8112e083ca9802"
+  integrity sha512-4WwyRa+P3vvjH8UOPNGyJ+LAcDfTfr0zjZhXA91rc5BT6C/G/6KD2/L9a4z2hCuPjQyBBLeuQBhw5BjTNzJrNA==
+  dependencies:
+    react-table "^7.0.0"
 
 "@opensrp/reducer-factory@^0.0.1":
   version "0.0.1"
