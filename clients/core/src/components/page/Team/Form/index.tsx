@@ -247,17 +247,22 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
                                     name="partOf"
                                 />
                             </Row>
-                            <Row>Location</Row>
-                            <Row className="field-row">
-                                <Select
-                                    value={formik.values.location}
-                                    classNamePrefix="select"
-                                    className="form-select"
-                                    onChange={e => formik.setFieldValue('location', e)}
-                                    options={locationOption}
-                                    name="location"
-                                />
-                            </Row>
+                            {props.match.params.id === undefined ? null : (
+                                <>
+                                    <Row>Location</Row>
+                                    <Row className="field-row">
+                                        <Select
+                                            value={formik.values.location}
+                                            classNamePrefix="select"
+                                            className="form-select"
+                                            onChange={e => formik.setFieldValue('location', e)}
+                                            options={locationOption}
+                                            name="location"
+                                        />
+                                    </Row>
+                                </>
+                            )}
+
                             <Row>
                                 <button type="submit" className="submit-btn-bg">
                                     Submit
