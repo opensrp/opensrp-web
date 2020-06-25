@@ -269,7 +269,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 
 exports.ManifestDraftFiles = ManifestDraftFiles;
 var defaultProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,
@@ -294,7 +294,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   fetchDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles
 };
 var ConnectedManifestDraftFiles = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ManifestDraftFiles);

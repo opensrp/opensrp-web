@@ -11,6 +11,7 @@ import DraftFilesReducer, {
     fetchManifestDraftFiles,
     draftReducerName,
     getAllManifestDraftFilesArray,
+    removeManifestDraftFiles,
 } from '../../ducks/manifestDraftFiles';
 import { Button } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
@@ -30,7 +31,7 @@ reducerRegistry.register(draftReducerName, DraftFilesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
-    clearDraftFiles: typeof fetchManifestDraftFiles;
+    clearDraftFiles: typeof removeManifestDraftFiles;
     data: ManifestFilesTypes[];
     downloadLabel: string;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
@@ -235,7 +236,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 
 /** declear default props */
 const defaultProps: DefaultProps = {
-    clearDraftFiles: fetchManifestDraftFiles,
+    clearDraftFiles: removeManifestDraftFiles,
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
@@ -271,7 +272,7 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 
 /** map dispatch to props */
 const mapDispatchToProps = {
-    clearDraftFiles: fetchManifestDraftFiles,
+    clearDraftFiles: removeManifestDraftFiles,
     fetchDraftFiles: fetchManifestDraftFiles,
 };
 
