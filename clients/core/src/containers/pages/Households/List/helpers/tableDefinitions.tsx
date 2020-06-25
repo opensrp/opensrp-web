@@ -16,7 +16,7 @@ export const useHouseholdTableColumns = (): any => {
                 // eslint-disable-next-line react/display-name
                 Header: (): ReturnType<React.FC> => <></>,
                 columns: [
-                    { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
+                    { Header: 'Identifier', accessor: 'identifiers.opensrp_id', disableSortBy: true },
                     {
                         Header: 'Family Name',
                         accessor: 'lastName',
@@ -47,7 +47,7 @@ export const useHouseholdTableColumns = (): any => {
                             <Link to={`${HOUSEHOLD_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
                         ),
                         Header: 'Actions',
-                        accessor: '',
+                        accessor: 'baseEntityId',
                         disableSortBy: true,
                     },
                 ],

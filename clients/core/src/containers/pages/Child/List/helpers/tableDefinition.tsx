@@ -14,7 +14,7 @@ export const useChildTableColumns = () => {
                 // eslint-disable-next-line react/display-name
                 Header: () => <></>,
                 columns: [
-                    { Header: 'Identifier', accessor: 'baseEntityId', disableSortBy: true },
+                    { Header: 'Identifier', accessor: 'identifiers.opensrp_id', disableSortBy: true },
                     {
                         Header: 'First Name',
                         accessor: 'firstName',
