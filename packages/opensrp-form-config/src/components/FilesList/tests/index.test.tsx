@@ -109,9 +109,56 @@ describe('components/manifestFiles', () => {
             .find('a');
         expect(downloadFiledCell.text()).toEqual('Download');
         expect(toJson(downloadFiledCell)).toMatchSnapshot();
-
+        // click download button
         downloadFiledCell.simulate('click');
         await flushPromises();
         expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
+        // when isJsonValidator download to be called with is_json_validator param
+        expect(mockList.mock.calls[1][0]).toEqual({
+            /* eslint-disable @typescript-eslint/camelcase */
+            form_identifier: 'reveal-test-file.json',
+            form_version: '1.0.27',
+            is_json_validator: true,
+        });
+    });
+
+    it('download with correct params form normal file', async () => {
+        store.dispatch(fetchManifestFiles(fixManifestFiles));
+        const downloadSpy = jest.spyOn(helpers, 'handleDownload');
+        const mockList = jest.fn();
+        OpenSRPService.prototype.list = mockList;
+        mockList
+            .mockReturnValueOnce(Promise.resolve(fixManifestFiles))
+            .mockReturnValueOnce(Promise.resolve(downloadFile));
+
+        // file not json validator
+        props.isJsonValidator = false;
+
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router history={history}>
+                    <ConnectedManifestFilesList {...props} />
+                </Router>
+            </Provider>,
+        );
+        await flushPromises();
+        wrapper.update();
+        const downloadFiledCell = wrapper
+            .find('.tbody .tr')
+            .at(0)
+            .find('.td')
+            .at(5)
+            .find('a');
+        expect(downloadFiledCell.text()).toEqual('Download');
+        // click download button
+        downloadFiledCell.simulate('click');
+        await flushPromises();
+        expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
+        // when not json validator is_json_validator param is absent
+        expect(mockList.mock.calls[1][0]).toEqual({
+            /* eslint-disable @typescript-eslint/camelcase */
+            form_identifier: 'reveal-test-file.json',
+            form_version: '1.0.27',
+        });
     });
 });

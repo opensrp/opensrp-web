@@ -84,6 +84,11 @@ describe('components/ManifestReleases', () => {
         downloadFiledCell.simulate('click');
         await flushPromises();
         expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
+        expect(mockList.mock.calls[1][0]).toEqual({
+            /* eslint-disable @typescript-eslint/camelcase */
+            form_identifier: 'reveal-test-file.json',
+            form_version: '1.0.27',
+        });
 
         // search
         const search = wrapper.find('SearchBar input');

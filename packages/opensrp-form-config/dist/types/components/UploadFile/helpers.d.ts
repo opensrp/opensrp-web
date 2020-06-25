@@ -7,11 +7,11 @@ export interface InitialValuesTypes {
     module: string;
 }
 /** Yup client upload validation schema */
-export declare const uploadValidationSchema: Yup.ObjectSchema<Yup.Shape<object | undefined, {
-    form: {};
+export declare const uploadValidationSchema: Yup.ObjectSchema<object & {
+    form: any;
     form_name: string;
-    form_relation: string | undefined;
-    module: string | undefined;
-}>>;
+    form_relation: string;
+    module: string;
+}>;
 /** */
 export declare const defaultInitialValues: InitialValuesTypes;
