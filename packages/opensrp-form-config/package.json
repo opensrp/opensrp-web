@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/form-config",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "OpenSrp form configuration components",
     "main": "dist/index.js",
     "types": "dist/types",
