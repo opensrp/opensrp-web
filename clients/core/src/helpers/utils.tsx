@@ -42,6 +42,11 @@ export function calculateAgeFromBirthdate(dob: string) {
     return calculateAge(new Date(dob).getTime());
 }
 
+export function generateRandom(excludeNum: number[], min: number, max: number): number {
+    const num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return excludeNum.indexOf(num) > -1 ? generateRandom(excludeNum, min, max) : num;
+}
+
 /**
  *
  * @param startDate = yyyy-MM-DD

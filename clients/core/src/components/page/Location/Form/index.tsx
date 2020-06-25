@@ -17,7 +17,7 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import { createUUID } from '../../../../helpers/utils';
+import { createUUID, generateRandom } from '../../../../helpers/utils';
 
 export interface LocationFormProps {
     parentLocation: DropdownOption;
@@ -25,7 +25,7 @@ export interface LocationFormProps {
     name: string;
     description: string;
     opensrpService: typeof OpenSRPService;
-    identifier: number;
+    identifier: string;
 }
 
 export const defaultLocationProps: LocationFormProps = {
@@ -34,24 +34,25 @@ export const defaultLocationProps: LocationFormProps = {
     name: '',
     description: '',
     opensrpService: OpenSRPService,
-    identifier: 0,
+    identifier: createUUID(),
 };
 
 /** Display the location form  */
 const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => {
     const [locationOption, setLocation] = useState([]);
     const [tagOption, setTag] = useState([]);
+    const [formId, setFormId] = useState(0);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = async (values: any, { resetForm }: any) => {
         const payload = {
-            id: values.identifier,
+            id: formId,
             properties: {
                 name: values.name,
                 parentId: parseInt(values.parentLocation.value),
                 version: 0,
                 type: 'Residential Structure',
                 status: 'Pending Review',
-                uid: createUUID(),
+                uid: values.identifier,
                 parentName: values.parentLocation.label,
                 tagName: values.locationTag.label,
             },
@@ -93,6 +94,8 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                 value: r.id,
             };
         });
+        const excludeIds = locationResponse.locations.map((r: any) => r.id);
+        setFormId(generateRandom(excludeIds, 1, 99999));
 
         const locationTagService = new opensrpService(
             OPENSRP_API_BASE_URL,
@@ -141,11 +144,12 @@ const LocationForm: React.FC<LocationFormProps> = (props: LocationFormProps) => 
                             <Row>Identifier</Row>
                             <Row className="field-row">
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="input-field"
                                     onChange={formik.handleChange}
                                     value={formik.values.identifier}
                                     name="identifier"
+                                    disabled
                                 />
                             </Row>
                             <Row>Location Name</Row>

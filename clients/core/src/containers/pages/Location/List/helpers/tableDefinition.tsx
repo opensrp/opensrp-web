@@ -44,7 +44,7 @@ export const useLocationTableColumns = () => {
                     {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Location>): ReturnType<React.FC> => (
-                            <Link to={`/${values.baseEntityId}`}>{VIEW}</Link>
+                            <Link to={LOCATIONS_URL}>{VIEW}</Link>
                         ),
                         Header: 'Actions',
                         accessor: '',
