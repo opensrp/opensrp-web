@@ -9,3 +9,9 @@ export * from './components/UploadFile/helpers';
 export * from './components/Releases';
 export * from './components/FilesList';
 export * from './components/DraftFiles';
+
+import draftFilesReducer from './ducks/manifestDraftFiles';
+import manifestFilesReducer from './ducks/manifestFiles';
+import manifestReleasesReducer from './ducks/manifestReleases';
+
+export { draftFilesReducer, manifestFilesReducer, manifestReleasesReducer };

@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import { SearchBarDefaultProps } from '../SearchBar';
 import { FormConfigProps } from '../../helpers/types';
-import { fetchManifestDraftFiles } from '../../ducks/manifestDraftFiles';
+import { fetchManifestDraftFiles, removeManifestDraftFiles } from '../../ducks/manifestDraftFiles';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
-    clearDraftFiles: typeof fetchManifestDraftFiles;
+    clearDraftFiles: typeof removeManifestDraftFiles;
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;

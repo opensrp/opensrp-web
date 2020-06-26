@@ -169,6 +169,11 @@ var ManifestFilesList = function ManifestFilesList(props) {
       form_identifier: identifier,
       form_version: obj.version
     };
+
+    if (isJsonValidator) {
+      params['is_json_validator'] = true;
+    }
+
     downloadFile(identifier, params);
   };
 

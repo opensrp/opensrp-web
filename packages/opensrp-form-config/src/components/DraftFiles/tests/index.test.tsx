@@ -7,7 +7,11 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import draftReducer, { fetchManifestDraftFiles, draftReducerName } from '../../../ducks/manifestDraftFiles';
+import draftReducer, {
+    fetchManifestDraftFiles,
+    draftReducerName,
+    getAllManifestDraftFilesArray,
+} from '../../../ducks/manifestDraftFiles';
 import { FixManifestDraftFiles, downloadFile } from '../../../ducks/tests/fixtures';
 import toJson from 'enzyme-to-json';
 import * as helpers from '../../../helpers/fileDownload';
@@ -86,6 +90,11 @@ describe('components/ManifestReleases', () => {
         downloadFiledCell.simulate('click');
         await flushPromises();
         expect(downloadSpy).toHaveBeenCalledWith(downloadFile.clientForm.json, 'reveal-test-file.json');
+        expect(mockList.mock.calls[1][0]).toEqual({
+            /* eslint-disable @typescript-eslint/camelcase */
+            form_identifier: 'reveal-test-file.json',
+            form_version: '1.0.27',
+        });
 
         // search
         const search = wrapper.find('SearchBar input');
@@ -95,6 +104,7 @@ describe('components/ManifestReleases', () => {
 
         // test creating manifest file
         wrapper.find('Button').simulate('click');
+        await flushPromises();
         const postData = {
             'Cache-Control': 'no-cache',
             Pragma: 'no-cache',
@@ -115,5 +125,7 @@ describe('components/ManifestReleases', () => {
         uploadBtn.simulate('click');
         await flushPromises();
         expect(window.location.pathname).toEqual('/manifest/releases');
+        // should clear drafts in store on publish
+        expect(getAllManifestDraftFilesArray(store.getState())).toEqual([]);
     });
 });

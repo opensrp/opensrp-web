@@ -156,11 +156,13 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     const onDownloadClick = (e: MouseEvent, obj: ManifestFilesTypes) => {
         e.preventDefault();
         const { identifier } = obj;
-        const params = {
+        const params: URLParams = {
             form_identifier: identifier, // eslint-disable-line @typescript-eslint/camelcase
             form_version: obj.version, // eslint-disable-line @typescript-eslint/camelcase
         };
-
+        if (isJsonValidator) {
+            params['is_json_validator'] = true;
+        }
         downloadFile(identifier, params);
     };
 

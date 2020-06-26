@@ -52,6 +52,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
       debounceTime = props.debounceTime,
       placeholder = props.placeholder,
       fetchDraftFiles = props.fetchDraftFiles,
+      clearDraftFiles = props.clearDraftFiles,
       customAlert = props.customAlert,
       downloadEndPoint = props.downloadEndPoint,
       releasesUrl = props.releasesUrl,
@@ -145,7 +146,8 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
               return clientService.create({
                 json: JSON.stringify(json)
               }).then(function () {
-                return setIfDoneHere(true);
+                clearDraftFiles();
+                setIfDoneHere(true);
               })["catch"](function (err) {
                 customAlert && customAlert(String(err), {
                   type: 'error'
@@ -294,7 +296,7 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 
 exports.ManifestDraftFiles = ManifestDraftFiles;
 var defaultProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   createdAt: _constants.CREATED_AT_LABEL,
   data: [],
   debounceTime: 1000,
@@ -321,7 +323,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-  clearDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
+  clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
   fetchDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles
 };
 var ConnectedManifestDraftFiles = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ManifestDraftFiles);

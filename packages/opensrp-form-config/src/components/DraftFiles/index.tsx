@@ -11,6 +11,7 @@ import DraftFilesReducer, {
     fetchManifestDraftFiles,
     draftReducerName,
     getAllManifestDraftFilesArray,
+    removeManifestDraftFiles,
 } from '../../ducks/manifestDraftFiles';
 import { Button, Row, Col } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
@@ -35,7 +36,7 @@ reducerRegistry.register(draftReducerName, DraftFilesReducer);
 
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
-    clearDraftFiles: typeof fetchManifestDraftFiles;
+    clearDraftFiles: typeof removeManifestDraftFiles;
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
@@ -68,6 +69,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         debounceTime,
         placeholder,
         fetchDraftFiles,
+        clearDraftFiles,
         customAlert,
         downloadEndPoint,
         releasesUrl,
@@ -128,7 +130,10 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         const clientService = new OpenSRPService(baseURL, manifestEndPoint, getPayload);
         await clientService
             .create({ json: JSON.stringify(json) })
-            .then(() => setIfDoneHere(true))
+            .then(() => {
+                clearDraftFiles();
+                setIfDoneHere(true);
+            })
             .catch(err => {
                 customAlert && customAlert(String(err), { type: 'error' });
             });
@@ -261,7 +266,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 
 /** declear default props */
 const defaultProps: DefaultProps = {
-    clearDraftFiles: fetchManifestDraftFiles,
+    clearDraftFiles: removeManifestDraftFiles,
     createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,
@@ -299,7 +304,7 @@ const mapStateToProps = (state: Partial<Store>): DispatchedStateProps => {
 
 /** map dispatch to props */
 const mapDispatchToProps = {
-    clearDraftFiles: fetchManifestDraftFiles,
+    clearDraftFiles: removeManifestDraftFiles,
     fetchDraftFiles: fetchManifestDraftFiles,
 };
 
