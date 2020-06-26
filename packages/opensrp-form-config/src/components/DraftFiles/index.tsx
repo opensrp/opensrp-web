@@ -35,7 +35,7 @@ import { Link } from 'react-router-dom';
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface DraftsDefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof removeManifestDraftFiles;
     createdAt: string;
     data: ManifestFilesTypes[];
@@ -51,7 +51,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 }
 
 /** manifest Draft files props interface */
-interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
+export interface ManifestDraftFilesProps extends DraftsDefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formUploadUrl: string;
     manifestEndPoint: string;
@@ -267,7 +267,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 };
 
 /** declear default props */
-const defaultProps: DefaultProps = {
+const defaultProps: DraftsDefaultProps = {
     clearDraftFiles: removeManifestDraftFiles,
     createdAt: CREATED_AT_LABEL,
     data: [],

@@ -35,7 +35,7 @@ import { formatDate } from '../../helpers/utils';
 reducerRegistry.register(filesReducerName, filesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface FilesListDefaultProps extends SearchBarDefaultProps {
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
@@ -53,7 +53,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 
 /** manifest files list props interface */
 
-interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
+export interface ManifestFilesListProps extends FilesListDefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formVersion: string | null;
     fileUploadUrl: string;
@@ -263,7 +263,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 };
 
 /** declear default props */
-const defaultProps: DefaultProps = {
+const defaultProps: FilesListDefaultProps = {
     createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,

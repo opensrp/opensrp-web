@@ -30,7 +30,7 @@ import { formatDate } from '../../helpers/utils';
 reducerRegistry.register(releasesReducerName, releasesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface ReleasesDefaultProps extends SearchBarDefaultProps {
     appIdLabel: string;
     appVersionLabel: string;
     data: ManifestReleasesTypes[];
@@ -43,14 +43,14 @@ interface DefaultProps extends SearchBarDefaultProps {
 }
 
 /** ManifestReleases props interface */
-interface ManifestReleasesProps extends FormConfigProps {
+export interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
     formUploadUrl: string;
     uploadTypeUrl: string;
 }
 
 /** view all manifest pages */
-const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
+const ManifestReleases = (props: ManifestReleasesProps & ReleasesDefaultProps) => {
     const {
         baseURL,
         endpoint,
@@ -176,7 +176,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
 };
 
 /** declear default props */
-const defaultProps: DefaultProps = {
+const defaultProps: ReleasesDefaultProps = {
     appIdLabel: APP_ID_LABEL,
     appVersionLabel: APP_VERSION_LABEL,
     data: [],

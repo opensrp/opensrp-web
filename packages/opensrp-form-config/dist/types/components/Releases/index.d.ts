@@ -3,7 +3,7 @@ import { fetchManifestReleases, ManifestReleasesTypes } from '../../ducks/manife
 import { SearchBarDefaultProps } from '../SearchBar';
 import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface ReleasesDefaultProps extends SearchBarDefaultProps {
     appIdLabel: string;
     appVersionLabel: string;
     data: ManifestReleasesTypes[];
@@ -15,21 +15,21 @@ interface DefaultProps extends SearchBarDefaultProps {
     viewFilesLabel: string;
 }
 /** ManifestReleases props interface */
-interface ManifestReleasesProps extends FormConfigProps {
+export interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
     formUploadUrl: string;
     uploadTypeUrl: string;
 }
 /** view all manifest pages */
 declare const ManifestReleases: {
-    (props: ManifestReleasesProps & DefaultProps): JSX.Element;
+    (props: ManifestReleasesProps & ReleasesDefaultProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
+    defaultProps: ReleasesDefaultProps;
 };
 /** Connected ManifestReleases component */
 declare const ConnectedManifestReleases: import("react-redux").ConnectedComponent<{
-    (props: ManifestReleasesProps & DefaultProps): JSX.Element;
+    (props: ManifestReleasesProps & ReleasesDefaultProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
-}, Pick<ManifestReleasesProps & DefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "formUploadUrl" | "uploadTypeUrl">>;
+    defaultProps: ReleasesDefaultProps;
+}, Pick<ManifestReleasesProps & ReleasesDefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "formUploadUrl" | "uploadTypeUrl">>;
 export { ManifestReleases, ConnectedManifestReleases };

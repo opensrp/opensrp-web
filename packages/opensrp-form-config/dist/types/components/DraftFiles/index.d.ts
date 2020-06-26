@@ -4,7 +4,7 @@ import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { fetchManifestDraftFiles, removeManifestDraftFiles } from '../../ducks/manifestDraftFiles';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface DraftsDefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof removeManifestDraftFiles;
     createdAt: string;
     data: ManifestFilesTypes[];
@@ -19,7 +19,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     uploadFileLabel: string;
 }
 /** manifest Draft files props interface */
-interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
+export interface ManifestDraftFilesProps extends DraftsDefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formUploadUrl: string;
     manifestEndPoint: string;
@@ -30,12 +30,12 @@ interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
 declare const ManifestDraftFiles: {
     (props: ManifestDraftFilesProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
+    defaultProps: DraftsDefaultProps;
 };
 /** Connected ManifestDraftFiles component */
 declare const ConnectedManifestDraftFiles: import("react-redux").ConnectedComponent<{
     (props: ManifestDraftFilesProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
+    defaultProps: DraftsDefaultProps;
 }, Pick<ManifestDraftFilesProps, "createdAt" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "formUploadUrl" | "uploadTypeUrl" | "downloadLabel" | "fileVersionLabel" | "downloadEndPoint" | "makeReleaseLabel" | "manifestEndPoint" | "releasesUrl">>;
 export { ManifestDraftFiles, ConnectedManifestDraftFiles };

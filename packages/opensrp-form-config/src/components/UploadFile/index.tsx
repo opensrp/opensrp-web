@@ -18,7 +18,7 @@ import {
 import { OpenSRPServiceExtend } from '../../helpers/services';
 
 /** default props interface */
-export interface DefaultProps {
+export interface UploadDefaultProps {
     fileNameLabel: string;
     fileUploadLabel: string;
     formData: ManifestFilesTypes | null;
@@ -37,7 +37,7 @@ export interface UploadConfigFileProps extends FormConfigProps {
     validatorsUrl: string;
 }
 
-const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
+const UploadConfigFile = (props: UploadConfigFileProps & UploadDefaultProps) => {
     const {
         isJsonValidator,
         formId,
@@ -203,7 +203,7 @@ const UploadConfigFile = (props: UploadConfigFileProps & DefaultProps) => {
 };
 
 /**default props */
-const defaultProps: DefaultProps = {
+const defaultProps: UploadDefaultProps = {
     fileNameLabel: FILE_NAME_LABEL,
     fileUploadLabel: FILE_UPLOAD_LABEL,
     formData: null,
@@ -220,7 +220,7 @@ UploadConfigFile.defaultProps = defaultProps;
  * @param {Partial<Store>} -  the  redux store
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-const mapStateToProps = (state: Partial<Store>, ownProps: any): DefaultProps => {
+const mapStateToProps = (state: Partial<Store>, ownProps: any): UploadDefaultProps => {
     const formId = ownProps.formId;
     let formInitialValues: InitialValuesTypes = defaultInitialValues;
     let formData: ManifestFilesTypes | null = null;
