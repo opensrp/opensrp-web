@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { fetchManifestReleases, ManifestReleasesTypes } from '../../ducks/manifestReleases';
 import { SearchBarDefaultProps } from '../SearchBar';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     appIdLabel: string;
     appVersionLabel: string;
     data: ManifestReleasesTypes[];
+    drillDownProps: DrillDownProps;
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
     updatedAt: string;
@@ -30,5 +31,5 @@ declare const ConnectedManifestReleases: import("react-redux").ConnectedComponen
     (props: ManifestReleasesProps & DefaultProps): JSX.Element;
     /** pass default props to component */
     defaultProps: DefaultProps;
-}, Pick<ManifestReleasesProps & DefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "identifierLabel" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "formUploadUrl" | "uploadTypeUrl">>;
+}, Pick<ManifestReleasesProps & DefaultProps, "updatedAt" | "placeholder" | "debounceTime" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "appIdLabel" | "appVersionLabel" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "viewFilesLabel" | "currentUrl" | "formUploadUrl" | "uploadTypeUrl">>;
 export { ManifestReleases, ConnectedManifestReleases };

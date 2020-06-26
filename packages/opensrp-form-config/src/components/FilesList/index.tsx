@@ -5,7 +5,7 @@ import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import { Link } from 'react-router-dom';
 import filesReducer, {
@@ -39,6 +39,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     editLabel: string;
     fetchFiles: typeof fetchManifestFiles;
     fileNameLabel: string;
@@ -87,6 +88,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         downloadLabel,
         uploadFileLabel,
         createdAt,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -173,7 +175,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     const linkToEditFile = (obj: ManifestFilesTypes) => {
         return <Link to={`${fileUploadUrl}/${uploadTypeUrl}/${obj.id}`}>{uploadEditLabel}</Link>;
     };
-    let columns = [
+    const columns = [
         {
             Header: identifierLabel,
             accessor: `identifier`,
@@ -191,12 +193,6 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
             Header: createdAt,
             accessor: 'createdAt',
             Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
-            maxWidth: 100,
-        },
-        {
-            Header: moduleLabel,
-            accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
-            disableSortBy: true,
             maxWidth: 100,
         },
         {
@@ -218,15 +214,23 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         },
     ];
 
-    if (isJsonValidator) {
-        columns = columns.filter(col => col.Header !== 'Module');
+    const moduleColumn = {
+        Header: moduleLabel,
+        accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
+        disableSortBy: true,
+        maxWidth: 100,
+    };
+
+    if (!isJsonValidator) {
+        const moduleIndex = columns.length - 2;
+        columns.splice(moduleIndex, 0, moduleColumn);
     }
 
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const searchBarProps = {
@@ -264,6 +268,9 @@ const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
+    drillDownProps: {
+        paginate: false,
+    },
     editLabel: EDIT_LABEL,
     fetchFiles: fetchManifestFiles,
     fileNameLabel: FILE_NAME_LABEL,

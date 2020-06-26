@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConnectedManifestFilesList = exports.ManifestFilesList = void 0;
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -39,6 +41,10 @@ var _constants = require("../../constants");
 
 var _utils = require("../../helpers/utils");
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 _reduxReducerRegistry["default"].register(_manifestFiles.filesReducerName, _manifestFiles["default"]);
 
 var ManifestFilesList = function ManifestFilesList(props) {
@@ -65,7 +71,8 @@ var ManifestFilesList = function ManifestFilesList(props) {
       uploadEditLabel = props.uploadEditLabel,
       downloadLabel = props.downloadLabel,
       uploadFileLabel = props.uploadFileLabel,
-      createdAt = props.createdAt;
+      createdAt = props.createdAt,
+      drillDownProps = props.drillDownProps;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -204,15 +211,6 @@ var ManifestFilesList = function ManifestFilesList(props) {
     },
     maxWidth: 100
   }, {
-    Header: moduleLabel,
-    accessor: function accessor(obj) {
-      return function () {
-        return _react["default"].createElement("span", null, obj.module || '_');
-      }();
-    },
-    disableSortBy: true,
-    maxWidth: 100
-  }, {
     Header: editLabel,
     accessor: function accessor(obj) {
       return linkToEditFile(obj);
@@ -234,19 +232,28 @@ var ManifestFilesList = function ManifestFilesList(props) {
     disableSortBy: true,
     maxWidth: 80
   }];
+  var moduleColumn = {
+    Header: moduleLabel,
+    accessor: function accessor(obj) {
+      return function () {
+        return _react["default"].createElement("span", null, obj.module || '_');
+      }();
+    },
+    disableSortBy: true,
+    maxWidth: 100
+  };
 
-  if (isJsonValidator) {
-    columns = columns.filter(function (col) {
-      return col.Header !== 'Module';
-    });
+  if (!isJsonValidator) {
+    var moduleIndex = columns.length - 2;
+    columns.splice(moduleIndex, 0, moduleColumn);
   }
 
-  var DrillDownTableProps = {
+  var DrillDownTableProps = _objectSpread({
     columns: columns,
     data: stateData,
-    paginate: false,
     useDrillDown: false
-  };
+  }, drillDownProps);
+
   var searchBarProps = {
     debounceTime: debounceTime,
     onChangeHandler: onChangeHandler,
@@ -273,6 +280,9 @@ var defaultProps = {
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,
+  drillDownProps: {
+    paginate: false
+  },
   editLabel: _constants.EDIT_LABEL,
   fetchFiles: _manifestFiles.fetchManifestFiles,
   fileNameLabel: _constants.FILE_NAME_LABEL,

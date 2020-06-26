@@ -13,7 +13,7 @@ import releasesReducer, {
 import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import {
     APP_ID_LABEL,
     APP_VERSION_LABEL,
@@ -34,6 +34,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     appIdLabel: string;
     appVersionLabel: string;
     data: ManifestReleasesTypes[];
+    drillDownProps: DrillDownProps;
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
     updatedAt: string;
@@ -69,6 +70,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         uploadFileLabel,
         identifierLabel,
         updatedAt,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -131,8 +133,8 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -179,6 +181,9 @@ const defaultProps: DefaultProps = {
     appVersionLabel: APP_VERSION_LABEL,
     data: [],
     debounceTime: 1000,
+    drillDownProps: {
+        paginate: false,
+    },
     fetchReleases: fetchManifestReleases,
     identifierLabel: IDENTIFIER_LABEL,
     placeholder: FIND_RELEASES_LABEL,

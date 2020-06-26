@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConnectedManifestReleases = exports.ManifestReleases = void 0;
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -37,6 +39,10 @@ var _constants = require("../../constants");
 
 var _utils = require("../../helpers/utils");
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 _reduxReducerRegistry["default"].register(_manifestReleases.releasesReducerName, _manifestReleases["default"]);
 
 var ManifestReleases = function ManifestReleases(props) {
@@ -57,7 +63,8 @@ var ManifestReleases = function ManifestReleases(props) {
       viewFilesLabel = props.viewFilesLabel,
       uploadFileLabel = props.uploadFileLabel,
       identifierLabel = props.identifierLabel,
-      updatedAt = props.updatedAt;
+      updatedAt = props.updatedAt,
+      drillDownProps = props.drillDownProps;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -144,12 +151,12 @@ var ManifestReleases = function ManifestReleases(props) {
     },
     disableSortBy: true
   }];
-  var DrillDownTableProps = {
+
+  var DrillDownTableProps = _objectSpread({
     columns: columns,
     data: stateData,
-    paginate: false,
     useDrillDown: false
-  };
+  }, drillDownProps);
 
   var onChangeHandler = function onChangeHandler(e) {
     var input = e.target.value.toUpperCase();
@@ -185,6 +192,9 @@ var defaultProps = {
   appVersionLabel: _constants.APP_VERSION_LABEL,
   data: [],
   debounceTime: 1000,
+  drillDownProps: {
+    paginate: false
+  },
   fetchReleases: _manifestReleases.fetchManifestReleases,
   identifierLabel: _constants.IDENTIFIER_LABEL,
   placeholder: _constants.FIND_RELEASES_LABEL,

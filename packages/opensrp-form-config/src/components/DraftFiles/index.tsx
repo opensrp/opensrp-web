@@ -5,7 +5,7 @@ import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import DraftFilesReducer, {
     fetchManifestDraftFiles,
@@ -40,6 +40,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
     fileNameLabel: string;
     fileVersionLabel: string;
@@ -84,6 +85,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         uploadFileLabel,
         formUploadUrl,
         uploadTypeUrl,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -224,8 +226,8 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const searchBarProps = {
@@ -271,6 +273,9 @@ const defaultProps: DefaultProps = {
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
+    drillDownProps: {
+        paginate: false,
+    },
     fetchDraftFiles: fetchManifestDraftFiles,
     fileNameLabel: FILE_NAME_LABEL,
     fileVersionLabel: FILE_VERSION_LABEL,

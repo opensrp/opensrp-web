@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { SearchBarDefaultProps } from '../SearchBar';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { fetchManifestFiles, ManifestFilesTypes, removeManifestFiles } from '../../ducks/manifestFiles';
 /** default props interface */
 interface DefaultProps extends SearchBarDefaultProps {
     createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     editLabel: string;
     fetchFiles: typeof fetchManifestFiles;
     fileNameLabel: string;
@@ -36,5 +37,5 @@ declare const ConnectedManifestFilesList: import("react-redux").ConnectedCompone
     (props: ManifestFilesListProps): JSX.Element;
     /** pass default props to component */
     defaultProps: DefaultProps;
-}, Pick<ManifestFilesListProps, "createdAt" | "isJsonValidator" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
+}, Pick<ManifestFilesListProps, "createdAt" | "isJsonValidator" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
 export { ManifestFilesList, ConnectedManifestFilesList };
