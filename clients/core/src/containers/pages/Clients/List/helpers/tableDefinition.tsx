@@ -50,7 +50,7 @@ export const useClientTableColumns = () => {
                             <Link to={`${CLIENT_PROFILE_URL}/${values.baseEntityId}`}>view</Link>
                         ),
                         Header: 'Actions',
-                        accessor: '',
+                        accessor: 'baseEntityId',
                         disableSortBy: true,
                     },
                 ],

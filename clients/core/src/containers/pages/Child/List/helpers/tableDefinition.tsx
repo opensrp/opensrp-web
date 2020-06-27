@@ -60,7 +60,7 @@ export const useChildTableColumns = () => {
                             <Link to={`${CHILD_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
                         ),
                         Header: 'Actions',
-                        accessor: '',
+                        accessor: 'baseEntityId',
                         disableSortBy: true,
                     },
                 ],

@@ -66,7 +66,7 @@ export const useANCTableColumns = (): any => {
                             <Link to={`${ANC_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
                         ),
                         Header: 'Actions',
-                        accessor: '',
+                        accessor: 'baseEntityId',
                         disableSortBy: true,
                     },
                 ],
