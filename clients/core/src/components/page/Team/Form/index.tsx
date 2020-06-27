@@ -31,7 +31,7 @@ export interface TeamFormProps {
     name: string;
     partOf: DropdownOption;
     opensrpService: typeof OpenSRPService;
-    location: DropdownOption;
+    location: DropdownOption | [] | null;
 }
 
 interface TeamFormURLParams {
@@ -46,7 +46,7 @@ export const defaultTeamProps: TeamFormProps = {
     name: '',
     partOf: { label: '', value: '' },
     opensrpService: OpenSRPService,
-    location: { label: '', value: '' },
+    location: null,
 };
 
 export type ProfileWithRoutesProps = TeamFormProps & RouteComponentProps<TeamFormURLParams>;
@@ -56,6 +56,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
     const [teamOption, setTeamOption] = useState([]);
     const [locationOption, setLocationOption] = useState([]);
     const [teamOb, setTeamOb] = useState(defaultTeamProps);
+    const [removedLocation, setRemovedLocation] = useState([]);
 
     const createTeam = async (values: any, resetForm: any) => {
         const payload = {
@@ -78,20 +79,24 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
     const onSubmit = async (values: any, { resetForm }: any) => {
         if (props.match.params.id === undefined) createTeam(values, resetForm);
         else {
-            const assignLocation = new OpenSRPService(
+            const assignLocationService = new OpenSRPService(
                 OPENSRP_API_BASE_URL,
                 'organization/assignLocationsAndPlans',
                 generateOptions,
             );
 
-            assignLocation
-                .create([
-                    {
-                        organization: values.identifier,
-                        jurisdiction: values.location.value,
-                        fromDate: '2020-06-22',
-                    },
-                ])
+            console.log('locations: ', values.location);
+
+            const assignedLocations = values.location.map((l: any) => {
+                return {
+                    organization: values.identifier,
+                    jurisdiction: l.value,
+                    fromDate: '2020-06-22',
+                };
+            });
+
+            assignLocationService
+                .create(assignedLocations)
                 .then((response: any) => toast.success('Saved Location sucessfully'))
                 .catch((err: any) => toast.success('Saved Location sucessfully'));
 
@@ -117,7 +122,18 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
         }
     };
 
+    const locationChange = (prevLocations: any, locations: any) => {
+        // console.log({ prevLocations }, locations);
+        // let removeLocations = [];
+        // for(let prevLoc of prevLocations) {
+        //     for(const loc of locations) {
+        //         if(prevLoc.value )
+        //     }
+        // }
+    };
+
     const getTeamList = async () => {
+        /** fethc teams */
         const teamService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_TEAM_ENDPOINT, generateOptions);
         const teamList = await teamService.list();
         const teamDropdownOptions = teamList.organizations.map((t: TeamFormProps) => {
@@ -128,35 +144,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
         });
         setTeamOption(teamDropdownOptions);
 
-        const teamId = props.match.params.id;
-        console.log('teamId == ', teamId);
-        if (teamId !== null && teamId !== undefined) {
-            const teamService = new OpenSRPService(
-                OPENSRP_API_BASE_URL,
-                `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${teamId}`,
-                generateOptions,
-            );
-            const teamResponse = await teamService.list();
-            console.log(' team --> ', teamResponse, teamOption);
-            const parentTeam: any = teamDropdownOptions.filter((t: any) => t.value == parseInt(teamResponse.partOf))[0];
-            console.log({ parentTeam });
-            const team: any = {
-                id: teamResponse.id,
-                identifier: teamResponse.identifier,
-                description: '',
-                active: teamResponse.active,
-                name: teamResponse.name,
-                partOf: parentTeam,
-                location: { label: '', value: '' },
-            };
-            setTeamOb(team);
-        } else {
-            defaultTeamProps.identifier = createUUID();
-            setTeamOb(defaultTeamProps);
-        }
-    };
-
-    const getLocationList = async () => {
+        /** fetch locations */
         const locationService = new OpenSRPService(OPENSRP_API_BASE_URL, OPENSRP_LOCATION_ENDPOINT, generateOptions);
         const response = await locationService.list();
         console.log('location list in team-form ', response);
@@ -167,12 +155,55 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
             };
         });
         setLocationOption(locationOption);
+
+        const teamId = props.match.params.id;
+        console.log('teamId == ', teamId);
+        if (teamId !== null && teamId !== undefined) {
+            const teamService = new OpenSRPService(
+                OPENSRP_API_BASE_URL,
+                `${OPENSRP_TEAM_PROFILE_ENDPOINT}/${teamId}`,
+                generateOptions,
+            );
+            const teamResponse = await teamService.list();
+            const parentTeam: any = teamDropdownOptions.filter((t: any) => t.value == parseInt(teamResponse.partOf))[0];
+
+            const teamLocationService = new OpenSRPService(
+                OPENSRP_API_BASE_URL,
+                `organization/assignedLocationsAndPlans/${teamId}`,
+                generateOptions,
+            );
+
+            const teamLocations = await teamLocationService.list();
+            const locationIds = teamLocations
+                .map((l: any) => l.jurisdictionId)
+                .filter((v: any, i: any, a: any) => a.indexOf(v) === i);
+
+            const selectedLocations = [];
+            for (const loc of locationOption) {
+                if (locationIds.indexOf(loc.value) > -1) {
+                    selectedLocations.push(loc);
+                }
+            }
+
+            const team: any = {
+                id: teamResponse.id,
+                identifier: teamResponse.identifier,
+                description: '',
+                active: teamResponse.active,
+                name: teamResponse.name,
+                partOf: parentTeam,
+                location: selectedLocations,
+            };
+            setTeamOb(team);
+        } else {
+            defaultTeamProps.identifier = createUUID();
+            setTeamOb(defaultTeamProps);
+        }
     };
 
     React.useEffect(() => {
         console.log('id to edit: ', props.match.params.id);
         getTeamList();
-        getLocationList();
     }, []);
 
     return (
@@ -252,10 +283,14 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
                                     <Row>Location</Row>
                                     <Row className="field-row">
                                         <Select
+                                            isMulti
                                             value={formik.values.location}
                                             classNamePrefix="select"
                                             className="form-select"
-                                            onChange={e => formik.setFieldValue('location', e)}
+                                            onChange={e => {
+                                                formik.setFieldValue('location', e);
+                                                locationChange(formik.values.location, e);
+                                            }}
                                             options={locationOption}
                                             name="location"
                                         />

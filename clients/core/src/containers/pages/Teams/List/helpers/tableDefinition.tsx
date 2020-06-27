@@ -39,9 +39,9 @@ export const useTeamTableColumns = () => {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<Team>): ReturnType<React.FC> => (
                             <>
-                                <Link to={`${TEAM_PROFILE_URL}/${values.identifier}`}>view</Link>{' '}
+                                <Link to={`${TEAM_PROFILE_URL}/${values.identifier}`}>View</Link>{' '}
                                 <Link className="edit-action" to={`${TEAM_FORM_URL}/${values.identifier}`}>
-                                    edit
+                                    Edit
                                 </Link>
                             </>
                         ),

@@ -68,7 +68,7 @@ export interface TeamProfileProps {
 }
 
 export interface TeamProfileState {
-    location: Location | null;
+    location: string;
     supervisor: Team | null;
 }
 
@@ -89,7 +89,7 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps, TeamProfileSta
     constructor(props: any) {
         super(props);
         this.state = {
-            location: null,
+            location: '',
             supervisor: null,
         };
     }
@@ -135,14 +135,19 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps, TeamProfileSta
                 generateOptions,
             );
             const locationRes = await locationService.list();
-            const location = locationRes.locations.filter(
-                (l: Location) => l.id === assignedLocations[assignedLocations.length - 1].jurisdictionId,
-            )[0];
+            const locationIds = assignedLocations
+                .map((l: any) => l.jurisdictionId)
+                .filter((v: any, i: any, a: any) => a.indexOf(v) === i);
 
-            console.log('team location -->', location);
+            const selectedLocations = locationRes.locations
+                .filter((loc: any) => locationIds.indexOf(loc.id) > -1)
+                .map((loc: any) => loc.properties.name)
+                .join(', ');
+
+            console.log('team location -->', selectedLocations);
             this.setState({
                 ...this.state,
-                location,
+                location: selectedLocations,
             });
         }
 
@@ -201,7 +206,7 @@ class TeamProfile extends React.Component<ProfileWithRoutesProps, TeamProfileSta
                             <tbody>
                                 <tr>
                                     <td className="info-label">Location:</td>
-                                    <td>{location === null ? '' : location.properties.name}</td>
+                                    <td>{location === null ? '' : location}</td>
                                     <td className="info-label">Supervisor:</td>
                                     <td>{supervisor === null ? '' : supervisor.name}</td>
                                 </tr>
