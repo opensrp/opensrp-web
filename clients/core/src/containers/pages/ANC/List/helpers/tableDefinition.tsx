@@ -6,6 +6,11 @@ import { ANC_PROFILE_URL, VIEW } from '../../../../../constants';
 import { readableDate } from '../../../../../helpers/utils';
 // ANC specific configurable table columns
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+const goToPage = function(values: any) {
+    localStorage.setItem(`anc_values_${values.baseEntityId}`, JSON.stringify(values));
+    return `${ANC_PROFILE_URL}/${values.baseEntityId}`;
+};
 export const useANCTableColumns = (): any => {
     return useMemo(
         () => [
@@ -46,7 +51,7 @@ export const useANCTableColumns = (): any => {
                         Header: 'Gestational age',
                         accessor: 'attributes.dynamicProperties.gestational_age',
                         // eslint-disable-next-line react/display-name
-                        Cell: ({ cell: { value } }: CellProps<object>): string => readableDate(value),
+                        Cell: ({ cell: { value } }: CellProps<object>): string => `${value} weeks`,
                     },
 
                     {
@@ -63,7 +68,9 @@ export const useANCTableColumns = (): any => {
                     {
                         // eslint-disable-next-line react/display-name
                         Cell: ({ row: { values } }: UseTableCellProps<ANCClientType>): ReturnType<React.FC> => (
-                            <Link to={`${ANC_PROFILE_URL}/${values.baseEntityId}`}>{VIEW}</Link>
+                            <Link to={goToPage(values)}>
+                                {VIEW} {console.log(values)}
+                            </Link>
                         ),
                         Header: 'Actions',
                         accessor: 'baseEntityId',

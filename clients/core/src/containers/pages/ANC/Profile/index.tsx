@@ -76,10 +76,21 @@ export function ANCBasicInfo(props: ANCBasicInfo): React.ReactElement {
                 </tbody>
                 <tbody>
                     <tr>
-                        <td className="info-label">Head of Household</td>
-                        <td>{props.anc.firstName}</td>
-                        <td className="info-label">Register date</td>
-                        <td>{props.anc.dateCreated || ''}</td>
+                        <td className="info-label">Age</td>
+                        <td>{props.anc.attributes['attributes.dynamicProperties.age_year_part'] || ''}</td>
+                        <td className="info-label">Gestational Age</td>
+                        <td>{props.anc.attributes['attributes.dynamicProperties.gestational_age'] || ''}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className="info-label">Last Contact Date </td>
+                        <td>{props.anc.attributes['attributes.dynamicProperties.last_contact_date']}</td>
+                        <td className="info-label">Expected delivery date</td>
+                        <td>
+                            {props.anc.attributes['attributes.dynamicProperties.edd'] || ''}
+                            {console.log('setting edd', props)}
+                        </td>
                     </tr>
                 </tbody>
             </Table>
@@ -94,8 +105,12 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
         const params = {
             identifier: match.params.id,
         };
+        console.log('anc values ======> ', localStorage.getItem(`anc_values_${match.params.id}`));
         const opensrpService = new OpenSRPService(OPENSRP_API_BASE_URL, `client/search`, generateOptions);
         const profileResponse = await opensrpService.list(params);
+        const storageValue = localStorage.getItem(`anc_values_${match.params.id}`) || '';
+        profileResponse[0]['attributes'] = JSON.parse(storageValue);
+
         removeANC();
         fetchANC(profileResponse);
         const eventService = new OpenSRPService(OPENSRP_API_BASE_URL, `${OPENSRP_EVENT_ENDPOINT}`, generateOptions);

@@ -179,6 +179,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
 
         const getProperty = (vaccineTakenDate: any): string => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            console.log('======= child profile date ', this.props.child!.birthdate, vaccineTakenDate);
             const days = countDaysBetweenDate(this.props.child!.birthdate, vaccineTakenDate);
             if (days % 7 === 0) return (days / 7).toFixed(0) + '_weeks ';
             else {
@@ -187,7 +188,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
         };
 
         this.props.events
-            .filter((d: Event) => d.eventType === 'Vaccination')
+            .filter((d: Event) => d.eventType === 'Vaccination' || d.eventType === 'Recurring Service')
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .map((data: any) => {
                 const timeProperty: string = getProperty(data.obs[0].values[0]);

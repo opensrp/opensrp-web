@@ -91,6 +91,7 @@ class ANCList extends React.Component<ANCProps, ANCState> {
     }
 
     public componentDidMount(): void {
+        localStorage.clear();
         this.getDataFromServer();
     }
 
