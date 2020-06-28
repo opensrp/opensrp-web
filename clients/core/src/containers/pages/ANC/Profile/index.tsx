@@ -54,7 +54,7 @@ export interface ANCBasicInfo {
     anc: ANC;
 }
 
-export function ANCBasicInfo(props: ANCBasicInfo): React.ReactElement {
+export function ANCBasicInfo(props: any): React.ReactElement {
     return (
         <Col className="info-body">
             <Table className="info-table" borderless={true}>
@@ -79,7 +79,9 @@ export function ANCBasicInfo(props: ANCBasicInfo): React.ReactElement {
                         <td className="info-label">Age</td>
                         <td>{props.anc.attributes['attributes.dynamicProperties.age_year_part'] || ''}</td>
                         <td className="info-label">Gestational Age</td>
-                        <td>{props.anc.attributes['attributes.dynamicProperties.gestational_age'] || ''}</td>
+                        <td>
+                            {props.anc.attributes['attributes.dynamicProperties.gestational_age'] || ''} {'weeks'}
+                        </td>
                     </tr>
                 </tbody>
                 <tbody>
@@ -163,6 +165,7 @@ export class ANCProfile extends React.Component<ANCProfileProps> {
             registerData: this.getRegisterData(),
             client: this.props.anc,
             tabs: ['ANC health'],
+            registerNode: <ANCBasicInfo anc={this.props.anc} />,
         };
     };
 

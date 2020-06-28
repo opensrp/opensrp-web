@@ -17,6 +17,7 @@ export interface RegisterPanelProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     client: any;
     tabs: string[];
+    registerNode?: React.ReactNode;
 }
 
 export interface RegisterPanelState {
@@ -37,7 +38,7 @@ class RegisterPanel extends React.Component<RegisterPanelProps, RegisterPanelSta
     };
 
     render() {
-        const { client, registerData, tabs } = this.props;
+        const { registerNode, registerData, tabs } = this.props;
         const { activeTab } = this.state;
         return (
             <>
@@ -55,9 +56,7 @@ class RegisterPanel extends React.Component<RegisterPanelProps, RegisterPanelSta
                     </Nav>
                     <TabContent activeTab={'1'}>
                         <TabPane tabId="1">
-                            <Row>
-                                <ChildBasicInfo child={client} />
-                            </Row>
+                            <Row>{registerNode}</Row>
                             <Row>
                                 <Col className="register-section" style={{ padding: '30px' }}>
                                     <Table style={{ border: '2px solid #e8e8e9' }}>

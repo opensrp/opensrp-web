@@ -101,7 +101,7 @@ export interface ClientBasicInfo {
     client: Client;
 }
 
-export function ClientBasicInfo(props: ClientBasicInfo): React.ReactElement {
+export function ClientBasicInfo(props: any): React.ReactElement {
     return (
         <Col className="info-body">
             <Table className="info-table" borderless={true}>
@@ -210,6 +210,7 @@ export class ClientProfile extends React.Component<ClientProfileProps> {
             registerData: this.getRegisterData(),
             client: this.props.client,
             tabs: ['client health'],
+            registerNode: <ClientBasicInfo client={this.props.client} />,
         };
     };
 

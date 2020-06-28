@@ -109,7 +109,7 @@ export interface ChildBasicInfo {
     child: Child;
 }
 
-export function ChildBasicInfo(props: ChildBasicInfo): React.ReactElement {
+export function ChildBasicInfo(props: any): React.ReactElement {
     return (
         <Col className="info-body">
             <Table className="info-table" borderless={true}>
@@ -219,6 +219,7 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
             registerData: this.getRegisterData(),
             client: this.props.child,
             tabs: ['child health'],
+            registerNode: <ChildBasicInfo child={this.props.child} />,
         };
     };
 
