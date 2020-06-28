@@ -191,10 +191,10 @@ export class ChildProfile extends React.Component<ChildProfileProps> {
             .filter((d: Event) => d.eventType === 'Vaccination' || d.eventType === 'Recurring Service')
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .map((data: any) => {
-                const timeProperty: string = getProperty(data.obs[0].values[0]);
+                const timeProperty: string = getProperty(data.eventDate.split('T')[0]);
                 registerData = {
                     ...registerData,
-                    takenDate: data.obs[0].values[0],
+                    takenDate: data.eventDate.split('T')[0],
                     providerId: data.providerId,
                     [timeProperty]:
                         registerData[timeProperty] === undefined
