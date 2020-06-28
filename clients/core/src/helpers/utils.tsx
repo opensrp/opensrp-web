@@ -32,6 +32,15 @@ export function readableDate(date: number | string): string {
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     return `${month} ${day}, ${year}`;
 }
+
+export function readableDateYYYYMMDD(date: number | string): string {
+    const d = new Date(date);
+    const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    return `${year}-${month}-${day}`;
+}
+
 export function calculateAge(dob: number) {
     const date = new Date(dob);
     return Math.abs(date.getUTCFullYear() - new Date().getFullYear());

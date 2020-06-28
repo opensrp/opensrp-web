@@ -17,7 +17,7 @@ import { OpenSRPService } from '@opensrp/server-service';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createUUID } from '../../../../helpers/utils';
+import { createUUID, readableDate, readableDateYYYYMMDD } from '../../../../helpers/utils';
 import { Link, withRouter, match, RouteComponentProps } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Location } from '../../../../store/ducks/adminLocation';
@@ -56,7 +56,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
     const [teamOption, setTeamOption] = useState([]);
     const [locationOption, setLocationOption] = useState([]);
     const [teamOb, setTeamOb] = useState(defaultTeamProps);
-    const [removedLocation, setRemovedLocation] = useState([]);
+    const [assignedLocation, setAssignedLocation] = useState();
 
     const createTeam = async (values: any, resetForm: any) => {
         const payload = {
@@ -87,7 +87,28 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
 
             console.log('locations: ', values.location);
 
-            const assignedLocations = values.location.map((l: any) => {
+            /** finding  removed location */
+            const removedLocation: any = [];
+            const _assignedLocation: any = assignedLocation;
+            for (const prevLoc of _assignedLocation) {
+                let found = false;
+                for (const loc of values.location) {
+                    if (prevLoc.value == loc.value) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    removedLocation.push({
+                        organization: values.identifier,
+                        jurisdiction: prevLoc.value,
+                        toDate: readableDateYYYYMMDD(new Date().getTime()),
+                    });
+                }
+            }
+            console.log('removed locations ', removedLocation);
+
+            const newlyAssignedLocations = values.location.map((l: any) => {
                 return {
                     organization: values.identifier,
                     jurisdiction: l.value,
@@ -96,7 +117,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
             });
 
             assignLocationService
-                .create(assignedLocations)
+                .create(newlyAssignedLocations.concat(removedLocation))
                 .then((response: any) => toast.success('Saved Location sucessfully'))
                 .catch((err: any) => toast.success('Saved Location sucessfully'));
 
@@ -117,19 +138,10 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
                 .then((r: any) => {
                     toast.success('Update sucessful');
                     resetForm();
+                    setTeamOb(defaultTeamProps);
                 })
                 .catch((err: any) => toast.error('Server error'));
         }
-    };
-
-    const locationChange = (prevLocations: any, locations: any) => {
-        // console.log({ prevLocations }, locations);
-        // let removeLocations = [];
-        // for(let prevLoc of prevLocations) {
-        //     for(const loc of locations) {
-        //         if(prevLoc.value )
-        //     }
-        // }
     };
 
     const getTeamList = async () => {
@@ -167,6 +179,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
             const teamResponse = await teamService.list();
             const parentTeam: any = teamDropdownOptions.filter((t: any) => t.value == parseInt(teamResponse.partOf))[0];
 
+            /** fetch assigned location to the team */
             const teamLocationService = new OpenSRPService(
                 OPENSRP_API_BASE_URL,
                 `organization/assignedLocationsAndPlans/${teamId}`,
@@ -174,16 +187,19 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
             );
 
             const teamLocations = await teamLocationService.list();
+            /** getting unique ids */
             const locationIds = teamLocations
                 .map((l: any) => l.jurisdictionId)
                 .filter((v: any, i: any, a: any) => a.indexOf(v) === i);
 
-            const selectedLocations = [];
+            const selectedLocations: any = [];
             for (const loc of locationOption) {
                 if (locationIds.indexOf(loc.value) > -1) {
                     selectedLocations.push(loc);
                 }
             }
+
+            setAssignedLocation(selectedLocations);
 
             const team: any = {
                 id: teamResponse.id,
@@ -287,10 +303,7 @@ const TeamForm: React.FC<ProfileWithRoutesProps> = (props: ProfileWithRoutesProp
                                             value={formik.values.location}
                                             classNamePrefix="select"
                                             className="form-select"
-                                            onChange={e => {
-                                                formik.setFieldValue('location', e);
-                                                locationChange(formik.values.location, e);
-                                            }}
+                                            onChange={e => formik.setFieldValue('location', e)}
                                             options={locationOption}
                                             name="location"
                                         />
