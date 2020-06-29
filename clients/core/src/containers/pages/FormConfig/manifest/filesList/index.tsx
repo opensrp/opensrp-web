@@ -19,6 +19,7 @@ import {
 } from '../../../../../constants';
 import { RouteParams } from '../../../../../helpers/utils';
 import { defaultConfigProps, drillDownProps } from '../../helpers';
+import Helmet from 'react-helmet';
 
 /**simple wrapper for manifest file lists component */
 export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
@@ -45,7 +46,10 @@ export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
 
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{RELEASE_FILE_LABEL}</h4>
+            <Helmet>
+                <title>{`${RELEASE_FILE_LABEL}: ${formVersion}`}</title>
+            </Helmet>
+            <h3 className="household-title">{`${RELEASE_FILE_LABEL}: ${formVersion}`}</h3>
             <ConnectedManifestFilesList {...manifestFilesListProps} />
         </div>
     );

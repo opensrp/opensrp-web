@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/pages/ConfigForm/manifest/ManifestFiles renders release file table correctly 1`] = `
+Object {
+  "LoadingComponent": <Ripple
+    borderColor="#ff5d00"
+    borderStyle="solid"
+    borderWidth="4px"
+    height="64px"
+    minHeight="80vh"
+    width="64px"
+  />,
+  "baseURL": "https://reveal-stage.smartregister.org/opensrp/rest/",
+  "createdAt": "Created at",
+  "data": Array [],
+  "debounceTime": 1000,
+  "downloadEndPoint": "clientForm",
+  "downloadLabel": "Download",
+  "drillDownProps": Object {
+    "paginate": false,
+  },
+  "editLabel": "Edit",
+  "endpoint": "clientForm/release-related-files",
+  "fetchFiles": [Function],
+  "fileNameLabel": "File Name",
+  "fileUploadUrl": "/manifest",
+  "fileVersionLabel": "File Version",
+  "formVersion": "1.0.1",
+  "getPayload": [Function],
+  "identifierLabel": "Identifier",
+  "isJsonValidator": false,
+  "moduleLabel": "Module",
+  "placeholder": "Find Release Files",
+  "removeFiles": [Function],
+  "uploadEditLabel": "Upload edit",
+  "uploadFileLabel": "Upload New File",
+  "uploadTypeUrl": "file-upload",
+}
+`;

@@ -8,33 +8,51 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import { JSONValidatorListPage } from '..';
-import { fixManifestFiles } from './fixtures';
-import store from '../../../../../store';
+import { ManifestFiles } from '..';
+import { VIEW_RELEASE_PAGE_URL, RELEASES_LABEL } from '../../../../../../constants';
+import store from '../../../../../../store';
+import { FixManifestFiles } from './fixtures';
 
 /** register the reducers */
 reducerRegistry.register(filesReducerName, manifestFilesReducer);
 
 const history = createBrowserHistory();
 
-describe('containers/pages/ConfigForm/JSONValidator', () => {
+const props = {
+    history,
+    location: {
+        hash: '',
+        pathname: VIEW_RELEASE_PAGE_URL,
+        search: '',
+        state: undefined,
+    },
+    match: {
+        isExact: true,
+        params: {
+            id: '1.0.1',
+        },
+        path: `${RELEASES_LABEL}`,
+        url: `${VIEW_RELEASE_PAGE_URL}`,
+    },
+};
+
+describe('containers/pages/ConfigForm/manifest/ManifestFiles', () => {
     beforeEach(() => {
         jest.resetAllMocks();
     });
 
     it('renders without crashing', () => {
-        shallow(<JSONValidatorListPage />);
+        shallow(<ManifestFiles {...props} />);
     });
 
-    it('renders validators list correctly', async () => {
+    it('renders release file table correctly', async () => {
         const mockList = jest.fn();
         OpenSRPService.prototype.list = mockList;
-        mockList.mockReturnValueOnce(Promise.resolve(fixManifestFiles));
-
+        mockList.mockReturnValueOnce(Promise.resolve(FixManifestFiles));
         const wrapper = mount(
             <Provider store={store}>
                 <Router history={history}>
-                    <JSONValidatorListPage />
+                    <ManifestFiles {...props} />
                 </Router>
             </Provider>,
         );
@@ -42,18 +60,19 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
         wrapper.update();
 
         const helmet = Helmet.peek();
-        expect(helmet.title).toEqual('JSON Validators');
-        expect(wrapper.find('.household-title').text()).toEqual('JSON Validators');
+        expect(helmet.title).toEqual('Release: 1.0.1');
+
+        expect(wrapper.find('.household-title').text()).toEqual('Release: 1.0.1');
 
         expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
 
         expect(wrapper.find('DrillDownTable').length).toEqual(1);
 
-        store.dispatch(fetchManifestFiles(fixManifestFiles));
+        store.dispatch(fetchManifestFiles(FixManifestFiles));
         await flushPromises();
         wrapper.update();
         // table renders two rows - equal to data
-        // expect(wrapper.find('.tbody .tr').length).toEqual(2);
+        expect(wrapper.find('.tbody .tr').length).toEqual(2);
 
         expect(wrapper.find('SearchBar').length).toEqual(1);
     });
