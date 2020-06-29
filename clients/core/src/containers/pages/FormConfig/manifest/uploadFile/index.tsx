@@ -17,6 +17,7 @@ import {
 import { RouteComponentProps } from 'react-router';
 import { RouteParams } from '../../../../../helpers/utils';
 import { defaultConfigProps } from '../../helpers';
+import Helmet from 'react-helmet';
 
 export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) => {
     const formId = props.match.params.id || null;
@@ -40,7 +41,10 @@ export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) =>
     const titleAction = formId ? EDIT_FILE_LABEL : UPLOAD_FILE_LABLE;
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{titleAction}</h4>
+            <Helmet>
+                <title>{titleAction}</title>
+            </Helmet>
+            <h3 className="household-title">{titleAction}</h3>
             <ConnectedUploadConfigFile {...uploadConfigFileProps} />
         </div>
     );
