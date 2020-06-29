@@ -20,7 +20,7 @@ interface LocationTagForm {
 const defaultProps: LocationTagForm = {
     name: '',
     description: '',
-    active: false,
+    active: true,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
