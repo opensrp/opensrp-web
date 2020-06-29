@@ -2291,10 +2291,10 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
-"@opensrp/form-config@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@opensrp/form-config/-/form-config-0.0.3.tgz#7b9584e57408eaf4d1cd64094db392ea7481c1e2"
-  integrity sha512-VWbtRGtSUwtNrgtabhDn2PXdJ2HXvi62zYYyALRwGBj/5YEQMkfxFj07XndwTb5osby+Xlxq5iwvpLL4/Cp84Q==
+"@opensrp/form-config@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@opensrp/form-config/-/form-config-0.0.4.tgz#1b92215b08a22139726c7f5f40d889352cc03733"
+  integrity sha512-P0qIgcpYLd1ylznyMdS5DPV0/mYoyblgrtRmrgSvHumwC1a634+M7pqod19t/sqQRpZoXpJ/quaJVXh5Ift6pQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.20"
     "@fortawesome/free-brands-svg-icons" "^5.10.0"

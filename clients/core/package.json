@@ -17,7 +17,7 @@
         "@onaio/redux-reducer-registry": "^0.0.9",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
-        "@opensrp/form-config": "^0.0.3",
+        "@opensrp/form-config": "^0.0.4",
         "@opensrp/opensrp-table": "^0.0.2",
         "@opensrp/reducer-factory": "^0.0.1",
         "@opensrp/server-service": "^0.0.2",

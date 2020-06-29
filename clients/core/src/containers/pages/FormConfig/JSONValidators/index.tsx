@@ -1,7 +1,5 @@
 import React from 'react';
 import { ConnectedManifestFilesList } from '@opensrp/form-config';
-import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
-import Loading from '../../../../components/page/Loading';
 import {
     MANIFEST_FILE_UPLOAD,
     OPENSRP_FORMS_ENDPOINT,
@@ -10,18 +8,16 @@ import {
     FIND_VALIDATOR_FILE,
     JSON_VALIDATOR_LABLE,
 } from '../../../../constants';
-import { generateOptions } from '../../../../services/opensrp';
+import { defaultConfigProps } from '../helpers';
 
 export const JSONValidatorListPage = () => {
     const JSONValidatorList = {
-        baseURL: OPENSRP_API_BASE_URL,
+        ...defaultConfigProps,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
         endpoint: OPENSRP_FORM_METADATA_ENDPOINT,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
         formVersion: null,
-        getPayload: generateOptions,
         isJsonValidator: true,
-        LoadingComponent: <Loading />,
         placeholder: FIND_VALIDATOR_FILE,
         uploadTypeUrl: VALIDATOR_UPLOAD_TYPE,
     };

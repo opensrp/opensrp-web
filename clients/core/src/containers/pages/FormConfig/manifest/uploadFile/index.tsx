@@ -1,8 +1,5 @@
 import React from 'react';
 import { ConnectedUploadConfigFile } from '@opensrp/form-config';
-import { OPENSRP_API_BASE_URL } from '../../../../../configs/env';
-import { generateOptions } from '../../../../../services/opensrp';
-import Loading from '../../../../../components/page/Loading';
 import {
     OPENSRP_FORMS_ENDPOINT,
     VIEW_DRAFT_FILES_PAGE_URL,
@@ -13,19 +10,18 @@ import {
 } from '../../../../../constants';
 import { RouteComponentProps } from 'react-router';
 import { RouteParams } from '../../../../../helpers/utils';
+import { defaultConfigProps } from '../../helpers';
 
 export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) => {
     const formId = props.match.params.id || null;
     const isJsonValidator = props.match.params.type === VALIDATOR_UPLOAD_TYPE;
 
     const uploadConfigFileProps = {
-        baseURL: OPENSRP_API_BASE_URL,
+        ...defaultConfigProps,
         draftFilesUrl: VIEW_DRAFT_FILES_PAGE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
         formId,
         isJsonValidator,
-        getPayload: generateOptions,
-        LoadingComponent: <Loading />,
         validatorsUrl: VIEW_JSON_VALIDATORS_PAGE_URL,
     };
 
