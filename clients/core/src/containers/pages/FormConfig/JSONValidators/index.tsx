@@ -5,20 +5,37 @@ import {
     OPENSRP_FORMS_ENDPOINT,
     VALIDATOR_UPLOAD_TYPE,
     OPENSRP_FORM_METADATA_ENDPOINT,
-    FIND_VALIDATOR_FILE,
     JSON_VALIDATOR_LABLE,
+    DOWNLOAD_LABEL,
+    EDIT_LABEL,
+    FILE_NAME_LABEL,
+    FILE_VERSION_LABEL,
+    IDENTIFIER_LABEL,
+    MODULE_LABEL,
+    FIND_VALIDATOR_FILES,
+    UPLOAD_EDIT_LABEL,
+    UPOL0AD_FILE_LABEL,
 } from '../../../../constants';
-import { defaultConfigProps } from '../helpers';
+import { defaultConfigProps, drillDownProps } from '../helpers';
 
 export const JSONValidatorListPage = () => {
     const JSONValidatorList = {
         ...defaultConfigProps,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
+        downloadLabel: DOWNLOAD_LABEL,
+        drillDownProps,
+        editLabel: EDIT_LABEL,
         endpoint: OPENSRP_FORM_METADATA_ENDPOINT,
+        fileNameLabel: FILE_NAME_LABEL,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
+        fileVersionLabel: FILE_VERSION_LABEL,
         formVersion: null,
+        identifierLabel: IDENTIFIER_LABEL,
         isJsonValidator: true,
-        placeholder: FIND_VALIDATOR_FILE,
+        moduleLabel: MODULE_LABEL,
+        placeholder: FIND_VALIDATOR_FILES,
+        uploadEditLabel: UPLOAD_EDIT_LABEL,
+        uploadFileLabel: UPOL0AD_FILE_LABEL,
         uploadTypeUrl: VALIDATOR_UPLOAD_TYPE,
     };
     return (

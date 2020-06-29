@@ -7,6 +7,12 @@ import {
     VIEW_JSON_VALIDATORS_PAGE_URL,
     EDIT_FILE_LABEL,
     UPLOAD_FILE_LABLE,
+    FILE_NAME_LABEL,
+    FILE_UPLOAD_LABEL,
+    FORM_NAME_REQUIRED_LABEL,
+    FORM_REQUIRED_LABEL,
+    MODULE_LABEL,
+    RELATED_TO_LABEL,
 } from '../../../../../constants';
 import { RouteComponentProps } from 'react-router';
 import { RouteParams } from '../../../../../helpers/utils';
@@ -20,8 +26,14 @@ export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) =>
         ...defaultConfigProps,
         draftFilesUrl: VIEW_DRAFT_FILES_PAGE_URL,
         endpoint: OPENSRP_FORMS_ENDPOINT,
+        fileNameLabel: FILE_NAME_LABEL,
+        fileUploadLabel: FILE_UPLOAD_LABEL,
         formId,
+        formNameRequiredLable: FORM_NAME_REQUIRED_LABEL,
+        formRequiredLabel: FORM_REQUIRED_LABEL,
         isJsonValidator,
+        moduleLabel: MODULE_LABEL,
+        relatedToLabel: RELATED_TO_LABEL,
         validatorsUrl: VIEW_JSON_VALIDATORS_PAGE_URL,
     };
 

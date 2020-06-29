@@ -7,9 +7,18 @@ import {
     OPENSRP_FORMS_ENDPOINT,
     FILE_UPLOAD_TYPE,
     RELEASE_FILE_LABEL,
+    MODULE_LABEL,
+    DOWNLOAD_LABEL,
+    EDIT_LABEL,
+    FILE_NAME_LABEL,
+    FILE_VERSION_LABEL,
+    IDENTIFIER_LABEL,
+    FIND_RELEASE_FILES,
+    UPLOAD_EDIT_LABEL,
+    UPOL0AD_FILE_LABEL,
 } from '../../../../../constants';
 import { RouteParams } from '../../../../../helpers/utils';
-import { defaultConfigProps } from '../../helpers';
+import { defaultConfigProps, drillDownProps } from '../../helpers';
 
 /**simple wrapper for manifest file lists component */
 export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
@@ -17,10 +26,20 @@ export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
     const manifestFilesListProps = {
         ...defaultConfigProps,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
+        downloadLabel: DOWNLOAD_LABEL,
+        drillDownProps,
+        editLabel: EDIT_LABEL,
         endpoint: OPENSRP_MANIFEST_FORMS_ENDPOINT,
+        fileNameLabel: FILE_NAME_LABEL,
         fileUploadUrl: MANIFEST_FILE_UPLOAD,
+        fileVersionLabel: FILE_VERSION_LABEL,
         formVersion,
+        identifierLabel: IDENTIFIER_LABEL,
         isJsonValidator: false,
+        moduleLabel: MODULE_LABEL,
+        placeholder: FIND_RELEASE_FILES,
+        uploadEditLabel: UPLOAD_EDIT_LABEL,
+        uploadFileLabel: UPOL0AD_FILE_LABEL,
         uploadTypeUrl: FILE_UPLOAD_TYPE,
     };
 
