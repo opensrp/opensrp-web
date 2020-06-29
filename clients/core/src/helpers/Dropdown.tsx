@@ -1,4 +1,4 @@
-import sampleData from '../components/page/BreadCrumb/sample-data';
+import getLocationData from '../components/page/BreadCrumb/sample-data';
 
 /** default options for genders */
 export const genderOptions: DropdownOption[] = [
@@ -17,8 +17,9 @@ export interface DropdownOption {
 export const getLocationDropdownOption = () => {
     const locations = [];
 
-    const rootMap = sampleData.locations.locationsHierarchy.map;
-    const rootLocation = rootMap['592608f9-b885-4eed-97ec-b2e77ccb2e4c'];
+    // console.log(getLocationData());
+    const rootMap = getLocationData().locations.locationsHierarchy.map;
+    const rootLocation = rootMap[Object.keys(rootMap)[0]];
     locations.push({
         parentHistory: '',
         name: rootLocation.label,

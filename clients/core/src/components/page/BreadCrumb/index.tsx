@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import sampleData from './sample-data';
+import getLocationData from './sample-data';
 import './style.css';
 import { ComponentProps, Location } from './model/models';
 import { Breadcrumb, BreadcrumbItem, ButtonDropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
@@ -95,15 +95,15 @@ class LocationBreadcrumb extends React.Component<LocationBreadcrumbProps, any> {
     }
 
     componentDidMount() {
-        console.log('location breadcrumb mounted');
+        console.log(getLocationData());
         this.setState({
-            breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
+            breadcrumItems: [renameProperty(getLocationData().locations.locationsHierarchy, 'map', 'children')],
         });
     }
     componentDidUpdate(prevProps: LocationBreadcrumbProps) {
         if (this.props.reset === true && prevProps.reset === false) {
             this.setState({
-                breadcrumItems: [renameProperty(sampleData.locations.locationsHierarchy, 'map', 'children')],
+                breadcrumItems: [renameProperty(getLocationData().locations.locationsHierarchy, 'map', 'children')],
             });
         }
     }

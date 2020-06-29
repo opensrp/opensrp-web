@@ -32,6 +32,7 @@
         "@types/react-select": "^3.0.10",
         "@types/reactstrap": "^8.0.1",
         "@types/seamless-immutable": "^7.1.10",
+        "axios": "^0.19.2",
         "bootstrap": "^4.3.1",
         "classnames": "^2.2.6",
         "client-oauth2": "^4.2.5",

@@ -33,7 +33,6 @@ import {
 import { FetchAction, RemoveAction, SetTotalRecordsAction } from '../../../../store/ducks/baseDux';
 import { Helmet } from 'react-helmet';
 import LocationBreadcrumb from '../../../../components/page/BreadCrumb';
-import sampleData from '../../../../components/page/BreadCrumb/sample-data';
 
 /** register the clients reducer */
 reducerRegistry.register(clientsReducerName, clientsReducer);

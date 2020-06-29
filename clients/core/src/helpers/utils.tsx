@@ -1,12 +1,22 @@
 import { getOnadataUserInfo, getOpenSRPUserInfo } from '@onaio/gatekeeper';
 import { SessionState } from '@onaio/session-reducer';
-import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE } from '../configs/env';
+import { ONADATA_OAUTH_STATE, OPENSRP_OAUTH_STATE, OPENSRP_API_BASE_URL } from '../configs/env';
+import { generateOptions } from '../services/opensrp';
+import { OpenSRPService } from '@opensrp/server-service';
+import axios from 'axios';
 
 /** Interface for an object that is allowed to have any property */
 export interface FlexObject {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
+
+const savelocationTolocalstorage = async (token: string) => {
+    const res = await axios.get(
+        `${OPENSRP_API_BASE_URL.replace('/rest/', '/')}security/authenticate?access_token=${token}`,
+    );
+    localStorage.setItem('_location', JSON.stringify(res.data));
+};
 
 /** Custom function to get oAuth user info depending on the oAuth2 provider
  * It compares the value of the `state` param in the oAuth2 provider config
@@ -15,6 +25,8 @@ export interface FlexObject {
  * @param {{[key: string]: any }} apiResponse - the API response object
  */
 export function oAuthUserInfoGetter(apiResponse: FlexObject): SessionState | void {
+    console.log('oAuth user info ', apiResponse.oAuth2Data.access_token);
+    savelocationTolocalstorage(apiResponse.oAuth2Data.access_token);
     if (Object.keys(apiResponse).includes('oAuth2Data')) {
         switch (apiResponse.oAuth2Data.state) {
             case OPENSRP_OAUTH_STATE:
