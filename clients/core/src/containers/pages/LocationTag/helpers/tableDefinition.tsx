@@ -23,15 +23,15 @@ export const useLocationTagTableColumns = () => {
                         accessor: 'description',
                         disableSortBy: true,
                     },
-                    {
-                        // eslint-disable-next-line react/display-name
-                        Cell: ({ row: { values } }: UseTableCellProps<LocationTag>): React.ReactNode => (
-                            <label>{values.active ? 'Active' : 'Deactive'}</label>
-                        ),
-                        Header: 'Status',
-                        accessor: 'active',
-                        disableSortBy: true,
-                    },
+                    // {
+                    //     // eslint-disable-next-line react/display-name
+                    //     Cell: ({ row: { values } }: UseTableCellProps<LocationTag>): React.ReactNode => (
+                    //         <label>{values.active ? 'Active' : 'Deactive'}</label>
+                    //     ),
+                    //     Header: 'Status',
+                    //     accessor: 'active',
+                    //     disableSortBy: true,
+                    // },
                 ],
                 id: 'locationTagtableCrumb',
             },
