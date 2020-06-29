@@ -44,7 +44,7 @@ export const JSONValidatorListPage = () => {
             <Helmet>
                 <title>{JSON_VALIDATOR_LABLE}</title>
             </Helmet>
-            <h3 className="household-title"> {JSON_VALIDATOR_LABLE} </h3>
+            <h3 className="household-title">{JSON_VALIDATOR_LABLE}</h3>
             <ConnectedManifestFilesList {...JSONValidatorList} />
         </div>
     );

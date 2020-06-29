@@ -44,7 +44,7 @@ export const ManifestDraftFilesPage = () => {
             <Helmet>
                 <title>{DRAFT_FILE_LABEL}</title>
             </Helmet>
-            <h3 className="household-title"> {DRAFT_FILE_LABEL} </h3>
+            <h3 className="household-title">{DRAFT_FILE_LABEL}</h3>
             <ConnectedManifestDraftFiles {...ManifestFilesListProps} />
         </div>
     );

@@ -14,6 +14,7 @@ import {
     VIEW_FILES_LABEL,
 } from '../../../../../constants';
 import { defaultConfigProps, drillDownProps } from '../../helpers';
+import Helmet from 'react-helmet';
 
 export const ManifestReleasesPage = () => {
     const manifestReleasesProps = {
@@ -32,7 +33,10 @@ export const ManifestReleasesPage = () => {
     };
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{RELEASES_LABEL}</h4>
+            <Helmet>
+                <title>{RELEASES_LABEL}</title>
+            </Helmet>
+            <h3 className="household-title">{RELEASES_LABEL}</h3>
             <ConnectedManifestReleases {...manifestReleasesProps} />
         </div>
     );

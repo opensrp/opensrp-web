@@ -44,7 +44,7 @@ describe('containers/pages/ConfigForm/manifest/draftFiles', () => {
 
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Draft Files');
-        expect(wrapper.find('.household-title').text()).toEqual(' Draft Files ');
+        expect(wrapper.find('.household-title').text()).toEqual('Draft Files');
 
         expect(wrapper.find('DrillDownTable').length).toEqual(1);
         expect(wrapper.find('ManifestDraftFiles').props()).toMatchSnapshot();
