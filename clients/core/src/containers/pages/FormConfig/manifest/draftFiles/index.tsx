@@ -17,9 +17,10 @@ import {
     FIND_DRAFT_FILE_LABEL,
 } from '../../../../../constants';
 import { defaultConfigProps, drillDownProps } from '../../helpers';
+import Helmet from 'react-helmet';
 
 /**simple wrapper for manifest file lists component */
-export const ManifestDraftFiles = () => {
+export const ManifestDraftFilesPage = () => {
     const ManifestFilesListProps = {
         ...defaultConfigProps,
         downloadEndPoint: OPENSRP_FORMS_ENDPOINT,
@@ -40,7 +41,10 @@ export const ManifestDraftFiles = () => {
 
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{DRAFT_FILE_LABEL}</h4>
+            <Helmet>
+                <title>{DRAFT_FILE_LABEL}</title>
+            </Helmet>
+            <h3 className="household-title"> {DRAFT_FILE_LABEL} </h3>
             <ConnectedManifestDraftFiles {...ManifestFilesListProps} />
         </div>
     );

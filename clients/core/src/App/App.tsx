@@ -32,7 +32,7 @@ import { ManifestReleasesPage } from '../containers/pages/FormConfig/manifest/re
 import { ManifestFiles } from '../containers/pages/FormConfig/manifest/filesList';
 import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators';
 import { UploadConfigFilePage } from '../containers/pages/FormConfig/manifest/uploadFile';
-import { ManifestDraftFiles } from '../containers/pages/FormConfig/manifest/draftFiles';
+import { ManifestDraftFilesPage } from '../containers/pages/FormConfig/manifest/draftFiles';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -100,7 +100,7 @@ class App extends Component {
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}
                                 path={VIEW_DRAFT_FILES_PAGE_URL}
-                                component={ManifestDraftFiles}
+                                component={ManifestDraftFilesPage}
                             />
                             <Route
                                 exact={true}
