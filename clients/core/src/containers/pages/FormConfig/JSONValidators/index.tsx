@@ -17,6 +17,7 @@ import {
     UPOL0AD_FILE_LABEL,
 } from '../../../../constants';
 import { defaultConfigProps, drillDownProps } from '../helpers';
+import Helmet from 'react-helmet';
 
 export const JSONValidatorListPage = () => {
     const JSONValidatorList = {
@@ -40,7 +41,10 @@ export const JSONValidatorListPage = () => {
     };
     return (
         <div>
-            <h4 style={{ marginBottom: '30px' }}>{JSON_VALIDATOR_LABLE}</h4>
+            <Helmet>
+                <title>{JSON_VALIDATOR_LABLE}</title>
+            </Helmet>
+            <h3 className="household-title"> {JSON_VALIDATOR_LABLE} </h3>
             <ConnectedManifestFilesList {...JSONValidatorList} />
         </div>
     );

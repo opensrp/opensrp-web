@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/pages/ConfigForm/JSONValidator renders validators list correctly 1`] = `
+Object {
+  "LoadingComponent": <Ripple
+    borderColor="#ff5d00"
+    borderStyle="solid"
+    borderWidth="4px"
+    height="64px"
+    minHeight="80vh"
+    width="64px"
+  />,
+  "baseURL": "https://reveal-stage.smartregister.org/opensrp/rest/",
+  "createdAt": "Created at",
+  "data": Array [],
+  "debounceTime": 1000,
+  "downloadEndPoint": "clientForm",
+  "downloadLabel": "Download",
+  "drillDownProps": Object {
+    "paginate": false,
+  },
+  "editLabel": "Edit",
+  "endpoint": "clientForm/metadata",
+  "fetchFiles": [Function],
+  "fileNameLabel": "File Name",
+  "fileUploadUrl": "/manifest",
+  "fileVersionLabel": "File Version",
+  "formVersion": null,
+  "getPayload": [Function],
+  "identifierLabel": "Identifier",
+  "isJsonValidator": true,
+  "moduleLabel": "Module",
+  "placeholder": "Find Validator Files",
+  "removeFiles": [Function],
+  "uploadEditLabel": "Upload edit",
+  "uploadFileLabel": "Upload New File",
+  "uploadTypeUrl": "validator_upload",
+}
+`;
