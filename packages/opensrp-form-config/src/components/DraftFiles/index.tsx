@@ -244,6 +244,13 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         return <Redirect to={releasesUrl} />;
     }
 
+    const uploadLink = {
+        pathname: `${formUploadUrl}/${uploadTypeUrl}`,
+        state: {
+            fromDrafts: true,
+        },
+    };
+
     return (
         <div>
             <Row>
@@ -251,7 +258,7 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                     <SearchBar {...searchBarProps} />
                 </Col>
                 <Col xs="4">
-                    <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
+                    <Link className="btn btn-secondary float-right" to={uploadLink}>
                         {uploadFileLabel}
                     </Link>
                 </Col>

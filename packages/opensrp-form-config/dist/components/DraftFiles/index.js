@@ -288,13 +288,19 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     });
   }
 
+  var uploadLink = {
+    pathname: "".concat(formUploadUrl, "/").concat(uploadTypeUrl),
+    state: {
+      fromDrafts: true
+    }
+  };
   return _react["default"].createElement("div", null, _react["default"].createElement(_reactstrap.Row, null, _react["default"].createElement(_reactstrap.Col, {
     xs: "8"
   }, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps)), _react["default"].createElement(_reactstrap.Col, {
     xs: "4"
   }, _react["default"].createElement(_reactRouterDom.Link, {
     className: "btn btn-secondary float-right",
-    to: "".concat(formUploadUrl, "/").concat(uploadTypeUrl)
+    to: uploadLink
   }, uploadFileLabel))), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps), data.length > 0 && _react["default"].createElement(_reactstrap.Button, {
     className: "btn btn-md btn btn-primary float-right",
     color: "primary",

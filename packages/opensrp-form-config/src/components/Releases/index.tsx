@@ -158,6 +158,13 @@ const ManifestReleases = (props: ManifestReleasesProps & ReleasesDefaultProps) =
         return <div>{LoadingComponent}</div>;
     }
 
+    const uploadLink = {
+        pathname: `${formUploadUrl}/${uploadTypeUrl}`,
+        state: {
+            fromReleases: true,
+        },
+    };
+
     return (
         <div>
             <Row>
@@ -165,7 +172,7 @@ const ManifestReleases = (props: ManifestReleasesProps & ReleasesDefaultProps) =
                     <SearchBar {...searchBarProps} />
                 </Col>
                 <Col xs="4">
-                    <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
+                    <Link className="btn btn-secondary float-right" to={uploadLink}>
                         {uploadFileLabel}
                     </Link>
                 </Col>
