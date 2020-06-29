@@ -1,7 +1,7 @@
 {
-    "name": "@opensrp/server-service",
-    "version": "0.0.4",
-    "description": "Wrapper around OpenSRP Server REST API",
+    "name": "@opensrp/form-config",
+    "version": "0.0.3",
+    "description": "OpenSrp form configuration components",
     "main": "dist/index.js",
     "types": "dist/types",
     "files": [
@@ -24,6 +24,29 @@
         "setupFiles": [
             "../../setupTests"
         ]
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-redux": "^7.1.0",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1",
+        "redux": "^4.0.4"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.20",
+        "@fortawesome/free-brands-svg-icons": "^5.10.0",
+        "@fortawesome/free-regular-svg-icons": "^5.10.0",
+        "@fortawesome/free-solid-svg-icons": "^5.10.0",
+        "@fortawesome/react-fontawesome": "^0.1.4",
+        "@onaio/drill-down-table": "^1.0.2",
+        "@onaio/redux-reducer-registry": "^0.0.9",
+        "@opensrp/reducer-factory": "^0.0.1",
+        "@opensrp/server-service": "^0.0.2",
+        "formik": "^2.1.4",
+        "lodash": "^4.17.15",
+        "react-toastify": "^6.0.5",
+        "reactstrap": "^8.0.1",
+        "yup": "^0.29.1"
     },
     "bugs": {
         "url": "https://github.com/opensrp/opensrp-web/issues"

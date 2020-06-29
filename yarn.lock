@@ -2291,10 +2291,8 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
-"@opensrp/form-config@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@opensrp/form-config/-/form-config-0.0.4.tgz#1b92215b08a22139726c7f5f40d889352cc03733"
-  integrity sha512-P0qIgcpYLd1ylznyMdS5DPV0/mYoyblgrtRmrgSvHumwC1a634+M7pqod19t/sqQRpZoXpJ/quaJVXh5Ift6pQ==
+"@opensrp/form-config@file:/home/ona/projects/opensrp/opensrp-web/packages/opensrp-form-config/":
+  version "0.0.3"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.20"
     "@fortawesome/free-brands-svg-icons" "^5.10.0"
@@ -2310,6 +2308,13 @@
     react-toastify "^6.0.5"
     reactstrap "^8.0.1"
     yup "^0.29.1"
+
+"@opensrp/opensrp-table@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@opensrp/opensrp-table/-/opensrp-table-0.0.2.tgz#ee2c0e058429b2ec0ec1adbca3b5f2506511ec13"
+  integrity sha512-pNIHvvtUxbxvXi8F18TRg68bOKJepIHKEQCuK1noP8a1DD5CE1rHb0zAph3je/C1eQbLjOQLHXAKFo6YnQO6bA==
+  dependencies:
+    react-table "^7.0.0"
 
 "@opensrp/reducer-factory@^0.0.1":
   version "0.0.1"
@@ -2795,6 +2800,11 @@
   integrity sha512-XAvHLwG7UQ+8M4caKIH0ZozIOYay5fQkAgyIXegXT9jPtdIGdhga+sUEdAr1CiG46aB+c64xQEYyEzlwWVTNzA==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/yup@^0.26.22":
+  version "0.26.37"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.37.tgz#7a52854ac602ba0dc969bebc960559f7464a1686"
+  integrity sha512-cDqR/ez4+iAVQYOwadXjKX4Dq1frtnDGV2GNVKj3aUVKVCKRvsr8esFk66j+LgeeJGmrMcBkkfCf3zk13MjV7A==
 
 "@types/yup@^0.29.3":
   version "0.29.3"
@@ -6688,6 +6698,11 @@ flatten@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
+
+flush-promises@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/flush-promises/-/flush-promises-1.0.2.tgz#4948fd58f15281fed79cbafc86293d5bb09b2ced"
+  integrity sha512-G0sYfLQERwKz4+4iOZYQEZVpOt9zQrlItIxQAAYAWpfby3gbHrx0osCHz5RLl/XoXevXk0xoN4hDFky/VV9TrA==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"

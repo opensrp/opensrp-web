@@ -1,6 +1,6 @@
 {
     "name": "opensrp-web",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.20",
@@ -17,7 +17,7 @@
         "@onaio/redux-reducer-registry": "^0.0.9",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
-        "@opensrp/form-config": "^0.0.4",
+        "@opensrp/form-config": "file:/home/ona/projects/opensrp/opensrp-web/packages/opensrp-form-config/",
         "@opensrp/opensrp-table": "^0.0.2",
         "@opensrp/reducer-factory": "^0.0.1",
         "@opensrp/server-service": "^0.0.2",
@@ -42,7 +42,6 @@
         "client-oauth2": "^4.2.5",
         "connected-react-router": "^6.5.2",
         "fetch-mock": "^7.3.9",
-        "formik": "^2.1.4",
         "history": "^4.9.0",
         "jest-fetch-mock": "^2.1.2",
         "lodash": "^4.17.15",
