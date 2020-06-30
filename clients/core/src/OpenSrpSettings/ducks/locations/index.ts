@@ -21,18 +21,18 @@ interface ParentLocation {
 export interface LocNode {
     locationId: string;
     name: string;
-    tags?: Array<string>;
     parentLocation?: ParentLocation;
+    tags?: string[];
     voided: boolean;
 }
 
 /** location children interface */
 export interface LocChildren {
+    children?: { [key: string]: LocChildren };
     id: string;
     label: string;
-    node: LocNode;
     parent?: string;
-    children?: { [key: string]: LocChildren };
+    node: LocNode;
 }
 
 /** locationsHierarchy parentChildren  interface */
@@ -47,11 +47,11 @@ export interface LocMap {
 
 /** crurrent Location interface */
 export interface CurrentLoc {
+    activeLocId?: string | null;
+    defaultLocId?: string;
     map: LocMap | {};
     parentChildren: ParentChildren | {};
-    activeLocId?: string | null;
     selectedLocs?: string[];
-    defaultLocId?: string;
 }
 
 /** location payload interface */

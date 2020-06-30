@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, SERVER_SETTINGS_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -19,6 +19,7 @@ import ConnectedClientList from '../containers/Clients/List';
 import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
+import { EditSetingsPage } from '../containers/pages/PopulationCharacteristics';
 import './App.css';
 
 library.add(faUser, faChartLine, faCog);
@@ -52,6 +53,12 @@ class App extends Component {
                                 exact={true}
                                 path={CHILD_URL}
                                 component={ConnectedChildList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={SERVER_SETTINGS_URL}
+                                component={EditSetingsPage}
                             />
 
                             <Route

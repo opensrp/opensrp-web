@@ -22,6 +22,8 @@ import {
     TEAMS,
     USER_URL,
     USERS,
+    SERVER_SETTINGS_URL,
+    SERVER_SETTINGS,
 } from '../constants';
 import {
     ENABLE_ANC_PAGE,
@@ -33,6 +35,7 @@ import {
     ENABLE_ROLE_PAGE,
     ENABLE_TEAM_PAGE,
     ENABLE_USER_PAGE,
+    ENABLE_POPULATION_CHARACTERISTICS,
 } from './env';
 
 // Page links
@@ -69,6 +72,10 @@ const TEAMS_PAGE_NAVIGATION: PageLink = {
 const LOCATIONS_PAGE_NAVIGATION: PageLink = {
     label: LOCATIONS,
     url: LOCATIONS_URL,
+};
+const CHARACTERISTICS_SETTINGS_NAVIGATION: PageLink = {
+    label: SERVER_SETTINGS,
+    url: SERVER_SETTINGS_URL,
 };
 
 // icons
@@ -112,6 +119,7 @@ const ADMIN_NAVIGATION_MODULE: NavigationModule = {
         ENABLE_ROLE_PAGE && ROLES_PAGE_NAVIGATION,
         ENABLE_TEAM_PAGE && TEAMS_PAGE_NAVIGATION,
         ENABLE_LOCATION_PAGE && LOCATIONS_PAGE_NAVIGATION,
+        ENABLE_POPULATION_CHARACTERISTICS && CHARACTERISTICS_SETTINGS_NAVIGATION,
     ].filter<PageLink>((childNav: PageLink | boolean): childNav is PageLink => typeof childNav !== 'boolean'),
     parentNav: ADMIN_MODULE_PARENT_NAV,
 };
@@ -122,7 +130,12 @@ const ENABLE_CLIENT_RECORDS_MODULE =
 type ENABLE_CLIENT_RECORDS_MODULE = typeof ENABLE_CLIENT_RECORDS_MODULE;
 
 /** Enable Admin Module from its child pages */
-const ENABLE_ADMIN_MODULE = ENABLE_USER_PAGE || ENABLE_ROLE_PAGE || ENABLE_TEAM_PAGE || ENABLE_LOCATION_PAGE;
+const ENABLE_ADMIN_MODULE =
+    ENABLE_USER_PAGE ||
+    ENABLE_ROLE_PAGE ||
+    ENABLE_TEAM_PAGE ||
+    ENABLE_LOCATION_PAGE ||
+    ENABLE_POPULATION_CHARACTERISTICS;
 type ENABLE_ADMIN_MODULE = typeof ENABLE_ADMIN_MODULE;
 
 export const sideMenuProps: SideMenuProps = {

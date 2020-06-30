@@ -272,4 +272,4 @@ const mapStateToProps = (state: Partial<Store>) => {
 
 const ConnectedEditSetings = connect(mapStateToProps, mapDispatchToProps)(EditSetings);
 
-export default ConnectedEditSetings;
+export { EditSetings, ConnectedEditSetings };

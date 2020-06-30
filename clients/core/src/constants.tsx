@@ -29,6 +29,8 @@ export const LOCATIONS_URL = '/404';
 export type LOCATION_URL = typeof LOCATIONS_URL;
 export const REPORTS_URL = '/404';
 export type REPORTS_URL = typeof REPORTS_URL;
+export const SERVER_SETTINGS_URL = '/server-settings';
+export type SERVER_SETTINGS_URL = typeof SERVER_SETTINGS_URL;
 
 // string literals
 
@@ -76,3 +78,5 @@ export type PREVIOUS = typeof PREVIOUS;
 export const LOADING = 'Loading';
 export const VIEW = 'View';
 export type VIEW = typeof VIEW;
+export const SERVER_SETTINGS = 'Server Settings';
+export type SERVER_SETTINGS = typeof SERVER_SETTINGS;

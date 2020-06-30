@@ -13,17 +13,17 @@ export const REMOVE_LOC_SETTINGS = 'settings/location/REMOVE_SETTINGS';
 /** interface for settings */
 export interface Setting {
     description: string;
-    label: string;
-    value: boolean;
-    key: string;
-    type: string;
-    identifier: string;
-    team_id: string;
-    team: string;
-    provider_id: string;
-    locationId: string;
-    inherited_from?: string;
     editing?: boolean;
+    identifier: string;
+    inherited_from?: string;
+    key: string;
+    label: string;
+    locationId: string;
+    provider_id: string;
+    team: string;
+    team_id: string;
+    type: string;
+    value: boolean;
 }
 
 export interface SettingStorage {

@@ -44,6 +44,11 @@ export type ENABLE_TEAM_PAGE = typeof ENABLE_TEAM_PAGE;
 export const ENABLE_LOCATION_PAGE = process.env.REACT_APP_ENABLE_LOCATION_PAGE === 'true' || false;
 export type ENABLE_LOCATION_PAGE = typeof ENABLE_LOCATION_PAGE;
 
+/** do you want to enable population characteristics settings */
+export const ENABLE_POPULATION_CHARACTERISTICS =
+    process.env.REACT_APP_ENABLE_POPULATION_CHARACTERISTICS === 'true' || false;
+export type ENABLE_POPULATION_CHARACTERISTICS = typeof ENABLE_POPULATION_CHARACTERISTICS;
+
 /** Do you want to disable login protection? */
 export const DISABLE_LOGIN_PROTECTION = process.env.REACT_APP_DISABLE_LOGIN_PROTECTION === 'true';
 export type DISABLE_LOGIN_PROTECTION = typeof DISABLE_LOGIN_PROTECTION;
