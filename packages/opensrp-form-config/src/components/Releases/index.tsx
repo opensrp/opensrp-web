@@ -182,7 +182,7 @@ const ManifestReleases = (props: ManifestReleasesProps & ReleasesDefaultProps) =
     );
 };
 
-/** declear default props */
+/** populate default props for ManifestReleases */
 const defaultProps: ReleasesDefaultProps = {
     appIdLabel: APP_ID_LABEL,
     appVersionLabel: APP_VERSION_LABEL,

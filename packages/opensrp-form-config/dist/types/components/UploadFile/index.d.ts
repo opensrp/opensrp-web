@@ -24,9 +24,12 @@ declare const UploadConfigFile: {
     (props: UploadConfigFileProps & UploadDefaultProps): JSX.Element;
     defaultProps: UploadDefaultProps;
 };
+/** ownprops interface */
+interface OwnProps extends UploadConfigFileProps, UploadDefaultProps {
+}
 /** Connected UploadConfigFile component */
 declare const ConnectedUploadConfigFile: import("react-redux").ConnectedComponent<{
     (props: UploadConfigFileProps & UploadDefaultProps): JSX.Element;
     defaultProps: UploadDefaultProps;
-}, any>;
+}, Pick<UploadConfigFileProps & UploadDefaultProps, "isJsonValidator" | "draftFilesUrl" | "formId" | "validatorsUrl" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent"> & OwnProps>;
 export { UploadConfigFile, ConnectedUploadConfigFile };
