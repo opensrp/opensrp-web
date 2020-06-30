@@ -9,12 +9,17 @@ Object {
       "accessor": [Function],
     },
     Object {
-      "Header": "APP Id",
+      "Header": "App Id",
       "accessor": "appId",
     },
     Object {
       "Header": "App Version",
       "accessor": [Function],
+    },
+    Object {
+      "Cell": [Function],
+      "Header": "Updated at",
+      "accessor": "updatedAt",
     },
     Object {
       "Header": " ",

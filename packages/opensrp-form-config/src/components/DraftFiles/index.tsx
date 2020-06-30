@@ -5,7 +5,7 @@ import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import DraftFilesReducer, {
     fetchManifestDraftFiles,
@@ -13,7 +13,7 @@ import DraftFilesReducer, {
     getAllManifestDraftFilesArray,
     removeManifestDraftFiles,
 } from '../../ducks/manifestDraftFiles';
-import { Button } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 import { ManifestFilesTypes } from '../../ducks/manifestFiles';
 import { Redirect } from 'react-router';
 import {
@@ -24,29 +24,39 @@ import {
     MODULE_LABEL,
     DOWNLOAD_LABEL,
     FIND_DRAFT_RELEASES_LABEL,
+    CREATED_AT_LABEL,
+    UPOL0AD_FILE_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
+import { Link } from 'react-router-dom';
 
 /** Register reducer */
 reducerRegistry.register(draftReducerName, DraftFilesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface DraftsDefaultProps extends SearchBarDefaultProps {
     clearDraftFiles: typeof removeManifestDraftFiles;
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     fetchDraftFiles: typeof fetchManifestDraftFiles;
     fileNameLabel: string;
     fileVersionLabel: string;
     identifierLabel: string;
     makeReleaseLabel: string;
     moduleLabel: string;
+    uploadFileLabel: string;
 }
 
 /** manifest Draft files props interface */
-interface ManifestDraftFilesProps extends DefaultProps, FormConfigProps {
+export interface ManifestDraftFilesProps extends DraftsDefaultProps, FormConfigProps {
     downloadEndPoint: string;
+    formUploadUrl: string;
     manifestEndPoint: string;
     releasesUrl: string;
+    uploadTypeUrl: string;
 }
 
 /** view manifest forms */
@@ -71,6 +81,11 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         fileVersionLabel,
         moduleLabel,
         downloadLabel,
+        createdAt,
+        uploadFileLabel,
+        formUploadUrl,
+        uploadTypeUrl,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -184,9 +199,16 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
             accessor: `version`,
         },
         {
+            Header: createdAt,
+            accessor: 'createdAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
+            maxWidth: 100,
+        },
+        {
             Header: moduleLabel,
             accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
             disableSortBy: true,
+            maxWidth: 80,
         },
         {
             Header: ' ',
@@ -197,14 +219,15 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
                     </a>
                 ))(),
             disableSortBy: true,
+            maxWidth: 80,
         },
     ];
 
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const searchBarProps = {
@@ -221,9 +244,25 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
         return <Redirect to={releasesUrl} />;
     }
 
+    const uploadLink = {
+        pathname: `${formUploadUrl}/${uploadTypeUrl}`,
+        state: {
+            fromDrafts: true,
+        },
+    };
+
     return (
         <div>
-            <SearchBar {...searchBarProps} />
+            <Row>
+                <Col xs="8">
+                    <SearchBar {...searchBarProps} />
+                </Col>
+                <Col xs="4">
+                    <Link className="btn btn-secondary float-right" to={uploadLink}>
+                        {uploadFileLabel}
+                    </Link>
+                </Col>
+            </Row>
             <DrillDownTable {...DrillDownTableProps} />
             {data.length > 0 && (
                 <Button className="btn btn-md btn btn-primary float-right" color="primary" onClick={onMakeReleaseClick}>
@@ -235,11 +274,15 @@ const ManifestDraftFiles = (props: ManifestDraftFilesProps) => {
 };
 
 /** declear default props */
-const defaultProps: DefaultProps = {
+const defaultProps: DraftsDefaultProps = {
     clearDraftFiles: removeManifestDraftFiles,
+    createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
+    drillDownProps: {
+        paginate: false,
+    },
     fetchDraftFiles: fetchManifestDraftFiles,
     fileNameLabel: FILE_NAME_LABEL,
     fileVersionLabel: FILE_VERSION_LABEL,
@@ -247,6 +290,7 @@ const defaultProps: DefaultProps = {
     makeReleaseLabel: MAKE_RELEASE_LABEL,
     moduleLabel: MODULE_LABEL,
     placeholder: FIND_DRAFT_RELEASES_LABEL,
+    uploadFileLabel: UPOL0AD_FILE_LABEL,
 };
 
 /** pass default props to component */

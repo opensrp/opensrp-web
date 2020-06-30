@@ -30,11 +30,12 @@ const props = {
     baseURL,
     endpoint,
     downloadEndPoint: 'formDownload',
-    fileUploadUrl: '/manifest',
+    formUploadUrl: '/manifest',
     getPayload: getFetchOptions,
     LoadingComponent: <div>Loading</div>,
     manifestEndPoint: 'manifest',
     releasesUrl: '/manifest/releases',
+    uploadTypeUrl: 'file-upload',
 };
 
 const actualDebounce = _.debounce;
@@ -81,8 +82,9 @@ describe('components/ManifestReleases', () => {
             .find('.tbody .tr')
             .at(0)
             .find('.td')
-            .at(4)
+            .at(5)
             .find('a');
+        expect(downloadFiledCell.text()).toEqual('Download');
         expect(toJson(downloadFiledCell)).toMatchSnapshot();
 
         downloadFiledCell.simulate('click');
@@ -116,6 +118,13 @@ describe('components/ManifestReleases', () => {
             method: 'POST',
         };
         expect(fetch).toHaveBeenCalledWith('https://test-example.com/rest/manifest', postData);
+
+        // upload file button test
+        const uploadBtn = wrapper.find('Col Link');
+        expect(uploadBtn.text()).toEqual('Upload New File');
+        uploadBtn.simulate('click');
+        await flushPromises();
+        expect(window.location.pathname).toEqual('/manifest/releases');
         // should clear drafts in store on publish
         expect(getAllManifestDraftFilesArray(store.getState())).toEqual([]);
     });

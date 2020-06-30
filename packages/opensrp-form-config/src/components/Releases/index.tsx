@@ -13,7 +13,7 @@ import releasesReducer, {
 import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import {
     APP_ID_LABEL,
     APP_VERSION_LABEL,
@@ -21,31 +21,36 @@ import {
     UPOL0AD_FILE_LABEL,
     IDENTIFIER_LABEL,
     FIND_RELEASES_LABEL,
+    UPDATED_AT_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
 
 /** Register reducer */
 reducerRegistry.register(releasesReducerName, releasesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface ReleasesDefaultProps extends SearchBarDefaultProps {
     appIdLabel: string;
     appVersionLabel: string;
     data: ManifestReleasesTypes[];
+    drillDownProps: DrillDownProps;
     fetchReleases: typeof fetchManifestReleases;
     identifierLabel: string;
-    formUploadUrl: string;
+    updatedAt: string;
     uploadFileLabel: string;
     viewFilesLabel: string;
 }
 
 /** ManifestReleases props interface */
-interface ManifestReleasesProps extends FormConfigProps {
+export interface ManifestReleasesProps extends FormConfigProps {
     currentUrl: string;
+    formUploadUrl: string;
     uploadTypeUrl: string;
 }
 
 /** view all manifest pages */
-const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
+const ManifestReleases = (props: ManifestReleasesProps & ReleasesDefaultProps) => {
     const {
         baseURL,
         endpoint,
@@ -64,6 +69,8 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         viewFilesLabel,
         uploadFileLabel,
         identifierLabel,
+        updatedAt,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -112,6 +119,11 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
             accessor: (obj: ManifestReleasesTypes) => `V${obj.appVersion}`,
         },
         {
+            Header: updatedAt,
+            accessor: 'updatedAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
+        },
+        {
             Header: ' ',
             accessor: (obj: ManifestReleasesTypes) => linkToFiles(obj),
             disableSortBy: true,
@@ -121,8 +133,8 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -146,6 +158,13 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
         return <div>{LoadingComponent}</div>;
     }
 
+    const uploadLink = {
+        pathname: `${formUploadUrl}/${uploadTypeUrl}`,
+        state: {
+            fromReleases: true,
+        },
+    };
+
     return (
         <div>
             <Row>
@@ -153,7 +172,7 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
                     <SearchBar {...searchBarProps} />
                 </Col>
                 <Col xs="4">
-                    <Link className="btn btn-secondary float-right" to={`${formUploadUrl}/${uploadTypeUrl}`}>
+                    <Link className="btn btn-secondary float-right" to={uploadLink}>
                         {uploadFileLabel}
                     </Link>
                 </Col>
@@ -163,16 +182,19 @@ const ManifestReleases = (props: ManifestReleasesProps & DefaultProps) => {
     );
 };
 
-/** declear default props */
-const defaultProps: DefaultProps = {
+/** populate default props for ManifestReleases */
+const defaultProps: ReleasesDefaultProps = {
     appIdLabel: APP_ID_LABEL,
     appVersionLabel: APP_VERSION_LABEL,
     data: [],
     debounceTime: 1000,
+    drillDownProps: {
+        paginate: false,
+    },
     fetchReleases: fetchManifestReleases,
-    formUploadUrl: '',
     identifierLabel: IDENTIFIER_LABEL,
     placeholder: FIND_RELEASES_LABEL,
+    updatedAt: UPDATED_AT_LABEL,
     uploadFileLabel: UPOL0AD_FILE_LABEL,
     viewFilesLabel: VIEW_FILES_LABEL,
 };
