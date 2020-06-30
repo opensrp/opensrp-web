@@ -207,7 +207,6 @@ var defaultProps = {
   relatedToLabel: _constants.RELATED_TO_LABEL
 };
 UploadConfigFile.defaultProps = defaultProps;
-;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var formId = ownProps.formId;
