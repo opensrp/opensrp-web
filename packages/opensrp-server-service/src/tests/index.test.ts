@@ -1,5 +1,7 @@
 import { getDefaultHeaders, OpenSRPService, OPENSRP_API_BASE_URL } from '..';
 import { createPlan, plansListResponse } from './fixtures/plans';
+import { sampleErrorObj } from './fixtures/session';
+import { throwNetworkError, throwHTTPError } from '../errors';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -64,7 +66,8 @@ describe('services/OpenSRP', () => {
     });
 
     it('OpenSRPService list method should handle http errors', async () => {
-        fetch.mockResponseOnce(JSON.stringify({}), { status: 500 });
+        const statusText = 'something happened';
+        fetch.mockResponseOnce(JSON.stringify(sampleErrorObj), { status: 500, statusText });
         const planService = new OpenSRPService(OPENSRP_API_BASE_URL, 'plans');
         let error;
         try {
@@ -73,6 +76,8 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService list on plans failed, HTTP status 500'));
+        expect(error.name).toEqual('HTTPError');
+        expect(error.statusCode).toEqual(500);
     });
 
     // delete method
@@ -118,7 +123,8 @@ describe('services/OpenSRP', () => {
     });
 
     it('OpenSRPService delete method should handle http errors', async () => {
-        fetch.mockResponseOnce(JSON.stringify({}), { status: 500 });
+        const statusText = 'something happened';
+        fetch.mockResponseOnce(JSON.stringify(sampleErrorObj), { status: 500, statusText });
         const service = new OpenSRPService(OPENSRP_API_BASE_URL, 'practitioners');
         let error;
         try {
@@ -127,6 +133,9 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService delete on practitioners failed, HTTP status 500'));
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
+        expect(error.statusText).toEqual('something happened');
+        expect(error.statusCode).toEqual(500);
     });
 
     // read method
@@ -169,7 +178,8 @@ describe('services/OpenSRP', () => {
     });
 
     it('OpenSRPService read method should handle http errors', async () => {
-        fetch.mockResponseOnce(JSON.stringify({}), { status: 500 });
+        const statusText = 'something happened';
+        fetch.mockResponseOnce(JSON.stringify(sampleErrorObj), { status: 500, statusText });
         const planService = new OpenSRPService(OPENSRP_API_BASE_URL, 'plans');
         let error;
         try {
@@ -178,6 +188,9 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService read on plans failed, HTTP status 500'));
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
+        expect(error.statusText).toEqual('something happened');
+        expect(error.statusCode).toEqual(500);
     });
 
     it('OpenSRPService create method works', async () => {
@@ -214,7 +227,8 @@ describe('services/OpenSRP', () => {
     });
 
     it('OpenSRPService create method should handle http errors', async () => {
-        fetch.mockResponseOnce(JSON.stringify({}), { status: 500 });
+        const statusText = 'something happened';
+        fetch.mockResponseOnce(JSON.stringify(sampleErrorObj), { status: 500, statusText });
         const planService = new OpenSRPService(OPENSRP_API_BASE_URL, 'plans');
         let error;
         try {
@@ -223,6 +237,9 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService create on plans failed, HTTP status 500'));
+        expect(error.description).toEqual(JSON.stringify(sampleErrorObj));
+        expect(error.statusText).toEqual('something happened');
+        expect(error.statusCode).toEqual(500);
     });
 
     it('OpenSRPService update method works', async () => {
@@ -272,5 +289,53 @@ describe('services/OpenSRP', () => {
             error = e;
         }
         expect(error).toEqual(new Error('OpenSRPService update on plans failed, HTTP status 500'));
+    });
+
+    it('OpenSRPService attaches a non successful apiResponse correctly', async () => {
+        // json apiResponse object
+        const statusText = 'something happened';
+        fetch.mockResponseOnce(JSON.stringify('Some error happened'), { status: 500, statusText });
+        const planService = new OpenSRPService(OPENSRP_API_BASE_URL, 'plans');
+        let error;
+        try {
+            await planService.update({ foo: 'bar' });
+        } catch (e) {
+            error = e;
+        }
+        expect(error).toEqual(new Error('OpenSRPService update on plans failed, HTTP status 500'));
+        expect(error.description).toEqual('"Some error happened"');
+        expect(error.statusText).toEqual('something happened');
+        expect(error.statusCode).toEqual(500);
+    });
+});
+
+describe('src/errors', () => {
+    it('does not create a network error', () => {
+        /// increase test coverage.
+        try {
+            const error = new SyntaxError();
+            throwNetworkError(error);
+        } catch (err) {
+            expect(err.name).toEqual('SyntaxError');
+        }
+    });
+
+    it('creates a network error', () => {
+        /// increase test coverage.
+        try {
+            const error = new TypeError();
+            throwNetworkError(error);
+        } catch (err) {
+            expect(err.name).toEqual('NetworkError');
+        }
+    });
+
+    it('throws HTTPErrors', async () => {
+        try {
+            const sampleResponse = new Response(JSON.stringify({}), { status: 500, statusText: 'Nothing' });
+            await throwHTTPError(sampleResponse);
+        } catch (err) {
+            expect(err.name).toEqual('HTTPError');
+        }
     });
 });

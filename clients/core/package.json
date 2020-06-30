@@ -1,6 +1,6 @@
 {
     "name": "opensrp-web",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.20",
@@ -10,15 +10,15 @@
         "@fortawesome/react-fontawesome": "^0.1.4",
         "@onaio/connected-private-route": "^0.0.9",
         "@onaio/connected-reducer-registry": "^0.0.1",
-        "@onaio/gatekeeper": "^0.0.14",
+        "@onaio/gatekeeper": "^0.0.21",
         "@onaio/list-view": "^0.0.3",
         "@onaio/loaders": "^0.0.1",
         "@onaio/pagination": "^0.0.3",
         "@onaio/redux-reducer-registry": "^0.0.8",
         "@onaio/session-reducer": "^0.0.10",
         "@onaio/superset-connector": "^0.0.13",
-        "@opensrp/opensrp-table": "^0.0.2",
-        "@opensrp/server-service": "^0.0.1",
+        "@opensrp/opensrp-table": "^0.0.3",
+        "@opensrp/server-service": "^0.0.2",
         "@types/bootstrap": "^4.3.1",
         "@types/fetch-mock": "^7.3.1",
         "@types/history": "^4.7.2",
@@ -38,13 +38,14 @@
         "client-oauth2": "^4.2.5",
         "connected-react-router": "^6.5.2",
         "fetch-mock": "^7.3.9",
-        "formik": "^2.1.4",
+        "flush-promises": "^1.0.2",
         "history": "^4.9.0",
         "jest-fetch-mock": "^2.1.2",
         "lodash": "^4.17.15",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
+        "react-helmet": "^5.2.1",
         "react-redux": "^7.1.0",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
@@ -107,5 +108,9 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "@types/react-helmet": "^5.0.15",
+        "@types/react-select": "^3.0.10"
+    }
 }

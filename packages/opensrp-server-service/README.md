@@ -32,9 +32,23 @@ yarn add @opensrp/server-service
     -   optional
     -   A function thats given the signal and method to use. Used to add custom options that you might want to pass on tho the fetch request
 
-### Code example
+### Errors
 
-Here is a [code sandbox](https://codesandbox.io/s/bootstrap-pagination-component-jxtbt) showing how this hook could be used to create a bootstrap-powered pagination component
+OpenSRP exposes 2 additional error classes:
+
+#### HTTPError
+
+This is thrown when the statusCode is not within the allowed success range for any respective operation.
+
+The fetch.response.text() value from the api is attached to the error as the value of `description`.
+
+Also attaches the following fields from the response to the thrown error object: - statusCode - statusText - url
+
+#### NetworkError
+
+This is thrown when the fetch error cannot go through due to a failed internet connection.
+
+### Code example
 
 ```typescript
 import OpenSRPService from '@opensrp/server-service';
@@ -49,8 +63,8 @@ function getFetchOptions(signal: AbortSignal, method: HTTPMethod): { headers: He
     };
 }
 
-const loadclients = async () => {
-    const clientService = new opensrpService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, getFetchOptions);
+const loadClients = async () => {
+    const clientService = new openSRPService(OPENSRP_API_BASE_URL, OPENSRP_CLIENT_ENDPOINT, getFetchOptions);
     return await clientService.list();
 };
 ```
