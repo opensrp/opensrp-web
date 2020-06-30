@@ -1,6 +1,5 @@
-import reducerRegistry from '@onaio/redux-reducer-registry';
+import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { FlushThunks } from 'redux-testkit';
-import store from '../../../..';
 import { locHierarchy } from './fixtures';
 import reducer, {
     fetchLocs,

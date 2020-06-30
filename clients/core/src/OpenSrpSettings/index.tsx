@@ -7,7 +7,7 @@ import settingsReducer, {
     getLocSettings,
     reducerName as settingsReducerName,
     fetchLocSettings,
-} from '../store/ducks/openSrpDux';
+} from './ducks/settings';
 import { connect } from 'react-redux';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import locationReducer, {
@@ -19,26 +19,26 @@ import locationReducer, {
     reducerName as LocsReducerName,
     LocPayload,
     getDefaultLocId,
-} from '../store/ducks/openSrpDux/locations';
+} from './ducks/locations';
 import { LocationMenu } from './helpers/LocationsMenu';
 
 // static data for testing: to be removed to use data from server
-import { locHierarchy } from '../store/ducks/openSrpDux/locations/tests/fixtures';
-import { allSettings } from '../store/ducks/openSrpDux/tests/fixtures';
+import { locHierarchy } from './ducks/locations/tests/fixtures';
+import { allSettings } from './ducks/settings/tests/fixtures';
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
 
 interface DefaultProps {
-    locationSettings: Setting[];
+    activeLocationId: string;
+    currentLocName: string;
+    defaultLocId: string;
     fetchSettings: typeof fetchLocSettings;
     fetchLocations: typeof fetchLocs;
-    activeLocationId: string;
-    selectedLocations: string[];
     locationDetails: LocChildren | {};
+    locationSettings: Setting[];
+    selectedLocations: string[];
     state: Partial<Store>;
-    defaultLocId: string;
-    currentLocName: string;
 }
 
 const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
@@ -60,21 +60,21 @@ const EditSetings = (props: DefaultProps) => {
     const [locSettings, changelocSettings] = useState(locationSettings);
     const [searchInput, changeSearchInput] = useState('');
 
-    function FetchLocSettings(currentLocId: string, update = false) {
+    const getLocationSettings = async (currentLocId: string, update = false) => {
         if ((!locSettings.length && currentLocId) || update) {
             // code block to fetch settings from Api should enter here then dispatch the line below
             return fetchSettings(allSettings, currentLocId);
         }
-    }
+    };
 
-    function getLocations() {
+    const getLocations = async () => {
         if (!activeLocationId && !Object.keys(locationDetails).length) {
             // code block to fetch locations from Api should enter here then dispatch the line below
             fetchLocations(locHierarchy);
-            return FetchLocSettings(locId);
+            return getLocationSettings(locId);
         }
-        FetchLocSettings(locId);
-    }
+        getLocationSettings(locId);
+    };
 
     useEffect(() => {
         getLocations();
@@ -148,7 +148,7 @@ const EditSetings = (props: DefaultProps) => {
         const selectedLocs = [...selectedLocations, activeLocId];
         const locSettings = getLocSettings(state, activeLocId);
         if (!locSettings.length) {
-            FetchLocSettings(activeLocId, true);
+            getLocationSettings(activeLocId, true);
         }
         const data: LocPayload = {
             locationsHierarchy: {
@@ -251,7 +251,7 @@ const mapStateToProps = (state: Partial<Store>) => {
     const selectedLocations: string[] = getSelectedLocs(state);
     const defaultLocId = getDefaultLocId(state);
     let locationDetails: LocChildren | {} = {};
-    let locationSettings: Setting[] | [] = [];
+    let locationSettings: Setting[] = [];
     let currentLocName = '';
     if (defaultLocId && activeLocationId && selectedLocations.length) {
         locationDetails = getLocDetails(state, [defaultLocId]);

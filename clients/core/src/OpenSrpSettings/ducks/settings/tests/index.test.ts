@@ -1,8 +1,7 @@
-import reducerRegistry from '@onaio/redux-reducer-registry';
+import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { FlushThunks } from 'redux-testkit';
 import reducer, { reducerName, getLocSettings, fetchLocSettings } from '..';
 import { allSettings } from './fixtures';
-import store from '../../..';
 
 reducerRegistry.register(reducerName, reducer);
 const locId = '75af7700-a6f2-448c-a17d-816261a7749a';

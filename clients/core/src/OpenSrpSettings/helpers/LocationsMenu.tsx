@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { LocChildren } from '../../store/ducks/openSrpDux/locations';
+import { LocChildren } from '../ducks/locations';
 
 interface DefaultProps {
     locationDetails: LocChildren;
