@@ -5,7 +5,7 @@ import { SearchBar, SearchBarDefaultProps } from '../SearchBar';
 import { Store } from 'redux';
 import { DrillDownTable } from '@onaio/drill-down-table';
 import { connect } from 'react-redux';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { handleDownload } from '../../helpers/fileDownload';
 import { Link } from 'react-router-dom';
 import filesReducer, {
@@ -26,15 +26,20 @@ import {
     UPOL0AD_FILE_LABEL,
     MODULE_LABEL,
     FIND_FILES_LABEL,
+    CREATED_AT_LABEL,
 } from '../../constants';
+import { Cell } from 'react-table';
+import { formatDate } from '../../helpers/utils';
 
 /** Register reducer */
 reducerRegistry.register(filesReducerName, filesReducer);
 
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface FilesListDefaultProps extends SearchBarDefaultProps {
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     editLabel: string;
     fetchFiles: typeof fetchManifestFiles;
     fileNameLabel: string;
@@ -48,7 +53,7 @@ interface DefaultProps extends SearchBarDefaultProps {
 
 /** manifest files list props interface */
 
-interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
+export interface ManifestFilesListProps extends FilesListDefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formVersion: string | null;
     fileUploadUrl: string;
@@ -82,6 +87,8 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         uploadEditLabel,
         downloadLabel,
         uploadFileLabel,
+        createdAt,
+        drillDownProps,
     } = props;
 
     const [loading, setLoading] = useState(false);
@@ -168,7 +175,7 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
     const linkToEditFile = (obj: ManifestFilesTypes) => {
         return <Link to={`${fileUploadUrl}/${uploadTypeUrl}/${obj.id}`}>{uploadEditLabel}</Link>;
     };
-    let columns = [
+    const columns = [
         {
             Header: identifierLabel,
             accessor: `identifier`,
@@ -180,16 +187,19 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
         {
             Header: fileVersionLabel,
             accessor: `version`,
+            maxWidth: 100,
         },
         {
-            Header: moduleLabel,
-            accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
-            disableSortBy: true,
+            Header: createdAt,
+            accessor: 'createdAt',
+            Cell: ({ value }: Cell) => (() => <span>{formatDate(value)}</span>)(),
+            maxWidth: 100,
         },
         {
             Header: editLabel,
             accessor: (obj: ManifestFilesTypes) => linkToEditFile(obj),
             disableSortBy: true,
+            maxWidth: 80,
         },
         {
             Header: ' ',
@@ -200,18 +210,27 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
                     </a>
                 ))(),
             disableSortBy: true,
+            maxWidth: 80,
         },
     ];
 
-    if (isJsonValidator) {
-        columns = columns.filter(col => col.Header !== 'Module');
+    const moduleColumn = {
+        Header: moduleLabel,
+        accessor: (obj: ManifestFilesTypes) => (() => <span>{obj.module || '_'}</span>)(),
+        disableSortBy: true,
+        maxWidth: 100,
+    };
+
+    if (!isJsonValidator) {
+        const moduleIndex = columns.length - 2;
+        columns.splice(moduleIndex, 0, moduleColumn);
     }
 
     const DrillDownTableProps = {
         columns,
         data: stateData,
-        paginate: false,
         useDrillDown: false,
+        ...drillDownProps,
     };
 
     const searchBarProps = {
@@ -244,10 +263,14 @@ const ManifestFilesList = (props: ManifestFilesListProps) => {
 };
 
 /** declear default props */
-const defaultProps: DefaultProps = {
+const defaultProps: FilesListDefaultProps = {
+    createdAt: CREATED_AT_LABEL,
     data: [],
     debounceTime: 1000,
     downloadLabel: DOWNLOAD_LABEL,
+    drillDownProps: {
+        paginate: false,
+    },
     editLabel: EDIT_LABEL,
     fetchFiles: fetchManifestFiles,
     fileNameLabel: FILE_NAME_LABEL,

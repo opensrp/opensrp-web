@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConnectedManifestDraftFiles = exports.ManifestDraftFiles = void 0;
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -37,6 +39,14 @@ var _reactRouter = require("react-router");
 
 var _constants = require("../../constants");
 
+var _utils = require("../../helpers/utils");
+
+var _reactRouterDom = require("react-router-dom");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 _reduxReducerRegistry["default"].register(_manifestDraftFiles.draftReducerName, _manifestDraftFiles["default"]);
 
 var ManifestDraftFiles = function ManifestDraftFiles(props) {
@@ -58,7 +68,12 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
       fileNameLabel = props.fileNameLabel,
       fileVersionLabel = props.fileVersionLabel,
       moduleLabel = props.moduleLabel,
-      downloadLabel = props.downloadLabel;
+      downloadLabel = props.downloadLabel,
+      createdAt = props.createdAt,
+      uploadFileLabel = props.uploadFileLabel,
+      formUploadUrl = props.formUploadUrl,
+      uploadTypeUrl = props.uploadTypeUrl,
+      drillDownProps = props.drillDownProps;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -217,13 +232,24 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     Header: fileVersionLabel,
     accessor: "version"
   }, {
+    Header: createdAt,
+    accessor: 'createdAt',
+    Cell: function Cell(_ref4) {
+      var value = _ref4.value;
+      return function () {
+        return _react["default"].createElement("span", null, (0, _utils.formatDate)(value));
+      }();
+    },
+    maxWidth: 100
+  }, {
     Header: moduleLabel,
     accessor: function accessor(obj) {
       return function () {
         return _react["default"].createElement("span", null, obj.module || '_');
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }, {
     Header: ' ',
     accessor: function accessor(obj) {
@@ -236,14 +262,16 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
         }, downloadLabel);
       }();
     },
-    disableSortBy: true
+    disableSortBy: true,
+    maxWidth: 80
   }];
-  var DrillDownTableProps = {
+
+  var DrillDownTableProps = _objectSpread({
     columns: columns,
     data: stateData,
-    paginate: false,
     useDrillDown: false
-  };
+  }, drillDownProps);
+
   var searchBarProps = {
     debounceTime: debounceTime,
     onChangeHandler: onChangeHandler,
@@ -260,7 +288,20 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
     });
   }
 
-  return _react["default"].createElement("div", null, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps), data.length > 0 && _react["default"].createElement(_reactstrap.Button, {
+  var uploadLink = {
+    pathname: "".concat(formUploadUrl, "/").concat(uploadTypeUrl),
+    state: {
+      fromDrafts: true
+    }
+  };
+  return _react["default"].createElement("div", null, _react["default"].createElement(_reactstrap.Row, null, _react["default"].createElement(_reactstrap.Col, {
+    xs: "8"
+  }, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps)), _react["default"].createElement(_reactstrap.Col, {
+    xs: "4"
+  }, _react["default"].createElement(_reactRouterDom.Link, {
+    className: "btn btn-secondary float-right",
+    to: uploadLink
+  }, uploadFileLabel))), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps), data.length > 0 && _react["default"].createElement(_reactstrap.Button, {
     className: "btn btn-md btn btn-primary float-right",
     color: "primary",
     onClick: onMakeReleaseClick
@@ -270,16 +311,21 @@ var ManifestDraftFiles = function ManifestDraftFiles(props) {
 exports.ManifestDraftFiles = ManifestDraftFiles;
 var defaultProps = {
   clearDraftFiles: _manifestDraftFiles.removeManifestDraftFiles,
+  createdAt: _constants.CREATED_AT_LABEL,
   data: [],
   debounceTime: 1000,
   downloadLabel: _constants.DOWNLOAD_LABEL,
+  drillDownProps: {
+    paginate: false
+  },
   fetchDraftFiles: _manifestDraftFiles.fetchManifestDraftFiles,
   fileNameLabel: _constants.FILE_NAME_LABEL,
   fileVersionLabel: _constants.FILE_VERSION_LABEL,
   identifierLabel: _constants.IDENTIFIER_LABEL,
   makeReleaseLabel: _constants.MAKE_RELEASE_LABEL,
   moduleLabel: _constants.MODULE_LABEL,
-  placeholder: _constants.FIND_DRAFT_RELEASES_LABEL
+  placeholder: _constants.FIND_DRAFT_RELEASES_LABEL,
+  uploadFileLabel: _constants.UPOL0AD_FILE_LABEL
 };
 ManifestDraftFiles.defaultProps = defaultProps;
 

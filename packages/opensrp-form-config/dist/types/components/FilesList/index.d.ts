@@ -1,11 +1,13 @@
 /// <reference types="react" />
 import { SearchBarDefaultProps } from '../SearchBar';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, DrillDownProps } from '../../helpers/types';
 import { fetchManifestFiles, ManifestFilesTypes, removeManifestFiles } from '../../ducks/manifestFiles';
 /** default props interface */
-interface DefaultProps extends SearchBarDefaultProps {
+export interface FilesListDefaultProps extends SearchBarDefaultProps {
+    createdAt: string;
     data: ManifestFilesTypes[];
     downloadLabel: string;
+    drillDownProps: DrillDownProps;
     editLabel: string;
     fetchFiles: typeof fetchManifestFiles;
     fileNameLabel: string;
@@ -17,7 +19,7 @@ interface DefaultProps extends SearchBarDefaultProps {
     uploadFileLabel: string;
 }
 /** manifest files list props interface */
-interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
+export interface ManifestFilesListProps extends FilesListDefaultProps, FormConfigProps {
     downloadEndPoint: string;
     formVersion: string | null;
     fileUploadUrl: string;
@@ -28,12 +30,12 @@ interface ManifestFilesListProps extends DefaultProps, FormConfigProps {
 declare const ManifestFilesList: {
     (props: ManifestFilesListProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
+    defaultProps: FilesListDefaultProps;
 };
 /** Connected ManifestFilesList component */
 declare const ConnectedManifestFilesList: import("react-redux").ConnectedComponent<{
     (props: ManifestFilesListProps): JSX.Element;
     /** pass default props to component */
-    defaultProps: DefaultProps;
-}, Pick<ManifestFilesListProps, "isJsonValidator" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
+    defaultProps: FilesListDefaultProps;
+}, Pick<ManifestFilesListProps, "createdAt" | "isJsonValidator" | "placeholder" | "debounceTime" | "fileNameLabel" | "moduleLabel" | "baseURL" | "customAlert" | "endpoint" | "getPayload" | "LoadingComponent" | "drillDownProps" | "identifierLabel" | "uploadFileLabel" | "uploadTypeUrl" | "downloadLabel" | "editLabel" | "fileVersionLabel" | "uploadEditLabel" | "downloadEndPoint" | "formVersion" | "fileUploadUrl">>;
 export { ManifestFilesList, ConnectedManifestFilesList };

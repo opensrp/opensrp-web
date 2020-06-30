@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConnectedManifestReleases = exports.ManifestReleases = void 0;
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -35,6 +37,12 @@ var _reactstrap = require("reactstrap");
 
 var _constants = require("../../constants");
 
+var _utils = require("../../helpers/utils");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 _reduxReducerRegistry["default"].register(_manifestReleases.releasesReducerName, _manifestReleases["default"]);
 
 var ManifestReleases = function ManifestReleases(props) {
@@ -54,7 +62,9 @@ var ManifestReleases = function ManifestReleases(props) {
       appIdLabel = props.appIdLabel,
       viewFilesLabel = props.viewFilesLabel,
       uploadFileLabel = props.uploadFileLabel,
-      identifierLabel = props.identifierLabel;
+      identifierLabel = props.identifierLabel,
+      updatedAt = props.updatedAt,
+      drillDownProps = props.drillDownProps;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -126,18 +136,27 @@ var ManifestReleases = function ManifestReleases(props) {
       return "V".concat(obj.appVersion);
     }
   }, {
+    Header: updatedAt,
+    accessor: 'updatedAt',
+    Cell: function Cell(_ref2) {
+      var value = _ref2.value;
+      return function () {
+        return _react["default"].createElement("span", null, (0, _utils.formatDate)(value));
+      }();
+    }
+  }, {
     Header: ' ',
     accessor: function accessor(obj) {
       return linkToFiles(obj);
     },
     disableSortBy: true
   }];
-  var DrillDownTableProps = {
+
+  var DrillDownTableProps = _objectSpread({
     columns: columns,
     data: stateData,
-    paginate: false,
     useDrillDown: false
-  };
+  }, drillDownProps);
 
   var onChangeHandler = function onChangeHandler(e) {
     var input = e.target.value.toUpperCase();
@@ -157,13 +176,19 @@ var ManifestReleases = function ManifestReleases(props) {
     return _react["default"].createElement("div", null, LoadingComponent);
   }
 
+  var uploadLink = {
+    pathname: "".concat(formUploadUrl, "/").concat(uploadTypeUrl),
+    state: {
+      fromReleases: true
+    }
+  };
   return _react["default"].createElement("div", null, _react["default"].createElement(_reactstrap.Row, null, _react["default"].createElement(_reactstrap.Col, {
     xs: "8"
   }, _react["default"].createElement(_SearchBar.SearchBar, searchBarProps)), _react["default"].createElement(_reactstrap.Col, {
     xs: "4"
   }, _react["default"].createElement(_reactRouterDom.Link, {
     className: "btn btn-secondary float-right",
-    to: "".concat(formUploadUrl, "/").concat(uploadTypeUrl)
+    to: uploadLink
   }, uploadFileLabel))), _react["default"].createElement(_drillDownTable.DrillDownTable, DrillDownTableProps));
 };
 
@@ -173,10 +198,13 @@ var defaultProps = {
   appVersionLabel: _constants.APP_VERSION_LABEL,
   data: [],
   debounceTime: 1000,
+  drillDownProps: {
+    paginate: false
+  },
   fetchReleases: _manifestReleases.fetchManifestReleases,
-  formUploadUrl: '',
   identifierLabel: _constants.IDENTIFIER_LABEL,
   placeholder: _constants.FIND_RELEASES_LABEL,
+  updatedAt: _constants.UPDATED_AT_LABEL,
   uploadFileLabel: _constants.UPOL0AD_FILE_LABEL,
   viewFilesLabel: _constants.VIEW_FILES_LABEL
 };

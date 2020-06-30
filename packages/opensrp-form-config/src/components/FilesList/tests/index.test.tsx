@@ -63,7 +63,7 @@ describe('components/manifestFiles', () => {
 
         await flushPromises();
         wrapper.update();
-        expect(wrapper.find('DrillDownTable').props()).toMatchSnapshot();
+        expect(wrapper.find('DrillDownTable').props()).toMatchSnapshot('isJsonValidator true');
         expect(wrapper.find('SearchBar').length).toEqual(1);
         expect(
             wrapper
@@ -105,7 +105,7 @@ describe('components/manifestFiles', () => {
             .find('.tbody .tr')
             .at(0)
             .find('.td')
-            .at(4)
+            .at(5)
             .find('a');
         expect(downloadFiledCell.text()).toEqual('Download');
         expect(toJson(downloadFiledCell)).toMatchSnapshot();
@@ -143,11 +143,13 @@ describe('components/manifestFiles', () => {
         );
         await flushPromises();
         wrapper.update();
+
+        expect(wrapper.find('DrillDownTable').props()).toMatchSnapshot('isJsonValidator false');
         const downloadFiledCell = wrapper
             .find('.tbody .tr')
             .at(0)
             .find('.td')
-            .at(5)
+            .at(6)
             .find('a');
         expect(downloadFiledCell.text()).toEqual('Download');
         // click download button
