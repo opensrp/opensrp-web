@@ -1,0 +1,22 @@
+#info-container {
+  background-color: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 #d7d7e0;
+  margin-top: 25px;
+}
+
+.info-header {
+  margin: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(85, 89, 97);
+  color: #3a484f;
+}
+
+.info-body {
+  margin-right: 8px;
+}
+
+.table {
+  border: none;
+}
