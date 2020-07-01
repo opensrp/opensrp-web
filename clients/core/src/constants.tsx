@@ -1,6 +1,12 @@
 // endpoints
 export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
+export const SETTINGS_ENDPOINT = 'v2/settings/';
+export type SETTINGS_ENDPOINT = typeof SETTINGS_ENDPOINT;
+export const LOCATIONS_ENDPOINT = 'location/location-tree';
+export type LOCATIONS_ENDPOINT = typeof LOCATIONS_ENDPOINT;
+export const SECURITY_AUTHENTICATE_ENDPOINT = 'security/authenticate';
+export type SECURITY_AUTHENTICATE_ENDPOINT = typeof SECURITY_AUTHENTICATE_ENDPOINT;
 
 // internal urls
 export const LOGIN_URL = '/login';

@@ -15,11 +15,12 @@
     width: 100%;
     border: 1px solid gray;
     margin: 0;
-    height: 30px;
+    height: 50px;
 }
 
 .locations-menu {
     display: inline-block;
+    margin: 10px 0;
 }
 
 .locations,
@@ -100,14 +101,14 @@ select {
 /* The actual popup */
 .popup .popuptext {
     visibility: hidden;
-    width: 160px;
+    width: max-content;
     background-color: #f8f9fa;
     color: #2a2525;
     border-radius: 6px;
     padding: 8px 10px;
     position: absolute;
     z-index: 1;
-    left: -200%;
+    left: -100%;
     margin-left: -80px;
     top: 130%;
     border: 1px solid grey;
@@ -165,4 +166,11 @@ select {
     to {
         opacity: 1;
     }
+}
+
+.search-input-wrapper {
+    position: relative;
+    max-width: 400px;
+    top: 4px;
+    margin-right: 20px;
 }

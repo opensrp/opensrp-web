@@ -8,6 +8,7 @@ import App from './App/App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
+import '@onaio/drill-down-table/dist/table.css';
 
 ReactDOM.render(
     <Provider store={store}>

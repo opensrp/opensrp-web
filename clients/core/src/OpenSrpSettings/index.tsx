@@ -1,4 +1,5 @@
 import ListView from '@onaio/list-view';
+import { OpenSRPService } from '@opensrp/server-service';
 import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
 import './index.css';
 import { Store } from 'redux';
@@ -23,27 +24,52 @@ import locationReducer, {
 import { LocationMenu } from './helpers/LocationsMenu';
 
 // static data for testing: to be removed to use data from server
-import { locHierarchy } from './ducks/locations/tests/fixtures';
-import { allSettings } from './ducks/settings/tests/fixtures';
+import { locs } from './ducks/locations/tests/fixtures';
+import { FormConfigProps } from './helpers/types';
+import { SearchForm } from './SearchForm';
+import {
+    SEARCH_SETTINGS_LABEL,
+    EDIT_LABEL,
+    PAGE_TITLE_LABEL,
+    NAME_LABEL,
+    DESCRIPTION_LABEL,
+    SETTINGS_LABEL,
+    INHERITED_FROM_LABEL,
+    SET_TO_NO_LABEL,
+    SET_TO_YES_LABEL,
+    INHERIT_SETTING_LABEL,
+} from './constants';
+import { preparePutData } from './helpers/utils';
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
 
-interface DefaultProps {
+/** dafault edit settings interface */
+interface EditSettingsDefaultProps {
     activeLocationId: string;
     currentLocName: string;
+    debounceTime: number;
     defaultLocId: string;
+    descriptionLabel: string;
+    editLabel: string;
     fetchSettings: typeof fetchLocSettings;
     fetchLocations: typeof fetchLocs;
+    inheritedLable: string;
+    inheritSettingsLabel: string;
     locationDetails: LocChildren | {};
     locationSettings: Setting[];
+    nameLabel: string;
+    pageTitle: string;
+    placeholder: string;
     selectedLocations: string[];
+    settingLabel: string;
+    setToNoLabel: string;
+    setToYesLabel: string;
     state: Partial<Store>;
 }
 
-const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
-
-const EditSetings = (props: DefaultProps) => {
+/** component for displaying population characteristics */
+const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const {
         locationSettings,
         fetchSettings,
@@ -54,31 +80,102 @@ const EditSetings = (props: DefaultProps) => {
         defaultLocId,
         state,
         currentLocName,
+        LoadingComponent,
+        baseURL,
+        restBaseURL,
+        getPayload,
+        locationsEndpoint,
+        secAuthEndpoint,
+        settingsEndpoint,
+        customAlert,
+        debounceTime,
+        placeholder,
+        pageTitle,
+        descriptionLabel,
+        nameLabel,
+        settingLabel,
+        inheritedLable,
+        editLabel,
+        inheritSettingsLabel,
+        setToNoLabel,
+        setToYesLabel,
     } = props;
 
-    const [showLocPopUp, changeLocPopup] = useState('');
-    const [locSettings, changelocSettings] = useState(locationSettings);
-    const [searchInput, changeSearchInput] = useState('');
+    const [showLocPopUp, setShowLocPopup] = useState('');
+    const [locSettings, setLocSettings] = useState(locationSettings);
+    const [loading, setLoading] = useState(false);
 
-    const getLocationSettings = async (currentLocId: string, update = false) => {
-        if ((!locSettings.length && currentLocId) || update) {
-            // code block to fetch settings from Api should enter here then dispatch the line below
-            return fetchSettings(allSettings, currentLocId);
-        }
+    /**
+     * gets settings of a particular location
+     * @param {string} currentLocId
+     */
+    const getLocationSettings = async (currentLocId: string) => {
+        setLoading(true);
+        const params = { locationId: currentLocId };
+        const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+        await clientService
+            .list(params)
+            .then(res => {
+                fetchSettings(res, currentLocId);
+            })
+            .catch(error => {
+                customAlert && customAlert(String(error), { type: 'error' });
+            })
+            .finally(() => setLoading(false));
     };
 
-    const getLocations = async () => {
-        if (!activeLocationId && !Object.keys(locationDetails).length) {
-            // code block to fetch locations from Api should enter here then dispatch the line below
-            fetchLocations(locHierarchy);
-            return getLocationSettings(locId);
-        }
-        getLocationSettings(locId);
+    /**
+     * gets full location hierarch of the identifier provided
+     * @param {string} currentLocId  - location identifier
+     */
+    const getLocations = async (currentLocId: string) => {
+        setLoading(true);
+        const url = `${locationsEndpoint}/${currentLocId}`;
+        const clientService = new OpenSRPService(baseURL, url, getPayload);
+        await clientService
+            .list()
+            .then(async res => {
+                const { map } = res.locationsHierarchy;
+                const locId = Object.keys(map)[0];
+                await getLocationSettings(locId);
+                fetchLocations(res);
+            })
+            .catch(async error => {
+                const { map } = locs.locationsHierarchy;
+                const locId = Object.keys(map)[0];
+                await getLocationSettings(locId);
+                fetchLocations(locs);
+
+                setLoading(false);
+                customAlert && customAlert(String(error), { type: 'error' });
+            });
+    };
+
+    /** gets location assigned to user*/
+    const getUserLocHierarchy = async () => {
+        setLoading(true);
+        const clientService = new OpenSRPService(baseURL, secAuthEndpoint, getPayload);
+        await clientService
+            .list()
+            .then(res => {
+                const { map } = res.locations.locationsHierarchy;
+                const locId = Object.keys(map)[0];
+                getLocations(locId);
+            })
+            .catch(error => {
+                setLoading(false);
+                customAlert && customAlert(String(error), { type: 'error' });
+            });
     };
 
     useEffect(() => {
-        getLocations();
-        changelocSettings(props.locationSettings);
+        if (!defaultLocId) {
+            getUserLocHierarchy();
+        }
+    }, []);
+
+    useEffect(() => {
+        setLocSettings(props.locationSettings);
     }, [props.locationSettings]);
 
     // handle search input
@@ -86,15 +183,14 @@ const EditSetings = (props: DefaultProps) => {
         e.preventDefault();
         let input = (e.target as any).value;
         input = input.replace(/\s+/g, ' ').trimStart();
-        changeSearchInput(input);
         if (!input) {
-            changelocSettings(locationSettings);
+            setLocSettings(locationSettings);
             return false;
         }
         if (locationSettings.length) {
             input = input.toUpperCase();
             const results = locationSettings.filter((seting: Setting) => seting.label.toUpperCase().includes(input));
-            changelocSettings(results);
+            setLocSettings(results);
             return true;
         }
     };
@@ -102,17 +198,28 @@ const EditSetings = (props: DefaultProps) => {
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
-        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
+        const activeLoc = activeLocationId;
+        fetchSettings([{ ...row, editing: !row.editing }], activeLoc);
     };
 
     // update setting
-    const changeSetting = (e: MouseEvent, row: any, value: boolean) => {
+    const changeSetting = async (e: MouseEvent, row: any, value: string) => {
         e.preventDefault();
         if (value === row.value) {
             return false;
         }
-        // code block for updating settings in the Api should enter here then dispatch the line below
-        fetchSettings([{ ...row, value }], activeLocationId);
+        const activeLoc = activeLocationId;
+        const data = preparePutData(row, value);
+        const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+        await clientService
+            .update(data)
+            .then(() => {
+                fetchSettings([{ ...row, value }], activeLoc);
+            })
+            .catch(error => {
+                customAlert && customAlert(String(error), { type: 'error' });
+            })
+            .finally(() => setLoading(false));
     };
 
     // update active location
@@ -120,9 +227,9 @@ const EditSetings = (props: DefaultProps) => {
         e.preventDefault();
         const isClossing = showLocPopUp === id;
         if (isClossing) {
-            changeLocPopup('');
+            setShowLocPopup('');
         } else {
-            changeLocPopup(id);
+            setShowLocPopup(id);
         }
         const lastSelectedloc = [...selectedLocations].pop();
         if (lastSelectedloc !== id && selectedLocations.includes(id) && !isClossing) {
@@ -148,7 +255,7 @@ const EditSetings = (props: DefaultProps) => {
         const selectedLocs = [...selectedLocations, activeLocId];
         const locSettings = getLocSettings(state, activeLocId);
         if (!locSettings.length) {
-            getLocationSettings(activeLocId, true);
+            getLocationSettings(activeLocId);
         }
         const data: LocPayload = {
             locationsHierarchy: {
@@ -160,7 +267,7 @@ const EditSetings = (props: DefaultProps) => {
             },
         };
         fetchLocations(data);
-        changeLocPopup('');
+        setShowLocPopup('');
     };
 
     // prepare location menu
@@ -190,54 +297,85 @@ const EditSetings = (props: DefaultProps) => {
     // construct table data and headers
     const listViewProps = {
         data: locSettings.map(row => {
+            const value = typeof row.value === 'string' ? row.value === 'true' : row.value;
             return [
                 row.label,
                 row.description,
-                <p key={row.key}>{row.value ? 'Yes' : 'No'}</p>,
+                <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
                 row.inherited_from?.trim() || '_',
                 <div className="popup" key={row.key}>
                     <a href="#" onClick={e => openEditModal(e, row)}>
-                        Edit
+                        {editLabel}
                     </a>
                     <div className={`popuptext ${row.editing ? 'show' : ''}`}>
-                        <div onClick={e => changeSetting(e, row, true)}>
-                            <span className={row.value ? 'check' : 'empty-check'} />
-                            <span>Set to {'Yes'}</span>
+                        <div onClick={e => changeSetting(e, row, 'true')}>
+                            <span className={value ? 'check' : 'empty-check'} />
+                            <span>{setToYesLabel}</span>
                         </div>
-                        <div onClick={e => changeSetting(e, row, false)}>
-                            <span className={row.value ? 'empty-check' : 'check'} /> <span>Set to {'No'}</span>
+                        <div onClick={e => changeSetting(e, row, 'false')}>
+                            <span className={value ? 'empty-check' : 'check'} /> <span>{setToNoLabel}</span>
                         </div>
                         <div className="inherit-from">
                             <span className={row.inherited_from?.trim() ? 'check' : 'empty-check'} />
-                            Inherit setting
+                            {inheritSettingsLabel}
                         </div>
                     </div>
                 </div>,
             ];
         }),
-        headerItems: ['Name', ` Description`, 'Setting', 'Inherited from', 'Edit'],
+        headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],
         tableClass: 'table table-striped',
     };
+
+    const searchProps = {
+        debounceTime,
+        onChangeHandler: handleSearchInput,
+        placeholder,
+    };
+
+    if (LoadingComponent && loading) {
+        return <div>{LoadingComponent}</div>;
+    }
 
     return (
         <div>
             <div className="title">
-                <h4>Server Settings ({currentLocName})</h4>
-                <input
-                    className="searchTerm"
-                    type="text"
-                    value={searchInput}
-                    placeholder="Search settings"
-                    onChange={e => {
-                        handleSearchInput(e);
-                    }}
-                />
+                <h4>
+                    {pageTitle} {currentLocName && <span>({currentLocName})</span>}
+                </h4>
+                <SearchForm {...searchProps} />
             </div>
             <div className="box">{locationMenu}</div>
             <ListView {...listViewProps} />
         </div>
     );
 };
+
+/** Editsettings default props */
+const defaultProps: EditSettingsDefaultProps = {
+    activeLocationId: '',
+    currentLocName: '',
+    debounceTime: 1000,
+    defaultLocId: '',
+    descriptionLabel: DESCRIPTION_LABEL,
+    editLabel: EDIT_LABEL,
+    fetchSettings: fetchLocSettings,
+    fetchLocations: fetchLocs,
+    inheritedLable: INHERITED_FROM_LABEL,
+    inheritSettingsLabel: INHERIT_SETTING_LABEL,
+    locationDetails: {},
+    locationSettings: [],
+    nameLabel: NAME_LABEL,
+    pageTitle: PAGE_TITLE_LABEL,
+    placeholder: SEARCH_SETTINGS_LABEL,
+    selectedLocations: [],
+    settingLabel: SETTINGS_LABEL,
+    setToNoLabel: SET_TO_NO_LABEL,
+    setToYesLabel: SET_TO_YES_LABEL,
+    state: {},
+};
+
+EditSetings.defaultProps = defaultProps;
 
 /** map dispatch to props */
 const mapDispatchToProps = {
@@ -258,7 +396,6 @@ const mapStateToProps = (state: Partial<Store>) => {
         currentLocName = getLocDetails(state, selectedLocations).label;
         locationSettings = getLocSettings(state, activeLocationId);
     }
-
     return {
         activeLocationId,
         selectedLocations,
