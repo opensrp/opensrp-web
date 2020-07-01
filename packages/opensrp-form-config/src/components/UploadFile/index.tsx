@@ -216,11 +216,13 @@ const defaultProps: UploadDefaultProps = {
 
 UploadConfigFile.defaultProps = defaultProps;
 
+/** ownprops interface */
+interface OwnProps extends UploadConfigFileProps, UploadDefaultProps {}
+
 /** Map props to state
  * @param {Partial<Store>} -  the  redux store
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-const mapStateToProps = (state: Partial<Store>, ownProps: any): UploadDefaultProps => {
+const mapStateToProps = (state: Partial<Store>, ownProps: OwnProps): UploadDefaultProps => {
     const formId = ownProps.formId;
     let formInitialValues: InitialValuesTypes = defaultInitialValues;
     let formData: ManifestFilesTypes | null = null;
