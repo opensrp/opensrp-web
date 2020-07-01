@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConnectedEditSetings } from '../../../OpenSrpSettings';
+import { ConnectedEditSetings } from '../../../OpenSrpSettings/EditSettings';
 import { OPENSRP_API_BASE_URL } from '../../../configs/env';
 import Loading from '../../../components/page/Loading';
 import { generateOptions } from '../../../services/opensrp';

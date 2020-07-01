@@ -1,14 +1,14 @@
 import ListView from '@onaio/list-view';
 import { OpenSRPService } from '@opensrp/server-service';
 import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
-import './index.css';
+import '../styles/index.css';
 import { Store } from 'redux';
 import settingsReducer, {
     Setting,
     getLocSettings,
     reducerName as settingsReducerName,
     fetchLocSettings,
-} from './ducks/settings';
+} from '../ducks/settings';
 import { connect } from 'react-redux';
 import reducerRegistry from '@onaio/redux-reducer-registry';
 import locationReducer, {
@@ -20,13 +20,13 @@ import locationReducer, {
     reducerName as LocsReducerName,
     LocPayload,
     getDefaultLocId,
-} from './ducks/locations';
-import { LocationMenu } from './helpers/LocationsMenu';
+} from '../ducks/locations';
+import { LocationMenu } from '../LocationsMenu';
 
 // static data for testing: to be removed to use data from server
-import { locs } from './ducks/locations/tests/fixtures';
-import { FormConfigProps } from './helpers/types';
-import { SearchForm } from './SearchForm';
+import { locs } from '../ducks/locations/tests/fixtures';
+import { FormConfigProps } from '../helpers/types';
+import { SearchForm } from '../SearchForm';
 import {
     SEARCH_SETTINGS_LABEL,
     EDIT_LABEL,
@@ -38,8 +38,8 @@ import {
     SET_TO_NO_LABEL,
     SET_TO_YES_LABEL,
     INHERIT_SETTING_LABEL,
-} from './constants';
-import { preparePutData } from './helpers/utils';
+} from '../constants';
+import { preparePutData } from '../helpers/utils';
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
@@ -148,7 +148,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
 
                 setLoading(false);
                 customAlert && customAlert(String(error), { type: 'error' });
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     /** gets location assigned to user*/
@@ -231,6 +232,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         } else {
             setShowLocPopup(id);
         }
+
         const lastSelectedloc = [...selectedLocations].pop();
         if (lastSelectedloc !== id && selectedLocations.includes(id) && !isClossing) {
             const index = selectedLocations.indexOf(id);

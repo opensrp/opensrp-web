@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Editsettings renders correctly when connected to store 1`] = `
+Object {
+  "data": Array [
+    Array [
+      "Undernourished prevalence 20% or higher",
+      "The proportion of women in the adult population (18 years or older), with a BMI less than 18.5, is 20% or higher.",
+      <p>
+        No
+      </p>,
+      "_",
+      <div
+        className="popup"
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+        >
+          Edit
+        </a>
+        <div
+          className="popuptext "
+        >
+          <div
+            onClick={[Function]}
+          >
+            <span
+              className="empty-check"
+            />
+            <span>
+              Set to 'Yes'
+            </span>
+          </div>
+          <div
+            onClick={[Function]}
+          >
+            <span
+              className="check"
+            />
+             
+            <span>
+              Set to 'No'
+            </span>
+          </div>
+          <div
+            className="inherit-from"
+          >
+            <span
+              className="empty-check"
+            />
+            Inherit setting
+          </div>
+        </div>
+      </div>,
+    ],
+    Array [
+      "Anaemia prevalence 40% or higher",
+      "The proportion of pregnant women in the population with anaemia (haemoglobin level less than 11 g/dl) is 40% or higher.",
+      <p>
+        Yes
+      </p>,
+      "_",
+      <div
+        className="popup"
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+        >
+          Edit
+        </a>
+        <div
+          className="popuptext "
+        >
+          <div
+            onClick={[Function]}
+          >
+            <span
+              className="check"
+            />
+            <span>
+              Set to 'Yes'
+            </span>
+          </div>
+          <div
+            onClick={[Function]}
+          >
+            <span
+              className="empty-check"
+            />
+             
+            <span>
+              Set to 'No'
+            </span>
+          </div>
+          <div
+            className="inherit-from"
+          >
+            <span
+              className="empty-check"
+            />
+            Inherit setting
+          </div>
+        </div>
+      </div>,
+    ],
+  ],
+  "headerItems": Array [
+    "Name",
+    "Description",
+    "Settings",
+    "Inherited from",
+    "Edit",
+  ],
+  "renderHeaders": [Function],
+  "renderRows": [Function],
+  "tableClass": "table table-striped",
+  "tbodyClass": "listview-tbody",
+  "tdClass": "listview-td",
+  "thClass": "listview-th",
+  "theadClass": "listview-thead",
+  "trClass": "listview-tr",
+}
+`;

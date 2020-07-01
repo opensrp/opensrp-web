@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { debounce } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../index.css';
+import '../styles/index.css';
 import { SEARCH_LABEL } from '../constants';
 
 /** SearchBar props interface  */
