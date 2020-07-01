@@ -119,7 +119,6 @@ class App extends Component {
                                     />
                                 )}
                             />
-                            ManifestReleases
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}
                                 exact={true}

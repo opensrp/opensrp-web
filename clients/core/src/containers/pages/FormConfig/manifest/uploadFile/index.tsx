@@ -6,7 +6,7 @@ import {
     VALIDATOR_UPLOAD_TYPE,
     VIEW_JSON_VALIDATORS_PAGE_URL,
     EDIT_FILE_LABEL,
-    UPLOAD_FILE_LABLE,
+    UPLOAD_FILE_LABEL,
     FILE_NAME_LABEL,
     FILE_UPLOAD_LABEL,
     FORM_NAME_REQUIRED_LABEL,
@@ -38,7 +38,7 @@ export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) =>
         validatorsUrl: VIEW_JSON_VALIDATORS_PAGE_URL,
     };
 
-    const titleAction = formId ? EDIT_FILE_LABEL : UPLOAD_FILE_LABLE;
+    const titleAction = formId ? EDIT_FILE_LABEL : UPLOAD_FILE_LABEL;
     return (
         <div>
             <Helmet>
