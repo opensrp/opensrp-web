@@ -1,8 +1,9 @@
 import { Client } from '../../ducks/clients';
 import { Household } from '../../ducks/households';
-import { ANCClientType } from '../anc';
+import { ANCClientType as ANC } from '../anc';
 import { Event } from '../events';
 import { Child } from '../child';
+
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -338,7 +339,7 @@ export const household3: Household = {
     _rev: 'v1',
 };
 
-export const ANCClient1: ANCClientType = {
+export const ANCClient1: ANC = {
     firstName: 'Nakin',
     middleName: '',
     lastName: 'Nadi',
@@ -359,6 +360,7 @@ export const ANCClient1: ANCClientType = {
             age_month_part: 1,
             family_head: 'Easin Family',
             last_contact_date: '2019-11-27T06:00:00.000+0600',
+            gestational_age: '2019-11-27T06:00:00.000+0600',
             edd: '2020-03-02T00:00:00.000+0600',
             age_year_part: 12,
             provider_id: 'asim',
@@ -373,7 +375,7 @@ export const ANCClient1: ANCClientType = {
     id: '62a874f9-3b24-48d9-b0fe-fc1f21801535',
     revision: 'v1',
 };
-export const ANCClient2: ANCClientType = {
+export const ANCClient2: ANC = {
     firstName: 'Jorina',
     middleName: '',
     lastName: 'Jori',
@@ -395,6 +397,7 @@ export const ANCClient2: ANCClientType = {
             family_head: 'Rajib Family',
             last_contact_date: '2019-11-17T06:00:00.000+0600',
             edd: '2020-02-21T00:00:00.000+0600',
+            gestational_age: '2019-11-27T06:00:00.000+0600',
             age_year_part: 19,
             provider_id: 'tanvir',
             lmp: '2019-05-17T00:00:00.000+0600',
@@ -408,6 +411,44 @@ export const ANCClient2: ANCClientType = {
     id: '00812a49-b4c7-450c-a70c-bd40cecab335',
     revision: 'v1',
 };
+
+export const ANCClient3: ANC = {
+    firstName: 'Sokhina',
+    middleName: '',
+    lastName: '',
+    birthdate: '2000-11-17T06:00:00.000+06:00',
+    birthdateApprox: false,
+    deathdateApprox: false,
+    gender: 'Female',
+    relationships: {
+        family: ['c633c0c4-6265-42fc-86bf-492551ff90e8'],
+    },
+    baseEntityId: '304fce60-29c8-4a9d-b99b-6a74411a1457',
+    identifiers: {
+        opensrp_id: '1008206',
+    },
+    addresses: [],
+    attributes: {
+        dynamicProperties: {
+            age_month_part: 2,
+            family_head: 'Tanvir Family',
+            last_contact_date: '2019-11-17T06:00:00.000+0600',
+            edd: '2020-02-21T00:00:00.000+0600',
+            gestational_age: '2019-11-27T06:00:00.000+0600',
+            age_year_part: 19,
+            provider_id: 'tanvir',
+            lmp: '2019-05-17T00:00:00.000+0600',
+        },
+    },
+    dateCreated: '2019-11-17T12:21:06.552+06:00',
+    serverVersion: 1573971666532,
+    clientApplicationVersion: 9,
+    clientDatabaseVersion: 12,
+    type: 'Client',
+    id: '00812a49-b4c7-450c-a70c-bd40cecab335',
+    revision: 'v1',
+};
+
 export const rawANCClientsPage1 = {
     total: 28,
     clients: [
@@ -907,3 +948,4 @@ export const clients: Client[] = [client1, client2, client3, client4, client5, c
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
+export const ancList: ANC[] = [ANCClient1, ANCClient2, ANCClient3];

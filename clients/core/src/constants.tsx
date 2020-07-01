@@ -15,8 +15,10 @@ export const CLIENT_PROFILE_URL = '/client-profile';
 export type CLIENT_PROFILE_URL = typeof CLIENT_PROFILE_URL;
 export const HOUSEHOLD_URL = '/404';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
-export const ANC_URL = '/404';
+export const ANC_URL = '/anc';
 export type ANC_URL = typeof ANC_URL;
+export const ANC_PROFILE_URL = '/anc-profile';
+export type ANC_PROFILE_URL = typeof ANC_PROFILE_URL;
 export const CHILD_URL = '/child';
 export type CHILD_URL = typeof CHILD_URL;
 export const CHILD_PROFILE_URL = '/child-profile';
@@ -66,6 +68,8 @@ export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
+export const ANC_CLIENT_TYPE = 'anc';
+export type ANC_CLIENT_TYPE = typeof ANC_CLIENT_TYPE;
 
 // url constants
 export const PAGINATION_SIZE = 10;
