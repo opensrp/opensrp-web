@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
-import _, { at } from 'lodash';
+import _ from 'lodash';
 import { EditSetings, ConnectedEditSetings } from '..';
 import settingsReducer, { reducerName as settingsReducerName, fetchLocSettings } from '../../ducks/settings';
 import locationReducer, { fetchLocs, reducerName as LocsReducerName } from '../../ducks/locations';

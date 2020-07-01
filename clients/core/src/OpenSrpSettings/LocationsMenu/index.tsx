@@ -11,6 +11,7 @@ interface DefaultProps {
 }
 
 export const LocationMenu = (props: DefaultProps) => {
+    console.log(props);
     const { locationDetails, activeLocationId, showLocPopUp, popLocPopup, loadLocsettings, isLast } = props;
 
     const locDetails = { ...locationDetails };
