@@ -13,7 +13,7 @@ import reducer, {
 
 reducerRegistry.register(reducerName, reducer);
 
-describe('reducers/goals', () => {
+describe('reducers/locations', () => {
     beforeEach(() => {
         FlushThunks.createMiddleware();
         jest.resetAllMocks();

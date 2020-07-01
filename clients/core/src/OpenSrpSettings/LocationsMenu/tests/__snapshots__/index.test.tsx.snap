@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/Editsettings render menu correctly 1`] = `
+exports[`components/LocationsMenu render menu correctly 1`] = `
 <LocationMenu
   activeLocationId="02ebbc84-5e29-4cd5-9b79-c594058923e9"
   isLast={true}
@@ -94,7 +94,7 @@ exports[`components/Editsettings render menu correctly 1`] = `
 </LocationMenu>
 `;
 
-exports[`components/Editsettings renders coreectly with popup id: location 1`] = `
+exports[`components/LocationsMenu renders coreectly with popup id: location 1`] = `
 <a
   className="locations "
   onClick={[Function]}
@@ -109,7 +109,7 @@ exports[`components/Editsettings renders coreectly with popup id: location 1`] =
 </a>
 `;
 
-exports[`components/Editsettings renders coreectly with popup id: popup 1`] = `
+exports[`components/LocationsMenu renders coreectly with popup id: popup 1`] = `
 <div
   className="popup"
 >

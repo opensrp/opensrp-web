@@ -102,7 +102,7 @@ export const fetchLocSettings = (settings: Setting[] = [], locId: string): Fetch
                 set['editing'] = set['editing'] ? set['editing'] : false;
                 return set;
             }),
-            setting => setting.key,
+            setting => setting.settingMetadataId,
         ),
     },
     type: LOC_SETTINGS_FETCHED,

@@ -6,7 +6,7 @@ import { allSettings } from './fixtures';
 reducerRegistry.register(reducerName, reducer);
 const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
 
-describe('reducers/goals', () => {
+describe('reducers/settings', () => {
     beforeEach(() => {
         FlushThunks.createMiddleware();
         jest.resetAllMocks();
