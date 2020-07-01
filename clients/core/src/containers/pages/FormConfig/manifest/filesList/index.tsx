@@ -49,7 +49,7 @@ export const ManifestFiles = (props: RouteComponentProps<RouteParams>) => {
             <Helmet>
                 <title>{`${RELEASE_FILE_LABEL}: ${formVersion}`}</title>
             </Helmet>
-            <h3 className="household-title">{`${RELEASE_FILE_LABEL}: ${formVersion}`}</h3>
+            <h3 className="page-title">{`${RELEASE_FILE_LABEL}: ${formVersion}`}</h3>
             <ConnectedManifestFilesList {...manifestFilesListProps} />
         </div>
     );

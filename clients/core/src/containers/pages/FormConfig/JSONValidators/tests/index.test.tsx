@@ -44,7 +44,7 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
 
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('JSON Validators');
-        expect(wrapper.find('.household-title').text()).toEqual('JSON Validators');
+        expect(wrapper.find('.page-title').text()).toEqual('JSON Validators');
 
         expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
 

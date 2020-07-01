@@ -36,7 +36,7 @@ export const ManifestReleasesPage = () => {
             <Helmet>
                 <title>{RELEASES_LABEL}</title>
             </Helmet>
-            <h3 className="household-title">{RELEASES_LABEL}</h3>
+            <h3 className="page-title">{RELEASES_LABEL}</h3>
             <ConnectedManifestReleases {...manifestReleasesProps} />
         </div>
     );

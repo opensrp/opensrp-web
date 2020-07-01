@@ -46,7 +46,7 @@ describe('containers/pages/ConfigForm/manifest/releases', () => {
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Releases');
 
-        expect(wrapper.find('.household-title').text()).toEqual('Releases');
+        expect(wrapper.find('.page-title').text()).toEqual('Releases');
 
         expect(wrapper.find('ManifestReleases').props()).toMatchSnapshot();
 

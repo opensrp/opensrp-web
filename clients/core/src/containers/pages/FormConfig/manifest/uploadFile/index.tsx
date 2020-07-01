@@ -44,7 +44,7 @@ export const UploadConfigFilePage = (props: RouteComponentProps<RouteParams>) =>
             <Helmet>
                 <title>{titleAction}</title>
             </Helmet>
-            <h3 className="household-title">{titleAction}</h3>
+            <h3 className="page-title">{titleAction}</h3>
             <ConnectedUploadConfigFile {...uploadConfigFileProps} />
         </div>
     );

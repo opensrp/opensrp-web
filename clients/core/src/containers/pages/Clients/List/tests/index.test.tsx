@@ -65,7 +65,7 @@ describe('containers/clients/list/ClientList', () => {
 
         // expect(toJson(wrapper)).toMatchSnapshot();
         // page title
-        expect(wrapper.find('.household-title').text()).toMatchInlineSnapshot(`" All Clients (7)"`);
+        expect(wrapper.find('.page-title').text()).toMatchInlineSnapshot(`" All Clients (7)"`);
         // html document title
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual(ALL_CLIENTS);

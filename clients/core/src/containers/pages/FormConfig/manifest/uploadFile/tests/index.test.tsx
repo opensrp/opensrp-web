@@ -52,7 +52,7 @@ describe('containers/pages/ConfigForm/manifest/uploadFile', () => {
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Upload Form');
 
-        expect(wrapper.find('.household-title').text()).toEqual('Upload Form');
+        expect(wrapper.find('.page-title').text()).toEqual('Upload Form');
 
         expect(wrapper.find('UploadConfigFile').props()).toMatchSnapshot('upload form');
 
@@ -92,7 +92,7 @@ describe('containers/pages/ConfigForm/manifest/uploadFile', () => {
         );
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Edit Form');
-        expect(wrapper.find('.household-title').text()).toEqual('Edit Form');
+        expect(wrapper.find('.page-title').text()).toEqual('Edit Form');
 
         expect(wrapper.find('UploadConfigFile').props()).toMatchSnapshot('edit form');
 

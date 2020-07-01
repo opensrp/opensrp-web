@@ -62,7 +62,7 @@ describe('containers/pages/ConfigForm/manifest/ManifestFiles', () => {
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Release: 1.0.1');
 
-        expect(wrapper.find('.household-title').text()).toEqual('Release: 1.0.1');
+        expect(wrapper.find('.page-title').text()).toEqual('Release: 1.0.1');
 
         expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
 
