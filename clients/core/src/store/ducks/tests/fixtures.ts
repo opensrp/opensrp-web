@@ -3,6 +3,7 @@ import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
 import { Event } from '../events';
 import { Child } from '../child';
+import { LocationTag } from '../locationTag';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -903,7 +904,28 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
+export const locationTag1: LocationTag = {
+    id: '1',
+    name: 'District',
+    active: true,
+    description: 'level 2',
+};
+
+export const locationTag2: LocationTag = {
+    id: '2',
+    name: 'division',
+    active: true,
+    description: 'level 1',
+};
+
+export const locationTag3: LocationTag = {
+    id: '3',
+    name: 'upazila',
+    active: true,
+    description: 'level 3',
+};
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
+export const locationTagList: LocationTag[] = [locationTag1, locationTag2, locationTag3];
