@@ -2,6 +2,9 @@
 export const OPENSRP_CLIENT_ENDPOINT = 'client/searchByCriteria';
 export type OPENSRP_CLIENT_ENDPOINT = typeof OPENSRP_CLIENT_ENDPOINT;
 
+export const OPENSRP_ADMIN_ENDPOINT = 'admin/location';
+export type OPENSRP_ADMIN_ENDPOINT = typeof OPENSRP_ADMIN_ENDPOINT;
+
 // internal urls
 export const LOGIN_URL = '/login';
 export type LOGIN_URL = typeof LOGIN_URL;
@@ -27,7 +30,7 @@ export const ROLE_URL = '/404';
 export type ROLE_URL = typeof ROLE_URL;
 export const TEAM_URL = '/404';
 export type TEAM_URL = typeof TEAM_URL;
-export const LOCATIONS_URL = '/404';
+export const LOCATIONS_URL = '/locations';
 export type LOCATION_URL = typeof LOCATIONS_URL;
 export const REPORTS_URL = '/404';
 export type REPORTS_URL = typeof REPORTS_URL;

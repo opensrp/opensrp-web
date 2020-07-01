@@ -3,6 +3,7 @@ import { Household } from '../../ducks/households';
 import { ANCClientType } from '../anc';
 import { Event } from '../events';
 import { Child } from '../child';
+import { Location } from '../adminLocation';
 /* eslint-disable @typescript-eslint/camelcase */
 
 export const client1: Client = {
@@ -903,7 +904,85 @@ export const child3: Child = {
     _rev: 'v1',
 };
 
+export const location1: Location = {
+    type: 'Feature',
+    id: '3',
+    properties: {
+        uid: '694e0f30-d9ac-4576-b50a-38a3ef13ebcr',
+        type: 'Residential Structure',
+        status: 'Pending Review',
+        parentId: '22',
+        name: 'Rajbari',
+        geographicLevel: 0,
+        effectiveStartDate: '2015-01-01T0000',
+        version: 0,
+        parentName: 'Dhaka',
+        tagName: 'District',
+    },
+    serverVersion: 1586159649654,
+    locationTags: [
+        {
+            id: 3,
+            active: true,
+            name: 'District',
+            description: 'District',
+        },
+    ],
+};
+
+export const location2: Location = {
+    type: 'Feature',
+    id: '4',
+    properties: {
+        uid: '694e0f30-d9ac-4576-b50a-38a3ef13ebcr',
+        type: 'Residential Structure',
+        status: 'Pending Review',
+        parentId: '23',
+        name: 'Baliakandi',
+        geographicLevel: 0,
+        effectiveStartDate: '2015-01-01T0000',
+        version: 0,
+        parentName: 'Rajbari',
+        tagName: 'Thana',
+    },
+    serverVersion: 1586159769694,
+    locationTags: [
+        {
+            id: 4,
+            active: true,
+            name: 'Thana',
+            description: 'Thana',
+        },
+    ],
+};
+
+export const location3: Location = {
+    type: 'Feature',
+    id: '5',
+    properties: {
+        uid: '694e0f30-d9ac-4576-b50a-38a3ef13ebcr',
+        type: 'Residential Structure',
+        status: 'Pending Review',
+        parentId: '24',
+        name: 'Pangsha',
+        geographicLevel: 0,
+        effectiveStartDate: '2015-01-01T0000',
+        version: 0,
+        parentName: 'Baliakandi',
+        tagName: 'Union',
+    },
+    serverVersion: 1586159769695,
+    locationTags: [
+        {
+            id: 10,
+            active: true,
+            name: 'Union',
+            description: 'Union',
+        },
+    ],
+};
 export const clients: Client[] = [client1, client2, client3, client4, client5, client6, client7];
 export const households: Household[] = [household1, household2, household3];
 export const events: Event[] = [event1, event2, event3];
 export const childList: Child[] = [child1, child2, child3];
+export const locations: Location[] = [location1, location2, location3];
