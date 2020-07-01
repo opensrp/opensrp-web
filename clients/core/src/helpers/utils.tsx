@@ -24,3 +24,9 @@ export function oAuthUserInfoGetter(apiResponse: FlexObject): SessionState | voi
         }
     }
 }
+
+/** Route params interface */
+export interface RouteParams {
+    id?: string;
+    type?: string;
+}
