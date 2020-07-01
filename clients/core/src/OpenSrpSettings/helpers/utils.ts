@@ -18,12 +18,12 @@ export const preparePutData = (data: Setting, value: string) => {
         locationId,
         providerId,
         uuid,
-        settingsId,
         settingIdentifier: identifier,
         settingMetadataId: _id,
         team,
         teamId,
         type,
+        documentId,
     } = data;
     let postData: PostData = {
         _id,
@@ -33,7 +33,7 @@ export const preparePutData = (data: Setting, value: string) => {
         label,
         locationId,
         uuid,
-        settingsId,
+        settingsId: documentId,
         type,
         value,
     };
