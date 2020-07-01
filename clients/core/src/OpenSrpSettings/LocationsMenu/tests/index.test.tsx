@@ -14,7 +14,7 @@ const props = {
     showLocPopUp: '',
 };
 
-describe('components/Editsettings', () => {
+describe('components/LocationsMenu', () => {
     it('renders without crashing', () => {
         shallow(<LocationMenu {...props} />);
     });
