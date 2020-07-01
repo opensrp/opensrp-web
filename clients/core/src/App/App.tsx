@@ -10,7 +10,7 @@ import Loading from '../components/page/Loading';
 import { DISABLE_LOGIN_PROTECTION } from '../configs/env';
 import { sideMenuProps } from '../configs/navigationConfigs';
 import { providers } from '../configs/settings';
-import { LOGIN_URL, LOGOUT_URL, CHILD_URL } from '../constants';
+import { LOGIN_URL, LOGOUT_URL, CHILD_URL, HOUSEHOLD_URL } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
 import SideMenu from '../components/page/SideMenu';
@@ -20,6 +20,7 @@ import ConnectedChildList from '../containers/pages/Child/List';
 import Home from '../containers/pages/Home/Home';
 import { oAuthUserInfoGetter } from '../helpers/utils';
 import './App.css';
+import ConnectedHouseholdList from '../containers/Households/List';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -46,6 +47,12 @@ class App extends Component {
                                 exact={true}
                                 path={CLIENT_URL}
                                 component={ConnectedClientList}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={HOUSEHOLD_URL}
+                                component={ConnectedHouseholdList}
                             />
                             <ConnectedPrivateRoute
                                 disableLoginProtection={DISABLE_LOGIN_PROTECTION}

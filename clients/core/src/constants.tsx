@@ -13,7 +13,7 @@ export const CLIENT_URL = '/clients';
 export type CLIENT_URL = typeof CLIENT_URL;
 export const CLIENT_PROFILE_URL = '/client-profile';
 export type CLIENT_PROFILE_URL = typeof CLIENT_PROFILE_URL;
-export const HOUSEHOLD_URL = '/404';
+export const HOUSEHOLD_URL = '/households';
 export type HOUSEHOLD_URL = typeof HOUSEHOLD_URL;
 export const ANC_URL = '/404';
 export type ANC_URL = typeof ANC_URL;
@@ -21,6 +21,8 @@ export const CHILD_URL = '/child';
 export type CHILD_URL = typeof CHILD_URL;
 export const CHILD_PROFILE_URL = '/child-profile';
 export type CHILD_PROFILE_URL = typeof CHILD_PROFILE_URL;
+export const HOUSEHOLD_PROFILE_URL = '/household-profile';
+export type HOUSEHOLD_PROFILE_URL = typeof HOUSEHOLD_PROFILE_URL;
 export const USER_URL = '/404';
 export type USER_URL = typeof USER_URL;
 export const ROLE_URL = '/404';
@@ -64,14 +66,11 @@ export const LOGIN = 'Login';
 export type LOGIN = typeof LOGIN;
 export const SIGN_OUT = 'Sign Out';
 export type SIGN_OUT = typeof SIGN_OUT;
+export const HOUSEHOLD_CLIENT_TYPE = 'ec_family';
+export type HOUSEHOLD_CLIENT_TYPE = typeof HOUSEHOLD_CLIENT_TYPE;
 export const CHILD_CLIENT_TYPE = 'child';
 export type CHILD_CLIENT_TYPE = typeof CHILD_CLIENT_TYPE;
 
-// url constants
-export const PAGINATION_SIZE = 10;
-export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
-export const PAGINATION_NEIGHBORS = 3;
-export type PAGINATION_NEIGHBORS = typeof PAGINATION_NEIGHBORS;
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
 export const START = 'Start';
@@ -83,3 +82,9 @@ export type PREVIOUS = typeof PREVIOUS;
 export const LOADING = 'Loading';
 export const VIEW = 'View';
 export type VIEW = typeof VIEW;
+
+/** page constants for every list of */
+export const PAGINATION_SIZE = 10;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGHBORS = 3;
+export type PAGINATION_NEIGHBORS = typeof PAGINATION_NEIGHBORS;
