@@ -2291,8 +2291,10 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
-"@opensrp/form-config@file:/home/ona/projects/opensrp/opensrp-web/packages/opensrp-form-config/":
-  version "0.0.3"
+"@opensrp/form-config@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@opensrp/form-config/-/form-config-0.0.5.tgz#f37674bed23b74ee861ee39376f9d55c443dd64f"
+  integrity sha512-KUMj6AkBjOwiIPj1d/lFbtw2ZqMTg/8yo7rNLPIbF/5SCWsZsIBb7FNra2IOlc0Hnmm989PtLehut1dDCwBofQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.20"
     "@fortawesome/free-brands-svg-icons" "^5.10.0"
