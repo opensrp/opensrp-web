@@ -2235,6 +2235,11 @@
     react-table "^7.0.6"
     reactstrap "^8.4.1"
 
+"@onaio/element-map@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@onaio/element-map/-/element-map-0.0.5.tgz#6c8b55314d41fb76c1ea7538d4ee217a121936cb"
+  integrity sha512-PxhKq2uR9j8fZkvIqiUMp8CvZTX358d3sWuLj5a7LRpTK/Y+ZS1L9XZp2Xb9pplHCSferZxzwjm/YfKqVr56lA==
+
 "@onaio/gatekeeper@^0.0.16":
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.16.tgz#e4873a32d70f0491c00afee772d70ffd1da06885"
@@ -2252,6 +2257,13 @@
     "@onaio/session-reducer" "^0.0.11"
     client-oauth2 "^4.2.3"
     query-string "^6.4.2"
+
+"@onaio/list-view@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@onaio/list-view/-/list-view-0.0.3.tgz#18cb78a0721fd30d331c9c267d242d838e58f623"
+  integrity sha512-vY8//UU2ZIuslzrFJC6NwnymZHh2+9EG7hwo87dlaX6p2bmZcYr44uzchNvFwNvW3C3xx3GV4LWkpU+WO95LCw==
+  dependencies:
+    "@onaio/element-map" "^0.0.5"
 
 "@onaio/loaders@^0.0.1":
   version "0.0.1"

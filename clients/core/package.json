@@ -12,6 +12,7 @@
         "@onaio/connected-reducer-registry": "^0.0.3",
         "@onaio/drill-down-table": "^1.0.2",
         "@onaio/gatekeeper": "^0.0.21",
+        "@onaio/list-view": "^0.0.3",
         "@onaio/loaders": "^0.0.1",
         "@onaio/pagination": "^0.0.3",
         "@onaio/redux-reducer-registry": "^0.0.9",
