@@ -129,10 +129,9 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      */
     const getLocations = async (currentLocId: string) => {
         setLoading(true);
-        const url = `${locationsEndpoint}/${currentLocId}`;
-        const clientService = new OpenSRPService(baseURL, url, getPayload);
+        const clientService = new OpenSRPService(baseURL, locationsEndpoint, getPayload);
         await clientService
-            .list()
+            .read(currentLocId)
             .then(async res => {
                 const { map } = res.locationsHierarchy;
                 const locId = Object.keys(map)[0];

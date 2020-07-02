@@ -49,15 +49,15 @@ describe('components/Editsettings', () => {
     });
 
     it('renders correctly when connected to store', async () => {
-        store.dispatch(fetchLocs(locHierarchy));
-        store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
         const mockList = jest.fn();
         const mockUpdate = jest.fn();
+        const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
+            .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
             .mockReturnValueOnce(Promise.resolve(allSettings));
+        OpenSRPService.prototype.read = mockRead;
+        mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
         OpenSRPService.prototype.update = mockUpdate;
         mockUpdate.mockReturnValueOnce(Promise.resolve({}));
 
@@ -70,6 +70,10 @@ describe('components/Editsettings', () => {
         );
 
         await flushPromises();
+        wrapper.update();
+
+        store.dispatch(fetchLocs(locHierarchy));
+        store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
         wrapper.update();
         expect(wrapper.find('.title h4').text()).toEqual('Server Settings (ME)');
         expect(wrapper.find('ListView').props()).toMatchSnapshot();
@@ -137,11 +141,13 @@ describe('components/Editsettings', () => {
         store.dispatch(fetchLocSettings([allSettings[1]], '8400d475-3187-46e4-8980-7c6f0a243495'));
         const mockList = jest.fn();
         const mockUpdate = jest.fn();
+        const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
+            .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
             .mockReturnValueOnce(Promise.resolve(allSettings));
+        OpenSRPService.prototype.read = mockRead;
+        mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
         OpenSRPService.prototype.update = mockUpdate;
         mockUpdate.mockReturnValueOnce(Promise.resolve({}));
 
@@ -218,14 +224,13 @@ describe('components/Editsettings', () => {
         store.dispatch(fetchLocs(locHierarchy));
         store.dispatch(fetchLocSettings([], '75af7700-a6f2-448c-a17d-816261a7749a'));
         const mockList = jest.fn();
-        const mockUpdate = jest.fn();
+        const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
-            .mockReturnValueOnce(Promise.resolve(locHierarchy))
-            .mockReturnValueOnce(Promise.resolve([]));
-        OpenSRPService.prototype.update = mockUpdate;
-        mockUpdate.mockReturnValueOnce(Promise.resolve({}));
+            .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
+            .mockReturnValueOnce(Promise.resolve(allSettings));
+        OpenSRPService.prototype.read = mockRead;
+        mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
 
         const wrapper = mount(
             <Provider store={store}>
@@ -234,6 +239,8 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
+        await flushPromises();
+        wrapper.update();
         expect(wrapper.find('.no-data').text()).toEqual('No data found');
     });
 });
