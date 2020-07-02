@@ -1,5 +1,5 @@
 {
-    "name": "@opensrp/char-settings",
+    "name": "@opensrp/population-characteristics",
     "version": "0.0.3",
     "description": "Edit characteristics settings",
     "main": "dist/index.js",

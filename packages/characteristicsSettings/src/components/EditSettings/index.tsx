@@ -42,7 +42,7 @@ reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(locationReducerName, locationReducer);
 
 /** dafault edit settings interface */
-interface EditSettingsDefaultProps {
+export interface EditSettingsDefaultProps {
     activeLocationId: string;
     currentLocName: string;
     debounceTime: number;
@@ -346,7 +346,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 </h4>
                 <SearchForm {...searchProps} />
             </div>
-            {locSettings.length > 0 && <div className="box">{locationMenu}</div>}
+            <div className="box">{locationMenu}</div>
             <ListView {...listViewProps} />
             {!locSettings.length && <div className="no-data">{noDataFound}</div>}
         </div>
