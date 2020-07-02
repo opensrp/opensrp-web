@@ -3,3 +3,7 @@ export * from './components/LocationsMenu';
 export * from './components/SearchForm';
 export * from './ducks/locations';
 export * from './ducks/settings';
+import settingsReducer from './ducks/settings';
+import locationsReducer from './ducks/locations';
+
+export { settingsReducer, locationsReducer };
