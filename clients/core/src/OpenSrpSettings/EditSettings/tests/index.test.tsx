@@ -217,8 +217,6 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
-
-        expect(wrapper.find('.box').length).toEqual(0);
         expect(wrapper.find('.no-data').text()).toEqual('No data found');
     });
 });

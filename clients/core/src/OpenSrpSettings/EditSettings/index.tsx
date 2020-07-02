@@ -133,10 +133,10 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      */
     const getLocations = async (currentLocId: string) => {
         setLoading(true);
-        const url = `${locationsEndpoint}/${currentLocId}`;
-        const clientService = new OpenSRPService(baseURL, url, getPayload);
+        // const url = `${locationsEndpoint}/${currentLocId}`;
+        const clientService = new OpenSRPService(baseURL, locationsEndpoint, getPayload);
         await clientService
-            .list()
+            .read(currentLocId)
             .then(async res => {
                 const { map } = res.locationsHierarchy;
                 const locId = Object.keys(map)[0];
@@ -161,10 +161,10 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         const clientService = new OpenSRPService(baseURL, secAuthEndpoint, getPayload);
         await clientService
             .list()
-            .then(res => {
+            .then(async res => {
                 const { map } = res.locations.locationsHierarchy;
                 const locId = Object.keys(map)[0];
-                getLocations(locId);
+                await getLocations(locId);
             })
             .catch(error => {
                 setLoading(false);
@@ -318,7 +318,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                             <span>{setToYesLabel}</span>
                         </div>
                         <div onClick={e => changeSetting(e, row, 'false')}>
-                            <span className={value ? 'empty-check' : 'check'} /> <span>{setToNoLabel}</span>
+                            <span className={value ? 'empty-check' : 'check'} />
+                            <span>{setToNoLabel}</span>
                         </div>
                         <div className="inherit-from">
                             <span className={row.inherited_from?.trim() ? 'check' : 'empty-check'} />
@@ -350,7 +351,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 </h4>
                 <SearchForm {...searchProps} />
             </div>
-            {locSettings.length > 0 && <div className="box">{locationMenu}</div>}
+            <div className="box">{locationMenu}</div>
             <ListView {...listViewProps} />
             {!locSettings.length && <div className="no-data">{noDataFound}</div>}
         </div>

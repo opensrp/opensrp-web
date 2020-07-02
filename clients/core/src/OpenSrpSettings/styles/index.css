@@ -61,11 +61,6 @@ select {
     cursor: default !important;
 }
 
-.inherit-from span {
-    margin-right: 10px;
-    margin-top: 3px;
-}
-
 .searchTerm {
     width: 40%;
     margin: 15px 0;
@@ -85,11 +80,11 @@ select {
     width: 5px;
     border-bottom: 2px solid #000;
     border-right: 2px solid #000;
-    margin-right: 5px;
+    margin-right: 6px !important;
 }
 
 .empty-check {
-    margin-right: 13px !important;
+    margin-right: 11px !important;
 }
 
 /* Popup container - can be anything you want */
@@ -117,6 +112,7 @@ select {
 /* make cursor div in pointer */
 .popuptext div {
     cursor: pointer;
+    margin-bottom: 6px;
 }
 
 /* make cursor a in pointer */

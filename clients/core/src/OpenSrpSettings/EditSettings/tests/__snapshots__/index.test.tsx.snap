@@ -38,7 +38,6 @@ Object {
             <span
               className="check"
             />
-             
             <span>
               Set to 'No'
             </span>
@@ -89,7 +88,6 @@ Object {
             <span
               className="empty-check"
             />
-             
             <span>
               Set to 'No'
             </span>
