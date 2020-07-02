@@ -8,7 +8,11 @@ import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import flushPromises from 'flush-promises';
 import _ from 'lodash';
 import { EditSetings, ConnectedEditSetings } from '..';
-import settingsReducer, { reducerName as settingsReducerName, fetchLocSettings } from '../../ducks/settings';
+import settingsReducer, {
+    reducerName as settingsReducerName,
+    fetchLocSettings,
+    removeLocSettingAction,
+} from '../../ducks/settings';
 import locationReducer, { fetchLocs, reducerName as LocsReducerName } from '../../ducks/locations';
 import { locHierarchy } from '../../ducks/locations/tests/fixtures';
 import { allSettings } from '../../ducks/settings/tests/fixtures';
@@ -190,5 +194,31 @@ describe('components/Editsettings', () => {
         search.simulate('input', { target: { value: 'Undernourished prevalence' } });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(1);
+    });
+
+    it('renders correctly when no data', async () => {
+        store.dispatch(removeLocSettingAction());
+        store.dispatch(fetchLocs(locHierarchy));
+        store.dispatch(fetchLocSettings([], '75af7700-a6f2-448c-a17d-816261a7749a'));
+        const mockList = jest.fn();
+        const mockUpdate = jest.fn();
+        OpenSRPService.prototype.list = mockList;
+        mockList
+            .mockReturnValueOnce(Promise.resolve(locHierarchy))
+            .mockReturnValueOnce(Promise.resolve(locHierarchy))
+            .mockReturnValueOnce(Promise.resolve([]));
+        OpenSRPService.prototype.update = mockUpdate;
+        mockUpdate.mockReturnValueOnce(Promise.resolve({}));
+
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router history={history}>
+                    <ConnectedEditSetings {...props} />
+                </Router>
+            </Provider>,
+        );
+
+        expect(wrapper.find('.box').length).toEqual(0);
+        expect(wrapper.find('.no-data').text()).toEqual('No data found');
     });
 });

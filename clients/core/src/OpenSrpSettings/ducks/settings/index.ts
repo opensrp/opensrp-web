@@ -89,10 +89,10 @@ export default function reducer(state = initialState, action: LocSettingsTypes):
 }
 
 /** removeLocSettingAction */
-export const removeLocSettingAction: RemoveLocSettingsAction = {
+export const removeLocSettingAction = () => ({
     settingsByLocId: {},
     type: REMOVE_LOC_SETTINGS,
-};
+});
 
 /** fetchLocSettings */
 export const fetchLocSettings = (settings: Setting[] = [], locId: string): FetchLocSettingsAction => ({

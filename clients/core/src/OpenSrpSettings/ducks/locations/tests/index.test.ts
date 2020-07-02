@@ -9,6 +9,7 @@ import reducer, {
     getActiveLocId,
     getSelectedLocs,
     getDefaultLocId,
+    removeLocAction,
 } from '..';
 
 reducerRegistry.register(reducerName, reducer);
@@ -44,5 +45,14 @@ describe('reducers/locations', () => {
         expect(getSelectedLocs(store.getState())).toEqual([locId]);
         // get default location id
         expect(getDefaultLocId(store.getState())).toEqual(locId);
+    });
+
+    it('should clear locations', () => {
+        const locId = '75af7700-a6f2-448c-a17d-816261a7749a';
+        // dispatch locations
+        store.dispatch(fetchLocs(locHierarchy));
+        store.dispatch(removeLocAction());
+        // get location hierarchy
+        expect(getLocChildren(store.getState(), locId)).toEqual([]);
     });
 });

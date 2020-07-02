@@ -174,3 +174,8 @@ select {
     top: 4px;
     margin-right: 20px;
 }
+
+.no-data {
+    text-align: center;
+    border-bottom: 1px solid gray;
+}

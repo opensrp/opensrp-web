@@ -38,6 +38,7 @@ import {
     SET_TO_NO_LABEL,
     SET_TO_YES_LABEL,
     INHERIT_SETTING_LABEL,
+    NO_DATA_FOUND,
 } from '../constants';
 import { preparePutData } from '../helpers/utils';
 
@@ -59,6 +60,7 @@ interface EditSettingsDefaultProps {
     locationDetails: LocChildren | {};
     locationSettings: Setting[];
     nameLabel: string;
+    noDataFound: string;
     pageTitle: string;
     placeholder: string;
     selectedLocations: string[];
@@ -99,6 +101,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         inheritSettingsLabel,
         setToNoLabel,
         setToYesLabel,
+        noDataFound,
     } = props;
 
     const [showLocPopUp, setShowLocPopup] = useState('');
@@ -347,8 +350,9 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 </h4>
                 <SearchForm {...searchProps} />
             </div>
-            <div className="box">{locationMenu}</div>
+            {locSettings.length > 0 && <div className="box">{locationMenu}</div>}
             <ListView {...listViewProps} />
+            {!locSettings.length && <div className="no-data">{noDataFound}</div>}
         </div>
     );
 };
@@ -368,6 +372,7 @@ const defaultProps: EditSettingsDefaultProps = {
     locationDetails: {},
     locationSettings: [],
     nameLabel: NAME_LABEL,
+    noDataFound: NO_DATA_FOUND,
     pageTitle: PAGE_TITLE_LABEL,
     placeholder: SEARCH_SETTINGS_LABEL,
     selectedLocations: [],

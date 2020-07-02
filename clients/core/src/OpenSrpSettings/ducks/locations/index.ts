@@ -115,13 +115,13 @@ export default function reducer(state = initialState, action: LocTypes): Immutab
 }
 
 /** removeLocAction */
-export const removeLocAction: RemoveLocAction = {
+export const removeLocAction = () => ({
     locations: {
         map: {},
         parentChildren: {},
     },
     type: REMOVE_LOC,
-};
+});
 
 /** fetchLocs */
 export const fetchLocs = (locs: LocPayload): FetchLocAction => {

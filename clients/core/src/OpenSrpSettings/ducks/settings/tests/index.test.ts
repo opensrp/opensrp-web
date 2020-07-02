@@ -1,6 +1,6 @@
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
 import { FlushThunks } from 'redux-testkit';
-import reducer, { reducerName, getLocSettings, fetchLocSettings } from '..';
+import reducer, { reducerName, getLocSettings, fetchLocSettings, removeLocSettingAction } from '..';
 import { allSettings } from './fixtures';
 
 reducerRegistry.register(reducerName, reducer);
@@ -29,5 +29,13 @@ describe('reducers/settings', () => {
         allSettings[0] = updatedSetting;
         store.dispatch(fetchLocSettings([updatedSetting], locId));
         expect(getLocSettings(store.getState(), locId)).toEqual(allSettings);
+    });
+
+    it('should clear settings', () => {
+        // dispatch locations
+        store.dispatch(fetchLocSettings(allSettings, locId));
+        store.dispatch(removeLocSettingAction());
+        // get location settings
+        expect(getLocSettings(store.getState(), locId)).toEqual([]);
     });
 });
