@@ -96,6 +96,18 @@ describe('components/Editsettings', () => {
                 .at(1)
                 .find('.check').length,
         ).toEqual(1);
+        //click set to no nothing happens
+        wrapper
+            .find('.show div')
+            .at(1)
+            .simulate('click');
+        wrapper.update();
+        expect(
+            wrapper
+                .find('.show div')
+                .at(1)
+                .find('.check').length,
+        ).toEqual(1);
         // click set to yes
         wrapper
             .find('.show div')
@@ -191,6 +203,11 @@ describe('components/Editsettings', () => {
         search.simulate('input', { target: { value: 'test search' } });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(0);
+
+        search.simulate('input', { target: { value: '    ' } });
+        wrapper.update();
+        expect(wrapper.find('tbody tr').length).toEqual(2);
+
         search.simulate('input', { target: { value: 'Undernourished prevalence' } });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(1);

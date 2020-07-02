@@ -2,7 +2,7 @@
 export const allSettings = [
     {
         key: 'pop_undernourish',
-        value: false,
+        value: 'false',
         label: 'Undernourished prevalence 20% or higher',
         description:
             'The proportion of women in the adult population (18 years or older), with a BMI less than 18.5, is 20% or higher.',
