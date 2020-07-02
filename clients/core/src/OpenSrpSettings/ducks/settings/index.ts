@@ -17,7 +17,7 @@ export interface Setting {
     value: boolean | string;
     label: string;
     description: string;
-    inherited_from: string;
+    inheritedFrom: string;
     uuid: string;
     settingsId: string;
     settingIdentifier: string;

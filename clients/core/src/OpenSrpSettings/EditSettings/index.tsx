@@ -133,7 +133,6 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      */
     const getLocations = async (currentLocId: string) => {
         setLoading(true);
-        // const url = `${locationsEndpoint}/${currentLocId}`;
         const clientService = new OpenSRPService(baseURL, locationsEndpoint, getPayload);
         await clientService
             .read(currentLocId)
@@ -144,12 +143,6 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 fetchLocations(res);
             })
             .catch(async error => {
-                const { map } = locs.locationsHierarchy;
-                const locId = Object.keys(map)[0];
-                await getLocationSettings(locId);
-                fetchLocations(locs);
-
-                setLoading(false);
                 customAlert && customAlert(String(error), { type: 'error' });
             })
             .finally(() => setLoading(false));
@@ -307,7 +300,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                row.inherited_from?.trim() || '_',
+                row.inheritedFrom?.trim() || '_',
                 <div className="popup" key={row.key}>
                     <a href="#" onClick={e => openEditModal(e, row)}>
                         {editLabel}
@@ -322,7 +315,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                             <span>{setToNoLabel}</span>
                         </div>
                         <div className="inherit-from">
-                            <span className={row.inherited_from?.trim() ? 'check' : 'empty-check'} />
+                            <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
                             {inheritSettingsLabel}
                         </div>
                     </div>

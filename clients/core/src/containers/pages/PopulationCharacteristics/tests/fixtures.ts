@@ -6,7 +6,7 @@ export const settings = [
         label: 'Undernourished prevalence 20% or higher',
         description:
             'The proportion of women in the adult population (18 years or older), with a BMI less than 18.5, is 20% or higher.',
-        inherited_from: '',
+        inheritedFrom: '',
         uuid: '96475904-0b13-4a31-a59b-807b7b445897',
         settingsId: '2',
         settingIdentifier: 'population_characteristics',
@@ -24,7 +24,7 @@ export const settings = [
         label: 'Anaemia prevalence 40% or higher',
         description:
             'The proportion of pregnant women in the population with anaemia (haemoglobin level less than 11 g/dl) is 40% or higher.',
-        inherited_from: '',
+        inheritedFrom: '',
         uuid: '90e45492-1eeb-49a9-a510-0f53f563f044',
         settingsId: '2',
         settingIdentifier: 'population_characteristics',
