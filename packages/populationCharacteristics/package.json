@@ -39,6 +39,7 @@
         "@fortawesome/react-fontawesome": "^0.1.4",
         "@onaio/redux-reducer-registry": "^0.0.9",
         "@onaio/list-view": "^0.0.3",
+        "@onaio/utils": "^0.0.1",
         "@opensrp/server-service": "^0.0.2",
         "lodash": "^4.17.15",
         "react-toastify": "^6.0.5"

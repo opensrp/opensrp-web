@@ -1,6 +1,7 @@
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { keyBy } from 'lodash';
+import { Dictionary } from '@onaio/utils';
 
 /** reducer name */
 export const settingsReducerName = 'populationCharacteristics';
@@ -33,9 +34,7 @@ export interface Setting {
     type: string;
 }
 
-export interface SettingStorage {
-    [key: string]: Setting | {};
-}
+export type SettingStorage = Dictionary<Setting | {}>;
 
 /** FetchLocSettingsAction interface for LOC_SETTINGS_FETCHED */
 export interface FetchLocSettingsAction extends AnyAction {

@@ -1,5 +1,6 @@
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
+import { Dictionary } from '@onaio/utils';
 
 /** reducer name */
 export const locationReducerName = 'locHierarchy';
@@ -36,14 +37,10 @@ export interface LocChildren {
 }
 
 /** locationsHierarchy parentChildren  interface */
-export interface ParentChildren {
-    [key: string]: Array<string>;
-}
+export type ParentChildren = Dictionary<string[]>;
 
 /** locationsHierarchy map interface */
-export interface LocMap {
-    [key: string]: LocChildren;
-}
+export type LocMap = Dictionary<LocChildren>;
 
 /** crurrent Location interface */
 export interface CurrentLoc {

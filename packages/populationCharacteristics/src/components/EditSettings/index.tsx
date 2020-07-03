@@ -17,7 +17,6 @@ import { LocationMenu } from '../LocationsMenu';
 import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
 import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
-import '../../styles/index.css';
 
 /** dafault edit settings interface */
 interface EditSettingsDefaultProps {
