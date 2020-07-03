@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 import { LocChildren } from '../../ducks/locations';
 
+/** location menu dafault props interface */
 interface DefaultProps {
     locationDetails: LocChildren;
     activeLocationId: string;
@@ -10,6 +11,7 @@ interface DefaultProps {
     isLast: boolean;
 }
 
+/** simple component for generating location menu */
 export const LocationMenu = (props: DefaultProps) => {
     const { locationDetails, activeLocationId, showLocPopUp, popLocPopup, loadLocsettings, isLast } = props;
 
