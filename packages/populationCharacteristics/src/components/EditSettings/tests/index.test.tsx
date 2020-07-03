@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import { createBrowserHistory } from 'history';
 import { getFetchOptions, OpenSRPService } from '@opensrp/server-service';
 import { Provider } from 'react-redux';
@@ -68,9 +69,10 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
-
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
 
         store.dispatch(fetchLocs(locHierarchy));
         store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
@@ -84,6 +86,7 @@ describe('components/Editsettings', () => {
         const editButton = wrapper.find('.popup a').at(0);
         expect(editButton.text()).toEqual('Edit');
         expect(wrapper.find('.popup .show').length).toEqual(0);
+
         editButton.simulate('click');
         wrapper.update();
         expect(wrapper.find('.popup .show').length).toEqual(1);
@@ -101,11 +104,14 @@ describe('components/Editsettings', () => {
                 .find('.check').length,
         ).toEqual(1);
         //click set to no nothing happens
-        wrapper
-            .find('.show div')
-            .at(1)
-            .simulate('click');
-        wrapper.update();
+        await act(async () => {
+            wrapper
+                .find('.show div')
+                .at(1)
+                .simulate('click');
+            wrapper.update();
+        });
+
         expect(
             wrapper
                 .find('.show div')
@@ -113,12 +119,14 @@ describe('components/Editsettings', () => {
                 .find('.check').length,
         ).toEqual(1);
         // click set to yes
-        wrapper
-            .find('.show div')
-            .at(0)
-            .simulate('click');
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            wrapper
+                .find('.show div')
+                .at(0)
+                .simulate('click');
+            await flushPromises();
+            wrapper.update();
+        });
         expect(mockUpdate).toHaveBeenCalledWith(updateDate);
         // true is now checked
         expect(
@@ -158,9 +166,10 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
-
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
 
         expect(wrapper.find('tbody tr').length).toEqual(2);
         expect(wrapper.find('.locations').length).toEqual(1);
@@ -171,12 +180,16 @@ describe('components/Editsettings', () => {
                 .at(0)
                 .text(),
         ).toEqual('ME');
-        wrapper.find('.locations').simulate('click');
+        await act(async () => {
+            wrapper.find('.locations').simulate('click');
+        });
         wrapper.update();
         expect(wrapper.find('.popup .show').length).toEqual(1);
         expect(wrapper.find('.popup .show div').text()).toEqual('Lobi');
         // click child location
-        wrapper.find('.popup .show div').simulate('click');
+        await act(async () => {
+            wrapper.find('.popup .show div').simulate('click');
+        });
         wrapper.update();
         expect(wrapper.find('.locations').length).toEqual(2);
         expect(
@@ -206,15 +219,21 @@ describe('components/Editsettings', () => {
 
         // test search
         const search = wrapper.find('SearchForm input');
-        search.simulate('input', { target: { value: 'test search' } });
+        await act(async () => {
+            search.simulate('input', { target: { value: 'test search' } });
+        });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(0);
 
-        search.simulate('input', { target: { value: '    ' } });
+        await act(async () => {
+            search.simulate('input', { target: { value: '    ' } });
+        });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(2);
 
-        search.simulate('input', { target: { value: 'Undernourished prevalence' } });
+        await act(async () => {
+            search.simulate('input', { target: { value: 'Undernourished prevalence' } });
+        });
         wrapper.update();
         expect(wrapper.find('tbody tr').length).toEqual(1);
     });
