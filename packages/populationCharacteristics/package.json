@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/population-characteristics",
-    "version": "0.0.3",
+    "version": "0.0.0",
     "description": "Edit characteristics settings",
     "main": "dist/index.js",
     "types": "dist/types",
