@@ -62,7 +62,8 @@ var EditSetings = function EditSetings(props) {
       secAuthEndpoint = props.secAuthEndpoint,
       settingsEndpoint = props.settingsEndpoint,
       customAlert = props.customAlert,
-      debounceTime = props.debounceTime;
+      debounceTime = props.debounceTime,
+      v2BaseUrl = props.v2BaseUrl;
   var pageTitle = labels.pageTitle,
       placeholder = labels.placeholder,
       descriptionLabel = labels.descriptionLabel,
@@ -95,7 +96,7 @@ var EditSetings = function EditSetings(props) {
     var params = {
       locationId: currentLocId
     };
-    var clientService = new _serverService.OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+    var clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
     return clientService.list(params);
   };
 

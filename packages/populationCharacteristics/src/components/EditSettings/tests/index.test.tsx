@@ -38,6 +38,7 @@ const props = {
     restBaseURL,
     secAuthEndpoint: 'security/authenticate',
     settingsEndpoint: 'settings',
+    v2BaseUrl: 'https://test-example.com/opensrp/rest/v2/',
 };
 
 describe('components/Editsettings', () => {
