@@ -1,0 +1,181 @@
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    max-width: 340px;
+    font-size: 14px;
+}
+
+.title {
+    margin: 10px 0px;
+}
+
+.box {
+    width: 100%;
+    border: 1px solid gray;
+    margin: 0;
+    height: 50px;
+}
+
+.locations-menu {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.locations,
+.active-loc {
+    align-items: center;
+    cursor: pointer;
+    margin: 4px 2px 0px 8px;
+    vertical-align: middle;
+}
+
+.locations span {
+    color: #3d6897;
+    border-color: #3d6897 transparent transparent transparent;
+}
+
+.active-loc span {
+    color: #000;
+    border-color: #000 transparent transparent transparent;
+}
+
+.drop-down {
+    content: '';
+    position: relative;
+    top: 11px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #3d6897 transparent transparent transparent;
+}
+
+select {
+    background: none;
+    border: none;
+}
+
+.inherit-from {
+    border-top: 1px solid grey;
+    padding-top: 2px;
+    cursor: default !important;
+}
+
+.inherit-from span {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.searchTerm {
+    width: 40%;
+    margin: 15px 0;
+    padding: 5px;
+    border-radius: 5px;
+    height: 36px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid grey;
+    outline: none;
+}
+
+.check {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 10px;
+    width: 5px;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    margin-right: 5px;
+}
+
+.empty-check {
+    margin-right: 13px !important;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: max-content;
+    background-color: #f8f9fa;
+    color: #2a2525;
+    border-radius: 6px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    left: -100%;
+    margin-left: -80px;
+    top: 130%;
+    border: 1px solid grey;
+}
+
+/* make cursor div in pointer */
+.popuptext div {
+    cursor: pointer;
+}
+
+/* make cursor a in pointer */
+.popuptext a {
+    cursor: pointer;
+}
+
+/* overide .popuptext for location popup */
+.loc-popup {
+    left: 30px !important;
+    top: 12px !important;
+    padding: 0px 10px !important;
+}
+/* Popup arrow */
+.popup .popuptext::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 90%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.search-input-wrapper {
+    position: relative;
+    max-width: 400px;
+    top: 4px;
+    margin-right: 20px;
+}
+
+.no-data {
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
