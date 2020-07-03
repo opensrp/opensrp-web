@@ -280,27 +280,58 @@ var EditSetings = function EditSetings(props) {
     }
   };
 
-  var loadLocsettings = function loadLocsettings(e, activeLocId) {
-    e.preventDefault();
-    var selectedLocs = [].concat((0, _toConsumableArray2["default"])(selectedLocations), [activeLocId]);
-    var locSettings = (0, _settings.getLocSettings)(state, activeLocId);
+  var loadLocsettings = function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, activeLocId) {
+      var selectedLocs, locSettings, data;
+      return _regenerator["default"].wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              e.preventDefault();
+              selectedLocs = [].concat((0, _toConsumableArray2["default"])(selectedLocations), [activeLocId]);
+              locSettings = (0, _settings.getLocSettings)(state, activeLocId);
 
-    if (!locSettings.length) {
-      getLocationSettings(activeLocId);
-    }
+              if (locSettings.length) {
+                _context3.next = 6;
+                break;
+              }
 
-    var data = {
-      locationsHierarchy: {
-        map: {},
-        parentChildren: {},
-        activeLocId: activeLocId,
-        selectedLocs: selectedLocs,
-        defaultLocId: defaultLocId
-      }
+              _context3.next = 6;
+              return getLocationSettings(activeLocId).then(function (res) {
+                return fetchSettings(res, activeLocId);
+              })["catch"](function (error) {
+                return customAlert && customAlert(String(error), {
+                  type: 'error'
+                });
+              })["finally"](function () {
+                return setLoading(false);
+              });
+
+            case 6:
+              data = {
+                locationsHierarchy: {
+                  map: {},
+                  parentChildren: {},
+                  activeLocId: activeLocId,
+                  selectedLocs: selectedLocs,
+                  defaultLocId: defaultLocId
+                }
+              };
+              fetchLocations(data);
+              setShowLocPopup('');
+
+            case 9:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function loadLocsettings(_x4, _x5) {
+      return _ref3.apply(this, arguments);
     };
-    fetchLocations(data);
-    setShowLocPopup('');
-  };
+  }();
 
   var locationMenu = [];
 
