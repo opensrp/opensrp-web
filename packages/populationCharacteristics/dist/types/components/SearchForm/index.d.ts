@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import '../styles/index.css';
 /** SearchBar props interface  */
 export interface SearchBarDefaultProps {
     placeholder?: string;

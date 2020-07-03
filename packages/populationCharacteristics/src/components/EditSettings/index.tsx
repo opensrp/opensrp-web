@@ -204,12 +204,15 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     };
 
     // load settings of selected location
-    const loadLocsettings = (e: MouseEvent, activeLocId: string) => {
+    const loadLocsettings = async (e: MouseEvent, activeLocId: string) => {
         e.preventDefault();
         const selectedLocs = [...selectedLocations, activeLocId];
         const locSettings = getLocSettings(state, activeLocId);
         if (!locSettings.length) {
-            getLocationSettings(activeLocId);
+            await getLocationSettings(activeLocId)
+                .then((res: Setting[]) => fetchSettings(res, activeLocId))
+                .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
+                .finally(() => setLoading(false));
         }
         const data: LocPayload = {
             locationsHierarchy: {

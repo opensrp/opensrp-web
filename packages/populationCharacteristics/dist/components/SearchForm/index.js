@@ -13,8 +13,6 @@ var _lodash = require("lodash");
 
 var _reactFontawesome = require("@fortawesome/react-fontawesome");
 
-require("../styles/index.css");
-
 var _constants = require("../../constants");
 
 var SearchForm = function SearchForm(props) {
