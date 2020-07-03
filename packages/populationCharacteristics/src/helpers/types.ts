@@ -12,3 +12,18 @@ export interface FormConfigProps {
     secAuthEndpoint: string;
     settingsEndpoint: string;
 }
+
+/** interface for all displayed strings */
+export interface EditSettingLabels {
+    descriptionLabel: string;
+    editLabel: string;
+    inheritedLable: string;
+    inheritSettingsLabel: string;
+    nameLabel: string;
+    noDataFound: string;
+    pageTitle: string;
+    placeholder: string;
+    settingLabel: string;
+    setToNoLabel: string;
+    setToYesLabel: string;
+}

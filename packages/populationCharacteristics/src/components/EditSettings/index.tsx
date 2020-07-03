@@ -3,72 +3,42 @@ import { OpenSRPService } from '@opensrp/server-service';
 import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
 import '../../styles/index.css';
 import { Store } from 'redux';
-import settingsReducer, { Setting, getLocSettings, settingsReducerName, fetchLocSettings } from '../../ducks/settings';
+import { Setting, getLocSettings, fetchLocSettings } from '../../ducks/settings';
 import { connect } from 'react-redux';
-import reducerRegistry from '@onaio/redux-reducer-registry';
-import locationReducer, {
+import {
     fetchLocs,
     getActiveLocId,
     getSelectedLocs,
     getLocDetails,
     LocChildren,
-    locationReducerName,
     LocPayload,
     getDefaultLocId,
 } from '../../ducks/locations';
 import { LocationMenu } from '../LocationsMenu';
-
-// static data for testing: to be removed to use data from server
-import { locs } from '../../ducks/locations/tests/fixtures';
-import { FormConfigProps } from '../../helpers/types';
+import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
-import {
-    SEARCH_SETTINGS_LABEL,
-    EDIT_LABEL,
-    PAGE_TITLE_LABEL,
-    NAME_LABEL,
-    DESCRIPTION_LABEL,
-    SETTINGS_LABEL,
-    INHERITED_FROM_LABEL,
-    SET_TO_NO_LABEL,
-    SET_TO_YES_LABEL,
-    INHERIT_SETTING_LABEL,
-    NO_DATA_FOUND,
-} from '../../constants';
-import { preparePutData } from '../../helpers/utils';
+import { preparePutData, labels } from '../../helpers/utils';
 import '../../../../OpenSRPTable/src/index.css';
 
-reducerRegistry.register(settingsReducerName, settingsReducer);
-reducerRegistry.register(locationReducerName, locationReducer);
-
 /** dafault edit settings interface */
-export interface EditSettingsDefaultProps {
+interface EditSettingsDefaultProps {
     activeLocationId: string;
     currentLocName: string;
     debounceTime: number;
     defaultLocId: string;
-    descriptionLabel: string;
-    editLabel: string;
     fetchSettings: typeof fetchLocSettings;
     fetchLocations: typeof fetchLocs;
-    inheritedLable: string;
-    inheritSettingsLabel: string;
+    labels: EditSettingLabels;
     locationDetails: LocChildren | {};
     locationSettings: Setting[];
-    nameLabel: string;
-    noDataFound: string;
-    pageTitle: string;
-    placeholder: string;
     selectedLocations: string[];
-    settingLabel: string;
-    setToNoLabel: string;
-    setToYesLabel: string;
     state: Partial<Store>;
 }
 
 /** component for displaying population characteristics */
 const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const {
+        labels,
         locationSettings,
         fetchSettings,
         fetchLocations,
@@ -87,8 +57,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         settingsEndpoint,
         customAlert,
         debounceTime,
-        placeholder,
+    } = props;
+
+    const {
         pageTitle,
+        placeholder,
         descriptionLabel,
         nameLabel,
         settingLabel,
@@ -98,7 +71,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         setToNoLabel,
         setToYesLabel,
         noDataFound,
-    } = props;
+    } = labels;
 
     const [showLocPopUp, setShowLocPopup] = useState('');
     const [locSettings, setLocSettings] = useState(locationSettings);
@@ -352,22 +325,12 @@ const defaultProps: EditSettingsDefaultProps = {
     currentLocName: '',
     debounceTime: 1000,
     defaultLocId: '',
-    descriptionLabel: DESCRIPTION_LABEL,
-    editLabel: EDIT_LABEL,
     fetchSettings: fetchLocSettings,
     fetchLocations: fetchLocs,
-    inheritedLable: INHERITED_FROM_LABEL,
-    inheritSettingsLabel: INHERIT_SETTING_LABEL,
+    labels,
     locationDetails: {},
     locationSettings: [],
-    nameLabel: NAME_LABEL,
-    noDataFound: NO_DATA_FOUND,
-    pageTitle: PAGE_TITLE_LABEL,
-    placeholder: SEARCH_SETTINGS_LABEL,
     selectedLocations: [],
-    settingLabel: SETTINGS_LABEL,
-    setToNoLabel: SET_TO_NO_LABEL,
-    setToYesLabel: SET_TO_YES_LABEL,
     state: {},
 };
 
