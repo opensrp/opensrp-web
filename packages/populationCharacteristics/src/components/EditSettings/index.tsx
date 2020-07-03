@@ -84,15 +84,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         setLoading(true);
         const params = { locationId: currentLocId };
         const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
-        await clientService
-            .list(params)
-            .then(res => {
-                fetchSettings(res, currentLocId);
-            })
-            .catch(error => {
-                customAlert && customAlert(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+        return await clientService.list(params);
     };
 
     /**
@@ -102,40 +94,37 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const getLocations = async (currentLocId: string) => {
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, locationsEndpoint, getPayload);
-        await clientService
-            .read(currentLocId)
-            .then(async res => {
-                const { map } = res.locationsHierarchy;
-                const locId = Object.keys(map)[0];
-                await getLocationSettings(locId);
-                fetchLocations(res);
-            })
-            .catch(async error => {
-                customAlert && customAlert(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+        return await clientService.read(currentLocId);
     };
 
     /** gets location assigned to user*/
     const getUserLocHierarchy = async () => {
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, secAuthEndpoint, getPayload);
-        await clientService
-            .list()
-            .then(res => {
-                const { map } = res.locations.locationsHierarchy;
-                const locId = Object.keys(map)[0];
-                getLocations(locId);
-            })
-            .catch(error => {
-                setLoading(false);
-                customAlert && customAlert(String(error), { type: 'error' });
-            });
+        return await clientService.list();
+    };
+
+    const getLocsandSettings = async () => {
+        try {
+            const userLocs = await getUserLocHierarchy();
+            const { map: userLocMap } = userLocs.locations.locationsHierarchy;
+            const userLocId = Object.keys(userLocMap)[0];
+            const hierarchy = await getLocations(userLocId);
+            const { map } = hierarchy.locationsHierarchy;
+            const locId = Object.keys(map)[0];
+            const settings = await getLocationSettings(locId);
+            fetchLocations(hierarchy);
+            fetchSettings(settings, locId);
+        } catch (error) {
+            customAlert && customAlert(String(error), { type: 'error' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
         if (!defaultLocId) {
-            getUserLocHierarchy();
+            getLocsandSettings();
         }
     }, []);
 
