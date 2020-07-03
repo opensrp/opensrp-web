@@ -80,28 +80,28 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      * gets settings of a particular location
      * @param {string} currentLocId
      */
-    const getLocationSettings = async (currentLocId: string) => {
+    const getLocationSettings = (currentLocId: string) => {
         setLoading(true);
         const params = { locationId: currentLocId };
         const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
-        return await clientService.list(params);
+        return clientService.list(params);
     };
 
     /**
      * gets full location hierarch of the identifier provided
      * @param {string} currentLocId  - location identifier
      */
-    const getLocations = async (currentLocId: string) => {
+    const getLocations = (currentLocId: string) => {
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, locationsEndpoint, getPayload);
-        return await clientService.read(currentLocId);
+        return clientService.read(currentLocId);
     };
 
     /** gets location assigned to user*/
-    const getUserLocHierarchy = async () => {
+    const getUserLocHierarchy = () => {
         setLoading(true);
         const clientService = new OpenSRPService(baseURL, secAuthEndpoint, getPayload);
-        return await clientService.list();
+        return clientService.list();
     };
 
     const getLocsandSettings = async () => {
