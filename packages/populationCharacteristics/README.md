@@ -30,6 +30,7 @@ const EditSetingsPage = () => {
         restBaseURL: <OpenSRP API base url>,
         secAuthEndpoint: <OpenSrp API security authenticate endpoint>,
         settingsEndpoint: <OpenSrp API settings endpoint>,
+        v2BaseUrl: <OpenSRP API v2 base url without rest at end>
     };
     return <ConnectedEditSetings {...editSetingsProps} />
 };
@@ -43,6 +44,7 @@ _locationsEndpoint_: OpenSrp API location tree endpoint
 _restBaseURL_: OpenSRP API base url
 _secAuthEndpoint_: OpenSrp API security authenticate endpoint,
 _settingsEndpoint_: OpenSrp API settings endpoint,
+_v2BaseUrl_: OpenSRP API v2 base url without rest at end
 
 ### Optional props
 

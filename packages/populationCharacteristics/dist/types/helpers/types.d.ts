@@ -11,6 +11,7 @@ export interface FormConfigProps {
     restBaseURL: string;
     secAuthEndpoint: string;
     settingsEndpoint: string;
+    v2BaseUrl: string;
 }
 /** interface for all displayed strings */
 export interface EditSettingLabels {

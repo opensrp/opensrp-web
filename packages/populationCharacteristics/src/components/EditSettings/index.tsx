@@ -55,6 +55,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         settingsEndpoint,
         customAlert,
         debounceTime,
+        v2BaseUrl,
     } = props;
 
     const {
@@ -82,7 +83,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const getLocationSettings = (currentLocId: string) => {
         setLoading(true);
         const params = { locationId: currentLocId };
-        const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+        const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
         return clientService.list(params);
     };
 
