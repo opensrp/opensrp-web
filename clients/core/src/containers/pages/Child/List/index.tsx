@@ -142,7 +142,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         } else {
             return (
                 <div>
-                    <h3 className="household-title"> All Child ({totalRecords})</h3>
+                    <h3 className="page-title"> All Child ({totalRecords})</h3>
                     <Row>
                         <Col md={{ size: 3, offset: 9 }}> Gender </Col>
                     </Row>

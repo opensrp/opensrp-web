@@ -973,9 +973,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.9.6":
-  version "7.10.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.3.tgz#670d002655a7c366540c67f6fd3342cd09500364"
-  integrity sha512-RzGO0RLSdokm9Ipe/YD+7ww8X2Ro79qiXZF3HU9ljrM+qnJmH1Vqth+hbiQZy761LnMJTMitHDuKVYTk3k4dLw==
+  version "7.10.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
+  integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -2220,12 +2220,12 @@
   dependencies:
     "@onaio/session-reducer" "^0.0.11"
 
-"@onaio/connected-reducer-registry@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@onaio/connected-reducer-registry/-/connected-reducer-registry-0.0.1.tgz#e4cef471ef6a2da8ed22520c787bcaa9aa053180"
-  integrity sha512-euTobnOCUd9XR4Hvm1i6rIy1RuDmUL+TeLZhoeMxPafkCSgoDuqVkRtLEmWz1fou8HcVfZBKqXugAXv3CuF9gw==
+"@onaio/connected-reducer-registry@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@onaio/connected-reducer-registry/-/connected-reducer-registry-0.0.3.tgz#2ccb901d3ace97425b8451a3ee4b39f80cec7c4a"
+  integrity sha512-OxykHEbQcuOb7o6VrMqqIKtYhmLSYzMQxdcJvPQDEAqIDCn5MvkRsWqr8RPF3y3ojgn44dMXhRwBrfej8pos3w==
   dependencies:
-    "@onaio/redux-reducer-registry" "^0.0.8"
+    "@onaio/redux-reducer-registry" "^0.0.9"
 
 "@onaio/drill-down-table@^1.0.2":
   version "1.0.2"
@@ -2235,14 +2235,10 @@
     react-table "^7.0.6"
     reactstrap "^8.4.1"
 
-"@onaio/gatekeeper@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.14.tgz#bdffeb5056cbb6ecc322178792fb40d3c87bbd6e"
-  integrity sha512-znVkg3ss+pIEsbHtdg1inwN6rQcANtpwgfayswL2635jHg0nrmKYwMaOar47rqu5BZH8L8C93W4U2zszreu74w==
-  dependencies:
-    "@onaio/session-reducer" "^0.0.10"
-    client-oauth2 "^4.2.3"
-    query-string "^6.4.2"
+"@onaio/element-map@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@onaio/element-map/-/element-map-0.0.5.tgz#6c8b55314d41fb76c1ea7538d4ee217a121936cb"
+  integrity sha512-PxhKq2uR9j8fZkvIqiUMp8CvZTX358d3sWuLj5a7LRpTK/Y+ZS1L9XZp2Xb9pplHCSferZxzwjm/YfKqVr56lA==
 
 "@onaio/gatekeeper@^0.0.16":
   version "0.0.16"
@@ -2252,6 +2248,22 @@
     "@onaio/session-reducer" "^0.0.11"
     client-oauth2 "^4.2.3"
     query-string "^6.4.2"
+
+"@onaio/gatekeeper@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@onaio/gatekeeper/-/gatekeeper-0.0.21.tgz#ebf445833330ebc09548999b85a9da253b7ebd1a"
+  integrity sha512-0kN42NehnehGnPn8rMQnUvQOGstU8xkR6GEpeTPHqt0G/8pcWULUSzDZOZyADO1oZOpyz+dzC70NuvTw8jHt1w==
+  dependencies:
+    "@onaio/session-reducer" "^0.0.11"
+    client-oauth2 "^4.2.3"
+    query-string "^6.4.2"
+
+"@onaio/list-view@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@onaio/list-view/-/list-view-0.0.3.tgz#18cb78a0721fd30d331c9c267d242d838e58f623"
+  integrity sha512-vY8//UU2ZIuslzrFJC6NwnymZHh2+9EG7hwo87dlaX6p2bmZcYr44uzchNvFwNvW3C3xx3GV4LWkpU+WO95LCw==
+  dependencies:
+    "@onaio/element-map" "^0.0.5"
 
 "@onaio/loaders@^0.0.1":
   version "0.0.1"
@@ -2265,13 +2277,6 @@
   dependencies:
     bootstrap "^4.3.1"
     reactstrap "^8.0.1"
-
-"@onaio/redux-reducer-registry@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@onaio/redux-reducer-registry/-/redux-reducer-registry-0.0.8.tgz#53433bc95c271fe1f77e5632ec324af6825f56e7"
-  integrity sha512-GyM9D5mZHAtTv2HL8MB3zZyO1y2gJH+iIbctxP6Z+5NWKowxjr/VLbv6O7fEECwRZgQKzSeE/eqKNYaPGSrWEQ==
-  dependencies:
-    redux "^4.0.1"
 
 "@onaio/redux-reducer-registry@^0.0.9":
   version "0.0.9"
@@ -2298,10 +2303,30 @@
     "@types/papaparse" "^4.5.11"
     papaparse "^4.6.3"
 
-"@opensrp/opensrp-table@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@opensrp/opensrp-table/-/opensrp-table-0.0.3.tgz#58656667957cd57f091ee6002f8112e083ca9802"
-  integrity sha512-4WwyRa+P3vvjH8UOPNGyJ+LAcDfTfr0zjZhXA91rc5BT6C/G/6KD2/L9a4z2hCuPjQyBBLeuQBhw5BjTNzJrNA==
+"@opensrp/form-config@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@opensrp/form-config/-/form-config-0.0.5.tgz#f37674bed23b74ee861ee39376f9d55c443dd64f"
+  integrity sha512-KUMj6AkBjOwiIPj1d/lFbtw2ZqMTg/8yo7rNLPIbF/5SCWsZsIBb7FNra2IOlc0Hnmm989PtLehut1dDCwBofQ==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.20"
+    "@fortawesome/free-brands-svg-icons" "^5.10.0"
+    "@fortawesome/free-regular-svg-icons" "^5.10.0"
+    "@fortawesome/free-solid-svg-icons" "^5.10.0"
+    "@fortawesome/react-fontawesome" "^0.1.4"
+    "@onaio/drill-down-table" "^1.0.2"
+    "@onaio/redux-reducer-registry" "^0.0.9"
+    "@opensrp/reducer-factory" "^0.0.1"
+    "@opensrp/server-service" "^0.0.2"
+    formik "^2.1.4"
+    lodash "^4.17.15"
+    react-toastify "^6.0.5"
+    reactstrap "^8.0.1"
+    yup "^0.29.1"
+
+"@opensrp/opensrp-table@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@opensrp/opensrp-table/-/opensrp-table-0.0.2.tgz#ee2c0e058429b2ec0ec1adbca3b5f2506511ec13"
+  integrity sha512-pNIHvvtUxbxvXi8F18TRg68bOKJepIHKEQCuK1noP8a1DD5CE1rHb0zAph3je/C1eQbLjOQLHXAKFo6YnQO6bA==
   dependencies:
     react-table "^7.0.0"
 
@@ -2795,6 +2820,11 @@
   resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.37.tgz#7a52854ac602ba0dc969bebc960559f7464a1686"
   integrity sha512-cDqR/ez4+iAVQYOwadXjKX4Dq1frtnDGV2GNVKj3aUVKVCKRvsr8esFk66j+LgeeJGmrMcBkkfCf3zk13MjV7A==
 
+"@types/yup@^0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.3.tgz#5a85024796bffe0eb01601bfc180fe218356dba4"
+  integrity sha512-XxZFKnxzTfm+DR8MMBA35UUXfUPmjPpi8HJ90VZg7q/LIbtiOhVGJ26gNnATcflcpnIyf2Qm9A+oEhswaqoDpA==
+
 "@typescript-eslint/eslint-plugin@^2.10.0", "@typescript-eslint/eslint-plugin@^2.9.0":
   version "2.23.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.23.0.tgz#aa7133bfb7b685379d9eafe4ae9e08b9037e129d"
@@ -3078,6 +3108,11 @@ acorn@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 address@1.1.2, address@^1.0.1:
   version "1.1.2"
@@ -12126,9 +12161,9 @@ react-table@^7.0.0:
     "@scarf/scarf" "^0.1.5"
 
 react-table@^7.0.6:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.2.1.tgz#d85f5a59b6441ccd9e0acddc93c288c54a7de7ee"
-  integrity sha512-cICU3w5yFWTDluz9yFePziEQXGt3PK5R1Va3InP7qMGnZOKm8kv0GiDMli+VOqE1uM1dBYPb9BEad15up1ac6g==
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.2.0.tgz#a2d8a84efa610be541103b3c714cacbb15df9d1a"
+  integrity sha512-hcBwPimjwOKQZoaeoQnUYyQNCg3NhjA1xAhKmuxam03sKsxE5NfI4GZ1qJcBQ8CJVj78e1o/lOKCh1AGuPmcnQ==
   dependencies:
     "@scarf/scarf" "^1.0.4"
 
@@ -12143,9 +12178,9 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
     scheduler "^0.19.0"
 
 react-toastify@^6.0.5:
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-6.0.6.tgz#7409ef8e89d12492308a8e561317031b5d90615e"
-  integrity sha512-NdHiMhj76Z877kZlXuelVfJONslvpmDTL95FVAoBy2kkU75hiqR5+pu1GdJZfRWPhen9ecdb58d3HmefaJ06Yw==
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-6.0.5.tgz#6435b2bf6a298863bc71342dcc88e8283cdb4630"
+  integrity sha512-1YXSb6Jr478c1TJEyVpxLHFvtmeXGMvdpZc0fke/7lK+MoLBC+NFgB74bq+C2SZe6LdK+K1voEURJoY88WqWvA==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.7.2"
@@ -15043,6 +15078,11 @@ yargs@^14.2.2:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^15.0.0"
+
+yarn@^1.22.4:
+  version "1.22.4"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.4.tgz#01c1197ca5b27f21edc8bc472cd4c8ce0e5a470e"
+  integrity sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA==
 
 yup@^0.29.1:
   version "0.29.1"

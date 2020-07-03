@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/LocationsMenu render menu correctly 1`] = `
+<LocationMenu
+  activeLocationId="02ebbc84-5e29-4cd5-9b79-c594058923e9"
+  isLast={true}
+  loadLocsettings={[MockFunction]}
+  locationDetails={
+    Object {
+      "children": Object {
+        "8400d475-3187-46e4-8980-7c6f0a243495": Object {
+          "children": Object {
+            "f4d22dad-f211-4476-bdf0-09fb20f7f64f": Object {
+              "id": "f4d22dad-f211-4476-bdf0-09fb20f7f64f",
+              "label": "Outreach",
+              "node": Object {
+                "locationId": "f4d22dad-f211-4476-bdf0-09fb20f7f64f",
+                "name": "Outreach",
+                "parentLocation": Object {
+                  "locationId": "8400d475-3187-46e4-8980-7c6f0a243495",
+                  "name": "Lobi",
+                  "parentLocation": Object {
+                    "locationId": "75af7700-a6f2-448c-a17d-816261a7749a",
+                    "name": "ME",
+                    "voided": false,
+                  },
+                  "voided": false,
+                },
+                "voided": false,
+              },
+              "parent": "8400d475-3187-46e4-8980-7c6f0a243495",
+            },
+          },
+          "id": "8400d475-3187-46e4-8980-7c6f0a243495",
+          "label": "Lobi",
+          "node": Object {
+            "locationId": "8400d475-3187-46e4-8980-7c6f0a243495",
+            "name": "Lobi",
+            "parentLocation": Object {
+              "locationId": "75af7700-a6f2-448c-a17d-816261a7749a",
+              "name": "ME",
+              "voided": false,
+            },
+            "voided": false,
+          },
+          "parent": "75af7700-a6f2-448c-a17d-816261a7749a",
+        },
+      },
+      "id": "75af7700-a6f2-448c-a17d-816261a7749a",
+      "label": "ME",
+      "node": Object {
+        "locationId": "75af7700-a6f2-448c-a17d-816261a7749a",
+        "name": "ME",
+        "tags": Array [
+          "Country",
+        ],
+        "voided": false,
+      },
+    }
+  }
+  popLocPopup={[MockFunction]}
+  showLocPopUp=""
+>
+  <div
+    className="locations-menu"
+    key="75af7700-a6f2-448c-a17d-816261a7749a"
+  >
+    <a
+      className="locations "
+      onClick={[Function]}
+    >
+      <span>
+        ME
+      </span>
+      <span
+        className="drop-down"
+      />
+    </a>
+    <div
+      className="popup"
+    >
+      <div
+        className="popuptext loc-popup "
+      >
+        <div
+          key="8400d475-3187-46e4-8980-7c6f0a243495"
+          onClick={[Function]}
+        >
+          Lobi
+        </div>
+      </div>
+    </div>
+  </div>
+</LocationMenu>
+`;
+
+exports[`components/LocationsMenu renders coreectly with popup id: location 1`] = `
+<a
+  className="locations "
+  onClick={[Function]}
+>
+  <span>
+    ME
+  </span>
+  <span
+    className="drop-down"
+  />
+  /
+</a>
+`;
+
+exports[`components/LocationsMenu renders coreectly with popup id: popup 1`] = `
+<div
+  className="popup"
+>
+  <div
+    className="popuptext loc-popup "
+  >
+    <div
+      key="8400d475-3187-46e4-8980-7c6f0a243495"
+      onClick={[Function]}
+    >
+      Lobi
+    </div>
+  </div>
+</div>
+`;

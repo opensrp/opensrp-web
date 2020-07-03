@@ -172,7 +172,7 @@ class ClientList extends React.Component<ClientListProps, ClientListState> {
                     <Helmet>
                         <title>{ALL_CLIENTS}</title>
                     </Helmet>
-                    <h3 className="household-title"> All Clients ({totalRecords})</h3>
+                    <h3 className="page-title"> All Clients ({totalRecords})</h3>
                     <Row>
                         <Col md={{ size: 3, offset: 9 }}> Gender </Col>
                     </Row>
