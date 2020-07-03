@@ -1,7 +1,6 @@
 import ListView from '@onaio/list-view';
 import { OpenSRPService } from '@opensrp/server-service';
 import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
-import '../../styles/index.css';
 import { Store } from 'redux';
 import { Setting, getLocSettings, fetchLocSettings } from '../../ducks/settings';
 import { connect } from 'react-redux';
@@ -17,8 +16,8 @@ import {
 import { LocationMenu } from '../LocationsMenu';
 import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
-import { preparePutData, labels } from '../../helpers/utils';
-import '../../../../OpenSRPTable/src/index.css';
+import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
+import '../../styles/index.css';
 
 /** dafault edit settings interface */
 interface EditSettingsDefaultProps {
@@ -270,24 +269,17 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
                 row.inheritedFrom?.trim() || '_',
-                <div className="popup" key={row.key}>
-                    <a href="#" onClick={e => openEditModal(e, row)}>
-                        {editLabel}
-                    </a>
-                    <div className={`popuptext ${row.editing ? 'show' : ''}`}>
-                        <div onClick={e => changeSetting(e, row, 'true')}>
-                            <span className={value ? 'check' : 'empty-check'} />
-                            <span>{setToYesLabel}</span>
-                        </div>
-                        <div onClick={e => changeSetting(e, row, 'false')}>
-                            <span className={value ? 'empty-check' : 'check'} /> <span>{setToNoLabel}</span>
-                        </div>
-                        <div className="inherit-from">
-                            <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
-                            {inheritSettingsLabel}
-                        </div>
-                    </div>
-                </div>,
+                <EditSettingsButton
+                    key={row.documentId}
+                    changeSetting={changeSetting}
+                    editLabel={editLabel}
+                    inheritSettingsLabel={inheritSettingsLabel}
+                    openEditModal={openEditModal}
+                    row={row}
+                    setToNoLabel={setToNoLabel}
+                    setToYesLabel={setToYesLabel}
+                    value={value}
+                />,
             ];
         }),
         headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],

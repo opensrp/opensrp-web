@@ -1,3 +1,4 @@
+import React, { MouseEvent } from 'react';
 import { Setting } from '../ducks/settings';
 import {
     DESCRIPTION_LABEL,
@@ -69,4 +70,50 @@ export const labels: EditSettingLabels = {
     settingLabel: SETTINGS_LABEL,
     setToNoLabel: SET_TO_NO_LABEL,
     setToYesLabel: SET_TO_YES_LABEL,
+};
+
+/** format table data function props interface */
+interface EditSettingsButtonProps {
+    changeSetting: (event: MouseEvent<HTMLDivElement>, setting: Setting, value: string) => void;
+    editLabel: string;
+    inheritSettingsLabel: string;
+    openEditModal: (event: MouseEvent<HTMLAnchorElement>, setting: Setting) => void;
+    row: Setting;
+    setToNoLabel: string;
+    setToYesLabel: string;
+    value: boolean;
+}
+
+export const EditSettingsButton = (props: EditSettingsButtonProps) => {
+    const {
+        editLabel,
+        inheritSettingsLabel,
+        value,
+        setToYesLabel,
+        setToNoLabel,
+        row,
+        openEditModal,
+        changeSetting,
+    } = props;
+    return (
+        <div className="popup" key={row.key}>
+            <a href="#" onClick={e => openEditModal(e, row)}>
+                {editLabel}
+            </a>
+            <div className={`popuptext ${row.editing ? 'show' : ''}`}>
+                <div onClick={e => changeSetting(e, row, 'true')}>
+                    <span className={value ? 'check' : 'empty-check'} />
+                    <span>{setToYesLabel}</span>
+                </div>
+                <div onClick={e => changeSetting(e, row, 'false')}>
+                    <span className={value ? 'empty-check' : 'check'} />
+                    <span>{setToNoLabel}</span>
+                </div>
+                <div className="inherit-from">
+                    <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
+                    {inheritSettingsLabel}
+                </div>
+            </div>
+        </div>
+    );
 };
