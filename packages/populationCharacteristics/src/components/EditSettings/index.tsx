@@ -156,7 +156,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     };
 
     // update setting
-    const changeSetting = async (e: MouseEvent, row: any, value: string) => {
+    const changeSetting = async (e: MouseEvent, row: Setting, value: string) => {
         e.preventDefault();
         if (value === row.value) {
             return false;
