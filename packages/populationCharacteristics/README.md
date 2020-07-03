@@ -32,15 +32,15 @@ _settingsEndpoint_: OpenSrp API settings endpoint,
 
 _debounceTime_: debounce time in milliseconds. expects a value of type number.
 _labels_: object with the following keys:
-_descriptionLabel_
-_editLabel_
-_inheritedLable_
-_inheritSettingsLabel_
-_nameLabel_
-_noDataFound_
-_pageTitle_
-_placeholder_
-_settingLabel_
-_setToNoLabel_
-_setToYesLabel_
+&nbsp;&nbsp; _descriptionLabel_
+&nbsp;&nbsp; _editLabel_
+&nbsp;&nbsp; _inheritedLable_
+&nbsp;&nbsp; _inheritSettingsLabel_
+&nbsp;&nbsp; _nameLabel_
+&nbsp;&nbsp; _noDataFound_
+&nbsp;&nbsp; _pageTitle_
+&nbsp;&nbsp; _placeholder_
+&nbsp;&nbsp; _settingLabel_
+&nbsp;&nbsp; _setToNoLabel_
+&nbsp;&nbsp; _setToYesLabel_
 All of the `label` keys expect values of type strings .
