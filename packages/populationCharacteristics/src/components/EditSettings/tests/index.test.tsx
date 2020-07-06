@@ -18,6 +18,8 @@ import locationReducer, { fetchLocs, locationReducerName as LocsReducerName } fr
 import { locHierarchy } from '../../../ducks/locations/tests/fixtures';
 import { allSettings } from '../../../ducks/settings/tests/fixtures';
 import { updateDate } from './fixtures';
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const fetch = require('jest-fetch-mock');
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(LocsReducerName, locationReducer);
@@ -52,7 +54,6 @@ describe('components/Editsettings', () => {
 
     it('renders correctly when connected to store', async () => {
         const mockList = jest.fn();
-        const mockUpdate = jest.fn();
         const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
@@ -60,8 +61,6 @@ describe('components/Editsettings', () => {
             .mockReturnValueOnce(Promise.resolve(allSettings));
         OpenSRPService.prototype.read = mockRead;
         mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
-        OpenSRPService.prototype.update = mockUpdate;
-        mockUpdate.mockReturnValueOnce(Promise.resolve({}));
 
         const wrapper = mount(
             <Provider store={store}>
@@ -128,7 +127,17 @@ describe('components/Editsettings', () => {
             await flushPromises();
             wrapper.update();
         });
-        expect(mockUpdate).toHaveBeenCalledWith(updateDate);
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/opensrp/rest/v2/settings', {
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
+            body: JSON.stringify(updateDate),
+            headers: {
+                accept: 'application/json',
+                authorization: 'Bearer hunter2',
+                'content-type': 'application/json;charset=UTF-8',
+            },
+            method: 'PUT',
+        });
         // true is now checked
         expect(
             wrapper

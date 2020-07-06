@@ -225,7 +225,7 @@ var EditSetings = function EditSetings(props) {
             case 3:
               activeLoc = activeLocationId;
               data = (0, _utils.preparePutData)(row, value);
-              clientService = new _serverService.OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
               _context2.next = 8;
               return clientService.update(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {

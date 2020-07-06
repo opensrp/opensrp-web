@@ -1,6 +1,6 @@
 {
     "name": "@opensrp/form-config",
-    "version": "0.0.3",
+    "version": "0.0.6",
     "description": "OpenSrp form configuration components",
     "main": "dist/index.js",
     "types": "dist/types",
@@ -53,5 +53,6 @@
     },
     "author": "Ona Engineering",
     "license": "Apache-2.0",
-    "private": false
+    "private": false,
+    "gitHead": "4a5cd6809e86d1e76261c0a11f013b79a968c029"
 }
