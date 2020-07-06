@@ -164,7 +164,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
         const activeLoc = activeLocationId;
         const data = preparePutData(row, value);
-        const clientService = new OpenSRPService(restBaseURL, settingsEndpoint, getPayload);
+        const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
         await clientService
             .update(data)
             .then(() => {
