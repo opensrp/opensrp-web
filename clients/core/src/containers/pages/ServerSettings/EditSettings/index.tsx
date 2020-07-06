@@ -24,6 +24,7 @@ import './index.css';
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(locationReducerName, locationsReducer);
 
+/** wrapper component for @opensrp/population-characteristics server settings edit component */
 export const EditServerSettings = () => {
     const baseURL = OPENSRP_API_BASE_URL.replace('rest/', '');
 
