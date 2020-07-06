@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { act } from 'react-dom/test-utils';
 import { fetchManifestFiles, filesReducerName, manifestFilesReducer } from '@opensrp/form-config';
 import { OpenSRPService } from '@opensrp/server-service';
 import { mount, shallow } from 'enzyme';
@@ -39,9 +40,10 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
                 </Router>
             </Provider>,
         );
-        await flushPromises();
-        wrapper.update();
-
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('JSON Validators');
         expect(wrapper.find('.page-title').text()).toEqual('JSON Validators');
