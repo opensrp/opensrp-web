@@ -54,7 +54,6 @@ describe('components/Editsettings', () => {
 
     it('renders correctly when connected to store', async () => {
         const mockList = jest.fn();
-        // const mockUpdate = jest.fn();
         const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
@@ -62,8 +61,6 @@ describe('components/Editsettings', () => {
             .mockReturnValueOnce(Promise.resolve(allSettings));
         OpenSRPService.prototype.read = mockRead;
         mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
-        // OpenSRPService.prototype.update = mockUpdate;
-        // mockUpdate.mockReturnValueOnce(Promise.resolve({}));
 
         const wrapper = mount(
             <Provider store={store}>
