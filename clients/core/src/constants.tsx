@@ -9,6 +9,12 @@ export const OPENSRP_MANIFEST_FORMS_ENDPOINT = 'clientForm/release-related-files
 export type OPENSRP_MANIFEST_FORMS_ENDPOINT = typeof OPENSRP_MANIFEST_FORMS_ENDPOINT;
 export const OPENSRP_FORM_METADATA_ENDPOINT = 'clientForm/metadata';
 export type OPENSRP_FORM_METADATA_ENDPOINT = typeof OPENSRP_FORM_METADATA_ENDPOINT;
+export const SETTINGS_ENDPOINT = 'settings/';
+export type SETTINGS_ENDPOINT = typeof SETTINGS_ENDPOINT;
+export const LOCATIONS_ENDPOINT = 'location/location-tree';
+export type LOCATIONS_ENDPOINT = typeof LOCATIONS_ENDPOINT;
+export const SECURITY_AUTHENTICATE_ENDPOINT = 'security/authenticate';
+export type SECURITY_AUTHENTICATE_ENDPOINT = typeof SECURITY_AUTHENTICATE_ENDPOINT;
 
 // internal urls
 export const LOGIN_URL = '/login';
@@ -47,6 +53,8 @@ export const VIEW_JSON_VALIDATORS_PAGE_URL = '/json-validators';
 export type VIEW_JSON_VALIDATORS_PAGE_URL = typeof VIEW_JSON_VALIDATORS_PAGE_URL;
 export const MANIFEST_FILE_UPLOAD = '/manifest';
 export type MANIFEST_FILE_UPLOAD = typeof MANIFEST_FILE_UPLOAD;
+export const SERVER_SETTINGS_URL = '/server-settings';
+export type SERVER_SETTINGS_URL = typeof SERVER_SETTINGS_URL;
 
 // string literals
 
@@ -154,6 +162,8 @@ export const FIND_RELEASE_FILES = 'Find Release Files';
 export type FIND_RELEASE_FILES = typeof FIND_RELEASE_FILES;
 export const FIND_VALIDATOR_FILES = 'Find Validator Files';
 export type FIND_VALIDATOR_FILES = typeof FIND_VALIDATOR_FILES;
+export const SERVER_SETTINGS = 'Server Settings';
+export type SERVER_SETTINGS = typeof SERVER_SETTINGS;
 
 // url constants
 export const PAGINATION_SIZE = 10;
