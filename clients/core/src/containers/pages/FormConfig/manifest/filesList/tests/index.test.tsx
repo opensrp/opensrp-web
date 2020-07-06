@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { act } from 'react-dom/test-utils';
 import { fetchManifestFiles, filesReducerName, manifestFilesReducer } from '@opensrp/form-config';
 import { OpenSRPService } from '@opensrp/server-service';
 import { mount, shallow } from 'enzyme';
@@ -56,21 +57,22 @@ describe('containers/pages/ConfigForm/manifest/ManifestFiles', () => {
                 </Router>
             </Provider>,
         );
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
 
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Release: 1.0.1');
 
         expect(wrapper.find('.page-title').text()).toEqual('Release: 1.0.1');
 
-        expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
-
         expect(wrapper.find('DrillDownTable').length).toEqual(1);
 
         store.dispatch(fetchManifestFiles(FixManifestFiles));
         await flushPromises();
         wrapper.update();
+        expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
         // table renders two rows - equal to data
         expect(wrapper.find('.tbody .tr').length).toEqual(2);
 

@@ -1,4 +1,5 @@
 import reducerRegistry from '@onaio/redux-reducer-registry';
+import { act } from 'react-dom/test-utils';
 import { fetchManifestFiles, filesReducerName, manifestFilesReducer } from '@opensrp/form-config';
 import { OpenSRPService } from '@opensrp/server-service';
 import { mount, shallow } from 'enzyme';
@@ -27,7 +28,6 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
     });
 
     it('renders validators list correctly', async () => {
-        store.dispatch(fetchManifestFiles(fixManifestFiles));
         const mockList = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList.mockReturnValueOnce(Promise.resolve(fixManifestFiles));
@@ -39,13 +39,16 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
                 </Router>
             </Provider>,
         );
-        await flushPromises();
-        wrapper.update();
-
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('JSON Validators');
         expect(wrapper.find('.page-title').text()).toEqual('JSON Validators');
 
+        store.dispatch(fetchManifestFiles(fixManifestFiles));
+        wrapper.update();
         expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
 
         expect(wrapper.find('DrillDownTable').length).toEqual(1);

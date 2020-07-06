@@ -18,6 +18,7 @@ import {
     VIEW_JSON_VALIDATORS_PAGE_URL,
     MANIFEST_FILE_UPLOAD,
     VIEW_DRAFT_FILES_PAGE_URL,
+    SERVER_SETTINGS_URL,
 } from '../constants';
 import ConnectedHeader from '../containers/ConnectedHeader';
 
@@ -33,6 +34,7 @@ import { ManifestFiles } from '../containers/pages/FormConfig/manifest/filesList
 import { JSONValidatorListPage } from '../containers/pages/FormConfig/JSONValidators';
 import { UploadConfigFilePage } from '../containers/pages/FormConfig/manifest/uploadFile';
 import { ManifestDraftFilesPage } from '../containers/pages/FormConfig/manifest/draftFiles';
+import { EditServerSettings } from '../containers/pages/ServerSettings/EditSettings';
 
 library.add(faUser, faChartLine, faCog, faSearch);
 
@@ -101,6 +103,12 @@ class App extends Component {
                                 exact={true}
                                 path={VIEW_DRAFT_FILES_PAGE_URL}
                                 component={ManifestDraftFilesPage}
+                            />
+                            <ConnectedPrivateRoute
+                                disableLoginProtection={DISABLE_LOGIN_PROTECTION}
+                                exact={true}
+                                path={SERVER_SETTINGS_URL}
+                                component={EditServerSettings}
                             />
                             <Route
                                 exact={true}

@@ -48,6 +48,11 @@ export type ENABLE_LOCATION_PAGE = typeof ENABLE_LOCATION_PAGE;
 export const DISABLE_LOGIN_PROTECTION = process.env.REACT_APP_DISABLE_LOGIN_PROTECTION === 'true';
 export type DISABLE_LOGIN_PROTECTION = typeof DISABLE_LOGIN_PROTECTION;
 
+/** do you want to enable population characteristics settings */
+export const ENABLE_POPULATION_CHARACTERISTICS =
+    process.env.REACT_APP_ENABLE_POPULATION_CHARACTERISTICS === 'true' || false;
+export type ENABLE_POPULATION_CHARACTERISTICS = typeof ENABLE_POPULATION_CHARACTERISTICS;
+
 /** The Superset API base */
 export const SUPERSET_API_BASE = process.env.REACT_APP_SUPERSET_API_BASE || 'http://localhost';
 export type SUPERSET_API_BASE = typeof SUPERSET_API_BASE;
@@ -108,6 +113,10 @@ export type GISIDA_ONADATA_API_TOKEN = typeof GISIDA_ONADATA_API_TOKEN;
 export const OPENSRP_API_BASE_URL =
     process.env.REACT_APP_OPENSRP_API_BASE_URL || 'https://reveal-stage.smartregister.org/opensrp/rest/';
 export type OPENSRP_API_BASE_URL = typeof OPENSRP_API_BASE_URL;
+
+export const OPENSRP_API_V2_BASE_URL =
+    process.env.REACT_APP_OPENSRP_API_V2_BASE_URL || 'https://reveal-stage.smartregister.org/opensrp/rest/v2';
+export type OPENSRP_API_V2_BASE_URL = typeof OPENSRP_API_V2_BASE_URL;
 
 /** the clients endpoint NOTE: does not end with / */
 export const OPENSRP_CLIENT_ENDPOINT = process.env.REACT_APP_OPENSRP_CLIENT_ENDPOINT || 'client/search';
