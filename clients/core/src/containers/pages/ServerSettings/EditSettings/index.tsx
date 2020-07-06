@@ -18,6 +18,7 @@ import {
 } from '@opensrp/population-characteristics';
 import '@opensrp/population-characteristics/dist/styles/index.css';
 import Helmet from 'react-helmet';
+import './index.css';
 
 /** register the reducers */
 reducerRegistry.register(settingsReducerName, settingsReducer);
