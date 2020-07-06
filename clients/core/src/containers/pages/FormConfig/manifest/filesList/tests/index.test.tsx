@@ -67,13 +67,12 @@ describe('containers/pages/ConfigForm/manifest/ManifestFiles', () => {
 
         expect(wrapper.find('.page-title').text()).toEqual('Release: 1.0.1');
 
-        expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
-
         expect(wrapper.find('DrillDownTable').length).toEqual(1);
 
         store.dispatch(fetchManifestFiles(FixManifestFiles));
         await flushPromises();
         wrapper.update();
+        expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
         // table renders two rows - equal to data
         expect(wrapper.find('.tbody .tr').length).toEqual(2);
 

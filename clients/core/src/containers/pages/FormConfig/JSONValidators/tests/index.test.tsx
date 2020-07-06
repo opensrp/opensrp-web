@@ -28,7 +28,6 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
     });
 
     it('renders validators list correctly', async () => {
-        store.dispatch(fetchManifestFiles(fixManifestFiles));
         const mockList = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList.mockReturnValueOnce(Promise.resolve(fixManifestFiles));
@@ -48,6 +47,8 @@ describe('containers/pages/ConfigForm/JSONValidator', () => {
         expect(helmet.title).toEqual('JSON Validators');
         expect(wrapper.find('.page-title').text()).toEqual('JSON Validators');
 
+        store.dispatch(fetchManifestFiles(fixManifestFiles));
+        wrapper.update();
         expect(wrapper.find('ManifestFilesList').props()).toMatchSnapshot();
 
         expect(wrapper.find('DrillDownTable').length).toEqual(1);
