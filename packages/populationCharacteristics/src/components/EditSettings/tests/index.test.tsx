@@ -74,6 +74,16 @@ describe('components/Editsettings', () => {
             wrapper.update();
         });
 
+        expect(mockList).toHaveBeenCalledTimes(2);
+        expect(mockList.mock.calls[1]).toEqual([
+            {
+                identifier: 'population_characteristics',
+                locationId: '75af7700-a6f2-448c-a17d-816261a7749a',
+                resolve: true,
+                serverVersion: 0,
+            },
+        ]);
+
         store.dispatch(fetchLocs(locHierarchy));
         store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
         wrapper.update();

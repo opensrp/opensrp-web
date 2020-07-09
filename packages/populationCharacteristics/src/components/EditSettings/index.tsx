@@ -17,6 +17,7 @@ import { LocationMenu } from '../LocationsMenu';
 import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
 import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
+import { POP_CHARACTERISTICS_PARAM } from '../../constants';
 
 /** dafault edit settings interface */
 interface EditSettingsDefaultProps {
@@ -82,7 +83,12 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      */
     const getLocationSettings = (currentLocId: string) => {
         setLoading(true);
-        const params = { locationId: currentLocId };
+        const params = {
+            identifier: POP_CHARACTERISTICS_PARAM,
+            locationId: currentLocId,
+            resolve: true,
+            serverVersion: 0,
+        };
         const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
         return clientService.list(params);
     };
