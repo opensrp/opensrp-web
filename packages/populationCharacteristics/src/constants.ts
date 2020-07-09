@@ -10,3 +10,4 @@ export const SET_TO_YES_LABEL = `Set to 'Yes'`;
 export const SET_TO_NO_LABEL = `Set to 'No'`;
 export const INHERIT_SETTING_LABEL = 'Inherit setting';
 export const NO_DATA_FOUND = 'No data found';
+export const POP_CHARACTERISTICS_PARAM = 'population_characteristics';
