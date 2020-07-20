@@ -18,6 +18,7 @@ import locationReducer, { fetchLocs, locationReducerName as LocsReducerName } fr
 import { locHierarchy } from '../../../ducks/locations/tests/fixtures';
 import { allSettings } from '../../../ducks/settings/tests/fixtures';
 import { updateDate } from './fixtures';
+import toJson from 'enzyme-to-json';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -173,7 +174,8 @@ describe('components/Editsettings', () => {
         OpenSRPService.prototype.list = mockList;
         mockList
             .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
-            .mockReturnValueOnce(Promise.resolve(allSettings));
+            .mockReturnValueOnce(Promise.resolve(allSettings))
+            .mockReturnValue(Promise.resolve([allSettings[1]]));
         OpenSRPService.prototype.read = mockRead;
         mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
         OpenSRPService.prototype.update = mockUpdate;
@@ -243,19 +245,20 @@ describe('components/Editsettings', () => {
             search.simulate('input', { target: { value: 'test search' } });
         });
         wrapper.update();
-        expect(wrapper.find('tbody tr').length).toEqual(0);
+        expect(wrapper.find('tbody tr').length).toEqual(1);
 
         await act(async () => {
             search.simulate('input', { target: { value: '    ' } });
         });
         wrapper.update();
-        expect(wrapper.find('tbody tr').length).toEqual(2);
+        expect(wrapper.find('tbody tr').length).toEqual(1);
 
         await act(async () => {
             search.simulate('input', { target: { value: 'Undernourished prevalence' } });
         });
         wrapper.update();
-        expect(wrapper.find('tbody tr').length).toEqual(1);
+        await flushPromises();
+        expect(wrapper.find('tbody tr').length).toEqual(0);
     });
 
     it('renders correctly when no data', async () => {

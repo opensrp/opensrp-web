@@ -81,8 +81,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      * gets settings of a particular location
      * @param {string} currentLocId
      */
-    const getLocationSettings = (currentLocId: string) => {
-        setLoading(true);
+    const getLocationSettings = async (currentLocId: string) => {
+        setLoading(locationSettings.length < 1);
         const params = {
             identifier: POP_CHARACTERISTICS_PARAM,
             locationId: currentLocId,
@@ -90,7 +90,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             serverVersion: 0,
         };
         const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-        return clientService.list(params);
+        await clientService
+            .list(params)
+            .then((res: Setting[]) => fetchSettings(res, currentLocId, true))
+            .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
+            .finally(() => setLoading(false));
     };
 
     /**
@@ -116,11 +120,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             const { map: userLocMap } = userLocs.locations.locationsHierarchy;
             const userLocId = Object.keys(userLocMap)[0];
             const hierarchy = await getLocations(userLocId);
-            const { map } = hierarchy.locationsHierarchy;
-            const locId = Object.keys(map)[0];
-            const settings = await getLocationSettings(locId);
             fetchLocations(hierarchy);
-            fetchSettings(settings, locId);
         } catch (error) {
             customAlert && customAlert(String(error), { type: 'error' });
         } finally {
@@ -133,6 +133,12 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             getLocsandSettings();
         }
     }, []);
+
+    useEffect(() => {
+        if (activeLocationId) {
+            getLocationSettings(activeLocationId);
+        }
+    }, [props.activeLocationId]);
 
     useEffect(() => {
         setLocSettings(props.locationSettings);
@@ -214,13 +220,6 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const loadLocsettings = async (e: MouseEvent, activeLocId: string) => {
         e.preventDefault();
         const selectedLocs = [...selectedLocations, activeLocId];
-        const locSettings = getLocSettings(state, activeLocId);
-        if (!locSettings.length) {
-            await getLocationSettings(activeLocId)
-                .then((res: Setting[]) => fetchSettings(res, activeLocId))
-                .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
-                .finally(() => setLoading(false));
-        }
         const data: LocPayload = {
             locationsHierarchy: {
                 map: {},

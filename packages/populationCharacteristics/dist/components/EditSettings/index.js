@@ -93,17 +93,44 @@ var EditSetings = function EditSetings(props) {
       loading = _useState6[0],
       setLoading = _useState6[1];
 
-  var getLocationSettings = function getLocationSettings(currentLocId) {
-    setLoading(true);
-    var params = {
-      identifier: _constants.POP_CHARACTERISTICS_PARAM,
-      locationId: currentLocId,
-      resolve: true,
-      serverVersion: 0
+  var getLocationSettings = function () {
+    var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee(currentLocId) {
+      var params, clientService;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(locationSettings.length < 1);
+              params = {
+                identifier: _constants.POP_CHARACTERISTICS_PARAM,
+                locationId: currentLocId,
+                resolve: true,
+                serverVersion: 0
+              };
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+              _context.next = 5;
+              return clientService.list(params).then(function (res) {
+                return fetchSettings(res, currentLocId, true);
+              })["catch"](function (error) {
+                return customAlert && customAlert(String(error), {
+                  type: 'error'
+                });
+              })["finally"](function () {
+                return setLoading(false);
+              });
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getLocationSettings(_x) {
+      return _ref.apply(this, arguments);
     };
-    var clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-    return clientService.list(params);
-  };
+  }();
 
   var getLocations = function getLocations(currentLocId) {
     setLoading(true);
@@ -118,59 +145,51 @@ var EditSetings = function EditSetings(props) {
   };
 
   var getLocsandSettings = function () {
-    var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee() {
-      var userLocs, userLocMap, userLocId, hierarchy, map, locId, settings;
-      return _regenerator["default"].wrap(function _callee$(_context) {
+    var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2() {
+      var userLocs, userLocMap, userLocId, hierarchy;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
+              _context2.prev = 0;
+              _context2.next = 3;
               return getUserLocHierarchy();
 
             case 3:
-              userLocs = _context.sent;
+              userLocs = _context2.sent;
               userLocMap = userLocs.locations.locationsHierarchy.map;
               userLocId = Object.keys(userLocMap)[0];
-              _context.next = 8;
+              _context2.next = 8;
               return getLocations(userLocId);
 
             case 8:
-              hierarchy = _context.sent;
-              map = hierarchy.locationsHierarchy.map;
-              locId = Object.keys(map)[0];
-              _context.next = 13;
-              return getLocationSettings(locId);
-
-            case 13:
-              settings = _context.sent;
+              hierarchy = _context2.sent;
               fetchLocations(hierarchy);
-              fetchSettings(settings, locId);
-              _context.next = 21;
+              _context2.next = 15;
               break;
 
-            case 18:
-              _context.prev = 18;
-              _context.t0 = _context["catch"](0);
-              customAlert && customAlert(String(_context.t0), {
+            case 12:
+              _context2.prev = 12;
+              _context2.t0 = _context2["catch"](0);
+              customAlert && customAlert(String(_context2.t0), {
                 type: 'error'
               });
 
-            case 21:
-              _context.prev = 21;
+            case 15:
+              _context2.prev = 15;
               setLoading(false);
-              return _context.finish(21);
+              return _context2.finish(15);
 
-            case 24:
+            case 18:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[0, 18, 21, 24]]);
+      }, _callee2, null, [[0, 12, 15, 18]]);
     }));
 
     return function getLocsandSettings() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -179,6 +198,11 @@ var EditSetings = function EditSetings(props) {
       getLocsandSettings();
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (activeLocationId) {
+      getLocationSettings(activeLocationId);
+    }
+  }, [props.activeLocationId]);
   (0, _react.useEffect)(function () {
     setLocSettings(props.locationSettings);
   }, [props.locationSettings]);
@@ -212,26 +236,27 @@ var EditSetings = function EditSetings(props) {
   };
 
   var changeSetting = function () {
-    var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2(e, row, value) {
+    var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
       var activeLoc, data, clientService;
-      return _regenerator["default"].wrap(function _callee2$(_context2) {
+      return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
 
               if (!(value === row.value)) {
-                _context2.next = 3;
+                _context3.next = 3;
                 break;
               }
 
-              return _context2.abrupt("return", false);
+              return _context3.abrupt("return", false);
 
             case 3:
+              console.log(row.locationId, activeLocationId, row.locationId == activeLocationId);
               activeLoc = activeLocationId;
               data = (0, _utils.preparePutData)(row, value);
               clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context2.next = 8;
+              _context3.next = 9;
               return clientService.update(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
@@ -244,16 +269,16 @@ var EditSetings = function EditSetings(props) {
                 return setLoading(false);
               });
 
-            case 8:
+            case 9:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
-    return function changeSetting(_x, _x2, _x3) {
-      return _ref2.apply(this, arguments);
+    return function changeSetting(_x2, _x3, _x4) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
@@ -287,33 +312,14 @@ var EditSetings = function EditSetings(props) {
   };
 
   var loadLocsettings = function () {
-    var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, activeLocId) {
-      var selectedLocs, locSettings, data;
-      return _regenerator["default"].wrap(function _callee3$(_context3) {
+    var _ref4 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee4(e, activeLocId) {
+      var selectedLocs, data;
+      return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               e.preventDefault();
               selectedLocs = [].concat((0, _toConsumableArray2["default"])(selectedLocations), [activeLocId]);
-              locSettings = (0, _settings.getLocSettings)(state, activeLocId);
-
-              if (locSettings.length) {
-                _context3.next = 6;
-                break;
-              }
-
-              _context3.next = 6;
-              return getLocationSettings(activeLocId).then(function (res) {
-                return fetchSettings(res, activeLocId);
-              })["catch"](function (error) {
-                return customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              })["finally"](function () {
-                return setLoading(false);
-              });
-
-            case 6:
               data = {
                 locationsHierarchy: {
                   map: {},
@@ -326,16 +332,16 @@ var EditSetings = function EditSetings(props) {
               fetchLocations(data);
               setShowLocPopup('');
 
-            case 9:
+            case 5:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
 
-    return function loadLocsettings(_x4, _x5) {
-      return _ref3.apply(this, arguments);
+    return function loadLocsettings(_x5, _x6) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
