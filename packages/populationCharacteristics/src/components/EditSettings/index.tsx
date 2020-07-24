@@ -4,6 +4,9 @@ import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
 import { Store } from 'redux';
 import { Setting, getLocSettings, fetchLocSettings } from '../../ducks/settings';
 import { connect } from 'react-redux';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import {
     fetchLocs,
     getActiveLocId,
@@ -19,6 +22,9 @@ import { SearchForm } from '../SearchForm';
 import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
 import { POP_CHARACTERISTICS_PARAM } from '../../constants';
 
+/** reqister search and question mark icons */
+library.add(faSearch, faQuestionCircle);
+
 /** dafault edit settings interface */
 interface EditSettingsDefaultProps {
     activeLocationId: string;
@@ -32,6 +38,7 @@ interface EditSettingsDefaultProps {
     locationSettings: Setting[];
     selectedLocations: string[];
     state: Partial<Store>;
+    tableClass: string;
 }
 
 /** component for displaying population characteristics */
@@ -57,9 +64,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         customAlert,
         debounceTime,
         v2BaseUrl,
+        tableClass,
     } = props;
 
     const {
+        actionLabel,
         pageTitle,
         placeholder,
         descriptionLabel,
@@ -257,6 +266,13 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
     }
 
+    // adds question mark to inherited from header
+    const iheritedFrom = (
+        <span>
+            {inheritedLable} <FontAwesomeIcon icon="question-circle" />
+        </span>
+    );
+
     // construct table data and headers
     const listViewProps = {
         data: locSettings.map(row => {
@@ -279,8 +295,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 />,
             ];
         }),
-        headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],
-        tableClass: 'table table-striped',
+        headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
+        tableClass,
     };
 
     const searchProps = {
@@ -321,6 +337,7 @@ const defaultProps: EditSettingsDefaultProps = {
     locationSettings: [],
     selectedLocations: [],
     state: {},
+    tableClass: 'table table-striped',
 };
 
 EditSetings.defaultProps = defaultProps;

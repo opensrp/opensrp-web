@@ -281,8 +281,10 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
         expect(wrapper.find('.no-data').text()).toEqual('No data found');
     });
 });

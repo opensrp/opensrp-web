@@ -81,9 +81,15 @@ Object {
   "headerItems": Array [
     "Name",
     "Description",
-    "Settings",
-    "Inherited from",
-    "Edit",
+    "Setting",
+    <span>
+      Inherited from
+       
+      <FontAwesomeIcon
+        icon="question-circle"
+      />
+    </span>,
+    "Actions",
   ],
   "renderHeaders": [Function],
   "renderRows": [Function],

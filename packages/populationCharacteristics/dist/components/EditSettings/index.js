@@ -31,6 +31,12 @@ var _settings = require("../../ducks/settings");
 
 var _reactRedux = require("react-redux");
 
+var _fontawesomeSvgCore = require("@fortawesome/fontawesome-svg-core");
+
+var _reactFontawesome = require("@fortawesome/react-fontawesome");
+
+var _freeSolidSvgIcons = require("@fortawesome/free-solid-svg-icons");
+
 var _locations = require("../../ducks/locations");
 
 var _LocationsMenu = require("../LocationsMenu");
@@ -44,6 +50,8 @@ var _constants = require("../../constants");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+_fontawesomeSvgCore.library.add(_freeSolidSvgIcons.faSearch, _freeSolidSvgIcons.faQuestionCircle);
 
 var EditSetings = function EditSetings(props) {
   var labels = props.labels,
@@ -65,8 +73,10 @@ var EditSetings = function EditSetings(props) {
       settingsEndpoint = props.settingsEndpoint,
       customAlert = props.customAlert,
       debounceTime = props.debounceTime,
-      v2BaseUrl = props.v2BaseUrl;
-  var pageTitle = labels.pageTitle,
+      v2BaseUrl = props.v2BaseUrl,
+      tableClass = props.tableClass;
+  var actionLabel = labels.actionLabel,
+      pageTitle = labels.pageTitle,
       placeholder = labels.placeholder,
       descriptionLabel = labels.descriptionLabel,
       nameLabel = labels.nameLabel,
@@ -252,11 +262,10 @@ var EditSetings = function EditSetings(props) {
               return _context3.abrupt("return", false);
 
             case 3:
-              console.log(row.locationId, activeLocationId, row.locationId == activeLocationId);
               activeLoc = activeLocationId;
               data = (0, _utils.preparePutData)(row, value);
               clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context3.next = 9;
+              _context3.next = 8;
               return clientService.update(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
@@ -269,7 +278,7 @@ var EditSetings = function EditSetings(props) {
                 return setLoading(false);
               });
 
-            case 9:
+            case 8:
             case "end":
               return _context3.stop();
           }
@@ -378,6 +387,10 @@ var EditSetings = function EditSetings(props) {
     }
   }
 
+  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, " ", _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
+    icon: "question-circle"
+  }));
+
   var listViewProps = {
     data: locSettings.map(function (row) {
       var _row$inheritedFrom;
@@ -397,8 +410,8 @@ var EditSetings = function EditSetings(props) {
         value: value
       })];
     }),
-    headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],
-    tableClass: 'table table-striped'
+    headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
+    tableClass: tableClass
   };
   var searchProps = {
     debounceTime: debounceTime,
@@ -431,7 +444,8 @@ var defaultProps = {
   locationDetails: {},
   locationSettings: [],
   selectedLocations: [],
-  state: {}
+  state: {},
+  tableClass: 'table table-striped'
 };
 EditSetings.defaultProps = defaultProps;
 var mapDispatchToProps = {

@@ -56,6 +56,7 @@ var preparePutData = function preparePutData(data, value) {
 
 exports.preparePutData = preparePutData;
 var labels = {
+  actionLabel: _constants.ACTION_LABEL,
   descriptionLabel: _constants.DESCRIPTION_LABEL,
   editLabel: _constants.EDIT_LABEL,
   inheritedLable: _constants.INHERITED_FROM_LABEL,

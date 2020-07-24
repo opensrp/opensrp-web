@@ -12,6 +12,7 @@ import {
     SETTINGS_LABEL,
     SET_TO_NO_LABEL,
     SET_TO_YES_LABEL,
+    ACTION_LABEL,
 } from '../constants';
 import { EditSettingLabels } from './types';
 
@@ -59,6 +60,7 @@ export const preparePutData = (data: Setting, value: string) => {
 };
 
 export const labels: EditSettingLabels = {
+    actionLabel: ACTION_LABEL,
     descriptionLabel: DESCRIPTION_LABEL,
     editLabel: EDIT_LABEL,
     inheritedLable: INHERITED_FROM_LABEL,

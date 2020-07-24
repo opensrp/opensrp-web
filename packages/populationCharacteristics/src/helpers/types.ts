@@ -16,6 +16,7 @@ export interface FormConfigProps {
 
 /** interface for all displayed strings */
 export interface EditSettingLabels {
+    actionLabel: string;
     descriptionLabel: string;
     editLabel: string;
     inheritedLable: string;
