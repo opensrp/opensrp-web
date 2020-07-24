@@ -247,7 +247,7 @@ var EditSetings = function EditSetings(props) {
 
   var changeSetting = function () {
     var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
-      var activeLoc, data, clientService;
+      var activeLoc, data, putUrl, clientService;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -264,8 +264,9 @@ var EditSetings = function EditSetings(props) {
             case 3:
               activeLoc = activeLocationId;
               data = (0, _utils.preparePutData)(row, value);
-              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context3.next = 8;
+              putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
+              _context3.next = 9;
               return clientService.update(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
@@ -278,7 +279,7 @@ var EditSetings = function EditSetings(props) {
                 return setLoading(false);
               });
 
-            case 8:
+            case 9:
             case "end":
               return _context3.stop();
           }
