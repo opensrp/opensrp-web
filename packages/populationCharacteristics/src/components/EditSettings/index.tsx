@@ -185,17 +185,31 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
         const activeLoc = activeLocationId;
         const data = preparePutData(row, value);
-        const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-        const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
-        await clientService
-            .update(data)
-            .then(() => {
-                fetchSettings([{ ...row, value }], activeLoc);
-            })
-            .catch(error => {
-                customAlert && customAlert(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+        if (activeLoc !== row.locationId) {
+            data.locationId = activeLoc;
+            delete data.uuid;
+            delete data._id;
+            const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+            return await clientService
+                .create(data)
+                .then(() => {
+                    fetchSettings([{ ...row, value }], activeLoc);
+                })
+                .catch(error => {
+                    customAlert && customAlert(String(error), { type: 'error' });
+                });
+        } else {
+            const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
+            const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
+            await clientService
+                .update(data)
+                .then(() => {
+                    fetchSettings([{ ...row, value }], activeLoc);
+                })
+                .catch(error => {
+                    customAlert && customAlert(String(error), { type: 'error' });
+                });
+        }
     };
 
     // update active location

@@ -247,7 +247,8 @@ var EditSetings = function EditSetings(props) {
 
   var changeSetting = function () {
     var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
-      var activeLoc, data, putUrl, clientService;
+      var activeLoc, data, clientService, putUrl, _clientService;
+
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -264,10 +265,18 @@ var EditSetings = function EditSetings(props) {
             case 3:
               activeLoc = activeLocationId;
               data = (0, _utils.preparePutData)(row, value);
-              putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-              clientService = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
-              _context3.next = 9;
-              return clientService.update(data).then(function () {
+
+              if (!(activeLoc !== row.locationId)) {
+                _context3.next = 15;
+                break;
+              }
+
+              data.locationId = activeLoc;
+              delete data.uuid;
+              delete data._id;
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+              _context3.next = 12;
+              return clientService.create(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
                 })], activeLoc);
@@ -275,11 +284,26 @@ var EditSetings = function EditSetings(props) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
                 });
-              })["finally"](function () {
-                return setLoading(false);
               });
 
-            case 9:
+            case 12:
+              return _context3.abrupt("return", _context3.sent);
+
+            case 15:
+              putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
+              _clientService = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
+              _context3.next = 19;
+              return _clientService.update(data).then(function () {
+                fetchSettings([_objectSpread({}, row, {
+                  value: value
+                })], activeLoc);
+              })["catch"](function (error) {
+                customAlert && customAlert(String(error), {
+                  type: 'error'
+                });
+              });
+
+            case 19:
             case "end":
               return _context3.stop();
           }
