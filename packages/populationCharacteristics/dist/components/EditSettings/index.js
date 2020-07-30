@@ -423,7 +423,7 @@ var EditSetings = function EditSetings(props) {
       var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
       return [row.label, row.description, _react["default"].createElement("p", {
         key: row.key
-      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) || '_', _react["default"].createElement(_utils.EditSettingsButton, {
+      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? (0, _locations.getLocDetails)(state, [row.inheritedFrom]).label : '_', _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
         changeSetting: changeSetting,
         editLabel: editLabel,

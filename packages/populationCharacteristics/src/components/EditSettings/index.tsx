@@ -296,7 +296,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                row.inheritedFrom?.trim() || '_',
+                row.inheritedFrom?.trim() ? getLocDetails(state, [row.inheritedFrom]).label : '_',
                 <EditSettingsButton
                     key={row.documentId}
                     changeSetting={changeSetting}
