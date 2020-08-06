@@ -27,6 +27,7 @@ exports[`helpers/utils: EditSettingsButton renders correctly when value is false
   }
   setToNoLabel="Set to 'No'"
   setToYesLabel="Set to 'Yes'"
+  showInheritSettingsLabel={true}
   value={false}
 >
   <div
@@ -64,6 +65,7 @@ exports[`helpers/utils: EditSettingsButton renders correctly when value is false
       </div>
       <div
         className="inherit-from"
+        onClick={[Function]}
       >
         <span
           className="empty-check"

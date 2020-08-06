@@ -120,7 +120,8 @@ var EditSetings = function EditSetings(props) {
               clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
               _context.next = 5;
               return clientService.list(params).then(function (res) {
-                return fetchSettings(res, currentLocId, true);
+                console.log('fetch settings', res);
+                fetchSettings(res, currentLocId, true);
               })["catch"](function (error) {
                 return customAlert && customAlert(String(error), {
                   type: 'error'
@@ -174,28 +175,29 @@ var EditSetings = function EditSetings(props) {
 
             case 8:
               hierarchy = _context2.sent;
+              console.log('hierarchy', hierarchy);
               fetchLocations(hierarchy);
-              _context2.next = 15;
+              _context2.next = 16;
               break;
 
-            case 12:
-              _context2.prev = 12;
+            case 13:
+              _context2.prev = 13;
               _context2.t0 = _context2["catch"](0);
               customAlert && customAlert(String(_context2.t0), {
                 type: 'error'
               });
 
-            case 15:
-              _context2.prev = 15;
+            case 16:
+              _context2.prev = 16;
               setLoading(false);
-              return _context2.finish(15);
+              return _context2.finish(16);
 
-            case 18:
+            case 19:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 12, 15, 18]]);
+      }, _callee2, null, [[0, 13, 16, 19]]);
     }));
 
     return function getLocsandSettings() {
@@ -247,7 +249,7 @@ var EditSetings = function EditSetings(props) {
 
   var changeSetting = function () {
     var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
-      var activeLoc, data, clientService, putUrl, _clientService;
+      var deleteUrl, clientService, data, _clientService, putUrl, _clientService2;
 
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
@@ -263,47 +265,69 @@ var EditSetings = function EditSetings(props) {
               return _context3.abrupt("return", false);
 
             case 3:
-              activeLoc = activeLocationId;
-              data = (0, _utils.preparePutData)(row, value);
-
-              if (!(activeLoc !== row.locationId)) {
-                _context3.next = 15;
+              if (!(value === 'inherit')) {
+                _context3.next = 10;
                 break;
               }
 
-              data.locationId = activeLoc;
+              deleteUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
+              _context3.next = 8;
+              return clientService["delete"]().then(function () {
+                getLocationSettings(activeLocationId);
+              })["catch"](function (error) {
+                customAlert && customAlert(String(error), {
+                  type: 'error'
+                });
+              });
+
+            case 8:
+              _context3.next = 27;
+              break;
+
+            case 10:
+              data = (0, _utils.preparePutData)(row, value);
+              console.log('Active location id', activeLocationId);
+              console.log('Row location id', row.locationId);
+
+              if (!(activeLocationId !== row.locationId)) {
+                _context3.next = 23;
+                break;
+              }
+
+              data.locationId = activeLocationId;
               delete data.uuid;
               delete data._id;
-              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context3.next = 12;
-              return clientService.create(data).then(function () {
+              _clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+              _context3.next = 20;
+              return _clientService.create(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
-                })], activeLoc);
+                })], activeLocationId);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
                 });
               });
 
-            case 12:
+            case 20:
               return _context3.abrupt("return", _context3.sent);
 
-            case 15:
+            case 23:
               putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-              _clientService = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
-              _context3.next = 19;
-              return _clientService.update(data).then(function () {
+              _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
+              _context3.next = 27;
+              return _clientService2.update(data).then(function () {
                 fetchSettings([_objectSpread({}, row, {
                   value: value
-                })], activeLoc);
+                })], activeLocationId);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
                 });
               });
 
-            case 19:
+            case 27:
             case "end":
               return _context3.stop();
           }
@@ -423,7 +447,7 @@ var EditSetings = function EditSetings(props) {
       var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
       return [row.label, row.description, _react["default"].createElement("p", {
         key: row.key
-      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? (0, _locations.getLocDetails)(state, [row.inheritedFrom]).label : '_', _react["default"].createElement(_utils.EditSettingsButton, {
+      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? (0, _locations.getLocDetails)(state, [row.inheritedFrom]).label : activeLocationId !== defaultLocId ? defaultLocId : '_', _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
         changeSetting: changeSetting,
         editLabel: editLabel,
@@ -432,7 +456,8 @@ var EditSetings = function EditSetings(props) {
         row: row,
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
-        value: value
+        value: value,
+        showInheritSettingsLabel: activeLocationId !== defaultLocId
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],

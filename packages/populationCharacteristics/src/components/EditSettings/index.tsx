@@ -101,7 +101,9 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
         await clientService
             .list(params)
-            .then((res: Setting[]) => fetchSettings(res, currentLocId, true))
+            .then((res: Setting[]) => {
+                fetchSettings(res, currentLocId, true);
+            })
             .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
             .finally(() => setLoading(false));
     };
@@ -180,35 +182,50 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // update setting
     const changeSetting = async (e: MouseEvent, row: Setting, value: string) => {
         e.preventDefault();
+
         if (value === row.value) {
             return false;
         }
-        const activeLoc = activeLocationId;
-        const data = preparePutData(row, value);
-        if (activeLoc !== row.locationId) {
-            data.locationId = activeLoc;
-            delete data.uuid;
-            delete data._id;
-            const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-            return await clientService
-                .create(data)
+
+        if (value === 'inherit') {
+            const deleteUrl = `${settingsEndpoint}${row.settingMetadataId}`;
+            const clientService = new OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
+            await clientService
+                .delete()
                 .then(() => {
-                    fetchSettings([{ ...row, value }], activeLoc);
+                    getLocationSettings(activeLocationId);
                 })
                 .catch(error => {
                     customAlert && customAlert(String(error), { type: 'error' });
                 });
         } else {
-            const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-            const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
-            await clientService
-                .update(data)
-                .then(() => {
-                    fetchSettings([{ ...row, value }], activeLoc);
-                })
-                .catch(error => {
-                    customAlert && customAlert(String(error), { type: 'error' });
-                });
+            const data = preparePutData(row, value);
+
+            if (activeLocationId !== row.locationId) {
+                data.locationId = activeLocationId;
+                delete data.uuid;
+                delete data._id;
+                const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+                return await clientService
+                    .create(data)
+                    .then(() => {
+                        fetchSettings([{ ...row, value }], activeLocationId);
+                    })
+                    .catch(error => {
+                        customAlert && customAlert(String(error), { type: 'error' });
+                    });
+            } else {
+                const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
+                const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
+                await clientService
+                    .update(data)
+                    .then(() => {
+                        fetchSettings([{ ...row, value }], activeLocationId);
+                    })
+                    .catch(error => {
+                        customAlert && customAlert(String(error), { type: 'error' });
+                    });
+            }
         }
     };
 
@@ -296,7 +313,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                row.inheritedFrom?.trim() ? getLocDetails(state, [row.inheritedFrom]).label : '_',
+                row.inheritedFrom?.trim()
+                    ? getLocDetails(state, [row.inheritedFrom]).label
+                    : activeLocationId !== defaultLocId
+                    ? defaultLocId
+                    : '_',
                 <EditSettingsButton
                     key={row.documentId}
                     changeSetting={changeSetting}
@@ -307,6 +328,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
+                    showInheritSettingsLabel={activeLocationId !== defaultLocId}
                 />,
             ];
         }),
@@ -376,6 +398,7 @@ const mapStateToProps = (state: Partial<Store>) => {
         currentLocName = getLocDetails(state, selectedLocations).label;
         locationSettings = getLocSettings(state, activeLocationId);
     }
+
     return {
         activeLocationId,
         selectedLocations,

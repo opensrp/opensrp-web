@@ -84,6 +84,7 @@ interface EditSettingsButtonProps {
     setToNoLabel: string;
     setToYesLabel: string;
     value: boolean;
+    showInheritSettingsLabel: boolean;
 }
 
 export const EditSettingsButton = (props: EditSettingsButtonProps) => {
@@ -96,6 +97,7 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
         row,
         openEditModal,
         changeSetting,
+        showInheritSettingsLabel,
     } = props;
     return (
         <div className="popup" key={row.key}>
@@ -111,10 +113,12 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
                     <span className={value ? 'empty-check' : 'check'} />
                     <span>{setToNoLabel}</span>
                 </div>
-                <div className="inherit-from">
-                    <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
-                    {inheritSettingsLabel}
-                </div>
+                {showInheritSettingsLabel && (
+                    <div onClick={e => changeSetting(e, row, 'inherit')} className="inherit-from">
+                        <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
+                        {inheritSettingsLabel}
+                    </div>
+                )}
             </div>
         </div>
     );

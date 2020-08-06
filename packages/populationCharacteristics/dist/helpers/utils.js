@@ -81,7 +81,8 @@ var EditSettingsButton = function EditSettingsButton(props) {
       setToNoLabel = props.setToNoLabel,
       row = props.row,
       openEditModal = props.openEditModal,
-      changeSetting = props.changeSetting;
+      changeSetting = props.changeSetting,
+      showInheritSettingsLabel = props.showInheritSettingsLabel;
   return _react["default"].createElement("div", {
     className: "popup",
     key: row.key
@@ -104,7 +105,10 @@ var EditSettingsButton = function EditSettingsButton(props) {
     }
   }, _react["default"].createElement("span", {
     className: value ? 'empty-check' : 'check'
-  }), _react["default"].createElement("span", null, setToNoLabel)), _react["default"].createElement("div", {
+  }), _react["default"].createElement("span", null, setToNoLabel)), showInheritSettingsLabel && _react["default"].createElement("div", {
+    onClick: function onClick(e) {
+      return changeSetting(e, row, 'inherit');
+    },
     className: "inherit-from"
   }, _react["default"].createElement("span", {
     className: ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? 'check' : 'empty-check'

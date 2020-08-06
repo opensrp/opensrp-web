@@ -2315,7 +2315,7 @@
   dependencies:
     react-table "^7.0.0"
 
-"@opensrp/population-characteristics@file:/home/ona/projects/opensrp/opensrp-web/packages/populationCharacteristics/":
+"@opensrp/population-characteristics@file:packages/populationCharacteristics":
   version "0.0.6"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.20"
