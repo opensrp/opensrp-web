@@ -22,6 +22,7 @@ interface EditSettingsButtonProps {
     setToNoLabel: string;
     setToYesLabel: string;
     value: boolean;
+    showInheritSettingsLabel: boolean;
 }
 export declare const EditSettingsButton: (props: EditSettingsButtonProps) => JSX.Element;
 export {};
