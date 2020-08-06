@@ -17,10 +17,6 @@ import settingsReducer, {
 import locationReducer, { fetchLocs, locationReducerName as LocsReducerName } from '../../../ducks/locations';
 import { locHierarchy } from './fixtures';
 import { allSettings, allSettings2 } from './fixtures';
-import * as locationsFixtures from '../../../ducks/locations/tests/fixtures';
-import * as settingsFixtures from '../../../ducks/settings/tests/fixtures';
-import { updateDate } from './fixtures';
-import toJson from 'enzyme-to-json';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -257,6 +253,7 @@ describe('components/Editsettings', () => {
                 .text(),
         ).toEqual('Kampala');
         expect(wrapper.find('tbody tr').length).toEqual(11);
+
         // go back to previous location
         wrapper
             .find('.locations')
