@@ -254,6 +254,32 @@ describe('components/Editsettings', () => {
         ).toEqual('Kampala');
         expect(wrapper.find('tbody tr').length).toEqual(11);
 
+        // inhert setting works correctly
+        const editButton = wrapper.find('.popup a').at(0);
+        expect(editButton.text()).toEqual('Edit');
+        expect(wrapper.find('.popup .show').length).toEqual(0);
+
+        editButton.simulate('click');
+        wrapper.update();
+        expect(wrapper.find('.popup .show').length).toEqual(1);
+
+        await act(async () => {
+            wrapper
+                .find('.show div')
+                .at(2)
+                .simulate('click');
+            await flushPromises();
+            wrapper.update();
+        });
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/opensrp/rest/v2/settings/1278', {
+            headers: {
+                accept: 'application/json',
+                authorization: 'Bearer hunter2',
+                'content-type': 'application/json;charset=UTF-8',
+            },
+            method: 'DELETE',
+        });
+
         // go back to previous location
         wrapper
             .find('.locations')
