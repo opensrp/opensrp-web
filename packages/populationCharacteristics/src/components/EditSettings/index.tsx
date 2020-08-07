@@ -399,7 +399,6 @@ const mapDispatchToProps = {
 const mapStateToProps = (state: Partial<Store>) => {
     const activeLocationId: string = getActiveLocId(state);
     const selectedLocations: string[] = getSelectedLocs(state);
-    console.log('SELECTED locatios', selectedLocations);
     const defaultLocId = getDefaultLocId(state);
     let locationDetails: LocChildren | {} = {};
     let locationSettings: Setting[] = [];

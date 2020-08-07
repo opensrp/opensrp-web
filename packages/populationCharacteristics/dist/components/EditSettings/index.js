@@ -510,7 +510,6 @@ var mapDispatchToProps = {
 var mapStateToProps = function mapStateToProps(state) {
   var activeLocationId = (0, _locations.getActiveLocId)(state);
   var selectedLocations = (0, _locations.getSelectedLocs)(state);
-  console.log('SELECTED locatios', selectedLocations);
   var defaultLocId = (0, _locations.getDefaultLocId)(state);
   var locationDetails = {};
   var locationSettings = [];
