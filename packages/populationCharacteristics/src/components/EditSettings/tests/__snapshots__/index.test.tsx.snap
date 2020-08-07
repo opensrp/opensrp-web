@@ -4,47 +4,6 @@ exports[`components/Editsettings location menu works correctly 1`] = `
 Object {
   "data": Array [
     Array [
-      "Vitamin A deficiency 5% or higher",
-      "The prevalence of night blindness is 5% or higher in pregnant women or 5% or higher in children 24–59 months of age, or the proportion of pregnant women with a serum retinol level less than 0.7 mol/L is 20% or higher. ",
-      <p>
-        Yes
-      </p>,
-      "Uganda",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The prevalence of night blindness is 5% or higher in pregnant women or 5% or higher in children 24–59 months of age, or the proportion of pregnant women with a serum retinol level less than 0.7 mol/L is 20% or higher. ",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "key": "pop_vita",
-            "label": "Vitamin A deficiency 5% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1278",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "4e38781a-5b4c-47b5-9842-6052d6af0bd0",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={true}
-      />,
-    ],
-    Array [
       "Soil-transmitted helminth infection prevalence 20% or higher",
       "The percentage of individuals in the general population infected with at least one species of soil-transmitted helminth is 20% or higher.",
       <p>
@@ -81,48 +40,7 @@ Object {
         }
         setToNoLabel="Set to 'No'"
         setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={false}
-      />,
-    ],
-    Array [
-      "HIV incidence greater than 3 per 100 person-years in the absence of PrEP",
-      "Women in the population have a substantial risk of HIV infection. Substantial risk of HIV infection is provisionally defined as HIV incidence greater than 3 per 100 person–years in the absence of pre-exposure prophylaxis (PrEP).",
-      <p>
-        No
-      </p>,
-      "Uganda",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "Women in the population have a substantial risk of HIV infection. Substantial risk of HIV infection is provisionally defined as HIV incidence greater than 3 per 100 person–years in the absence of pre-exposure prophylaxis (PrEP).",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "key": "pop_hiv_incidence",
-            "label": "HIV incidence greater than 3 per 100 person-years in the absence of PrEP",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1280",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "ceb5809f-896e-42bb-88a6-94353486d005",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
+        showInheritSettingsLabel={false}
         value={false}
       />,
     ],
@@ -132,7 +50,7 @@ Object {
       <p>
         Yes
       </p>,
-      "Uganda",
+      "_",
       <EditSettingsButton
         changeSetting={[Function]}
         editLabel="Edit"
@@ -143,7 +61,7 @@ Object {
             "description": "This is a malaria-endemic setting.",
             "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
             "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
+            "inheritedFrom": "",
             "key": "pop_malaria",
             "label": "Malaria-endemic setting",
             "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
@@ -163,212 +81,7 @@ Object {
         }
         setToNoLabel="Set to 'No'"
         setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={true}
-      />,
-    ],
-    Array [
-      "Syphilis prevalence 5% or higher",
-      "The prevalence of syphilis in pregnant women in the population is 5% or higher.",
-      <p>
-        No
-      </p>,
-      "Uganda",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The prevalence of syphilis in pregnant women in the population is 5% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "key": "pop_syphilis",
-            "label": "Syphilis prevalence 5% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1283",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "147da8f6-3bf7-430c-b3aa-c0a67b957bb9",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={false}
-      />,
-    ],
-    Array [
-      "Hep B prevalence is intermediate (2% or higher) or high (5% or higher)",
-      "The proportion of Hepatitis B surface antigen (HBsAg) seroprevalance in the general population is 2% or higher.",
-      <p>
-        No
-      </p>,
-      "Uganda",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The proportion of Hepatitis B surface antigen (HBsAg) seroprevalance in the general population is 2% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "key": "pop_hepb",
-            "label": "Hep B prevalence is intermediate (2% or higher) or high (5% or higher)",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1284",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "6e806360-ff69-4226-ac5c-628a9482299f",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={false}
-      />,
-    ],
-    Array [
-      "National Hep B ANC routine screening program established",
-      "There is a national Hepatitis B ANC routine screening program in place.",
-      <p>
-        Yes
-      </p>,
-      "Uganda",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "There is a national Hepatitis B ANC routine screening program in place.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "key": "pop_hepb_screening",
-            "label": "National Hep B ANC routine screening program established",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1285",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "203cfe12-55da-4eb7-931a-bb26320938f4",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={true}
-      />,
-    ],
-    Array [
-      "Hep C prevalence is intermediate (2% or higher) or high (5% or higher)",
-      "The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ",
-      <p>
-        Yes
-      </p>,
-      "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hepc",
-            "label": "Hep C prevalence is intermediate (2% or higher) or high (5% or higher)",
-            "locationId": "8340315f-48e4-4768-a1ce-414532b4c49b",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1596091780439,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1294",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "e6c656d6-9737-40c9-927c-8bcc6ee7c5e0",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={true}
-      />,
-    ],
-    Array [
-      "HIV prevalence 5% or higher",
-      "The HIV prevalence in pregnant women in the population is 5% or higher.",
-      <p>
-        Yes
-      </p>,
-      "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The HIV prevalence in pregnant women in the population is 5% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hiv_prevalence",
-            "label": "HIV prevalence 5% or higher",
-            "locationId": "8340315f-48e4-4768-a1ce-414532b4c49b",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1596091868903,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1295",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "bd6f8789-525d-442c-947d-0d653029d45c",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
+        showInheritSettingsLabel={false}
         value={true}
       />,
     ],
@@ -378,7 +91,7 @@ Object {
       <p>
         Yes
       </p>,
-      "02ebbc84-5e29-4cd5-9b79-c594058923e9",
+      "3264c866-078e-4112-8894-052d53ab0a97",
       <EditSettingsButton
         changeSetting={[Function]}
         editLabel="Edit"
@@ -389,7 +102,7 @@ Object {
             "description": "The proportion of women in the adult population (18 years or older), with a BMI less than 18.5, is 20% or higher.",
             "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
             "editing": false,
-            "inheritedFrom": "",
+            "inheritedFrom": "3264c866-078e-4112-8894-052d53ab0a97",
             "key": "pop_undernourish",
             "label": "Undernourished prevalence 20% or higher",
             "locationId": "8340315f-48e4-4768-a1ce-414532b4c49b",
@@ -403,47 +116,6 @@ Object {
             "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
             "type": "Setting",
             "uuid": "d16fc8f3-6115-4086-a71d-cf2c1fc85005",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={true}
-        value={true}
-      />,
-    ],
-    Array [
-      "Anaemia prevalence 40% or higher",
-      "The proportion of pregnant women in the population with anaemia (haemoglobin level less than 11 g/dl) is 40% or higher.",
-      <p>
-        Yes
-      </p>,
-      "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The proportion of pregnant women in the population with anaemia (haemoglobin level less than 11 g/dl) is 40% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_anaemia_40",
-            "label": "Anaemia prevalence 40% or higher",
-            "locationId": "8340315f-48e4-4768-a1ce-414532b4c49b",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1596092306785,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1297",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "62c70c58-b4a6-44d2-acad-c90d27cff411",
             "v1Settings": false,
             "value": "true",
           }
@@ -483,88 +155,6 @@ exports[`components/Editsettings renders correctly when connected to store 1`] =
 Object {
   "data": Array [
     Array [
-      "Vitamin A deficiency 5% or higher",
-      "The prevalence of night blindness is 5% or higher in pregnant women or 5% or higher in children 24–59 months of age, or the proportion of pregnant women with a serum retinol level less than 0.7 mol/L is 20% or higher. ",
-      <p>
-        Yes
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The prevalence of night blindness is 5% or higher in pregnant women or 5% or higher in children 24–59 months of age, or the proportion of pregnant women with a serum retinol level less than 0.7 mol/L is 20% or higher. ",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_vita",
-            "label": "Vitamin A deficiency 5% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1278",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "4e38781a-5b4c-47b5-9842-6052d6af0bd0",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={true}
-      />,
-    ],
-    Array [
-      "Soil-transmitted helminth infection prevalence 20% or higher",
-      "The percentage of individuals in the general population infected with at least one species of soil-transmitted helminth is 20% or higher.",
-      <p>
-        No
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The percentage of individuals in the general population infected with at least one species of soil-transmitted helminth is 20% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_helminth",
-            "label": "Soil-transmitted helminth infection prevalence 20% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1279",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "9a1e2d64-6a13-4d3b-be88-052e1e6c1fa7",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={false}
-      />,
-    ],
-    Array [
       "HIV incidence greater than 3 per 100 person-years in the absence of PrEP",
       "Women in the population have a substantial risk of HIV infection. Substantial risk of HIV infection is provisionally defined as HIV incidence greater than 3 per 100 person–years in the absence of pre-exposure prophylaxis (PrEP).",
       <p>
@@ -595,47 +185,6 @@ Object {
             "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
             "type": "Setting",
             "uuid": "ceb5809f-896e-42bb-88a6-94353486d005",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={false}
-      />,
-    ],
-    Array [
-      "HIV prevalence 5% or higher",
-      "The HIV prevalence in pregnant women in the population is 5% or higher.",
-      <p>
-        No
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The HIV prevalence in pregnant women in the population is 5% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hiv_prevalence",
-            "label": "HIV prevalence 5% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1281",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "f1aba3ea-25ed-4cac-80b5-abf58f010e11",
             "v1Settings": false,
             "value": "false",
           }
@@ -685,170 +234,6 @@ Object {
         setToYesLabel="Set to 'Yes'"
         showInheritSettingsLabel={false}
         value={true}
-      />,
-    ],
-    Array [
-      "Syphilis prevalence 5% or higher",
-      "The prevalence of syphilis in pregnant women in the population is 5% or higher.",
-      <p>
-        No
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The prevalence of syphilis in pregnant women in the population is 5% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_syphilis",
-            "label": "Syphilis prevalence 5% or higher",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1283",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "147da8f6-3bf7-430c-b3aa-c0a67b957bb9",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={false}
-      />,
-    ],
-    Array [
-      "Hep B prevalence is intermediate (2% or higher) or high (5% or higher)",
-      "The proportion of Hepatitis B surface antigen (HBsAg) seroprevalance in the general population is 2% or higher.",
-      <p>
-        No
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The proportion of Hepatitis B surface antigen (HBsAg) seroprevalance in the general population is 2% or higher.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hepb",
-            "label": "Hep B prevalence is intermediate (2% or higher) or high (5% or higher)",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1284",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "6e806360-ff69-4226-ac5c-628a9482299f",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={false}
-      />,
-    ],
-    Array [
-      "National Hep B ANC routine screening program established",
-      "There is a national Hepatitis B ANC routine screening program in place.",
-      <p>
-        Yes
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "There is a national Hepatitis B ANC routine screening program in place.",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hepb_screening",
-            "label": "National Hep B ANC routine screening program established",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1285",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "203cfe12-55da-4eb7-931a-bb26320938f4",
-            "v1Settings": false,
-            "value": "true",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={true}
-      />,
-    ],
-    Array [
-      "Hep C prevalence is intermediate (2% or higher) or high (5% or higher)",
-      "The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ",
-      <p>
-        No
-      </p>,
-      "_",
-      <EditSettingsButton
-        changeSetting={[Function]}
-        editLabel="Edit"
-        inheritSettingsLabel="Inherit setting"
-        openEditModal={[Function]}
-        row={
-          Object {
-            "description": "The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ",
-            "documentId": "3264c866-078e-4112-8894-052d53ab0a97",
-            "editing": false,
-            "inheritedFrom": "",
-            "key": "pop_hepc",
-            "label": "Hep C prevalence is intermediate (2% or higher) or high (5% or higher)",
-            "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-            "providerId": "demo",
-            "resolveSettings": false,
-            "serverVersion": 1595886234688,
-            "settingIdentifier": "population_characteristics",
-            "settingMetadataId": "1286",
-            "settingsId": "21",
-            "team": "Bukesa",
-            "teamId": "6c8d2b9b-2246-47c2-949b-4fe29e888cc8",
-            "type": "Setting",
-            "uuid": "edd75200-23c2-46e3-89ff-1dfc08ab65bf",
-            "v1Settings": false,
-            "value": "false",
-          }
-        }
-        setToNoLabel="Set to 'No'"
-        setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
-        value={false}
       />,
     ],
   ],

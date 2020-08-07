@@ -297,9 +297,7 @@ var EditSetings = function EditSetings(props) {
               _clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
               _context3.next = 18;
               return _clientService.create(data).then(function () {
-                fetchSettings([_objectSpread({}, row, {
-                  value: value
-                })], activeLocationId);
+                getLocationSettings(activeLocationId);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
@@ -314,9 +312,7 @@ var EditSetings = function EditSetings(props) {
               _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
               _context3.next = 25;
               return _clientService2.update(data).then(function () {
-                fetchSettings([_objectSpread({}, row, {
-                  value: value
-                })], activeLocationId);
+                getLocationSettings(activeLocationId);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
@@ -441,9 +437,21 @@ var EditSetings = function EditSetings(props) {
       var _row$inheritedFrom;
 
       var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+      var inheritedFrom = (_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim();
+
+      if (inheritedFrom) {
+        var label = (0, _locations.getLocDetails)(state, inheritedFrom).label;
+
+        if (label) {
+          inheritedFrom = label;
+        }
+      } else {
+        inheritedFrom = '_';
+      }
+
       return [row.label, row.description, _react["default"].createElement("p", {
         key: row.key
-      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? (0, _locations.getLocDetails)(state, [row.inheritedFrom]).label : activeLocationId !== defaultLocId ? defaultLocId : '_', _react["default"].createElement(_utils.EditSettingsButton, {
+      }, value ? 'Yes' : 'No'), inheritedFrom, _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
         changeSetting: changeSetting,
         editLabel: editLabel,
@@ -453,7 +461,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: activeLocationId !== defaultLocId
+        showInheritSettingsLabel: defaultLocId !== row.locationId || !inheritedFrom
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
@@ -502,14 +510,15 @@ var mapDispatchToProps = {
 var mapStateToProps = function mapStateToProps(state) {
   var activeLocationId = (0, _locations.getActiveLocId)(state);
   var selectedLocations = (0, _locations.getSelectedLocs)(state);
+  console.log('SELECTED locatios', selectedLocations);
   var defaultLocId = (0, _locations.getDefaultLocId)(state);
   var locationDetails = {};
   var locationSettings = [];
   var currentLocName = '';
 
   if (defaultLocId && activeLocationId && selectedLocations.length) {
-    locationDetails = (0, _locations.getLocDetails)(state, [defaultLocId]);
-    currentLocName = (0, _locations.getLocDetails)(state, selectedLocations).label;
+    locationDetails = (0, _locations.getLocDetails)(state, defaultLocId);
+    currentLocName = (0, _locations.getLocDetails)(state, selectedLocations[selectedLocations.length - 1]).label;
     locationSettings = (0, _settings.getLocSettings)(state, activeLocationId);
   }
 

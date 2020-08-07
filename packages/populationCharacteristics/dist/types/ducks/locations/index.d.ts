@@ -103,5 +103,5 @@ export declare function getSelectedLocs(state: Partial<Store>): string[];
  * @param {locIds}  - the location ids
  * @returns { locationDetails } locId children locactions
  */
-export declare function getLocDetails(state: Partial<Store>, locIds: string[]): LocChildren;
+export declare function getLocDetails(state: Partial<Store>, locId: string): LocChildren;
 export {};

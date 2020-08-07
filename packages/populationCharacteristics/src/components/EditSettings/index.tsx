@@ -209,7 +209,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 return await clientService
                     .create(data)
                     .then(() => {
-                        fetchSettings([{ ...row, value }], activeLocationId);
+                        //fetchSettings([{ ...row, value }], activeLocationId);
+                        getLocationSettings(activeLocationId);
                     })
                     .catch(error => {
                         customAlert && customAlert(String(error), { type: 'error' });
@@ -220,7 +221,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 await clientService
                     .update(data)
                     .then(() => {
-                        fetchSettings([{ ...row, value }], activeLocationId);
+                        //fetchSettings([{ ...row, value }], activeLocationId);
+                        getLocationSettings(activeLocationId);
                     })
                     .catch(error => {
                         customAlert && customAlert(String(error), { type: 'error' });
@@ -309,15 +311,23 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const listViewProps = {
         data: locSettings.map(row => {
             const value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+            let inheritedFrom = row.inheritedFrom?.trim();
+
+            if (inheritedFrom) {
+                const label = getLocDetails(state, inheritedFrom).label;
+
+                if (label) {
+                    inheritedFrom = label;
+                }
+            } else {
+                inheritedFrom = '_';
+            }
+
             return [
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                row.inheritedFrom?.trim()
-                    ? getLocDetails(state, [row.inheritedFrom]).label
-                    : activeLocationId !== defaultLocId
-                    ? defaultLocId
-                    : '_',
+                inheritedFrom,
                 <EditSettingsButton
                     key={row.documentId}
                     changeSetting={changeSetting}
@@ -328,7 +338,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
-                    showInheritSettingsLabel={activeLocationId !== defaultLocId}
+                    showInheritSettingsLabel={defaultLocId !== row.locationId || !inheritedFrom}
                 />,
             ];
         }),
@@ -389,13 +399,14 @@ const mapDispatchToProps = {
 const mapStateToProps = (state: Partial<Store>) => {
     const activeLocationId: string = getActiveLocId(state);
     const selectedLocations: string[] = getSelectedLocs(state);
+    console.log('SELECTED locatios', selectedLocations);
     const defaultLocId = getDefaultLocId(state);
     let locationDetails: LocChildren | {} = {};
     let locationSettings: Setting[] = [];
     let currentLocName = '';
     if (defaultLocId && activeLocationId && selectedLocations.length) {
-        locationDetails = getLocDetails(state, [defaultLocId]);
-        currentLocName = getLocDetails(state, selectedLocations).label;
+        locationDetails = getLocDetails(state, defaultLocId);
+        currentLocName = getLocDetails(state, selectedLocations[selectedLocations.length - 1]).label;
         locationSettings = getLocSettings(state, activeLocationId);
     }
 
