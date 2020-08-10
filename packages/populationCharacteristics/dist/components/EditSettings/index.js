@@ -239,10 +239,9 @@ var EditSetings = function EditSetings(props) {
 
   var openEditModal = function openEditModal(e, row) {
     e.preventDefault();
-    var activeLoc = activeLocationId;
     fetchSettings([_objectSpread({}, row, {
       editing: !row.editing
-    })], activeLoc);
+    })], activeLocationId);
   };
 
   var updateSetting = function updateSetting(row, value) {
@@ -250,7 +249,7 @@ var EditSetings = function EditSetings(props) {
       return;
     }
 
-    if (value !== 'inherit') {
+    if (value !== _constants.SETTINGS_INHERIT) {
       fetchSettings([_objectSpread({}, row, {
         value: value,
         inheritedFrom: ''
@@ -293,7 +292,7 @@ var EditSetings = function EditSetings(props) {
               return _context3.abrupt("return", false);
 
             case 3:
-              if (!(value === 'inherit')) {
+              if (!(value === _constants.SETTINGS_INHERIT)) {
                 _context3.next = 10;
                 break;
               }
@@ -466,7 +465,7 @@ var EditSetings = function EditSetings(props) {
     data: locSettings.map(function (row) {
       var _row$inheritedFrom;
 
-      var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+      var value = typeof row.value === 'string' ? row.value === _constants.SETTINGS_TRUE : row.value;
       var inheritedFrom = (_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim();
       var inheritedFromInvalid = false;
 
@@ -494,7 +493,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: !row.inheritedFrom || inheritedFromInvalid
+        showInheritSettingsLabel: !row.inheritedFrom && activeLocationId !== defaultLocId || inheritedFromInvalid
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],

@@ -17,10 +17,10 @@ import {
     getDefaultLocId,
 } from '../../ducks/locations';
 import { LocationMenu } from '../LocationsMenu';
-import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
+import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
 import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
-import { POP_CHARACTERISTICS_PARAM } from '../../constants';
+import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE, SETTINGS_INHERIT } from '../../constants';
 
 /** reqister search and question mark icons */
 library.add(faSearch, faQuestionCircle);
@@ -175,17 +175,16 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
-        const activeLoc = activeLocationId;
-        fetchSettings([{ ...row, editing: !row.editing }], activeLoc);
+        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
     };
 
     // update setting
-    const updateSetting = (row: Setting, value: string) => {
+    const updateSetting = (row: Setting, value: SettingValue) => {
         if (row.value === value) {
             return;
         }
 
-        if (value !== 'inherit') {
+        if (value !== SETTINGS_INHERIT) {
             // We set the new value and make sure to override inheritedFrom
             // to none
             fetchSettings([{ ...row, value, inheritedFrom: '' }], activeLocationId);
@@ -203,14 +202,14 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     };
 
     // update setting
-    const changeSetting = async (e: MouseEvent, row: Setting, value: string) => {
+    const changeSetting = async (e: MouseEvent, row: Setting, value: SettingValue) => {
         e.preventDefault();
 
         if (value === row.value) {
             return false;
         }
 
-        if (value === 'inherit') {
+        if (value === SETTINGS_INHERIT) {
             const deleteUrl = `${settingsEndpoint}${row.settingMetadataId}`;
             const clientService = new OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
             await clientService
@@ -331,7 +330,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // construct table data and headers
     const listViewProps = {
         data: locSettings.map(row => {
-            const value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+            const value = typeof row.value === 'string' ? row.value === SETTINGS_TRUE : row.value;
             let inheritedFrom = row.inheritedFrom?.trim();
             let inheritedFromInvalid = false;
 
@@ -362,7 +361,9 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
-                    showInheritSettingsLabel={!row.inheritedFrom || inheritedFromInvalid}
+                    showInheritSettingsLabel={
+                        (!row.inheritedFrom && activeLocationId !== defaultLocId) || inheritedFromInvalid
+                    }
                 />,
             ];
         }),

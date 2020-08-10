@@ -13,8 +13,11 @@ import {
     SET_TO_NO_LABEL,
     SET_TO_YES_LABEL,
     ACTION_LABEL,
+    SETTINGS_INHERIT,
+    SETTINGS_FALSE,
+    SETTINGS_TRUE,
 } from '../constants';
-import { EditSettingLabels } from './types';
+import { EditSettingLabels, SettingValue } from './types';
 
 interface PostData extends Partial<Setting> {
     _id: string;
@@ -76,7 +79,7 @@ export const labels: EditSettingLabels = {
 
 /** format table data function props interface */
 interface EditSettingsButtonProps {
-    changeSetting: (event: MouseEvent<HTMLDivElement>, setting: Setting, value: string) => void;
+    changeSetting: (event: MouseEvent<HTMLDivElement>, setting: Setting, value: SettingValue) => void;
     editLabel: string;
     inheritSettingsLabel: string;
     openEditModal: (event: MouseEvent<HTMLAnchorElement>, setting: Setting) => void;
@@ -105,16 +108,16 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
                 {editLabel}
             </a>
             <div className={`popuptext ${row.editing ? 'show' : ''}`}>
-                <div onClick={e => changeSetting(e, row, 'true')}>
+                <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
                     <span className={value ? 'check' : 'empty-check'} />
                     <span>{setToYesLabel}</span>
                 </div>
-                <div onClick={e => changeSetting(e, row, 'false')}>
+                <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
                     <span className={value ? 'empty-check' : 'check'} />
                     <span>{setToNoLabel}</span>
                 </div>
                 {showInheritSettingsLabel && (
-                    <div onClick={e => changeSetting(e, row, 'inherit')} className="inherit-from">
+                    <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
                         <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
                         {inheritSettingsLabel}
                     </div>

@@ -12,3 +12,6 @@ export const INHERIT_SETTING_LABEL = 'Inherit setting';
 export const NO_DATA_FOUND = 'No data found';
 export const POP_CHARACTERISTICS_PARAM = 'population_characteristics';
 export const ACTION_LABEL = 'Actions';
+export const SETTINGS_TRUE = 'true';
+export const SETTINGS_FALSE = 'false';
+export const SETTINGS_INHERIT = 'inherit';

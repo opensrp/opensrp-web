@@ -95,19 +95,19 @@ var EditSettingsButton = function EditSettingsButton(props) {
     className: "popuptext ".concat(row.editing ? 'show' : '')
   }, _react["default"].createElement("div", {
     onClick: function onClick(e) {
-      return changeSetting(e, row, 'true');
+      return changeSetting(e, row, _constants.SETTINGS_TRUE);
     }
   }, _react["default"].createElement("span", {
     className: value ? 'check' : 'empty-check'
   }), _react["default"].createElement("span", null, setToYesLabel)), _react["default"].createElement("div", {
     onClick: function onClick(e) {
-      return changeSetting(e, row, 'false');
+      return changeSetting(e, row, _constants.SETTINGS_FALSE);
     }
   }, _react["default"].createElement("span", {
     className: value ? 'empty-check' : 'check'
   }), _react["default"].createElement("span", null, setToNoLabel)), showInheritSettingsLabel && _react["default"].createElement("div", {
     onClick: function onClick(e) {
-      return changeSetting(e, row, 'inherit');
+      return changeSetting(e, row, _constants.SETTINGS_INHERIT);
     },
     className: "inherit-from"
   }, _react["default"].createElement("span", {
