@@ -81,7 +81,7 @@ Object {
         }
         setToNoLabel="Set to 'No'"
         setToYesLabel="Set to 'Yes'"
-        showInheritSettingsLabel={false}
+        showInheritSettingsLabel={true}
         value={true}
       />,
     ],

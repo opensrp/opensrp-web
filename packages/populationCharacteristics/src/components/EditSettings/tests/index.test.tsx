@@ -264,7 +264,7 @@ describe('components/Editsettings', () => {
         expect(wrapper.find('tbody tr').length).toEqual(3);
 
         // inhert setting works correctly
-        const editButton = wrapper.find('.popup a').at(0);
+        const editButton = wrapper.find('.popup a').at(1);
         expect(editButton.text()).toEqual('Edit');
         expect(wrapper.find('.popup .show').length).toEqual(0);
 
@@ -281,7 +281,7 @@ describe('components/Editsettings', () => {
             wrapper.update();
         });
         expect(fetch).toHaveBeenCalledWith(
-            `https://test-example.com/opensrp/rest/v2/settings/${setting3.settingMetadataId}`,
+            `https://test-example.com/opensrp/rest/v2/settings/${setting2.settingMetadataId}`,
             {
                 headers: {
                     accept: 'application/json',
