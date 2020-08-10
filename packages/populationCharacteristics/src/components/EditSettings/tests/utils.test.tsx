@@ -1,11 +1,16 @@
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
-import { onEditSuccess } from '../utils';
+import { onEditSuccess, editSetting } from '../utils';
 import { setting1, setting2, setting3, setting4, locHierarchy } from './fixtures';
 import locationReducer, { fetchLocs, locationReducerName } from '../../../ducks/locations';
 import settingsReducer, { fetchLocSettings, settingsReducerName } from '../../../ducks/settings';
+import { getFetchOptions } from '@opensrp/server-service';
+import flushPromises from 'flush-promises';
 
 reducerRegistry.register(settingsReducerName, settingsReducer);
 reducerRegistry.register(locationReducerName, locationReducer);
+
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const fetch = require('jest-fetch-mock');
 
 describe('src/components/EditSettings/utils/onEditSuccess', () => {
     beforeAll(() => {
@@ -55,5 +60,202 @@ describe('src/components/EditSettings/utils/onEditSuccess', () => {
 
         onEditSuccess(store.getState(), setting2, 'true', mockFetchSettings, setting2.locationId);
         expect(mockFetchSettings).not.toBeCalled();
+    });
+});
+
+describe('src/components/EditSettings/utils/editSetting', () => {
+    beforeAll(() => {
+        store.dispatch(fetchLocs(locHierarchy));
+        store.dispatch(fetchLocSettings([setting1, setting2], '02ebbc84-5e29-4cd5-9b79-c594058923e9'));
+        store.dispatch(fetchLocSettings([setting2, setting3, setting4], '8340315f-48e4-4768-a1ce-414532b4c49b'));
+    });
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+        jest.resetAllMocks();
+    });
+
+    const settingsEndpoint = 'settings/';
+    const v2BaseUrl = 'https://test-example.com/opensrp/rest/v2/';
+
+    it('does not update setting if value is equal to current value', () => {
+        const mockFetchSettings = jest.fn();
+
+        editSetting(
+            store.getState(),
+            setting2,
+            'true',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            setting2.locationId,
+        );
+        expect(fetch).not.toBeCalled();
+    });
+
+    it('updates correctly, if the setting is inherited', () => {
+        const mockFetchSettings = jest.fn();
+        editSetting(
+            store.getState(),
+            setting4,
+            'inherit',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            setting4.locationId,
+        );
+        expect(fetch).toHaveBeenCalledWith(
+            `https://test-example.com/opensrp/rest/v2/settings/${setting4.settingMetadataId}`,
+            {
+                headers: {
+                    accept: 'application/json',
+                    authorization: 'Bearer hunter2',
+                    'content-type': 'application/json;charset=UTF-8',
+                },
+                method: 'DELETE',
+            },
+        );
+    });
+
+    it('creates setting if active location id is not equal to setting location id', () => {
+        const mockFetchSettings = jest.fn();
+        const activeLocationId = setting1.locationId;
+        editSetting(
+            store.getState(),
+            setting4,
+            'false',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            activeLocationId,
+        );
+        expect(fetch).toHaveBeenCalledWith('https://test-example.com/opensrp/rest/v2/settings/', {
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
+            body: JSON.stringify({
+                description: setting4.description,
+                identifier: 'population_characteristics',
+                key: setting4.key,
+                label: setting4.label,
+                locationId: activeLocationId,
+                settingsId: setting4.documentId,
+                type: setting4.type,
+                value: 'false',
+                team: setting4.team,
+                teamId: setting4.teamId,
+                providerId: setting4.providerId,
+            }),
+            headers: {
+                accept: 'application/json',
+                authorization: 'Bearer hunter2',
+                'content-type': 'application/json;charset=UTF-8',
+            },
+            method: 'POST',
+        });
+    });
+
+    it('updates correctly if active location id is equal to setting location id', () => {
+        const mockFetchSettings = jest.fn();
+        const activeLocationId = setting4.locationId;
+        editSetting(
+            store.getState(),
+            setting4,
+            'false',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            activeLocationId,
+        );
+        expect(fetch).toHaveBeenCalledWith(
+            `https://test-example.com/opensrp/rest/v2/settings/${setting4.settingMetadataId}`,
+            {
+                'Cache-Control': 'no-cache',
+                Pragma: 'no-cache',
+                body: JSON.stringify({
+                    _id: setting4.settingMetadataId,
+                    description: setting4.description,
+                    identifier: 'population_characteristics',
+                    key: setting4.key,
+                    label: setting4.label,
+                    locationId: setting4.locationId,
+                    uuid: setting4.uuid,
+                    settingsId: setting4.documentId,
+                    type: setting1.type,
+                    value: 'false',
+                    team: setting4.team,
+                    teamId: setting4.teamId,
+                    providerId: setting4.providerId,
+                }),
+                headers: {
+                    accept: 'application/json',
+                    authorization: 'Bearer hunter2',
+                    'content-type': 'application/json;charset=UTF-8',
+                },
+                method: 'PUT',
+            },
+        );
+    });
+
+    it('displays custom alert if updating inherited setting fails', async () => {
+        fetch.mockReject('API is down');
+        const mockFetchSettings = jest.fn();
+        const customAlertMock = jest.fn();
+        editSetting(
+            store.getState(),
+            setting4,
+            'inherit',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            setting4.locationId,
+            customAlertMock,
+        );
+        await flushPromises();
+        expect(customAlertMock).toHaveBeenCalledWith('API is down', { type: 'error' });
+    });
+
+    it('displays custom alert if active location id is not equal to setting location id fails', async () => {
+        fetch.mockReject('API is down');
+        const mockFetchSettings = jest.fn();
+        const customAlertMock = jest.fn();
+        const activeLocationId = setting1.locationId;
+        editSetting(
+            store.getState(),
+            setting4,
+            'false',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            activeLocationId,
+            customAlertMock,
+        );
+        await flushPromises();
+        expect(customAlertMock).toHaveBeenCalledWith('API is down', { type: 'error' });
+    });
+
+    it('displays custom alert if active location id is equal to setting location id fails', async () => {
+        fetch.mockReject('API is down');
+        const mockFetchSettings = jest.fn();
+        const customAlertMock = jest.fn();
+        const activeLocationId = setting4.locationId;
+        editSetting(
+            store.getState(),
+            setting4,
+            'false',
+            v2BaseUrl,
+            settingsEndpoint,
+            getFetchOptions,
+            mockFetchSettings,
+            activeLocationId,
+            customAlertMock,
+        );
+        await flushPromises();
+        expect(customAlertMock).toHaveBeenCalledWith('API is down', { type: 'error' });
     });
 });

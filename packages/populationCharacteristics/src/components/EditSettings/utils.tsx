@@ -91,7 +91,7 @@ export const editSetting = async (
             delete data.uuid;
             delete data._id;
             const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-            return await clientService
+            await clientService
                 .create(data)
                 .then(() => {
                     onEditSuccess(state, row, value, fetchSettings, activeLocationId);
