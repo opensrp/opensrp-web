@@ -15,7 +15,7 @@ import settingsReducer, {
     removeLocSettingAction,
 } from '../../../ducks/settings';
 import locationReducer, { fetchLocs, locationReducerName as LocsReducerName } from '../../../ducks/locations';
-import { locHierarchy, allSettings2, setting3, setting4 } from './fixtures';
+import { locHierarchy, setting3, setting4 } from './fixtures';
 import { setting1, setting2 } from './fixtures';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');

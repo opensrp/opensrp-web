@@ -19,8 +19,9 @@ import {
 import { LocationMenu } from '../LocationsMenu';
 import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
-import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
-import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE, SETTINGS_INHERIT } from '../../constants';
+import { labels, EditSettingsButton } from '../../helpers/utils';
+import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
+import { editSetting } from './utils';
 
 /** reqister search and question mark icons */
 library.add(faSearch, faQuestionCircle);
@@ -178,77 +179,19 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
     };
 
-    // update setting
-    const updateSetting = (row: Setting, value: SettingValue) => {
-        if (row.value === value) {
-            return;
-        }
-
-        if (value !== SETTINGS_INHERIT) {
-            // We set the new value and make sure to override inheritedFrom
-            // to none
-            fetchSettings([{ ...row, value, inheritedFrom: '' }], activeLocationId);
-        } else {
-            // Get the parent of this location
-            const locationDetails = getLocDetails(state, row.locationId);
-            const parentId = locationDetails.node.parentLocation?.locationId;
-
-            if (parentId) {
-                fetchSettings([{ ...row, value, inheritedFrom: parentId }], activeLocationId);
-            } else {
-                fetchSettings([{ ...row, value }], activeLocationId);
-            }
-        }
-    };
-
-    // update setting
-    const changeSetting = async (e: MouseEvent, row: Setting, value: SettingValue) => {
+    const editSettingHandler = async (e: MouseEvent, row: Setting, value: SettingValue) => {
         e.preventDefault();
-
-        if (value === row.value) {
-            return false;
-        }
-
-        if (value === SETTINGS_INHERIT) {
-            const deleteUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-            const clientService = new OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
-            await clientService
-                .delete()
-                .then(() => {
-                    updateSetting(row, value);
-                })
-                .catch(error => {
-                    customAlert && customAlert(String(error), { type: 'error' });
-                });
-        } else {
-            const data = preparePutData(row, value);
-
-            if (activeLocationId !== row.locationId) {
-                data.locationId = activeLocationId;
-                delete data.uuid;
-                delete data._id;
-                const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-                return await clientService
-                    .create(data)
-                    .then(() => {
-                        updateSetting(row, value);
-                    })
-                    .catch(error => {
-                        customAlert && customAlert(String(error), { type: 'error' });
-                    });
-            } else {
-                const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-                const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
-                await clientService
-                    .update(data)
-                    .then(() => {
-                        updateSetting(row, value);
-                    })
-                    .catch(error => {
-                        customAlert && customAlert(String(error), { type: 'error' });
-                    });
-            }
-        }
+        editSetting(
+            state,
+            row,
+            value,
+            v2BaseUrl,
+            settingsEndpoint,
+            getPayload,
+            fetchSettings,
+            activeLocationId,
+            customAlert,
+        );
     };
 
     // update active location
@@ -353,7 +296,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 inheritedFrom,
                 <EditSettingsButton
                     key={row.documentId}
-                    changeSetting={changeSetting}
+                    changeSetting={editSettingHandler}
                     editLabel={editLabel}
                     inheritSettingsLabel={inheritSettingsLabel}
                     openEditModal={openEditModal}

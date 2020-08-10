@@ -47,6 +47,8 @@ var _utils = require("../../helpers/utils");
 
 var _constants = require("../../constants");
 
+var _utils2 = require("./utils");
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -244,111 +246,16 @@ var EditSetings = function EditSetings(props) {
     })], activeLocationId);
   };
 
-  var updateSetting = function updateSetting(row, value) {
-    if (row.value === value) {
-      return;
-    }
-
-    if (value !== _constants.SETTINGS_INHERIT) {
-      fetchSettings([_objectSpread({}, row, {
-        value: value,
-        inheritedFrom: ''
-      })], activeLocationId);
-    } else {
-      var _locationDetails$node;
-
-      var _locationDetails = (0, _locations.getLocDetails)(state, row.locationId);
-
-      var parentId = (_locationDetails$node = _locationDetails.node.parentLocation) === null || _locationDetails$node === void 0 ? void 0 : _locationDetails$node.locationId;
-
-      if (parentId) {
-        fetchSettings([_objectSpread({}, row, {
-          value: value,
-          inheritedFrom: parentId
-        })], activeLocationId);
-      } else {
-        fetchSettings([_objectSpread({}, row, {
-          value: value
-        })], activeLocationId);
-      }
-    }
-  };
-
-  var changeSetting = function () {
+  var editSettingHandler = function () {
     var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
-      var deleteUrl, clientService, data, _clientService, putUrl, _clientService2;
-
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
+              (0, _utils2.editSetting)(state, row, value, v2BaseUrl, settingsEndpoint, getPayload, fetchSettings, activeLocationId, customAlert);
 
-              if (!(value === row.value)) {
-                _context3.next = 3;
-                break;
-              }
-
-              return _context3.abrupt("return", false);
-
-            case 3:
-              if (!(value === _constants.SETTINGS_INHERIT)) {
-                _context3.next = 10;
-                break;
-              }
-
-              deleteUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-              clientService = new _serverService.OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
-              _context3.next = 8;
-              return clientService["delete"]().then(function () {
-                updateSetting(row, value);
-              })["catch"](function (error) {
-                customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              });
-
-            case 8:
-              _context3.next = 25;
-              break;
-
-            case 10:
-              data = (0, _utils.preparePutData)(row, value);
-
-              if (!(activeLocationId !== row.locationId)) {
-                _context3.next = 21;
-                break;
-              }
-
-              data.locationId = activeLocationId;
-              delete data.uuid;
-              delete data._id;
-              _clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context3.next = 18;
-              return _clientService.create(data).then(function () {
-                updateSetting(row, value);
-              })["catch"](function (error) {
-                customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              });
-
-            case 18:
-              return _context3.abrupt("return", _context3.sent);
-
-            case 21:
-              putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-              _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
-              _context3.next = 25;
-              return _clientService2.update(data).then(function () {
-                updateSetting(row, value);
-              })["catch"](function (error) {
-                customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              });
-
-            case 25:
+            case 2:
             case "end":
               return _context3.stop();
           }
@@ -356,7 +263,7 @@ var EditSetings = function EditSetings(props) {
       }, _callee3);
     }));
 
-    return function changeSetting(_x2, _x3, _x4) {
+    return function editSettingHandler(_x2, _x3, _x4) {
       return _ref3.apply(this, arguments);
     };
   }();
@@ -485,7 +392,7 @@ var EditSetings = function EditSetings(props) {
         key: row.key
       }, value ? 'Yes' : 'No'), inheritedFrom, _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
-        changeSetting: changeSetting,
+        changeSetting: editSettingHandler,
         editLabel: editLabel,
         inheritSettingsLabel: inheritSettingsLabel,
         openEditModal: openEditModal,
