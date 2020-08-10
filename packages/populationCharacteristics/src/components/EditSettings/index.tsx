@@ -180,6 +180,29 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     };
 
     // update setting
+    const updateSetting = (row: Setting, value: string) => {
+        if (row.value === value) {
+            return;
+        }
+
+        if (value !== 'inherit') {
+            // We set the new value and make sure to override inheritedFrom
+            // to none
+            fetchSettings([{ ...row, value, inheritedFrom: '' }], activeLocationId);
+        } else {
+            // Get the parent of this location
+            const locationDetails = getLocDetails(state, row.locationId);
+            const parentId = locationDetails.node.parentLocation?.locationId;
+
+            if (parentId) {
+                fetchSettings([{ ...row, value, inheritedFrom: parentId }], activeLocationId);
+            } else {
+                fetchSettings([{ ...row, value }], activeLocationId);
+            }
+        }
+    };
+
+    // update setting
     const changeSetting = async (e: MouseEvent, row: Setting, value: string) => {
         e.preventDefault();
 
@@ -193,7 +216,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             await clientService
                 .delete()
                 .then(() => {
-                    getLocationSettings(activeLocationId);
+                    updateSetting(row, value);
                 })
                 .catch(error => {
                     customAlert && customAlert(String(error), { type: 'error' });
@@ -209,8 +232,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 return await clientService
                     .create(data)
                     .then(() => {
-                        //fetchSettings([{ ...row, value }], activeLocationId);
-                        getLocationSettings(activeLocationId);
+                        updateSetting(row, value);
                     })
                     .catch(error => {
                         customAlert && customAlert(String(error), { type: 'error' });
@@ -221,8 +243,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                 await clientService
                     .update(data)
                     .then(() => {
-                        //fetchSettings([{ ...row, value }], activeLocationId);
-                        getLocationSettings(activeLocationId);
+                        updateSetting(row, value);
                     })
                     .catch(error => {
                         customAlert && customAlert(String(error), { type: 'error' });
@@ -312,12 +333,15 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         data: locSettings.map(row => {
             const value = typeof row.value === 'string' ? row.value === 'true' : row.value;
             let inheritedFrom = row.inheritedFrom?.trim();
+            let inheritedFromInvalid = false;
 
             if (inheritedFrom) {
                 const label = getLocDetails(state, inheritedFrom).label;
 
                 if (label) {
                     inheritedFrom = label;
+                } else {
+                    inheritedFromInvalid = true;
                 }
             } else {
                 inheritedFrom = '_';
@@ -338,7 +362,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
-                    showInheritSettingsLabel={defaultLocId !== row.locationId || !inheritedFrom}
+                    showInheritSettingsLabel={!row.inheritedFrom || inheritedFromInvalid}
                 />,
             ];
         }),

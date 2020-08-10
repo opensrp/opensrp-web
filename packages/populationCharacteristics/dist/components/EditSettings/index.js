@@ -245,6 +245,36 @@ var EditSetings = function EditSetings(props) {
     })], activeLoc);
   };
 
+  var updateSetting = function updateSetting(row, value) {
+    if (row.value === value) {
+      return;
+    }
+
+    if (value !== 'inherit') {
+      fetchSettings([_objectSpread({}, row, {
+        value: value,
+        inheritedFrom: ''
+      })], activeLocationId);
+    } else {
+      var _locationDetails$node;
+
+      var _locationDetails = (0, _locations.getLocDetails)(state, row.locationId);
+
+      var parentId = (_locationDetails$node = _locationDetails.node.parentLocation) === null || _locationDetails$node === void 0 ? void 0 : _locationDetails$node.locationId;
+
+      if (parentId) {
+        fetchSettings([_objectSpread({}, row, {
+          value: value,
+          inheritedFrom: parentId
+        })], activeLocationId);
+      } else {
+        fetchSettings([_objectSpread({}, row, {
+          value: value
+        })], activeLocationId);
+      }
+    }
+  };
+
   var changeSetting = function () {
     var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
       var deleteUrl, clientService, data, _clientService, putUrl, _clientService2;
@@ -272,7 +302,7 @@ var EditSetings = function EditSetings(props) {
               clientService = new _serverService.OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
               _context3.next = 8;
               return clientService["delete"]().then(function () {
-                getLocationSettings(activeLocationId);
+                updateSetting(row, value);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
@@ -297,7 +327,7 @@ var EditSetings = function EditSetings(props) {
               _clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
               _context3.next = 18;
               return _clientService.create(data).then(function () {
-                getLocationSettings(activeLocationId);
+                updateSetting(row, value);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
@@ -312,7 +342,7 @@ var EditSetings = function EditSetings(props) {
               _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
               _context3.next = 25;
               return _clientService2.update(data).then(function () {
-                getLocationSettings(activeLocationId);
+                updateSetting(row, value);
               })["catch"](function (error) {
                 customAlert && customAlert(String(error), {
                   type: 'error'
@@ -438,12 +468,15 @@ var EditSetings = function EditSetings(props) {
 
       var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
       var inheritedFrom = (_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim();
+      var inheritedFromInvalid = false;
 
       if (inheritedFrom) {
         var label = (0, _locations.getLocDetails)(state, inheritedFrom).label;
 
         if (label) {
           inheritedFrom = label;
+        } else {
+          inheritedFromInvalid = true;
         }
       } else {
         inheritedFrom = '_';
@@ -461,7 +494,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: defaultLocId !== row.locationId || !inheritedFrom
+        showInheritSettingsLabel: !row.inheritedFrom || inheritedFromInvalid
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
