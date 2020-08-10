@@ -70,10 +70,13 @@ export const editSetting = async (
     if (value === row.value) {
         return false;
     }
+    const endPoint =
+        value === SETTINGS_INHERIT || activeLocationId === row.locationId
+            ? `${settingsEndpoint}${row.settingMetadataId}`
+            : settingsEndpoint;
 
     if (value === SETTINGS_INHERIT) {
-        const deleteUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-        const clientService = new OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
+        const clientService = new OpenSRPService(v2BaseUrl, endPoint, getPayload);
 
         await clientService
             .delete()
@@ -90,7 +93,7 @@ export const editSetting = async (
             data.locationId = activeLocationId;
             delete data.uuid;
             delete data._id;
-            const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+            const clientService = new OpenSRPService(v2BaseUrl, endPoint, getPayload);
             await clientService
                 .create(data)
                 .then(() => {
@@ -100,8 +103,7 @@ export const editSetting = async (
                     customAlert && customAlert(String(error), { type: 'error' });
                 });
         } else {
-            const putUrl = `${settingsEndpoint}${row.settingMetadataId}`;
-            const clientService = new OpenSRPService(v2BaseUrl, putUrl, getPayload);
+            const clientService = new OpenSRPService(v2BaseUrl, endPoint, getPayload);
             await clientService
                 .update(data)
                 .then(() => {
