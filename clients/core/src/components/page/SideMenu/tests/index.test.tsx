@@ -34,13 +34,13 @@ describe('components/page/SideMenu', () => {
         ],
     };
 
-    /*it('renders without crashing', () => {
+    it('renders without crashing', () => {
         shallow(
             <Router history={history}>
                 <SideMenu {...sideMenuProps} />
             </Router>,
         );
-    });*/
+    });
 
     it('renders side menu correctly', () => {
         const wrapper = mount(
