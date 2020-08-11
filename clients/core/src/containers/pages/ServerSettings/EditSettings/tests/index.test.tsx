@@ -19,6 +19,9 @@ import { Router } from 'react-router';
 import { EditServerSettings } from '..';
 import store from '../../../../../store';
 import { allSettings, locHierarchy } from './fixtures';
+import toJson from 'enzyme-to-json';
+
+jest.mock('../../../../../configs/env');
 
 const history = createBrowserHistory();
 
@@ -35,21 +38,11 @@ describe('containers/pages/ConfigForm/manifest/draftFiles', () => {
         shallow(<EditServerSettings />);
     });
 
-    it('renders table correctly', async () => {
-        store.dispatch(fetchLocs(locHierarchy));
-        store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
-        store.dispatch(fetchLocSettings([allSettings[1]], '8400d475-3187-46e4-8980-7c6f0a243495'));
-        const mockList = jest.fn();
-        const mockUpdate = jest.fn();
-        const mockRead = jest.fn();
-        OpenSRPService.prototype.list = mockList;
-        mockList
-            .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
-            .mockReturnValueOnce(Promise.resolve(allSettings));
-        OpenSRPService.prototype.read = mockRead;
-        mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
-        OpenSRPService.prototype.update = mockUpdate;
-        mockUpdate.mockReturnValueOnce(Promise.resolve({}));
+    it('renders table correctly', () => {
+        /* eslint-disable-next-line @typescript-eslint/no-var-requires */
+        const envModule = require('../../../../../configs/env');
+        envModule.OPENSRP_API_BASE_URL = 'https://anc-stage.smartregister.org/opensrp/rest/';
+        envModule.OPENSRP_API_V2_BASE_URL = 'https://anc-stage.smartregister.org/opensrp/rest/v2/';
 
         const wrapper = mount(
             <Provider store={store}>
@@ -58,21 +51,9 @@ describe('containers/pages/ConfigForm/manifest/draftFiles', () => {
                 </Router>
             </Provider>,
         );
-        await act(async () => {
-            await flushPromises();
-            wrapper.update();
-        });
+
         const helmet = Helmet.peek();
         expect(helmet.title).toEqual('Server Settings');
-        // page header
-        expect(wrapper.find('.title h4').text()).toEqual('Server Settings (ME)');
-        // table rendered
-        expect(wrapper.find('ListView').length).toEqual(1);
-        expect(wrapper.find('ListView').props()).toMatchSnapshot();
-        expect(wrapper.find('tbody tr').length).toEqual(allSettings.length);
-        // search bar rendered
-        expect(wrapper.find('SearchForm').length).toEqual(1);
-        // location hierarchy rendered
-        expect(wrapper.find('LocationMenu').length).toEqual(1);
+        expect(wrapper.find('Connect(EditSetings)').props()).toMatchSnapshot();
     });
 });
