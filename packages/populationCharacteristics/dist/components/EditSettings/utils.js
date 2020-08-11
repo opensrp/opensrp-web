@@ -53,7 +53,7 @@ exports.onEditSuccess = onEditSuccess;
 
 var editSetting = function () {
   var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee(state, row, value, v2BaseUrl, settingsEndpoint, getPayload, fetchSettings, activeLocationId, customAlert) {
-    var deleteUrl, clientService, data, _clientService, putUrl, _clientService2;
+    var endPoint, clientService, data, _clientService, _clientService2;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -67,13 +67,14 @@ var editSetting = function () {
             return _context.abrupt("return", false);
 
           case 2:
+            endPoint = value === _constants.SETTINGS_INHERIT || activeLocationId === row.locationId ? "".concat(settingsEndpoint).concat(row.settingMetadataId) : settingsEndpoint;
+
             if (!(value === _constants.SETTINGS_INHERIT)) {
               _context.next = 9;
               break;
             }
 
-            deleteUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-            clientService = new _serverService.OpenSRPService(v2BaseUrl, deleteUrl, getPayload);
+            clientService = new _serverService.OpenSRPService(v2BaseUrl, endPoint, getPayload);
             _context.next = 7;
             return clientService["delete"]().then(function () {
               onEditSuccess(state, row, value, fetchSettings, activeLocationId);
@@ -84,21 +85,21 @@ var editSetting = function () {
             });
 
           case 7:
-            _context.next = 24;
+            _context.next = 22;
             break;
 
           case 9:
             data = (0, _utils.preparePutData)(row, value);
 
             if (!(activeLocationId !== row.locationId)) {
-              _context.next = 20;
+              _context.next = 19;
               break;
             }
 
             data.locationId = activeLocationId;
             delete data.uuid;
             delete data._id;
-            _clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+            _clientService = new _serverService.OpenSRPService(v2BaseUrl, endPoint, getPayload);
             _context.next = 17;
             return _clientService.create(data).then(function () {
               onEditSuccess(state, row, value, fetchSettings, activeLocationId);
@@ -109,12 +110,12 @@ var editSetting = function () {
             });
 
           case 17:
-            return _context.abrupt("return", _context.sent);
+            _context.next = 22;
+            break;
 
-          case 20:
-            putUrl = "".concat(settingsEndpoint).concat(row.settingMetadataId);
-            _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, putUrl, getPayload);
-            _context.next = 24;
+          case 19:
+            _clientService2 = new _serverService.OpenSRPService(v2BaseUrl, endPoint, getPayload);
+            _context.next = 22;
             return _clientService2.update(data).then(function () {
               onEditSuccess(state, row, value, fetchSettings, activeLocationId);
             })["catch"](function (error) {
@@ -123,7 +124,7 @@ var editSetting = function () {
               });
             });
 
-          case 24:
+          case 22:
           case "end":
             return _context.stop();
         }

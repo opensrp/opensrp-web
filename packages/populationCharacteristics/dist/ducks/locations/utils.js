@@ -20,7 +20,7 @@ function getLocationDetailsFromLocMap(locMap, locId) {
       locFound = true;
     } else {
       if (currentLocDetails.children) {
-        return getLocationDetailsFromLocMap(currentLocDetails.children, locId);
+        locDetails = getLocationDetailsFromLocMap(currentLocDetails.children, locId);
       }
     }
 

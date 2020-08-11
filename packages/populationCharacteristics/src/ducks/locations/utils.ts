@@ -22,7 +22,7 @@ export function getLocationDetailsFromLocMap(locMap: LocMap, locId: string): Loc
             locFound = true;
         } else {
             if (currentLocDetails.children) {
-                return getLocationDetailsFromLocMap(currentLocDetails.children, locId);
+                locDetails = getLocationDetailsFromLocMap(currentLocDetails.children, locId);
             }
         }
 

@@ -26,4 +26,4 @@ export declare const onEditSuccess: (state: Partial<Store<any, import("redux").A
  * @param activeLocationId - active location id
  * @param customAlert - a custom toast alert
  */
-export declare const editSetting: (state: Partial<Store<any, import("redux").AnyAction>>, row: Setting, value: SettingValue, v2BaseUrl: string, settingsEndpoint: string, getPayload: typeof getFetchOptions, fetchSettings: (settings: Setting[] | undefined, locId: string, replace?: boolean) => import("../../ducks/settings").FetchLocSettingsAction, activeLocationId: string, customAlert?: ((message: string, options: ToastOptions) => void) | undefined) => Promise<false | void>;
+export declare const editSetting: (state: Partial<Store<any, import("redux").AnyAction>>, row: Setting, value: SettingValue, v2BaseUrl: string, settingsEndpoint: string, getPayload: typeof getFetchOptions, fetchSettings: (settings: Setting[] | undefined, locId: string, replace?: boolean) => import("../../ducks/settings").FetchLocSettingsAction, activeLocationId: string, customAlert?: ((message: string, options: ToastOptions) => void) | undefined) => Promise<false | undefined>;
