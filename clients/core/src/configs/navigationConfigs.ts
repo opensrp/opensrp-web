@@ -121,7 +121,7 @@ const ADMIN_MODULE_PARENT_NAV: ModulePageLink = {
 };
 
 // nav module objects
-const CLIENT_NAVIGATION_MODULE: NavigationModule = {
+export const CLIENT_NAVIGATION_MODULE: NavigationModule = {
     childNavs: [
         ENABLE_CLIENT_PAGE && CLIENT_PAGE_NAVIGATION,
         ENABLE_HOUSEHOLD_PAGE && HOUSEHOLD_PAGE_NAVIGATION,
@@ -130,12 +130,12 @@ const CLIENT_NAVIGATION_MODULE: NavigationModule = {
     ].filter((childNav): childNav is PageLink => typeof childNav !== 'boolean'),
     parentNav: CLIENT_MODULE_PARENT_NAV,
 };
-const REPORT_NAVIGATION_MODULE: NavigationModule = {
+export const REPORT_NAVIGATION_MODULE: NavigationModule = {
     childNavs: [],
     parentNav: REPORT_MODULE_PARENT_NAV,
 };
 
-const ADMIN_NAVIGATION_MODULE: NavigationModule = {
+export const ADMIN_NAVIGATION_MODULE: NavigationModule = {
     childNavs: [
         ENABLE_USER_PAGE && USERS_PAGE_NAVIGATION,
         ENABLE_ROLE_PAGE && ROLES_PAGE_NAVIGATION,

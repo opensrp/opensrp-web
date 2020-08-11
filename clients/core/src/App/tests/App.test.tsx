@@ -8,6 +8,8 @@ import { Router } from 'react-router';
 import store from '../../store';
 import App from '../App';
 
+jest.mock('../../configs/env');
+
 const history = createBrowserHistory();
 
 describe('App', () => {
