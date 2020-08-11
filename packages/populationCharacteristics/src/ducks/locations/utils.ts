@@ -23,6 +23,10 @@ export function getLocationDetailsFromLocMap(locMap: LocMap, locId: string): Loc
         } else {
             if (currentLocDetails.children) {
                 locDetails = getLocationDetailsFromLocMap(currentLocDetails.children, locId);
+
+                if (Object.keys(locDetails).length) {
+                    locFound = true;
+                }
             }
         }
 
