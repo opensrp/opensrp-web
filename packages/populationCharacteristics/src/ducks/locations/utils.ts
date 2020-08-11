@@ -11,7 +11,7 @@ export function getLocationDetailsFromLocMap(locMap: LocMap, locId: string): Loc
     const locationIds = Object.keys(locMap);
     let i = 0;
     let locFound = false;
-    let locDetails = null;
+    let locDetails = {} as LocChildren;
 
     while (!locFound && i < locationIds.length) {
         const currentLocationId = locationIds[i];
@@ -29,5 +29,5 @@ export function getLocationDetailsFromLocMap(locMap: LocMap, locId: string): Loc
         i += 1;
     }
 
-    return locDetails || ({} as LocChildren);
+    return locDetails;
 }
