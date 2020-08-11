@@ -115,3 +115,38 @@ export const editSetting = async (
         }
     }
 };
+
+/**
+ * Checks if the inherited from value is a valid location in the location hierarchy
+ * @param state - redux store
+ * @param inheritedFrom - the location id the setting inherits from
+ */
+export const isInheritedFromValid = (state: Partial<Store>, inheritedFrom: string) => {
+    const label = getLocDetails(state, inheritedFrom).label;
+
+    if (!label) {
+        return false;
+    }
+
+    return true;
+};
+
+/**
+ * Returns the label to display when provided with the inherited from location id
+ * @param state - redux store
+ * @param inheritedFrom - the location id the setting inherits from
+ */
+
+export const getInheritedFromLabel = (state: Partial<Store>, inheritedFrom: string | undefined): string => {
+    if (inheritedFrom) {
+        const label = getLocDetails(state, inheritedFrom).label;
+
+        if (label) {
+            inheritedFrom = label;
+        }
+    } else {
+        inheritedFrom = '_';
+    }
+
+    return inheritedFrom;
+};

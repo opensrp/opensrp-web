@@ -21,7 +21,7 @@ import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/
 import { SearchForm } from '../SearchForm';
 import { labels, EditSettingsButton } from '../../helpers/utils';
 import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
-import { editSetting } from './utils';
+import { editSetting, getInheritedFromLabel, isInheritedFromValid } from './utils';
 
 /** reqister search and question mark icons */
 library.add(faSearch, faQuestionCircle);
@@ -274,26 +274,13 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const listViewProps = {
         data: locSettings.map(row => {
             const value = typeof row.value === 'string' ? row.value === SETTINGS_TRUE : row.value;
-            let inheritedFrom = row.inheritedFrom?.trim();
-            let inheritedFromInvalid = false;
-
-            if (inheritedFrom) {
-                const label = getLocDetails(state, inheritedFrom).label;
-
-                if (label) {
-                    inheritedFrom = label;
-                } else {
-                    inheritedFromInvalid = true;
-                }
-            } else {
-                inheritedFrom = '_';
-            }
+            const inheritedFrom = row.inheritedFrom?.trim();
 
             return [
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                inheritedFrom,
+                getInheritedFromLabel(state, inheritedFrom),
                 <EditSettingsButton
                     key={row.documentId}
                     changeSetting={editSettingHandler}
@@ -305,7 +292,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToYesLabel={setToYesLabel}
                     value={value}
                     showInheritSettingsLabel={
-                        (!row.inheritedFrom && activeLocationId !== defaultLocId) || inheritedFromInvalid
+                        (!row.inheritedFrom && activeLocationId !== defaultLocId) ||
+                        (!!inheritedFrom && !isInheritedFromValid(state, inheritedFrom))
                     }
                 />,
             ];

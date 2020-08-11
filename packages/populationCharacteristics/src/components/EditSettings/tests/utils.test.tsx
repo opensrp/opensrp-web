@@ -1,5 +1,5 @@
 import reducerRegistry, { store } from '@onaio/redux-reducer-registry';
-import { onEditSuccess, editSetting } from '../utils';
+import { onEditSuccess, editSetting, isInheritedFromValid, getInheritedFromLabel } from '../utils';
 import { setting1, setting2, setting3, setting4, locHierarchy } from './fixtures';
 import locationReducer, { fetchLocs, locationReducerName } from '../../../ducks/locations';
 import settingsReducer, { fetchLocSettings, settingsReducerName } from '../../../ducks/settings';
@@ -257,5 +257,41 @@ describe('src/components/EditSettings/utils/editSetting', () => {
         );
         await flushPromises();
         expect(customAlertMock).toHaveBeenCalledWith('API is down', { type: 'error' });
+    });
+});
+
+describe('src/components/EditSettings/utils/isInheritedFromValid', () => {
+    beforeAll(() => {
+        store.dispatch(fetchLocs(locHierarchy));
+    });
+
+    it('should return true if value is a valid location id', () => {
+        expect(isInheritedFromValid(store.getState(), '4e188e6d-2ffb-4b25-85f9-b9fbf5010d40')).toEqual(true);
+    });
+
+    it('should return false if value is NOT a valid location id', () => {
+        expect(isInheritedFromValid(store.getState(), '9188e6d-2ffb-4b25-85f9-b9fbf5010d40')).toEqual(false);
+    });
+});
+
+describe('src/components/EditSettings/utils/getInheritedFromLabel', () => {
+    beforeAll(() => {
+        store.dispatch(fetchLocs(locHierarchy));
+    });
+
+    it('returns correct label if value is undefine', () => {
+        expect(getInheritedFromLabel(store.getState(), undefined)).toEqual('_');
+    });
+
+    it('returns correct label if location id is valid', () => {
+        expect(getInheritedFromLabel(store.getState(), '4e188e6d-2ffb-4b25-85f9-b9fbf5010d40')).toEqual(
+            'Central Division',
+        );
+    });
+
+    it('returns the value if value if not a valid location id', () => {
+        expect(getInheritedFromLabel(store.getState(), '9188e6d-2ffb-4b25-85f9-b9fbf5010d40')).toEqual(
+            '9188e6d-2ffb-4b25-85f9-b9fbf5010d40',
+        );
     });
 });
