@@ -50,7 +50,12 @@ describe('App', () => {
         const mainPageWrapper = wrapper.find('div.container-section');
         expect(mainPageWrapper.length).toEqual(1);
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(
+            wrapper
+                .find('LinkAnchor')
+                .at(1)
+                .text(),
+        ).toEqual('Login');
         wrapper.unmount();
     });
 });
