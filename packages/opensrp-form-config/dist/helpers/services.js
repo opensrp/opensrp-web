@@ -57,6 +57,7 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
         var params,
             url,
             response,
+            status,
             defaultMessage,
             _args = arguments;
         return _regenerator["default"].wrap(function _callee$(_context) {
@@ -78,7 +79,7 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
                 response = _context.sent;
 
                 if (!response) {
-                  _context.next = 11;
+                  _context.next = 13;
                   break;
                 }
 
@@ -90,11 +91,19 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
                 return _context.abrupt("return", {});
 
               case 8:
-                defaultMessage = "OpenSRPService create on ".concat(this.endpoint, " failed, HTTP status ").concat(response === null || response === void 0 ? void 0 : response.status);
-                _context.next = 11;
+                status = "HTTP status ".concat(response === null || response === void 0 ? void 0 : response.status);
+                defaultMessage = "OpenSRPService create on ".concat(this.endpoint, " failed, ").concat(status);
+
+                if (!response.ok || response.text) {
+                  response.text().then(function (text) {
+                    defaultMessage = "".concat(text, ", ").concat(status);
+                  });
+                }
+
+                _context.next = 13;
                 return (0, _serverService.throwHTTPError)(response, defaultMessage);
 
-              case 11:
+              case 13:
               case "end":
                 return _context.stop();
             }
