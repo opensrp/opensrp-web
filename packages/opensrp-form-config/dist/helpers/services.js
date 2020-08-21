@@ -103,7 +103,7 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
 
                 _context.next = 14;
                 return response.text().then(function (text) {
-                  defaultMessage = "".concat(text, ", ").concat(status);
+                  defaultMessage = text.includes('html') || text.includes('doctype') ? defaultMessage : "".concat(text, ", ").concat(status);
                 });
 
               case 14:
