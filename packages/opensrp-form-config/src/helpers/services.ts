@@ -31,6 +31,7 @@ export class OpenSRPServiceExtend extends OpenSRPService {
             if (response.ok || response.status === 201) {
                 return {};
             }
+            const responseClone = response.clone();
             const status = `HTTP status ${response?.status}`;
             let defaultMessage = `OpenSRPService create on ${this.endpoint} failed, ${status}`;
             if (!response.ok || response.text) {
@@ -38,7 +39,7 @@ export class OpenSRPServiceExtend extends OpenSRPService {
                     defaultMessage = `${text}, ${status}`;
                 });
             }
-            await throwHTTPError(response, defaultMessage);
+            await throwHTTPError(responseClone, defaultMessage);
         }
     }
 }
