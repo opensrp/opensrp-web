@@ -79,7 +79,7 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
                 response = _context.sent;
 
                 if (!response) {
-                  _context.next = 13;
+                  _context.next = 15;
                   break;
                 }
 
@@ -94,16 +94,21 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
                 status = "HTTP status ".concat(response === null || response === void 0 ? void 0 : response.status);
                 defaultMessage = "OpenSRPService create on ".concat(this.endpoint, " failed, ").concat(status);
 
-                if (!response.ok || response.text) {
-                  response.text().then(function (text) {
-                    defaultMessage = "".concat(text, ", ").concat(status);
-                  });
+                if (!(!response.ok || response.text)) {
+                  _context.next = 13;
+                  break;
                 }
 
                 _context.next = 13;
-                return (0, _serverService.throwHTTPError)(response, defaultMessage);
+                return response.text().then(function (text) {
+                  defaultMessage = "".concat(text, ", ").concat(status);
+                });
 
               case 13:
+                _context.next = 15;
+                return (0, _serverService.throwHTTPError)(response, defaultMessage);
+
+              case 15:
               case "end":
                 return _context.stop();
             }
