@@ -374,23 +374,9 @@ var EditSetings = function EditSetings(props) {
 
       var value = typeof row.value === 'string' ? row.value === _constants.SETTINGS_TRUE : row.value;
       var inheritedFrom = (_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim();
-      var inheritedFromInvalid = false;
-
-      if (inheritedFrom) {
-        var label = (0, _locations.getLocDetails)(state, inheritedFrom).label;
-
-        if (label) {
-          inheritedFrom = label;
-        } else {
-          inheritedFromInvalid = true;
-        }
-      } else {
-        inheritedFrom = '_';
-      }
-
       return [row.label, row.description, _react["default"].createElement("p", {
         key: row.key
-      }, value ? 'Yes' : 'No'), inheritedFrom, _react["default"].createElement(_utils.EditSettingsButton, {
+      }, value ? 'Yes' : 'No'), (0, _utils2.getInheritedFromLabel)(state, inheritedFrom), _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
         changeSetting: editSettingHandler,
         editLabel: editLabel,
@@ -400,7 +386,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: !row.inheritedFrom && activeLocationId !== defaultLocId || inheritedFromInvalid
+        showInheritSettingsLabel: !inheritedFrom && activeLocationId !== defaultLocId || !!inheritedFrom && !(0, _utils2.isInheritedFromValid)(state, inheritedFrom)
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],

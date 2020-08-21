@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.editSetting = exports.onEditSuccess = void 0;
+exports.getInheritedFromLabel = exports.isInheritedFromValid = exports.editSetting = exports.onEditSuccess = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -138,3 +138,31 @@ var editSetting = function () {
 }();
 
 exports.editSetting = editSetting;
+
+var isInheritedFromValid = function isInheritedFromValid(state, inheritedFrom) {
+  var label = (0, _locations.getLocDetails)(state, inheritedFrom).label;
+
+  if (!label) {
+    return false;
+  }
+
+  return true;
+};
+
+exports.isInheritedFromValid = isInheritedFromValid;
+
+var getInheritedFromLabel = function getInheritedFromLabel(state, inheritedFrom) {
+  if (inheritedFrom) {
+    var label = (0, _locations.getLocDetails)(state, inheritedFrom).label;
+
+    if (label) {
+      inheritedFrom = label;
+    }
+  } else {
+    inheritedFrom = '_';
+  }
+
+  return inheritedFrom;
+};
+
+exports.getInheritedFromLabel = getInheritedFromLabel;

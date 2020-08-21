@@ -9,7 +9,7 @@ function getLocationDetailsFromLocMap(locMap, locId) {
   var locationIds = Object.keys(locMap);
   var i = 0;
   var locFound = false;
-  var locDetails = null;
+  var locDetails = {};
 
   while (!locFound && i < locationIds.length) {
     var currentLocationId = locationIds[i];
@@ -21,11 +21,15 @@ function getLocationDetailsFromLocMap(locMap, locId) {
     } else {
       if (currentLocDetails.children) {
         locDetails = getLocationDetailsFromLocMap(currentLocDetails.children, locId);
+
+        if (Object.keys(locDetails).length) {
+          locFound = true;
+        }
       }
     }
 
     i += 1;
   }
 
-  return locDetails || {};
+  return locDetails;
 }

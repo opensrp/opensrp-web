@@ -27,3 +27,15 @@ export declare const onEditSuccess: (state: Partial<Store<any, import("redux").A
  * @param customAlert - a custom toast alert
  */
 export declare const editSetting: (state: Partial<Store<any, import("redux").AnyAction>>, row: Setting, value: SettingValue, v2BaseUrl: string, settingsEndpoint: string, getPayload: typeof getFetchOptions, fetchSettings: (settings: Setting[] | undefined, locId: string, replace?: boolean) => import("../../ducks/settings").FetchLocSettingsAction, activeLocationId: string, customAlert?: ((message: string, options: ToastOptions) => void) | undefined) => Promise<false | undefined>;
+/**
+ * Checks if the inherited from value is a valid location in the location hierarchy
+ * @param state - redux store
+ * @param inheritedFrom - the location id the setting inherits from
+ */
+export declare const isInheritedFromValid: (state: Partial<Store<any, import("redux").AnyAction>>, inheritedFrom: string) => boolean;
+/**
+ * Returns the label to display when provided with the inherited from location id
+ * @param state - redux store
+ * @param inheritedFrom - the location id the setting inherits from
+ */
+export declare const getInheritedFromLabel: (state: Partial<Store<any, import("redux").AnyAction>>, inheritedFrom: string | undefined) => string;
