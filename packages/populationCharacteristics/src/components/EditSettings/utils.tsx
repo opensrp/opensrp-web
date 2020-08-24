@@ -68,7 +68,7 @@ export const editSetting = async (
     customAlert?: (message: string, options: ToastOptions) => void,
 ) => {
     if (value === row.value) {
-        return false;
+        return;
     }
     const endPoint =
         value === SETTINGS_INHERIT || activeLocationId === row.locationId

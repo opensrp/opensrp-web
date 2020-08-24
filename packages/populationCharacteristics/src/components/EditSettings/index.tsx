@@ -291,10 +291,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
-                    showInheritSettingsLabel={
-                        (!inheritedFrom && activeLocationId !== defaultLocId) ||
-                        (!!inheritedFrom && !isInheritedFromValid(state, inheritedFrom))
-                    }
+                    showInheritSettingsLabel={activeLocationId !== defaultLocId}
                 />,
             ];
         }),

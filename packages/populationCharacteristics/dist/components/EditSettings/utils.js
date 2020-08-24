@@ -64,7 +64,7 @@ var editSetting = function () {
               break;
             }
 
-            return _context.abrupt("return", false);
+            return _context.abrupt("return");
 
           case 2:
             endPoint = value === _constants.SETTINGS_INHERIT || activeLocationId === row.locationId ? "".concat(settingsEndpoint).concat(row.settingMetadataId) : settingsEndpoint;

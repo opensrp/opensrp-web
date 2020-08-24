@@ -57,7 +57,6 @@ select {
 .inherit-from {
     border-top: 1px solid grey;
     padding-top: 2px;
-    cursor: default !important;
 }
 
 .inherit-from span {
@@ -102,7 +101,7 @@ select {
     visibility: hidden;
     width: max-content;
     background-color: #f8f9fa;
-    color: #2a2525;
+    color: #3d6897;
     border-radius: 6px;
     padding: 8px 10px;
     position: absolute;

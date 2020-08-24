@@ -386,7 +386,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: !inheritedFrom && activeLocationId !== defaultLocId || !!inheritedFrom && !(0, _utils2.isInheritedFromValid)(state, inheritedFrom)
+        showInheritSettingsLabel: activeLocationId !== defaultLocId
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],

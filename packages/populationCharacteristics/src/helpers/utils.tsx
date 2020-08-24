@@ -109,17 +109,17 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
             </a>
             <div className={`popuptext ${row.editing ? 'show' : ''}`}>
                 <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
-                    <span className={value ? 'check' : 'empty-check'} />
+                    <span className={value && !row.inheritedFrom ? 'check' : 'empty-check'} />
                     <span>{setToYesLabel}</span>
                 </div>
                 <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
-                    <span className={value ? 'empty-check' : 'check'} />
+                    <span className={value || row.inheritedFrom ? 'empty-check' : 'check'} />
                     <span>{setToNoLabel}</span>
                 </div>
                 {showInheritSettingsLabel && (
                     <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
                         <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
-                        {inheritSettingsLabel}
+                        <span>{inheritSettingsLabel}</span>
                     </div>
                 )}
             </div>

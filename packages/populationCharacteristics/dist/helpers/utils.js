@@ -98,13 +98,13 @@ var EditSettingsButton = function EditSettingsButton(props) {
       return changeSetting(e, row, _constants.SETTINGS_TRUE);
     }
   }, _react["default"].createElement("span", {
-    className: value ? 'check' : 'empty-check'
+    className: value && !row.inheritedFrom ? 'check' : 'empty-check'
   }), _react["default"].createElement("span", null, setToYesLabel)), _react["default"].createElement("div", {
     onClick: function onClick(e) {
       return changeSetting(e, row, _constants.SETTINGS_FALSE);
     }
   }, _react["default"].createElement("span", {
-    className: value ? 'empty-check' : 'check'
+    className: value || row.inheritedFrom ? 'empty-check' : 'check'
   }), _react["default"].createElement("span", null, setToNoLabel)), showInheritSettingsLabel && _react["default"].createElement("div", {
     onClick: function onClick(e) {
       return changeSetting(e, row, _constants.SETTINGS_INHERIT);
@@ -112,7 +112,7 @@ var EditSettingsButton = function EditSettingsButton(props) {
     className: "inherit-from"
   }, _react["default"].createElement("span", {
     className: ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? 'check' : 'empty-check'
-  }), inheritSettingsLabel)));
+  }), _react["default"].createElement("span", null, inheritSettingsLabel))));
 };
 
 exports.EditSettingsButton = EditSettingsButton;
