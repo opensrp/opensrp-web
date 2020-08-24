@@ -56,6 +56,7 @@ var preparePutData = function preparePutData(data, value) {
 
 exports.preparePutData = preparePutData;
 var labels = {
+  actionLabel: _constants.ACTION_LABEL,
   descriptionLabel: _constants.DESCRIPTION_LABEL,
   editLabel: _constants.EDIT_LABEL,
   inheritedLable: _constants.INHERITED_FROM_LABEL,
@@ -80,7 +81,8 @@ var EditSettingsButton = function EditSettingsButton(props) {
       setToNoLabel = props.setToNoLabel,
       row = props.row,
       openEditModal = props.openEditModal,
-      changeSetting = props.changeSetting;
+      changeSetting = props.changeSetting,
+      showInheritSettingsLabel = props.showInheritSettingsLabel;
   return _react["default"].createElement("div", {
     className: "popup",
     key: row.key
@@ -93,17 +95,20 @@ var EditSettingsButton = function EditSettingsButton(props) {
     className: "popuptext ".concat(row.editing ? 'show' : '')
   }, _react["default"].createElement("div", {
     onClick: function onClick(e) {
-      return changeSetting(e, row, 'true');
+      return changeSetting(e, row, _constants.SETTINGS_TRUE);
     }
   }, _react["default"].createElement("span", {
     className: value ? 'check' : 'empty-check'
   }), _react["default"].createElement("span", null, setToYesLabel)), _react["default"].createElement("div", {
     onClick: function onClick(e) {
-      return changeSetting(e, row, 'false');
+      return changeSetting(e, row, _constants.SETTINGS_FALSE);
     }
   }, _react["default"].createElement("span", {
     className: value ? 'empty-check' : 'check'
-  }), _react["default"].createElement("span", null, setToNoLabel)), _react["default"].createElement("div", {
+  }), _react["default"].createElement("span", null, setToNoLabel)), showInheritSettingsLabel && _react["default"].createElement("div", {
+    onClick: function onClick(e) {
+      return changeSetting(e, row, _constants.SETTINGS_INHERIT);
+    },
     className: "inherit-from"
   }, _react["default"].createElement("span", {
     className: ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? 'check' : 'empty-check'

@@ -74,7 +74,9 @@ export default function reducer(state = initialState, action: LocSettingsTypes):
                 ...state,
                 settingsByLocId: {
                     ...state.settingsByLocId,
-                    [locId]: { ...(state.settingsByLocId as any)[locId], ...action.settingsByLocId[locId] },
+                    [locId]: action.replace
+                        ? { ...action.settingsByLocId[locId] }
+                        : { ...(state.settingsByLocId as any)[locId], ...action.settingsByLocId[locId] },
                 },
             });
         case REMOVE_LOC_SETTINGS:
@@ -94,7 +96,7 @@ export const removeLocSettingAction = () => ({
 });
 
 /** fetchLocSettings */
-export const fetchLocSettings = (settings: Setting[] = [], locId: string): FetchLocSettingsAction => ({
+export const fetchLocSettings = (settings: Setting[] = [], locId: string, replace = false): FetchLocSettingsAction => ({
     settingsByLocId: {
         [locId]: keyBy(
             settings.map((set: Setting) => {
@@ -106,6 +108,7 @@ export const fetchLocSettings = (settings: Setting[] = [], locId: string): Fetch
     },
     type: LOC_SETTINGS_FETCHED,
     locId,
+    replace,
 });
 
 /** getLocSettings - get get location settings

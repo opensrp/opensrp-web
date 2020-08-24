@@ -15,9 +15,8 @@ import settingsReducer, {
     removeLocSettingAction,
 } from '../../../ducks/settings';
 import locationReducer, { fetchLocs, locationReducerName as LocsReducerName } from '../../../ducks/locations';
-import { locHierarchy } from '../../../ducks/locations/tests/fixtures';
-import { allSettings } from '../../../ducks/settings/tests/fixtures';
-import { updateDate } from './fixtures';
+import { locHierarchy, setting3, setting4 } from './fixtures';
+import { setting1, setting2 } from './fixtures';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const fetch = require('jest-fetch-mock');
 
@@ -39,7 +38,7 @@ const props = {
     locationsEndpoint: 'location-tree',
     restBaseURL,
     secAuthEndpoint: 'security/authenticate',
-    settingsEndpoint: 'settings',
+    settingsEndpoint: 'settings/',
     v2BaseUrl: 'https://test-example.com/opensrp/rest/v2/',
 };
 
@@ -48,11 +47,17 @@ describe('components/Editsettings', () => {
         _.debounce = actualDebounce;
     });
 
+    beforeEach(() => {
+        jest.clearAllMocks();
+        jest.resetAllMocks();
+    });
+
     it('renders without crashing', () => {
         shallow(<EditSetings {...props} />);
     });
 
     it('renders correctly when connected to store', async () => {
+        const allSettings = [setting1, setting2];
         const mockList = jest.fn();
         const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
@@ -78,16 +83,16 @@ describe('components/Editsettings', () => {
         expect(mockList.mock.calls[1]).toEqual([
             {
                 identifier: 'population_characteristics',
-                locationId: '75af7700-a6f2-448c-a17d-816261a7749a',
+                locationId: '02ebbc84-5e29-4cd5-9b79-c594058923e9',
                 resolve: true,
                 serverVersion: 0,
             },
         ]);
 
         store.dispatch(fetchLocs(locHierarchy));
-        store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
+        store.dispatch(fetchLocSettings(allSettings, '02ebbc84-5e29-4cd5-9b79-c594058923e9'));
         wrapper.update();
-        expect(wrapper.find('.title h4').text()).toEqual('Server Settings (ME)');
+        expect(wrapper.find('.title h4').text()).toEqual('Server Settings (Uganda)');
         expect(wrapper.find('ListView').props()).toMatchSnapshot();
 
         expect(wrapper.find('tbody tr').length).toEqual(2);
@@ -100,7 +105,29 @@ describe('components/Editsettings', () => {
         editButton.simulate('click');
         wrapper.update();
         expect(wrapper.find('.popup .show').length).toEqual(1);
-        // false is checked
+        // Set to yes is not checked
+        expect(
+            wrapper
+                .find('.show div')
+                .at(0)
+                .find('.check').length,
+        ).toEqual(0);
+        // Set to no is checked
+        expect(
+            wrapper
+                .find('.show div')
+                .at(1)
+                .find('.check').length,
+        ).toEqual(1);
+
+        //click set to no nothing happens
+        await act(async () => {
+            wrapper
+                .find('.show div')
+                .at(1)
+                .simulate('click');
+            wrapper.update();
+        });
         expect(
             wrapper
                 .find('.show div')
@@ -113,21 +140,7 @@ describe('components/Editsettings', () => {
                 .at(1)
                 .find('.check').length,
         ).toEqual(1);
-        //click set to no nothing happens
-        await act(async () => {
-            wrapper
-                .find('.show div')
-                .at(1)
-                .simulate('click');
-            wrapper.update();
-        });
 
-        expect(
-            wrapper
-                .find('.show div')
-                .at(1)
-                .find('.check').length,
-        ).toEqual(1);
         // click set to yes
         await act(async () => {
             wrapper
@@ -137,18 +150,36 @@ describe('components/Editsettings', () => {
             await flushPromises();
             wrapper.update();
         });
-        expect(fetch).toHaveBeenCalledWith('https://test-example.com/opensrp/rest/v2/settings', {
-            'Cache-Control': 'no-cache',
-            Pragma: 'no-cache',
-            body: JSON.stringify(updateDate),
-            headers: {
-                accept: 'application/json',
-                authorization: 'Bearer hunter2',
-                'content-type': 'application/json;charset=UTF-8',
+        expect(fetch).toHaveBeenCalledWith(
+            `https://test-example.com/opensrp/rest/v2/settings/${setting1.settingMetadataId}`,
+            {
+                'Cache-Control': 'no-cache',
+                Pragma: 'no-cache',
+                body: JSON.stringify({
+                    _id: setting1.settingMetadataId,
+                    description: setting1.description,
+                    identifier: 'population_characteristics',
+                    key: setting1.key,
+                    label: setting1.label,
+                    locationId: setting1.locationId,
+                    uuid: setting1.uuid,
+                    settingsId: setting1.documentId,
+                    type: setting1.type,
+                    value: 'true',
+                    team: setting1.team,
+                    teamId: setting1.teamId,
+                    providerId: setting1.providerId,
+                }),
+                headers: {
+                    accept: 'application/json',
+                    authorization: 'Bearer hunter2',
+                    'content-type': 'application/json;charset=UTF-8',
+                },
+                method: 'PUT',
             },
-            method: 'PUT',
-        });
-        // true is now checked
+        );
+
+        // Set to yes is now checked
         expect(
             wrapper
                 .find('.show div')
@@ -165,15 +196,16 @@ describe('components/Editsettings', () => {
 
     it('location menu works correctly', async () => {
         store.dispatch(fetchLocs(locHierarchy));
-        store.dispatch(fetchLocSettings(allSettings, '75af7700-a6f2-448c-a17d-816261a7749a'));
-        store.dispatch(fetchLocSettings([allSettings[1]], '8400d475-3187-46e4-8980-7c6f0a243495'));
+        store.dispatch(fetchLocSettings([setting1, setting2], '02ebbc84-5e29-4cd5-9b79-c594058923e9'));
+        store.dispatch(fetchLocSettings([setting2, setting3, setting4], '8340315f-48e4-4768-a1ce-414532b4c49b'));
         const mockList = jest.fn();
         const mockUpdate = jest.fn();
         const mockRead = jest.fn();
         OpenSRPService.prototype.list = mockList;
         mockList
             .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
-            .mockReturnValueOnce(Promise.resolve(allSettings));
+            .mockReturnValueOnce(Promise.resolve([setting1, setting2]))
+            .mockReturnValue(Promise.resolve([setting2, setting3, setting4]));
         OpenSRPService.prototype.read = mockRead;
         mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
         OpenSRPService.prototype.update = mockUpdate;
@@ -199,18 +231,19 @@ describe('components/Editsettings', () => {
                 .find('.locations span')
                 .at(0)
                 .text(),
-        ).toEqual('ME');
+        ).toEqual('Uganda');
         await act(async () => {
             wrapper.find('.locations').simulate('click');
         });
         wrapper.update();
         expect(wrapper.find('.popup .show').length).toEqual(1);
-        expect(wrapper.find('.popup .show div').text()).toEqual('Lobi');
+        expect(wrapper.find('.popup .show div').text()).toEqual('Kampala');
         // click child location
         await act(async () => {
             wrapper.find('.popup .show div').simulate('click');
         });
         wrapper.update();
+        expect(wrapper.find('ListView').props()).toMatchSnapshot();
         expect(wrapper.find('.locations').length).toEqual(2);
         expect(
             wrapper
@@ -219,7 +252,7 @@ describe('components/Editsettings', () => {
                 .find('span')
                 .at(0)
                 .text(),
-        ).toEqual('ME');
+        ).toEqual('Uganda');
         expect(
             wrapper
                 .find('.locations')
@@ -227,8 +260,38 @@ describe('components/Editsettings', () => {
                 .find('span')
                 .at(0)
                 .text(),
-        ).toEqual('Lobi');
-        expect(wrapper.find('tbody tr').length).toEqual(1);
+        ).toEqual('Kampala');
+        expect(wrapper.find('tbody tr').length).toEqual(3);
+
+        // inhert setting works correctly
+        const editButton = wrapper.find('.popup a').at(1);
+        expect(editButton.text()).toEqual('Edit');
+        expect(wrapper.find('.popup .show').length).toEqual(0);
+
+        editButton.simulate('click');
+        wrapper.update();
+        expect(wrapper.find('.popup .show').length).toEqual(1);
+
+        await act(async () => {
+            wrapper
+                .find('.show div')
+                .at(2)
+                .simulate('click');
+            await flushPromises();
+            wrapper.update();
+        });
+        expect(fetch).toHaveBeenCalledWith(
+            `https://test-example.com/opensrp/rest/v2/settings/${setting2.settingMetadataId}`,
+            {
+                headers: {
+                    accept: 'application/json',
+                    authorization: 'Bearer hunter2',
+                    'content-type': 'application/json;charset=UTF-8',
+                },
+                method: 'DELETE',
+            },
+        );
+
         // go back to previous location
         wrapper
             .find('.locations')
@@ -243,18 +306,19 @@ describe('components/Editsettings', () => {
             search.simulate('input', { target: { value: 'test search' } });
         });
         wrapper.update();
-        expect(wrapper.find('tbody tr').length).toEqual(0);
+        expect(wrapper.find('tbody tr').length).toEqual(3);
 
         await act(async () => {
             search.simulate('input', { target: { value: '    ' } });
         });
         wrapper.update();
-        expect(wrapper.find('tbody tr').length).toEqual(2);
+        expect(wrapper.find('tbody tr').length).toEqual(3);
 
         await act(async () => {
             search.simulate('input', { target: { value: 'Undernourished prevalence' } });
         });
         wrapper.update();
+        await flushPromises();
         expect(wrapper.find('tbody tr').length).toEqual(1);
     });
 
@@ -267,7 +331,7 @@ describe('components/Editsettings', () => {
         OpenSRPService.prototype.list = mockList;
         mockList
             .mockReturnValueOnce(Promise.resolve({ locations: locHierarchy }))
-            .mockReturnValueOnce(Promise.resolve(allSettings));
+            .mockReturnValueOnce(Promise.resolve([setting1, setting2]));
         OpenSRPService.prototype.read = mockRead;
         mockRead.mockReturnValueOnce(Promise.resolve(locHierarchy));
 
@@ -278,8 +342,10 @@ describe('components/Editsettings', () => {
                 </Router>
             </Provider>,
         );
-        await flushPromises();
-        wrapper.update();
+        await act(async () => {
+            await flushPromises();
+            wrapper.update();
+        });
         expect(wrapper.find('.no-data').text()).toEqual('No data found');
     });
 });

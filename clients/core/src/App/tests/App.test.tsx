@@ -8,6 +8,8 @@ import { Router } from 'react-router';
 import store from '../../store';
 import App from '../App';
 
+jest.mock('../../configs/env');
+
 const history = createBrowserHistory();
 
 describe('App', () => {
@@ -48,7 +50,12 @@ describe('App', () => {
         const mainPageWrapper = wrapper.find('div.container-section');
         expect(mainPageWrapper.length).toEqual(1);
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(
+            wrapper
+                .find('LinkAnchor')
+                .at(1)
+                .text(),
+        ).toEqual('Login');
         wrapper.unmount();
     });
 });

@@ -37,7 +37,7 @@ function reducer() {
     case LOC_SETTINGS_FETCHED:
       var locId = action.locId;
       return (0, _seamlessImmutable["default"])(_objectSpread({}, state, {
-        settingsByLocId: _objectSpread({}, state.settingsByLocId, (0, _defineProperty2["default"])({}, locId, _objectSpread({}, state.settingsByLocId[locId], {}, action.settingsByLocId[locId])))
+        settingsByLocId: _objectSpread({}, state.settingsByLocId, (0, _defineProperty2["default"])({}, locId, action.replace ? _objectSpread({}, action.settingsByLocId[locId]) : _objectSpread({}, state.settingsByLocId[locId], {}, action.settingsByLocId[locId])))
       }));
 
     case REMOVE_LOC_SETTINGS:
@@ -62,6 +62,7 @@ exports.removeLocSettingAction = removeLocSettingAction;
 var fetchLocSettings = function fetchLocSettings() {
   var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var locId = arguments.length > 1 ? arguments[1] : undefined;
+  var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   return {
     settingsByLocId: (0, _defineProperty2["default"])({}, locId, (0, _lodash.keyBy)(settings.map(function (set) {
       set['editing'] = set['editing'] ? set['editing'] : false;
@@ -70,7 +71,8 @@ var fetchLocSettings = function fetchLocSettings() {
       return setting.settingMetadataId;
     })),
     type: LOC_SETTINGS_FETCHED,
-    locId: locId
+    locId: locId,
+    replace: replace
   };
 };
 

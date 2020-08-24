@@ -4,6 +4,9 @@ import React, { useEffect, MouseEvent, useState, ChangeEvent } from 'react';
 import { Store } from 'redux';
 import { Setting, getLocSettings, fetchLocSettings } from '../../ducks/settings';
 import { connect } from 'react-redux';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import {
     fetchLocs,
     getActiveLocId,
@@ -14,10 +17,14 @@ import {
     getDefaultLocId,
 } from '../../ducks/locations';
 import { LocationMenu } from '../LocationsMenu';
-import { FormConfigProps, EditSettingLabels } from '../../helpers/types';
+import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
-import { preparePutData, labels, EditSettingsButton } from '../../helpers/utils';
-import { POP_CHARACTERISTICS_PARAM } from '../../constants';
+import { labels, EditSettingsButton } from '../../helpers/utils';
+import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
+import { editSetting, getInheritedFromLabel, isInheritedFromValid } from './utils';
+
+/** reqister search and question mark icons */
+library.add(faSearch, faQuestionCircle);
 
 /** dafault edit settings interface */
 interface EditSettingsDefaultProps {
@@ -32,6 +39,7 @@ interface EditSettingsDefaultProps {
     locationSettings: Setting[];
     selectedLocations: string[];
     state: Partial<Store>;
+    tableClass: string;
 }
 
 /** component for displaying population characteristics */
@@ -57,9 +65,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         customAlert,
         debounceTime,
         v2BaseUrl,
+        tableClass,
     } = props;
 
     const {
+        actionLabel,
         pageTitle,
         placeholder,
         descriptionLabel,
@@ -81,8 +91,8 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
      * gets settings of a particular location
      * @param {string} currentLocId
      */
-    const getLocationSettings = (currentLocId: string) => {
-        setLoading(true);
+    const getLocationSettings = async (currentLocId: string) => {
+        setLoading(locationSettings.length < 1);
         const params = {
             identifier: POP_CHARACTERISTICS_PARAM,
             locationId: currentLocId,
@@ -90,7 +100,13 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             serverVersion: 0,
         };
         const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-        return clientService.list(params);
+        await clientService
+            .list(params)
+            .then((res: Setting[]) => {
+                fetchSettings(res, currentLocId, true);
+            })
+            .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
+            .finally(() => setLoading(false));
     };
 
     /**
@@ -116,11 +132,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             const { map: userLocMap } = userLocs.locations.locationsHierarchy;
             const userLocId = Object.keys(userLocMap)[0];
             const hierarchy = await getLocations(userLocId);
-            const { map } = hierarchy.locationsHierarchy;
-            const locId = Object.keys(map)[0];
-            const settings = await getLocationSettings(locId);
             fetchLocations(hierarchy);
-            fetchSettings(settings, locId);
         } catch (error) {
             customAlert && customAlert(String(error), { type: 'error' });
         } finally {
@@ -133,6 +145,12 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             getLocsandSettings();
         }
     }, []);
+
+    useEffect(() => {
+        if (activeLocationId) {
+            getLocationSettings(activeLocationId);
+        }
+    }, [props.activeLocationId]);
 
     useEffect(() => {
         setLocSettings(props.locationSettings);
@@ -158,28 +176,22 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
-        const activeLoc = activeLocationId;
-        fetchSettings([{ ...row, editing: !row.editing }], activeLoc);
+        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
     };
 
-    // update setting
-    const changeSetting = async (e: MouseEvent, row: Setting, value: string) => {
+    const editSettingHandler = async (e: MouseEvent, row: Setting, value: SettingValue) => {
         e.preventDefault();
-        if (value === row.value) {
-            return false;
-        }
-        const activeLoc = activeLocationId;
-        const data = preparePutData(row, value);
-        const clientService = new OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-        await clientService
-            .update(data)
-            .then(() => {
-                fetchSettings([{ ...row, value }], activeLoc);
-            })
-            .catch(error => {
-                customAlert && customAlert(String(error), { type: 'error' });
-            })
-            .finally(() => setLoading(false));
+        editSetting(
+            state,
+            row,
+            value,
+            v2BaseUrl,
+            settingsEndpoint,
+            getPayload,
+            fetchSettings,
+            activeLocationId,
+            customAlert,
+        );
     };
 
     // update active location
@@ -214,13 +226,6 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     const loadLocsettings = async (e: MouseEvent, activeLocId: string) => {
         e.preventDefault();
         const selectedLocs = [...selectedLocations, activeLocId];
-        const locSettings = getLocSettings(state, activeLocId);
-        if (!locSettings.length) {
-            await getLocationSettings(activeLocId)
-                .then((res: Setting[]) => fetchSettings(res, activeLocId))
-                .catch(error => customAlert && customAlert(String(error), { type: 'error' }))
-                .finally(() => setLoading(false));
-        }
         const data: LocPayload = {
             locationsHierarchy: {
                 map: {},
@@ -258,18 +263,27 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
     }
 
+    // adds question mark to inherited from header
+    const iheritedFrom = (
+        <span>
+            {inheritedLable} <FontAwesomeIcon icon="question-circle" />
+        </span>
+    );
+
     // construct table data and headers
     const listViewProps = {
         data: locSettings.map(row => {
-            const value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+            const value = typeof row.value === 'string' ? row.value === SETTINGS_TRUE : row.value;
+            const inheritedFrom = row.inheritedFrom?.trim();
+
             return [
                 row.label,
                 row.description,
                 <p key={row.key}>{value ? 'Yes' : 'No'}</p>,
-                row.inheritedFrom?.trim() || '_',
+                getInheritedFromLabel(state, inheritedFrom),
                 <EditSettingsButton
                     key={row.documentId}
-                    changeSetting={changeSetting}
+                    changeSetting={editSettingHandler}
                     editLabel={editLabel}
                     inheritSettingsLabel={inheritSettingsLabel}
                     openEditModal={openEditModal}
@@ -277,11 +291,15 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
+                    showInheritSettingsLabel={
+                        (!inheritedFrom && activeLocationId !== defaultLocId) ||
+                        (!!inheritedFrom && !isInheritedFromValid(state, inheritedFrom))
+                    }
                 />,
             ];
         }),
-        headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],
-        tableClass: 'table table-striped',
+        headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
+        tableClass,
     };
 
     const searchProps = {
@@ -322,6 +340,7 @@ const defaultProps: EditSettingsDefaultProps = {
     locationSettings: [],
     selectedLocations: [],
     state: {},
+    tableClass: 'table table-striped',
 };
 
 EditSetings.defaultProps = defaultProps;
@@ -341,10 +360,11 @@ const mapStateToProps = (state: Partial<Store>) => {
     let locationSettings: Setting[] = [];
     let currentLocName = '';
     if (defaultLocId && activeLocationId && selectedLocations.length) {
-        locationDetails = getLocDetails(state, [defaultLocId]);
-        currentLocName = getLocDetails(state, selectedLocations).label;
+        locationDetails = getLocDetails(state, defaultLocId);
+        currentLocName = getLocDetails(state, selectedLocations[selectedLocations.length - 1]).label;
         locationSettings = getLocSettings(state, activeLocationId);
     }
+
     return {
         activeLocationId,
         selectedLocations,

@@ -61,7 +61,7 @@ export declare const removeLocSettingAction: () => {
     type: string;
 };
 /** fetchLocSettings */
-export declare const fetchLocSettings: (settings: Setting[] | undefined, locId: string) => FetchLocSettingsAction;
+export declare const fetchLocSettings: (settings: Setting[] | undefined, locId: string, replace?: boolean) => FetchLocSettingsAction;
 /** getLocSettings - get get location settings
  * @param {Partial<Store>} state - the redux store
  * @param {locId} string - the location id

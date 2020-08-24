@@ -1,5 +1,6 @@
 import { getFetchOptions } from '@opensrp/server-service';
 import { ToastOptions } from 'react-toastify';
+import { SETTINGS_FALSE, SETTINGS_TRUE, SETTINGS_INHERIT } from '../constants';
 
 /** form config default component props types */
 export interface FormConfigProps {
@@ -16,6 +17,7 @@ export interface FormConfigProps {
 
 /** interface for all displayed strings */
 export interface EditSettingLabels {
+    actionLabel: string;
     descriptionLabel: string;
     editLabel: string;
     inheritedLable: string;
@@ -28,3 +30,6 @@ export interface EditSettingLabels {
     setToNoLabel: string;
     setToYesLabel: string;
 }
+
+/** Types for setting values */
+export type SettingValue = typeof SETTINGS_TRUE | typeof SETTINGS_FALSE | typeof SETTINGS_INHERIT;

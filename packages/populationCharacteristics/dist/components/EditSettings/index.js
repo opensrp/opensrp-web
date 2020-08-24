@@ -31,6 +31,12 @@ var _settings = require("../../ducks/settings");
 
 var _reactRedux = require("react-redux");
 
+var _fontawesomeSvgCore = require("@fortawesome/fontawesome-svg-core");
+
+var _reactFontawesome = require("@fortawesome/react-fontawesome");
+
+var _freeSolidSvgIcons = require("@fortawesome/free-solid-svg-icons");
+
 var _locations = require("../../ducks/locations");
 
 var _LocationsMenu = require("../LocationsMenu");
@@ -41,9 +47,13 @@ var _utils = require("../../helpers/utils");
 
 var _constants = require("../../constants");
 
+var _utils2 = require("./utils");
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+_fontawesomeSvgCore.library.add(_freeSolidSvgIcons.faSearch, _freeSolidSvgIcons.faQuestionCircle);
 
 var EditSetings = function EditSetings(props) {
   var labels = props.labels,
@@ -65,8 +75,10 @@ var EditSetings = function EditSetings(props) {
       settingsEndpoint = props.settingsEndpoint,
       customAlert = props.customAlert,
       debounceTime = props.debounceTime,
-      v2BaseUrl = props.v2BaseUrl;
-  var pageTitle = labels.pageTitle,
+      v2BaseUrl = props.v2BaseUrl,
+      tableClass = props.tableClass;
+  var actionLabel = labels.actionLabel,
+      pageTitle = labels.pageTitle,
       placeholder = labels.placeholder,
       descriptionLabel = labels.descriptionLabel,
       nameLabel = labels.nameLabel,
@@ -93,17 +105,44 @@ var EditSetings = function EditSetings(props) {
       loading = _useState6[0],
       setLoading = _useState6[1];
 
-  var getLocationSettings = function getLocationSettings(currentLocId) {
-    setLoading(true);
-    var params = {
-      identifier: _constants.POP_CHARACTERISTICS_PARAM,
-      locationId: currentLocId,
-      resolve: true,
-      serverVersion: 0
+  var getLocationSettings = function () {
+    var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee(currentLocId) {
+      var params, clientService;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(locationSettings.length < 1);
+              params = {
+                identifier: _constants.POP_CHARACTERISTICS_PARAM,
+                locationId: currentLocId,
+                resolve: true,
+                serverVersion: 0
+              };
+              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
+              _context.next = 5;
+              return clientService.list(params).then(function (res) {
+                fetchSettings(res, currentLocId, true);
+              })["catch"](function (error) {
+                return customAlert && customAlert(String(error), {
+                  type: 'error'
+                });
+              })["finally"](function () {
+                return setLoading(false);
+              });
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getLocationSettings(_x) {
+      return _ref.apply(this, arguments);
     };
-    var clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-    return clientService.list(params);
-  };
+  }();
 
   var getLocations = function getLocations(currentLocId) {
     setLoading(true);
@@ -118,59 +157,51 @@ var EditSetings = function EditSetings(props) {
   };
 
   var getLocsandSettings = function () {
-    var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee() {
-      var userLocs, userLocMap, userLocId, hierarchy, map, locId, settings;
-      return _regenerator["default"].wrap(function _callee$(_context) {
+    var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2() {
+      var userLocs, userLocMap, userLocId, hierarchy;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
+              _context2.prev = 0;
+              _context2.next = 3;
               return getUserLocHierarchy();
 
             case 3:
-              userLocs = _context.sent;
+              userLocs = _context2.sent;
               userLocMap = userLocs.locations.locationsHierarchy.map;
               userLocId = Object.keys(userLocMap)[0];
-              _context.next = 8;
+              _context2.next = 8;
               return getLocations(userLocId);
 
             case 8:
-              hierarchy = _context.sent;
-              map = hierarchy.locationsHierarchy.map;
-              locId = Object.keys(map)[0];
-              _context.next = 13;
-              return getLocationSettings(locId);
-
-            case 13:
-              settings = _context.sent;
+              hierarchy = _context2.sent;
               fetchLocations(hierarchy);
-              fetchSettings(settings, locId);
-              _context.next = 21;
+              _context2.next = 15;
               break;
 
-            case 18:
-              _context.prev = 18;
-              _context.t0 = _context["catch"](0);
-              customAlert && customAlert(String(_context.t0), {
+            case 12:
+              _context2.prev = 12;
+              _context2.t0 = _context2["catch"](0);
+              customAlert && customAlert(String(_context2.t0), {
                 type: 'error'
               });
 
-            case 21:
-              _context.prev = 21;
+            case 15:
+              _context2.prev = 15;
               setLoading(false);
-              return _context.finish(21);
+              return _context2.finish(15);
 
-            case 24:
+            case 18:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[0, 18, 21, 24]]);
+      }, _callee2, null, [[0, 12, 15, 18]]);
     }));
 
     return function getLocsandSettings() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -179,6 +210,11 @@ var EditSetings = function EditSetings(props) {
       getLocsandSettings();
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (activeLocationId) {
+      getLocationSettings(activeLocationId);
+    }
+  }, [props.activeLocationId]);
   (0, _react.useEffect)(function () {
     setLocSettings(props.locationSettings);
   }, [props.locationSettings]);
@@ -205,55 +241,30 @@ var EditSetings = function EditSetings(props) {
 
   var openEditModal = function openEditModal(e, row) {
     e.preventDefault();
-    var activeLoc = activeLocationId;
     fetchSettings([_objectSpread({}, row, {
       editing: !row.editing
-    })], activeLoc);
+    })], activeLocationId);
   };
 
-  var changeSetting = function () {
-    var _ref2 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee2(e, row, value) {
-      var activeLoc, data, clientService;
-      return _regenerator["default"].wrap(function _callee2$(_context2) {
+  var editSettingHandler = function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, row, value) {
+      return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
+              (0, _utils2.editSetting)(state, row, value, v2BaseUrl, settingsEndpoint, getPayload, fetchSettings, activeLocationId, customAlert);
 
-              if (!(value === row.value)) {
-                _context2.next = 3;
-                break;
-              }
-
-              return _context2.abrupt("return", false);
-
-            case 3:
-              activeLoc = activeLocationId;
-              data = (0, _utils.preparePutData)(row, value);
-              clientService = new _serverService.OpenSRPService(v2BaseUrl, settingsEndpoint, getPayload);
-              _context2.next = 8;
-              return clientService.update(data).then(function () {
-                fetchSettings([_objectSpread({}, row, {
-                  value: value
-                })], activeLoc);
-              })["catch"](function (error) {
-                customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              })["finally"](function () {
-                return setLoading(false);
-              });
-
-            case 8:
+            case 2:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
-    return function changeSetting(_x, _x2, _x3) {
-      return _ref2.apply(this, arguments);
+    return function editSettingHandler(_x2, _x3, _x4) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
@@ -287,33 +298,14 @@ var EditSetings = function EditSetings(props) {
   };
 
   var loadLocsettings = function () {
-    var _ref3 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee3(e, activeLocId) {
-      var selectedLocs, locSettings, data;
-      return _regenerator["default"].wrap(function _callee3$(_context3) {
+    var _ref4 = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee4(e, activeLocId) {
+      var selectedLocs, data;
+      return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               e.preventDefault();
               selectedLocs = [].concat((0, _toConsumableArray2["default"])(selectedLocations), [activeLocId]);
-              locSettings = (0, _settings.getLocSettings)(state, activeLocId);
-
-              if (locSettings.length) {
-                _context3.next = 6;
-                break;
-              }
-
-              _context3.next = 6;
-              return getLocationSettings(activeLocId).then(function (res) {
-                return fetchSettings(res, activeLocId);
-              })["catch"](function (error) {
-                return customAlert && customAlert(String(error), {
-                  type: 'error'
-                });
-              })["finally"](function () {
-                return setLoading(false);
-              });
-
-            case 6:
               data = {
                 locationsHierarchy: {
                   map: {},
@@ -326,16 +318,16 @@ var EditSetings = function EditSetings(props) {
               fetchLocations(data);
               setShowLocPopup('');
 
-            case 9:
+            case 5:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
 
-    return function loadLocsettings(_x4, _x5) {
-      return _ref3.apply(this, arguments);
+    return function loadLocsettings(_x5, _x6) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -372,27 +364,33 @@ var EditSetings = function EditSetings(props) {
     }
   }
 
+  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, " ", _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
+    icon: "question-circle"
+  }));
+
   var listViewProps = {
     data: locSettings.map(function (row) {
       var _row$inheritedFrom;
 
-      var value = typeof row.value === 'string' ? row.value === 'true' : row.value;
+      var value = typeof row.value === 'string' ? row.value === _constants.SETTINGS_TRUE : row.value;
+      var inheritedFrom = (_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim();
       return [row.label, row.description, _react["default"].createElement("p", {
         key: row.key
-      }, value ? 'Yes' : 'No'), ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) || '_', _react["default"].createElement(_utils.EditSettingsButton, {
+      }, value ? 'Yes' : 'No'), (0, _utils2.getInheritedFromLabel)(state, inheritedFrom), _react["default"].createElement(_utils.EditSettingsButton, {
         key: row.documentId,
-        changeSetting: changeSetting,
+        changeSetting: editSettingHandler,
         editLabel: editLabel,
         inheritSettingsLabel: inheritSettingsLabel,
         openEditModal: openEditModal,
         row: row,
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
-        value: value
+        value: value,
+        showInheritSettingsLabel: !inheritedFrom && activeLocationId !== defaultLocId || !!inheritedFrom && !(0, _utils2.isInheritedFromValid)(state, inheritedFrom)
       })];
     }),
-    headerItems: [nameLabel, descriptionLabel, settingLabel, inheritedLable, editLabel],
-    tableClass: 'table table-striped'
+    headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
+    tableClass: tableClass
   };
   var searchProps = {
     debounceTime: debounceTime,
@@ -425,7 +423,8 @@ var defaultProps = {
   locationDetails: {},
   locationSettings: [],
   selectedLocations: [],
-  state: {}
+  state: {},
+  tableClass: 'table table-striped'
 };
 EditSetings.defaultProps = defaultProps;
 var mapDispatchToProps = {
@@ -442,8 +441,8 @@ var mapStateToProps = function mapStateToProps(state) {
   var currentLocName = '';
 
   if (defaultLocId && activeLocationId && selectedLocations.length) {
-    locationDetails = (0, _locations.getLocDetails)(state, [defaultLocId]);
-    currentLocName = (0, _locations.getLocDetails)(state, selectedLocations).label;
+    locationDetails = (0, _locations.getLocDetails)(state, defaultLocId);
+    currentLocName = (0, _locations.getLocDetails)(state, selectedLocations[selectedLocations.length - 1]).label;
     locationSettings = (0, _settings.getLocSettings)(state, activeLocationId);
   }
 

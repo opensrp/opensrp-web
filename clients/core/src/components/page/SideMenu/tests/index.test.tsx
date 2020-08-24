@@ -3,10 +3,12 @@ import toJson from 'enzyme-to-json';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router';
-import snapshotDiff from 'snapshot-diff';
 import SideMenu from '..';
-import { sideMenuProps } from '../../../../configs/navigationConfigs';
-import { CLIENT_RECORDS } from '../../../../constants';
+import {
+    CLIENT_NAVIGATION_MODULE,
+    ADMIN_NAVIGATION_MODULE,
+    REPORT_NAVIGATION_MODULE,
+} from '../../../../configs/navigationConfigs';
 
 const history = createBrowserHistory();
 
@@ -14,6 +16,23 @@ describe('components/page/SideMenu', () => {
     beforeEach(() => {
         jest.resetAllMocks();
     });
+
+    const sideMenuProps = {
+        navigationModules: [
+            {
+                enabled: true,
+                module: CLIENT_NAVIGATION_MODULE,
+            },
+            {
+                enabled: true,
+                module: REPORT_NAVIGATION_MODULE,
+            },
+            {
+                enabled: true,
+                module: ADMIN_NAVIGATION_MODULE,
+            },
+        ],
+    };
 
     it('renders without crashing', () => {
         shallow(
@@ -29,50 +48,87 @@ describe('components/page/SideMenu', () => {
                 <SideMenu {...sideMenuProps} />
             </Router>,
         );
-        /** client Collapse SubMenu renders correctly */
-        expect(toJson(wrapper.find('Nav .side-collapse-nav').first())).toMatchSnapshot();
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .find('#sub-menu-Client-Records').length,
+        ).toEqual(1);
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .find('#sub-menu-Reports').length,
+        ).toEqual(1);
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .find('#sub-menu-Admin').length,
+        ).toEqual(1);
         wrapper.unmount();
     });
 
-    it('manages state correctly', () => {
+    it('does not display any nav items if no navigation modules are enabled ', () => {
+        const sideMenuProps = {
+            navigationModules: [
+                {
+                    enabled: false,
+                    module: CLIENT_NAVIGATION_MODULE,
+                },
+                {
+                    enabled: false,
+                    module: REPORT_NAVIGATION_MODULE,
+                },
+                {
+                    enabled: false,
+                    module: ADMIN_NAVIGATION_MODULE,
+                },
+            ],
+        };
         const wrapper = mount(
             <Router history={history}>
                 <SideMenu {...sideMenuProps} />
             </Router>,
         );
-
-        expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(null);
-
-        wrapper.find(`ul#${CLIENT_RECORDS.replace(' ', '-')}`).simulate('click');
-        expect(wrapper.find('SideMenu').state('collapsedModuleLabel')).toEqual(CLIENT_RECORDS);
-        wrapper.unmount();
-    });
-
-    it('sets the collapsedModuleLabel correctly from clicks on parentNavs', () => {
-        // clicking changes the collapsedModuleLabel state and collapses
-        // nav to reveal child navigation
-
-        const wrapper = mount(
-            <Router history={history}>
-                <SideMenu {...sideMenuProps} />)
-            </Router>,
-        );
-
-        // starts with sub-menu as closed, not collapsed
-        const clientChildNav = wrapper.find('div.collapse.show a[href="/clients"]');
-        expect(clientChildNav.length).toEqual(0);
-        const beforeClickWrapper = toJson(wrapper);
-
-        // clicking on a parent nav changes the collapsedState for that navigation module
-        const clientParentNav = wrapper.find(`ul#${CLIENT_RECORDS.replace(' ', '-')}`);
-        expect(clientParentNav.length).toEqual(1);
-        clientParentNav.simulate('click');
-        wrapper.update();
-        const afterClickWrapper = toJson(wrapper);
-
-        // isOpen value for collapsible div holding child navs changes from false to true
-        expect(snapshotDiff(beforeClickWrapper, afterClickWrapper)).toMatchSnapshot('Everything');
-
-        wrapper.unmount();
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .at(0)
+                .find('#sub-menu-Client-Records').length,
+        ).toEqual(0);
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .at(0)
+                .find('#sub-menu-Reports').length,
+        ).toEqual(0);
+        expect(
+            wrapper
+                .find('.side-menu-container div')
+                .at(0)
+                .find('.row div')
+                .at(0)
+                .find('.side-menu-extend div')
+                .at(0)
+                .find('#sub-menu-Admin').length,
+        ).toEqual(0);
     });
 });
