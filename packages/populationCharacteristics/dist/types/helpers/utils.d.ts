@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 import { Setting } from '../ducks/settings';
 import { EditSettingLabels, SettingValue } from './types';
 interface PostData extends Partial<Setting> {
@@ -24,5 +24,10 @@ interface EditSettingsButtonProps {
     value: boolean;
     showInheritSettingsLabel: boolean;
 }
+interface ClickOutsideProps {
+    children: ReactElement;
+    onClick: any;
+}
+export declare const ClickOutside: ({ children, onClick }: ClickOutsideProps) => JSX.Element;
 export declare const EditSettingsButton: (props: EditSettingsButtonProps) => JSX.Element;
 export {};

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef } from 'react';
+import React, { MouseEvent, useEffect, useRef, cloneElement, ReactElement } from 'react';
 import { Setting } from '../ducks/settings';
 import {
     DESCRIPTION_LABEL,
@@ -18,7 +18,6 @@ import {
     SETTINGS_TRUE,
 } from '../constants';
 import { EditSettingLabels, SettingValue } from './types';
-import { Event } from 'react-toastify/dist/core';
 
 interface PostData extends Partial<Setting> {
     _id: string;
@@ -91,6 +90,28 @@ interface EditSettingsButtonProps {
     showInheritSettingsLabel: boolean;
 }
 
+interface ClickOutsideProps {
+    children: ReactElement;
+    onClick: any;
+}
+
+export const ClickOutside = ({ children, onClick }: ClickOutsideProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e: any) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                onClick(e);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [onClick]);
+    return <>{cloneElement(children, { ref })}</>;
+};
+
 export const EditSettingsButton = (props: EditSettingsButtonProps) => {
     const {
         editLabel,
@@ -103,47 +124,39 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
         changeSetting,
         showInheritSettingsLabel,
     } = props;
-    const wrapperRef = useRef<HTMLDivElement>(null);
 
-    /** We listen for clicks outside the pop and close if user clicks outside pop */
-    useEffect(() => {
-        if (row.editing) {
-            const handleClickOutside = (event: any) => {
-                if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-                    openEditModal(event, row);
-                }
-            };
-
-            // Bind the event listener
-            document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-                // Unbind the event listener on clean up
-                document.removeEventListener('mousedown', handleClickOutside);
-            };
-        }
-    }, [row.editing]);
+    const onClickOutSide = React.useCallback(
+        (e: any) => {
+            if (row.editing) {
+                openEditModal(e, row);
+            }
+        },
+        [row.editing],
+    );
 
     return (
         <div className="popup" key={row.key}>
             <a href="#" onClick={e => openEditModal(e, row)}>
                 {editLabel}
             </a>
-            <div ref={wrapperRef} className={`popuptext ${row.editing ? 'show' : ''}`}>
-                <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
-                    <span className={value && !row.inheritedFrom ? 'check' : 'empty-check'} />
-                    <span>{setToYesLabel}</span>
-                </div>
-                <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
-                    <span className={value || row.inheritedFrom ? 'empty-check' : 'check'} />
-                    <span>{setToNoLabel}</span>
-                </div>
-                {showInheritSettingsLabel && (
-                    <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
-                        <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
-                        <span>{inheritSettingsLabel}</span>
+            <ClickOutside onClick={onClickOutSide}>
+                <div className={`popuptext ${row.editing ? 'show' : ''}`}>
+                    <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
+                        <span className={value && !row.inheritedFrom ? 'check' : 'empty-check'} />
+                        <span>{setToYesLabel}</span>
                     </div>
-                )}
-            </div>
+                    <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
+                        <span className={value || row.inheritedFrom ? 'empty-check' : 'check'} />
+                        <span>{setToNoLabel}</span>
+                    </div>
+                    {showInheritSettingsLabel && (
+                        <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
+                            <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
+                            <span>{inheritSettingsLabel}</span>
+                        </div>
+                    )}
+                </div>
+            </ClickOutside>
         </div>
     );
 };

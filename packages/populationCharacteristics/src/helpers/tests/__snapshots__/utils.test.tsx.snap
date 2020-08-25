@@ -11,40 +11,44 @@ exports[`helpers/utils: EditSettingsButton renders correctly 1`] = `
   >
     Edit
   </a>
-  <div
-    className="popuptext "
+  <ClickOutside
+    onClick={[Function]}
   >
     <div
-      onClick={[Function]}
+      className="popuptext "
     >
-      <span
-        className="empty-check"
-      />
-      <span>
-        Set to 'Yes'
-      </span>
+      <div
+        onClick={[Function]}
+      >
+        <span
+          className="empty-check"
+        />
+        <span>
+          Set to 'Yes'
+        </span>
+      </div>
+      <div
+        onClick={[Function]}
+      >
+        <span
+          className="check"
+        />
+        <span>
+          Set to 'No'
+        </span>
+      </div>
+      <div
+        className="inherit-from"
+        onClick={[Function]}
+      >
+        <span
+          className="empty-check"
+        />
+        <span>
+          Inherit setting
+        </span>
+      </div>
     </div>
-    <div
-      onClick={[Function]}
-    >
-      <span
-        className="check"
-      />
-      <span>
-        Set to 'No'
-      </span>
-    </div>
-    <div
-      className="inherit-from"
-      onClick={[Function]}
-    >
-      <span
-        className="empty-check"
-      />
-      <span>
-        Inherit setting
-      </span>
-    </div>
-  </div>
+  </ClickOutside>
 </div>
 `;
