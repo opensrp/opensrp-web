@@ -28,6 +28,7 @@ export interface EditSettingLabels {
     settingLabel: string;
     setToNoLabel: string;
     setToYesLabel: string;
+    toolTipInheritedFrom: string;
 }
 /** Types for setting values */
 export declare type SettingValue = typeof SETTINGS_TRUE | typeof SETTINGS_FALSE | typeof SETTINGS_INHERIT;

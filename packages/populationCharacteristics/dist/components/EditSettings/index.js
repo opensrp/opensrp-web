@@ -88,7 +88,8 @@ var EditSetings = function EditSetings(props) {
       inheritSettingsLabel = labels.inheritSettingsLabel,
       setToNoLabel = labels.setToNoLabel,
       setToYesLabel = labels.setToYesLabel,
-      noDataFound = labels.noDataFound;
+      noDataFound = labels.noDataFound,
+      toolTipInheritedFrom = labels.toolTipInheritedFrom;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -374,7 +375,7 @@ var EditSetings = function EditSetings(props) {
     icon: "question-circle"
   }), _react["default"].createElement("span", {
     className: "tooltiptext"
-  }, _constants.TOOLTIP_INHERITED_FROM)));
+  }, toolTipInheritedFrom)));
 
   var listViewProps = {
     data: locSettings.map(function (row) {

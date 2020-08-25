@@ -16,6 +16,7 @@ import {
     SETTINGS_INHERIT,
     SETTINGS_FALSE,
     SETTINGS_TRUE,
+    TOOLTIP_INHERITED_FROM,
 } from '../constants';
 import { EditSettingLabels, SettingValue } from './types';
 
@@ -75,6 +76,7 @@ export const labels: EditSettingLabels = {
     settingLabel: SETTINGS_LABEL,
     setToNoLabel: SET_TO_NO_LABEL,
     setToYesLabel: SET_TO_YES_LABEL,
+    toolTipInheritedFrom: TOOLTIP_INHERITED_FROM,
 };
 
 /** format table data function props interface */

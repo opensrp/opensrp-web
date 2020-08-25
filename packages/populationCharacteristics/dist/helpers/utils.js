@@ -69,7 +69,8 @@ var labels = {
   placeholder: _constants.SEARCH_SETTINGS_LABEL,
   settingLabel: _constants.SETTINGS_LABEL,
   setToNoLabel: _constants.SET_TO_NO_LABEL,
-  setToYesLabel: _constants.SET_TO_YES_LABEL
+  setToYesLabel: _constants.SET_TO_YES_LABEL,
+  toolTipInheritedFrom: _constants.TOOLTIP_INHERITED_FROM
 };
 exports.labels = labels;
 
