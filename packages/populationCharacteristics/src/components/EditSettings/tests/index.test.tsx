@@ -179,6 +179,11 @@ describe('components/Editsettings', () => {
             },
         );
 
+        // The pop up is closed when edit is successful, we click top open again
+        expect(editButton.text()).toEqual('Edit');
+        editButton.simulate('click');
+        wrapper.update();
+
         // Set to yes is now checked
         expect(
             wrapper

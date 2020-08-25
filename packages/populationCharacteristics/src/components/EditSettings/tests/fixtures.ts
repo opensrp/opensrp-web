@@ -263,7 +263,7 @@ export const setting1 = {
     documentId: '3264c866-078e-4112-8894-052d53ab0a97',
     serverVersion: 1595886234688,
     type: 'Setting',
-    editing: true,
+    editing: false,
     inheritedFrom: '', // Inherited from is empty
 };
 
