@@ -21,7 +21,7 @@ import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/
 import { SearchForm } from '../SearchForm';
 import { labels, EditSettingsButton } from '../../helpers/utils';
 import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
-import { editSetting, getInheritedFromLabel, isInheritedFromValid } from './utils';
+import { editSetting, getInheritedFromLabel } from './utils';
 
 /** reqister search and question mark icons */
 library.add(faSearch, faQuestionCircle);

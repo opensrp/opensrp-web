@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -9,7 +11,7 @@ exports.EditSettingsButton = exports.labels = exports.preparePutData = void 0;
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _constants = require("../constants");
 
@@ -83,6 +85,21 @@ var EditSettingsButton = function EditSettingsButton(props) {
       openEditModal = props.openEditModal,
       changeSetting = props.changeSetting,
       showInheritSettingsLabel = props.showInheritSettingsLabel;
+  var wrapperRef = (0, _react.useRef)(null);
+  (0, _react.useEffect)(function () {
+    if (row.editing) {
+      var handleClickOutside = function handleClickOutside(event) {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+          openEditModal(event, row);
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return function () {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [row.editing]);
   return _react["default"].createElement("div", {
     className: "popup",
     key: row.key
@@ -92,6 +109,7 @@ var EditSettingsButton = function EditSettingsButton(props) {
       return openEditModal(e, row);
     }
   }, editLabel), _react["default"].createElement("div", {
+    ref: wrapperRef,
     className: "popuptext ".concat(row.editing ? 'show' : '')
   }, _react["default"].createElement("div", {
     onClick: function onClick(e) {
