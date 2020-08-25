@@ -173,10 +173,14 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
     };
 
+    const toggleEdit = (row: Setting) => {
+        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
+    };
+
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
-        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
+        toggleEdit(row);
     };
 
     const editSettingHandler = async (e: MouseEvent, row: Setting, value: SettingValue) => {

@@ -239,11 +239,15 @@ var EditSetings = function EditSetings(props) {
     }
   };
 
-  var openEditModal = function openEditModal(e, row) {
-    e.preventDefault();
+  var toggleEdit = function toggleEdit(row) {
     fetchSettings([_objectSpread({}, row, {
       editing: !row.editing
     })], activeLocationId);
+  };
+
+  var openEditModal = function openEditModal(e, row) {
+    e.preventDefault();
+    toggleEdit(row);
   };
 
   var editSettingHandler = function () {

@@ -33,7 +33,7 @@ describe('src/components/EditSettings/utils/onEditSuccess', () => {
         // Should inherit
         onEditSuccess(store.getState(), setting6, 'inherit', mockFetchSettings, setting6.locationId);
         expect(mockFetchSettings).toBeCalledWith(
-            [{ ...setting6, value: setting5.value, inheritedFrom: setting5.locationId }],
+            [{ ...setting6, editing: false, value: setting5.value, inheritedFrom: setting5.locationId }],
             setting6.locationId,
         );
     });
@@ -50,7 +50,7 @@ describe('src/components/EditSettings/utils/onEditSuccess', () => {
 
         onEditSuccess(store.getState(), setting1, 'true', mockFetchSettings, setting1.locationId);
         expect(mockFetchSettings).toBeCalledWith(
-            [{ ...setting1, value: 'true', inheritedFrom: '' }],
+            [{ ...setting1, editing: false, value: 'true', inheritedFrom: '' }],
             setting1.locationId,
         );
     });

@@ -27,7 +27,7 @@ export const onEditSuccess = (
     if (value !== SETTINGS_INHERIT) {
         // We set the new value and make sure to override inheritedFrom
         // to none
-        fetchSettings([{ ...row, value, inheritedFrom: '' }], activeLocationId);
+        fetchSettings([{ ...row, editing: false, value, inheritedFrom: '' }], activeLocationId);
     } else {
         // Get the parent of active location and get the parent setting matching
         // the setting we are editing and inherit its value
@@ -54,7 +54,10 @@ export const onEditSuccess = (
                 }
 
                 if (settingFound) {
-                    fetchSettings([{ ...row, value: inheritedValue, inheritedFrom: parentId }], activeLocationId);
+                    fetchSettings(
+                        [{ ...row, editing: false, value: inheritedValue, inheritedFrom: parentId }],
+                        activeLocationId,
+                    );
                 }
             }
         }

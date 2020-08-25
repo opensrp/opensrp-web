@@ -30,6 +30,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var onEditSuccess = function onEditSuccess(state, row, value, fetchSettings, activeLocationId) {
   if (value !== _constants.SETTINGS_INHERIT) {
     fetchSettings([_objectSpread({}, row, {
+      editing: false,
       value: value,
       inheritedFrom: ''
     })], activeLocationId);
@@ -60,6 +61,7 @@ var onEditSuccess = function onEditSuccess(state, row, value, fetchSettings, act
 
         if (settingFound) {
           fetchSettings([_objectSpread({}, row, {
+            editing: false,
             value: inheritedValue,
             inheritedFrom: parentId
           })], activeLocationId);
