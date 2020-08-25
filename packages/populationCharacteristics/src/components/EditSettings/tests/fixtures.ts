@@ -335,6 +335,52 @@ export const setting4 = {
     inheritedFrom: '3264c866-078e-4112-8894-052d53ab0a97', // Not in location hierachy
 };
 
+export const setting5 = {
+    key: 'pop_hepc',
+    value: 'true',
+    label: 'Hep C prevalence is intermediate (2% or higher) or high (5% or higher)',
+    description:
+        'The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ',
+    uuid: 'e6c656d6-9737-40c9-927c-8bcc6ee7c5e0',
+    settingsId: '21',
+    settingIdentifier: 'population_characteristics',
+    settingMetadataId: '1294',
+    teamId: '6c8d2b9b-2246-47c2-949b-4fe29e888cc8',
+    team: 'Bukesa',
+    providerId: 'demo',
+    locationId: '02ebbc84-5e29-4cd5-9b79-c594058923e9',
+    v1Settings: false,
+    resolveSettings: false,
+    documentId: '3264c866-078e-4112-8894-052d53ab0a97',
+    serverVersion: 1596091780439,
+    type: 'Setting',
+    editing: false,
+    inheritedFrom: '',
+};
+
+export const setting6 = {
+    key: 'pop_hepc',
+    value: 'false',
+    label: 'Hep C prevalence is intermediate (2% or higher) or high (5% or higher)',
+    description:
+        'The proportion of Hepatitis C virus (HCV) antibody seroprevalence in the general population is 2% or higher. ',
+    uuid: 'e6c656d6-9737-40c9-927c-8bcc6ee7c5e0',
+    settingsId: '21',
+    settingIdentifier: 'population_characteristics',
+    settingMetadataId: '1294',
+    teamId: '6c8d2b9b-2246-47c2-949b-4fe29e888cc8',
+    team: 'Bukesa',
+    providerId: 'demo',
+    locationId: '8340315f-48e4-4768-a1ce-414532b4c49b',
+    v1Settings: false,
+    resolveSettings: false,
+    documentId: '3264c866-078e-4112-8894-052d53ab0a97',
+    serverVersion: 1596091780439,
+    type: 'Setting',
+    editing: false,
+    inheritedFrom: '',
+};
+
 export const allSettings2: Setting[] = [
     {
         key: 'pop_hiv_incidence',

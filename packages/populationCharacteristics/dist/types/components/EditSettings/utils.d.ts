@@ -1,4 +1,4 @@
-import { Setting } from 'populationCharacteristics/src/ducks/settings';
+import { Setting } from '../../ducks/settings';
 import { SettingValue } from '../../helpers/types';
 import { Store } from 'redux';
 import { getFetchOptions } from '@opensrp/server-service';
