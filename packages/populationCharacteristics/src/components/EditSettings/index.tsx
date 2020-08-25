@@ -270,7 +270,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // adds question mark to inherited from header
     const iheritedFrom = (
         <span>
-            {inheritedLable} <FontAwesomeIcon icon="question-circle" />
+            {inheritedLable}{' '}
+            <span className="opensrp-tooltip">
+                <FontAwesomeIcon icon="question-circle" />
+                <span className="tooltiptext">The name of the location from which the setting was inherited</span>
+            </span>
         </span>
     );
 

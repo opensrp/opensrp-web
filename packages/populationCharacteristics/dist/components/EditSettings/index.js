@@ -368,9 +368,13 @@ var EditSetings = function EditSetings(props) {
     }
   }
 
-  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, " ", _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
+  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, ' ', _react["default"].createElement("span", {
+    className: "opensrp-tooltip"
+  }, _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: "question-circle"
-  }));
+  }), _react["default"].createElement("span", {
+    className: "tooltiptext"
+  }, "The name of the location from which the setting was inherited")));
 
   var listViewProps = {
     data: locSettings.map(function (row) {
