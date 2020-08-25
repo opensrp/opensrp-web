@@ -374,7 +374,7 @@ var EditSetings = function EditSetings(props) {
     icon: "question-circle"
   }), _react["default"].createElement("span", {
     className: "tooltiptext"
-  }, "The name of the location from which the setting was inherited")));
+  }, _constants.TOOLTIP_INHERITED_FROM)));
 
   var listViewProps = {
     data: locSettings.map(function (row) {

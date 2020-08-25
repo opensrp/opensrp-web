@@ -20,7 +20,7 @@ import { LocationMenu } from '../LocationsMenu';
 import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/types';
 import { SearchForm } from '../SearchForm';
 import { labels, EditSettingsButton } from '../../helpers/utils';
-import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
+import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE, TOOLTIP_INHERITED_FROM } from '../../constants';
 import { editSetting, getInheritedFromLabel } from './utils';
 
 /** reqister search and question mark icons */
@@ -273,7 +273,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
             {inheritedLable}{' '}
             <span className="opensrp-tooltip">
                 <FontAwesomeIcon icon="question-circle" />
-                <span className="tooltiptext">The name of the location from which the setting was inherited</span>
+                <span className="tooltiptext">{TOOLTIP_INHERITED_FROM}</span>
             </span>
         </span>
     );
