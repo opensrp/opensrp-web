@@ -13,9 +13,16 @@ module.exports =  {
         jsx:  true,  // Allows for the parsing of JSX
     },
   },
+  plugins: ['jest'],
   rules:  {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-inferrable-types': 'warn',
+    'jest/no-large-snapshots': [
+      'error',
+      {
+        maxSize: 150,
+      },
+    ],
   },
   settings:  {
     react:  {

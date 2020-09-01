@@ -4,7 +4,8 @@
     "scripts": {
         "test": "jest",
         "test:watch": "jest --watch",
-        "lint": "eslint '{packages,clients}/**/*.{js,jsx,ts,tsx}'"
+        "lint": "eslint '{packages,clients}/**/*.{js,jsx,ts,tsx}'",
+        "lint-snap": "eslint '{packages,clients}/**/*.snap'"
     },
     "husky": {
         "hooks": {
@@ -23,6 +24,9 @@
         "*.{json,css,md}": [
             "prettier --write",
             "git add"
+        ],
+        "*.{snap, test.tsx}": [
+            "eslint"
         ]
     },
     "devDependencies": {
