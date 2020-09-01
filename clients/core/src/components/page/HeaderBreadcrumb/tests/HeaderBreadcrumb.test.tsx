@@ -61,7 +61,7 @@ describe('components/page/HeaderBreadcrumb', () => {
                 <HeaderBreadcrumb {...props} />
             </Router>,
         );
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(toJson(wrapper.find('HeaderBreadcrumb'))).toMatchSnapshot();
         wrapper.unmount();
     });
 });
