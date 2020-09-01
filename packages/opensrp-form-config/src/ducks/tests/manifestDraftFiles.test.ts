@@ -31,7 +31,7 @@ describe('ducks/manifestDraftFiles', () => {
         expect(getManifestDraftFilesById(store.getState(), '53')).toEqual(FixManifestDraftFiles[1]);
     });
 
-    it('fetches manifest draft files correctly', () => {
+    it('removes manifest draft files correctly', () => {
         store.dispatch(fetchManifestDraftFiles(FixManifestDraftFiles as ManifestFilesTypes[]));
 
         store.dispatch(removeManifestDraftFiles());

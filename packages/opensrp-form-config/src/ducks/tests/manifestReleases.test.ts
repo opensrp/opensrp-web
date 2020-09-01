@@ -32,7 +32,7 @@ describe('ducks/manifestReleases', () => {
         expect(getManifestReleasesById(store.getState(), '1.0.12')).toEqual(fixManifestReleases[1]);
     });
 
-    it('fetches releases correctly', () => {
+    it('removes releases correctly', () => {
         store.dispatch(fetchManifestReleases(fixManifestReleases as ManifestReleasesTypes[]));
 
         store.dispatch(removeManifestReleases());
