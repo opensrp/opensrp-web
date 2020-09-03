@@ -1,4 +1,4 @@
-# OpenSRP Table
+# Opensrp server Logout
 
 Exposes a helper function that can be re-used to logout from an opensrp server that uses keycloak for user management.
 
