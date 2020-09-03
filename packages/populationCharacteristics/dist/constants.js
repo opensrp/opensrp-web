@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SETTINGS_INHERIT = exports.SETTINGS_FALSE = exports.SETTINGS_TRUE = exports.ACTION_LABEL = exports.POP_CHARACTERISTICS_PARAM = exports.NO_DATA_FOUND = exports.INHERIT_SETTING_LABEL = exports.SET_TO_NO_LABEL = exports.SET_TO_YES_LABEL = exports.NAME_LABEL = exports.INHERITED_FROM_LABEL = exports.SETTINGS_LABEL = exports.DESCRIPTION_LABEL = exports.EDIT_LABEL = exports.PAGE_TITLE_LABEL = exports.SEARCH_SETTINGS_LABEL = exports.SEARCH_LABEL = void 0;
+exports.TOOLTIP_INHERITED_FROM = exports.SETTINGS_INHERIT = exports.SETTINGS_FALSE = exports.SETTINGS_TRUE = exports.ACTION_LABEL = exports.POP_CHARACTERISTICS_PARAM = exports.NO_DATA_FOUND = exports.INHERIT_SETTING_LABEL = exports.SET_TO_NO_LABEL = exports.SET_TO_YES_LABEL = exports.NAME_LABEL = exports.INHERITED_FROM_LABEL = exports.SETTINGS_LABEL = exports.DESCRIPTION_LABEL = exports.EDIT_LABEL = exports.PAGE_TITLE_LABEL = exports.SEARCH_SETTINGS_LABEL = exports.SEARCH_LABEL = void 0;
 var SEARCH_LABEL = 'Search';
 exports.SEARCH_LABEL = SEARCH_LABEL;
 var SEARCH_SETTINGS_LABEL = 'Search Settings';
@@ -38,3 +38,5 @@ var SETTINGS_FALSE = 'false';
 exports.SETTINGS_FALSE = SETTINGS_FALSE;
 var SETTINGS_INHERIT = 'inherit';
 exports.SETTINGS_INHERIT = SETTINGS_INHERIT;
+var TOOLTIP_INHERITED_FROM = 'The name of the location from which the setting was inherited';
+exports.TOOLTIP_INHERITED_FROM = TOOLTIP_INHERITED_FROM;

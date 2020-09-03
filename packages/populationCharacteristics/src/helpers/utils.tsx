@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useEffect, useRef, cloneElement, ReactElement } from 'react';
 import { Setting } from '../ducks/settings';
 import {
     DESCRIPTION_LABEL,
@@ -16,6 +16,7 @@ import {
     SETTINGS_INHERIT,
     SETTINGS_FALSE,
     SETTINGS_TRUE,
+    TOOLTIP_INHERITED_FROM,
 } from '../constants';
 import { EditSettingLabels, SettingValue } from './types';
 
@@ -75,6 +76,7 @@ export const labels: EditSettingLabels = {
     settingLabel: SETTINGS_LABEL,
     setToNoLabel: SET_TO_NO_LABEL,
     setToYesLabel: SET_TO_YES_LABEL,
+    toolTipInheritedFrom: TOOLTIP_INHERITED_FROM,
 };
 
 /** format table data function props interface */
@@ -90,6 +92,28 @@ interface EditSettingsButtonProps {
     showInheritSettingsLabel: boolean;
 }
 
+interface ClickOutsideProps {
+    children: ReactElement;
+    onClick: any;
+}
+
+export const ClickOutside = ({ children, onClick }: ClickOutsideProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e: any) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                onClick(e);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [onClick]);
+    return <>{cloneElement(children, { ref })}</>;
+};
+
 export const EditSettingsButton = (props: EditSettingsButtonProps) => {
     const {
         editLabel,
@@ -102,27 +126,39 @@ export const EditSettingsButton = (props: EditSettingsButtonProps) => {
         changeSetting,
         showInheritSettingsLabel,
     } = props;
+
+    const onClickOutSide = React.useCallback(
+        (e: any) => {
+            if (row.editing) {
+                openEditModal(e, row);
+            }
+        },
+        [row.editing],
+    );
+
     return (
         <div className="popup" key={row.key}>
             <a href="#" onClick={e => openEditModal(e, row)}>
                 {editLabel}
             </a>
-            <div className={`popuptext ${row.editing ? 'show' : ''}`}>
-                <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
-                    <span className={value ? 'check' : 'empty-check'} />
-                    <span>{setToYesLabel}</span>
-                </div>
-                <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
-                    <span className={value ? 'empty-check' : 'check'} />
-                    <span>{setToNoLabel}</span>
-                </div>
-                {showInheritSettingsLabel && (
-                    <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
-                        <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
-                        {inheritSettingsLabel}
+            <ClickOutside onClick={onClickOutSide}>
+                <div className={`popuptext ${row.editing ? 'show' : ''}`}>
+                    <div onClick={e => changeSetting(e, row, SETTINGS_TRUE)}>
+                        <span className={value && !row.inheritedFrom ? 'check' : 'empty-check'} />
+                        <span>{setToYesLabel}</span>
                     </div>
-                )}
-            </div>
+                    <div onClick={e => changeSetting(e, row, SETTINGS_FALSE)}>
+                        <span className={value || row.inheritedFrom ? 'empty-check' : 'check'} />
+                        <span>{setToNoLabel}</span>
+                    </div>
+                    {showInheritSettingsLabel && (
+                        <div onClick={e => changeSetting(e, row, SETTINGS_INHERIT)} className="inherit-from">
+                            <span className={row.inheritedFrom?.trim() ? 'check' : 'empty-check'} />
+                            <span>{inheritSettingsLabel}</span>
+                        </div>
+                    )}
+                </div>
+            </ClickOutside>
         </div>
     );
 };

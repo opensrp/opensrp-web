@@ -29,6 +29,7 @@ export interface EditSettingLabels {
     settingLabel: string;
     setToNoLabel: string;
     setToYesLabel: string;
+    toolTipInheritedFrom: string;
 }
 
 /** Types for setting values */

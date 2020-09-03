@@ -15,6 +15,8 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _constants = require("../../constants");
 
+var _settings = require("../../ducks/settings");
+
 var _locations = require("../../ducks/locations");
 
 var _serverService = require("@opensrp/server-service");
@@ -26,25 +28,45 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var onEditSuccess = function onEditSuccess(state, row, value, fetchSettings, activeLocationId) {
-  if (row.value === value) {
-    return;
-  }
-
   if (value !== _constants.SETTINGS_INHERIT) {
     fetchSettings([_objectSpread({}, row, {
+      editing: false,
       value: value,
       inheritedFrom: ''
     })], activeLocationId);
   } else {
     var _locationDetails$node;
 
-    var locationDetails = (0, _locations.getLocDetails)(state, row.locationId);
+    var locationDetails = (0, _locations.getLocDetails)(state, activeLocationId);
     var parentId = (_locationDetails$node = locationDetails.node.parentLocation) === null || _locationDetails$node === void 0 ? void 0 : _locationDetails$node.locationId;
 
     if (parentId) {
-      fetchSettings([_objectSpread({}, row, {
-        inheritedFrom: parentId
-      })], activeLocationId);
+      var parentSettings = (0, _settings.getLocSettings)(state, parentId);
+
+      if (parentSettings.length) {
+        var inheritedValue = row.value;
+        var settingFound = false;
+        var i = 0;
+
+        while (!settingFound && i < parentSettings.length) {
+          var currentSetting = parentSettings[i];
+
+          if (currentSetting.key === row.key) {
+            inheritedValue = currentSetting.value;
+            settingFound = true;
+          }
+
+          i += 1;
+        }
+
+        if (settingFound) {
+          fetchSettings([_objectSpread({}, row, {
+            editing: false,
+            value: inheritedValue,
+            inheritedFrom: parentId
+          })], activeLocationId);
+        }
+      }
     }
   }
 };
@@ -59,12 +81,12 @@ var editSetting = function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            if (!(value === row.value)) {
+            if (!(value === _constants.SETTINGS_INHERIT && row.inheritedFrom || value === row.value && !row.inheritedFrom)) {
               _context.next = 2;
               break;
             }
 
-            return _context.abrupt("return", false);
+            return _context.abrupt("return");
 
           case 2:
             endPoint = value === _constants.SETTINGS_INHERIT || activeLocationId === row.locationId ? "".concat(settingsEndpoint).concat(row.settingMetadataId) : settingsEndpoint;

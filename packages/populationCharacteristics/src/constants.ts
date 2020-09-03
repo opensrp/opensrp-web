@@ -15,3 +15,4 @@ export const ACTION_LABEL = 'Actions';
 export const SETTINGS_TRUE = 'true';
 export const SETTINGS_FALSE = 'false';
 export const SETTINGS_INHERIT = 'inherit';
+export const TOOLTIP_INHERITED_FROM = 'The name of the location from which the setting was inherited';

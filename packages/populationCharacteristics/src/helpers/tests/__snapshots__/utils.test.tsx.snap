@@ -1,45 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`helpers/utils: EditSettingsButton renders correctly when value is false: setting value false 1`] = `
-<EditSettingsButton
-  changeSetting={[MockFunction]}
-  editLabel="Edit"
-  inheritSettingsLabel="Inherit setting"
-  openEditModal={[MockFunction]}
-  row={
-    Object {
-      "description": "The proportion of women in the adult population (18 years or older), with a BMI less than 18.5, is 20% or higher.",
-      "documentId": "e79b139c-3a20-4656-b684-d2d9ed83c94e",
-      "inheritedFrom": "",
-      "key": "pop_undernourish",
-      "label": "Undernourished prevalence 20% or higher",
-      "locationId": "02ebbc84-5e29-4cd5-9b79-c594058923e9",
-      "resolveSettings": false,
-      "serverVersion": 1590644327306,
-      "settingIdentifier": "population_characteristics",
-      "settingMetadataId": "5",
-      "settingsId": "2",
-      "type": "Setting",
-      "uuid": "96475904-0b13-4a31-a59b-807b7b445897",
-      "v1Settings": false,
-      "value": "false",
-    }
-  }
-  setToNoLabel="Set to 'No'"
-  setToYesLabel="Set to 'Yes'"
-  showInheritSettingsLabel={true}
-  value={false}
+exports[`helpers/utils: EditSettingsButton renders correctly 1`] = `
+<div
+  className="popup"
+  key="pop_undernourish"
 >
-  <div
-    className="popup"
-    key="pop_undernourish"
+  <a
+    href="#"
+    onClick={[Function]}
   >
-    <a
-      href="#"
-      onClick={[Function]}
-    >
-      Edit
-    </a>
+    Edit
+  </a>
+  <ClickOutside
+    onClick={[Function]}
+  >
     <div
       className="popuptext "
     >
@@ -70,9 +44,11 @@ exports[`helpers/utils: EditSettingsButton renders correctly when value is false
         <span
           className="empty-check"
         />
-        Inherit setting
+        <span>
+          Inherit setting
+        </span>
       </div>
     </div>
-  </div>
-</EditSettingsButton>
+  </ClickOutside>
+</div>
 `;

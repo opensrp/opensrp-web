@@ -127,6 +127,7 @@ select {
     left: 30px !important;
     top: 12px !important;
     padding: 0px 10px !important;
+    color: #3d6897 !important;
 }
 /* Popup arrow */
 .popup .popuptext::after {
@@ -145,6 +146,47 @@ select {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+}
+
+/* Tooltip container */
+.opensrp-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.opensrp-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: normal;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.opensrp-tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Tooltip arrow */
+.opensrp-tooltip .tooltiptext::after {
+    content: ' ';
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
 }
 
 /* Add animation (fade in the popup) */

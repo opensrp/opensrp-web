@@ -21,7 +21,7 @@ import { FormConfigProps, EditSettingLabels, SettingValue } from '../../helpers/
 import { SearchForm } from '../SearchForm';
 import { labels, EditSettingsButton } from '../../helpers/utils';
 import { POP_CHARACTERISTICS_PARAM, SETTINGS_TRUE } from '../../constants';
-import { editSetting, getInheritedFromLabel, isInheritedFromValid } from './utils';
+import { editSetting, getInheritedFromLabel } from './utils';
 
 /** reqister search and question mark icons */
 library.add(faSearch, faQuestionCircle);
@@ -81,6 +81,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         setToNoLabel,
         setToYesLabel,
         noDataFound,
+        toolTipInheritedFrom,
     } = labels;
 
     const [showLocPopUp, setShowLocPopup] = useState('');
@@ -173,10 +174,14 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
         }
     };
 
+    const toggleEdit = (row: Setting) => {
+        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
+    };
+
     // toggle settings update modal
     const openEditModal = (e: MouseEvent, row: Setting) => {
         e.preventDefault();
-        fetchSettings([{ ...row, editing: !row.editing }], activeLocationId);
+        toggleEdit(row);
     };
 
     const editSettingHandler = async (e: MouseEvent, row: Setting, value: SettingValue) => {
@@ -266,7 +271,11 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
     // adds question mark to inherited from header
     const iheritedFrom = (
         <span>
-            {inheritedLable} <FontAwesomeIcon icon="question-circle" />
+            {inheritedLable}{' '}
+            <span className="opensrp-tooltip">
+                <FontAwesomeIcon icon="question-circle" />
+                <span className="tooltiptext">{toolTipInheritedFrom}</span>
+            </span>
         </span>
     );
 
@@ -291,10 +300,7 @@ const EditSetings = (props: FormConfigProps & EditSettingsDefaultProps) => {
                     setToNoLabel={setToNoLabel}
                     setToYesLabel={setToYesLabel}
                     value={value}
-                    showInheritSettingsLabel={
-                        (!inheritedFrom && activeLocationId !== defaultLocId) ||
-                        (!!inheritedFrom && !isInheritedFromValid(state, inheritedFrom))
-                    }
+                    showInheritSettingsLabel={activeLocationId !== defaultLocId}
                 />,
             ];
         }),

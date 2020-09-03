@@ -1,15 +1,17 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EditSettingsButton = exports.labels = exports.preparePutData = void 0;
+exports.EditSettingsButton = exports.ClickOutside = exports.labels = exports.preparePutData = void 0;
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _constants = require("../constants");
 
@@ -67,9 +69,33 @@ var labels = {
   placeholder: _constants.SEARCH_SETTINGS_LABEL,
   settingLabel: _constants.SETTINGS_LABEL,
   setToNoLabel: _constants.SET_TO_NO_LABEL,
-  setToYesLabel: _constants.SET_TO_YES_LABEL
+  setToYesLabel: _constants.SET_TO_YES_LABEL,
+  toolTipInheritedFrom: _constants.TOOLTIP_INHERITED_FROM
 };
 exports.labels = labels;
+
+var ClickOutside = function ClickOutside(_ref) {
+  var children = _ref.children,
+      onClick = _ref.onClick;
+  var ref = (0, _react.useRef)(null);
+  (0, _react.useEffect)(function () {
+    var handleClickOutside = function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) {
+        onClick(e);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClick]);
+  return _react["default"].createElement(_react["default"].Fragment, null, (0, _react.cloneElement)(children, {
+    ref: ref
+  }));
+};
+
+exports.ClickOutside = ClickOutside;
 
 var EditSettingsButton = function EditSettingsButton(props) {
   var _row$inheritedFrom;
@@ -83,6 +109,13 @@ var EditSettingsButton = function EditSettingsButton(props) {
       openEditModal = props.openEditModal,
       changeSetting = props.changeSetting,
       showInheritSettingsLabel = props.showInheritSettingsLabel;
+
+  var onClickOutSide = _react["default"].useCallback(function (e) {
+    if (row.editing) {
+      openEditModal(e, row);
+    }
+  }, [row.editing]);
+
   return _react["default"].createElement("div", {
     className: "popup",
     key: row.key
@@ -91,20 +124,22 @@ var EditSettingsButton = function EditSettingsButton(props) {
     onClick: function onClick(e) {
       return openEditModal(e, row);
     }
-  }, editLabel), _react["default"].createElement("div", {
+  }, editLabel), _react["default"].createElement(ClickOutside, {
+    onClick: onClickOutSide
+  }, _react["default"].createElement("div", {
     className: "popuptext ".concat(row.editing ? 'show' : '')
   }, _react["default"].createElement("div", {
     onClick: function onClick(e) {
       return changeSetting(e, row, _constants.SETTINGS_TRUE);
     }
   }, _react["default"].createElement("span", {
-    className: value ? 'check' : 'empty-check'
+    className: value && !row.inheritedFrom ? 'check' : 'empty-check'
   }), _react["default"].createElement("span", null, setToYesLabel)), _react["default"].createElement("div", {
     onClick: function onClick(e) {
       return changeSetting(e, row, _constants.SETTINGS_FALSE);
     }
   }, _react["default"].createElement("span", {
-    className: value ? 'empty-check' : 'check'
+    className: value || row.inheritedFrom ? 'empty-check' : 'check'
   }), _react["default"].createElement("span", null, setToNoLabel)), showInheritSettingsLabel && _react["default"].createElement("div", {
     onClick: function onClick(e) {
       return changeSetting(e, row, _constants.SETTINGS_INHERIT);
@@ -112,7 +147,7 @@ var EditSettingsButton = function EditSettingsButton(props) {
     className: "inherit-from"
   }, _react["default"].createElement("span", {
     className: ((_row$inheritedFrom = row.inheritedFrom) === null || _row$inheritedFrom === void 0 ? void 0 : _row$inheritedFrom.trim()) ? 'check' : 'empty-check'
-  }), inheritSettingsLabel)));
+  }), _react["default"].createElement("span", null, inheritSettingsLabel)))));
 };
 
 exports.EditSettingsButton = EditSettingsButton;

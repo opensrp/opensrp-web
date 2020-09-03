@@ -1,5 +1,5 @@
 import { SETTINGS_INHERIT } from '../../constants';
-import { Setting, fetchLocSettings } from 'populationCharacteristics/src/ducks/settings';
+import { Setting, fetchLocSettings, getLocSettings } from '../../ducks/settings';
 import { SettingValue } from '../../helpers/types';
 import { getLocDetails } from '../../ducks/locations';
 import { Store } from 'redux';
@@ -24,21 +24,42 @@ export const onEditSuccess = (
     fetchSettings: typeof fetchLocSettings,
     activeLocationId: string,
 ) => {
-    if (row.value === value) {
-        return;
-    }
-
     if (value !== SETTINGS_INHERIT) {
         // We set the new value and make sure to override inheritedFrom
         // to none
-        fetchSettings([{ ...row, value, inheritedFrom: '' }], activeLocationId);
+        fetchSettings([{ ...row, editing: false, value, inheritedFrom: '' }], activeLocationId);
     } else {
-        // Get the parent of this location
-        const locationDetails = getLocDetails(state, row.locationId);
+        // Get the parent of active location and get the parent setting matching
+        // the setting we are editing and inherit its value
+        const locationDetails = getLocDetails(state, activeLocationId);
         const parentId = locationDetails.node.parentLocation?.locationId;
 
         if (parentId) {
-            fetchSettings([{ ...row, inheritedFrom: parentId }], activeLocationId);
+            const parentSettings = getLocSettings(state, parentId);
+
+            if (parentSettings.length) {
+                let inheritedValue = row.value;
+                let settingFound = false;
+                let i = 0;
+
+                while (!settingFound && i < parentSettings.length) {
+                    const currentSetting = parentSettings[i];
+
+                    if (currentSetting.key === row.key) {
+                        inheritedValue = currentSetting.value;
+                        settingFound = true;
+                    }
+
+                    i += 1;
+                }
+
+                if (settingFound) {
+                    fetchSettings(
+                        [{ ...row, editing: false, value: inheritedValue, inheritedFrom: parentId }],
+                        activeLocationId,
+                    );
+                }
+            }
         }
     }
 };
@@ -67,9 +88,10 @@ export const editSetting = async (
     activeLocationId: string,
     customAlert?: (message: string, options: ToastOptions) => void,
 ) => {
-    if (value === row.value) {
-        return false;
+    if ((value === SETTINGS_INHERIT && row.inheritedFrom) || (value === row.value && !row.inheritedFrom)) {
+        return;
     }
+
     const endPoint =
         value === SETTINGS_INHERIT || activeLocationId === row.locationId
             ? `${settingsEndpoint}${row.settingMetadataId}`

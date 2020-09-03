@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { preparePutData, EditSettingsButton } from '../utils';
-import { allSettings } from '../../ducks/settings/tests/fixtures';
+import { allSettings, setting3, setting4 } from '../../ducks/settings/tests/fixtures';
 import { updateDate } from '../../components/EditSettings/tests/fixtures';
 import { EDIT_LABEL } from '../../../../../clients/core/src/constants';
 import { INHERIT_SETTING_LABEL, SET_TO_NO_LABEL, SET_TO_YES_LABEL } from '../../constants';
@@ -13,18 +13,6 @@ const output = {
 };
 
 const mockFn = jest.fn();
-
-const editSettingsButtonProps = {
-    changeSetting: mockFn,
-    editLabel: EDIT_LABEL,
-    inheritSettingsLabel: INHERIT_SETTING_LABEL,
-    openEditModal: mockFn,
-    row: allSettings[0],
-    setToNoLabel: SET_TO_NO_LABEL,
-    setToYesLabel: SET_TO_YES_LABEL,
-    value: false,
-    showInheritSettingsLabel: true,
-};
 
 describe('helpers/utils: preparePutData', () => {
     it('preparePutData', () => {
@@ -43,55 +31,79 @@ describe('helpers/utils: preparePutData', () => {
 });
 
 describe('helpers/utils: EditSettingsButton', () => {
+    const editSettingsButtonProps = {
+        changeSetting: mockFn,
+        editLabel: EDIT_LABEL,
+        inheritSettingsLabel: INHERIT_SETTING_LABEL,
+        openEditModal: mockFn,
+        row: allSettings[0],
+        setToNoLabel: SET_TO_NO_LABEL,
+        setToYesLabel: SET_TO_YES_LABEL,
+        value: false,
+        showInheritSettingsLabel: true,
+    };
+
+    afterEach(() => {
+        jest.clearAllMocks();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
+    });
+
     it('renders without crashing', () => {
         shallow(<EditSettingsButton {...editSettingsButtonProps} />);
     });
 
-    it('renders correctly when value is false', () => {
-        const wrapper = mount(<EditSettingsButton {...editSettingsButtonProps} />);
+    it('renders correctly', () => {
+        const wrapper = shallow(<EditSettingsButton {...editSettingsButtonProps} />);
+        expect(toJson(wrapper)).toMatchSnapshot();
+    });
 
-        expect(toJson(wrapper)).toMatchSnapshot('setting value false');
-        // edit button works correctly
+    it('handles click Set to Yes', () => {
+        const wrapper = mount(<EditSettingsButton {...editSettingsButtonProps} />);
         const editButton = wrapper.find('.popup a').at(0);
         editButton.simulate('click');
         wrapper.update();
-        expect(editSettingsButtonProps.openEditModal).toHaveBeenCalledTimes(1);
-        expect(editSettingsButtonProps.openEditModal).toHaveBeenCalledWith(expect.any(Object), allSettings[0]);
-
-        // true is not checked
-        expect(
-            wrapper
-                .find('.popuptext div')
-                .at(0)
-                .find('.check').length,
-        ).toEqual(0);
-        // false is checked
-        expect(
-            wrapper
-                .find('.popuptext div')
-                .at(1)
-                .find('.check').length,
-        ).toEqual(1);
-
-        // can click set to Yes
         wrapper
             .find('.popuptext div')
             .at(0)
             .simulate('click');
-        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
+            expect.any(Object),
+            editSettingsButtonProps.row,
+            'true',
+        );
+    });
 
-        // Can click to set Inherit Setting
+    it('handles click Set to No', () => {
+        const wrapper = mount(<EditSettingsButton {...editSettingsButtonProps} />);
+        const editButton = wrapper.find('.popup a').at(0);
+        editButton.simulate('click');
+        wrapper.update();
+        wrapper
+            .find('.popuptext div')
+            .at(1)
+            .simulate('click');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
+            expect.any(Object),
+            editSettingsButtonProps.row,
+            'false',
+        );
+    });
+
+    it('hanldes click Inherit Setting', () => {
+        const wrapper = mount(<EditSettingsButton {...editSettingsButtonProps} />);
+        const editButton = wrapper.find('.popup a').at(0);
+        editButton.simulate('click');
+        wrapper.update();
         wrapper
             .find('.popuptext div')
             .at(2)
             .simulate('click');
         expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
             expect.any(Object),
-            allSettings[0],
+            editSettingsButtonProps.row,
             'inherit',
         );
-
-        wrapper.unmount();
     });
 
     it('renders correctly when value is true', () => {
@@ -121,23 +133,13 @@ describe('helpers/utils: EditSettingsButton', () => {
                 .find('.check').length,
         ).toEqual(0);
 
-        // can click set to No
-        wrapper
-            .find('.popuptext div')
-            .at(1)
-            .simulate('click');
-        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
-
-        // Can click to set Inherit Setting
-        wrapper
-            .find('.popuptext div')
-            .at(2)
-            .simulate('click');
-        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
-            expect.any(Object),
-            allSettings[0],
-            'inherit',
-        );
+        // inherit is not checked
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(2)
+                .find('.check').length,
+        ).toEqual(0);
     });
 
     it('renders correcly when showInheritSettingsLabel is false', () => {
@@ -147,19 +149,64 @@ describe('helpers/utils: EditSettingsButton', () => {
         };
         const wrapper = mount(<EditSettingsButton {...props} />);
         expect(wrapper.find('.popuptext div').length).toBe(2);
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(0)
+                .find('span')
+                .at(1)
+                .text(),
+        ).toEqual("Set to 'Yes'");
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(1)
+                .find('span')
+                .at(1)
+                .text(),
+        ).toEqual("Set to 'No'");
+    });
 
-        // The first one is the set to yes setting
-        wrapper
-            .find('.popuptext div')
-            .at(0)
-            .simulate('click');
-        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
+    it('renders correctly for inherited setting', () => {
+        const props = {
+            ...editSettingsButtonProps,
+            row: setting3,
+        };
+        const wrapper = mount(<EditSettingsButton {...props} />);
+        // true is not checked
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(0)
+                .find('.check').length,
+        ).toEqual(0);
+        // false is not checked
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(1)
+                .find('.check').length,
+        ).toEqual(0);
+        // inherit is checked
+        expect(
+            wrapper
+                .find('.popuptext div')
+                .at(2)
+                .find('.check').length,
+        ).toEqual(1);
+    });
 
-        // The second one is the set to no setting
-        wrapper
-            .find('.popuptext div')
-            .at(1)
-            .simulate('click');
-        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'false');
+    it('renders correctly if setting editing is true', () => {
+        const props = {
+            ...editSettingsButtonProps,
+            row: setting4,
+        };
+        const wrapper = mount(<EditSettingsButton {...props} />);
+        expect(
+            wrapper
+                .find('div')
+                .at(1)
+                .prop('className'),
+        ).toEqual('popuptext show');
     });
 });

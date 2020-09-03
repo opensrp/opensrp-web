@@ -88,7 +88,8 @@ var EditSetings = function EditSetings(props) {
       inheritSettingsLabel = labels.inheritSettingsLabel,
       setToNoLabel = labels.setToNoLabel,
       setToYesLabel = labels.setToYesLabel,
-      noDataFound = labels.noDataFound;
+      noDataFound = labels.noDataFound,
+      toolTipInheritedFrom = labels.toolTipInheritedFrom;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -239,11 +240,15 @@ var EditSetings = function EditSetings(props) {
     }
   };
 
-  var openEditModal = function openEditModal(e, row) {
-    e.preventDefault();
+  var toggleEdit = function toggleEdit(row) {
     fetchSettings([_objectSpread({}, row, {
       editing: !row.editing
     })], activeLocationId);
+  };
+
+  var openEditModal = function openEditModal(e, row) {
+    e.preventDefault();
+    toggleEdit(row);
   };
 
   var editSettingHandler = function () {
@@ -364,9 +369,13 @@ var EditSetings = function EditSetings(props) {
     }
   }
 
-  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, " ", _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
+  var iheritedFrom = _react["default"].createElement("span", null, inheritedLable, ' ', _react["default"].createElement("span", {
+    className: "opensrp-tooltip"
+  }, _react["default"].createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: "question-circle"
-  }));
+  }), _react["default"].createElement("span", {
+    className: "tooltiptext"
+  }, toolTipInheritedFrom)));
 
   var listViewProps = {
     data: locSettings.map(function (row) {
@@ -386,7 +395,7 @@ var EditSetings = function EditSetings(props) {
         setToNoLabel: setToNoLabel,
         setToYesLabel: setToYesLabel,
         value: value,
-        showInheritSettingsLabel: !inheritedFrom && activeLocationId !== defaultLocId || !!inheritedFrom && !(0, _utils2.isInheritedFromValid)(state, inheritedFrom)
+        showInheritSettingsLabel: activeLocationId !== defaultLocId
       })];
     }),
     headerItems: [nameLabel, descriptionLabel, settingLabel, iheritedFrom, actionLabel],
