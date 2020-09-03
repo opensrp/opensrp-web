@@ -166,10 +166,6 @@ export const SERVER_SETTINGS = 'Server Settings';
 export type SERVER_SETTINGS = typeof SERVER_SETTINGS;
 
 // url constants
-export const PAGINATION_SIZE = 10;
-export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
-export const PAGINATION_NEIGHBORS = 3;
-export type PAGINATION_NEIGHBORS = typeof PAGINATION_NEIGHBORS;
 export const NEXT = 'Next';
 export type NEXT = typeof NEXT;
 export const START = 'Start';
@@ -181,3 +177,9 @@ export type PREVIOUS = typeof PREVIOUS;
 export const LOADING = 'Loading';
 export const VIEW = 'View';
 export type VIEW = typeof VIEW;
+
+/** pagination constants */
+export const PAGINATION_SIZE = 10;
+export type PAGINATION_SIZE = typeof PAGINATION_SIZE;
+export const PAGINATION_NEIGBOURS = 2;
+export type PAGINATION_NEIGBOURS = typeof PAGINATION_NEIGBOURS;

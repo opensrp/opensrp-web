@@ -5,7 +5,7 @@ import { Col, Row } from 'reactstrap';
 import { Store } from 'redux';
 import Loading from '../../../../components/page/Loading';
 import SearchBox from '../../../../components/page/SearchBox';
-import { PAGINATION_SIZE, OPENSRP_API_BASE_URL } from '../../../../configs/env';
+import { OPENSRP_API_BASE_URL } from '../../../../configs/env';
 import { OpenSRPService } from '@opensrp/server-service';
 import childReducer, {
     fetchChildList,
@@ -24,7 +24,13 @@ import { useChildTableColumns } from './helpers/tableDefinition';
 import { generateOptions } from '../../../../services/opensrp';
 import '@opensrp/opensrp-table/dist/index.css';
 import { DropdownOption, genderOptions } from '../../../../helpers/Dropdown';
-import { CHILD_CLIENT_TYPE, OPENSRP_CLIENT_ENDPOINT } from '../../../../constants';
+import {
+    CHILD_CLIENT_TYPE,
+    OPENSRP_CLIENT_ENDPOINT,
+    PAGINATION_NEIGBOURS,
+    PAGINATION_SIZE,
+} from '../../../../constants';
+import { Pagination, Props as PaginationProps } from '../../../../components/Pagination';
 
 reducerRegistry.register(reducerName, childReducer);
 
@@ -43,6 +49,7 @@ export interface ChildListState {
     selectedGender: DropdownOption;
     loading: boolean;
     searchText: string;
+    currentPage: number;
 }
 
 /** default props for the childList component */
@@ -60,6 +67,7 @@ export const defaultChildState: ChildListState = {
     selectedGender: { value: '', label: 'All' },
     loading: true,
     searchText: '',
+    currentPage: 1,
 };
 
 /** props interface for the child table */
@@ -85,14 +93,14 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         this.state = defaultChildState;
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         this.getDataFromServer();
     }
 
-    getDataFromServer = async () => {
+    getDataFromServer = async (): Promise<void> => {
         const params = {
             clientType: CHILD_CLIENT_TYPE,
-            pageNumber: '1',
+            pageNumber: this.state.currentPage,
             pageSize: PAGINATION_SIZE,
             gender: this.state.selectedGender.value,
             searchText: this.state.searchText,
@@ -102,14 +110,14 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         const response = await clientService.list(params);
         removeChild();
         fetchChild(response.clients);
-        setTotalRecords(response.total);
+        if (response.total > 0) setTotalRecords(response.total);
         this.setState({
             ...this.state,
             loading: false,
         });
     };
 
-    genderFilter = (selectedGender: DropdownOption) => {
+    genderFilter = (selectedGender: DropdownOption): void => {
         this.setState(
             {
                 ...this.state,
@@ -121,7 +129,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         );
     };
 
-    searchTextfilter = (searchText: string) => {
+    searchTextfilter = (searchText: string): void => {
         this.setState(
             {
                 ...this.state,
@@ -133,7 +141,30 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
         );
     };
 
-    public render() {
+    /** fetch data from server with a specific page number */
+    onPageChange = (currentPage: number): void => {
+        this.setState(
+            {
+                ...this.state,
+                currentPage,
+            },
+            () => {
+                this.getDataFromServer();
+            },
+        );
+    };
+
+    /** it returns the required options for pagination component */
+    getPaginationOptions = (): PaginationProps => {
+        return {
+            onPageChangeHandler: this.onPageChange,
+            pageNeighbors: PAGINATION_NEIGBOURS,
+            pageSize: PAGINATION_SIZE,
+            totalRecords: this.props.totalRecords,
+        };
+    };
+
+    public render(): React.ReactNode {
         const { childArray, totalRecords } = this.props;
         /** render loader if there are no child in state */
 
@@ -150,7 +181,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                         <Col md={9} className="filter-row">
                             <div className="household-search-bar">
                                 <SearchBox
-                                    searchCallBack={(searchText: string) => this.searchTextfilter(searchText)}
+                                    searchCallBack={(searchText: string): void => this.searchTextfilter(searchText)}
                                     placeholder={`Search Child`}
                                 />
                             </div>
@@ -160,7 +191,7 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                                 value={this.state.selectedGender}
                                 classNamePrefix="select"
                                 className="basic-single"
-                                onChange={(e: any) => this.genderFilter(e as DropdownOption)}
+                                onChange={(e): void => this.genderFilter(e as DropdownOption)}
                                 options={genderOptions}
                             />
                         </Col>
@@ -168,6 +199,9 @@ class ChildList extends React.Component<ChildListProps, ChildListState> {
                     <Row>
                         <Col>
                             <ChildTable tableData={childArray} />
+                        </Col>
+                        <Col md={{ size: 3, offset: 3 }}>
+                            <Pagination {...this.getPaginationOptions()} />
                         </Col>
                     </Row>
                 </div>
