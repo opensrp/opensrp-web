@@ -21,30 +21,26 @@ exports.defaultErrorCallback = defaultErrorCallback;
 
 var logout = function () {
   var _ref = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee(payload, opensrpLogoutUri, keycloakLogoutUri, redirectUri) {
-    var errorCallback,
-        filterParams,
-        fullKeycloakLogoutUri,
-        _args = arguments;
+    var filterParams, fullKeycloakLogoutUri;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            errorCallback = _args.length > 4 && _args[4] !== undefined ? _args[4] : defaultErrorCallback;
             filterParams = {
               redirect_uri: redirectUri
             };
             fullKeycloakLogoutUri = _serverService.OpenSRPService.getURL(keycloakLogoutUri, filterParams);
-            _context.next = 5;
+            _context.next = 4;
             return (0, _serverService.customFetch)(opensrpLogoutUri, payload).then(function () {
               window.location.href = fullKeycloakLogoutUri;
             })["catch"](function (error) {
-              errorCallback(error);
+              throw error;
             });
 
-          case 5:
+          case 4:
             return _context.abrupt("return", null);
 
-          case 6:
+          case 5:
           case "end":
             return _context.stop();
         }

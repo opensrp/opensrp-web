@@ -26,10 +26,6 @@ yarn add @opensrp/server-logout
     -   `string`
     -   **required**
     -   the uri to redirect to after succesfully logging out of keycloak
--   **errorCallback**
-    -   `(error: Erorr): void`
-    -   **optional**
-    -   callback invoked when fetch call to opensrpLogoutUri fails
 
 #### an example
 
@@ -48,6 +44,9 @@ const keycloakLogoutUri = 'https://keycloak.smartregister.org/realm/<realm>/open
 const redirectUri = 'https://opensrp-web.smartregister.org';
 
 export const logoutComponent = () => {
-    logout(payload, opensrpLogoutUri, keycloakLogoutUri, redirectUri);
+    logout(payload, opensrpLogoutUri, keycloakLogoutUri, redirectUri).catch(() => {
+        /** logout failed*/
+    });
+    return null;
 };
 ```

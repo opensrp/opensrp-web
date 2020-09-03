@@ -8,10 +8,6 @@ export interface Payload {
     method: HTTPMethod;
 }
 
-export interface ErrorCallback {
-    (error: Error): void;
-}
-
 export const defaultErrorCallback = () => {
     return;
 };
@@ -23,14 +19,12 @@ export const defaultErrorCallback = () => {
  * @param keycloakLogoutUri - url to logout from keycloak
  * @param redirectUri - uri to redirect to after logout
  * - its attached to the keycloak logout uri as a searchParam with key redirect_uri
- * @param errorCallback - function called with error if logging out form opensrpLogoutUri fails
  */
 export const logout = async (
     payload: Payload,
     opensrpLogoutUri: string,
     keycloakLogoutUri: string,
     redirectUri: string,
-    errorCallback: ErrorCallback = defaultErrorCallback,
 ) => {
     const filterParams = {
         // eslint-disable-next-line @typescript-eslint/camelcase
@@ -42,7 +36,7 @@ export const logout = async (
             window.location.href = fullKeycloakLogoutUri;
         })
         .catch(error => {
-            errorCallback(error);
+            throw error;
         });
     return null;
 };

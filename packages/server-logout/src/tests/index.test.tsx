@@ -45,14 +45,4 @@ describe('gatekeeper/utils/logoutFromAuthServer', () => {
             'https://keycloak.smartregister.org/realm/camelot/openid-connect/logout?redirect_uri=https%3A%2F%2Fopensrp-web.smartregister.org',
         );
     });
-
-    it('Deals with errors', async () => {
-        fetch.mockReject(JSON.stringify('still logged in'));
-        const errorMock = jest.fn();
-
-        logout(payload, opensrpLogoutUri, keycloakLogoutUri, redirectUri, errorMock);
-        await new Promise(resolve => setImmediate(resolve));
-
-        expect(errorMock).toHaveBeenCalledWith('"still logged in"');
-    });
 });

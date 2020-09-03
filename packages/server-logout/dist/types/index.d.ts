@@ -4,9 +4,6 @@ export interface Payload {
     headers: HeadersInit;
     method: HTTPMethod;
 }
-export interface ErrorCallback {
-    (error: Error): void;
-}
 export declare const defaultErrorCallback: () => void;
 /** custom function that logs user from both a keycloak authorization server
  * and the opensrp server
@@ -15,6 +12,5 @@ export declare const defaultErrorCallback: () => void;
  * @param keycloakLogoutUri - url to logout from keycloak
  * @param redirectUri - uri to redirect to after logout
  * - its attached to the keycloak logout uri as a searchParam with key redirect_uri
- * @param errorCallback - function called with error if logging out form opensrpLogoutUri fails
  */
-export declare const logout: (payload: Payload, opensrpLogoutUri: string, keycloakLogoutUri: string, redirectUri: string, errorCallback?: ErrorCallback) => Promise<null>;
+export declare const logout: (payload: Payload, opensrpLogoutUri: string, keycloakLogoutUri: string, redirectUri: string) => Promise<null>;
