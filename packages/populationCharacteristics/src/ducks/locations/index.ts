@@ -1,6 +1,7 @@
 import { AnyAction, Store } from 'redux';
 import SeamlessImmutable from 'seamless-immutable';
 import { Dictionary } from '@onaio/utils';
+import { getLocationDetailsFromLocMap } from './utils';
 
 /** reducer name */
 export const locationReducerName = 'locHierarchy';
@@ -182,14 +183,6 @@ export function getSelectedLocs(state: Partial<Store>): string[] {
  * @param {locIds}  - the location ids
  * @returns { locationDetails } locId children locactions
  */
-export function getLocDetails(state: Partial<Store>, locIds: string[]): LocChildren {
-    let locDetails = (state as any)[locationReducerName].locations.map[locIds[0]];
-    if (locIds.length === 1) {
-        return locDetails || {};
-    } else {
-        for (let i = 1; i < locIds.length; i++) {
-            locDetails = locDetails.children[locIds[i]];
-        }
-    }
-    return locDetails;
+export function getLocDetails(state: Partial<Store>, locId: string): LocChildren {
+    return getLocationDetailsFromLocMap((state as any)[locationReducerName].locations.map, locId);
 }

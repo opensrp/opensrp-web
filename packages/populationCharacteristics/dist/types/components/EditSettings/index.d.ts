@@ -16,6 +16,7 @@ interface EditSettingsDefaultProps {
     locationSettings: Setting[];
     selectedLocations: string[];
     state: Partial<Store>;
+    tableClass: string;
 }
 /** component for displaying population characteristics */
 declare const EditSetings: {
@@ -25,5 +26,5 @@ declare const EditSetings: {
 declare const ConnectedEditSetings: import("react-redux").ConnectedComponent<{
     (props: FormConfigProps & EditSettingsDefaultProps): JSX.Element;
     defaultProps: EditSettingsDefaultProps;
-}, Pick<FormConfigProps & EditSettingsDefaultProps, "debounceTime" | "labels" | "baseURL" | "customAlert" | "getPayload" | "LoadingComponent" | "locationsEndpoint" | "restBaseURL" | "secAuthEndpoint" | "settingsEndpoint" | "v2BaseUrl">>;
+}, Pick<FormConfigProps & EditSettingsDefaultProps, "debounceTime" | "labels" | "tableClass" | "baseURL" | "customAlert" | "getPayload" | "LoadingComponent" | "locationsEndpoint" | "restBaseURL" | "secAuthEndpoint" | "settingsEndpoint" | "v2BaseUrl">>;
 export { EditSetings, ConnectedEditSetings };

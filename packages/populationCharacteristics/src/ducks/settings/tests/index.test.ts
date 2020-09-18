@@ -24,18 +24,36 @@ describe('reducers/settings', () => {
     });
 
     it('should update single setting', () => {
-        const updatedSetting = { ...allSettings[0], editing: true };
-        updatedSetting.value = false;
-        allSettings[0] = updatedSetting;
-        store.dispatch(fetchLocSettings([updatedSetting], locId));
+        // Fetch settings
+        store.dispatch(fetchLocSettings(allSettings, locId));
         expect(getLocSettings(store.getState(), locId)).toEqual(allSettings);
+
+        // Update setting
+        const updatedSetting = { ...allSettings[0], editing: true, value: 'true' };
+        store.dispatch(fetchLocSettings([updatedSetting], locId));
+        // Setting should now be updated in store
+        expect(getLocSettings(store.getState(), locId)).toEqual([
+            updatedSetting,
+            ...allSettings.slice(0, 0),
+            ...allSettings.slice(0 + 1, allSettings.length),
+        ]);
+    });
+
+    it('replaces the settings for the location correctly', () => {
+        // Fetch settings
+        store.dispatch(fetchLocSettings(allSettings, locId));
+        expect(getLocSettings(store.getState(), locId)).toEqual(allSettings);
+        // Now replace settings
+        store.dispatch(fetchLocSettings([allSettings[0]], locId, true));
+        expect(getLocSettings(store.getState(), locId)).toEqual([allSettings[0]]);
     });
 
     it('should clear settings', () => {
-        // dispatch locations
+        // Fetch settings
         store.dispatch(fetchLocSettings(allSettings, locId));
+        expect(getLocSettings(store.getState(), locId)).toEqual(allSettings);
+        // Now clear settings
         store.dispatch(removeLocSettingAction());
-        // get location settings
         expect(getLocSettings(store.getState(), locId)).toEqual([]);
     });
 });

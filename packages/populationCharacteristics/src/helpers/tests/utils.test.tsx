@@ -23,6 +23,7 @@ const editSettingsButtonProps = {
     setToNoLabel: SET_TO_NO_LABEL,
     setToYesLabel: SET_TO_YES_LABEL,
     value: false,
+    showInheritSettingsLabel: true,
 };
 
 describe('helpers/utils: preparePutData', () => {
@@ -79,6 +80,17 @@ describe('helpers/utils: EditSettingsButton', () => {
             .simulate('click');
         expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
 
+        // Can click to set Inherit Setting
+        wrapper
+            .find('.popuptext div')
+            .at(2)
+            .simulate('click');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
+            expect.any(Object),
+            allSettings[0],
+            'inherit',
+        );
+
         wrapper.unmount();
     });
 
@@ -115,5 +127,39 @@ describe('helpers/utils: EditSettingsButton', () => {
             .at(1)
             .simulate('click');
         expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
+
+        // Can click to set Inherit Setting
+        wrapper
+            .find('.popuptext div')
+            .at(2)
+            .simulate('click');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(
+            expect.any(Object),
+            allSettings[0],
+            'inherit',
+        );
+    });
+
+    it('renders correcly when showInheritSettingsLabel is false', () => {
+        const props = {
+            ...editSettingsButtonProps,
+            showInheritSettingsLabel: false,
+        };
+        const wrapper = mount(<EditSettingsButton {...props} />);
+        expect(wrapper.find('.popuptext div').length).toBe(2);
+
+        // The first one is the set to yes setting
+        wrapper
+            .find('.popuptext div')
+            .at(0)
+            .simulate('click');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'true');
+
+        // The second one is the set to no setting
+        wrapper
+            .find('.popuptext div')
+            .at(1)
+            .simulate('click');
+        expect(editSettingsButtonProps.changeSetting).toHaveBeenCalledWith(expect.any(Object), allSettings[0], 'false');
     });
 });
