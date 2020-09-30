@@ -96,14 +96,14 @@ var OpenSRPServiceExtend = function (_OpenSRPService) {
                 status = "HTTP status ".concat(response === null || response === void 0 ? void 0 : response.status);
                 defaultMessage = "OpenSRPService create on ".concat(this.endpoint, " failed, ").concat(status);
 
-                if (!(!response.ok || response.text)) {
+                if (response.ok) {
                   _context.next = 14;
                   break;
                 }
 
                 _context.next = 14;
                 return response.text().then(function (text) {
-                  defaultMessage = text.includes('html') || text.includes('doctype') ? defaultMessage : "".concat(text, ", ").concat(status);
+                  defaultMessage = text && !(text.includes('html') || text.includes('doctype')) ? "".concat(text, ", ").concat(status) : defaultMessage;
                 });
 
               case 14:
